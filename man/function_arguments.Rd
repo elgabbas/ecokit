@@ -28,6 +28,7 @@ environment and can load a specified package before processing.
 }
 \examples{
 formals(stats::setNames)
+
 function_arguments(stats::setNames)
 }
 \author{

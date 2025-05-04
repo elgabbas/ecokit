@@ -16,7 +16,8 @@ currently loaded in the R session.
 \examples{
 loaded_packages()
 
-require(tidyr)
+require(tidyterra)
+require(lubridate)
 
 loaded_packages()
 

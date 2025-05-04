@@ -32,13 +32,19 @@
 #' @author Ahmed El-Gabbas
 #' @export
 #' @examples
+#' # ----------------------------------------------------
 #' # Show the most recent commit
+#' # ----------------------------------------------------
 #' git_log(n_commits = 1)
 #'
+#' # ----------------------------------------------------
 #' # Show the most recent 5 commits
+#' # ----------------------------------------------------
 #' git_log(n_commits = 5)
 #'
+#' # ----------------------------------------------------
 #' # Return the log as a character vector
+#' # ----------------------------------------------------
 #' Log <- git_log(return_log = TRUE)
 #'
 #' length(Log)
@@ -115,7 +121,7 @@ git_log <- function(path = ".", n_commits = NULL, return_log = FALSE) {
 
     # Execute the command and capture the output
     log_output <- tryCatch({
-      ecokit::system_command(log_command, R_object = TRUE)
+      ecokit::system_command(log_command, r_object = TRUE)
     },
     error = function(e) {
       ecokit::stop_ctx(

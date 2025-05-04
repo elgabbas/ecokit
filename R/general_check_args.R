@@ -19,6 +19,35 @@
 #'   throw an error if any of the specified arguments do not match the expected
 #'   type.
 #' @export
+#' @examples
+#' f1 <- function(x = "AA", y = "BB", z = 1) {
+#'   all_arguments <- ls(envir = environment())
+#'   all_arguments <- purrr::map(
+#'     all_arguments,
+#'     function(x) get(x, envir = parent.env(env = environment()))) %>%
+#'     stats::setNames(all_arguments)
+#'
+#'  # Check if x and y are a character
+#'  check_args(
+#'     args_all = all_arguments, args_type = "character",
+#'     args_to_check = c("x", "y"))
+#'
+#'  # Check if z is a numeric
+#'  check_args(
+#'     args_all = all_arguments, args_type = "numeric",
+#'     args_to_check = "z")
+#'
+#'  # the rest of the function
+#'  }
+#'
+#'  # no output as x is a character
+#'  f1(x = "X")
+#'
+#'  # no output as z is a numeric
+#'  f1(z = 20)
+#'
+#'  # error as x is not a character
+#'  try(f1(x = 1))
 
 check_args <- function(args_all, args_to_check, args_type) {
 

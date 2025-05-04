@@ -57,13 +57,14 @@ Function1 <- function(w = 5, x, y, z = c(1, 2), ...) {
 }
 
 # ----------------------------------------------------
-
 # Example 1: Simple function call with scalar and expression
+# ----------------------------------------------------
+
 Function1(x = a + b, y = 2)
 
 # ----------------------------------------------------
-
 # Example 2: Using lapply with indexed arguments
+# ----------------------------------------------------
 
 lapply(
   X = 1:3,
@@ -78,8 +79,9 @@ dplyr::bind_rows() \%>\%
 print()
 
 # ----------------------------------------------------
-
 # Example 3: Using pmap with mixed argument types
+# ----------------------------------------------------
+
 purrr::pmap(
   .l = list(w = w_values, x = x_values, y = y_values),
   .f = function(w, x, y) {
@@ -93,8 +95,8 @@ purrr::pmap(
   print()
 
 # ----------------------------------------------------
-
 # Example 4: Using additional arguments via ...
+# ----------------------------------------------------
 Function1(x = a + b, y = "test", extra1 = "hello", extra2 = 42)
 
 }

@@ -66,6 +66,7 @@ reference:
   - cat_sep
   - cat_time
   - cat_diff
+  - info_chunk
 - subtitle: Vector / data frame operations
   contents:
   - assign_if_not_exist
@@ -94,7 +95,6 @@ reference:
   - clear_console
   - check_RStudio
   - check_quarto
-  - info_chunk
   - save_session
   - save_session_info
   - git_log

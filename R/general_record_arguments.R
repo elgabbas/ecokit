@@ -49,13 +49,14 @@
 #' }
 #'
 #' # ----------------------------------------------------
-#'
 #' # Example 1: Simple function call with scalar and expression
+#' # ----------------------------------------------------
+#'
 #' Function1(x = a + b, y = 2)
 #'
 #' # ----------------------------------------------------
-#'
 #' # Example 2: Using lapply with indexed arguments
+#' # ----------------------------------------------------
 #'
 #' lapply(
 #'   X = 1:3,
@@ -70,8 +71,9 @@
 #' print()
 #'
 #' # ----------------------------------------------------
-#'
 #' # Example 3: Using pmap with mixed argument types
+#' # ----------------------------------------------------
+#'
 #' purrr::pmap(
 #'   .l = list(w = w_values, x = x_values, y = y_values),
 #'   .f = function(w, x, y) {
@@ -85,8 +87,8 @@
 #'   print()
 #'
 #' # ----------------------------------------------------
-#'
 #' # Example 4: Using additional arguments via ...
+#' # ----------------------------------------------------
 #' Function1(x = a + b, y = "test", extra1 = "hello", extra2 = 42)
 #'
 #' @author Ahmed El-Gabbas

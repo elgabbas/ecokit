@@ -41,13 +41,19 @@ Git repository, Git is not installed, or if the \code{n_commits} parameter is
 not \code{NULL} or a positive number.
 }
 \examples{
+# ----------------------------------------------------
 # Show the most recent commit
+# ----------------------------------------------------
 git_log(n_commits = 1)
 
+# ----------------------------------------------------
 # Show the most recent 5 commits
+# ----------------------------------------------------
 git_log(n_commits = 5)
 
+# ----------------------------------------------------
 # Return the log as a character vector
+# ----------------------------------------------------
 Log <- git_log(return_log = TRUE)
 
 length(Log)

@@ -21,6 +21,7 @@
 #'   `assign` is TRUE, it also assigns arguments to the global environment.
 #' @examples
 #' formals(stats::setNames)
+#'
 #' function_arguments(stats::setNames)
 
 function_arguments <- function(function_name, assign = FALSE, package = NULL) {

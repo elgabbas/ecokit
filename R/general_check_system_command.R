@@ -17,7 +17,14 @@
 #' @name check_system_command
 #' @author Ahmed El-Gabbas
 #' @examples
+#' # Check for the availability of system commands
+#' check_system_command(c("unzip", "head"))
+#'
+#' # return FALSE, with a warning for a missing command
 #' check_system_command(c("unzip", "head", "curl", "missing"))
+#'
+#' # return FALSE, without a warning for a missing command
+#' check_system_command(c("unzip", "head", "curl", "missing"), warning = FALSE)
 #' @export
 
 check_system_command <- function(commands, warning = TRUE) {

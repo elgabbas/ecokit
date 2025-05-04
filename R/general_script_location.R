@@ -31,9 +31,9 @@
 #' @export
 #' @examples
 #' \dontrun{
-#' # Save as "my_script.R": script_location()
-#' # Run: Rscript my_script.R
-#' # Output: [1] "my_script.R" (or full path depending on Rscript invocation)
+#'   # Save as "my_script.R": script_location()
+#'   # Run: Rscript my_script.R
+#'   # Output: [1] "my_script.R" (or full path depending on Rscript invocation)
 #' }
 
 script_location <- function() {

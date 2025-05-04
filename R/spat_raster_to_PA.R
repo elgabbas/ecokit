@@ -23,7 +23,12 @@
 #' ecokit::load_packages(
 #'    package_list = c("dplyr", "raster", "ggplot2", "tidyterra"))
 #'
-#' r <- raster::raster(system.file("external/test.grd", package = "raster"))
+#' r <- r2 <- raster::raster(
+#'   system.file("external/test.grd", package = "raster"))
+#'
+#' # change some values to 0
+#' r[5000:6000] <- 0
+#' r <- raster::mask(r, r2)
 #'
 #' ggplot2::ggplot() +
 #'   tidyterra::geom_spatraster(data = terra::rast(r), maxcell = Inf) +

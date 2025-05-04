@@ -25,6 +25,36 @@ type.
 This function checks if the specified arguments of a function match the
 expected type. It is useful for validating function inputs.
 }
+\examples{
+f1 <- function(x = "AA", y = "BB", z = 1) {
+  all_arguments <- ls(envir = environment())
+  all_arguments <- purrr::map(
+    all_arguments,
+    function(x) get(x, envir = parent.env(env = environment()))) \%>\%
+    stats::setNames(all_arguments)
+
+ # Check if x and y are a character
+ check_args(
+    args_all = all_arguments, args_type = "character",
+    args_to_check = c("x", "y"))
+
+ # Check if z is a numeric
+ check_args(
+    args_all = all_arguments, args_type = "numeric",
+    args_to_check = "z")
+
+ # the rest of the function
+ }
+
+ # no output as x is a character
+ f1(x = "X")
+
+ # no output as z is a numeric
+ f1(z = 20)
+
+ # error as x is not a character
+ try(f1(x = 1))
+}
 \author{
 Ahmed El-Gabbas
 }

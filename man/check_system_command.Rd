@@ -23,7 +23,14 @@ PATH. If any commands are missing, it stops execution and returns an
 informative error message.
 }
 \examples{
+# Check for the availability of system commands
+check_system_command(c("unzip", "head"))
+
+# return FALSE, with a warning for a missing command
 check_system_command(c("unzip", "head", "curl", "missing"))
+
+# return FALSE, without a warning for a missing command
+check_system_command(c("unzip", "head", "curl", "missing"), warning = FALSE)
 }
 \author{
 Ahmed El-Gabbas

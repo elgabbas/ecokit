@@ -11,7 +11,8 @@ A collection of utility functions designed for ecologists and general R users, p
 \seealso{
 Useful links:
 \itemize{
-  \item \url{https://github.com/elgabbas/ecokit/}
+  \item \url{https://github.com/elgabbas/ecokit}
+  \item \url{https://elgabbas.github.io/ecokit/}
   \item Report bugs at \url{https://github.com/elgabbas/ecokit/issues}
 }
 

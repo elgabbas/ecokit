@@ -12,7 +12,8 @@
 #' @examples
 #' loaded_packages()
 #'
-#' require(tidyr)
+#' require(tidyterra)
+#' require(lubridate)
 #'
 #' loaded_packages()
 #'
