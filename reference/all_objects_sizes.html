@@ -107,7 +107,9 @@ examined.</p>
     <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span><span class="va">AA1</span> <span class="op">&lt;&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/rep.html" class="external-link">rep</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/seq.html" class="external-link">seq_len</a></span><span class="op">(</span><span class="fl">1000</span><span class="op">)</span>, <span class="fl">10000</span><span class="op">)</span></span></span>
 <span class="r-in"><span><span class="va">AA2</span> <span class="op">&lt;&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/rep.html" class="external-link">rep</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/seq.html" class="external-link">seq_len</a></span><span class="op">(</span><span class="fl">1000</span><span class="op">)</span>, <span class="fl">100</span><span class="op">)</span></span></span>
 <span class="r-in"><span></span></span>
+<span class="r-in"><span><span class="co"># ----------------------------------------------------</span></span></span>
 <span class="r-in"><span><span class="co"># All objects in memory</span></span></span>
+<span class="r-in"><span><span class="co"># ----------------------------------------------------</span></span></span>
 <span class="r-in"><span><span class="fu">all_objects_sizes</span><span class="op">(</span><span class="op">)</span></span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #0000BB;">---------------------------------------------------</span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #0000BB;">	</span><span style="color: #0000BB; font-weight: bold;">3</span><span style="color: #0000BB;"> object(s) fulfil the criteria</span></span>
@@ -123,7 +125,10 @@ examined.</p>
 <span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #0000BB;">---------------------------------------------------</span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-in"><span></span></span>
+<span class="r-in"><span></span></span>
+<span class="r-in"><span><span class="co"># ----------------------------------------------------</span></span></span>
 <span class="r-in"><span><span class="co"># Objects larger than 1 MB</span></span></span>
+<span class="r-in"><span><span class="co"># ----------------------------------------------------</span></span></span>
 <span class="r-in"><span><span class="fu">all_objects_sizes</span><span class="op">(</span>greater_than <span class="op">=</span> <span class="fl">1</span><span class="op">)</span></span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #0000BB;">---------------------------------------------------</span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #0000BB;">	</span><span style="color: #0000BB; font-weight: bold;">1</span><span style="color: #0000BB;"> object(s) fulfil the criteria</span></span>
@@ -137,13 +142,19 @@ examined.</p>
 <span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #0000BB;">---------------------------------------------------</span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-in"><span></span></span>
+<span class="r-in"><span></span></span>
+<span class="r-in"><span><span class="co"># ----------------------------------------------------</span></span></span>
 <span class="r-in"><span><span class="co"># Objects larger than 50 MB</span></span></span>
+<span class="r-in"><span><span class="co"># ----------------------------------------------------</span></span></span>
 <span class="r-in"><span><span class="fu">all_objects_sizes</span><span class="op">(</span>greater_than <span class="op">=</span> <span class="fl">50</span><span class="op">)</span></span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BB0000;">No object has Size &gt; 50 MB</span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-in"><span></span></span>
+<span class="r-in"><span></span></span>
+<span class="r-in"><span><span class="co"># ----------------------------------------------------</span></span></span>
 <span class="r-in"><span><span class="co"># When called with another function, it shows the objects only available</span></span></span>
 <span class="r-in"><span><span class="co"># within the function</span></span></span>
+<span class="r-in"><span><span class="co"># ----------------------------------------------------</span></span></span>
 <span class="r-in"><span><span class="va">TestFun</span> <span class="op">&lt;-</span> <span class="kw">function</span><span class="op">(</span><span class="va">XX</span> <span class="op">=</span> <span class="fl">10</span><span class="op">)</span> <span class="op">{</span></span></span>
 <span class="r-in"><span>  <span class="va">Y</span> <span class="op">&lt;-</span> <span class="fl">20</span></span></span>
 <span class="r-in"><span>  <span class="va">C</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/matrix.html" class="external-link">matrix</a></span><span class="op">(</span>data <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/seq.html" class="external-link">seq_len</a></span><span class="op">(</span><span class="fl">10000</span><span class="op">)</span>, nrow <span class="op">=</span> <span class="fl">100</span>, ncol <span class="op">=</span> <span class="fl">100</span><span class="op">)</span></span></span>

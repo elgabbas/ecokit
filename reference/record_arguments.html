@@ -110,8 +110,9 @@ recorded.</p></li>
 <span class="r-in"><span><span class="op">}</span></span></span>
 <span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="co"># ----------------------------------------------------</span></span></span>
-<span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="co"># Example 1: Simple function call with scalar and expression</span></span></span>
+<span class="r-in"><span><span class="co"># ----------------------------------------------------</span></span></span>
+<span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="fu">Function1</span><span class="op">(</span>x <span class="op">=</span> <span class="va">a</span> <span class="op">+</span> <span class="va">b</span>, y <span class="op">=</span> <span class="fl">2</span><span class="op">)</span></span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># A tibble: 1 × 4</span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>       w     x     y z        </span>
@@ -119,8 +120,8 @@ recorded.</p></li>
 <span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">1</span>     5     8     2 <span style="color: #949494;">&lt;dbl [2]&gt;</span></span>
 <span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="co"># ----------------------------------------------------</span></span></span>
-<span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="co"># Example 2: Using lapply with indexed arguments</span></span></span>
+<span class="r-in"><span><span class="co"># ----------------------------------------------------</span></span></span>
 <span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="fu"><a href="https://rdrr.io/r/base/lapply.html" class="external-link">lapply</a></span><span class="op">(</span></span></span>
 <span class="r-in"><span>  X <span class="op">=</span> <span class="fl">1</span><span class="op">:</span><span class="fl">3</span>,</span></span>
@@ -141,8 +142,9 @@ recorded.</p></li>
 <span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">3</span>     3    15 <span style="color: #BB0000;">NA</span>        3</span>
 <span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="co"># ----------------------------------------------------</span></span></span>
-<span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="co"># Example 3: Using pmap with mixed argument types</span></span></span>
+<span class="r-in"><span><span class="co"># ----------------------------------------------------</span></span></span>
+<span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="fu">purrr</span><span class="fu">::</span><span class="fu"><a href="https://purrr.tidyverse.org/reference/pmap.html" class="external-link">pmap</a></span><span class="op">(</span></span></span>
 <span class="r-in"><span>  .l <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></span><span class="op">(</span>w <span class="op">=</span> <span class="va">w_values</span>, x <span class="op">=</span> <span class="va">x_values</span>, y <span class="op">=</span> <span class="va">y_values</span><span class="op">)</span>,</span></span>
 <span class="r-in"><span>  .f <span class="op">=</span> <span class="kw">function</span><span class="op">(</span><span class="va">w</span>, <span class="va">x</span>, <span class="va">y</span><span class="op">)</span> <span class="op">{</span></span></span>
@@ -162,8 +164,8 @@ recorded.</p></li>
 <span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">3</span>     3    15 <span style="color: #BB0000;">NA</span>    <span style="color: #949494;">&lt;PckdSptR&gt;</span></span>
 <span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="co"># ----------------------------------------------------</span></span></span>
-<span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="co"># Example 4: Using additional arguments via ...</span></span></span>
+<span class="r-in"><span><span class="co"># ----------------------------------------------------</span></span></span>
 <span class="r-in"><span><span class="fu">Function1</span><span class="op">(</span>x <span class="op">=</span> <span class="va">a</span> <span class="op">+</span> <span class="va">b</span>, y <span class="op">=</span> <span class="st">"test"</span>, extra1 <span class="op">=</span> <span class="st">"hello"</span>, extra2 <span class="op">=</span> <span class="fl">42</span><span class="op">)</span></span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># A tibble: 1 × 6</span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>       w     x y     z         extra1 extra2</span>
