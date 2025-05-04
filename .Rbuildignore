@@ -1,0 +1,11 @@
+^.*\.Rproj$
+^\.Rproj\.user$
+^.ignore$
+.vscode
+.lintr
+README.Rmd
+cspell.json
+LICENSE.md
+^_pkgdown\.yml$
+^docs$
+^pkgdown$

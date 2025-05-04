@@ -1,0 +1,124 @@
+url: https://elgabbas.github.io/ecokit
+
+template:
+  bootstrap: 5
+  light-switch: true
+
+authors:
+  Ahmed El-Gabbas:
+    href: https://elgabbas.netlify.app/
+
+home:
+  title: ecokit
+
+development:
+  mode: auto
+
+
+navbar:
+  title: ecokit
+  type: default
+  left:
+  - text: Functions
+    icon: fa-file-code-o
+    href: reference/index.html
+
+reference:
+- title: Package info
+  contents:
+  - ecokit-package
+
+- title: General functions
+  desc: Data management / utility functions
+- subtitle: Packages management
+  contents:
+  - stop_ctx
+  - package_functions
+  - load_packages
+  - reload_package
+  - loaded_packages
+  - package_remote_sha
+  - assign_env_vars
+  - check_system_command
+  - check_args
+  - function_arguments
+  - record_arguments
+- subtitle: File operations
+  contents:
+  - file_extension
+  - file_size
+  - file_type
+  - normalize_path
+  - path
+  - load_as
+  - load_multiple
+  - check_data
+  - check_zip
+  - save_as
+  - save_multiple
+  - list_to_RData
+- subtitle: Plotting
+  contents:
+  - add_image_to_plot
+  - add_line
+  - integer_breaks
+- subtitle: Printing/logging functions
+  contents:
+  - cat_sep
+  - cat_time
+  - cat_diff
+- subtitle: Vector / data frame operations
+  contents:
+  - assign_if_not_exist
+  - cc
+  - ht
+  - apply_functions
+  - n_decimals
+  - replace_space
+  - scrape_link
+  - sort2
+  - split_vector
+  - split_df_to_chunks
+  - range_to_new_value
+  - all_objects_sizes
+  - keep_only
+  - source_silent
+  - n_unique
+  - add_missing_columns
+- subtitle: Other functions
+  contents:
+  - set_parallel
+  - OS
+  - system_command
+  - check_URL
+  - script_location
+  - clear_console
+  - check_RStudio
+  - check_quarto
+  - info_chunk
+  - save_session
+  - save_session_info
+  - git_log
+  - bash_variables
+  - detect_alias
+  - get_mode
+
+- title: Spatial functions
+  contents:
+  - check_tiff
+  - boundary_to_WKT
+  - polygon_centroid
+  - rename_geometry
+  - split_raster
+  - set_geometry
+  - text_to_coordinates
+  - clip_raster_by_polygon
+  - check_stack_in_memory
+  - sf_add_coords
+  - add_cross_to_grid
+  - add_diagonals_to_grid
+  - raster_to_PA
+  - nc_global_attributes
+  - scale_0_1
+  - set_raster_CRS
+  - set_raster_values
