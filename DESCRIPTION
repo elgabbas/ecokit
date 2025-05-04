@@ -9,7 +9,7 @@ Description: A collection of utility functions designed for ecologists and
     general R users, providing tools for data manipulation, statistical
     analysis, and spatial data handling.
 License: MIT + file LICENSE
-URL: https://github.com/elgabbas/ecokit
+URL: https://github.com/elgabbas/ecokit, https://elgabbas.github.io/ecokit/
 BugReports: https://github.com/elgabbas/ecokit/issues
 Depends: 
     magrittr (>= 2.0.3),
