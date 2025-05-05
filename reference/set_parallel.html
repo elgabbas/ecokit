@@ -104,7 +104,7 @@ global variables identified. See <code>future.globals.maxSize</code> argument of
     <h2 id="ref-examples">Examples<a class="anchor" aria-label="anchor" href="#ref-examples"></a></h2>
     <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span><span class="co"># Prepare working in parallel</span></span></span>
 <span class="r-in"><span><span class="fu">ecokit</span><span class="fu">::</span><span class="fu">set_parallel</span><span class="op">(</span>n_cores <span class="op">=</span> <span class="fl">2</span><span class="op">)</span></span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> Setting up parallel processing with 2 core(s) - 01:55:40</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> Setting up parallel processing with 2 core(s) - 02:09:42</span>
 <span class="r-in"><span><span class="fu">future</span><span class="fu">::</span><span class="fu"><a href="https://future.futureverse.org/reference/plan.html" class="external-link">plan</a></span><span class="op">(</span><span class="op">)</span></span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> multisession:</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> - args: function (..., workers = c(system = 2L), envir = parent.frame())</span>
@@ -129,14 +129,14 @@ global variables identified. See <code>future.globals.maxSize</code> argument of
 <span class="r-out co"><span class="r-pr">#&gt;</span> Number of futures since start: 0</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> Workers of type RichSOCKcluster:</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> - Summary: Socket cluster with 2 nodes where 2 nodes are on host ‘localhost’ (R version 4.5.0 (2025-04-11), platform x86_64-pc-linux-gnu)</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> - [ OK ] Node 1/2: valid connection, alive [RichSOCKnode of a socket cluster on local host 'localhost' with pid 9507 (R version 4.5.0 (2025-04-11), x86_64-pc-linux-gnu) using socket connection #5 ('&lt;-localhost:11085')]</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> - [ OK ] Node 2/2: valid connection, alive [RichSOCKnode of a socket cluster on local host 'localhost' with pid 9506 (R version 4.5.0 (2025-04-11), x86_64-pc-linux-gnu) using socket connection #6 ('&lt;-localhost:11085')]</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> - [ OK ] Node 1/2: valid connection, alive [RichSOCKnode of a socket cluster on local host 'localhost' with pid 9503 (R version 4.5.0 (2025-04-11), x86_64-pc-linux-gnu) using socket connection #5 ('&lt;-localhost:11680')]</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> - [ OK ] Node 2/2: valid connection, alive [RichSOCKnode of a socket cluster on local host 'localhost' with pid 9502 (R version 4.5.0 (2025-04-11), x86_64-pc-linux-gnu) using socket connection #6 ('&lt;-localhost:11680')]</span>
 <span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="co"># ---------------------------------------------</span></span></span>
 <span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="co"># Stopping parallel processing</span></span></span>
 <span class="r-in"><span><span class="fu">ecokit</span><span class="fu">::</span><span class="fu">set_parallel</span><span class="op">(</span>stop_cluster <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> Stopping parallel processing - 01:55:41</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> Stopping parallel processing - 02:09:43</span>
 <span class="r-in"><span><span class="fu">future</span><span class="fu">::</span><span class="fu"><a href="https://future.futureverse.org/reference/plan.html" class="external-link">plan</a></span><span class="op">(</span><span class="op">)</span></span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> sequential:</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> - args: function (..., gc = TRUE, envir = parent.frame(), workers = "&lt;NULL&gt;")</span>
@@ -148,7 +148,7 @@ global variables identified. See <code>future.globals.maxSize</code> argument of
 <span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="co"># Prepare working in parallel using `future::cluster`</span></span></span>
 <span class="r-in"><span><span class="fu">ecokit</span><span class="fu">::</span><span class="fu">set_parallel</span><span class="op">(</span>n_cores <span class="op">=</span> <span class="fl">2</span>, strategy <span class="op">=</span> <span class="st">"future::cluster"</span><span class="op">)</span></span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> Setting up parallel processing with 2 core(s) - 01:55:41</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> Setting up parallel processing with 2 core(s) - 02:09:43</span>
 <span class="r-in"><span><span class="fu">future</span><span class="fu">::</span><span class="fu"><a href="https://future.futureverse.org/reference/plan.html" class="external-link">plan</a></span><span class="op">(</span><span class="op">)</span></span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> cluster:</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> - args: function (..., workers = c(system = 2L), envir = parent.frame())</span>
@@ -173,12 +173,12 @@ global variables identified. See <code>future.globals.maxSize</code> argument of
 <span class="r-out co"><span class="r-pr">#&gt;</span> Number of futures since start: 0</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> Workers of type RichSOCKcluster:</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> - Summary: Socket cluster with 2 nodes where 2 nodes are on host ‘localhost’ (R version 4.5.0 (2025-04-11), platform x86_64-pc-linux-gnu)</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> - [ OK ] Node 1/2: valid connection [RichSOCKnode of a socket cluster on local host 'localhost' with pid 9578 (R version 4.5.0 (2025-04-11), x86_64-pc-linux-gnu) using socket connection #5 ('&lt;-localhost:11510')]</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> - [ OK ] Node 2/2: valid connection [RichSOCKnode of a socket cluster on local host 'localhost' with pid 9579 (R version 4.5.0 (2025-04-11), x86_64-pc-linux-gnu) using socket connection #6 ('&lt;-localhost:11510')]</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> - [ OK ] Node 1/2: valid connection [RichSOCKnode of a socket cluster on local host 'localhost' with pid 9574 (R version 4.5.0 (2025-04-11), x86_64-pc-linux-gnu) using socket connection #5 ('&lt;-localhost:11426')]</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> - [ OK ] Node 2/2: valid connection [RichSOCKnode of a socket cluster on local host 'localhost' with pid 9573 (R version 4.5.0 (2025-04-11), x86_64-pc-linux-gnu) using socket connection #6 ('&lt;-localhost:11426')]</span>
 <span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="co"># Stopping parallel processing</span></span></span>
 <span class="r-in"><span><span class="fu">ecokit</span><span class="fu">::</span><span class="fu">set_parallel</span><span class="op">(</span>stop_cluster <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> Stopping parallel processing - 01:55:41</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> Stopping parallel processing - 02:09:43</span>
 <span class="r-in"><span><span class="fu">future</span><span class="fu">::</span><span class="fu"><a href="https://future.futureverse.org/reference/plan.html" class="external-link">plan</a></span><span class="op">(</span><span class="op">)</span></span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> sequential:</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> - args: function (..., gc = TRUE, envir = parent.frame(), workers = "&lt;NULL&gt;")</span>
