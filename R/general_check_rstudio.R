@@ -1,5 +1,5 @@
 ## |------------------------------------------------------------------------| #
-# check_RStudio ----
+# check_rstudio ----
 ## |------------------------------------------------------------------------| #
 
 #' Check if the installed RStudio version is up to date
@@ -7,7 +7,7 @@
 #' This function checks the current installed version of RStudio against the
 #' latest version available online. If the versions do not match, it suggests
 #' updating RStudio.
-#' @name check_RStudio
+#' @name check_rstudio
 #' @author Ahmed El-Gabbas
 #' @return Side effects include printing messages to the console regarding the
 #'   status of RStudio version.
@@ -16,9 +16,9 @@
 #'   display the latest version without comparing.
 #' @export
 #' @examples
-#' try(check_RStudio())
+#' try(check_rstudio())
 
-check_RStudio <- function() {
+check_rstudio <- function() {
 
   online_version <- "https://posit.co/download/rstudio-desktop/" %>%
     xml2::read_html() %>%
