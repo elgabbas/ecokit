@@ -2,7 +2,7 @@
 % Please edit documentation in R/general_check_data.R
 \name{check_data}
 \alias{check_data}
-\alias{check_RData}
+\alias{check_rdata}
 \alias{check_qs}
 \alias{check_rds}
 \alias{check_feather}
@@ -10,7 +10,7 @@
 \usage{
 check_data(file, warning = TRUE, n_threads = 5)
 
-check_RData(file, warning = TRUE)
+check_rdata(file, warning = TRUE)
 
 check_qs(file, warning = TRUE, n_threads = 5)
 
@@ -41,7 +41,7 @@ The \code{check_data()} function determines the file type based on its
 extension. If the extension is unrecognised, it returns \code{FALSE}. Supported
 file types:
 \itemize{
-\item \strong{RData}: Checked with \code{check_RData()}, read using \link{load_as}
+\item \strong{RData}: Checked with \code{check_rdata()}, read using \link{load_as}
 \item \strong{qs2}: Checked with \code{check_qs()}, read using \link[qs2:qs_read]{qs2::qs_read}
 \item \strong{rds}: Checked with \code{check_rds()}, read using \link{readRDS}
 \item \strong{feather}: Checked with \code{check_feather()}, read using

@@ -22,7 +22,7 @@
 #' @details The `check_data()` function determines the file type based on its
 #'   extension. If the extension is unrecognised, it returns `FALSE`. Supported
 #'   file types:
-#' - **RData**: Checked with `check_RData()`, read using [load_as]
+#' - **RData**: Checked with `check_rdata()`, read using [load_as]
 #' - **qs2**: Checked with `check_qs()`, read using [qs2::qs_read]
 #' - **rds**: Checked with `check_rds()`, read using [readRDS]
 #' - **feather**: Checked with `check_feather()`, read using
@@ -42,7 +42,7 @@ check_data <- function(file, warning = TRUE, n_threads = 5) {
   out_file <- switch(
     extension,
     qs2 = ecokit::check_qs(file, n_threads = n_threads, warning = warning),
-    rdata = ecokit::check_RData(file, warning = warning),
+    rdata = ecokit::check_rdata(file, warning = warning),
     rds = ecokit::check_rds(file, warning = warning),
     feather = ecokit::check_feather(file, warning = warning),
     FALSE)
@@ -52,7 +52,7 @@ check_data <- function(file, warning = TRUE, n_threads = 5) {
 
 
 ## |------------------------------------------------------------------------| #
-# check_RData ----
+# check_rdata ----
 ## |------------------------------------------------------------------------| #
 
 #' @export
@@ -61,7 +61,7 @@ check_data <- function(file, warning = TRUE, n_threads = 5) {
 #' @order 2
 #' @author Ahmed El-Gabbas
 
-check_RData <- function(file, warning = TRUE) {
+check_rdata <- function(file, warning = TRUE) {
 
   if (!file.exists(file) || is.null(file) || !nzchar(file)) {
     if (warning) {
