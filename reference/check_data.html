@@ -55,7 +55,7 @@ returns <code>FALSE</code>.</p>
     <h2 id="ref-usage">Usage<a class="anchor" aria-label="anchor" href="#ref-usage"></a></h2>
     <div class="sourceCode"><pre class="sourceCode r"><code><span><span class="fu">check_data</span><span class="op">(</span><span class="va">file</span>, warning <span class="op">=</span> <span class="cn">TRUE</span>, n_threads <span class="op">=</span> <span class="fl">5</span><span class="op">)</span></span>
 <span></span>
-<span><span class="fu">check_RData</span><span class="op">(</span><span class="va">file</span>, warning <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></span>
+<span><span class="fu">check_rdata</span><span class="op">(</span><span class="va">file</span>, warning <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></span>
 <span></span>
 <span><span class="fu">check_qs</span><span class="op">(</span><span class="va">file</span>, warning <span class="op">=</span> <span class="cn">TRUE</span>, n_threads <span class="op">=</span> <span class="fl">5</span><span class="op">)</span></span>
 <span></span>
@@ -90,7 +90,7 @@ files. Default is 5.</p></dd>
     <h2 id="details">Details<a class="anchor" aria-label="anchor" href="#details"></a></h2>
     <p>The <code>check_data()</code> function determines the file type based on its
 extension. If the extension is unrecognised, it returns <code>FALSE</code>. Supported
-file types:</p><ul><li><p><strong>RData</strong>: Checked with <code>check_RData()</code>, read using <a href="load_as.html">load_as</a></p></li>
+file types:</p><ul><li><p><strong>RData</strong>: Checked with <code>check_rdata()</code>, read using <a href="load_as.html">load_as</a></p></li>
 <li><p><strong>qs2</strong>: Checked with <code>check_qs()</code>, read using <a href="https://rdrr.io/pkg/qs2/man/qs_read.html" class="external-link">qs2::qs_read</a></p></li>
 <li><p><strong>rds</strong>: Checked with <code>check_rds()</code>, read using <a href="https://rdrr.io/r/base/readRDS.html" class="external-link">readRDS</a></p></li>
 <li><p><strong>feather</strong>: Checked with <code>check_feather()</code>, read using
