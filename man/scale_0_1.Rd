@@ -27,7 +27,7 @@ manipulation.
 \examples{
 library(terra)
 r <- rast(ncols = 10, nrows = 10)
-values(r) <- seq_len(terra::ncell(r))
+values(r) <- rnorm(terra::ncell(r))
 
 (r2 <- scale_0_1(r))
 
