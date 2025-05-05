@@ -89,6 +89,7 @@
 #' # ----------------------------------------------------
 #' # Example 4: Using additional arguments via ...
 #' # ----------------------------------------------------
+#'
 #' Function1(x = a + b, y = "test", extra1 = "hello", extra2 = 42)
 #'
 #' @author Ahmed El-Gabbas

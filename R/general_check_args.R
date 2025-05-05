@@ -71,7 +71,7 @@ check_args <- function(args_all, args_to_check, args_type) {
     if (length(missing_arguments) > 0) {
       ecokit::stop_ctx(
         paste0(
-          "The following character argument(s) must be provided\n  >>  ",
+          "The following character argument(s) must be character\n  >>  ",
           paste(missing_arguments, collapse = " | ")),
         length_MissingArgs = length(missing_arguments))
     }

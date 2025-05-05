@@ -25,6 +25,14 @@
 #' (r2 <- scale_0_1(r))
 #'
 #' plot(c(r, r2), main = c("Original", "Scaled"), axes = FALSE)
+#' ggplot2::ggplot() +
+#'   tidyterra::geom_spatraster(data = r, maxcell = Inf) +
+#'   ggplot2::theme_minimal()
+#'
+#' ggplot2::ggplot() +
+#'   tidyterra::geom_spatraster(data = r2, maxcell = Inf) +
+#'   ggplot2::theme_minimal()
+#'
 
 scale_0_1 <- function(raster) {
   # ensure raster is indeed a SpatRaster object

@@ -36,18 +36,21 @@
 #' # ----------------------------------------------------
 #' # All objects in memory
 #' # ----------------------------------------------------
+#'
 #' all_objects_sizes()
 #'
 #'
 #' # ----------------------------------------------------
 #' # Objects larger than 1 MB
 #' # ----------------------------------------------------
+#'
 #' all_objects_sizes(greater_than = 1)
 #'
 #'
 #' # ----------------------------------------------------
 #' # Objects larger than 50 MB
 #' # ----------------------------------------------------
+#'
 #' all_objects_sizes(greater_than = 50)
 #'
 #'
@@ -55,6 +58,7 @@
 #' # When called with another function, it shows the objects only available
 #' # within the function
 #' # ----------------------------------------------------
+#'
 #' TestFun <- function(XX = 10) {
 #'   Y <- 20
 #'   C <- matrix(data = seq_len(10000), nrow = 100, ncol = 100)

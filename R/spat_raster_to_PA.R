@@ -35,18 +35,18 @@
 #'   ggplot2::theme_minimal()
 #'
 #' r_2 <- raster::stack(
-#'   # NA replaced with 0
+#'   # 1) NA replaced with 0
 #'   raster_to_PA(raster = r),
-#'   # NA is kept as NA
+#'   # 2) NA is kept as NA
 #'   raster_to_PA(raster = r, NA_to_0 = FALSE),
-#'   # 0 replaced with NA in the second map
+#'   # 3) 0 replaced with NA
 #'   raster_to_PA(raster = raster_to_PA(r), zero_to_NA = TRUE))
 #'
 #' ggplot2::ggplot() +
 #'   tidyterra::geom_spatraster(
 #'     data = terra::as.factor(terra::rast(r_2)), maxcell = Inf) +
 #'   ggplot2::facet_wrap(~lyr) +
-#'   ggplot2::scale_fill_manual(values = c("grey30", "red"),
+#'   ggplot2::scale_fill_manual(values = c("grey30", "red", "blue"),
 #'     na.value = "transparent") +
 #'   ggplot2::theme_minimal()
 
