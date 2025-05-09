@@ -108,8 +108,8 @@ only letters, numbers, dots, or underscores. Only one of <code>check_dir</code> 
 <span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="co"># contents of the .env file</span></span></span>
 <span class="r-in"><span><span class="fu"><a href="https://rdrr.io/r/base/readLines.html" class="external-link">readLines</a></span><span class="op">(</span><span class="va">tmp_env_file</span><span class="op">)</span></span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [1] "MY_FILE=/tmp/Rtmp7Qd9ZU/file2057fa795a6.txt"</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [2] "MY_DIR=/tmp/Rtmp7Qd9ZU"                     </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [1] "MY_FILE=/tmp/RtmpxOZ4K2/file20786e474d74.txt"</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [2] "MY_DIR=/tmp/RtmpxOZ4K2"                      </span>
 <span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="co"># Define simple environment variables data</span></span></span>
 <span class="r-in"><span><span class="op">(</span><span class="va">env_vars</span> <span class="op">&lt;-</span> <span class="fu">tibble</span><span class="fu">::</span><span class="fu"><a href="https://tibble.tidyverse.org/reference/tibble.html" class="external-link">tibble</a></span><span class="op">(</span></span></span>
@@ -133,9 +133,9 @@ only letters, numbers, dots, or underscores. Only one of <code>check_dir</code> 
 <span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="co"># Verify</span></span></span>
 <span class="r-in"><span><span class="va">my_file</span></span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [1] "/tmp/Rtmp7Qd9ZU/file2057fa795a6.txt"</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [1] "/tmp/RtmpxOZ4K2/file20786e474d74.txt"</span>
 <span class="r-in"><span><span class="va">my_dir</span></span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [1] "/tmp/Rtmp7Qd9ZU"</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [1] "/tmp/RtmpxOZ4K2"</span>
 <span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="co"># clean up</span></span></span>
 <span class="r-in"><span><span class="fu"><a href="https://rdrr.io/r/base/unlink.html" class="external-link">unlink</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="va">my_file</span>, <span class="va">my_dir</span>, <span class="va">tmp_env_file</span><span class="op">)</span><span class="op">)</span></span></span>

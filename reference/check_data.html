@@ -107,7 +107,9 @@ extension (case-insensitive). If the extension is unrecognised, it returns
     <h2 id="ref-examples">Examples<a class="anchor" aria-label="anchor" href="#ref-examples"></a></h2>
     <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="co"># Setup temporary directory</span></span></span>
-<span class="r-in"><span><span class="va">temp_dir</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/tempfile.html" class="external-link">tempdir</a></span><span class="op">(</span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="va">temp_dir</span> <span class="op">&lt;-</span> <span class="fu">fs</span><span class="fu">::</span><span class="fu"><a href="https://fs.r-lib.org/reference/file_temp.html" class="external-link">path_temp</a></span><span class="op">(</span><span class="st">"load_multiple"</span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="fu">fs</span><span class="fu">::</span><span class="fu"><a href="https://fs.r-lib.org/reference/create.html" class="external-link">dir_create</a></span><span class="op">(</span><span class="va">temp_dir</span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="fu"><a href="https://rdrr.io/r/base/on.exit.html" class="external-link">on.exit</a></span><span class="op">(</span><span class="fu">fs</span><span class="fu">::</span><span class="fu"><a href="https://fs.r-lib.org/reference/delete.html" class="external-link">dir_delete</a></span><span class="op">(</span><span class="va">temp_dir</span><span class="op">)</span><span class="op">)</span></span></span>
 <span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="co"># |||||||||||||||||||||||||||||||||||||||</span></span></span>
 <span class="r-in"><span><span class="co"># Validate RData files</span></span></span>
@@ -117,23 +119,27 @@ extension (case-insensitive). If the extension is unrecognised, it returns
 <span class="r-in"><span><span class="va">data</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/data.frame.html" class="external-link">data.frame</a></span><span class="op">(</span>x <span class="op">=</span> <span class="fl">1</span><span class="op">:</span><span class="fl">5</span><span class="op">)</span></span></span>
 <span class="r-in"><span><span class="va">rdata_file</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/file.path.html" class="external-link">file.path</a></span><span class="op">(</span><span class="va">temp_dir</span>, <span class="st">"valid.Rdata"</span><span class="op">)</span></span></span>
 <span class="r-in"><span><span class="fu"><a href="https://rdrr.io/r/base/save.html" class="external-link">save</a></span><span class="op">(</span><span class="va">data</span>, file <span class="op">=</span> <span class="va">rdata_file</span><span class="op">)</span></span></span>
+<span class="r-wrn co"><span class="r-pr">#&gt;</span> <span class="warning">Warning: </span>cannot open compressed file '/tmp/RtmpxOZ4K2/load_multiple/valid.Rdata', probable reason 'No such file or directory'</span>
+<span class="r-err co"><span class="r-pr">#&gt;</span> <span class="error">Error in gzfile(file, "wb"):</span> cannot open the connection</span>
 <span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="co"># Invalid RData file (corrupted)</span></span></span>
 <span class="r-in"><span><span class="va">bad_rdata</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/file.path.html" class="external-link">file.path</a></span><span class="op">(</span><span class="va">temp_dir</span>, <span class="st">"invalid.Rdata"</span><span class="op">)</span></span></span>
 <span class="r-in"><span><span class="fu"><a href="https://rdrr.io/r/base/writeLines.html" class="external-link">writeLines</a></span><span class="op">(</span><span class="st">"not an RData file"</span>, <span class="va">bad_rdata</span><span class="op">)</span></span></span>
+<span class="r-wrn co"><span class="r-pr">#&gt;</span> <span class="warning">Warning: </span>cannot open file '/tmp/RtmpxOZ4K2/load_multiple/invalid.Rdata': No such file or directory</span>
+<span class="r-err co"><span class="r-pr">#&gt;</span> <span class="error">Error in file(con, "w"):</span> cannot open the connection</span>
 <span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="fu">check_data</span><span class="op">(</span><span class="va">rdata_file</span><span class="op">)</span>                               <span class="co"># TRUE</span></span></span>
-<span class="r-wrn co"><span class="r-pr">#&gt;</span> <span class="warning">Warning: </span>Not a valid RData file: /tmp/Rtmp7Qd9ZU/valid.Rdata</span>
+<span class="r-wrn co"><span class="r-pr">#&gt;</span> <span class="warning">Warning: </span>File does not exist: `/tmp/RtmpxOZ4K2/load_multiple/valid.Rdata`</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> [1] FALSE</span>
 <span class="r-in"><span><span class="fu">check_rdata</span><span class="op">(</span><span class="va">rdata_file</span><span class="op">)</span>                              <span class="co"># TRUE</span></span></span>
-<span class="r-wrn co"><span class="r-pr">#&gt;</span> <span class="warning">Warning: </span>Not a valid RData file: /tmp/Rtmp7Qd9ZU/valid.Rdata</span>
+<span class="r-wrn co"><span class="r-pr">#&gt;</span> <span class="warning">Warning: </span>File does not exist: `/tmp/RtmpxOZ4K2/load_multiple/valid.Rdata`</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> [1] FALSE</span>
 <span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="fu">check_data</span><span class="op">(</span><span class="va">bad_rdata</span><span class="op">)</span>                                <span class="co"># FALSE, with warning</span></span></span>
-<span class="r-wrn co"><span class="r-pr">#&gt;</span> <span class="warning">Warning: </span>Not a valid RData file: /tmp/Rtmp7Qd9ZU/invalid.Rdata</span>
+<span class="r-wrn co"><span class="r-pr">#&gt;</span> <span class="warning">Warning: </span>File does not exist: `/tmp/RtmpxOZ4K2/load_multiple/invalid.Rdata`</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> [1] FALSE</span>
 <span class="r-in"><span><span class="fu">check_rdata</span><span class="op">(</span><span class="va">bad_rdata</span><span class="op">)</span>                               <span class="co"># FALSE, with warning</span></span></span>
-<span class="r-wrn co"><span class="r-pr">#&gt;</span> <span class="warning">Warning: </span>Not a valid RData file: /tmp/Rtmp7Qd9ZU/invalid.Rdata</span>
+<span class="r-wrn co"><span class="r-pr">#&gt;</span> <span class="warning">Warning: </span>File does not exist: `/tmp/RtmpxOZ4K2/load_multiple/invalid.Rdata`</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> [1] FALSE</span>
 <span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="fu">check_data</span><span class="op">(</span><span class="va">bad_rdata</span>, warning <span class="op">=</span> <span class="cn">FALSE</span><span class="op">)</span>               <span class="co"># FALSE, no warning</span></span></span>
@@ -148,23 +154,26 @@ extension (case-insensitive). If the extension is unrecognised, it returns
 <span class="r-in"><span><span class="co"># Valid qs2 file</span></span></span>
 <span class="r-in"><span><span class="va">qs_file</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/file.path.html" class="external-link">file.path</a></span><span class="op">(</span><span class="va">temp_dir</span>, <span class="st">"valid.qs2"</span><span class="op">)</span></span></span>
 <span class="r-in"><span><span class="fu">qs2</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/qs2/man/qs_save.html" class="external-link">qs_save</a></span><span class="op">(</span><span class="va">data</span>, <span class="va">qs_file</span><span class="op">)</span></span></span>
+<span class="r-err co"><span class="r-pr">#&gt;</span> <span class="error">Error in qs2::qs_save(data, qs_file):</span> For file /tmp/RtmpxOZ4K2/load_multiple/valid.qs2: Failed to open for writing. Does the directory exist? Do you have file permissions? Is the file name long? (&gt;255 chars)</span>
 <span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="co"># Invalid qs2 file (corrupted)</span></span></span>
 <span class="r-in"><span><span class="va">bad_qs</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/file.path.html" class="external-link">file.path</a></span><span class="op">(</span><span class="va">temp_dir</span>, <span class="st">"invalid.qs2"</span><span class="op">)</span></span></span>
 <span class="r-in"><span><span class="fu"><a href="https://rdrr.io/r/base/writeLines.html" class="external-link">writeLines</a></span><span class="op">(</span><span class="st">"not a qs2 file"</span>, <span class="va">bad_qs</span><span class="op">)</span></span></span>
+<span class="r-wrn co"><span class="r-pr">#&gt;</span> <span class="warning">Warning: </span>cannot open file '/tmp/RtmpxOZ4K2/load_multiple/invalid.qs2': No such file or directory</span>
+<span class="r-err co"><span class="r-pr">#&gt;</span> <span class="error">Error in file(con, "w"):</span> cannot open the connection</span>
 <span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="fu">check_data</span><span class="op">(</span><span class="va">qs_file</span><span class="op">)</span>                                  <span class="co"># TRUE</span></span></span>
-<span class="r-wrn co"><span class="r-pr">#&gt;</span> <span class="warning">Warning: </span>Failed to load qs2 file: /tmp/Rtmp7Qd9ZU/valid.qs2</span>
+<span class="r-wrn co"><span class="r-pr">#&gt;</span> <span class="warning">Warning: </span>File does not exist: `/tmp/RtmpxOZ4K2/load_multiple/valid.qs2`</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> [1] FALSE</span>
 <span class="r-in"><span><span class="fu">check_qs</span><span class="op">(</span><span class="va">qs_file</span><span class="op">)</span>                                    <span class="co"># TRUE</span></span></span>
-<span class="r-wrn co"><span class="r-pr">#&gt;</span> <span class="warning">Warning: </span>Failed to load qs2 file: /tmp/Rtmp7Qd9ZU/valid.qs2</span>
+<span class="r-wrn co"><span class="r-pr">#&gt;</span> <span class="warning">Warning: </span>File does not exist: `/tmp/RtmpxOZ4K2/load_multiple/valid.qs2`</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> [1] FALSE</span>
 <span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="fu">check_data</span><span class="op">(</span><span class="va">bad_qs</span><span class="op">)</span>                                   <span class="co"># FALSE, with warning</span></span></span>
-<span class="r-wrn co"><span class="r-pr">#&gt;</span> <span class="warning">Warning: </span>Not a valid qs2 file: /tmp/Rtmp7Qd9ZU/invalid.qs2</span>
+<span class="r-wrn co"><span class="r-pr">#&gt;</span> <span class="warning">Warning: </span>File does not exist: `/tmp/RtmpxOZ4K2/load_multiple/invalid.qs2`</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> [1] FALSE</span>
 <span class="r-in"><span><span class="fu">check_qs</span><span class="op">(</span><span class="va">bad_qs</span><span class="op">)</span>                                     <span class="co"># FALSE, with warning</span></span></span>
-<span class="r-wrn co"><span class="r-pr">#&gt;</span> <span class="warning">Warning: </span>Not a valid qs2 file: /tmp/Rtmp7Qd9ZU/invalid.qs2</span>
+<span class="r-wrn co"><span class="r-pr">#&gt;</span> <span class="warning">Warning: </span>File does not exist: `/tmp/RtmpxOZ4K2/load_multiple/invalid.qs2`</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> [1] FALSE</span>
 <span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="co"># |||||||||||||||||||||||||||||||||||||||</span></span></span>
@@ -174,23 +183,27 @@ extension (case-insensitive). If the extension is unrecognised, it returns
 <span class="r-in"><span><span class="co"># Valid rds file</span></span></span>
 <span class="r-in"><span><span class="va">rds_file</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/file.path.html" class="external-link">file.path</a></span><span class="op">(</span><span class="va">temp_dir</span>, <span class="st">"valid.rds"</span><span class="op">)</span></span></span>
 <span class="r-in"><span><span class="fu"><a href="https://rdrr.io/r/base/readRDS.html" class="external-link">saveRDS</a></span><span class="op">(</span><span class="va">data</span>, <span class="va">rds_file</span><span class="op">)</span></span></span>
+<span class="r-wrn co"><span class="r-pr">#&gt;</span> <span class="warning">Warning: </span>cannot open compressed file '/tmp/RtmpxOZ4K2/load_multiple/valid.rds', probable reason 'No such file or directory'</span>
+<span class="r-err co"><span class="r-pr">#&gt;</span> <span class="error">Error in gzfile(file, mode):</span> cannot open the connection</span>
 <span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="co"># Invalid rds file (corrupted)</span></span></span>
 <span class="r-in"><span><span class="va">bad_rds</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/file.path.html" class="external-link">file.path</a></span><span class="op">(</span><span class="va">temp_dir</span>, <span class="st">"invalid.rds"</span><span class="op">)</span></span></span>
 <span class="r-in"><span><span class="fu"><a href="https://rdrr.io/r/base/writeLines.html" class="external-link">writeLines</a></span><span class="op">(</span><span class="st">"not an rds file"</span>, <span class="va">bad_rds</span><span class="op">)</span></span></span>
+<span class="r-wrn co"><span class="r-pr">#&gt;</span> <span class="warning">Warning: </span>cannot open file '/tmp/RtmpxOZ4K2/load_multiple/invalid.rds': No such file or directory</span>
+<span class="r-err co"><span class="r-pr">#&gt;</span> <span class="error">Error in file(con, "w"):</span> cannot open the connection</span>
 <span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="fu">check_data</span><span class="op">(</span><span class="va">rds_file</span><span class="op">)</span>                                 <span class="co"># TRUE</span></span></span>
-<span class="r-wrn co"><span class="r-pr">#&gt;</span> <span class="warning">Warning: </span>Not a valid rds file: /tmp/Rtmp7Qd9ZU/valid.rds</span>
+<span class="r-wrn co"><span class="r-pr">#&gt;</span> <span class="warning">Warning: </span>File does not exist: `/tmp/RtmpxOZ4K2/load_multiple/valid.rds`</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> [1] FALSE</span>
 <span class="r-in"><span><span class="fu">check_rds</span><span class="op">(</span><span class="va">rds_file</span><span class="op">)</span>                                  <span class="co"># TRUE</span></span></span>
-<span class="r-wrn co"><span class="r-pr">#&gt;</span> <span class="warning">Warning: </span>Not a valid rds file: /tmp/Rtmp7Qd9ZU/valid.rds</span>
+<span class="r-wrn co"><span class="r-pr">#&gt;</span> <span class="warning">Warning: </span>File does not exist: `/tmp/RtmpxOZ4K2/load_multiple/valid.rds`</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> [1] FALSE</span>
 <span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="fu">check_data</span><span class="op">(</span><span class="va">bad_rds</span><span class="op">)</span>                                  <span class="co"># FALSE, with warning</span></span></span>
-<span class="r-wrn co"><span class="r-pr">#&gt;</span> <span class="warning">Warning: </span>Not a valid rds file: /tmp/Rtmp7Qd9ZU/invalid.rds</span>
+<span class="r-wrn co"><span class="r-pr">#&gt;</span> <span class="warning">Warning: </span>File does not exist: `/tmp/RtmpxOZ4K2/load_multiple/invalid.rds`</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> [1] FALSE</span>
 <span class="r-in"><span><span class="fu">check_rds</span><span class="op">(</span><span class="va">bad_rds</span><span class="op">)</span>                                   <span class="co"># FALSE, with warning</span></span></span>
-<span class="r-wrn co"><span class="r-pr">#&gt;</span> <span class="warning">Warning: </span>Not a valid rds file: /tmp/Rtmp7Qd9ZU/invalid.rds</span>
+<span class="r-wrn co"><span class="r-pr">#&gt;</span> <span class="warning">Warning: </span>File does not exist: `/tmp/RtmpxOZ4K2/load_multiple/invalid.rds`</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> [1] FALSE</span>
 <span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="co"># |||||||||||||||||||||||||||||||||||||||</span></span></span>
@@ -200,21 +213,26 @@ extension (case-insensitive). If the extension is unrecognised, it returns
 <span class="r-in"><span><span class="co"># Valid feather file</span></span></span>
 <span class="r-in"><span><span class="va">feather_file</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/file.path.html" class="external-link">file.path</a></span><span class="op">(</span><span class="va">temp_dir</span>, <span class="st">"valid.feather"</span><span class="op">)</span></span></span>
 <span class="r-in"><span><span class="fu">arrow</span><span class="fu">::</span><span class="fu"><a href="https://arrow.apache.org/docs/r/reference/write_feather.html" class="external-link">write_feather</a></span><span class="op">(</span><span class="va">data</span>, <span class="va">feather_file</span><span class="op">)</span></span></span>
+<span class="r-err co"><span class="r-pr">#&gt;</span> <span class="error">Error:</span> IOError: Failed to open local file '/tmp/RtmpxOZ4K2/load_multiple/valid.feather'. Detail: [errno 2] No such file or directory</span>
 <span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="co"># Invalid feather file (corrupted)</span></span></span>
 <span class="r-in"><span><span class="va">bad_feather</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/file.path.html" class="external-link">file.path</a></span><span class="op">(</span><span class="va">temp_dir</span>, <span class="st">"invalid.feather"</span><span class="op">)</span></span></span>
 <span class="r-in"><span><span class="fu"><a href="https://rdrr.io/r/base/writeLines.html" class="external-link">writeLines</a></span><span class="op">(</span><span class="st">"not a feather file"</span>, <span class="va">bad_feather</span><span class="op">)</span></span></span>
+<span class="r-wrn co"><span class="r-pr">#&gt;</span> <span class="warning">Warning: </span>cannot open file '/tmp/RtmpxOZ4K2/load_multiple/invalid.feather': No such file or directory</span>
+<span class="r-err co"><span class="r-pr">#&gt;</span> <span class="error">Error in file(con, "w"):</span> cannot open the connection</span>
 <span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="fu">check_data</span><span class="op">(</span><span class="va">feather_file</span><span class="op">)</span>                             <span class="co"># TRUE</span></span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [1] TRUE</span>
+<span class="r-wrn co"><span class="r-pr">#&gt;</span> <span class="warning">Warning: </span>File does not exist: `/tmp/RtmpxOZ4K2/load_multiple/valid.feather`</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [1] FALSE</span>
 <span class="r-in"><span><span class="fu">check_feather</span><span class="op">(</span><span class="va">feather_file</span><span class="op">)</span>                          <span class="co"># TRUE</span></span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [1] TRUE</span>
+<span class="r-wrn co"><span class="r-pr">#&gt;</span> <span class="warning">Warning: </span>File does not exist: `/tmp/RtmpxOZ4K2/load_multiple/valid.feather`</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [1] FALSE</span>
 <span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="fu">check_data</span><span class="op">(</span><span class="va">bad_feather</span><span class="op">)</span>                              <span class="co"># FALSE, with warning</span></span></span>
-<span class="r-wrn co"><span class="r-pr">#&gt;</span> <span class="warning">Warning: </span>Not a valid feather file: /tmp/Rtmp7Qd9ZU/invalid.feather</span>
+<span class="r-wrn co"><span class="r-pr">#&gt;</span> <span class="warning">Warning: </span>File does not exist: `/tmp/RtmpxOZ4K2/load_multiple/invalid.feather`</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> [1] FALSE</span>
 <span class="r-in"><span><span class="fu">check_feather</span><span class="op">(</span><span class="va">bad_feather</span><span class="op">)</span>                           <span class="co"># FALSE, with warning</span></span></span>
-<span class="r-wrn co"><span class="r-pr">#&gt;</span> <span class="warning">Warning: </span>Not a valid feather file: /tmp/Rtmp7Qd9ZU/invalid.feather</span>
+<span class="r-wrn co"><span class="r-pr">#&gt;</span> <span class="warning">Warning: </span>File does not exist: `/tmp/RtmpxOZ4K2/load_multiple/invalid.feather`</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> [1] FALSE</span>
 <span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="co"># |||||||||||||||||||||||||||||||||||||||</span></span></span>
@@ -226,8 +244,12 @@ extension (case-insensitive). If the extension is unrecognised, it returns
 <span class="r-out co"><span class="r-pr">#&gt;</span> [1] FALSE</span>
 <span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="co"># Clean up</span></span></span>
-<span class="r-in"><span><span class="fu"><a href="https://rdrr.io/r/base/unlink.html" class="external-link">unlink</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="va">rdata_file</span>, <span class="va">bad_rdata</span>, <span class="va">qs_file</span>, <span class="va">bad_qs</span>, <span class="va">rds_file</span>, <span class="va">bad_rds</span>,</span></span>
-<span class="r-in"><span>         <span class="va">feather_file</span>, <span class="va">bad_feather</span><span class="op">)</span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="fu">fs</span><span class="fu">::</span><span class="fu"><a href="https://fs.r-lib.org/reference/delete.html" class="external-link">file_delete</a></span><span class="op">(</span></span></span>
+<span class="r-in"><span>  <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="va">rdata_file</span>, <span class="va">bad_rdata</span>, <span class="va">qs_file</span>, <span class="va">bad_qs</span>, <span class="va">rds_file</span>, <span class="va">bad_rds</span>,</span></span>
+<span class="r-in"><span>  <span class="va">feather_file</span>, <span class="va">bad_feather</span><span class="op">)</span><span class="op">)</span></span></span>
+<span class="r-err co"><span class="r-pr">#&gt;</span> <span class="error">Error:</span> [ENOENT] Failed to remove '/tmp/RtmpxOZ4K2/load_multiple/valid.Rdata': no such file or directory</span>
+<span class="r-in"><span><span class="fu">fs</span><span class="fu">::</span><span class="fu"><a href="https://fs.r-lib.org/reference/delete.html" class="external-link">dir_delete</a></span><span class="op">(</span><span class="va">temp_dir</span><span class="op">)</span></span></span>
+<span class="r-err co"><span class="r-pr">#&gt;</span> <span class="error">Error:</span> [ENOENT] Failed to search directory '/tmp/RtmpxOZ4K2/load_multiple': no such file or directory</span>
 </code></pre></div>
     </div>
   </main><aside class="col-md-3"><nav id="toc" aria-label="Table of contents"><h2>On this page</h2>
