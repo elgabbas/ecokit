@@ -58,8 +58,7 @@ from variable names or expressions without including the usual quotes.</p>
 
 
 <dl><dt id="arg--">...<a class="anchor" aria-label="anchor" href="#arg--"></a></dt>
-<dd><p>strings to be concatenated. Note that numeric values should be
-converted to strings before being passed.</p></dd>
+<dd><p>strings to be concatenated.</p></dd>
 
 </dl></div>
     <div class="section level2">
@@ -77,19 +76,10 @@ expressions.</p>
     <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span><span class="fu">cc</span><span class="op">(</span><span class="va">A</span>, <span class="va">B</span>, <span class="va">C</span><span class="op">)</span></span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> [1] "A" "B" "C"</span>
 <span class="r-in"><span></span></span>
-<span class="r-in"><span><span class="co"># -------------------------------------------</span></span></span>
-<span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="fu">cc</span><span class="op">(</span><span class="va">A</span>, <span class="va">B</span>, <span class="st">"A and B"</span><span class="op">)</span></span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> [1] "A"       "B"       "A and B"</span>
 <span class="r-in"><span></span></span>
-<span class="r-in"><span><span class="co"># -------------------------------------------</span></span></span>
-<span class="r-in"><span></span></span>
-<span class="r-in"><span><span class="co"># this does not work</span></span></span>
-<span class="r-in"><span><span class="kw"><a href="https://rdrr.io/r/base/try.html" class="external-link">try</a></span><span class="op">(</span><span class="fu">cc</span><span class="op">(</span><span class="va">A</span>, <span class="va">B</span>, <span class="st">"A and B"</span>, <span class="fl">10</span><span class="op">)</span><span class="op">)</span></span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> Error in sym(expr) : Can't convert a double vector to a symbol.</span>
-<span class="r-in"><span></span></span>
-<span class="r-in"><span><span class="co"># this works</span></span></span>
-<span class="r-in"><span><span class="fu">cc</span><span class="op">(</span><span class="va">A</span>, <span class="va">B</span>, <span class="st">"A and B"</span>, <span class="st">"10"</span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="fu">cc</span><span class="op">(</span><span class="va">A</span>, <span class="va">B</span>, <span class="st">"A and B"</span>, <span class="fl">10</span><span class="op">)</span></span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> [1] "A"       "B"       "A and B" "10"     </span>
 </code></pre></div>
     </div>

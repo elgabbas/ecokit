@@ -5,13 +5,13 @@
 <url><loc>https://elgabbas.github.io/ecokit/authors.html</loc></url>
 <url><loc>https://elgabbas.github.io/ecokit/index.html</loc></url>
 <url><loc>https://elgabbas.github.io/ecokit/reference/OS.html</loc></url>
-<url><loc>https://elgabbas.github.io/ecokit/reference/add_cross_to_grid.html</loc></url>
-<url><loc>https://elgabbas.github.io/ecokit/reference/add_diagonals_to_grid.html</loc></url>
+<url><loc>https://elgabbas.github.io/ecokit/reference/add_geometric_features.html</loc></url>
 <url><loc>https://elgabbas.github.io/ecokit/reference/add_image_to_plot.html</loc></url>
 <url><loc>https://elgabbas.github.io/ecokit/reference/add_line.html</loc></url>
 <url><loc>https://elgabbas.github.io/ecokit/reference/add_missing_columns.html</loc></url>
 <url><loc>https://elgabbas.github.io/ecokit/reference/all_objects_sizes.html</loc></url>
 <url><loc>https://elgabbas.github.io/ecokit/reference/apply_functions.html</loc></url>
+<url><loc>https://elgabbas.github.io/ecokit/reference/arrange_alphanum.html</loc></url>
 <url><loc>https://elgabbas.github.io/ecokit/reference/assign_env_vars.html</loc></url>
 <url><loc>https://elgabbas.github.io/ecokit/reference/assign_if_not_exist.html</loc></url>
 <url><loc>https://elgabbas.github.io/ecokit/reference/bash_variables.html</loc></url>
@@ -33,9 +33,7 @@
 <url><loc>https://elgabbas.github.io/ecokit/reference/clip_raster_by_polygon.html</loc></url>
 <url><loc>https://elgabbas.github.io/ecokit/reference/detect_alias.html</loc></url>
 <url><loc>https://elgabbas.github.io/ecokit/reference/ecokit-package.html</loc></url>
-<url><loc>https://elgabbas.github.io/ecokit/reference/file_extension.html</loc></url>
-<url><loc>https://elgabbas.github.io/ecokit/reference/file_size.html</loc></url>
-<url><loc>https://elgabbas.github.io/ecokit/reference/file_type.html</loc></url>
+<url><loc>https://elgabbas.github.io/ecokit/reference/file_operations.html</loc></url>
 <url><loc>https://elgabbas.github.io/ecokit/reference/function_arguments.html</loc></url>
 <url><loc>https://elgabbas.github.io/ecokit/reference/get_mode.html</loc></url>
 <url><loc>https://elgabbas.github.io/ecokit/reference/git_log.html</loc></url>
@@ -55,11 +53,10 @@
 <url><loc>https://elgabbas.github.io/ecokit/reference/normalize_path.html</loc></url>
 <url><loc>https://elgabbas.github.io/ecokit/reference/package_functions.html</loc></url>
 <url><loc>https://elgabbas.github.io/ecokit/reference/package_remote_sha.html</loc></url>
-<url><loc>https://elgabbas.github.io/ecokit/reference/path.html</loc></url>
 <url><loc>https://elgabbas.github.io/ecokit/reference/pipe.html</loc></url>
 <url><loc>https://elgabbas.github.io/ecokit/reference/polygon_centroid.html</loc></url>
 <url><loc>https://elgabbas.github.io/ecokit/reference/range_to_new_value.html</loc></url>
-<url><loc>https://elgabbas.github.io/ecokit/reference/raster_to_PA.html</loc></url>
+<url><loc>https://elgabbas.github.io/ecokit/reference/raster_to_pres_abs.html</loc></url>
 <url><loc>https://elgabbas.github.io/ecokit/reference/record_arguments.html</loc></url>
 <url><loc>https://elgabbas.github.io/ecokit/reference/reload_package.html</loc></url>
 <url><loc>https://elgabbas.github.io/ecokit/reference/rename_geometry.html</loc></url>
@@ -76,7 +73,6 @@
 <url><loc>https://elgabbas.github.io/ecokit/reference/set_raster_CRS.html</loc></url>
 <url><loc>https://elgabbas.github.io/ecokit/reference/set_raster_values.html</loc></url>
 <url><loc>https://elgabbas.github.io/ecokit/reference/sf_add_coords.html</loc></url>
-<url><loc>https://elgabbas.github.io/ecokit/reference/sort2.html</loc></url>
 <url><loc>https://elgabbas.github.io/ecokit/reference/source_silent.html</loc></url>
 <url><loc>https://elgabbas.github.io/ecokit/reference/split_df_to_chunks.html</loc></url>
 <url><loc>https://elgabbas.github.io/ecokit/reference/split_raster.html</loc></url>

@@ -81,7 +81,7 @@ with an error message.</p></dd>
 
 
 <dt id="arg-prefix">prefix<a class="anchor" aria-label="anchor" href="#arg-prefix"></a></dt>
-<dd><p>Character. prefix of each output file name. Useful for
+<dd><p>Character. Prefix of each output file name. Useful for
 organizing saved files or avoiding name conflicts. Defaults to an empty
 string.</p></dd>
 
@@ -103,51 +103,60 @@ return a value.</p>
 
     <div class="section level2">
     <h2 id="ref-examples">Examples<a class="anchor" aria-label="anchor" href="#ref-examples"></a></h2>
-    <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span><span class="kw">if</span> <span class="op">(</span><span class="cn">FALSE</span><span class="op">)</span> <span class="op">{</span> <span class="co"># \dontrun{</span></span></span>
-<span class="r-in"><span>  <span class="va">TMP_Folder</span> <span class="op">&lt;-</span> <span class="fu">ecokit</span><span class="fu">::</span><span class="fu"><a href="path.html">path</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/tempfile.html" class="external-link">tempdir</a></span><span class="op">(</span><span class="op">)</span>, <span class="fu">stringi</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/stringi/man/stri_rand_strings.html" class="external-link">stri_rand_strings</a></span><span class="op">(</span><span class="fl">1</span>, <span class="fl">5</span><span class="op">)</span><span class="op">)</span></span></span>
-<span class="r-in"><span>  <span class="fu">fs</span><span class="fu">::</span><span class="fu"><a href="https://fs.r-lib.org/reference/create.html" class="external-link">dir_create</a></span><span class="op">(</span><span class="va">TMP_Folder</span><span class="op">)</span></span></span>
+    <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span><span class="fu"><a href="load_packages.html">load_packages</a></span><span class="op">(</span><span class="va">fs</span>, <span class="va">purrr</span>, <span class="va">stringi</span><span class="op">)</span></span></span>
 <span class="r-in"><span></span></span>
-<span class="r-in"><span>  <span class="co"># ----------------------------------------------</span></span></span>
-<span class="r-in"><span>  <span class="co"># Save x1 and x2 to disk</span></span></span>
-<span class="r-in"><span>  <span class="co"># ----------------------------------------------</span></span></span>
-<span class="r-in"><span>  <span class="va">x1</span> <span class="op">=</span> <span class="fl">10</span>; <span class="va">x2</span> <span class="op">=</span> <span class="fl">20</span></span></span>
+<span class="r-in"><span><span class="va">TMP_Folder</span> <span class="op">&lt;-</span> <span class="fu">fs</span><span class="fu">::</span><span class="fu"><a href="https://fs.r-lib.org/reference/path.html" class="external-link">path</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/tempfile.html" class="external-link">tempdir</a></span><span class="op">(</span><span class="op">)</span>, <span class="fu">stringi</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/stringi/man/stri_rand_strings.html" class="external-link">stri_rand_strings</a></span><span class="op">(</span><span class="fl">1</span>, <span class="fl">5</span><span class="op">)</span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="fu">fs</span><span class="fu">::</span><span class="fu"><a href="https://fs.r-lib.org/reference/create.html" class="external-link">dir_create</a></span><span class="op">(</span><span class="va">TMP_Folder</span><span class="op">)</span></span></span>
 <span class="r-in"><span></span></span>
-<span class="r-in"><span>  <span class="fu">save_multiple</span><span class="op">(</span>variables <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"x1"</span>, <span class="st">"x2"</span><span class="op">)</span>, out_directory <span class="op">=</span> <span class="va">TMP_Folder</span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="co"># ----------------------------------------------</span></span></span>
+<span class="r-in"><span><span class="co"># Save x1 and x2 to disk</span></span></span>
+<span class="r-in"><span><span class="co"># ----------------------------------------------</span></span></span>
+<span class="r-in"><span><span class="va">x1</span> <span class="op">=</span> <span class="fl">10</span></span></span>
+<span class="r-in"><span><span class="va">x2</span> <span class="op">=</span> <span class="fl">20</span></span></span>
 <span class="r-in"><span></span></span>
-<span class="r-in"><span>  <span class="fu"><a href="https://rdrr.io/r/base/list.files.html" class="external-link">list.files</a></span><span class="op">(</span>path <span class="op">=</span> <span class="va">TMP_Folder</span>, pattern <span class="op">=</span> <span class="st">"^.+.RData"</span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="fu">save_multiple</span><span class="op">(</span></span></span>
+<span class="r-in"><span>  variables <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"x1"</span>, <span class="st">"x2"</span><span class="op">)</span>, out_directory <span class="op">=</span> <span class="va">TMP_Folder</span>, verbose <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></span></span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> Saved 2 object(s) to /tmp/Rtmp7Qd9ZU/ucMfP.</span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> Saved files are: <span style="color: #BB0000;">x1.RData</span>, <span style="color: #BB0000;">x2.RData</span>.</span>
 <span class="r-in"><span></span></span>
-<span class="r-in"><span>  <span class="op">(</span><span class="va">x1Contents</span> <span class="op">&lt;-</span> <span class="fu">ecokit</span><span class="fu">::</span><span class="fu"><a href="load_as.html">load_as</a></span><span class="op">(</span><span class="fu">ecokit</span><span class="fu">::</span><span class="fu"><a href="path.html">path</a></span><span class="op">(</span><span class="va">TMP_Folder</span>, <span class="st">"x1.RData"</span><span class="op">)</span><span class="op">)</span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="fu"><a href="https://rdrr.io/r/base/list.files.html" class="external-link">list.files</a></span><span class="op">(</span>path <span class="op">=</span> <span class="va">TMP_Folder</span>, pattern <span class="op">=</span> <span class="st">"^.+.RData"</span><span class="op">)</span></span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [1] "x1.RData" "x2.RData"</span>
 <span class="r-in"><span></span></span>
-<span class="r-in"><span>  <span class="op">(</span><span class="va">x2Contents</span> <span class="op">&lt;-</span> <span class="fu">ecokit</span><span class="fu">::</span><span class="fu"><a href="load_as.html">load_as</a></span><span class="op">(</span><span class="fu">ecokit</span><span class="fu">::</span><span class="fu"><a href="path.html">path</a></span><span class="op">(</span><span class="va">TMP_Folder</span>, <span class="st">"x2.RData"</span><span class="op">)</span><span class="op">)</span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="op">(</span><span class="va">x1Contents</span> <span class="op">&lt;-</span> <span class="fu">ecokit</span><span class="fu">::</span><span class="fu"><a href="load_as.html">load_as</a></span><span class="op">(</span><span class="fu">fs</span><span class="fu">::</span><span class="fu"><a href="https://fs.r-lib.org/reference/path.html" class="external-link">path</a></span><span class="op">(</span><span class="va">TMP_Folder</span>, <span class="st">"x1.RData"</span><span class="op">)</span><span class="op">)</span><span class="op">)</span></span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [1] 10</span>
+<span class="r-in"><span><span class="op">(</span><span class="va">x2Contents</span> <span class="op">&lt;-</span> <span class="fu">ecokit</span><span class="fu">::</span><span class="fu"><a href="load_as.html">load_as</a></span><span class="op">(</span><span class="fu">fs</span><span class="fu">::</span><span class="fu"><a href="https://fs.r-lib.org/reference/path.html" class="external-link">path</a></span><span class="op">(</span><span class="va">TMP_Folder</span>, <span class="st">"x2.RData"</span><span class="op">)</span><span class="op">)</span><span class="op">)</span></span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [1] 20</span>
 <span class="r-in"><span></span></span>
-<span class="r-in"><span>  <span class="co"># ----------------------------------------------</span></span></span>
-<span class="r-in"><span>  <span class="co"># Use prefix</span></span></span>
-<span class="r-in"><span>  <span class="co"># ----------------------------------------------</span></span></span>
+<span class="r-in"><span><span class="co"># ----------------------------------------------</span></span></span>
+<span class="r-in"><span><span class="co"># Use prefix</span></span></span>
+<span class="r-in"><span><span class="co"># ----------------------------------------------</span></span></span>
+<span class="r-in"><span><span class="fu">save_multiple</span><span class="op">(</span></span></span>
+<span class="r-in"><span>  variables <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"x1"</span>, <span class="st">"x2"</span><span class="op">)</span>, out_directory <span class="op">=</span> <span class="va">TMP_Folder</span>, prefix <span class="op">=</span> <span class="st">"A_"</span><span class="op">)</span></span></span>
 <span class="r-in"><span></span></span>
-<span class="r-in"><span>  <span class="fu">save_multiple</span><span class="op">(</span></span></span>
-<span class="r-in"><span>      variables <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"x1"</span>, <span class="st">"x2"</span><span class="op">)</span>, out_directory <span class="op">=</span> <span class="va">TMP_Folder</span>, prefix <span class="op">=</span> <span class="st">"A_"</span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="fu"><a href="https://rdrr.io/r/base/list.files.html" class="external-link">list.files</a></span><span class="op">(</span>path <span class="op">=</span> <span class="va">TMP_Folder</span>, pattern <span class="op">=</span> <span class="st">"^.+.RData"</span><span class="op">)</span></span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [1] "A_x1.RData" "A_x2.RData" "x1.RData"   "x2.RData"  </span>
 <span class="r-in"><span></span></span>
-<span class="r-in"><span>  <span class="fu"><a href="https://rdrr.io/r/base/list.files.html" class="external-link">list.files</a></span><span class="op">(</span>path <span class="op">=</span> <span class="va">TMP_Folder</span>, pattern <span class="op">=</span> <span class="st">"^.+.RData"</span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="co"># ----------------------------------------------</span></span></span>
+<span class="r-in"><span><span class="co"># File exists, no save</span></span></span>
+<span class="r-in"><span><span class="co"># ----------------------------------------------</span></span></span>
+<span class="r-in"><span><span class="kw"><a href="https://rdrr.io/r/base/try.html" class="external-link">try</a></span><span class="op">(</span><span class="fu">save_multiple</span><span class="op">(</span>variables <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"x1"</span>, <span class="st">"x2"</span><span class="op">)</span>, out_directory <span class="op">=</span> <span class="va">TMP_Folder</span><span class="op">)</span><span class="op">)</span></span></span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> One or more files exist; skipping save. Use overwrite = TRUE to force.</span>
 <span class="r-in"><span></span></span>
-<span class="r-in"><span>  <span class="co"># ----------------------------------------------</span></span></span>
-<span class="r-in"><span>  <span class="co"># File exists, no save</span></span></span>
-<span class="r-in"><span>  <span class="co"># ----------------------------------------------</span></span></span>
-<span class="r-in"><span>  <span class="kw"><a href="https://rdrr.io/r/base/try.html" class="external-link">try</a></span><span class="op">(</span><span class="fu">save_multiple</span><span class="op">(</span>variables <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"x1"</span>, <span class="st">"x2"</span><span class="op">)</span>, out_directory <span class="op">=</span> <span class="va">TMP_Folder</span><span class="op">)</span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="co"># ----------------------------------------------</span></span></span>
+<span class="r-in"><span><span class="co"># overwrite existing file</span></span></span>
+<span class="r-in"><span><span class="co"># ----------------------------------------------</span></span></span>
+<span class="r-in"><span><span class="va">x1</span> <span class="op">=</span> <span class="fl">100</span>; <span class="va">x2</span> <span class="op">=</span> <span class="fl">200</span>; <span class="va">x3</span> <span class="op">=</span> <span class="fl">300</span></span></span>
 <span class="r-in"><span></span></span>
-<span class="r-in"><span>  <span class="co"># ----------------------------------------------</span></span></span>
-<span class="r-in"><span>  <span class="co"># overwrite existing file</span></span></span>
-<span class="r-in"><span>  <span class="co"># ----------------------------------------------</span></span></span>
-<span class="r-in"><span>  <span class="va">x1</span> <span class="op">=</span> <span class="fl">100</span>; <span class="va">x2</span> <span class="op">=</span> <span class="fl">200</span>; <span class="va">x3</span> <span class="op">=</span> <span class="fl">300</span></span></span>
+<span class="r-in"><span><span class="fu">save_multiple</span><span class="op">(</span></span></span>
+<span class="r-in"><span>  variables <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"x1"</span>, <span class="st">"x2"</span>, <span class="st">"x3"</span><span class="op">)</span>,</span></span>
+<span class="r-in"><span>  out_directory <span class="op">=</span> <span class="va">TMP_Folder</span>, overwrite <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></span></span>
 <span class="r-in"><span></span></span>
-<span class="r-in"><span>  <span class="fu">save_multiple</span><span class="op">(</span>variables <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"x1"</span>, <span class="st">"x2"</span>, <span class="st">"x3"</span><span class="op">)</span>,</span></span>
-<span class="r-in"><span>     out_directory <span class="op">=</span> <span class="va">TMP_Folder</span>, overwrite <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></span></span>
-<span class="r-in"><span></span></span>
-<span class="r-in"><span>  <span class="op">(</span><span class="va">x1Contents</span> <span class="op">&lt;-</span> <span class="fu">ecokit</span><span class="fu">::</span><span class="fu"><a href="load_as.html">load_as</a></span><span class="op">(</span><span class="fu">ecokit</span><span class="fu">::</span><span class="fu"><a href="path.html">path</a></span><span class="op">(</span><span class="va">TMP_Folder</span>, <span class="st">"x1.RData"</span><span class="op">)</span><span class="op">)</span><span class="op">)</span></span></span>
-<span class="r-in"><span></span></span>
-<span class="r-in"><span>  <span class="op">(</span><span class="va">x2Contents</span> <span class="op">&lt;-</span> <span class="fu">ecokit</span><span class="fu">::</span><span class="fu"><a href="load_as.html">load_as</a></span><span class="op">(</span><span class="fu">ecokit</span><span class="fu">::</span><span class="fu"><a href="path.html">path</a></span><span class="op">(</span><span class="va">TMP_Folder</span>, <span class="st">"x2.RData"</span><span class="op">)</span><span class="op">)</span><span class="op">)</span></span></span>
-<span class="r-in"><span></span></span>
-<span class="r-in"><span>  <span class="op">(</span><span class="va">x3Contents</span> <span class="op">&lt;-</span> <span class="fu">ecokit</span><span class="fu">::</span><span class="fu"><a href="load_as.html">load_as</a></span><span class="op">(</span><span class="fu">ecokit</span><span class="fu">::</span><span class="fu"><a href="path.html">path</a></span><span class="op">(</span><span class="va">TMP_Folder</span>, <span class="st">"x3.RData"</span><span class="op">)</span><span class="op">)</span><span class="op">)</span></span></span>
-<span class="r-in"><span><span class="op">}</span> <span class="co"># }</span></span></span>
+<span class="r-in"><span><span class="op">(</span><span class="va">x1Contents</span> <span class="op">&lt;-</span> <span class="fu">ecokit</span><span class="fu">::</span><span class="fu"><a href="load_as.html">load_as</a></span><span class="op">(</span><span class="fu">fs</span><span class="fu">::</span><span class="fu"><a href="https://fs.r-lib.org/reference/path.html" class="external-link">path</a></span><span class="op">(</span><span class="va">TMP_Folder</span>, <span class="st">"x1.RData"</span><span class="op">)</span><span class="op">)</span><span class="op">)</span></span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [1] 100</span>
+<span class="r-in"><span><span class="op">(</span><span class="va">x2Contents</span> <span class="op">&lt;-</span> <span class="fu">ecokit</span><span class="fu">::</span><span class="fu"><a href="load_as.html">load_as</a></span><span class="op">(</span><span class="fu">fs</span><span class="fu">::</span><span class="fu"><a href="https://fs.r-lib.org/reference/path.html" class="external-link">path</a></span><span class="op">(</span><span class="va">TMP_Folder</span>, <span class="st">"x2.RData"</span><span class="op">)</span><span class="op">)</span><span class="op">)</span></span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [1] 200</span>
+<span class="r-in"><span><span class="op">(</span><span class="va">x3Contents</span> <span class="op">&lt;-</span> <span class="fu">ecokit</span><span class="fu">::</span><span class="fu"><a href="load_as.html">load_as</a></span><span class="op">(</span><span class="fu">fs</span><span class="fu">::</span><span class="fu"><a href="https://fs.r-lib.org/reference/path.html" class="external-link">path</a></span><span class="op">(</span><span class="va">TMP_Folder</span>, <span class="st">"x3.RData"</span><span class="op">)</span><span class="op">)</span><span class="op">)</span></span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [1] 300</span>
 </code></pre></div>
     </div>
   </main><aside class="col-md-3"><nav id="toc" aria-label="Table of contents"><h2>On this page</h2>

@@ -97,7 +97,7 @@ Default is <code>TRUE</code>. If <code>FALSE</code>, only the text is printed.</
 <dt id="arg-cat-date">cat_date<a class="anchor" aria-label="anchor" href="#arg-cat-date"></a></dt>
 <dd><p>logical; whether to include the date in the timestamp. Only
 effective if <code>time</code> is <code>TRUE</code>. Default is <code>FALSE</code>, meaning only the time is
-printed. If <code>TRUE</code>, the date is printed in the format "%d/%m/%Y %X".</p></dd>
+printed. If <code>TRUE</code>, the date is printed in the format <code>%d/%m/%Y %X</code>.</p></dd>
 
 
 <dt id="arg-time-zone">time_zone<a class="anchor" aria-label="anchor" href="#arg-time-zone"></a></dt>
@@ -128,25 +128,25 @@ console.</p>
     <div class="section level2">
     <h2 id="ref-examples">Examples<a class="anchor" aria-label="anchor" href="#ref-examples"></a></h2>
     <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span><span class="fu">cat_time</span><span class="op">(</span><span class="op">)</span></span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 18:29:24</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 00:27:19</span>
 <span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="fu">cat_time</span><span class="op">(</span>cat_date <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 05/05/2025 18:29:24</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 10/05/2025 00:27:19</span>
 <span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="fu">cat_time</span><span class="op">(</span><span class="st">"time now"</span><span class="op">)</span></span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> time now - 18:29:24</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> time now - 00:27:19</span>
 <span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="fu">cat_time</span><span class="op">(</span><span class="st">"\n\nTime now"</span>, msg_n_lines <span class="op">=</span> <span class="fl">2L</span>, level <span class="op">=</span> <span class="fl">1L</span><span class="op">)</span></span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>   &gt;&gt;&gt;  Time now - 18:29:24</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   &gt;&gt;&gt;  Time now - 00:27:19</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>  </span>
 <span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="fu">cat_time</span><span class="op">(</span></span></span>
 <span class="r-in"><span>  <span class="st">"\ntime now"</span>, cat_date <span class="op">=</span> <span class="cn">TRUE</span>, cat_bold <span class="op">=</span> <span class="cn">TRUE</span>, cat_red <span class="op">=</span> <span class="cn">TRUE</span>,</span></span>
 <span class="r-in"><span>  msg_n_lines <span class="op">=</span> <span class="fl">2L</span>, level <span class="op">=</span> <span class="fl">1L</span><span class="op">)</span></span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BB0000; font-weight: bold;">  &gt;&gt;&gt;  time now - 05/05/2025 18:29:24</span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BB0000; font-weight: bold;">  &gt;&gt;&gt;  time now - 10/05/2025 00:27:19</span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>  </span>
 <span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="co"># The use of levels</span></span></span>
@@ -156,10 +156,10 @@ console.</p>
 <span class="r-in"><span>  <span class="fu">cat_time</span><span class="op">(</span><span class="st">"subtask L2"</span>, level <span class="op">=</span> <span class="fl">2L</span><span class="op">)</span></span></span>
 <span class="r-in"><span>  <span class="fu">cat_time</span><span class="op">(</span><span class="st">"subtask L3"</span>, level <span class="op">=</span> <span class="fl">3L</span><span class="op">)</span></span></span>
 <span class="r-in"><span><span class="op">}</span></span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> Task 1 - 18:29:24</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>   &gt;&gt;&gt;  subtask L1 - 18:29:24</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>   &gt;&gt;&gt;  &gt;&gt;&gt;  subtask L2 - 18:29:24</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>   &gt;&gt;&gt;  &gt;&gt;&gt;  &gt;&gt;&gt;  subtask L3 - 18:29:24</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> Task 1 - 00:27:19</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   &gt;&gt;&gt;  subtask L1 - 00:27:19</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   &gt;&gt;&gt;  &gt;&gt;&gt;  subtask L2 - 00:27:19</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   &gt;&gt;&gt;  &gt;&gt;&gt;  &gt;&gt;&gt;  subtask L3 - 00:27:19</span>
 </code></pre></div>
     </div>
   </main><aside class="col-md-3"><nav id="toc" aria-label="Table of contents"><h2>On this page</h2>

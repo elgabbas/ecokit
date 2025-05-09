@@ -86,17 +86,25 @@ output is printed to the console.</p>
     <div class="section level2">
     <h2 id="ref-examples">Examples<a class="anchor" aria-label="anchor" href="#ref-examples"></a></h2>
     <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span><span class="co"># print working directory</span></span></span>
-<span class="r-in"><span><span class="fu">ecokit</span><span class="fu">::</span><span class="fu">system_command</span><span class="op">(</span><span class="st">"pwd"</span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="fu">system_command</span><span class="op">(</span><span class="st">"pwd"</span><span class="op">)</span></span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> [1] "/home/runner/work/ecokit/ecokit/docs/reference"</span>
+<span class="r-in"><span><span class="fu">system_command</span><span class="op">(</span><span class="st">"pwd"</span>, r_object <span class="op">=</span> <span class="cn">FALSE</span><span class="op">)</span></span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> /home/runner/work/ecokit/ecokit/docs/reference</span>
 <span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="co"># first 5 files on the working directory</span></span></span>
-<span class="r-in"><span><span class="op">(</span><span class="va">A</span> <span class="op">&lt;-</span> <span class="fu">ecokit</span><span class="fu">::</span><span class="fu">system_command</span><span class="op">(</span><span class="st">"ls | head -n 5"</span><span class="op">)</span><span class="op">)</span></span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [1] "OS.html"                     "add_cross_to_grid-1.png"    </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [3] "add_cross_to_grid-2.png"     "add_cross_to_grid.html"     </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [5] "add_diagonals_to_grid-1.png"</span>
+<span class="r-in"><span><span class="op">(</span><span class="va">A</span> <span class="op">&lt;-</span> <span class="fu">system_command</span><span class="op">(</span><span class="st">"ls | head -n 5"</span><span class="op">)</span><span class="op">)</span></span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [1] "OS.html"                      "add_geometric_features-1.png"</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [3] "add_geometric_features-2.png" "add_geometric_features.html" </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [5] "add_image_to_plot-1.png"     </span>
 <span class="r-in"><span></span></span>
-<span class="r-in"><span><span class="op">(</span><span class="va">A</span> <span class="op">&lt;-</span> <span class="fu">ecokit</span><span class="fu">::</span><span class="fu">system_command</span><span class="op">(</span><span class="st">"ls | head -n 5"</span>, r_object <span class="op">=</span> <span class="cn">FALSE</span><span class="op">)</span><span class="op">)</span></span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [1] 0</span>
+<span class="r-in"><span><span class="va">B</span> <span class="op">&lt;-</span> <span class="fu">system_command</span><span class="op">(</span><span class="st">"ls | head -n 5"</span>, r_object <span class="op">=</span> <span class="cn">FALSE</span><span class="op">)</span></span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> OS.html</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> add_geometric_features-1.png</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> add_geometric_features-2.png</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> add_geometric_features.html</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> add_image_to_plot-1.png</span>
+<span class="r-in"><span><span class="va">B</span></span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> NULL</span>
 </code></pre></div>
     </div>
   </main><aside class="col-md-3"><nav id="toc" aria-label="Table of contents"><h2>On this page</h2>

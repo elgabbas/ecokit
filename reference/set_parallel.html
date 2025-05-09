@@ -102,89 +102,106 @@ global variables identified. See <code>future.globals.maxSize</code> argument of
 
     <div class="section level2">
     <h2 id="ref-examples">Examples<a class="anchor" aria-label="anchor" href="#ref-examples"></a></h2>
-    <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span><span class="co"># Prepare working in parallel</span></span></span>
-<span class="r-in"><span><span class="fu">ecokit</span><span class="fu">::</span><span class="fu">set_parallel</span><span class="op">(</span>n_cores <span class="op">=</span> <span class="fl">2</span><span class="op">)</span></span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> Setting up parallel processing with 2 core(s) - 18:29:54</span>
-<span class="r-in"><span><span class="fu">future</span><span class="fu">::</span><span class="fu"><a href="https://future.futureverse.org/reference/plan.html" class="external-link">plan</a></span><span class="op">(</span><span class="op">)</span></span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> multisession:</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> - args: function (..., workers = c(system = 2L), envir = parent.frame())</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> - tweaked: TRUE</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> - call: future::plan(strategy = strategy, workers = n_cores)</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> MultisessionFutureBackend:</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> Inherits: ClusterFutureBackend, MultiprocessFutureBackend, FutureBackend</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> Number of workers: 2</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> Number of free workers: 2</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> Available cores: 4</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> Automatic garbage collection: FALSE</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> Early signaling: TRUE</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> Interrupts are enabled: TRUE</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> Maximum total size of globals: 500.00 MiB</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> Maximum total size of value: 500.00 MiB</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> Argument ‘persistent’: FALSE</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> Argument ‘wait.timeout’: 86400</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> Argument ‘wait.interval’: 0.01</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> Argument ‘wait.alpha’: 1.01</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> Argument ‘hooks’: FALSE</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> Number of active futures: 0</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> Number of futures since start: 0</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> Workers of type RichSOCKcluster:</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> - Summary: Socket cluster with 2 nodes where 2 nodes are on host ‘localhost’ (R version 4.5.0 (2025-04-11), platform x86_64-pc-linux-gnu)</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> - [ OK ] Node 1/2: valid connection, alive [RichSOCKnode of a socket cluster on local host 'localhost' with pid 9445 (R version 4.5.0 (2025-04-11), x86_64-pc-linux-gnu) using socket connection #5 ('&lt;-localhost:11964')]</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> - [ OK ] Node 2/2: valid connection, alive [RichSOCKnode of a socket cluster on local host 'localhost' with pid 9444 (R version 4.5.0 (2025-04-11), x86_64-pc-linux-gnu) using socket connection #6 ('&lt;-localhost:11964')]</span>
+    <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span><span class="fu"><a href="load_packages.html">load_packages</a></span><span class="op">(</span><span class="va">future</span><span class="op">)</span></span></span>
+<span class="r-in"><span></span></span>
+<span class="r-in"><span><span class="co"># number of workers available</span></span></span>
+<span class="r-in"><span><span class="fu">future</span><span class="fu">::</span><span class="fu"><a href="https://future.futureverse.org/reference/nbrOfWorkers.html" class="external-link">nbrOfWorkers</a></span><span class="op">(</span><span class="op">)</span></span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [1] 1</span>
 <span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="co"># ---------------------------------------------</span></span></span>
-<span class="r-in"><span></span></span>
-<span class="r-in"><span><span class="co"># Stopping parallel processing</span></span></span>
-<span class="r-in"><span><span class="fu">ecokit</span><span class="fu">::</span><span class="fu">set_parallel</span><span class="op">(</span>stop_cluster <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> Stopping parallel processing - 18:29:55</span>
-<span class="r-in"><span><span class="fu">future</span><span class="fu">::</span><span class="fu"><a href="https://future.futureverse.org/reference/plan.html" class="external-link">plan</a></span><span class="op">(</span><span class="op">)</span></span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> sequential:</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> - args: function (..., gc = TRUE, envir = parent.frame(), workers = "&lt;NULL&gt;")</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> - tweaked: TRUE</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> - call: future::plan("future::sequential", gc = TRUE)</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> FutureBackend to be launched</span>
-<span class="r-in"><span></span></span>
+<span class="r-in"><span><span class="co"># `future::multisession`</span></span></span>
 <span class="r-in"><span><span class="co"># ---------------------------------------------</span></span></span>
 <span class="r-in"><span></span></span>
-<span class="r-in"><span><span class="co"># Prepare working in parallel using `future::cluster`</span></span></span>
-<span class="r-in"><span><span class="fu">ecokit</span><span class="fu">::</span><span class="fu">set_parallel</span><span class="op">(</span>n_cores <span class="op">=</span> <span class="fl">2</span>, strategy <span class="op">=</span> <span class="st">"future::cluster"</span><span class="op">)</span></span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> Setting up parallel processing with 2 core(s) - 18:29:55</span>
-<span class="r-in"><span><span class="fu">future</span><span class="fu">::</span><span class="fu"><a href="https://future.futureverse.org/reference/plan.html" class="external-link">plan</a></span><span class="op">(</span><span class="op">)</span></span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> cluster:</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> - args: function (..., workers = c(system = 2L), envir = parent.frame())</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> - tweaked: TRUE</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> - call: future::plan(strategy = strategy, workers = n_cores)</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> ClusterFutureBackend:</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> Inherits: MultiprocessFutureBackend, FutureBackend</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> Number of workers: 2</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> Number of free workers: 2</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> Available cores: 4</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> Automatic garbage collection: FALSE</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> Early signaling: TRUE</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> Interrupts are enabled: FALSE</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> Maximum total size of globals: 500.00 MiB</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> Maximum total size of value: 500.00 MiB</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> Argument ‘persistent’: FALSE</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> Argument ‘wait.timeout’: 86400</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> Argument ‘wait.interval’: 0.01</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> Argument ‘wait.alpha’: 1.01</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> Argument ‘hooks’: FALSE</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> Number of active futures: 0</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> Number of futures since start: 0</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> Workers of type RichSOCKcluster:</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> - Summary: Socket cluster with 2 nodes where 2 nodes are on host ‘localhost’ (R version 4.5.0 (2025-04-11), platform x86_64-pc-linux-gnu)</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> - [ OK ] Node 1/2: valid connection [RichSOCKnode of a socket cluster on local host 'localhost' with pid 9517 (R version 4.5.0 (2025-04-11), x86_64-pc-linux-gnu) using socket connection #5 ('&lt;-localhost:11767')]</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> - [ OK ] Node 2/2: valid connection [RichSOCKnode of a socket cluster on local host 'localhost' with pid 9516 (R version 4.5.0 (2025-04-11), x86_64-pc-linux-gnu) using socket connection #6 ('&lt;-localhost:11767')]</span>
+<span class="r-in"><span><span class="co"># Prepare working in parallel</span></span></span>
+<span class="r-in"><span><span class="fu">set_parallel</span><span class="op">(</span>n_cores <span class="op">=</span> <span class="fl">2</span><span class="op">)</span></span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> Setting up parallel processing with 2 core(s) - 00:28:14</span>
+<span class="r-in"><span><span class="fu">future</span><span class="fu">::</span><span class="fu"><a href="https://future.futureverse.org/reference/plan.html" class="external-link">plan</a></span><span class="op">(</span><span class="st">"list"</span><span class="op">)</span></span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> List of future strategies:</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 1. multisession:</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>    - args: function (..., workers = c(system = 2L), envir = parent.frame())</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>    - tweaked: TRUE</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>    - call: future::plan(strategy = strategy, workers = n_cores)</span>
+<span class="r-in"><span><span class="fu">future</span><span class="fu">::</span><span class="fu"><a href="https://future.futureverse.org/reference/nbrOfWorkers.html" class="external-link">nbrOfWorkers</a></span><span class="op">(</span><span class="op">)</span></span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [1] 2</span>
 <span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="co"># Stopping parallel processing</span></span></span>
-<span class="r-in"><span><span class="fu">ecokit</span><span class="fu">::</span><span class="fu">set_parallel</span><span class="op">(</span>stop_cluster <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> Stopping parallel processing - 18:29:55</span>
-<span class="r-in"><span><span class="fu">future</span><span class="fu">::</span><span class="fu"><a href="https://future.futureverse.org/reference/plan.html" class="external-link">plan</a></span><span class="op">(</span><span class="op">)</span></span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> sequential:</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> - args: function (..., gc = TRUE, envir = parent.frame(), workers = "&lt;NULL&gt;")</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> - tweaked: TRUE</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> - call: future::plan("future::sequential", gc = TRUE)</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> FutureBackend to be launched</span>
+<span class="r-in"><span><span class="fu">set_parallel</span><span class="op">(</span>stop_cluster <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> Stopping parallel processing - 00:28:15</span>
+<span class="r-in"><span><span class="fu">future</span><span class="fu">::</span><span class="fu"><a href="https://future.futureverse.org/reference/plan.html" class="external-link">plan</a></span><span class="op">(</span><span class="st">"list"</span><span class="op">)</span></span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> List of future strategies:</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 1. sequential:</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>    - args: function (..., gc = TRUE, envir = parent.frame(), workers = "&lt;NULL&gt;")</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>    - tweaked: TRUE</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>    - call: future::plan("future::sequential", gc = TRUE)</span>
+<span class="r-in"><span><span class="fu">future</span><span class="fu">::</span><span class="fu"><a href="https://future.futureverse.org/reference/nbrOfWorkers.html" class="external-link">nbrOfWorkers</a></span><span class="op">(</span><span class="op">)</span></span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [1] 1</span>
+<span class="r-in"><span></span></span>
+<span class="r-in"><span><span class="co"># ---------------------------------------------</span></span></span>
+<span class="r-in"><span><span class="co"># `future::cluster`</span></span></span>
+<span class="r-in"><span><span class="co"># ---------------------------------------------</span></span></span>
+<span class="r-in"><span></span></span>
+<span class="r-in"><span><span class="co"># Prepare working in parallel</span></span></span>
+<span class="r-in"><span><span class="fu">set_parallel</span><span class="op">(</span>n_cores <span class="op">=</span> <span class="fl">2</span>, strategy <span class="op">=</span> <span class="st">"future::cluster"</span><span class="op">)</span></span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> Setting up parallel processing with 2 core(s) - 00:28:15</span>
+<span class="r-in"><span><span class="fu">future</span><span class="fu">::</span><span class="fu"><a href="https://future.futureverse.org/reference/plan.html" class="external-link">plan</a></span><span class="op">(</span><span class="st">"list"</span><span class="op">)</span></span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> List of future strategies:</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 1. cluster:</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>    - args: function (..., workers = c(system = 2L), envir = parent.frame())</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>    - tweaked: TRUE</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>    - call: future::plan(strategy = strategy, workers = n_cores)</span>
+<span class="r-in"><span><span class="fu">future</span><span class="fu">::</span><span class="fu"><a href="https://future.futureverse.org/reference/nbrOfWorkers.html" class="external-link">nbrOfWorkers</a></span><span class="op">(</span><span class="op">)</span></span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [1] 2</span>
+<span class="r-in"><span></span></span>
+<span class="r-in"><span><span class="co"># Stopping parallel processing</span></span></span>
+<span class="r-in"><span><span class="fu">set_parallel</span><span class="op">(</span>stop_cluster <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> Stopping parallel processing - 00:28:15</span>
+<span class="r-in"><span><span class="fu">future</span><span class="fu">::</span><span class="fu"><a href="https://future.futureverse.org/reference/plan.html" class="external-link">plan</a></span><span class="op">(</span><span class="st">"list"</span><span class="op">)</span></span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> List of future strategies:</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 1. sequential:</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>    - args: function (..., gc = TRUE, envir = parent.frame(), workers = "&lt;NULL&gt;")</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>    - tweaked: TRUE</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>    - call: future::plan("future::sequential", gc = TRUE)</span>
+<span class="r-in"><span><span class="fu">future</span><span class="fu">::</span><span class="fu"><a href="https://future.futureverse.org/reference/nbrOfWorkers.html" class="external-link">nbrOfWorkers</a></span><span class="op">(</span><span class="op">)</span></span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [1] 1</span>
+<span class="r-in"><span></span></span>
+<span class="r-in"><span><span class="co"># ---------------------------------------------</span></span></span>
+<span class="r-in"><span><span class="co"># `future::multicore`</span></span></span>
+<span class="r-in"><span><span class="co"># ---------------------------------------------</span></span></span>
+<span class="r-in"><span></span></span>
+<span class="r-in"><span><span class="co"># Prepare working in parallel</span></span></span>
+<span class="r-in"><span><span class="fu">set_parallel</span><span class="op">(</span>n_cores <span class="op">=</span> <span class="fl">2</span>, strategy <span class="op">=</span> <span class="st">"future::multicore"</span><span class="op">)</span></span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> Setting up parallel processing with 2 core(s) - 00:28:16</span>
+<span class="r-in"><span><span class="fu">future</span><span class="fu">::</span><span class="fu"><a href="https://future.futureverse.org/reference/plan.html" class="external-link">plan</a></span><span class="op">(</span><span class="st">"list"</span><span class="op">)</span></span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> List of future strategies:</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 1. multicore:</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>    - args: function (..., workers = c(system = 2L), envir = parent.frame())</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>    - tweaked: TRUE</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>    - call: future::plan(strategy = strategy, workers = n_cores)</span>
+<span class="r-in"><span><span class="fu">future</span><span class="fu">::</span><span class="fu"><a href="https://future.futureverse.org/reference/nbrOfWorkers.html" class="external-link">nbrOfWorkers</a></span><span class="op">(</span><span class="op">)</span></span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [1] 2</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> attr(,"class")</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [1] "integer"</span>
+<span class="r-in"><span></span></span>
+<span class="r-in"><span><span class="co"># Stopping parallel processing</span></span></span>
+<span class="r-in"><span><span class="fu">set_parallel</span><span class="op">(</span>stop_cluster <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> Stopping parallel processing - 00:28:16</span>
+<span class="r-in"><span><span class="fu">future</span><span class="fu">::</span><span class="fu"><a href="https://future.futureverse.org/reference/plan.html" class="external-link">plan</a></span><span class="op">(</span><span class="st">"list"</span><span class="op">)</span></span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> List of future strategies:</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 1. sequential:</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>    - args: function (..., gc = TRUE, envir = parent.frame(), workers = "&lt;NULL&gt;")</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>    - tweaked: TRUE</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>    - call: future::plan("future::sequential", gc = TRUE)</span>
+<span class="r-in"><span><span class="fu">future</span><span class="fu">::</span><span class="fu"><a href="https://future.futureverse.org/reference/nbrOfWorkers.html" class="external-link">nbrOfWorkers</a></span><span class="op">(</span><span class="op">)</span></span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [1] 1</span>
+<span class="r-in"><span></span></span>
+<span class="r-in"><span><span class="co"># ---------------------------------------------</span></span></span>
+<span class="r-in"><span><span class="co"># `future::sequential`</span></span></span>
+<span class="r-in"><span><span class="co"># ---------------------------------------------</span></span></span>
+<span class="r-in"><span></span></span>
+<span class="r-in"><span><span class="fu">set_parallel</span><span class="op">(</span>n_cores <span class="op">=</span> <span class="fl">1</span>, strategy <span class="op">=</span> <span class="st">"future::sequential"</span><span class="op">)</span></span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> Setting up sequential processing with 1 core(s) - 00:28:16</span>
+<span class="r-in"><span><span class="fu">future</span><span class="fu">::</span><span class="fu"><a href="https://future.futureverse.org/reference/nbrOfWorkers.html" class="external-link">nbrOfWorkers</a></span><span class="op">(</span><span class="op">)</span></span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [1] 1</span>
 </code></pre></div>
     </div>
   </main><aside class="col-md-3"><nav id="toc" aria-label="Table of contents"><h2>On this page</h2>

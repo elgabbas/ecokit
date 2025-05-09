@@ -71,6 +71,25 @@ name-value pair.</p>
     <p><a href="https://github.com/rspatial/terra/issues/1443" class="external-link">Click here</a></p>
     </div>
 
+    <div class="section level2">
+    <h2 id="ref-examples">Examples<a class="anchor" aria-label="anchor" href="#ref-examples"></a></h2>
+    <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span><span class="va">nc_example_1</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/system.file.html" class="external-link">system.file</a></span><span class="op">(</span><span class="st">"nc/sub.nc"</span>, package <span class="op">=</span> <span class="st">"stars"</span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="kw">if</span> <span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/files.html" class="external-link">file.exists</a></span><span class="op">(</span><span class="va">nc_example_1</span><span class="op">)</span><span class="op">)</span> <span class="fu">nc_global_attributes</span><span class="op">(</span>nc <span class="op">=</span> <span class="va">nc_example_1</span><span class="op">)</span></span></span>
+<span class="r-in"><span></span></span>
+<span class="r-in"><span><span class="va">nc_example_2</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/system.file.html" class="external-link">system.file</a></span><span class="op">(</span><span class="st">"nc/timeseries.nc"</span>, package <span class="op">=</span> <span class="st">"stars"</span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="kw">if</span> <span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/files.html" class="external-link">file.exists</a></span><span class="op">(</span><span class="va">nc_example_2</span><span class="op">)</span><span class="op">)</span> <span class="fu">nc_global_attributes</span><span class="op">(</span>nc <span class="op">=</span> <span class="va">nc_example_2</span><span class="op">)</span></span></span>
+<span class="r-in"><span></span></span>
+<span class="r-in"><span><span class="va">nc_example_3</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/system.file.html" class="external-link">system.file</a></span><span class="op">(</span><span class="st">"nc/cropped.nc"</span>, package <span class="op">=</span> <span class="st">"sf"</span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="kw">if</span> <span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/files.html" class="external-link">file.exists</a></span><span class="op">(</span><span class="va">nc_example_3</span><span class="op">)</span><span class="op">)</span> <span class="fu">nc_global_attributes</span><span class="op">(</span>nc <span class="op">=</span> <span class="va">nc_example_3</span><span class="op">)</span></span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [1] "Conventions=CF-1.0"                                                                                                           </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [2] "title=Daily-OI-V2, final, Data (Ship, Buoy, AVHRR, GSFC-ice)"                                                                 </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [3] "History=Tue Feb 13 20:40:49 2018: ncks -d lat,30,40 -d lon,25,50 avhrr-only-v2.19810901.nc -O cropped_example.nc\nVersion 2.0"</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [4] "creation_date=2011-05-04"                                                                                                     </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [5] "Source=NOAA/National Climatic Data Center"                                                                                    </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [6] "Contact=Dick Reynolds, email: Richard.W.Reynolds@noaa.gov &amp; Chunying Liu, email: Chunying.liu@noaa.gov"                       </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [7] "NCO=4.6.8"                                                                                                                    </span>
+</code></pre></div>
+    </div>
   </main><aside class="col-md-3"><nav id="toc" aria-label="Table of contents"><h2>On this page</h2>
     </nav></aside></div>
 

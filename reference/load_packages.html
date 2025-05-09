@@ -57,7 +57,7 @@ loaded packages.</p>
 <span>  <span class="va">...</span>,</span>
 <span>  package_list <span class="op">=</span> <span class="cn">NULL</span>,</span>
 <span>  verbose <span class="op">=</span> <span class="cn">FALSE</span>,</span>
-<span>  install_missing <span class="op">=</span> <span class="cn">TRUE</span></span>
+<span>  install_missing <span class="op">=</span> <span class="cn">FALSE</span></span>
 <span><span class="op">)</span></span></code></pre></div>
     </div>
 
@@ -80,8 +80,8 @@ loaded packages. Defaults to <code>FALSE</code>.</p></dd>
 
 
 <dt id="arg-install-missing">install_missing<a class="anchor" aria-label="anchor" href="#arg-install-missing"></a></dt>
-<dd><p>Logical. If <code>TRUE</code> (default), missing packages are
-automatically installed and then loaded.</p></dd>
+<dd><p>Logical. If <code>TRUE</code>, missing packages are
+automatically installed and then loaded. Defaults to <code>FALSE</code>.</p></dd>
 
 </dl></div>
     <div class="section level2">
@@ -98,26 +98,46 @@ packages) and does not return any value.</p>
     <h2 id="ref-examples">Examples<a class="anchor" aria-label="anchor" href="#ref-examples"></a></h2>
     <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span><span class="co"># Currently loaded packages</span></span></span>
 <span class="r-in"><span><span class="op">(</span><span class="va">P1</span> <span class="op">&lt;-</span> <span class="fu">ecokit</span><span class="fu">::</span><span class="fu"><a href="loaded_packages.html">loaded_packages</a></span><span class="op">(</span><span class="op">)</span><span class="op">)</span></span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  [1] "car"       "carData"   "rworldmap" "png"       "sf"        "raster"   </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  [7] "sp"        "ggplot2"   "dplyr"     "ecokit"    "magrittr"  "stats"    </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [13] "graphics"  "grDevices" "utils"     "datasets"  "methods"   "base"     </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  [1] "qs2"       "arrow"     "stringi"   "purrr"     "car"       "carData"  </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  [7] "rworldmap" "raster"    "sp"        "terra"     "fs"        "tibble"   </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [13] "png"       "sf"        "ggplot2"   "dplyr"     "ecokit"    "magrittr" </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [19] "stats"     "graphics"  "grDevices" "utils"     "datasets"  "methods"  </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [25] "base"     </span>
 <span class="r-in"><span></span></span>
-<span class="r-in"><span><span class="fu">load_packages</span><span class="op">(</span><span class="va">tidyr</span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="co"># Load tidyr</span></span></span>
+<span class="r-in"><span><span class="fu">load_packages</span><span class="op">(</span><span class="va">tidyr</span>, <span class="va">raster</span>, <span class="va">ggplot2</span>, verbose <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></span></span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> The following packages were already loaded:</span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span>   &gt;&gt;&gt;&gt;&gt;  <span style="color: #0000BB;">ggplot2</span>: 3.5.2</span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span>   &gt;&gt;&gt;&gt;&gt;  <span style="color: #0000BB;">raster</span>: 3.6-32</span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> Loading packages:</span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span>   &gt;&gt;&gt;&gt;&gt;  <span style="color: #0000BB;">tidyr</span>: 1.3.1</span>
+<span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="co"># Loaded packages after implementing the function</span></span></span>
 <span class="r-in"><span><span class="op">(</span><span class="va">P2</span> <span class="op">&lt;-</span> <span class="fu">ecokit</span><span class="fu">::</span><span class="fu"><a href="loaded_packages.html">loaded_packages</a></span><span class="op">(</span><span class="op">)</span><span class="op">)</span></span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  [1] "tidyr"     "car"       "carData"   "rworldmap" "png"       "sf"       </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  [7] "raster"    "sp"        "ggplot2"   "dplyr"     "ecokit"    "magrittr" </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [13] "stats"     "graphics"  "grDevices" "utils"     "datasets"  "methods"  </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [19] "base"     </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  [1] "tidyr"     "qs2"       "arrow"     "stringi"   "purrr"     "car"      </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  [7] "carData"   "rworldmap" "raster"    "sp"        "terra"     "fs"       </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [13] "tibble"    "png"       "sf"        "ggplot2"   "dplyr"     "ecokit"   </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [19] "magrittr"  "stats"     "graphics"  "grDevices" "utils"     "datasets" </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [25] "methods"   "base"     </span>
 <span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="co"># Which packages were loaded?</span></span></span>
 <span class="r-in"><span><span class="fu"><a href="https://rdrr.io/r/base/sets.html" class="external-link">setdiff</a></span><span class="op">(</span><span class="va">P2</span>, <span class="va">P1</span><span class="op">)</span></span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> [1] "tidyr"</span>
 <span class="r-in"><span></span></span>
-<span class="r-in"><span><span class="fu">load_packages</span><span class="op">(</span><span class="va">terra</span>, verbose <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></span></span>
-<span class="r-msg co"><span class="r-pr">#&gt;</span> </span>
-<span class="r-msg co"><span class="r-pr">#&gt;</span> The following packages were loaded:</span>
-<span class="r-msg co"><span class="r-pr">#&gt;</span>   &gt;&gt;&gt;&gt;&gt;  terra: 1.8-42</span>
+<span class="r-in"><span><span class="co"># verbose = FALSE (default)</span></span></span>
+<span class="r-in"><span><span class="fu">load_packages</span><span class="op">(</span><span class="va">tidyterra</span>, verbose <span class="op">=</span> <span class="cn">FALSE</span><span class="op">)</span></span></span>
+<span class="r-in"><span></span></span>
+<span class="r-in"><span><span class="co"># load already loaded packages</span></span></span>
+<span class="r-in"><span><span class="fu">load_packages</span><span class="op">(</span><span class="va">tidyr</span>, <span class="va">tidyterra</span>, verbose <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></span></span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> The following packages were already loaded:</span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span>   &gt;&gt;&gt;&gt;&gt;  <span style="color: #0000BB;">tidyr</span>: 1.3.1</span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span>   &gt;&gt;&gt;&gt;&gt;  <span style="color: #0000BB;">tidyterra</span>: 0.7.2</span>
+<span class="r-in"><span></span></span>
+<span class="r-in"><span><span class="co"># non-existent package</span></span></span>
+<span class="r-in"><span><span class="fu">load_packages</span><span class="op">(</span><span class="st">"non_existent"</span><span class="op">)</span></span></span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> The following packages are neither available nor installed as install_missing = FALSE:</span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span>   &gt;&gt;&gt;&gt;&gt;   <span style="color: #0000BB;">non_existent</span></span>
+<span class="r-in"><span></span></span>
 </code></pre></div>
     </div>
   </main><aside class="col-md-3"><nav id="toc" aria-label="Table of contents"><h2>On this page</h2>
