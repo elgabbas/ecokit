@@ -22,8 +22,9 @@
 #' ecokit::load_packages(terra, raster, fs, ggplot2, tidyterra)
 #'
 #' # Setup temporary directory
-#' temp_dir <- tempdir()
-#' on.exit(unlink(temp_dir, recursive = TRUE), add = TRUE)
+#' temp_dir <- fs::path_temp("scale_0_1")
+#' fs::dir_create(temp_dir)
+#' on.exit(fs::dir_delete(temp_dir), add = TRUE)
 #'
 #' # Example with SpatRaster
 #' r <- terra::rast(ncols = 10, nrows = 10)
@@ -51,6 +52,9 @@
 #' ggplot2::ggplot() +
 #'   tidyterra::geom_spatraster(data = r_scaled, maxcell = Inf) +
 #'   ggplot2::theme_minimal()
+#'
+#' # clean up
+#' fs::dir_delete(temp_dir)
 
 scale_0_1 <- function(raster) {
 
