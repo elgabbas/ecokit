@@ -117,15 +117,15 @@ ext_rect <- purrr::map_dfr(
           tile = .x, color = colors()[.x])
    })
 ggplot2::ggplot() +
- ggplot2::geom_raster(
+  ggplot2::geom_raster(
     data = as.data.frame(logo, xy = TRUE),
-    ggplot2::aes(x = x, y = y, fill = red)) +
+    mapping = ggplot2::aes(x = x, y = y, fill = red)) +
  ggplot2::geom_rect(
     data = ext_rect,
-    ggplot2::aes(
+    mapping = ggplot2::aes(
       xmin = xmin, xmax = xmax, ymin = ymin, ymax = ymax,
       group = tile, color = color),
-      fill = NA, linewidth = 1.4, linetype = "dashed")
+   fill = NA, linewidth = 1.4, linetype = "dashed")
 }
 \references{
 Click \href{https://stackoverflow.com/questions/29784829/}{here} and

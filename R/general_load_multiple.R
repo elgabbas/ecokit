@@ -44,7 +44,9 @@
 #' # ---------------------------------------------------
 #'
 #' # Setup temporary directory
-#' temp_dir <- tempdir()
+#' temp_dir <- fs::path_temp("load_multiple")
+#' fs::dir_create(temp_dir)
+#' on.exit(fs::dir_delete(temp_dir))
 #'
 #' # Create sample data files
 #' data1 <- terra::wrap(terra::rast(matrix(1:16, nrow = 4)))
@@ -136,7 +138,8 @@
 #' str(get("data4", envir = example_env), 1)
 #'
 #' # Clean up
-#' unlink(files)
+#' fs::file_delete(files)
+#' fs::dir_delete(temp_dir)
 #' rm(example_env)
 
 load_multiple <- function(

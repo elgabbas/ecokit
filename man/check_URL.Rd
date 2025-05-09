@@ -25,8 +25,10 @@ It returns \code{TRUE} if the URL is valid (i.e., the connection can be opened),
 and \code{FALSE} otherwise.
 }
 \examples{
+load_packages(purrr, tibble)
+
 urls <- c(
      "http://www.amazon.com", "http://this.isafakelink.biz",
-     "https://stackoverflow.com", "https://stack-overflow.com")
-sapply(urls, check_url)
+     "https://stackoverflow.com", "https://stackoverflow505.com")
+purrr::map_dfr(urls, ~tibble::tibble(URL = .x, Valid = check_url(.x)))
 }

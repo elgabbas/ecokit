@@ -31,7 +31,8 @@
 #'
 #' ggplot2::ggplot() +
 #'   tidyterra::geom_spatraster(data = terra::rast(r), maxcell = Inf) +
-#'   ggplot2::theme_minimal()
+#'   ggplot2::theme_minimal() +
+#'   ggplot2::theme(axis.text = ggplot2::element_blank())
 #'
 #' # ------------------------------------------------------
 #'
@@ -49,7 +50,8 @@
 #'   ggplot2::facet_wrap(~lyr) +
 #'   ggplot2::scale_fill_manual(values = c("grey30", "red", "blue"),
 #'     na.value = "transparent") +
-#'   ggplot2::theme_minimal()
+#'   ggplot2::theme_minimal() +
+#'   ggplot2::theme(axis.text = ggplot2::element_blank())
 
 raster_to_pres_abs <- function(
     raster = NULL, na_to_0 = TRUE, zero_to_na = FALSE) {

@@ -38,7 +38,8 @@ r <- raster::mask(r, r2)
 
 ggplot2::ggplot() +
   tidyterra::geom_spatraster(data = terra::rast(r), maxcell = Inf) +
-  ggplot2::theme_minimal()
+  ggplot2::theme_minimal() +
+  ggplot2::theme(axis.text = ggplot2::element_blank())
 
 # ------------------------------------------------------
 
@@ -56,7 +57,8 @@ ggplot2::ggplot() +
   ggplot2::facet_wrap(~lyr) +
   ggplot2::scale_fill_manual(values = c("grey30", "red", "blue"),
     na.value = "transparent") +
-  ggplot2::theme_minimal()
+  ggplot2::theme_minimal() +
+  ggplot2::theme(axis.text = ggplot2::element_blank())
 }
 \author{
 Ahmed El-Gabbas

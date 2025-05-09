@@ -53,7 +53,9 @@ extension (case-insensitive). If the extension is unrecognised, it returns
 \examples{
 
 # Setup temporary directory
-temp_dir <- tempdir()
+temp_dir <- fs::path_temp("load_multiple")
+fs::dir_create(temp_dir)
+on.exit(fs::dir_delete(temp_dir))
 
 # |||||||||||||||||||||||||||||||||||||||
 # Validate RData files
@@ -138,8 +140,10 @@ check_feather(bad_feather)                           # FALSE, with warning
 check_data("nonexistent.rds")                        # FALSE, with warning
 
 # Clean up
-unlink(c(rdata_file, bad_rdata, qs_file, bad_qs, rds_file, bad_rds,
-         feather_file, bad_feather))
+fs::file_delete(
+  c(rdata_file, bad_rdata, qs_file, bad_qs, rds_file, bad_rds,
+  feather_file, bad_feather))
+fs::dir_delete(temp_dir)
 }
 \author{
 Ahmed El-Gabbas

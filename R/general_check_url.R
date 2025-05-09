@@ -15,10 +15,12 @@
 #'   [stackoverflow](https://stackoverflow.com/q/52911812) discussion.
 #' @return A logical value: `TRUE` if the URL is valid, `FALSE` if not.
 #' @examples
+#' load_packages(purrr, tibble)
+#'
 #' urls <- c(
 #'      "http://www.amazon.com", "http://this.isafakelink.biz",
-#'      "https://stackoverflow.com", "https://stack-overflow.com")
-#' sapply(urls, check_url)
+#'      "https://stackoverflow.com", "https://stackoverflow505.com")
+#' purrr::map_dfr(urls, ~tibble::tibble(URL = .x, Valid = check_url(.x)))
 #' @export
 
 check_url <- function(url, timeout = 2L) {
