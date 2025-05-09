@@ -2,31 +2,62 @@
 % Please edit documentation in R/general_save_session_info.R
 \name{save_session_info}
 \alias{save_session_info}
-\title{Save session information to a file}
+\title{Save session information to a text file}
 \usage{
 save_session_info(out_directory = getwd(), session_info = NULL, prefix = "S")
 }
 \arguments{
-\item{out_directory}{Character. Directory path where the output file should
-be saved. The default is the current working directory (\link[base:getwd]{base::getwd}).}
+\item{out_directory}{Character. Directory path where the output file is
+saved. Defaults to the current working directory (\code{\link[base:getwd]{base::getwd()}}).}
 
-\item{session_info}{An optional list of objects to include in the session
-information output. This is typically the result of a session management
-function like \link{save_session}. If provided, details of these
-objects (excluding functions and pre-selected objects, with sizes in
-megabytes) are appended to the session information file.}
+\item{session_info}{An optional tibble or data frame with object details
+(e.g., from \code{\link[=save_session]{save_session()}}). If provided, details of objects
+(e.g., names and sizes in MB) are appended to the output file. Defaults to
+\code{NULL}.}
 
-\item{prefix}{Character. Prefix for the output file name. Defaults to \code{S}.}
+\item{prefix}{Character. Prefix for the output file name. Defaults to \code{"S"}.}
 }
 \value{
-The primary effect of this function is the side effect of writing
-session information to a file.
+Invisible \code{NULL}. Used for its side effect of writing session
+information to a file.
 }
 \description{
-This function saves the current R session information, including installed
-packages, session details, and optionally, information about specific objects
-in the session, to a text file.
+Saves R session information, including platform details, package versions,
+and optionally, a summary of objects in the session, to a text file.
 }
-\author{
-Ahmed El-Gabbas
+\examples{
+load_packages(fs)
+
+# Save session info without object details
+temp_dir <- fs::path(tempdir(), "temp_dir")
+fs::dir_create(temp_dir)
+save_session_info(out_directory = temp_dir)
+
+saved_file <- list.files(
+  temp_dir, pattern = "S_.+txt$", full.names = TRUE) \%>\%
+  ecokit::normalize_path()
+(saved_file <- saved_file[length(saved_file)])
+
+cat(readLines(saved_file), sep = "\n")
+
+# |||||||||||||||||||||||||||||||||||||||||||||||||
+
+# Save session info with object details
+# Create sample objects
+df <- data.frame(a = 1:1000)
+vec <- rnorm(1000)
+
+# Simulate output from save_session()
+session_data <- tibble::tibble(object = c("df", "vec"), size = c(0.1, 0.1))
+save_session_info(out_directory = temp_dir, session_info = session_data)
+
+saved_file <- list.files(
+  temp_dir, pattern = "S_.+txt$", full.names = TRUE) \%>\%
+  ecokit::normalize_path()
+(saved_file <- saved_file[length(saved_file)])
+
+cat(readLines(saved_file), sep = "\n")
+
+# Clean up
+unlink(temp_dir, recursive = TRUE)
 }

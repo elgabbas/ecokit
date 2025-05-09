@@ -7,27 +7,68 @@
 assign_env_vars(env_file = ".env", env_variables_data = NULL)
 }
 \arguments{
-\item{env_file}{Character. Path to the environment file containing paths to
-data sources. Defaults to \code{.env}.}
+\item{env_file}{Character. Path to a environment file containing key-value
+pairs (e.g., \code{KEY=VALUE}). Defaults to \code{.env}.}
 
-\item{env_variables_data}{\code{data.frame}. A data frame or tibble containing the
-columns \code{var_name}, \code{value}, \code{check_dir}, and \code{check_file}. Each row
-specifies an environment variable, the name to assign it to, and whether to
-check if it is a directory or file. This structure allows for additional
-validation checks on the variables being imported.}
+\item{env_variables_data}{\code{data.frame}. A data frame or tibble with columns
+\code{var_name} (character, R variable name), \code{value} (character, environment
+variable key in \code{.env}), \code{check_dir} (logical, check if value is a
+directory), and \code{check_file} (logical, check if value is a file). Each row
+defines a variable to assign with optional validation.}
 }
 \value{
-This function is used for its side effects of setting environment
-variables in the R environment. It assigns each variable from the \code{.env}
-file to the R environment with the name specified in the
-\code{env_variables_data} data frame.
+Returns \code{invisible(NULL)}. Used for its side effect of assigning
+variables from the \code{.env} file to \code{envir} based on \code{env_variables_data}.
 }
 \description{
-This function reads environment variables from a specified \code{.env} file and
-assigns them to variables in the R environment based on a data frame
-containing variable names, values, and checks for directories and files. It
-is designed to facilitate the management of environment variables in a
-structured and reproducible manner.
+Reads environment variables from a \code{.env} file and assigns them to R
+variables based on a data frame specifying variable names, environment
+variable keys, and optional directory or file checks. Facilitates structured
+management of environment variables.
+}
+\note{
+The \code{.env} file must contain key-value pairs (e.g.,
+\verb{DATA_PATH=/path/to/data}). \code{var_name} must start with a letter and contain
+only letters, numbers, dots, or underscores. Only one of \code{check_dir} or
+\code{check_file} can be \code{TRUE} per row.
+}
+\examples{
+load_packages(tibble, dplyr, fs)
+
+# Create a temporary file and directory
+tmp_dir <- ecokit::normalize_path(tempdir())
+fs::dir_create(tmp_dir)
+tmp_file <- ecokit::normalize_path(tempfile(fileext = ".txt"))
+fs::file_create(tmp_file)
+
+# Create a minimal .env file
+tmp_env_file <- tempfile(fileext = ".env")
+c(paste0("MY_FILE=", tmp_file), paste0("MY_DIR=", tmp_dir)) \%>\%
+  writeLines(tmp_env_file)
+rm(tmp_dir, tmp_file, envir = environment())
+
+# contents of the .env file
+readLines(tmp_env_file)
+
+# Define simple environment variables data
+(env_vars <- tibble::tibble(
+  var_name = c("my_file", "my_dir"),
+  value = c("MY_FILE", "MY_DIR"),
+  check_dir = c(FALSE, TRUE),
+  check_file = c(TRUE, FALSE)))
+
+ls()
+
+# Assign environment variables
+assign_env_vars(env_file = tmp_env_file, env_variables_data = env_vars)
+ls()
+
+# Verify
+my_file
+my_dir
+
+# clean up
+unlink(c(my_file, my_dir, tmp_env_file))
 }
 \author{
 Ahmed El-Gabbas

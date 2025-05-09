@@ -37,8 +37,11 @@ non-interactive execution without a script path.
 }
 \examples{
 \dontrun{
-  # Save as "my_script.R": script_location()
+  # in an interactive mode, use
+  script_location()
+
+  # add script_location() to your script; e.g. "my_script.R"
   # Run: Rscript my_script.R
-  # Output: [1] "my_script.R" (or full path depending on Rscript invocation)
+  # Output: absolute path of the script
 }
 }

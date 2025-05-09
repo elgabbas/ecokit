@@ -44,12 +44,12 @@ info_chunk <- function(
     ecokit::stop_ctx("message cannot be NULL", message = message)
   }
 
-  if (info_lines_before > 1) {
+  if (info_lines_before > 1L) {
     cat(strrep("\n", info_lines_before))
   }
 
   ecokit::cat_sep(
-    ..., sep_lines_before = sep_lines_before + 1,
+    ..., sep_lines_before = sep_lines_before + 1L,
     sep_lines_after = sep_lines_after, cat_red = cat_red, cat_bold = cat_bold)
   ecokit::cat_time(
     text = message, msg_n_lines = msg_n_lines,
@@ -57,7 +57,7 @@ info_chunk <- function(
     cat_red = cat_red, cat_bold = cat_bold)
   ecokit::cat_sep(
     ..., sep_lines_before = sep_lines_before,
-    sep_lines_after = sep_lines_after + 1,
+    sep_lines_after = sep_lines_after + 1L,
     cat_red = cat_red, cat_bold = cat_bold)
 
   return(invisible(NULL))

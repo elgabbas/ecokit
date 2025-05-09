@@ -21,16 +21,14 @@ format.
 }
 \examples{
 n_decimals(x = "13.45554545")
+n_decimals(x = 13.45554545)
 
 # -------------------------------------------
 
+# the function ignores trailing zeros for doubles
 n_decimals(x = 15.01500)
 
 n_decimals(x = '15.01500')
-
-# -------------------------------------------
-
-n_decimals(x = 13.45554545)
 }
 \author{
 Ahmed El-Gabbas

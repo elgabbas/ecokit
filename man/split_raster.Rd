@@ -15,7 +15,7 @@ split_raster(
 )
 }
 \arguments{
-\item{raster}{A raster object to be split. If NULL (the default), the
+\item{raster}{A raster object to be split. If \code{NULL} (the default), the
 function will not execute.}
 
 \item{n_columns, n_rows}{Integer. The desired number of columns and rows to
@@ -43,36 +43,89 @@ numbers of rows and columns. It can optionally save the resulting rasters to
 disk, plot them, or return just their extents.
 }
 \examples{
-library(raster)
-logo <- raster(system.file("external/rlogo.grd", package = "raster"))
-plot(logo, axes = FALSE, legend = FALSE, bty = "n",
-     box = FALSE, main = "Original raster layer")
+load_packages(raster, ggplot2, purrr)
+
+# set ggplot2 theme
+ggplot2::theme_set(
+  ggplot2::theme_minimal(base_size = 12) +
+  ggplot2::theme(
+    legend.position = "none",
+    axis.title = ggplot2::element_blank(),
+    axis.text = ggplot2::element_blank(),
+    axis.ticks = ggplot2::element_blank()))
+
+# example raster
+logo <- raster::raster(system.file("external/rlogo.grd", package = "raster"))
+
+ggplot2::ggplot() +
+ ggplot2::geom_raster(
+    data = as.data.frame(logo, xy = TRUE),
+    ggplot2::aes(x = x, y = y, fill = red)) +
+ ggplot2::scale_fill_gradient()
+
 # --------------------------------------------------
 
-# Split into 3 rows and 3 columns
-logoSplit <- split_raster(
-    raster = logo, n_columns = 3, n_rows = 3, plot = TRUE)
+# Split into 2 rows and 2 columns
+logo_split <- split_raster(
+  raster = logo, n_columns = 2, n_rows = 2, plot = FALSE)
 
-print(logoSplit) # a list object of 9 items
+# plotting
+plot_df <- purrr::map_dfr(
+  .x = seq_len(length(logo_split)),
+  .f = ~ {
+  as.data.frame(logo_split[[.x]], xy = TRUE) \%>\%
+    dplyr::mutate(tile = .x)
+  })
+
+ggplot2::ggplot() +
+ ggplot2::geom_raster(
+   data = plot_df, ggplot2::aes(x = x, y = y, fill = red)) +
+   ggplot2::facet_wrap(~tile, scales = "free") +
+   ggplot2::scale_fill_gradient()
 
 # --------------------------------------------------
 
 # Merging split maps again
-logoSplit$fun <- mean
-logoSplit$na.rm <- TRUE
-logoSplit2 <- do.call(mosaic, logoSplit)
-par(mfrow = c(1, 1))
-plot(logoSplit2, axes = FALSE, legend = FALSE, bty = "n",
-     box = FALSE, main = "Merged raster layers")
+logo_split$fun <- mean
+logo_split$na.rm <- TRUE
+logo_split2 <- do.call(mosaic, logo_split)
 
-print({logoSplit2 - logo}) # No value difference!
+# Plotting
+ggplot2::ggplot() +
+ ggplot2::geom_raster(
+    data = as.data.frame(logo_split2, xy = TRUE),
+    ggplot2::aes(x = x, y = y, fill = layer)) +
+ ggplot2::scale_fill_gradient() +
+ ggplot2::theme_minimal()
+
+# No value difference!
+print({logo_split2 - logo})
 
 # --------------------------------------------------
 
-logoSplit <- split_raster(
-   logo, n_columns = 3, n_rows = 3, extent_only = TRUE)
-print(logoSplit)
+(logo_extents <- split_raster(
+  logo, n_columns = 2, n_rows = 2, extent_only = TRUE))
 
+# plotting
+ext_rect <- purrr::map_dfr(
+  .x = seq_len(length(logo_extents)),
+  .f = ~ {
+      ext <- logo_extents[[.x]]
+      data.frame(
+          xmin = ext@xmin, xmax = ext@xmax,
+          ymin = ext@ymin, ymax = ext@ymax,
+          tile = .x, color = colors()[.x])
+   })
+ggplot2::ggplot() +
+ ggplot2::geom_raster(
+    data = as.data.frame(logo, xy = TRUE),
+    ggplot2::aes(x = x, y = y, fill = red)) +
+ ggplot2::geom_rect(
+    data = ext_rect,
+    ggplot2::aes(
+      xmin = xmin, xmax = xmax, ymin = ymin, ymax = ymax,
+      group = tile, color = color),
+      fill = NA, linewidth = 1.4, linetype = "dashed")
 }
 \references{
 Click \href{https://stackoverflow.com/questions/29784829/}{here} and

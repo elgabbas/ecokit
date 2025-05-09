@@ -24,8 +24,32 @@
 #' @inheritParams cat_time
 #' @export
 #' @examples
+#' # basic usage
 #' reference_time <- (lubridate::now() - lubridate::seconds(45))
+#'
 #' cat_diff(reference_time)
+#'
+#' # custom prefix text
+#' cat_diff(reference_time, prefix = "Finished in ")
+#'
+#' # level = 1
+#' cat_diff(reference_time, prefix = "Finished in ", level = 1L)
+#'
+#' # print date
+#' cat_diff(reference_time, prefix = "Finished in ", cat_timestamp = TRUE)
+#'
+#' # print date and time
+#' cat_diff(reference_time, prefix = "Finished in ", cat_date = TRUE)
+#'
+#' # show chunk info
+#' cat_diff(reference_time, cat_info = TRUE, prefix = "Finished in ")
+#'
+#' # custom chunk info text
+#' cat_diff(
+#'   reference_time, cat_info = TRUE, chunk_text = "Summary of task",
+#'   prefix = "Finished in ")
+#'
+#' # |||||||||||||||||||||||||||||||||||||||||||||||||||||||||||
 #'
 #' reference_time <- (lubridate::now() -
 #'     (lubridate::minutes(50) + lubridate::seconds(45)))
@@ -61,12 +85,12 @@ cat_diff <- function(
     lubridate::now(tzone = "CET") - init_time) %>%
     lubridate::seconds_to_period()
   period_hours <- stringr::str_pad(
-    (lubridate::hour(period) + 24 * lubridate::day(period)),
-    width = 2, pad = "0")
+    (lubridate::hour(period) + 24L * lubridate::day(period)),
+    width = 2L, pad = "0")
   period_minutes <- stringr::str_pad(
-    lubridate::minute(period), width = 2, pad = "0")
+    lubridate::minute(period), width = 2L, pad = "0")
   period_seconds <- stringr::str_pad(
-    round(lubridate::second(period)), width = 2, pad = "0")
+    round(lubridate::second(period)), width = 2L, pad = "0")
 
   paste0(period_hours, ":", period_minutes, ":", period_seconds) %>%
     paste0(prefix, .) %>%

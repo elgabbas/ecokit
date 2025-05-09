@@ -17,6 +17,13 @@
 #' str(package_functions(package = "raster"))
 #'
 #' str(package_functions(package = "sf"))
+#'
+#' package_functions(package = "ecokit")
+#'
+#' \dontrun{
+#'   # Error: package not found
+#'   package_functions(package = "non_exist")
+#' }
 
 package_functions <- function(package) {
 
@@ -27,9 +34,9 @@ package_functions <- function(package) {
   if (!requireNamespace(package, quietly = TRUE)) {
     ecokit::stop_ctx("package not found", package = package)
   }
-  library(
-    package = eval(package), character.only = TRUE, quietly = TRUE,
-    verbose  = FALSE)
-  return(ls(paste0("package:", package)))
 
+  # load the package
+  ecokit::load_packages(package_list = package, verbose = FALSE)
+
+  ls(paste0("package:", package))
 }

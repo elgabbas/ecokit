@@ -7,7 +7,8 @@
 ht(data = NULL, n_rows = 5L)
 }
 \arguments{
-\item{data}{\verb{data.frame. A data frame to print. This parameter cannot be }NULL`.}
+\item{data}{\code{data.frame}. A data frame to print. This parameter cannot be
+\code{NULL}.}
 
 \item{n_rows}{Integer. Number of rows to print from both the head and tail of
 the data frame. Defaults to 5.}

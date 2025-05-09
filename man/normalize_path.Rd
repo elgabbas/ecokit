@@ -26,6 +26,24 @@ Linux, it returns the input path as-is (relative). To maintain consistency
 across platforms, this function uses \code{\link[fs:path_math]{fs::path_abs()}} instead of
 \code{\link[base:normalizePath]{base::normalizePath()}}.
 }
+\examples{
+# current working directory
+normalize_path(".")
+
+# up one directory
+normalize_path("../")
+
+list.files()[1]
+normalize_path(list.files()[1])
+
+# absolute path with windows-style slashes
+normalize_path("D://Folder1//Folder2//file.txt")
+
+\dontrun{
+  # this will give an error if the path does not exist
+  normalize_path("D://Folder1//Folder2//file.txt", must_work = TRUE)
+}
+}
 \author{
 Ahmed El-Gabbas
 }

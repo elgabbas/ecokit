@@ -9,17 +9,19 @@
 #'
 #' @name check_args
 #' @author Ahmed El-Gabbas
-#' @param args_all Character vector. Input parameters of the function.
-#'   Usually as a result of `formals()` function
-#' @param args_to_check Character vector. Names of the arguments to be
-#'   checked.
-#' @param args_type Character. The expected type of the arguments. Must be
-#'   one of "character", "logical", or "numeric".
+#' @param args_all Character vector. Input parameters of the function. Usually
+#'   as a result of `formals()` function
+#' @param args_to_check Character vector. Names of the arguments to be checked.
+#' @param args_type Character. The expected type of the arguments. Must be one
+#'   of "character", "logical", or "numeric".
+#' @param include_backtrace Logical. If `TRUE`, includes the backtrace in the
+#'   error message. Default is `FALSE`. See [stop_ctx] for more details.
 #' @return The function does not return a value but will stop execution and
 #'   throw an error if any of the specified arguments do not match the expected
 #'   type.
 #' @export
 #' @examples
+#' # define a function with arguments
 #' f1 <- function(x = "AA", y = "BB", z = 1) {
 #'   all_arguments <- ls(envir = environment())
 #'   all_arguments <- purrr::map(
@@ -38,18 +40,23 @@
 #'     args_to_check = "z")
 #'
 #'  # the rest of the function
-#'  }
+#' }
 #'
-#'  # no output as x is a character
-#'  f1(x = "X")
+#' #  |||||||||||||||||||||||||||||||||||||||||||||||||
 #'
-#'  # no output as z is a numeric
-#'  f1(z = 20)
+#' # no output as x is a character
+#' f1(x = "X")
 #'
-#'  # error as x is not a character
-#'  try(f1(x = 1))
+#' # no output as z is a numeric
+#' f1(z = 20)
+#'
+#' \dontrun{
+#'   # error as x is not a character
+#'   f1(x = 1)
+#' }
 
-check_args <- function(args_all, args_to_check, args_type) {
+check_args <- function(
+    args_all, args_to_check, args_type, include_backtrace = FALSE) {
 
   if (is.null(args_all) || is.null(args_to_check) || is.null(args_type)) {
     ecokit::stop_ctx(
@@ -68,7 +75,7 @@ check_args <- function(args_all, args_to_check, args_type) {
       names() %>%
       sort()
 
-    if (length(missing_arguments) > 0) {
+    if (length(missing_arguments) > 0L) {
       ecokit::stop_ctx(
         paste0(
           "The following character argument(s) must be character\n  >>  ",
@@ -84,7 +91,7 @@ check_args <- function(args_all, args_to_check, args_type) {
       names() %>%
       sort()
 
-    if (length(missing_arguments) > 0) {
+    if (length(missing_arguments) > 0L) {
       ecokit::stop_ctx(
         paste0(
           "The following argument(s) must be logical\n  >>  ",
@@ -100,7 +107,7 @@ check_args <- function(args_all, args_to_check, args_type) {
       names() %>%
       sort()
 
-    if (length(missing_arguments) > 0) {
+    if (length(missing_arguments) > 0L) {
       ecokit::stop_ctx(
         paste0(
           "The following argument(s) must be numeric or integer\n  >>  ",

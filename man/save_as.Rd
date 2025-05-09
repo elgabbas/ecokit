@@ -43,22 +43,29 @@ specified file path.
 }
 \description{
 This function saves an R object to a specified file path with a potentially
-new name. It is useful for renaming objects during the save process. The
-function supports saving objects in \code{RData}, \code{qs2}, \code{feather}, and \code{rds}
-formats. The format is determined by the extension of the file path.
+new object name. It is useful for renaming objects during the save process.
+The function supports saving objects in \code{RData}, \code{qs2}, \code{feather}, and \code{rds}
+formats. The format is determined by the extension of the file path
+(case-insensitive).
 }
 \examples{
-TMP_Folder <- ecokit::path(tempdir(), stringi::stri_rand_strings(1, 5))
+load_packages(fs, tibble, stringi)
+
+TMP_Folder <- fs::path(tempdir(), stringi::stri_rand_strings(1, 5))
+out_file <- fs::path(TMP_Folder, "iris2.RData")
 fs::dir_create(TMP_Folder)
 list.files(TMP_Folder)
 
-# save iris data in `iris2.RData` with `iris2` object name
-save_as(iris, "iris2", ecokit::path(TMP_Folder, "iris2.RData"))
+# save iris data as `iris2.RData` with `iris2` object name
+save_as(
+  object = tibble::tibble(iris), object_name = "iris2", out_path = out_file)
+
 list.files(TMP_Folder, pattern = "^.+.RData")
 
-(load(ecokit::path(TMP_Folder, "iris2.RData")))
+# load the object to global environment. The data is loaded as `iris2`
+(loaded_name <- load(out_file))
 
-tibble::tibble(iris2)
+ecokit::load_as(out_file)
 }
 \author{
 Ahmed El-Gabbas

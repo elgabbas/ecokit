@@ -20,12 +20,14 @@
 #'   output is printed to the console.
 #' @examples
 #' # print working directory
-#' ecokit::system_command("pwd")
+#' system_command("pwd")
+#' system_command("pwd", r_object = FALSE)
 #'
 #' # first 5 files on the working directory
-#' (A <- ecokit::system_command("ls | head -n 5"))
+#' (A <- system_command("ls | head -n 5"))
 #'
-#' (A <- ecokit::system_command("ls | head -n 5", r_object = FALSE))
+#' B <- system_command("ls | head -n 5", r_object = FALSE)
+#' B
 #' @export
 
 system_command <- function(command, r_object = TRUE, ...) {
@@ -35,12 +37,17 @@ system_command <- function(command, r_object = TRUE, ...) {
     ecokit::stop_ctx("`command` cannot be NULL", command = command)
   }
 
-  if (ecokit::OS() == "Windows") {
-    output <- shell(cmd = command, intern = r_object, ...)
+  if (ecokit::os() == "Windows") {
+    output <- shell(cmd = command, intern = TRUE, ...)
   }
-  if (ecokit::OS() == "Linux") {
-    output <- system(command = command, intern = r_object, ...)
+  if (ecokit::os() == "Linux") {
+    output <- system(command = command, intern = TRUE, ...)
   }
 
-  return(output)
+  if (r_object) {
+    return(output)
+  } else {
+    cat(output, sep = "\n")
+    return(invisible(NULL))
+  }
 }

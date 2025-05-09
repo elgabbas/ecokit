@@ -26,5 +26,5 @@ cat_pipe <- function(x, message) {
     ecokit::stop_ctx("x or message cannot be NULL", message = message, x = x)
   }
   ecokit::cat_time(message)
-  return(x)
+  x
 }

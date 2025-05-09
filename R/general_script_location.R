@@ -31,12 +31,16 @@
 #' @export
 #' @examples
 #' \dontrun{
-#'   # Save as "my_script.R": script_location()
+#'   # in an interactive mode, use
+#'   script_location()
+#'
+#'   # add script_location() to your script; e.g. "my_script.R"
 #'   # Run: Rscript my_script.R
-#'   # Output: [1] "my_script.R" (or full path depending on Rscript invocation)
+#'   # Output: absolute path of the script
 #' }
 
 script_location <- function() {
+
   # Attempt to extract the script path from command line arguments (e.g.,
   # Rscript)
   this_file <- commandArgs() %>%
@@ -51,7 +55,7 @@ script_location <- function() {
     # Extract the value (file path)
     dplyr::pull(.data$value)
 
-  if (length(this_file) > 0) {
+  if (length(this_file) > 0L) {
     # If a command-line file path is found (e.g., from Rscript), use it. This
     # handles cases like 'Rscript my_script.R'
     this_file <- this_file
@@ -72,10 +76,10 @@ script_location <- function() {
 
     # Flatten the list, removing NULLs
     valid_files <- unlist(frame_files)
-    if (length(valid_files) > 0 && any(nzchar(valid_files))) {
+    if (length(valid_files) > 0L && any(nzchar(valid_files))) {
       # If valid file paths are found, take the most recent one (last in stack).
       # This ensures nested sourcing returns the innermost script (e.g., TT2.R)
-      this_file <- utils::tail(valid_files[nzchar(valid_files)], 1)
+      this_file <- utils::tail(valid_files[nzchar(valid_files)], 1L)
     } else if (requireNamespace("rstudioapi", quietly = TRUE) &&
                rstudioapi::isAvailable()) {
       # If no sourced files are found and RStudio is available, use the active
@@ -97,6 +101,5 @@ script_location <- function() {
   }
 
   # Return the determined file path or NA
-  return(this_file)
-
+  ecokit::normalize_path(this_file)
 }

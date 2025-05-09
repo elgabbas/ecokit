@@ -16,16 +16,14 @@
 #'   returns 0.
 #' @examples
 #' n_decimals(x = "13.45554545")
+#' n_decimals(x = 13.45554545)
 #'
 #' # -------------------------------------------
 #'
+#' # the function ignores trailing zeros for doubles
 #' n_decimals(x = 15.01500)
 #'
 #' n_decimals(x = '15.01500')
-#'
-#' # -------------------------------------------
-#'
-#' n_decimals(x = 13.45554545)
 #' @export
 
 n_decimals <- function(x = NULL) {
@@ -39,10 +37,10 @@ n_decimals <- function(x = NULL) {
     format(scientific = FALSE) %>%
     stringr::str_split(pattern = "\\.", n = Inf, simplify = TRUE)
 
-  if (ncol(data_split) == 2) {
+  if (ncol(data_split) == 2L) {
     output <- data_split %>%
       as.vector() %>%
-      utils::tail(1) %>%
+      utils::tail(1L) %>%
       nchar() %>%
       as.integer()
     return(output)

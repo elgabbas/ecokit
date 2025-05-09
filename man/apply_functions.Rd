@@ -6,39 +6,30 @@
 \alias{sapply_}
 \title{Apply a function over a list or vector with optional silence}
 \usage{
-lapply_(X, FUN, Silent = TRUE, ...)
+lapply_(x, fun, silent = TRUE, ...)
 
-sapply_(X, FUN, simplify = TRUE, Silent = TRUE, ...)
+sapply_(x, fun, simplify = TRUE, silent = TRUE, ...)
 }
 \arguments{
-\item{X}{a vector (atomic or list) or an \code{\link[base]{expression}}
-    object.  Other objects (including classed objects) will be coerced
-    by \code{base::\link[base]{as.list}}.}
+\item{x}{a vector (atomic or list) or an expression object. Other objects
+(including classed objects) will be coerced by \link[base:list]{base::as.list}.}
 
-\item{FUN}{the function to be applied to each element of \code{X}:
-    see \sQuote{Details}.  In the case of functions like
-    \code{+}, \code{\%*\%}, the function name must be backquoted or quoted.}
+\item{fun}{the function to be applied to each element of x. In the case of
+functions like +, \%*\%, the function name must be backquoted or quoted.}
 
-\item{Silent}{Logical; if TRUE, the function returns \code{invisible(NULL)}
-instead of the actual result, effectively suppressing the output. This
-enhances the base \link[base:lapply]{base::sapply} for cases where the return value is not
-necessary and its output is undesired.}
+\item{silent}{A logical value. If \code{TRUE}, the function suppresses the return
+value of \code{fun} and returns \code{NULL} invisibly. If \code{FALSE}, the function
+returns the result of applying \code{fun} over \code{X}.}
 
-\item{...}{Additional arguments to be passed to \code{FUN}.}
+\item{...}{Additional arguments to be passed to \code{fun}.}
 
-\item{simplify}{logical or character string; should the result be
-    simplified to a vector, matrix or higher dimensional array if
-    possible?  For \code{sapply} it must be named and not abbreviated.
-    The default value, \code{TRUE}, returns a vector or matrix if appropriate,
-    whereas if \code{simplify = "array"} the result may be an
-    \code{\link[base]{array}} of \dQuote{rank}
-    (\eqn{=}\code{length(dim(.))}) one higher than the result
-    of \code{FUN(X[[i]])}.}
+\item{simplify}{Logical or character string; should the result be simplified
+to a vector, matrix or higher dimensional array if possible?}
 }
 \value{
-If \code{Silent} is \code{TRUE}, returns \code{NULL} invisibly, otherwise returns a
-list of the same length as \code{X}, where each element is the result of
-applying \code{FUN} to the corresponding element of \code{X}.
+If \code{silent} is \code{TRUE}, returns \code{NULL} invisibly, otherwise returns a
+list of the same length as \code{x}, where each element is the result of
+applying \code{fun} to the corresponding element of \code{x}.
 }
 \description{
 Wrapper functions around the base \link[base:lapply]{base::lapply} and \link[base:lapply]{base::sapply} functions

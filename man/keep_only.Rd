@@ -24,6 +24,8 @@ environment. The function also provides an option to print the names of the
 kept and removed variables.
 }
 \examples{
+load_packages(terra)
+
 A <- B <- C <- 15
 ls()
 
@@ -36,6 +38,20 @@ rm(list = ls())
 A <- B <- C <- 15
 keep_only(c("A","B"))
 ls()
+
+# -------------------------------------------
+
+# use inside a function
+function1 <- function(a = 1, b = 2, c = 3) {
+  z <- terra::rast()
+  print(paste0("available objects before keep_only: ", toString(ls())))
+
+  keep_only(c("a", "b"), verbose = FALSE)
+  print(paste0("available objects after keep_only: ", toString(ls())))
+
+  return(invisible(NULL))
+}
+function1()
 }
 \author{
 Ahmed El-Gabbas

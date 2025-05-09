@@ -15,7 +15,7 @@
 #' @param overwrite Logical. Whether existing `.RData` files should be
 #'   overwritten. If `FALSE` (Default) and files exist, the function will stop
 #'   with an error message.
-#' @param prefix Character. prefix of each output file name. Useful for
+#' @param prefix Character. Prefix of each output file name. Useful for
 #'   organizing saved files or avoiding name conflicts. Defaults to an empty
 #'   string.
 #' @param verbose Logical. Whether to print a message upon successful saving of
@@ -26,112 +26,105 @@
 #'   return a value.
 #' @export
 #' @examples
-#' \dontrun{
-#'   TMP_Folder <- ecokit::path(tempdir(), stringi::stri_rand_strings(1, 5))
-#'   fs::dir_create(TMP_Folder)
+#' load_packages(fs, purrr, stringi)
 #'
-#'   # ----------------------------------------------
-#'   # Save x1 and x2 to disk
-#'   # ----------------------------------------------
-#'   x1 = 10; x2 = 20
+#' TMP_Folder <- fs::path(tempdir(), stringi::stri_rand_strings(1, 5))
+#' fs::dir_create(TMP_Folder)
 #'
-#'   save_multiple(variables = c("x1", "x2"), out_directory = TMP_Folder)
+#' # ----------------------------------------------
+#' # Save x1 and x2 to disk
+#' # ----------------------------------------------
+#' x1 = 10
+#' x2 = 20
 #'
-#'   list.files(path = TMP_Folder, pattern = "^.+.RData")
+#' save_multiple(
+#'   variables = c("x1", "x2"), out_directory = TMP_Folder, verbose = TRUE)
 #'
-#'   (x1Contents <- ecokit::load_as(ecokit::path(TMP_Folder, "x1.RData")))
+#' list.files(path = TMP_Folder, pattern = "^.+.RData")
 #'
-#'   (x2Contents <- ecokit::load_as(ecokit::path(TMP_Folder, "x2.RData")))
+#' (x1Contents <- ecokit::load_as(fs::path(TMP_Folder, "x1.RData")))
+#' (x2Contents <- ecokit::load_as(fs::path(TMP_Folder, "x2.RData")))
 #'
-#'   # ----------------------------------------------
-#'   # Use prefix
-#'   # ----------------------------------------------
+#' # ----------------------------------------------
+#' # Use prefix
+#' # ----------------------------------------------
+#' save_multiple(
+#'   variables = c("x1", "x2"), out_directory = TMP_Folder, prefix = "A_")
 #'
-#'   save_multiple(
-#'       variables = c("x1", "x2"), out_directory = TMP_Folder, prefix = "A_")
+#' list.files(path = TMP_Folder, pattern = "^.+.RData")
 #'
-#'   list.files(path = TMP_Folder, pattern = "^.+.RData")
+#' # ----------------------------------------------
+#' # File exists, no save
+#' # ----------------------------------------------
+#' try(save_multiple(variables = c("x1", "x2"), out_directory = TMP_Folder))
 #'
-#'   # ----------------------------------------------
-#'   # File exists, no save
-#'   # ----------------------------------------------
-#'   try(save_multiple(variables = c("x1", "x2"), out_directory = TMP_Folder))
+#' # ----------------------------------------------
+#' # overwrite existing file
+#' # ----------------------------------------------
+#' x1 = 100; x2 = 200; x3 = 300
 #'
-#'   # ----------------------------------------------
-#'   # overwrite existing file
-#'   # ----------------------------------------------
-#'   x1 = 100; x2 = 200; x3 = 300
+#' save_multiple(
+#'   variables = c("x1", "x2", "x3"),
+#'   out_directory = TMP_Folder, overwrite = TRUE)
 #'
-#'   save_multiple(variables = c("x1", "x2", "x3"),
-#'      out_directory = TMP_Folder, overwrite = TRUE)
-#'
-#'   (x1Contents <- ecokit::load_as(ecokit::path(TMP_Folder, "x1.RData")))
-#'
-#'   (x2Contents <- ecokit::load_as(ecokit::path(TMP_Folder, "x2.RData")))
-#'
-#'   (x3Contents <- ecokit::load_as(ecokit::path(TMP_Folder, "x3.RData")))
-#' }
+#' (x1Contents <- ecokit::load_as(fs::path(TMP_Folder, "x1.RData")))
+#' (x2Contents <- ecokit::load_as(fs::path(TMP_Folder, "x2.RData")))
+#' (x3Contents <- ecokit::load_as(fs::path(TMP_Folder, "x3.RData")))
 
 save_multiple <- function(
     variables = NULL, out_directory = getwd(),
     overwrite = FALSE, prefix = "", verbose = FALSE) {
 
-  # Check if variables is provided correctly
-  if (is.null(variables) || !is.character(variables)) {
+  # Validate `variables`
+  if (!is.character(variables) || length(variables) < 1L) {
     ecokit::stop_ctx(
-      "`variables` should be a character vector for names of objects",
+      "`variables` must be a non-empty character vector",
       variables = variables)
   }
 
-  env <- rlang::new_environment()
+  # Capture caller's environment
+  caller_env <- parent.frame()
+  store_env  <- rlang::new_environment(parent = emptyenv())
 
-  purrr::walk(
-    .x = variables,
-    .f = ~assign(.x, get(.x, envir = parent.frame()), envir = env))
+  # Copy each requested object into store_env
+  purrr::walk(variables, function(var) {
+    if (!exists(var, envir = caller_env, inherits = FALSE)) {
+      ecokit::stop_ctx(
+        paste0("Variable '", var, "' not found in caller environment."),
+        missing = var)
+    }
+    assign(var, get(var, envir = caller_env), envir = store_env)
+  })
 
-  # Check if all specified variables are available in the caller environment
-  missing_vars <- setdiff(variables, ls(envir = env))
-
-  if (length(missing_vars) > 0) {
-    ecokit::stop_ctx(
-      paste0(
-        "Variable(s) ", paste(missing_vars, collapse = " & "),
-        " do not exist in the caller environment.\n"))
-  }
+  # Prepare output dir
   fs::dir_create(out_directory)
 
-  # Check if files already exist
-  file_exist <- purrr::map_lgl(
-    .x = ecokit::path(out_directory, paste0(prefix, variables, ".RData")),
-    .f = file.exists) %>%
-    any()
+  # Check existing files
+  paths <- fs::path(out_directory, paste0(prefix, variables, ".RData"))
+  exists_any <- any(file.exists(paths))
 
-  if (file_exist && isFALSE(overwrite)) {
+  if (exists_any && !overwrite) {
     message(
-      "Some files already exist. No files are saved. ",
-      "Please use overwrite = TRUE")
-  } else {
-
-    purrr::walk(
-      .x = variables,
-      .f = ~{
-        ecokit::save_as(
-          object = get(.x, envir = env), object_name = .x,
-          out_path = ecokit::path(out_directory, paste0(prefix, .x, ".RData")))
-      })
-
-    all_exist <- all(
-      file.exists(
-        ecokit::path(out_directory, paste0(prefix, variables, ".RData"))))
-
-    if (all_exist) {
-      if (verbose) {
-        message(
-          "All files are saved to disk in ", out_directory, " successfully.")
-      }
-    } else {
-      message("Some files were not saved to disk! Please check again.")
-    }
+      "One or more files exist; skipping save. Use overwrite = TRUE to force.")
+    return(invisible(NULL))
   }
-  return(invisible(NULL))
+
+  # Save each object
+  purrr::walk2(
+    .x = variables, .y = paths,
+    .f = function(var, out_path) {
+      ecokit::save_as(
+        object = get(var, envir = store_env),
+        object_name = var, out_path = out_path)
+    })
+
+  # Verbose feedback
+  if (verbose) {
+    message(
+      "Saved ", length(variables), " object(s) to ",
+      ecokit::normalize_path(out_directory), ".")
+    message("Saved files are: ", toString(crayon::red(basename(paths))), ".")
+  }
+
+  invisible(NULL)
 }

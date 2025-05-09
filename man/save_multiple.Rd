@@ -24,7 +24,7 @@ files will be saved. Defaults to the current working directory.}
 overwritten. If \code{FALSE} (Default) and files exist, the function will stop
 with an error message.}
 
-\item{prefix}{Character. prefix of each output file name. Useful for
+\item{prefix}{Character. Prefix of each output file name. Useful for
 organizing saved files or avoiding name conflicts. Defaults to an empty
 string.}
 
@@ -41,51 +41,50 @@ separate \code{.RData} files. It allows for optional file prefixing and
 overwriting of existing files.
 }
 \examples{
-\dontrun{
-  TMP_Folder <- ecokit::path(tempdir(), stringi::stri_rand_strings(1, 5))
-  fs::dir_create(TMP_Folder)
+load_packages(fs, purrr, stringi)
 
-  # ----------------------------------------------
-  # Save x1 and x2 to disk
-  # ----------------------------------------------
-  x1 = 10; x2 = 20
+TMP_Folder <- fs::path(tempdir(), stringi::stri_rand_strings(1, 5))
+fs::dir_create(TMP_Folder)
 
-  save_multiple(variables = c("x1", "x2"), out_directory = TMP_Folder)
+# ----------------------------------------------
+# Save x1 and x2 to disk
+# ----------------------------------------------
+x1 = 10
+x2 = 20
 
-  list.files(path = TMP_Folder, pattern = "^.+.RData")
+save_multiple(
+  variables = c("x1", "x2"), out_directory = TMP_Folder, verbose = TRUE)
 
-  (x1Contents <- ecokit::load_as(ecokit::path(TMP_Folder, "x1.RData")))
+list.files(path = TMP_Folder, pattern = "^.+.RData")
 
-  (x2Contents <- ecokit::load_as(ecokit::path(TMP_Folder, "x2.RData")))
+(x1Contents <- ecokit::load_as(fs::path(TMP_Folder, "x1.RData")))
+(x2Contents <- ecokit::load_as(fs::path(TMP_Folder, "x2.RData")))
 
-  # ----------------------------------------------
-  # Use prefix
-  # ----------------------------------------------
+# ----------------------------------------------
+# Use prefix
+# ----------------------------------------------
+save_multiple(
+  variables = c("x1", "x2"), out_directory = TMP_Folder, prefix = "A_")
 
-  save_multiple(
-      variables = c("x1", "x2"), out_directory = TMP_Folder, prefix = "A_")
+list.files(path = TMP_Folder, pattern = "^.+.RData")
 
-  list.files(path = TMP_Folder, pattern = "^.+.RData")
+# ----------------------------------------------
+# File exists, no save
+# ----------------------------------------------
+try(save_multiple(variables = c("x1", "x2"), out_directory = TMP_Folder))
 
-  # ----------------------------------------------
-  # File exists, no save
-  # ----------------------------------------------
-  try(save_multiple(variables = c("x1", "x2"), out_directory = TMP_Folder))
+# ----------------------------------------------
+# overwrite existing file
+# ----------------------------------------------
+x1 = 100; x2 = 200; x3 = 300
 
-  # ----------------------------------------------
-  # overwrite existing file
-  # ----------------------------------------------
-  x1 = 100; x2 = 200; x3 = 300
+save_multiple(
+  variables = c("x1", "x2", "x3"),
+  out_directory = TMP_Folder, overwrite = TRUE)
 
-  save_multiple(variables = c("x1", "x2", "x3"),
-     out_directory = TMP_Folder, overwrite = TRUE)
-
-  (x1Contents <- ecokit::load_as(ecokit::path(TMP_Folder, "x1.RData")))
-
-  (x2Contents <- ecokit::load_as(ecokit::path(TMP_Folder, "x2.RData")))
-
-  (x3Contents <- ecokit::load_as(ecokit::path(TMP_Folder, "x3.RData")))
-}
+(x1Contents <- ecokit::load_as(fs::path(TMP_Folder, "x1.RData")))
+(x2Contents <- ecokit::load_as(fs::path(TMP_Folder, "x2.RData")))
+(x3Contents <- ecokit::load_as(fs::path(TMP_Folder, "x3.RData")))
 }
 \author{
 Ahmed El-Gabbas

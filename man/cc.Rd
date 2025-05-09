@@ -7,8 +7,7 @@
 cc(...)
 }
 \arguments{
-\item{...}{strings to be concatenated. Note that numeric values should be
-converted to strings before being passed.}
+\item{...}{strings to be concatenated.}
 }
 \value{
 A character string representing the concatenated values of the input
@@ -22,17 +21,9 @@ from variable names or expressions without including the usual quotes.
 \examples{
 cc(A, B, C)
 
-# -------------------------------------------
-
 cc(A, B, "A and B")
 
-# -------------------------------------------
-
-# this does not work
-try(cc(A, B, "A and B", 10))
-
-# this works
-cc(A, B, "A and B", "10")
+cc(A, B, "A and B", 10)
 }
 \author{
 Ahmed El-Gabbas

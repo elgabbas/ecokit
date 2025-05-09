@@ -1,5 +1,5 @@
 ## |------------------------------------------------------------------------| #
-# boundary_to_WKT ----
+# boundary_to_wkt ----
 ## |------------------------------------------------------------------------| #
 
 #' Determine the boundaries of the requested GBIF data
@@ -10,15 +10,15 @@
 #' function.
 #' @param left,right,bottom,top Numeric, the left, right, bottom, and top
 #'   boundary of the area.
-#' @name boundary_to_WKT
+#' @name boundary_to_wkt
 #' @author Ahmed El-Gabbas
 #' @return A character string representing the WKT of the polygon that outlines
 #'   the specified boundaries.
 #' @export
 #' @examples
-#' ecokit::boundary_to_WKT(left = 20, right = 30, bottom = 40, top = 50)
+#' boundary_to_wkt(left = 20, right = 30, bottom = 40, top = 50)
 
-boundary_to_WKT <- function(
+boundary_to_wkt <- function(
   left = NULL, right = NULL, bottom = NULL, top = NULL) {
 
   if (any(c(is.null(left), is.null(right), is.null(bottom), is.null(top)))) {

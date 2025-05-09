@@ -18,6 +18,8 @@
 #' @export
 #' @examples
 #' check_quarto()
+#'
+#' check_quarto(pre_release = TRUE)
 
 check_quarto <- function(pre_release = FALSE) {
 
@@ -51,12 +53,11 @@ check_quarto <- function(pre_release = FALSE) {
       # Return a data frame row
       if (is.na(quarto_version)) {
         # Skip if no version found
-        return(NULL)
+        NULL
       } else {
-        return(
-          tibble::tibble(
-            quarto_version = quarto_version,
-            labels = dplyr::if_else(nzchar(labels), labels, "None")))
+        tibble::tibble(
+          quarto_version = quarto_version,
+          labels = dplyr::if_else(nzchar(labels), labels, "None"))
       }
     }) %>%
     # Combine into a single data frame
@@ -83,7 +84,7 @@ check_quarto <- function(pre_release = FALSE) {
 
       version_pre_release <- releases %>%
         dplyr::slice(gtools::mixedorder(quarto_version)) %>%
-        dplyr::slice_tail(n = 1) %>%
+        dplyr::slice_tail(n = 1L) %>%
         dplyr::pull("quarto_version")
 
       cat(

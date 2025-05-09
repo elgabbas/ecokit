@@ -2,23 +2,69 @@
 % Please edit documentation in R/general_check_zip.R
 \name{check_zip}
 \alias{check_zip}
-\title{Check the Integrity of a ZIP file}
+\title{Check the Integrity of a ZIP File}
 \usage{
-check_zip(file)
+check_zip(file = NULL)
 }
 \arguments{
-\item{file}{Character. The path to the ZIP file to check. Must be a single,
-non-empty string.}
+\item{file}{Character. Path to a ZIP file. Must be a single, non-empty
+string.}
 }
 \value{
 Logical: \code{TRUE} if the file exists, is non-empty, and passes the
-integrity check; \code{FALSE} otherwise.
+integrity check; \code{FALSE} otherwise, accompanied by a warning explaining the
+failure.
 }
 \description{
-Tests the integrity of a ZIP file using the \code{unzip -t} command. Verifies that
-the file exists, is non-empty, and has no detectable errors in its compressed
-data. Returns \code{FALSE} with a message if the file is invalid or if \code{unzip} is
-unavailable.
+Tests the integrity of a ZIP file using the \code{unzip -t} system command.
+Verifies that the file exists, is non-empty, has a \code{.zip} extension, and
+passes the integrity check. Returns \code{FALSE} with a warning if the file is
+invalid or if \code{unzip} is unavailable.
+}
+\note{
+Requires the \code{unzip} system command.
+}
+\examples{
+# |||||||||||||||||||||||||||||||||||||||
+# Create ZIP files
+# |||||||||||||||||||||||||||||||||||||||
+
+# valid ZIP file
+temp_dir <- tempdir()
+temp_file <- file.path(temp_dir, "test.txt")
+writeLines("Hello, world!", temp_file)
+zip_file <- file.path(temp_dir, "valid.zip")
+zip(zip_file, temp_file, flags = "-jq")
+
+# invalid ZIP file (corrupted)
+bad_zip <- file.path(temp_dir, "invalid.zip")
+writeLines("Not a ZIP file", bad_zip)
+
+# empty ZIP file
+empty_zip <- file.path(temp_dir, "empty.zip")
+fs::file_create(empty_zip)
+
+# non-ZIP file
+non_zip_file <- file.path(temp_dir, "test.txt")
+writeLines("Hello, world!", non_zip_file)
+
+# |||||||||||||||||||||||||||||||||||||||
+# Check ZIP files
+# |||||||||||||||||||||||||||||||||||||||
+
+check_zip(zip_file)                              # TRUE
+
+check_zip(bad_zip)                               # FALSE, with warning
+
+# non-existent file
+check_zip("nonexistent.zip")                     # FALSE, with warning
+
+check_zip(empty_zip)                             # FALSE, with warning
+
+check_zip(non_zip_file)                          # FALSE, with warning
+
+# clean up
+unlink(c(zip_file, bad_zip, empty_zip, temp_file))
 }
 \author{
 Ahmed El-Gabbas

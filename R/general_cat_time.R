@@ -16,7 +16,7 @@
 #'   Default is `TRUE`. If `FALSE`, only the text is printed.
 #' @param cat_date logical; whether to include the date in the timestamp. Only
 #'   effective if `time` is `TRUE`. Default is `FALSE`, meaning only the time is
-#'   printed. If `TRUE`, the date is printed in the format "%d/%m/%Y %X".
+#'   printed. If `TRUE`, the date is printed in the format `%d/%m/%Y %X`.
 #' @param time_zone character; the time zone to use for the timestamp. Default
 #'   is `CET`.
 #' @param level integer; the level at which the message will be printed. If e.g.
@@ -90,25 +90,25 @@ cat_time <- function(
   n_lines_before <- stringr::str_extract(text, "^\\n+") %>%
     stringr::str_count("\n")
   if (is.na(n_lines_before)) {
-    n_lines_before <- 0
+    n_lines_before <- 0L
   }
 
   text <- stringr::str_remove(text, "^\\n+")
 
   if (text == "") {
-    if (n_lines_before > 0) {
+    if (n_lines_before > 0L) {
       text <- paste0(strrep("\n", n_lines_before), text)
     }
     text <- paste0(text, time_now)
   } else {
-    if (level > 0) {
+    if (level > 0L) {
       prefix <- rep("  >>>", each = level) %>%
         paste(collapse = "") %>%
         paste0("  ")
       text <- paste0(prefix, text)
     }
 
-    if (n_lines_before > 0) {
+    if (n_lines_before > 0L) {
       text <- paste0(strrep("\n", n_lines_before), text)
     }
     text <- paste0(text, time_now_2)

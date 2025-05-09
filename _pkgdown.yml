@@ -27,9 +27,7 @@ reference:
   contents:
   - ecokit-package
 
-- title: General functions
-  desc: Data management / utility functions
-- subtitle: Packages management
+- title: Package management
   contents:
   - stop_ctx
   - package_functions
@@ -38,45 +36,28 @@ reference:
   - loaded_packages
   - package_remote_sha
   - assign_env_vars
-  - check_system_command
   - check_args
   - function_arguments
   - record_arguments
-- subtitle: File operations
+
+- title: File / data operations
   contents:
-  - file_extension
-  - file_size
-  - file_type
+  - file_operations
   - normalize_path
-  - path
   - load_as
   - load_multiple
   - check_data
   - check_zip
   - save_as
   - save_multiple
-  - list_to_RData
-- subtitle: Plotting
-  contents:
-  - add_image_to_plot
-  - add_line
-  - integer_breaks
-- subtitle: Printing/logging functions
-  contents:
-  - cat_sep
-  - cat_time
-  - cat_diff
-  - info_chunk
-- subtitle: Vector / data frame operations
-  contents:
+  - list_to_rdata
   - assign_if_not_exist
   - cc
   - ht
-  - apply_functions
+  - arrange_alphanum
   - n_decimals
   - replace_space
   - scrape_link
-  - sort2
   - split_vector
   - split_df_to_chunks
   - range_to_new_value
@@ -85,15 +66,23 @@ reference:
   - source_silent
   - n_unique
   - add_missing_columns
-- subtitle: Other functions
+
+- title: Printing/logging functions
+  contents:
+  - cat_sep
+  - cat_time
+  - cat_diff
+  - info_chunk
+
+- title: Utility functions
   contents:
   - set_parallel
-  - OS
+  - os
   - system_command
-  - check_URL
+  - check_url
   - script_location
   - clear_console
-  - check_RStudio
+  - check_rstudio
   - check_quarto
   - save_session
   - save_session_info
@@ -101,11 +90,13 @@ reference:
   - bash_variables
   - detect_alias
   - get_mode
+  - check_system_command
+  - apply_functions
 
 - title: Spatial functions
   contents:
   - check_tiff
-  - boundary_to_WKT
+  - boundary_to_wkt
   - polygon_centroid
   - rename_geometry
   - split_raster
@@ -114,10 +105,16 @@ reference:
   - clip_raster_by_polygon
   - check_stack_in_memory
   - sf_add_coords
-  - add_cross_to_grid
-  - add_diagonals_to_grid
-  - raster_to_PA
+  - raster_to_pres_abs
   - nc_global_attributes
   - scale_0_1
-  - set_raster_CRS
+  - set_raster_crs
   - set_raster_values
+  - add_geometric_features
+  - range_to_new_value
+
+- title: Plotting functions
+  contents:
+  - add_image_to_plot
+  - add_line
+  - integer_breaks

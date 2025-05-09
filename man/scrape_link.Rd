@@ -4,10 +4,10 @@
 \alias{scrape_link}
 \title{Extracts link texts and URLs from a web page}
 \usage{
-scrape_link(URL, sort_by = c("link", "link_text"))
+scrape_link(url, sort_by = c("link", "link_text"))
 }
 \arguments{
-\item{URL}{Character. The URL of the web page to scrape. This URL is also
+\item{url}{Character. The URL of the web page to scrape. This URL is also
 used to resolve relative links to absolute URLs.}
 
 \item{sort_by}{Character vector of length 1 or 2. The columns to arrange the
@@ -18,8 +18,8 @@ specified in this argument.}
 }
 \value{
 A tibble with two columns: \code{link_text} containing the text of each
-link, and \code{URL} containing  the absolute URL of each link. The tibble is
-sorted by URL and then by link text, and only unique links are included.
+link, and \code{link} containing  the absolute URL of each link. The tibble is
+sorted by link and then by link text, and only unique links are included.
 }
 \description{
 This function scrapes a web page for all links (\verb{<a>} tags) and extracts both
@@ -28,14 +28,14 @@ the URLs and the link text.
 \examples{
 
 head(
-scrape_link(URL = "https://github.com/tidyverse/dplyr"))
+scrape_link(url = "https://github.com/tidyverse/dplyr"))
 
 head(
   scrape_link(
-    URL = "https://github.com/tidyverse/dplyr", sort_by = "link_text"))
+    url = "https://github.com/tidyverse/dplyr", sort_by = "link_text"))
 
-# This will give an "Invalid URL" error
+# This will give an "Invalid url" error
 \dontrun{
- scrape_link(URL = "https://github50.com")
+ scrape_link(url = "https://github50.com")
 }
 }

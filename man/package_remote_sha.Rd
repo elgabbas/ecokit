@@ -2,34 +2,63 @@
 % Please edit documentation in R/general_package_remote_sha.R
 \name{package_remote_sha}
 \alias{package_remote_sha}
-\title{Get the remote SHA of R packages}
+\title{Retrieve Remote SHAs for R Packages}
 \usage{
-package_remote_sha(...)
+package_remote_sha(..., lib_path = .libPaths()[1L])
 }
 \arguments{
-\item{...}{Character. Names of one or more R packages (quoted or unquoted)
-for which to retrieve the remote SHA.}
+\item{...}{Quoted or unquoted names of one or more R packages (e.g., \code{dplyr},
+\code{"tidyr"}). Must be valid package names (letters, numbers, dots, or
+underscores) and installed in the library.}
+
+\item{lib_path}{Character. Path to the library where the packages are
+installed. Defaults to the first library in \code{.libPaths()}. This parameter
+is optional.}
 }
 \value{
-A named character vector where names are the package names and values
-are the corresponding remote SHAs. If a package is not found or has no
-remote SHA, the value will be \code{NA}.
+A named character vector where names are package names and values are
+the corresponding remote SHAs. Returns \code{NA} for packages not installed,
+from CRAN, or without a remote SHA.
 }
 \description{
-This function retrieves the remote SHA (Secure Hash Algorithm) reference for
-one or more specified R packages from their remote repositories. The SHA
-uniquely identifies the version of a package's source code, useful for
-reproducibility and version tracking.
+Retrieves the remote SHA (Secure Hash Algorithm) reference for one or more R
+packages from their remote repositories (e.g., GitHub, GitLab). The SHA
+uniquely identifies a package's source code version, aiding reproducibility
+and version tracking.
 }
 \details{
-The function uses \code{\link[pak:lib_status]{pak::lib_status()}} to query the status of
-installed packages and extract their remote SHAs. It supports packages
-installed from GitHub, GitLab, or other remote sources via \code{pak}. If a
-package is installed from CRAN or locally without a remote SHA, the result
-will be \code{NA}.
+This function uses \code{\link[pak:lib_status]{pak::lib_status()}} to query installed packages
+and extract their remote SHAs. CRAN or locally installed packages typically
+return \code{NA}, as they lack remote SHAs.
 }
 \examples{
-package_remote_sha(ecokit, "nonexistent")
+load_packages(remotes, fs)
+
+# create a temporary directory for package installation
+temp_lib <- fs::path(tempdir(), "temp_lib")
+fs::dir_create(temp_lib)
+
+# install pkgconfig from GitHub into the temporary directory
+remotes::install_github(
+  "r-lib/pkgconfig", lib = temp_lib, upgrade = "never",
+  quiet = TRUE, dependencies = FALSE)
+
+# retrieve remote SHA for pkgconfig
+package_remote_sha(pkgconfig, lib_path = temp_lib)
+
+# `stats` and non-existent packages return NA
+package_remote_sha(stats, non_existent)
+
+# clean up
+remove.packages("pkgconfig", lib = temp_lib)
+unlink(temp_lib, recursive = TRUE)
+
+\dontrun{
+  # the following will give an error
+  package_remote_sha(TRUE)
+  package_remote_sha(NA)
+  package_remote_sha(NULL)
+}
 }
 \author{
 Ahmed El-Gabbas

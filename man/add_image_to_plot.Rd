@@ -56,4 +56,7 @@ image(volcano)
 add_image_to_plot(pic, x = 0.3, y = 0.5, width = 0.2)
 add_image_to_plot(pic, x = 0.7, y = 0.7, width = 0.2)
 add_image_to_plot(pic, x = 0.7, y = 0.2, width = 0.1)
+
+# clean up
+unlink(z)
 }

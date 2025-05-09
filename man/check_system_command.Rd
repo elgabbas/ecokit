@@ -14,13 +14,12 @@ check_system_command(commands, warning = TRUE)
 Defaults to \code{TRUE}.}
 }
 \value{
-The function returns \code{TRUE} if all specified commands are available
+The function returns \code{TRUE} if \emph{all} specified commands are available
 on the system, \code{FALSE} if any is not available.
 }
 \description{
 This function checks if a list of system commands are available on the user's
-PATH. If any commands are missing, it stops execution and returns an
-informative error message.
+PATH.
 }
 \examples{
 # Check for the availability of system commands

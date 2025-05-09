@@ -21,16 +21,17 @@
 #'   provided, the default names ("Longitude" and "Latitude") are used.
 #' @name text_to_coordinates
 #' @author Ahmed El-Gabbas
-#' @return two column tibble for Longitude & Latitude
 #' @export
 #' @examples
 #' c("POINT (11.761 46.286)", "POINT (14.8336 42.0422)",
 #'   "POINT (16.179999 38.427214)") %>%
-#'  lapply(text_to_coordinates)
+#'  purrr::map(text_to_coordinates) %>%
+#'  dplyr::bind_rows()
 #'
 #' c("POINT (11.761 46.286)", "POINT (14.8336 42.0422)",
 #'   "POINT (16.179999 38.427214)") %>%
-#'  lapply(text_to_coordinates, name_x = "Long", name_y = "Lat")
+#'  purrr::map(text_to_coordinates, name_x = "Long", name_y = "Lat") %>%
+#'  dplyr::bind_rows()
 
 text_to_coordinates <- function(
     text = NULL, name_x = "Longitude", name_y = "Latitude") {

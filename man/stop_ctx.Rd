@@ -10,7 +10,7 @@ stop_ctx(
   class = NULL,
   call = NULL,
   parent = NULL,
-  include_backtrace = TRUE,
+  include_backtrace = FALSE,
   cat_timestamp = TRUE,
   cat_date = FALSE
 )
@@ -19,22 +19,23 @@ stop_ctx(
 \item{message}{Character. The primary error message to display.}
 
 \item{...}{Named R objects to include as metadata. These can be of various
-types, such as vectors, lists, data frames, tibbles, terra::SpatRaster,
-raster::Raster, RasterStack, RasterBrick, sf objects, regression models
-(e.g., lm, glm), ggplot objects, S4 objects, and more. Unnamed arguments
-will cause an error due to \code{.named = TRUE} in \code{\link[rlang:enquo]{rlang::enquos()}}. \code{NULL}
-values are displayed as "NULL".}
+types, such as vectors, lists, data frames, tibbles, SpatRaster,
+RasterLayer, RasterStack, RasterBrick, sf objects, regression models (e.g.,
+lm, glm), ggplot objects, S4 objects, and more. Unnamed arguments will
+cause an error due to \code{.named = TRUE} in \code{\link[rlang:enquo]{rlang::enquos()}}. \code{NULL} values
+are displayed as "NULL".}
 
-\item{class}{Character or NULL. Subclass(es) for the error condition.
-Defaults to NULL.}
+\item{class}{Character or \code{NULL.} Subclass(es) for the error condition.
+Defaults to \code{NULL}. See \link[rlang:abort]{rlang::abort} for more details.}
 
-\item{call}{Call or NULL. The call causing the error. Defaults to the
-caller's expression.}
+\item{call}{Call or \code{NULL}. The call causing the error. Defaults to the
+caller's expression.  See \link[rlang:abort]{rlang::abort} for more details.}
 
-\item{parent}{Condition or NULL. Parent error for nesting. Defaults to NULL.}
+\item{parent}{Condition or \code{NULL}. Parent error for nesting. Defaults to
+\code{NULL}. See \link[rlang:abort]{rlang::abort} for more details.}
 
 \item{include_backtrace}{Logical. If \code{TRUE}, includes a compact backtrace.
-Default: \code{TRUE}.}
+Default: \code{FALSE}.}
 
 \item{cat_timestamp}{Logical. If \code{TRUE}, prepends a timestamp (HH:MM:SS).
 Default: \code{TRUE}.}
@@ -50,8 +51,8 @@ Signals errors with rich context, wrapping \code{\link[rlang:abort]{rlang::abort
 \itemize{
 \item The calling function name (if applicable).
 \item User-defined metadata (e.g., vectors, lists, data frames, tibbles,
-terra::SpatRaster, raster::Raster, RasterStack, RasterBrick, sf objects,
-regression models, ggplot objects, S4 objects).
+SpatRaster, RasterLayer, RasterStack, RasterBrick, sf objects, regression
+models, ggplot objects, S4 objects).
 \item Optional timestamps/dates.
 \item Optional backtraces to aid debugging.
 }
@@ -84,15 +85,20 @@ structure or summary as appropriate.
 }
 
 \examples{
-# Basic error with metadata
-try(
-  stop_ctx(
-    message = "File not found", file = "data.csv",
-    type = "missing_input", foo = 1:3))
+# loading packages
+load_packages(dplyr, sf, terra, raster)
 
 # -------------------------------------------------------------------
 
-# Include date in error message
+# Basic error with metadata and backtrace
+try(
+  stop_ctx(
+    message = "File not found", file = "data.csv",
+    type = "missing_input", foo = 1:3, include_backtrace = TRUE))
+
+# -------------------------------------------------------------------
+
+# Include date in error message; no backtrace
 try(
   stop_ctx(
     message = "File not found", file = "data.csv",
@@ -113,19 +119,13 @@ try(
 
 # -------------------------------------------------------------------
 
-# Error without backtrace
-try(
-  stop_ctx(message = "Simple error", include_backtrace = FALSE))
-
-# -------------------------------------------------------------------
-
 # S4 object as metadata
 setClass("Student", slots = list(name = "character", age = "numeric"))
 student <- new("Student", name = "John Doe", age = 23)
 try(
   stop_ctx(
     message = "Student record error",
-    metadata = student, type = "invalid_data"))
+    metadata = student, type = "invalid_data", include_backtrace = FALSE))
 
 # -------------------------------------------------------------------
 
@@ -142,13 +142,21 @@ try(f1("not a number"))
 # -------------------------------------------------------------------
 
 # Nested function error without metadata
-f3 <- function() stop_ctx(message = "Error in f3()")
+f3 <- function() {
+  stop_ctx(message = "Error in f3()", include_backtrace = TRUE)
+}
 f2 <- function(y) f3()
 f1 <- function(z) f2()
 
 # Output includes: "Calling Function: f1" before metadata
 try(f1())
 
+# -------------------------------------------------------------------
+
+\dontrun{
+  # Unnamed arguments will cause an error
+  stop_ctx("A", "X")
+}
 }
 \author{
 Ahmed El-Gabbas

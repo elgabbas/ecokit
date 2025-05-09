@@ -4,7 +4,7 @@
 \alias{load_as}
 \title{Load objects from \code{RData} / \code{qs2} / \code{rds} / \code{feather} file}
 \usage{
-load_as(file = NULL, n_threads = 5, timeout = 300, ...)
+load_as(file = NULL, n_threads = 5L, timeout = 300L, ...)
 }
 \arguments{
 \item{file}{Character. the file path or URL of the file to be loaded. If
@@ -42,7 +42,7 @@ file ahead of time. The function also supports loading \code{feather}, \code{qs2
 file <- system.file("testdata", "culcita_dat.RData", package = "lme4")
 
 # ---------------------------------------------------------
-# loading RData using base library
+# loading RData using base::load
 # ---------------------------------------------------------
 (load(file))
 
@@ -62,20 +62,25 @@ print(tibble::tibble(NewObj))
 # ---------------------------------------------------------
 # Loading multiple objects stored in single RData file
 # ---------------------------------------------------------
+
 # store three objects to single RData file
 mtcars2 <- mtcars3 <- mtcars
-TempFile <- tempfile(pattern = "mtcars_", fileext = ".RData")
 
-save(mtcars2, mtcars3, mtcars, file = TempFile)
-mtcars_all <- load_as(TempFile)
+# save in the order of mtcars2, mtcars3, mtcars
+TempFile_1 <- tempfile(pattern = "mtcars_", fileext = ".RData")
+save(mtcars2, mtcars3, mtcars, file = TempFile_1)
 
-# overwrite the file with different order of objects
-save(mtcars, mtcars2, mtcars3, file = TempFile)
-mtcars_all2 <- load_as(TempFile)
+# save in another order: mtcars, mtcars2, mtcars3
+TempFile_2 <- tempfile(pattern = "mtcars_", fileext = ".RData")
+save(mtcars, mtcars2, mtcars3, file = TempFile_2)
 
-# single list object with 3 items, keeping original object names and order
-names(mtcars_all)
-names(mtcars_all2)
+
+# loading as a single list  with 3 items, keeping original order
+mtcars_all_1 <- load_as(TempFile_1)
+str(mtcars_all_1, 1)
+
+mtcars_all_2 <- load_as(TempFile_2)
+str(mtcars_all_2, 1)
 }
 \author{
 Ahmed El-Gabbas

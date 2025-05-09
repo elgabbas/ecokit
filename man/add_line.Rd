@@ -33,15 +33,21 @@ Add a horizontal or vertical line to the current plot
 # Horizontal line
 par(oma = c(1, 1, 1, 1), mar = c(3, 3, 1, 1))
 plot(seq_len(100))
-add_line(at = 0.75)
-add_line(at = 0.25, outer = TRUE, lwd = 2)
-add_line(at = 0.5, outer = TRUE, lwd = 2, col = "red")
+
+# add horizontal line
+add_line(at = 0.25)
+# add horizontal line that extends outside the plot area
+add_line(at = 0.5, outer = TRUE)
+# the same line but with a different line width and colour
+add_line(at = 0.75, outer = TRUE, lwd = 3, col = "red")
 
 # ---------------------------------------------
 
-# Vertical line
 plot(seq_len(100))
-add_line(horizontal = FALSE, at = 0.75)
-add_line(horizontal = FALSE, at = 0.25, outer = TRUE, lwd = 2)
-add_line(horizontal = FALSE, at = 0.5, outer = TRUE, lwd = 2, col = "red")
+# add vertical line
+add_line(horizontal = FALSE, at = 0.25)
+# add vertical line that extends outside the plot area
+add_line(horizontal = FALSE, at = 0.5, outer = TRUE)
+# the same line but with a different line width and colour
+add_line(horizontal = FALSE, at = 0.75, outer = TRUE, lwd = 3, col = "red")
 }

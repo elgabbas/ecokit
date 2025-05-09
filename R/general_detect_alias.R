@@ -5,13 +5,13 @@
 #' Detect aliased variables in a linear model
 #'
 #' This function identifies aliased (linearly dependent) variables in a linear
-#' model by adding a constant column to the data frame, fitting a linear model,
-#' and then using the alias function to detect aliased variables.
+#' model by fitting a linear model, and then using the [stats::alias] function
+#' to detect aliased variables.
 #' @param data A `data frame` or `tibble` containing the variables to be checked
 #'   for aliasing.
-#' @param verbose Logical. Whether to print the aliased variables
-#'   found (if any). If `TRUE`, aliased variables are printed to the console.
-#'   Defaults to `FALSE`.
+#' @param verbose Logical. Whether to print the aliased variables found (if
+#'   any). If `TRUE`, aliased variables are printed to the console. Defaults to
+#'   `FALSE`.
 #' @return Returns a character vector of aliased variable names if any are
 #'   found; otherwise, returns `NULL` invisibly. If `verbose` is `TRUE`, the
 #'   function will also print a message to the console.
@@ -19,7 +19,8 @@
 #' @author Ahmed El-Gabbas
 #' @export
 #' @examples
-#' library("car", warn.conflicts = FALSE, quietly = TRUE, verbose = FALSE)
+#' load_packages(car)
+#'
 #' x1 <- rnorm(100)
 #' x2 <- 2 * x1
 #' x3 <- rnorm(100)
@@ -55,10 +56,10 @@ detect_alias <- function(data, verbose = FALSE) {
   }
 
   # Add a constant column to the data frame
-  data <- cbind.data.frame(XX = rep(1, nrow(data)), data)
+  data <- cbind.data.frame(XX = rep(1L, nrow(data)), data)
 
   # Construct the formula for linear model
-  form <- paste(names(data)[-1], collapse = " + ")
+  form <- paste(names(data)[-1L], collapse = " + ")
   form <- stats::as.formula(paste("XX", "~", form))
 
   # Fit the linear model
@@ -69,7 +70,7 @@ detect_alias <- function(data, verbose = FALSE) {
   aliased <- rownames(aliased$Complete)
 
   # Output aliased variables if any
-  if (length(aliased) > 0) {
+  if (length(aliased) > 0L) {
     if (verbose) {
       cat(paste0("aliased variables: ", toString(aliased), "\n"))
     }

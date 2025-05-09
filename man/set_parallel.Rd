@@ -41,25 +41,59 @@ Configures parallel processing with \code{\link[future:plan]{future::plan()}} or
 plan. When stopping, it resets to sequential mode.
 }
 \examples{
+load_packages(future)
+
+# number of workers available
+future::nbrOfWorkers()
+
+# ---------------------------------------------
+# `future::multisession`
+# ---------------------------------------------
+
 # Prepare working in parallel
-ecokit::set_parallel(n_cores = 2)
-future::plan()
-
-# ---------------------------------------------
-
-# Stopping parallel processing
-ecokit::set_parallel(stop_cluster = TRUE)
-future::plan()
-
-# ---------------------------------------------
-
-# Prepare working in parallel using `future::cluster`
-ecokit::set_parallel(n_cores = 2, strategy = "future::cluster")
-future::plan()
+set_parallel(n_cores = 2)
+future::plan("list")
+future::nbrOfWorkers()
 
 # Stopping parallel processing
-ecokit::set_parallel(stop_cluster = TRUE)
-future::plan()
+set_parallel(stop_cluster = TRUE)
+future::plan("list")
+future::nbrOfWorkers()
+
+# ---------------------------------------------
+# `future::cluster`
+# ---------------------------------------------
+
+# Prepare working in parallel
+set_parallel(n_cores = 2, strategy = "future::cluster")
+future::plan("list")
+future::nbrOfWorkers()
+
+# Stopping parallel processing
+set_parallel(stop_cluster = TRUE)
+future::plan("list")
+future::nbrOfWorkers()
+
+# ---------------------------------------------
+# `future::multicore`
+# ---------------------------------------------
+
+# Prepare working in parallel
+set_parallel(n_cores = 2, strategy = "future::multicore")
+future::plan("list")
+future::nbrOfWorkers()
+
+# Stopping parallel processing
+set_parallel(stop_cluster = TRUE)
+future::plan("list")
+future::nbrOfWorkers()
+
+# ---------------------------------------------
+# `future::sequential`
+# ---------------------------------------------
+
+set_parallel(n_cores = 1, strategy = "future::sequential")
+future::nbrOfWorkers()
 }
 \author{
 Ahmed El-Gabbas

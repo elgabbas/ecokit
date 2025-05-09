@@ -25,7 +25,11 @@
 #' @export
 #' @name assign_if_not_exist
 #' @examples
+#' load_packages(terra)
+#'
+#' exists("x")
 #' assign_if_not_exist(variable = "x", value = TRUE)
+#' exists("x")
 #' print(x)
 #'
 #' # --------------------------------------------------
@@ -34,6 +38,12 @@
 #' # y exists and thus its value was not changed
 #' assign_if_not_exist(variable = "y", value = TRUE)
 #' print(y)
+#'
+#' # --------------------------------------------------
+#'
+#' assign_if_not_exist(
+#'   variable = "R", value = terra::rast(nrows = 10, ncols = 10))
+#' print(R)
 
 assign_if_not_exist <- function(variable, value, environment = globalenv()) {
 
@@ -46,7 +56,7 @@ assign_if_not_exist <- function(variable, value, environment = globalenv()) {
   variable <- as.character(rlang::ensyms(variable))
 
   if (exists(variable, envir = environment)) {
-    "The input object already exists in the environment. " %>%
+    "The input object already exists in the environment.\n" %>%
       crayon::blue() %>%
       cat()
     print(rlang::env_get(environment, paste0(variable)))

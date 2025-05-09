@@ -24,5 +24,5 @@ replace_space <- function(x) {
     ecokit::stop_ctx("x name cannot be NULL", x = x)
   }
 
-  return(stringr::str_replace_all(as.character(x), " ", "_"))
+  stringr::str_replace_all(as.character(x), " ", "_")
 }

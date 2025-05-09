@@ -19,6 +19,8 @@
 #' @author Ahmed El-Gabbas
 #' @export
 #' @examples
+#' load_packages(terra)
+#'
 #' A <- B <- C <- 15
 #' ls()
 #'
@@ -31,10 +33,24 @@
 #' A <- B <- C <- 15
 #' keep_only(c("A","B"))
 #' ls()
+#'
+#' # -------------------------------------------
+#'
+#' # use inside a function
+#' function1 <- function(a = 1, b = 2, c = 3) {
+#'   z <- terra::rast()
+#'   print(paste0("available objects before keep_only: ", toString(ls())))
+#'
+#'   keep_only(c("a", "b"), verbose = FALSE)
+#'   print(paste0("available objects after keep_only: ", toString(ls())))
+#'
+#'   return(invisible(NULL))
+#' }
+#' function1()
 
 keep_only <- function(objects, verbose = TRUE) {
 
-  if (is.null(objects) || length(objects) == 0) {
+  if (is.null(objects) || length(objects) == 0L) {
     ecokit::stop_ctx("`objects` cannot be NULL or empty.", objects = objects)
   }
 

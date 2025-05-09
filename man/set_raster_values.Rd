@@ -2,23 +2,23 @@
 % Please edit documentation in R/spat_set_raster_values.R
 \name{set_raster_values}
 \alias{set_raster_values}
-\title{Set values for \code{SpatRaster} Objects}
+\title{Load Values for \code{SpatRaster} Objects into Memory}
 \usage{
-set_raster_values(raster)
+set_raster_values(raster = NULL)
 }
 \arguments{
-\item{raster}{A \code{SpatRaster} object, a file path to a raster file, or an
-object from the \code{raster} package (e.g., \code{RasterLayer}, \code{RasterStack},
-\code{RasterBrick}).}
+\item{raster}{A \code{SpatRaster} object, a file path to a raster file (e.g.,
+\code{.tif}, \code{.nc}), or a \code{raster} package object (\code{RasterLayer}, \code{RasterStack},
+\code{RasterBrick}). Cannot be \code{NULL} or missing.}
 }
 \value{
-A \code{SpatRaster} object with values loaded into memory.
+The \code{SpatRaster} object with all values loaded into memory.
 }
 \description{
-This function processes a \code{SpatRaster} object or a file path to it, ensuring
-the raster is loaded and unpacked if necessary. It converts raster objects
-from the \code{raster} package to \code{SpatRaster} objects. The function ensures that
-the \code{SpatRaster} object is read from memory, not from file.
+Ensures a \code{SpatRaster} object has its values loaded into memory, processing
+inputs as a \code{SpatRaster} object, a file path to a raster, or a \code{raster}
+package object (\code{RasterLayer}, \code{RasterStack}, \code{RasterBrick}). Converts and
+unpacks inputs as needed.
 }
 \details{
 The function handles various types of input:
@@ -30,6 +30,28 @@ The function handles various types of input:
 \item If the input is a raster object from the \code{raster} package, it is
 converted to \code{SpatRaster}.
 }
+}
+\examples{
+load_packages(terra, raster)
+
+f <- system.file("ex/elev.tif", package="terra")
+
+# SpatRaster
+r <- terra::rast(f)
+terra::inMemory(r)
+r_mem <- set_raster_values(r)
+terra::inMemory(r_mem)
+
+# PackedSpatRaster
+r2 <- terra::wrap(terra::rast(f))
+r2_mem <- set_raster_values(r2)
+terra::inMemory(r2_mem)
+
+# raster
+r3 <- raster::raster(f)
+raster::inMemory(r3)
+r3_mem <- set_raster_values(r3)
+terra::inMemory(r3_mem)
 }
 \author{
 Ahmed El-Gabbas

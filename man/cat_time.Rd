@@ -33,7 +33,7 @@ Default is \code{TRUE}. If \code{FALSE}, only the text is printed.}
 
 \item{cat_date}{logical; whether to include the date in the timestamp. Only
 effective if \code{time} is \code{TRUE}. Default is \code{FALSE}, meaning only the time is
-printed. If \code{TRUE}, the date is printed in the format "\%d/\%m/\%Y \%X".}
+printed. If \code{TRUE}, the date is printed in the format \verb{\%d/\%m/\%Y \%X}.}
 
 \item{time_zone}{character; the time zone to use for the timestamp. Default
 is \code{CET}.}

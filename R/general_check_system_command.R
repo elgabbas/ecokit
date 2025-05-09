@@ -5,11 +5,10 @@
 #' Check system commands availability
 #'
 #' This function checks if a list of system commands are available on the user's
-#' PATH. If any commands are missing, it stops execution and returns an
-#' informative error message.
+#' PATH.
 #' @param commands A character vector of system command names to check (e.g.,
 #'   `c("git", "Rscript", "unzip")`).
-#' @return The function returns `TRUE` if all specified commands are available
+#' @return The function returns `TRUE` if *all* specified commands are available
 #'   on the system, `FALSE` if any is not available.
 #' @param warning Logical. Whether to issue a warning if any command is missing.
 #'   Defaults to `TRUE`.
@@ -36,7 +35,7 @@ check_system_command <- function(commands, warning = TRUE) {
   missing_tools <- commands[!command_okay]
 
   # If any tools are missing, stop with an informative error message
-  if (length(missing_tools) > 0) {
+  if (length(missing_tools) > 0L) {
     if (warning) {
       warning(
         "The following tool(s) are missing: ", toString(missing_tools),

@@ -28,12 +28,14 @@ R object.
 }
 \examples{
 # print working directory
-ecokit::system_command("pwd")
+system_command("pwd")
+system_command("pwd", r_object = FALSE)
 
 # first 5 files on the working directory
-(A <- ecokit::system_command("ls | head -n 5"))
+(A <- system_command("ls | head -n 5"))
 
-(A <- ecokit::system_command("ls | head -n 5", r_object = FALSE))
+B <- system_command("ls | head -n 5", r_object = FALSE)
+B
 }
 \author{
 Ahmed El-Gabbas

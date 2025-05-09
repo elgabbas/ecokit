@@ -19,6 +19,23 @@
 #' @return A character vector of absolute, tidied, and shell-quoted paths.
 #' @export
 #' @author Ahmed El-Gabbas
+#' @examples
+#' # current working directory
+#' normalize_path(".")
+#'
+#' # up one directory
+#' normalize_path("../")
+#'
+#' list.files()[1]
+#' normalize_path(list.files()[1])
+#'
+#' # absolute path with windows-style slashes
+#' normalize_path("D://Folder1//Folder2//file.txt")
+#'
+#' \dontrun{
+#'   # this will give an error if the path does not exist
+#'   normalize_path("D://Folder1//Folder2//file.txt", must_work = TRUE)
+#' }
 
 normalize_path <- function(path, must_work = FALSE) {
 
@@ -31,7 +48,7 @@ normalize_path <- function(path, must_work = FALSE) {
       "`path` must be a character vector.",
       path = path, class_path = class(path))
   }
-  if (length(path) == 0) {
+  if (length(path) == 0L) {
     ecokit::stop_ctx(
       "`path` cannot be an empty character vector.",
       path = path, length_path = length(path))

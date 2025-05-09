@@ -4,17 +4,19 @@
 \alias{check_args}
 \title{Check function arguments for specific types}
 \usage{
-check_args(args_all, args_to_check, args_type)
+check_args(args_all, args_to_check, args_type, include_backtrace = FALSE)
 }
 \arguments{
-\item{args_all}{Character vector. Input parameters of the function.
-Usually as a result of \code{formals()} function}
+\item{args_all}{Character vector. Input parameters of the function. Usually
+as a result of \code{formals()} function}
 
-\item{args_to_check}{Character vector. Names of the arguments to be
-checked.}
+\item{args_to_check}{Character vector. Names of the arguments to be checked.}
 
-\item{args_type}{Character. The expected type of the arguments. Must be
-one of "character", "logical", or "numeric".}
+\item{args_type}{Character. The expected type of the arguments. Must be one
+of "character", "logical", or "numeric".}
+
+\item{include_backtrace}{Logical. If \code{TRUE}, includes the backtrace in the
+error message. Default is \code{FALSE}. See \link{stop_ctx} for more details.}
 }
 \value{
 The function does not return a value but will stop execution and
@@ -26,6 +28,7 @@ This function checks if the specified arguments of a function match the
 expected type. It is useful for validating function inputs.
 }
 \examples{
+# define a function with arguments
 f1 <- function(x = "AA", y = "BB", z = 1) {
   all_arguments <- ls(envir = environment())
   all_arguments <- purrr::map(
@@ -44,16 +47,20 @@ f1 <- function(x = "AA", y = "BB", z = 1) {
     args_to_check = "z")
 
  # the rest of the function
- }
+}
 
- # no output as x is a character
- f1(x = "X")
+#  |||||||||||||||||||||||||||||||||||||||||||||||||
 
- # no output as z is a numeric
- f1(z = 20)
+# no output as x is a character
+f1(x = "X")
 
- # error as x is not a character
- try(f1(x = 1))
+# no output as z is a numeric
+f1(z = 20)
+
+\dontrun{
+  # error as x is not a character
+  f1(x = 1)
+}
 }
 \author{
 Ahmed El-Gabbas

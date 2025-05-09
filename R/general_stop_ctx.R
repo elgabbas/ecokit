@@ -7,25 +7,26 @@
 #' Signals errors with rich context, wrapping [rlang::abort()]. It includes:
 #' - The calling function name (if applicable).
 #' - User-defined metadata (e.g., vectors, lists, data frames, tibbles,
-#' terra::SpatRaster, raster::Raster, RasterStack, RasterBrick, sf objects,
-#' regression models, ggplot objects, S4 objects).
+#' SpatRaster, RasterLayer, RasterStack, RasterBrick, sf objects, regression
+#' models, ggplot objects, S4 objects).
 #' - Optional timestamps/dates.
 #' - Optional backtraces to aid debugging.
 #'
 #' @param message Character. The primary error message to display.
 #' @param ... Named R objects to include as metadata. These can be of various
-#'   types, such as vectors, lists, data frames, tibbles, terra::SpatRaster,
-#'   raster::Raster, RasterStack, RasterBrick, sf objects, regression models
-#'   (e.g., lm, glm), ggplot objects, S4 objects, and more. Unnamed arguments
-#'   will cause an error due to `.named = TRUE` in [rlang::enquos()]. `NULL`
-#'   values are displayed as "NULL".
-#' @param class Character or NULL. Subclass(es) for the error condition.
-#'   Defaults to NULL.
-#' @param call Call or NULL. The call causing the error. Defaults to the
-#'   caller's expression.
-#' @param parent Condition or NULL. Parent error for nesting. Defaults to NULL.
+#'   types, such as vectors, lists, data frames, tibbles, SpatRaster,
+#'   RasterLayer, RasterStack, RasterBrick, sf objects, regression models (e.g.,
+#'   lm, glm), ggplot objects, S4 objects, and more. Unnamed arguments will
+#'   cause an error due to `.named = TRUE` in [rlang::enquos()]. `NULL` values
+#'   are displayed as "NULL".
+#' @param class Character or `NULL.` Subclass(es) for the error condition.
+#'   Defaults to `NULL`. See [rlang::abort] for more details.
+#' @param call Call or `NULL`. The call causing the error. Defaults to the
+#'   caller's expression.  See [rlang::abort] for more details.
+#' @param parent Condition or `NULL`. Parent error for nesting. Defaults to
+#'   `NULL`. See [rlang::abort] for more details.
 #' @param include_backtrace Logical. If `TRUE`, includes a compact backtrace.
-#'   Default: `TRUE`.
+#'   Default: `FALSE`.
 #' @param cat_timestamp Logical. If `TRUE`, prepends a timestamp (HH:MM:SS).
 #'   Default: `TRUE`.
 #' @param cat_date Logical. If `TRUE`, prepends the date (YYYY-MM-DD). Default:
@@ -60,15 +61,20 @@
 #'   structure or summary as appropriate.
 #'
 #' @examples
-#' # Basic error with metadata
-#' try(
-#'   stop_ctx(
-#'     message = "File not found", file = "data.csv",
-#'     type = "missing_input", foo = 1:3))
+#' # loading packages
+#' load_packages(dplyr, sf, terra, raster)
 #'
 #' # -------------------------------------------------------------------
 #'
-#' # Include date in error message
+#' # Basic error with metadata and backtrace
+#' try(
+#'   stop_ctx(
+#'     message = "File not found", file = "data.csv",
+#'     type = "missing_input", foo = 1:3, include_backtrace = TRUE))
+#'
+#' # -------------------------------------------------------------------
+#'
+#' # Include date in error message; no backtrace
 #' try(
 #'   stop_ctx(
 #'     message = "File not found", file = "data.csv",
@@ -89,19 +95,13 @@
 #'
 #' # -------------------------------------------------------------------
 #'
-#' # Error without backtrace
-#' try(
-#'   stop_ctx(message = "Simple error", include_backtrace = FALSE))
-#'
-#' # -------------------------------------------------------------------
-#'
 #' # S4 object as metadata
 #' setClass("Student", slots = list(name = "character", age = "numeric"))
 #' student <- new("Student", name = "John Doe", age = 23)
 #' try(
 #'   stop_ctx(
 #'     message = "Student record error",
-#'     metadata = student, type = "invalid_data"))
+#'     metadata = student, type = "invalid_data", include_backtrace = FALSE))
 #'
 #' # -------------------------------------------------------------------
 #'
@@ -118,17 +118,25 @@
 #' # -------------------------------------------------------------------
 #'
 #' # Nested function error without metadata
-#' f3 <- function() stop_ctx(message = "Error in f3()")
+#' f3 <- function() {
+#'   stop_ctx(message = "Error in f3()", include_backtrace = TRUE)
+#' }
 #' f2 <- function(y) f3()
 #' f1 <- function(z) f2()
 #'
 #' # Output includes: "Calling Function: f1" before metadata
 #' try(f1())
 #'
+#' # -------------------------------------------------------------------
+#'
+#' \dontrun{
+#'   # Unnamed arguments will cause an error
+#'   stop_ctx("A", "X")
+#' }
 
 stop_ctx <- function(
     message, ..., class = NULL, call = NULL, parent = NULL,
-    include_backtrace = TRUE, cat_timestamp = TRUE, cat_date = FALSE) {
+    include_backtrace = FALSE, cat_timestamp = TRUE, cat_date = FALSE) {
 
   # --------------------------------------------------------------------------
   # 1. Validate flag arguments are logical
@@ -136,8 +144,10 @@ stop_ctx <- function(
 
   all_arguments <- ls(envir = environment())
   all_arguments <- purrr::map(
-    all_arguments,
-    function(x) get(x, envir = parent.env(env = environment()))) %>%
+    .x = all_arguments,
+    .f = function(x) {
+      get(x, envir = parent.env(env = environment()))
+    }) %>%
     stats::setNames(all_arguments)
 
   # Validate that include_backtrace, cat_timestamp, cat_date are logical
@@ -153,7 +163,9 @@ stop_ctx <- function(
   # Helper: remove blank lines from a character vector
   trim_empty_lines <- function(lines) {
     lines <- lines[nzchar(lines)]
-    if (length(lines) == 0) return(character())
+    if (length(lines) == 0L) {
+      return(character())
+    }
     lines
   }
 
@@ -201,19 +213,19 @@ stop_ctx <- function(
         paste(
           trim_empty_lines(
             utils::capture.output(
-              utils::str(x, max.level = 1, give.attr = FALSE))),
+              utils::str(x, max.level = 1L, give.attr = FALSE))),
           collapse = "\n"))
     }
 
     # Handle atomic vectors with length > 1 by collapsing
-    if (is.atomic(x) && length(x) > 1) {
+    if (is.atomic(x) && length(x) > 1L) {
       return(toString(x))
     }
 
     # Handle lists: collapse if atomic, else use str
     if (is.list(x)) {
       # Check if all elements are atomic
-      if (all(vapply(x, is.atomic, logical(1)))) {
+      if (all(vapply(x, is.atomic, logical(1L)))) {
         return(toString(unlist(x)))
       }
       # Use str for non-atomic lists
@@ -221,7 +233,7 @@ stop_ctx <- function(
         paste(
           trim_empty_lines(
             utils::capture.output(
-              utils::str(x, max.level = 1, give.attr = FALSE))),
+              utils::str(x, max.level = 1L, give.attr = FALSE))),
           collapse = "\n"))
     }
 
@@ -302,16 +314,18 @@ stop_ctx <- function(
 
   # Traverse the stack from top to bottom, excluding stop_ctx itself, only if
   # there are calls
-  if (n_calls > 1) {
-    for (i in 1:(n_calls - 1)) {
+  if (n_calls > 1L) {
+    for (i in 1L:(n_calls - 1L)) {
       call <- calls[[i]]
-      if (is.symbol(call[[1]])) {  # Ensure the call has a named function
-        fn_name <- as.character(call[[1]])
+      if (is.symbol(call[[1L]])) {  # Ensure the call has a named function
+        fn_name <- as.character(call[[1L]])
         # Determine the environment where the call was made
-        if (i == 1) {
-          envir <- globalenv()  # Top-level call is from global environment
+        if (i == 1L) {
+          # Top-level call is from global environment
+          envir <- globalenv()
         } else {
-          envir <- sys.frame(i - 1)  # Parent frame of the call
+          # Parent frame of the call
+          envir <- sys.frame(i - 1L)
         }
         # Try to get the function object
         func <- try(get(fn_name, envir = envir), silent = TRUE)
@@ -345,13 +359,13 @@ stop_ctx <- function(
   # Check if backtrace is requested
   if (include_backtrace) {
     # Capture the call stack, starting from the second frame
-    trace <- rlang::trace_back(bottom = 2)
+    trace <- rlang::trace_back(bottom = 2L)
     # Capture the printed backtrace output
     trace_out <- utils::capture.output(print(trace))
     # Include backtrace if it has content beyond the header
-    if (length(trace_out) > 1) {
+    if (length(trace_out) > 1L) {
       # Join backtrace lines, excluding the first line
-      backtrace_info <- paste(trace_out[-1], collapse = "\n")
+      backtrace_info <- paste(trace_out[-1L], collapse = "\n")
     }
   }
 
@@ -378,7 +392,7 @@ stop_ctx <- function(
   full_msg <- c(
     msg_lines,
     # Add calling function name if present
-    if (nzchar(caller_str[1])) c("", caller_str),
+    if (nzchar(caller_str[1L])) c("", caller_str),
     # Add metadata section if present
     if (nzchar(metadata_str)) c("", "----- Metadata -----\n", metadata_str),
     if (!is.null(backtrace_info)) {

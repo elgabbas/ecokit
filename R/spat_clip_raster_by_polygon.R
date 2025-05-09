@@ -16,31 +16,48 @@
 #'   that falls within the specified polygon. The returned raster contains the
 #'   same data as the original within the polygon's bounds but is masked (set to
 #'   NA) outside of it.
-#' @note This function requires the 'raster' and 'sp' packages.
 #' @export
 #' @name clip_raster_by_polygon
 #' @author Ahmed El-Gabbas
 #' @examples
-#' library(sp)
-#' library(raster)
-#' library(rworldmap)
+#' load_packages(raster, sp, rworldmap, ggplot2)
 #'
-#' # Example Polygon
-#' SPDF <- getMap(resolution = "low") %>%
+#' # example Polygon
+#' SPDF <- rworldmap::getMap(resolution = "low") %>%
 #'    subset(NAME == "Germany")
 #'
-#' # Example RasterLayer
-#' r <- raster::raster(nrow = 1e3, ncol = 1e3, crs = proj4string(SPDF))
+#' # example raster
+#' r <- raster::raster(
+#'   xmn = 2, xmx = 18, ymn = 45, ymx = 58, resolution = 0.125)
 #' r[] <- seq_len(length(r))
-#' plot(r)
-#' plot(SPDF, add = TRUE)
+#' r
+#'
+#' # plotting example data
+#' ggplot2::ggplot() +
+#'   ggplot2::geom_raster(
+#'     data = as.data.frame(r, xy = TRUE),
+#'     ggplot2::aes(x = x, y = y, fill = layer)) +
+#'   ggplot2::geom_sf(
+#'     data = sf::st_as_sf(SPDF), fill = NA, color = "black", linewidth = 0.5) +
+#'   ggplot2::scale_fill_viridis_c() +
+#'   ggplot2::theme_minimal() +
+#'   ggplot2::labs(x = NULL, y = NULL) +
+#'   ggplot2::theme(axis.text = ggplot2::element_blank())
 #'
 #' # ----------------------------------
 #'
 #' SPDF_DE <- clip_raster_by_polygon(r, SPDF)
-#' plot(raster::extent(SPDF_DE), axes = FALSE, xlab = "", ylab = "")
-#' plot(SPDF_DE, add = TRUE)
-#' plot(SPDF, add = TRUE)
+#'
+#' ggplot2::ggplot() +
+#'   ggplot2::geom_tile(
+#'     data = as.data.frame(SPDF_DE, xy = TRUE),
+#'     ggplot2::aes(x = x, y = y, fill = layer)) +
+#'   ggplot2::geom_sf(
+#'     data = sf::st_as_sf(SPDF), fill = NA, color = "black", linewidth = 0.5) +
+#'   ggplot2::scale_fill_viridis_c() +
+#'   ggplot2::theme_minimal() +
+#'   ggplot2::labs(x = NULL, y = NULL) +
+#'   ggplot2::theme(axis.text = ggplot2::element_blank())
 
 clip_raster_by_polygon <- function(raster = NULL, shape = NULL) {
 

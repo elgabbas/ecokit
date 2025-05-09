@@ -2,22 +2,45 @@
 % Please edit documentation in R/spat_rename_geometry.R
 \name{rename_geometry}
 \alias{rename_geometry}
-\title{Rename active geometry column of an \code{sf} object.}
+\title{Rename Active Geometry Column of an \code{sf} Object}
 \usage{
 rename_geometry(sf_object = NULL, new_name = NULL)
 }
 \arguments{
-\item{sf_object}{\code{sf} object; the simple feature object whose geometry column
-name is to be changed.}
+\item{sf_object}{An \code{sf} object with an active geometry column. Cannot be
+\code{NULL}.}
 
-\item{new_name}{\code{character}; the new name for the geometry column.}
+\item{new_name}{Character. A single, non-empty name for the geometry column.
+Cannot be \code{NULL} or match an existing non-geometry column name.}
 }
 \value{
-The modified \code{sf} object with the renamed geometry column.
+The modified \code{sf} object with the geometry column renamed to
+\code{new_name}.
 }
 \description{
-This function renames the active geometry column of a simple feature (\code{sf})
-object to a new name provided by the user.
+Renames the active geometry column of a simple feature (\code{sf}) object to a
+user-specified name.
+}
+\note{
+The \code{sf_object} must have a valid geometry column, and \code{new_name} must
+not conflict with existing column names.
+}
+\examples{
+load_packages(sf)
+
+# example data
+(nc <- sf::st_read(
+  dsn = system.file("shape/nc.shp", package = "sf"), quiet = TRUE) \%>\%
+  dplyr::select(AREA))
+
+# Rename geometry column
+(nc_renamed <- rename_geometry(nc, "new_geom"))
+
+names(nc)
+names(nc_renamed)
+
+attr(nc, "sf_column")
+attr(nc_renamed, "sf_column")
 }
 \references{
 \href{https://gis.stackexchange.com/a/386589/30390}{Click here}

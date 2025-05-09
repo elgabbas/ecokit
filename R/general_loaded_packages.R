@@ -20,5 +20,5 @@
 
 loaded_packages <- function() {
   packages <- .packages()
-  return(packages)
+  packages
 }

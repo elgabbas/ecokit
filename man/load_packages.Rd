@@ -8,7 +8,7 @@ load_packages(
   ...,
   package_list = NULL,
   verbose = FALSE,
-  install_missing = TRUE
+  install_missing = FALSE
 )
 }
 \arguments{
@@ -20,8 +20,8 @@ specify package names as a vector.}
 \item{verbose}{Logical. If \code{TRUE}, prints the names and versions of the
 loaded packages. Defaults to \code{FALSE}.}
 
-\item{install_missing}{Logical. If \code{TRUE} (default), missing packages are
-automatically installed and then loaded.}
+\item{install_missing}{Logical. If \code{TRUE}, missing packages are
+automatically installed and then loaded. Defaults to \code{FALSE}.}
 }
 \value{
 This function is used for its side effects (loading/installing
@@ -37,14 +37,24 @@ loaded packages.
 # Currently loaded packages
 (P1 <- ecokit::loaded_packages())
 
-load_packages(tidyr)
+# Load tidyr
+load_packages(tidyr, raster, ggplot2, verbose = TRUE)
+
 # Loaded packages after implementing the function
 (P2 <- ecokit::loaded_packages())
 
 # Which packages were loaded?
 setdiff(P2, P1)
 
-load_packages(terra, verbose = TRUE)
+# verbose = FALSE (default)
+load_packages(tidyterra, verbose = FALSE)
+
+# load already loaded packages
+load_packages(tidyr, tidyterra, verbose = TRUE)
+
+# non-existent package
+load_packages("non_existent")
+
 }
 \author{
 Ahmed El-Gabbas

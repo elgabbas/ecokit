@@ -28,6 +28,5 @@ NULL
 
   # Display the startup message
   packageStartupMessage(
-    "ecokit v", package_version_info,
-    " - Last updated on ", package_date_info)
+    "ecokit v", package_version_info, " - Last updated on ", package_date_info)
 }

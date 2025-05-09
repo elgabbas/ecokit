@@ -1,5 +1,5 @@
 ## |------------------------------------------------------------------------| #
-# raster_to_PA ------
+# raster_to_pres_abs ------
 ## |------------------------------------------------------------------------| #
 
 #' Convert raster map into binary (1/0)
@@ -8,24 +8,23 @@
 #' values are set to 1 (presence) and zeros remain 0 (absence). Additionally, it
 #' allows for the conversion of NA values to 0, and/or 0 values to NA, based on
 #' the user's choice.
-#' @name raster_to_PA
+#' @name raster_to_pres_abs
 #' @param raster The input raster map. It must be of class `PackedSpatRaster`,
 #'   `RasterLayer`, or `SpatRaster`. This parameter cannot be NULL.
-#' @param NA_to_0 A logical value indicating whether NA values should be
+#' @param na_to_0 A logical value indicating whether NA values should be
 #'   converted to 0. Defaults to `TRUE`.
-#' @param zero_to_NA A logical value indicating whether 0 values should be
+#' @param zero_to_na A logical value indicating whether 0 values should be
 #'   converted to NA. Defaults to `FALSE`.
 #' @return A raster map where values have been converted according to the
 #'   specified parameters. This object is of the same class as the input object.
 #' @author Ahmed El-Gabbas
 #' @export
 #' @examples
-#' ecokit::load_packages(
-#'    package_list = c("dplyr", "raster", "ggplot2", "tidyterra"))
+#' ecokit::load_packages(dplyr, raster, ggplot2, tidyterra)
 #'
+#' # example data
 #' r <- r2 <- raster::raster(
 #'   system.file("external/test.grd", package = "raster"))
-#'
 #' # change some values to 0
 #' r[5000:6000] <- 0
 #' r <- raster::mask(r, r2)
@@ -34,13 +33,15 @@
 #'   tidyterra::geom_spatraster(data = terra::rast(r), maxcell = Inf) +
 #'   ggplot2::theme_minimal()
 #'
+#' # ------------------------------------------------------
+#'
 #' r_2 <- raster::stack(
-#'   # 1) NA replaced with 0
-#'   raster_to_PA(raster = r),
+#'   # 1) zero remains zero; NA becomes zero
+#'   raster_to_pres_abs(raster = r),
 #'   # 2) NA is kept as NA
-#'   raster_to_PA(raster = r, NA_to_0 = FALSE),
+#'   raster_to_pres_abs(raster = r, na_to_0 = FALSE),
 #'   # 3) 0 replaced with NA
-#'   raster_to_PA(raster = raster_to_PA(r), zero_to_NA = TRUE))
+#'   raster_to_pres_abs(raster = raster_to_pres_abs(r), zero_to_na = TRUE))
 #'
 #' ggplot2::ggplot() +
 #'   tidyterra::geom_spatraster(
@@ -50,7 +51,8 @@
 #'     na.value = "transparent") +
 #'   ggplot2::theme_minimal()
 
-raster_to_PA <- function(raster = NULL, NA_to_0 = TRUE, zero_to_NA = FALSE) {
+raster_to_pres_abs <- function(
+    raster = NULL, na_to_0 = TRUE, zero_to_na = FALSE) {
 
   if (is.null(raster)) {
     ecokit::stop_ctx("raster can not be NULL", raster = raster)
@@ -63,8 +65,8 @@ raster_to_PA <- function(raster = NULL, NA_to_0 = TRUE, zero_to_NA = FALSE) {
   if (inherits(raster, "RasterLayer")) {
     max_value <- raster::cellStats(raster, max)
     if (max_value > 0L) raster[raster > 0L] <- 1L
-    if (NA_to_0) raster <- raster::reclassify(raster, cbind(NA, 0L))
-    if (zero_to_NA) raster <- raster::reclassify(raster, cbind(0L, NA))
+    if (na_to_0) raster <- raster::reclassify(raster, cbind(NA, 0L))
+    if (zero_to_na) raster <- raster::reclassify(raster, cbind(0L, NA))
   } else {
 
     if (!inherits(raster, "SpatRaster")) {
@@ -76,8 +78,8 @@ raster_to_PA <- function(raster = NULL, NA_to_0 = TRUE, zero_to_NA = FALSE) {
     }
 
     raster <- terra::classify(raster, cbind(0L, Inf, 1L))
-    if (NA_to_0) raster <- terra::classify(raster, cbind(NA, 0L))
-    if (zero_to_NA) raster <- terra::classify(raster, cbind(0L, NA))
+    if (na_to_0) raster <- terra::classify(raster, cbind(NA, 0L))
+    if (zero_to_na) raster <- terra::classify(raster, cbind(0L, NA))
   }
   return(raster)
 }

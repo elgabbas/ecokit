@@ -18,8 +18,6 @@ A tibble with two columns containing the longitude and latitude
 values extracted from the input string. The names of these columns are
 determined by the \code{name_x} and \code{name_y} parameters. If no names are
 provided, the default names ("Longitude" and "Latitude") are used.
-
-two column tibble for Longitude & Latitude
 }
 \description{
 Extract longitude and latitude from string representing a geographical point
@@ -32,11 +30,13 @@ default names for the longitude and latitude columns are "Longitude" and
 \examples{
 c("POINT (11.761 46.286)", "POINT (14.8336 42.0422)",
   "POINT (16.179999 38.427214)") \%>\%
- lapply(text_to_coordinates)
+ purrr::map(text_to_coordinates) \%>\%
+ dplyr::bind_rows()
 
 c("POINT (11.761 46.286)", "POINT (14.8336 42.0422)",
   "POINT (16.179999 38.427214)") \%>\%
- lapply(text_to_coordinates, name_x = "Long", name_y = "Lat")
+ purrr::map(text_to_coordinates, name_x = "Long", name_y = "Lat") \%>\%
+ dplyr::bind_rows()
 }
 \author{
 Ahmed El-Gabbas

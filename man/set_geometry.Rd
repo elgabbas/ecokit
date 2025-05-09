@@ -2,28 +2,53 @@
 % Please edit documentation in R/spat_set_geometry.R
 \name{set_geometry}
 \alias{set_geometry}
-\title{Set the geometry column of a simple feature (sf) data frame in the pipe
-pipeline.}
+\title{Set Geometry Column of an \code{sf} Object in a Pipeline}
 \usage{
-set_geometry(sf_object, geometry_column)
+set_geometry(sf_object = NULL, geometry_column = NULL)
 }
 \arguments{
-\item{sf_object}{simple feature (sf) data frame. This is the data frame whose
-geometry column will be set or changed.}
+\item{sf_object}{An \code{sf} object with at least one geometry (\code{sfc}) column.
+Cannot be \code{NULL} or non-\code{sf}.}
 
-\item{geometry_column}{Character. Name of the geometry column to be used or
-set in the \code{sf_object} data frame.}
+\item{geometry_column}{Character. Name of an existing \code{sfc} geometry column
+in \code{sf_object} to set as the active geometry. Must be a single, non-empty
+character string.}
 }
 \value{
-The modified simple feature (sf) data frame with the updated geometry
-column. The function returns the original data frame \code{sf_object} with its
-geometry column set to \code{Name}.
+The modified \code{sf} object with the active geometry column set to
+\code{geometry_column}.
 }
 \description{
-Set the geometry column of a simple feature (sf) data frame, making it
-particularly useful in data processing pipelines. By specifying the name of
-the geometry column, users can ensure that spatial operations utilise the
-correct data.
+Sets the active geometry column of a simple feature (\code{sf}) object to a
+specified column, designed for use in data processing pipelines (e.g., with
+\verb{\%>\%}). Ensures spatial operations use the correct geometry column.
+}
+\note{
+The \code{geometry_column} must be an existing \code{sfc} column in \code{sf_object}.
+Use with caution to avoid overwriting the active geometry unintentionally.
+}
+\examples{
+load_packages(sf, dplyr, ggplot2)
+
+# example data with multiple geometry columns
+nc <- sf::st_read(
+  dsn = system.file("shape/nc.shp", package = "sf"), quiet = TRUE) \%>\%
+  dplyr::select(AREA)
+# add a new geometry column
+nc$centroid <- sf::st_centroid(st_geometry(nc))
+nc
+
+# set centroid as active geometry in a pipeline
+nc_modified <- set_geometry(nc, "centroid")
+nc_modified
+
+attr(nc, "sf_column")
+attr(nc_modified, "sf_column")
+
+ggplot2::ggplot() +
+  ggplot2::geom_sf(data = nc, aes(fill = NULL)) +
+  ggplot2::geom_sf(data = nc_modified, colour = "red") +
+  ggplot2::theme_minimal()
 }
 \author{
 Ahmed El-Gabbas

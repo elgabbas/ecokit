@@ -12,7 +12,7 @@
 #' @author Ahmed El-Gabbas
 #' @return The function is used for its side effect (printing) and does not
 #'   return any value.
-#' @param data `data.frame. A data frame to print. This parameter cannot be
+#' @param data `data.frame`. A data frame to print. This parameter cannot be
 #'   `NULL`.
 #' @param n_rows Integer. Number of rows to print from both the head and tail of
 #'   the data frame. Defaults to 5.

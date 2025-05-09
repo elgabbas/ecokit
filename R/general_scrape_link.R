@@ -6,7 +6,7 @@
 #'
 #' This function scrapes a web page for all links (`<a>` tags) and extracts both
 #' the URLs and the link text.
-#' @param URL Character. The URL of the web page to scrape. This URL is also
+#' @param url Character. The URL of the web page to scrape. This URL is also
 #'   used to resolve relative links to absolute URLs.
 #' @param sort_by Character vector of length 1 or 2. The columns to arrange the
 #'   output by. The default is c("link", "link_text"). The first column is the
@@ -15,31 +15,31 @@
 #'   specified in this argument.
 #' @name scrape_link
 #' @return A tibble with two columns: `link_text` containing the text of each
-#'   link, and `URL` containing  the absolute URL of each link. The tibble is
-#'   sorted by URL and then by link text, and only unique links are included.
+#'   link, and `link` containing  the absolute URL of each link. The tibble is
+#'   sorted by link and then by link text, and only unique links are included.
 #' @importFrom rlang .data
 #' @examples
 #'
 #' head(
-#' scrape_link(URL = "https://github.com/tidyverse/dplyr"))
+#' scrape_link(url = "https://github.com/tidyverse/dplyr"))
 #'
 #' head(
 #'   scrape_link(
-#'     URL = "https://github.com/tidyverse/dplyr", sort_by = "link_text"))
+#'     url = "https://github.com/tidyverse/dplyr", sort_by = "link_text"))
 #'
-#' # This will give an "Invalid URL" error
+#' # This will give an "Invalid url" error
 #' \dontrun{
-#'  scrape_link(URL = "https://github50.com")
+#'  scrape_link(url = "https://github50.com")
 #' }
 #' @export
 
-scrape_link <- function(URL, sort_by = c("link", "link_text")) {
+scrape_link <- function(url, sort_by = c("link", "link_text")) {
 
   link <- link_text <- NULL
 
   # Ensure that sort_by is a character vector of length 1 or 2
-  if (!is.character(sort_by) || length(sort_by) > 2 ||
-      length(sort_by) < 1) {
+  if (!is.character(sort_by) || length(sort_by) > 2L ||
+      length(sort_by) < 1L) {
     ecokit::stop_ctx(
       "`sort_by` must be a character vector of length 1 or 2",
       sort_by = sort_by)
@@ -51,16 +51,16 @@ scrape_link <- function(URL, sort_by = c("link", "link_text")) {
       "`sort_by` must contain only 'link' and 'link_text'", sort_by = sort_by)
   }
 
-  if (is.null(URL)) {
-    ecokit::stop_ctx("URL cannot be NULL", URL = URL)
+  if (is.null(url)) {
+    ecokit::stop_ctx("url cannot be NULL", url = url)
   }
 
-  if (isFALSE(ecokit::check_URL(URL))) {
-    ecokit::stop_ctx("Invalid URL", URL = URL)
+  if (isFALSE(ecokit::check_url(url))) {
+    ecokit::stop_ctx("Invalid url", url = url)
   }
 
-  # Create an html document from the URL
-  webpage <- xml2::read_html(URL) %>%
+  # Create an html document from the url
+  webpage <- xml2::read_html(url) %>%
     rvest::html_nodes("a")
 
   # Extract the URLs
@@ -77,8 +77,8 @@ scrape_link <- function(URL, sort_by = c("link", "link_text")) {
     dplyr::mutate(
       link = dplyr::if_else(
         stringr::str_starts(link, "http"), link,
-        ecokit::path(
-          stringr::str_remove(URL, "/$"), stringr::str_remove(link, "^/")
+        fs::path(
+          stringr::str_remove(url, "/$"), stringr::str_remove(link, "^/")
         )),
 
       link_text = {

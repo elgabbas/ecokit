@@ -21,7 +21,7 @@ RStudio online. If called outside of RStudio, it will only fetch and
 display the latest version without comparing.
 }
 \examples{
-try(check_rstudio())
+check_rstudio()
 }
 \author{
 Ahmed El-Gabbas

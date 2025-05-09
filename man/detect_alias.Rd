@@ -10,9 +10,9 @@ detect_alias(data, verbose = FALSE)
 \item{data}{A \verb{data frame} or \code{tibble} containing the variables to be checked
 for aliasing.}
 
-\item{verbose}{Logical. Whether to print the aliased variables
-found (if any). If \code{TRUE}, aliased variables are printed to the console.
-Defaults to \code{FALSE}.}
+\item{verbose}{Logical. Whether to print the aliased variables found (if
+any). If \code{TRUE}, aliased variables are printed to the console. Defaults to
+\code{FALSE}.}
 }
 \value{
 Returns a character vector of aliased variable names if any are
@@ -21,11 +21,12 @@ function will also print a message to the console.
 }
 \description{
 This function identifies aliased (linearly dependent) variables in a linear
-model by adding a constant column to the data frame, fitting a linear model,
-and then using the alias function to detect aliased variables.
+model by fitting a linear model, and then using the \link[stats:alias]{stats::alias} function
+to detect aliased variables.
 }
 \examples{
-library("car", warn.conflicts = FALSE, quietly = TRUE, verbose = FALSE)
+load_packages(car)
+
 x1 <- rnorm(100)
 x2 <- 2 * x1
 x3 <- rnorm(100)

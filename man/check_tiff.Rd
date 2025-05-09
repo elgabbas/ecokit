@@ -30,6 +30,11 @@ function works also for reading netCDF files with the \code{terra} package.
 (f <- system.file("ex/elev.tif", package="terra"))
 
 check_tiff(x = f)
+
+# a temp file ends with .tif (not a valid tiff file)
+(temp_file <- tempfile(fileext = ".tif"))
+fs::file_create(temp_file)
+check_tiff(x = temp_file)
 }
 \author{
 Ahmed El-Gabbas

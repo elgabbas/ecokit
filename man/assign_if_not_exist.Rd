@@ -31,7 +31,11 @@ value of the variable. The function is designed to prevent overwriting
 existing variables unintentionally.
 }
 \examples{
+load_packages(terra)
+
+exists("x")
 assign_if_not_exist(variable = "x", value = TRUE)
+exists("x")
 print(x)
 
 # --------------------------------------------------
@@ -40,6 +44,12 @@ y <- 10
 # y exists and thus its value was not changed
 assign_if_not_exist(variable = "y", value = TRUE)
 print(y)
+
+# --------------------------------------------------
+
+assign_if_not_exist(
+  variable = "R", value = terra::rast(nrows = 10, ncols = 10))
+print(R)
 }
 \author{
 Ahmed El-Gabbas

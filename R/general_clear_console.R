@@ -18,6 +18,7 @@
 #' clear_console()
 
 clear_console <- function() {
+
   if (Sys.getenv("RSTUDIO") == "") {
     cat("This function does not work outside of RStudio.\n")
 
@@ -25,5 +26,6 @@ clear_console <- function() {
     # Clear the console in RStudio
     cat("\014")
   }
-  return(invisible(NULL))
+
+  invisible(NULL)
 }

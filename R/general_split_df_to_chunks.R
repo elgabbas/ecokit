@@ -42,13 +42,13 @@ split_df_to_chunks <- function(
     ecokit::stop_ctx("`data` cannot be NULL", data = data)
   }
 
-  if (!is.null(chunk_size) && (chunk_size < 1 || !is.numeric(chunk_size))) {
+  if (!is.null(chunk_size) && (chunk_size < 1L || !is.numeric(chunk_size))) {
     ecokit::stop_ctx(
       "`chunk_size` must be numeric and larger than 1", chunk_size = chunk_size)
   }
 
   if (is.null(chunk_size) && is.null(n_chunks)) {
-    n_chunks <- min(5, nrow(data))
+    n_chunks <- min(5L, nrow(data))
     cat(paste0(crayon::green(
       paste0(
         "`chunk_size` and `n_chunks` are not determined by user. ",
@@ -68,7 +68,7 @@ split_df_to_chunks <- function(
   }
 
   data <- tibble::as_tibble(data)
-  output <- split(data, (seq_len(nrow(data)) - 1) %/% chunk_size)
+  output <- split(data, (seq_len(nrow(data)) - 1L) %/% chunk_size)
   names(output) <- paste0(prefix, "_", seq_along(output))
 
   return(output)

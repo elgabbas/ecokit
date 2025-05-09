@@ -1,5 +1,5 @@
 ## |------------------------------------------------------------------------| #
-# list_to_RData ----
+# list_to_rdata ----
 ## |------------------------------------------------------------------------| #
 
 #' Split list items into separate `.RData` files
@@ -10,19 +10,21 @@
 #' directory, with an option to overwrite existing files.
 #'
 #' @param list A named list object to be split into separate `.RData` files.
-#' @param prefix Character. prefix to each filename. If empty (default), no
+#' @param prefix Character. Prefix to each filename. If empty (default), no
 #'   prefix is added.
 #' @param directory The directory where the `.RData` files will be saved.
 #'   Defaults to the current working directory.
 #' @param overwrite A logical indicating whether to overwrite existing files.
 #'   Defaults to `FALSE`, in which case files that already exist will not be
 #'   overwritten, and a message will be printed for each such file.
-#' @name list_to_RData
+#' @name list_to_rdata
 #' @author Ahmed El-Gabbas
 #' @return The function is called for its side effect of saving files and does
 #'   not return a value.
 #' @export
 #' @examples
+#' load_packages(dplyr, fs, stringi)
+#'
 #' # split iris data by species name
 #' iris2 <- iris %>%
 #'   tibble::tibble() %>%
@@ -30,17 +32,38 @@
 #'
 #' str(iris2, 1)
 #'
-#' (TMP_Folder <- ecokit::path(tempdir(), stringi::stri_rand_strings(1, 5)))
-#' list.files(TMP_Folder)
+#' # save each species as a separate RData file
+#' temp_dir <- fs::path(tempdir(), stringi::stri_rand_strings(1, 5))
+#' list.files(temp_dir)
 #'
-#' list_to_RData(list = iris2, directory = TMP_Folder)
-#' list.files(TMP_Folder)
+#' list_to_rdata(list = iris2, directory = temp_dir)
+#' list.files(temp_dir)
+#'
+#' # loading data
+#' setosa <- load_as(fs::path(temp_dir, "setosa.RData"))
+#' str(setosa, 1)
+#'
+#' versicolor <- load_as(fs::path(temp_dir, "versicolor.RData"))
+#' str(versicolor, 1)
+#'
+#' virginica <- load_as(fs::path(temp_dir, "virginica.RData"))
+#' str(virginica, 1)
+#'
+#' # load multiple files in a single R object
+#' loaded_data <- load_multiple(
+#'   files = fs::path(
+#'   temp_dir, c("setosa.RData", "versicolor.RData", "virginica.RData")),
+#'   verbose = TRUE)
+#' str(loaded_data, 1)
+#'
+#' # clean up
+#' unlink(temp_dir, recursive = TRUE)
 
-list_to_RData <- function(
+list_to_rdata <- function(
   list, prefix = "", directory = getwd(), overwrite = FALSE) {
 
   # Validation Checks
-  if (is.null(list) || length(list) == 0) {
+  if (is.null(list) || length(list) == 0L) {
     ecokit::stop_ctx("`list` cannot be NULL or empty.", list = list)
   }
 
@@ -54,9 +77,9 @@ list_to_RData <- function(
   # file Saving Loop --- iterates over each element in the list and writes it to
   # a separate RData file. The filename is the element's name
 
-  ecokit::lapply_(
-    X = seq_along(list),
-    FUN = function(x) {
+  purrr::walk(
+    .x = seq_along(list),
+    .f = function(x) {
 
       # construct filename using the element's name and the optional prefix
       file_name <- if (prefix == "") {
@@ -64,7 +87,7 @@ list_to_RData <- function(
       } else {
         paste0(prefix, "_", names(list)[x])
       }
-      file <- ecokit::path(directory, paste0(file_name, ".RData"))
+      file <- fs::path(directory, paste0(file_name, ".RData"))
 
       # check if the file already exists. If it does and overwrite is FALSE, it
       # prints a message indicating that the file already exists and will not be

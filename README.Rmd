@@ -5,16 +5,30 @@ output: github_document
 
 ## Overview
 
-`ecokit` is an R package designed to provide a versatile set of utility functions for ecologists and general R users alike. It offers tools for data manipulation, statistical analysis, and spatial data handling.
+`ecokit` is an R package offering a collection of utility functions tailored for ecologists and R programmers. It provides tools for spatial data manipulation, package management, and general R workflows, making it easier to handle ecological datasets.
+
+Explore the [full documentation](https://elgabbas.github.io/ecokit/reference/index.html) for a complete list of functions.
+
+<br/>
 
 ## Installation
 
-You can install the development version of `ecokit` directly from GitHub using the following commands:
+You can install the development version of `ecokit` from GitHub using the `devtools` package:
 
 ```r
-# Install devtools if you don’t already have it
+# Install devtools if not already installed
 if (!require("devtools")) install.packages("devtools")
 
 # Install ecokit from GitHub
-devtools::install_github("elgabbas/ecokit")
+devtools::install_github("elgabbas/ecokit", dependencies = TRUE)
 ```
+
+<br/>
+
+## Contributing
+
+`ecokit` is an open-source project, and I welcome contributions from the community! If you encounter issues, have suggestions, or want to add new features, please:
+
+- **Report issues** or suggest features on the [GitHub issue tracker](https://github.com/elgabbas/ecokit/issues).
+- **Submit pull requests** with bug fixes or enhancements via the [GitHub repository](https://github.com/elgabbas/ecokit).
+- **Contact me** directly at *elgabbas[at]outlook[dot]com* for collaboration ideas or questions.

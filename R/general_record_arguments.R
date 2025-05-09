@@ -103,7 +103,7 @@ record_arguments <- function(out_path = NULL) {
   # # ||||||||||||||||||||||||||||||||||||||||||||||||||||||||||| #
 
   # Use sys.call(-1) to get the call from the parent frame
-  call_info <- sys.call(-1)
+  call_info <- sys.call(-1L)
 
   # # ||||||||||||||||||||||||||||||||||||||||||||||||||||||||||| #
   # Validate that record_arguments is called within a function
@@ -121,15 +121,15 @@ record_arguments <- function(out_path = NULL) {
   # # ||||||||||||||||||||||||||||||||||||||||||||||||||||||||||| #
 
   # Get the name of the calling function as a string (e.g., "Function1")
-  calling_func <- deparse(call_info[[1]])
+  calling_func <- deparse(call_info[[1L]])
 
   # Set the environment where arguments will be evaluated to the grandparent
   # frame (two levels up, e.g., the environment of the anonymous function in
   # lapply)
-  parent_env <- parent.frame(2)
+  parent_env <- parent.frame(2L)
 
   # Get the parent function object itself
-  parent_func <- sys.function(-1)
+  parent_func <- sys.function(-1L)
 
   # Extract the formal arguments (with defaults) as a named list
   formal_args <- as.list(formals(parent_func))
@@ -154,7 +154,7 @@ record_arguments <- function(out_path = NULL) {
   # # ||||||||||||||||||||||||||||||||||||||||||||||||||||||||||| #
 
   # Get the arguments from the call, excluding the function name (first element)
-  passed_args <- as.list(call_info)[-1]
+  passed_args <- as.list(call_info)[-1L]
   # Replace any NULL values with the string "NULL" for consistency
   passed_args <- purrr::map(
     .x = passed_args,
@@ -261,32 +261,32 @@ record_arguments <- function(out_path = NULL) {
     .f = function(value) {
       # Case 1: Simple vectors (not lists)
       if (is.vector(value) && !is.list(value)) {
-        if (length(value) == 1) {
+        if (length(value) == 1L) {
           # Scalars (e.g., 5, "NULL") are returned as-is
-          return(value)
+          value
         } else {
           # Multi-element vectors (e.g., c(1, 2)) are wrapped in a list
-          return(list(value))
+          list(value)
         }
         # Case 2: Language objects (e.g., unevaluated expressions)
       } else if (is.language(value)) {
         # Evaluate the expression in the grandparent environment
         eval_result <- eval(value, envir = parent_env)
         if (is.vector(eval_result) && !is.list(eval_result) &&
-            length(eval_result) == 1) {
+            length(eval_result) == 1L) {
           # Scalar results (e.g., 8 from a + b) returned as-is
-          return(eval_result)
+          eval_result
         } else {
           # Complex results wrapped in a list
-          return(list(eval_result))
+          list(eval_result)
         }
         # Case 3: SpatRaster objects
       } else if (inherits(value, "SpatRaster")) {
         # Wrap SpatRaster objects in a list for storage
-        return(list(terra::wrap(value)))
+        list(terra::wrap(value))
       } else {
         # Case 4: Any other complex objects (e.g., lm models)
-        return(list(value))
+        list(value)
       }
     })
 
@@ -298,7 +298,7 @@ record_arguments <- function(out_path = NULL) {
   tibble_data <- stats::setNames(formatted_values[arg_names], arg_names)
 
   # Construct a one-row tibble from the formatted data
-  result <- tibble::as_tibble(tibble_data, .rows = 1)
+  result <- tibble::as_tibble(tibble_data, .rows = 1L)
 
   # # ||||||||||||||||||||||||||||||||||||||||||||||||||||||||||| #
   # Handle output based on out_path

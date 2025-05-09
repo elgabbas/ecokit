@@ -1,5 +1,5 @@
 ## |------------------------------------------------------------------------| #
-# check_URL ----
+# check_url ----
 ## |------------------------------------------------------------------------| #
 
 #' Check the validity of a URL
@@ -7,10 +7,10 @@
 #' This function opens a connection to the specified URL to check its validity.
 #' It returns `TRUE` if the URL is valid (i.e., the connection can be opened),
 #' and `FALSE` otherwise.
-#' @param URL Character. The URL to be checked.
+#' @param url Character. The URL to be checked.
 #' @param timeout Numeric. Timeout in seconds for the connection attempt.
 #'   Default is 2 seconds.
-#' @name check_URL
+#' @name check_url
 #' @source The source code of this function was taken from this
 #'   [stackoverflow](https://stackoverflow.com/q/52911812) discussion.
 #' @return A logical value: `TRUE` if the URL is valid, `FALSE` if not.
@@ -18,20 +18,19 @@
 #' urls <- c(
 #'      "http://www.amazon.com", "http://this.isafakelink.biz",
 #'      "https://stackoverflow.com", "https://stack-overflow.com")
-#' sapply(urls, check_URL)
+#' sapply(urls, check_url)
 #' @export
 
-check_URL <- function(URL, timeout = 2) {
+check_url <- function(url, timeout = 2L) {
 
-  if (is.null(URL)) {
-    ecokit::stop_ctx("URL cannot be NULL", URL = URL)
+  if (is.null(url)) {
+    ecokit::stop_ctx("url cannot be NULL", url = url)
   }
 
-  con <- url(URL)
+  con <- url(url)
   check <- suppressWarnings(
     try(
-      open.connection(con, open = "rt", timeout = timeout),
-      silent = TRUE)[1])
+      open.connection(con, open = "rt", timeout = timeout), silent = TRUE)[1L])
 
   suppressWarnings(try(close.connection(con), silent = TRUE))
 

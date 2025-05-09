@@ -32,7 +32,7 @@ integer_breaks <- function(n_breaks = 5L, ...) {
   fxn <- function(x) {
     breaks <- floor(pretty(x, n_breaks, ...))
     names(breaks) <- attr(breaks, "labels")
-    return(breaks)
+    breaks
   }
 
   return(fxn)

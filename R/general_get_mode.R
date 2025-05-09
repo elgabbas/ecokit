@@ -24,7 +24,7 @@
 get_mode <- function(x) {
 
   # Check if the vector is NULL or empty
-  if (is.null(x) || length(x) == 0) {
+  if (is.null(x) || length(x) == 0L) {
     ecokit::stop_ctx("x cannot be NULL or empty", x = x)
   }
 
@@ -32,5 +32,5 @@ get_mode <- function(x) {
   unique_vals <- unique(x)
 
   # Find the mode by identifying the most frequent unique value
-  return(unique_vals[which.max(tabulate(match(x, unique_vals)))])
+  unique_vals[which.max(tabulate(match(x, unique_vals)))]
 }

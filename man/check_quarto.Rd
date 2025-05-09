@@ -23,6 +23,8 @@ the installed version.
 }
 \examples{
 check_quarto()
+
+check_quarto(pre_release = TRUE)
 }
 \author{
 Ahmed El-Gabbas

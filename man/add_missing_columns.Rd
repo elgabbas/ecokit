@@ -8,7 +8,7 @@ add_missing_columns(data, fill_value = NA_character_, ...)
 }
 \arguments{
 \item{data}{A data frame to which missing columns will be added. This
-parameter cannot be NULL.}
+parameter cannot be \code{NULL}.}
 
 \item{fill_value}{The value to fill the missing columns with. This parameter
 defaults to \code{NA_character_}, but can be changed to any scalar value as
@@ -25,20 +25,16 @@ If any are missing, it adds these columns to the data frame, filling them
 with a specified value.
 }
 \examples{
+load_packages(dplyr, tibble)
 
-mtcars2 <- dplyr::select(mtcars, seq_len(3)) \%>\%
+# example data
+(mtcars2 <- dplyr::select(mtcars, seq_len(3)) \%>\%
   head() \%>\%
-  tibble::as_tibble()
-
-mtcars2
-
-# -------------------------------------------
+  tibble::as_tibble())
 
 mtcars2 \%>\%
  add_missing_columns(fill_value = NA_character_, A, B, C) \%>\%
  add_missing_columns(fill_value = as.integer(10), D)
-
-# -------------------------------------------
 
 AddCols <- c("Add1", "Add2")
 mtcars2 \%>\%

@@ -5,9 +5,9 @@
 \title{Size of objects in memory}
 \usage{
 all_objects_sizes(
-  greater_than = 0,
+  greater_than = 0L,
   in_function = FALSE,
-  n_decimals = 2,
+  n_decimals = 2L,
   n_objects = Inf
 )
 }

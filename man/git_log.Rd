@@ -2,69 +2,61 @@
 % Please edit documentation in R/general_git_log.R
 \name{git_log}
 \alias{git_log}
-\title{Print or return a detailed \verb{git log} of the git repository located in the
-specified directory.}
+\title{Print or return a detailed Git log of a repository}
 \usage{
 git_log(path = ".", n_commits = NULL, return_log = FALSE)
 }
 \arguments{
 \item{path}{Character. Path to the directory to check. Defaults to the
-current working directory ".". If the path does not exist, the function
-will stop and throw an error. If the path is not a git repository, the
-function will throw a warning.}
+current working directory \code{"."}. If the path does not exist, the function
+stops with an error. If the path is not a Git repository, a warning is
+issued.}
 
-\item{n_commits}{Integer. Number of recent commits to display. If \code{NULL} (the
-default), the complete log is shown. If \code{n_commits} is not \code{NULL} or a
-positive number, the function will stop and throw an error. This parameter
-is ignored if \code{return_log} is \code{TRUE}.}
+\item{n_commits}{Integer. Number of recent commits to display. If \code{NULL}
+(default), the complete log is shown. Ignored if \code{return_log = TRUE}.}
 
-\item{return_log}{Logical. Whether to return the log (\code{TRUE}) or print it to
-the console (\code{FALSE}, default). If \code{TRUE}, the function returns a character
-vector containing the log lines.}
+\item{return_log}{Logical. If \code{TRUE}, returns the log as a character vector.
+If \code{FALSE} (default), prints the log to the console.}
 }
 \value{
-If \code{return_log} is \code{TRUE}, returns a character vector containing the
-git log lines. If \code{return_log} is \code{FALSE}, the function is called for its
-side effect of printing to the console.
+If \code{return_log = TRUE}, returns a character vector of log lines. If
+\code{return_log = FALSE}, the function is called for its side effect of
+printing to the console and returns \code{invisible(NULL)}.
 }
 \description{
-This function checks if the specified directory is a Git repository and, if
-so, executes a \verb{git log} command to either print the log to the console or
-return it. It supports execution on Windows and Linux operating systems and
-provides a visually appealing graph format of the log, showing the commit
-hash, references, commit message, relative commit date, and author name.
+Checks if the specified directory is a Git repository and, if so, executes a
+\verb{git log} command to either print the log to the console or return it as a
+character vector. The log is displayed in a visually appealing graph format,
+showing commit hashes, references, messages, relative dates, and authors.
 }
 \note{
-The function will stop and throw an error if the specified path does
-not exist, the operating system is not supported, the directory is not a
-Git repository, Git is not installed, or if the \code{n_commits} parameter is
-not \code{NULL} or a positive number.
+The function stops with an error if the path does not exist, the OS is
+unsupported, Git is not installed, or \code{n_commits} is invalid. Supports
+Windows and Linux only.
 }
 \examples{
-# ----------------------------------------------------
 # Show the most recent commit
-# ----------------------------------------------------
 git_log(n_commits = 1)
 
-# ----------------------------------------------------
 # Show the most recent 5 commits
-# ----------------------------------------------------
 git_log(n_commits = 5)
 
-# ----------------------------------------------------
-# Return the log as a character vector
-# ----------------------------------------------------
-Log <- git_log(return_log = TRUE)
+# by default, the log is only printed, not returned
+log_example <- git_log(n_commits = 1)
+print(log_example)
 
-length(Log)
+# Return the complete log as a character vector
+log_example <- git_log(return_log = TRUE)
+length(log_example)
+head(log_example, 8)
 
-head(Log, 8)
+# not a git repo
+non_git_dir <- fs::path(tempdir(), "test_dir")
+fs::dir_create(non_git_dir)
+git_log(path = non_git_dir)
 
-\dontrun{
-  # not a git repo
-  git_log(path = "C:/")
-  # #> Error: The provided path does not exist.
-}
+# clean up
+unlink(non_git_dir, recursive = TRUE)
 }
 \author{
 Ahmed El-Gabbas

@@ -8,30 +8,37 @@ The source code of the function was copied from this
 \href{https://stackoverflow.com/q/22196078}{stackoverflow} question.
 }
 \usage{
-n_unique(data)
+n_unique(data, arrange = TRUE)
 }
 \arguments{
 \item{data}{A data frame for which the number of unique values per column
 will be calculated.}
+
+\item{arrange}{Logical. Whether to arrange the result in descending order of
+the number of unique values. Defaults to \code{TRUE}.}
 }
 \value{
-A data frame with two columns: \code{Variable} and \code{n_unique}. The
-Variable column lists the names of the original columns, and the \code{n_unique}
-column lists the number of unique values in each column. The result is
-sorted by \code{n_unique} in ascending order.
+A data frame with two columns: \code{variable} and \code{n_unique}. The
+variable column lists the names of the original columns, and the \code{n_unique}
+column lists the number of unique values in each column.
 }
 \description{
 This function calculates the number of unique values for each column in a
-given data frame and returns a data frame with two columns: \code{Variable} and
-\code{n_unique}. The \code{Variable} column lists the names of the original columns,
+given data frame and returns a data frame with two columns: \code{variable} and
+\code{n_unique}. The \code{variable} column lists the names of the original columns,
 and the \code{n_unique} column lists the corresponding number of unique values in
-each column. The result is sorted by the number of unique values in ascending
-order.
+each column.
 }
 \examples{
+# arranged by n_unique
 n_unique(mtcars)
 
+# not arranged (keep original data order)
+n_unique(mtcars, arrange = FALSE)
+
 n_unique(iris)
+
+n_unique(iris, arrange = FALSE)
 }
 \author{
 Ahmed El-Gabbas

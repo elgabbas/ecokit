@@ -5,9 +5,9 @@
 #' Print function Arguments
 #'
 #' This function takes another function as input and prints its arguments in the
-#' format `ArgumentName = DefaultValue`. Each argument is printed on a new line.
-#' The function can optionally assign the formatted arguments to the global
-#' environment and can load a specified package before processing.
+#' format `ArgumentName = DefaultValue`. The function can optionally assign the
+#' formatted arguments to the global environment and can load a specified
+#' package before processing.
 #' @param function_name A function whose arguments you want to print. Must be a
 #'   valid R function.
 #' @param assign Logical. Whether to assign the arguments as variables in the
@@ -20,9 +20,41 @@
 #' @return The function prints the formatted arguments to the console. If
 #'   `assign` is TRUE, it also assigns arguments to the global environment.
 #' @examples
+#'
+#' # loading packages
+#' load_packages(dplyr, purrr)
+#'
+#' # ---------------------------------------------
+#' # using formals
+#' # ---------------------------------------------
 #' formals(stats::setNames)
 #'
+#' # ---------------------------------------------
+#' # no assignment
+#' # ---------------------------------------------
+#'
 #' function_arguments(stats::setNames)
+#'
+#' # objects were not assigned to the global environment
+#' any(purrr::map_lgl(c("object", "nm"), exists))     # FALSE
+#'
+#' # ---------------------------------------------
+#' # with assignment
+#' # ---------------------------------------------
+#'
+#' # Example 1
+#' function_arguments(stats::setNames, assign = TRUE)
+#'
+#' all(purrr::map_lgl(c("object", "nm"), exists))     # TRUE
+#' object
+#'
+#'
+#' # Example 2
+#' function_arguments(get0, assign = TRUE)
+#'
+#' c("x", "envir", "mode", "inherits", "ifnotfound") %>%
+#'   purrr::map_lgl(exists) %>%
+#'   all()                                            # TRUE
 
 function_arguments <- function(function_name, assign = FALSE, package = NULL) {
 
@@ -81,7 +113,7 @@ function_arguments <- function(function_name, assign = FALSE, package = NULL) {
       if (assign) {
         eval(expr = parse(text = output), envir = .GlobalEnv)
       }
-      return(output)
+      output
     }
   )
 

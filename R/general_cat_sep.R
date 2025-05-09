@@ -25,13 +25,17 @@
 #' @examples
 #' cat_sep()
 #'
-#' cat_sep(2)
+#' cat_sep(n_separators = 2)
 #'
-#' cat_sep(2,2,3)
+#' cat_sep(n_separators = 2, sep_lines_before = 2, sep_lines_after = 3)
 #'
-#' cat_sep(2,2,3, line_char = "*")
+#' cat_sep(
+#'   n_separators = 2, sep_lines_before = 2,
+#'   sep_lines_after = 3, line_char = "*")
 #'
-#' cat_sep(2,2,3, line_char = "*", line_char_rep = 20)
+#' cat_sep(
+#'   n_separators = 2, sep_lines_before = 2,
+#'   sep_lines_after = 3, line_char = "*", line_char_rep = 20)
 #' @export
 
 cat_sep <- function(

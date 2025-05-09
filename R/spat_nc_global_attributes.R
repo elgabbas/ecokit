@@ -13,6 +13,15 @@
 #' @return A character vector where each element is a global attribute.
 #' @references [Click here](https://github.com/rspatial/terra/issues/1443)
 #' @export
+#' @examples
+#' nc_example_1 <- system.file("nc/sub.nc", package = "stars")
+#' if (file.exists(nc_example_1)) nc_global_attributes(nc = nc_example_1)
+#'
+#' nc_example_2 <- system.file("nc/timeseries.nc", package = "stars")
+#' if (file.exists(nc_example_2)) nc_global_attributes(nc = nc_example_2)
+#'
+#' nc_example_3 <- system.file("nc/cropped.nc", package = "sf")
+#' if (file.exists(nc_example_3)) nc_global_attributes(nc = nc_example_3)
 
 nc_global_attributes <- function(nc = NULL) {
 
@@ -20,21 +29,40 @@ nc_global_attributes <- function(nc = NULL) {
   if (is.null(nc)) {
     ecokit::stop_ctx("Input file cannot be NULL", nc = nc)
   }
+  if (!is.character(nc) || length(nc) != 1L) {
+    ecokit::stop_ctx("`nc` must be a single character string", nc = nc)
+  }
+  if (!file.exists(nc)) {
+    ecokit::stop_ctx("NetCDF file does not exist", nc = nc)
+  }
+  if (tolower(tools::file_ext(nc)) != "nc") {
+    ecokit::stop_ctx("File must have a `.nc` extension", nc = nc)
+  }
+
+  is_nc <- ecokit::file_type(nc)
+  if (!startsWith(is_nc, "NetCDF Data Format data")) {
+    ecokit::stop_ctx("File is not a valid NetCDF file", nc = nc)
+  }
 
   # Open the NetCDF File
-  nc <- RNetCDF::open.nc(nc)
+  nc_handle <- RNetCDF::open.nc(nc)
+  on.exit(RNetCDF::close.nc(nc_handle), add = TRUE)
 
   # Extracting Global Attributes
+  ngatt <- RNetCDF::file.inq.nc(nc_handle)$ngatt
+  if (ngatt == 0L) {
+    return(character(0L))
+  }
   global_attributes <- purrr::map_chr(
-    .x = (seq_len(RNetCDF::file.inq.nc(nc)$ngatt) - 1L),
+    .x = (seq_len(ngatt) - 1L),
     .f = ~{
-      attributes_n <- RNetCDF::att.inq.nc(nc, "NC_GLOBAL", .x)$name
-      attributes_v <- RNetCDF::att.get.nc(nc, "NC_GLOBAL", .x)
-      paste0(attributes_n, "=", attributes_v)
+      attribute_name <- RNetCDF::att.inq.nc(nc_handle, "NC_GLOBAL", .x)$name
+      attribute_value <- RNetCDF::att.get.nc(nc_handle, "NC_GLOBAL", .x)
+      paste0(attribute_name, "=", attribute_value)
     })
 
   # Closing the NetCDF File
-  RNetCDF::close.nc(nc)
+  RNetCDF::close.nc(nc_handle)
 
   return(global_attributes)
 }

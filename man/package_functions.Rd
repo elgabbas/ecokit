@@ -22,6 +22,13 @@ can be loaded; if not, it raises an error.
 str(package_functions(package = "raster"))
 
 str(package_functions(package = "sf"))
+
+package_functions(package = "ecokit")
+
+\dontrun{
+  # Error: package not found
+  package_functions(package = "non_exist")
+}
 }
 \author{
 Ahmed El-Gabbas

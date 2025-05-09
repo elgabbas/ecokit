@@ -27,32 +27,66 @@
 #' @name set_parallel
 #' @author Ahmed El-Gabbas
 #' @examples
+#' load_packages(future)
+#'
+#' # number of workers available
+#' future::nbrOfWorkers()
+#'
+#' # ---------------------------------------------
+#' # `future::multisession`
+#' # ---------------------------------------------
+#'
 #' # Prepare working in parallel
-#' ecokit::set_parallel(n_cores = 2)
-#' future::plan()
-#'
-#' # ---------------------------------------------
-#'
-#' # Stopping parallel processing
-#' ecokit::set_parallel(stop_cluster = TRUE)
-#' future::plan()
-#'
-#' # ---------------------------------------------
-#'
-#' # Prepare working in parallel using `future::cluster`
-#' ecokit::set_parallel(n_cores = 2, strategy = "future::cluster")
-#' future::plan()
+#' set_parallel(n_cores = 2)
+#' future::plan("list")
+#' future::nbrOfWorkers()
 #'
 #' # Stopping parallel processing
-#' ecokit::set_parallel(stop_cluster = TRUE)
-#' future::plan()
+#' set_parallel(stop_cluster = TRUE)
+#' future::plan("list")
+#' future::nbrOfWorkers()
+#'
+#' # ---------------------------------------------
+#' # `future::cluster`
+#' # ---------------------------------------------
+#'
+#' # Prepare working in parallel
+#' set_parallel(n_cores = 2, strategy = "future::cluster")
+#' future::plan("list")
+#' future::nbrOfWorkers()
+#'
+#' # Stopping parallel processing
+#' set_parallel(stop_cluster = TRUE)
+#' future::plan("list")
+#' future::nbrOfWorkers()
+#'
+#' # ---------------------------------------------
+#' # `future::multicore`
+#' # ---------------------------------------------
+#'
+#' # Prepare working in parallel
+#' set_parallel(n_cores = 2, strategy = "future::multicore")
+#' future::plan("list")
+#' future::nbrOfWorkers()
+#'
+#' # Stopping parallel processing
+#' set_parallel(stop_cluster = TRUE)
+#' future::plan("list")
+#' future::nbrOfWorkers()
+#'
+#' # ---------------------------------------------
+#' # `future::sequential`
+#' # ---------------------------------------------
+#'
+#' set_parallel(n_cores = 1, strategy = "future::sequential")
+#' future::nbrOfWorkers()
 
 set_parallel <- function(
     n_cores = 1L, strategy = "future::multisession", stop_cluster = FALSE,
     show_log = TRUE, future_max_size = 500L, ...) {
 
   # Validate n_cores input
-  n_cores <- ifelse((is.null(n_cores) || n_cores < 1), 1L, as.integer(n_cores))
+  n_cores <- ifelse((is.null(n_cores) || n_cores < 1L), 1L, as.integer(n_cores))
 
   # n_cores can not be more than the available cores
   available_cores <- parallelly::availableCores()
@@ -66,6 +100,10 @@ set_parallel <- function(
       available_cores
     },
     n_cores)
+
+  if (strategy == "future::sequential") {
+    n_cores <- 1L
+  }
 
   if (stop_cluster) {
     if (show_log) {
@@ -89,7 +127,7 @@ set_parallel <- function(
       strategy)
 
     # strategy should be a character vector of length 1
-    if (length(strategy) != 1) {
+    if (length(strategy) != 1L) {
       ecokit::stop_ctx(
         "`strategy` must be a character vector of length 1",
         strategy = strategy, length_strategy = length(strategy))
@@ -123,16 +161,16 @@ set_parallel <- function(
     if (show_log) {
       ecokit::cat_time(
         paste(
-          "Setting up", ifelse(n_cores > 1, "parallel", "sequential"),
+          "Setting up", ifelse(n_cores > 1L, "parallel", "sequential"),
           "processing with", n_cores, "core(s)"), ...)
     }
 
     withr::local_options(
-      future.globals.maxSize = future_max_size * 1024^2,
+      future.globals.maxSize = future_max_size * 1024L^2L,
       future.gc = TRUE, future.seed = TRUE,
       .local_envir = parent.frame())
 
-    if (n_cores > 1) {
+    if (n_cores > 1L) {
       future::plan(strategy = strategy, workers = n_cores)
     } else {
       future::plan("future::sequential", gc = TRUE)

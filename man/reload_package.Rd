@@ -4,27 +4,26 @@
 \alias{reload_package}
 \title{Reload an R package}
 \usage{
-reload_package(package)
+reload_package(...)
 }
 \arguments{
-\item{package}{Character. Name of the package to reload.}
+\item{...}{Unquoted package names (e.g., \code{sf}, \code{ncdf4}). Must be installed
+packages. Multiple packages can be specified.}
 }
 \value{
-The function is used for its side effect of reloading a package
-rather than for its return value.
+Returns \code{invisible(NULL)}. The function is used for its side effect
+of reloading a package rather than for its return value.
 }
 \description{
-This function reloads a specified R package. If the package is not already
-loaded, it attempts to load it. If the package is already loaded, it reloads
-the package from its library location. This can be useful during package
-development when changes are made to the package code. This function depends
-on the \link[devtools:reload]{devtools::reload} function.
+Reloads one or more specified R packages. If a package is not loaded, it is
+loaded; if already loaded, it is detached and reloaded from its library
+location.
 }
 \examples{
-load_packages(sf)
+library(sf)
 
-reload_package("sf")
-
+# Reloads sf and ncdf4. terra0 does not exist
+reload_package(sf, ncdf4, terra0)
 }
 \author{
 Ahmed El-Gabbas

@@ -7,11 +7,13 @@
 check_stack_in_memory(stack = NULL)
 }
 \arguments{
-\item{stack}{A RasterStack object. If \code{NULL} or not a RasterStack, the
-function will stop with an error.}
+\item{stack}{A RasterStack object. If \code{NULL}, empty, or not a \code{RasterStack},
+the function stops with an error or prints a message for empty stacks.}
 }
 \value{
-No return value, but prints messages to the console.
+Returns \code{invisible(NULL)} and prints messages to the console
+indicating whether all layers are in memory, all are read from disk, or a
+mix (specifying which layers are read from disk).
 }
 \description{
 This function checks whether the layers of a RasterStack object are stored in
@@ -20,29 +22,38 @@ are in memory, all layers are on disk, or a mix of both. If there's a mix, it
 specifies which layers are on disk.
 }
 \examples{
-library(raster)
-logo <- raster(system.file("external/rlogo.grd", package = "raster"))
-logo@data@inmemory
-logo@data@fromdisk
-logo@file@name
+# loading packages
+load_packages(raster)
 
-# -------------------------------------------
+# Create a small in-memory raster
+r_1 <- raster::raster(nrows = 10, ncols = 10, vals = 1)
+r_2 <- raster::raster(nrows = 10, ncols = 10, vals = 2)
 
-# A raster stack reading from files
-ST2 <- raster::stack(logo, logo)
-check_stack_in_memory(ST2)
-c(ST2[[1]]@data@inmemory, ST2[[2]]@data@inmemory)
-c(ST2[[1]]@data@fromdisk, ST2[[2]]@data@fromdisk)
-c(ST2[[1]]@file@name, ST2[[2]]@file@name)
+# Create a stack with one disk-based and one in-memory layer
+temp_file_1 <- tempfile(fileext = ".tif")
+raster::writeRaster(r_1, temp_file_1)
+temp_file_2 <- tempfile(fileext = ".tif")
+raster::writeRaster(r_2, temp_file_2)
 
-# -------------------------------------------
+# ---------------------------------------------
 
-logo2 <- raster::readAll(logo)
-ST3 <- raster::stack(logo, logo2)
-check_stack_in_memory(ST3)
-c(ST3[[1]]@data@inmemory, ST3[[2]]@data@inmemory)
-c(ST3[[1]]@data@fromdisk, ST3[[2]]@data@fromdisk)
-c(ST3[[1]]@file@name, ST3[[2]]@file@name)
+stack1 <- raster::stack(temp_file_1, r_1)
+check_stack_in_memory(stack1)
+
+# ---------------------------------------------
+
+stack3 <- raster::stack(temp_file_1, temp_file_2)
+check_stack_in_memory(stack3)
+
+# ---------------------------------------------
+
+stack2 <- raster::stack(r_1, r_2)
+check_stack_in_memory(stack2)
+
+# ---------------------------------------------
+
+# Clean up
+unlink(c(temp_file_1, temp_file_2))
 }
 \author{
 Ahmed El-Gabbas

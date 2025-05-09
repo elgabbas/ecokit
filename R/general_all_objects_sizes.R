@@ -70,7 +70,7 @@
 #' TestFun(XX = "TEST")
 
 all_objects_sizes <- function(
-    greater_than = 0, in_function = FALSE, n_decimals = 2, n_objects = Inf) {
+    greater_than = 0L, in_function = FALSE, n_decimals = 2L, n_objects = Inf) {
 
   if (in_function) {
     current_environment <- parent.frame()
@@ -78,7 +78,7 @@ all_objects_sizes <- function(
     current_environment <- .GlobalEnv
   }
 
-  if (!is.numeric(greater_than) || is.na(greater_than) || greater_than < 0) {
+  if (!is.numeric(greater_than) || is.na(greater_than) || greater_than < 0L) {
     ecokit::stop_ctx(
       "`greater_than` must be a non-negative number",
       greater_than = greater_than)
@@ -86,7 +86,7 @@ all_objects_sizes <- function(
 
   all_variables <- ls(envir = current_environment, all.names = TRUE)
 
-  if (length(all_variables) == 0) {
+  if (length(all_variables) == 0L) {
     cat("No Objects are available in the global environment!\n")
   } else {
 
@@ -97,7 +97,7 @@ all_objects_sizes <- function(
         object_class <- paste(class(object), collapse = "_")
 
         tryCatch({
-          size_mb <- lobstr::obj_size(object) / (1024 * 1024)
+          size_mb <- lobstr::obj_size(object) / (1024L * 1024L)
           size_mb <- round(as.numeric(size_mb), n_decimals)
           return(
             tibble::tibble(
@@ -105,20 +105,18 @@ all_objects_sizes <- function(
               size_mb = size_mb))
 
         }, error = function(e) {
-          return(
-            tibble::tibble(
-              object = .x, object_class = object_class,
-              size_mb = NA_real_))
+          tibble::tibble(
+            object = .x, object_class = object_class, size_mb = NA_real_)
         })
       }) %>%
       dplyr::mutate(
         percent = round(
-          100 * .data$size_mb / sum(.data$size_mb, na.rm = TRUE), 2)) %>%
+          100L * .data$size_mb / sum(.data$size_mb, na.rm = TRUE), 2L)) %>%
       dplyr::arrange(dplyr::desc(.data$size_mb)) %>%
       dplyr::filter(
         .data$size_mb >= greater_than | is.na(.data$size_mb))
 
-    if (nrow(all_vars_size) > 0) {
+    if (nrow(all_vars_size) > 0L) {
       cat(crayon::blue(
         "---------------------------------------------------\n\t",
         crayon::bold(sum(!is.na(all_vars_size$size_mb))),
@@ -127,10 +125,10 @@ all_objects_sizes <- function(
         sep = ""),
         sep = "")
 
-      withr::local_options(list(pillar.sigfig = 4))
+      withr::local_options(list(pillar.sigfig = 4L))
       print(all_vars_size, n = n_objects)
 
-      if (sum(is.na(all_vars_size$size_mb)) > 0) {
+      if (sum(is.na(all_vars_size$size_mb)) > 0L) {
         na_var <- all_vars_size %>%
           dplyr::filter(is.na(.data$size_mb)) %>%
           dplyr::pull(.data$object) %>%
@@ -142,12 +140,6 @@ all_objects_sizes <- function(
             "size of the following object(s): ", na_var, "\n"), sep = ""),
           sep = "")
       }
-
-      cat(crayon::blue(
-        "---------------------------------------------------\n",
-        "object sizes are in MB.\n",
-        "---------------------------------------------------\n", sep = ""),
-        sep = "")
     } else {
       cat(crayon::red(
         paste0("No object has Size > ", greater_than, " MB\n")), sep = "")

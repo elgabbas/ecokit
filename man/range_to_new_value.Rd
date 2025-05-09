@@ -45,9 +45,7 @@ greater than or equals to (\code{greater_than}) or  less than or equals to
 invert the selection is also available for ranges.
 }
 \examples{
-library(raster)
-library(terra)
-par(mar = c(0.5, 0.5, 1, 2.5), oma = c(0.5, 0.5, 0.5, 1))
+ecokit::load_packages(dplyr, raster, terra, tibble, ggplot2, tidyr)
 
 # ---------------------------------------------
 
@@ -59,13 +57,15 @@ range_to_new_value(x = VV, between = c(5, 8), new_value = NA)
 
 range_to_new_value(x = VV, between = c(5, 8), new_value = NA, invert = TRUE)
 
-# greater_than is ignored as between is specified
+# greater_than is ignored as `between` is specified
 range_to_new_value(
    x = VV, between = c(5, 8), new_value = NA, greater_than = 4)
-
 range_to_new_value(x = VV, new_value = NA, greater_than = 4)
 
 range_to_new_value(x = VV, new_value = NA, less_than = 4)
+
+# `invert` argument works only when `between` is specified
+range_to_new_value(x = VV, new_value = NA, greater_than = 4, invert = TRUE)
 
 # ---------------------------------------------
 
@@ -75,7 +75,7 @@ iris2 <- iris \%>\%
   tibble::as_tibble() \%>\%
   dplyr::slice_head(n = 50) \%>\%
   dplyr::select(-Sepal.Length, -Petal.Length, -Petal.Width) \%>\%
-  dplyr::arrange(-Sepal.Width)
+  dplyr::arrange(Sepal.Width)
 
 iris2 \%>\%
  dplyr::mutate(
@@ -89,41 +89,65 @@ iris2 \%>\%
 
 # ---------------------------------------------
 
-# RasterLayer / SpatRaster
+# RasterLayer
 
 grd_file <- system.file("external/test.grd", package = "raster")
 R_raster <- raster::raster(grd_file)
-R_terra <- terra::rast(grd_file)
+
+# set the theme for ggplot2
+ggplot2::theme_set(
+  ggplot2::theme_minimal() +
+  ggplot2::theme(
+    legend.position = "right",
+    strip.text = ggplot2::element_text(size = 16),
+    legend.title = ggplot2::element_blank(),
+    axis.title = ggplot2::element_blank(),
+    axis.text = ggplot2::element_blank()))
 
 # Convert values less than 500 to NA
 R_raster2 <- range_to_new_value(
-x = R_raster, less_than = 500, new_value = NA)
-plot(
-   raster::stack(R_raster, R_raster2), nr = 1,
-   main = c("\nOriginal", "\n<500 to NA"),
-   box = FALSE, axes = FALSE, legend.width = 2, colNA = "lightgrey",
-   xaxs = "i", yaxs = "i")
+  x = R_raster, less_than = 500, new_value = NA)
+# Convert values greater than 600 to NA
+R_raster3 <- range_to_new_value(
+   x = R_raster, greater_than = 600, new_value = NA)
+(R_rasters <- raster::stack(R_raster, R_raster2, R_raster3))
 
+
+as.data.frame(R_rasters, xy = TRUE, na.rm = FALSE) \%>\%
+  stats::setNames(c("x", "y", "R_raster", "R_raster2", "R_raster3")) \%>\%
+  tidyr::pivot_longer(
+    cols = -c("x", "y"), names_to = "layer", values_to = "value") \%>\%
+  ggplot2::ggplot() +
+  ggplot2::geom_tile(mapping = ggplot2::aes(x = x, y = y, fill = value)) +
+  ggplot2::facet_grid(~layer) +
+  ggplot2::scale_fill_gradientn(
+    colours = c("blue", "green", "yellow", "red"),
+    na.value = "transparent") +
+  ggplot2::labs(title = NULL, x = NULL, y = NULL) +
+  ggplot2::coord_cartesian(expand = FALSE, clip = "off")
+
+# ---------------------------------------------
+
+# SpatRaster
+
+R_terra <- terra::rast(grd_file)
 R_terra2 <- range_to_new_value(x = R_terra, less_than = 500, new_value = NA)
-plot(
-   c(R_terra, R_terra2), nr = 1, main = c("\nOriginal", "\n<500 to NA"),
-   box = FALSE, axes = FALSE, colNA = "lightgrey", xaxs = "i", yaxs = "i")
+R_terra3 <- range_to_new_value(
+    x = R_terra, greater_than = 600, new_value = NA)
+(R_terras <- c(R_terra, R_terra2, R_terra3))
 
-
-# Convert values greater than 700 to NA
-R_raster2 <- range_to_new_value(
-   x = R_raster, greater_than = 700, new_value = NA)
-plot(
-   raster::stack(R_raster, R_raster2), nr = 1,
-   main = c("\nOriginal", "\n>700 to NA"),
-   box = FALSE, axes = FALSE, legend.width = 2, colNA = "lightgrey",
-   xaxs = "i", yaxs = "i")
-
-R_terra2 <- range_to_new_value(
-    x = R_terra, greater_than = 700, new_value = NA)
-plot(
-   c(R_terra, R_terra2), nr = 1, main = c("\nOriginal", "\n>700 to NA"),
-   box = FALSE, axes = FALSE, colNA = "lightgrey", xaxs = "i", yaxs = "i")
+as.data.frame(R_terras, xy = TRUE, na.rm = FALSE) \%>\%
+  stats::setNames(c("x", "y", "R_terra", "R_terra2", "R_terra3")) \%>\%
+  tidyr::pivot_longer(
+    cols = -c("x", "y"), names_to = "layer", values_to = "value") \%>\%
+  ggplot2::ggplot() +
+  ggplot2::geom_tile(mapping = ggplot2::aes(x = x, y = y, fill = value)) +
+  ggplot2::facet_grid(~layer) +
+  ggplot2::scale_fill_gradientn(
+    colours = c("blue", "green", "yellow", "red"),
+    na.value = "transparent") +
+  ggplot2::labs(title = NULL, x = NULL, y = NULL) +
+  ggplot2::coord_cartesian(expand = FALSE, clip = "off")
 }
 \author{
 Ahmed El-Gabbas

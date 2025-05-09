@@ -46,8 +46,32 @@ current time and prints it with a specified prefix. Optionally, it can also
 print a session summary.
 }
 \examples{
+# basic usage
 reference_time <- (lubridate::now() - lubridate::seconds(45))
+
 cat_diff(reference_time)
+
+# custom prefix text
+cat_diff(reference_time, prefix = "Finished in ")
+
+# level = 1
+cat_diff(reference_time, prefix = "Finished in ", level = 1L)
+
+# print date
+cat_diff(reference_time, prefix = "Finished in ", cat_timestamp = TRUE)
+
+# print date and time
+cat_diff(reference_time, prefix = "Finished in ", cat_date = TRUE)
+
+# show chunk info
+cat_diff(reference_time, cat_info = TRUE, prefix = "Finished in ")
+
+# custom chunk info text
+cat_diff(
+  reference_time, cat_info = TRUE, chunk_text = "Summary of task",
+  prefix = "Finished in ")
+
+# |||||||||||||||||||||||||||||||||||||||||||||||||||||||||||
 
 reference_time <- (lubridate::now() -
     (lubridate::minutes(50) + lubridate::seconds(45)))

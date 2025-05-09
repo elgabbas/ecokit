@@ -4,7 +4,13 @@
 \alias{sf_add_coords}
 \title{Add longitude and latitude coordinates to an sf object}
 \usage{
-sf_add_coords(sf_object, name_x = "Long", name_y = "Lat", overwrite = FALSE)
+sf_add_coords(
+  sf_object,
+  name_x = "Long",
+  name_y = "Lat",
+  overwrite = FALSE,
+  suffix = "_NEW"
+)
 }
 \arguments{
 \item{sf_object}{An \code{sf} object to which longitude and latitude columns will
@@ -15,7 +21,10 @@ Defaults to \code{Long} and \code{Lat}.}
 
 \item{overwrite}{Logical. Whether to overwrite existing columns with names
 specified by \code{name_x} and \code{name_y}. If \code{FALSE} and columns with these names
-exist, new columns are appended with "_NEW" suffix. Defaults to \code{FALSE}.}
+exist, new columns are appended with a suffix. Defaults to \code{FALSE}.}
+
+\item{suffix}{Character. Suffix to be appended to the new column names in
+cases of conflict and \code{overwrite} is \code{FALSE}. Defaults to \verb{_NEW}.}
 }
 \value{
 An sf object with added longitude and latitude columns.
@@ -26,26 +35,44 @@ Add longitude and latitude coordinates as new columns to an sf object
 into a tibble, and appends them to the original sf object as new columns. If
 \code{name_x} or \code{name_y}, provided as arguments respectively, already exist in
 the sf object, the function either  1) overwrites these columns if
-\code{overwrite} is set to \code{TRUE} or 2) appends "_NEW" to the new column names to
-avoid overwrite if \code{overwrite} is set to \code{FALSE}.
+\code{overwrite} is set to \code{TRUE} or 2) appends a suffix to the new column names
+to avoid overwrite if \code{overwrite} is set to \code{FALSE}.
 }
 \note{
 If the overwrite parameter is \code{FALSE} (default) and columns with the
 specified names already exist, the function will issue a warning and append
-"_NEW" to the names of the new columns to avoid overwriting.
+suffix to the names of the new columns to avoid overwriting.
 }
 \examples{
-pt1 = sf::st_point(c(0,1))
-pt2 = sf::st_point(c(1,1))
+load_packages(sf)
+
+# Example sf object
+pt1 = sf::st_point(c(0, 1))
+pt2 = sf::st_point(c(1, 1))
 d = data.frame(a = c(1, 2))
 d$geom = sf::st_sfc(pt1, pt2)
-df = sf::st_as_sf(d)
-df
+(df = sf::st_as_sf(d))
+
+# |||||||||||||||||||||||||||||||||||||||||||
+
+# add coordinates to the sf object and overwrite existing object
 (df <- sf_add_coords(df))
 
-(sf_add_coords(df))
+# add coordinates again
+sf_add_coords(df)
 
-(sf_add_coords(df, overwrite = TRUE))
+# add coordinates again, using custom suffix
+sf_add_coords(df, suffix = "new")
+
+# |||||||||||||||||||||||||||||||||||||||||||
+
+# jitter the coordinates a little
+set.seed(100)
+(df2 <- sf::st_jitter(df, amount = 0.1))
+
+sf_add_coords(df2, overwrite = FALSE)
+
+sf_add_coords(df2, overwrite = TRUE)
 }
 \author{
 Ahmed El-Gabbas

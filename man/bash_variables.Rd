@@ -7,14 +7,98 @@
 bash_variables()
 }
 \value{
-This function does not return anything but has the side effect of
-assigning variables into the global environment.
+A \code{tibble} with two columns: "name" and "value", containing the
+parsed command line arguments. If no arguments are provided, an empty
+\code{tibble} is returned.
 }
 \description{
-This function reads command line arguments passed to an R script executed via
-the bash command line and assigns them into the global environment of the R
-session. This allows for dynamic passing of variables from a bash script to
-an R script.
+Reads command line arguments passed to an R script executed via the command
+line (\code{Rscript}) and return the name and value of each argument as a
+tibble.
+}
+\details{
+To use \code{bash_variables}, include it in an R script and run the
+script with \code{Rscript} and command line arguments in the format
+\code{variable=value}. The function parses each argument and returns a \code{tibble}
+with columns "name" and "value". You can then access these values as
+needed.
+
+\strong{Usage}:
+\enumerate{
+\item Create an R script (e.g., \code{script.R}):
+}
+
+\if{html}{\out{<div class="sourceCode R">}}\preformatted{    library(ecokit)
+
+    load_packages(stringr, dplyr, purrr, tibble)
+
+    # read command line arguments
+    args <- ecokit::bash_variables()
+
+    # Access variables from the tibble
+    cat("Input:", args$value[args$name == "input_file"], "\\n")
+    n_iterations <- as.numeric(args$value[args$name == "n_iterations"])
+    cat("Iterations:", n_iterations, "\\n")
+}\if{html}{\out{</div>}}
+\enumerate{
+\item Run the script:
+}
+
+\if{html}{\out{<div class="sourceCode bash">}}\preformatted{    Rscript script.R input_file=data.csv n_iterations=100
+}\if{html}{\out{</div>}}
+
+\strong{Output}:
+
+\if{html}{\out{<div class="sourceCode">}}\preformatted{    Input: data.csv
+    Iterations: 100
+}\if{html}{\out{</div>}}
+
+\strong{Argument Format}:
+\itemize{
+\item Arguments must be \code{variable=value} (e.g., \code{input_file=data.csv}).
+\item Variable names must be valid R names: start with a letter or underscore,
+followed by letters, numbers, or underscores (e.g., \code{max_iter}, \verb{_flag}).
+\item Values can be any string, including empty strings (e.g., \verb{config_file=}).
+\item Values are assigned as character strings; convert types in the script if
+needed (e.g., \code{as.numeric(n_iterations)} for numbers).
+}
+
+\strong{Valid Commands}:
+
+\if{html}{\out{<div class="sourceCode bash">}}\preformatted{    # Assigns: `data_path = "/home/data"`, `output_dir = "results"`,
+    # `n_threads = "8"`.
+    Rscript script.R data_path=/home/data output_dir=results n_threads=8
+
+    # Assigns: `debug = "TRUE"`, `config_file = ""`.
+    Rscript script.R debug=TRUE config_file=
+
+    # Assigns: `model_type = "linear"`.
+    Rscript script.R model_type=linear
+
+    # No arguments; prints message: "No command line arguments provided".
+    Rscript script.R
+}\if{html}{\out{</div>}}
+
+\strong{Invalid Commands} (cause errors):
+
+\if{html}{\out{<div class="sourceCode bash">}}\preformatted{    # Error: "Invalid argument format... got: input_file, data.csv".
+    Rscript script.R input_file data.csv
+
+    # Error: "Invalid argument format... got: 1st_model=linear".
+    Rscript script.R 1st_model=linear
+
+    # Error: "Invalid argument format... got: input file=data.csv"
+    Rscript script.R input file=data.csv
+
+    # Error: "Variable names cannot be empty".
+    Rscript script.R =data.csv
+}\if{html}{\out{</div>}}
+
+\strong{Notes}:
+\itemize{
+\item The returned \code{tibble} contains the parsed arguments; you can convert values
+to other types as needed (e.g., \code{as.numeric(args$value[args$name == "n_iterations"])}).
+}
 }
 \author{
 Ahmed El-Gabbas

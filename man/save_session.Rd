@@ -2,28 +2,62 @@
 % Please edit documentation in R/general_save_session.R
 \name{save_session}
 \alias{save_session}
-\title{Saves all non-function objects from the global environment to an RData file}
+\title{Save non-function objects from the global environment to an RData file}
 \usage{
 save_session(out_directory = getwd(), exclude_objects = NULL, prefix = "S")
 }
 \arguments{
-\item{out_directory}{Character. Directory path where the output \code{RData} file
-should be saved. Defaults to the current working directory \code{\link[base:getwd]{base::getwd()}}.}
+\item{out_directory}{Character. Directory path where the \code{.RData} file is
+saved. Defaults to the current working directory \code{\link[base:getwd]{base::getwd()}}.}
 
-\item{exclude_objects}{Character vector. Object names (as strings) to exclude
-from saving.}
+\item{exclude_objects}{Character vector. Names of objects to exclude from
+saving. Defaults to \code{NULL}.}
 
-\item{prefix}{Character. prefix the saved file name with. Defaults to \code{S}.}
+\item{prefix}{Character. Prefix for the saved file name. Defaults to \code{"S"}.}
 }
 \value{
-A tibble containing the names and sizes (in MB, rounded to 1 decimal
-place) of the saved objects.
+A tibble with columns \code{object} (object names) and \code{size} (size in MB,
+rounded to 1 decimal place) for the saved objects, sorted by size in
+descending order.
 }
 \description{
-This function saves all objects (except functions and specified exclusions)
-from the global environment as list items in an \code{RData} file. It also creates
-a summary of these objects' sizes in memory.
+Saves all objects (except functions and specified exclusions) from the global
+environment as a named list in an \code{.RData} file. Returns a summary of the
+saved objects' sizes in memory.
 }
-\author{
-Ahmed El-Gabbas
+\examples{
+# Create sample objects in the global environment
+assign("df", data.frame(a = 1:1000), envir = .GlobalEnv)
+assign("vec", rnorm(1000), envir = .GlobalEnv)
+assign("fun", function(x) x + 1, envir = .GlobalEnv)
+ls(.GlobalEnv)
+
+# Save objects to a unique temporary directory, excluding "vec"
+temp_dir <- fs::path(tempdir(), "save_session_example")
+fs::dir_create(temp_dir)
+on.exit(unlink(temp_dir, recursive = TRUE), add = TRUE)
+
+(result <- save_session(out_directory = temp_dir, exclude_objects = "vec"))
+
+# Load saved objects
+saved_files <- list.files(
+  temp_dir, pattern = "S_.+\\\\.RData$", full.names = TRUE)
+if (length(saved_files) == 0) {
+  stop("No RData files found in temp_dir")
+}
+# pick the most recent file, if there is more than one file
+(saved_file <- saved_files[length(saved_files)])
+
+saved_objects <- ecokit::load_as(saved_file)
+names(saved_objects)
+str(saved_objects, 1)
+
+setdiff(
+  ls(.GlobalEnv),
+  c(result$object, "saved_file", "result", "saved_objects", "temp_dir")) \%>\%
+  purrr::map(~ stats::setNames(class(get(.x, envir = .GlobalEnv)), .x)) \%>\%
+  unlist()
+
+# Clean up
+unlink(temp_dir, recursive = TRUE)
 }

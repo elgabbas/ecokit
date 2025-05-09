@@ -2,29 +2,53 @@
 % Please edit documentation in R/spat_polygon_centroid.R
 \name{polygon_centroid}
 \alias{polygon_centroid}
-\title{Replace the geometry of a polygon with its centroid point}
+\title{Replace Polygon Geometry with Centroid Point}
 \usage{
 polygon_centroid(sf_object = NULL, rename = FALSE, new_name = NULL)
 }
 \arguments{
-\item{sf_object}{A simple feature (\code{sf}) object; the polygon whose geometry
-is to be replaced with its centroid. Cannot be \code{NULL}.}
+\item{sf_object}{A simple feature (\code{sf}) object with polygon or multipolygon
+geometry. Cannot be \code{NULL}.}
 
-\item{rename}{Logical. Whether to rename the geometry column of the sf
-object. Defaults to \code{FALSE}.}
+\item{rename}{Logical. Whether to rename the geometry column. Defaults to
+\code{FALSE}.}
 
-\item{new_name}{Character. New name for the geometry column. Only valid if
-\code{rename = TRUE}.}
+\item{new_name}{Character. New name for the geometry column. Must be a
+single, non-empty character string if \code{rename = TRUE}. Defaults to \code{NULL}.}
 }
 \value{
-The modified sf object with its geometry replaced by the centroid of
-the original polygon geometry. If rename is \code{TRUE}, the geometry column
-will also be renamed as specified by NewName.
+The modified \code{sf} object with its geometry replaced by the centroid
+points of the original polygon geometries. If \code{rename = TRUE}, the geometry
+column is renamed to \code{new_name}.
 }
 \description{
-This function replaces the geometry of a simple feature (\code{sf}) polygon object
-with the geometry of its centroid point. It can optionally rename the
-geometry column of the modified \code{sf} object.
+Replaces the geometry of a simple feature (\code{sf}) polygon object with its
+centroid point. Optionally renames the geometry column of the modified \code{sf}
+object.
+}
+\examples{
+load_packages(sf, ggplot2, dplyr)
+
+# example data
+(nc <- sf::st_read(
+  dsn = system.file("shape/nc.shp", package = "sf"), quiet = TRUE) \%>\%
+  dplyr::select(AREA))
+
+# Replace polygon geometry with centroids
+(nc_centroid <- polygon_centroid(nc))
+
+ggplot2::ggplot() +
+  ggplot2::geom_sf(data = nc, aes(fill = NULL)) +
+  ggplot2::geom_sf(data = nc_centroid, colour = "red") +
+  ggplot2::theme_minimal()
+
+# Rename geometry column
+(nc_centroid_renamed <- polygon_centroid(
+  sf_object = nc, rename = TRUE, new_name = "centroid"))
+
+attr(nc, "sf_column")
+attr(nc_centroid, "sf_column")
+attr(nc_centroid_renamed, "sf_column")
 }
 \references{
 \href{https://github.com/r-spatial/sf/issues/480}{Click here}

@@ -16,7 +16,7 @@
 #'   display the latest version without comparing.
 #' @export
 #' @examples
-#' try(check_rstudio())
+#' check_rstudio()
 
 check_rstudio <- function() {
 
@@ -27,14 +27,7 @@ check_rstudio <- function() {
     stringr::str_remove_all("RStudio-|.exe") %>%
     stringr::str_replace_all("-", ".")
 
-  if (Sys.getenv("RSTUDIO") == "") {
-
-    cat(paste0(
-      "This function was not called from RStudio. ",
-      "No version comparison was done. The most recent version of RStudio is ",
-      online_version, "\n"))
-
-  } else {
+  if (Sys.getenv("RSTUDIO") == "1" && rstudioapi::isAvailable()) {
 
     installed_version <- rstudioapi::versionInfo() %>%
       magrittr::extract2("long_version") %>%
@@ -55,6 +48,13 @@ check_rstudio <- function() {
           crayon::red(crayon::bold(installed_version)),
           "\nPlease consider updating R-Studio.\n"))
     }
+
+  } else {
+    cat(
+      paste0(
+        "Not called from RStudio. The most recent version of RStudio is ",
+        crayon::red(crayon::bold(online_version)), ".\n"))
   }
-  return(invisible(NULL))
+
+  invisible(NULL)
 }
