@@ -30,7 +30,7 @@ for the filenames, optionally prefixed. Files are saved in the specified
 directory, with an option to overwrite existing files.
 }
 \examples{
-load_packages(dplyr, fs, stringi)
+load_packages(dplyr, fs)
 
 # split iris data by species name
 iris2 <- iris \%>\%
@@ -40,7 +40,8 @@ iris2 <- iris \%>\%
 str(iris2, 1)
 
 # save each species as a separate RData file
-temp_dir <- fs::path(tempdir(), stringi::stri_rand_strings(1, 5))
+temp_dir <- fs::path_temp("list_to_rdata")
+fs::dir_create(temp_dir)
 list.files(temp_dir)
 
 list_to_rdata(list = iris2, directory = temp_dir)
@@ -64,7 +65,7 @@ loaded_data <- load_multiple(
 str(loaded_data, 1)
 
 # clean up
-unlink(temp_dir, recursive = TRUE)
+fs::dir_delete(temp_dir)
 }
 \author{
 Ahmed El-Gabbas

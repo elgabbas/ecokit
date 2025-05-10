@@ -36,7 +36,8 @@ only letters, numbers, dots, or underscores. Only one of \code{check_dir} or
 load_packages(tibble, dplyr, fs)
 
 # Create a temporary file and directory
-tmp_dir <- ecokit::normalize_path(tempdir())
+
+tmp_dir <- fs::path_temp("assign_env_vars")
 fs::dir_create(tmp_dir)
 tmp_file <- ecokit::normalize_path(tempfile(fileext = ".txt"))
 fs::file_create(tmp_file)
@@ -68,7 +69,7 @@ my_file
 my_dir
 
 # clean up
-unlink(c(my_file, my_dir, tmp_env_file))
+fs::dir_delete(fs::path_temp("assign_env_vars"))
 }
 \author{
 Ahmed El-Gabbas

@@ -24,22 +24,23 @@
 #' # |||||||||||||||||||||||||||||||||||||||
 #'
 #' # valid ZIP file
-#' temp_dir <- tempdir()
-#' temp_file <- file.path(temp_dir, "test.txt")
+#' temp_dir <- fs::path_temp("check_zip")
+#' fs::dir_create(temp_dir)
+#' temp_file <- fs::path(temp_dir, "test.txt")
 #' writeLines("Hello, world!", temp_file)
-#' zip_file <- file.path(temp_dir, "valid.zip")
+#' zip_file <- fs::path(temp_dir, "valid.zip")
 #' zip(zip_file, temp_file, flags = "-jq")
 #'
 #' # invalid ZIP file (corrupted)
-#' bad_zip <- file.path(temp_dir, "invalid.zip")
+#' bad_zip <- fs::path(temp_dir, "invalid.zip")
 #' writeLines("Not a ZIP file", bad_zip)
 #'
 #' # empty ZIP file
-#' empty_zip <- file.path(temp_dir, "empty.zip")
+#' empty_zip <- fs::path(temp_dir, "empty.zip")
 #' fs::file_create(empty_zip)
 #'
 #' # non-ZIP file
-#' non_zip_file <- file.path(temp_dir, "test.txt")
+#' non_zip_file <- fs::path(temp_dir, "test.txt")
 #' writeLines("Hello, world!", non_zip_file)
 #'
 #' # |||||||||||||||||||||||||||||||||||||||
@@ -58,7 +59,8 @@
 #' check_zip(non_zip_file)                          # FALSE, with warning
 #'
 #' # clean up
-#' unlink(c(zip_file, bad_zip, empty_zip, temp_file))
+#' fs::file_delete(c(zip_file, bad_zip, empty_zip, temp_file))
+#' fs::dir_delete(temp_dir)
 
 check_zip <- function(file = NULL) {
 

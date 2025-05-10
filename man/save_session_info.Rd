@@ -29,8 +29,9 @@ and optionally, a summary of objects in the session, to a text file.
 load_packages(fs)
 
 # Save session info without object details
-temp_dir <- fs::path(tempdir(), "temp_dir")
+temp_dir <- fs::path_temp("save_session_info")
 fs::dir_create(temp_dir)
+
 save_session_info(out_directory = temp_dir)
 
 saved_file <- list.files(
@@ -58,6 +59,6 @@ saved_file <- list.files(
 
 cat(readLines(saved_file), sep = "\n")
 
-# Clean up
-unlink(temp_dir, recursive = TRUE)
+# clean up
+fs::dir_delete(temp_dir)
 }

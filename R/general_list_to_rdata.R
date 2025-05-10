@@ -23,7 +23,7 @@
 #'   not return a value.
 #' @export
 #' @examples
-#' load_packages(dplyr, fs, stringi)
+#' load_packages(dplyr, fs)
 #'
 #' # split iris data by species name
 #' iris2 <- iris %>%
@@ -33,7 +33,8 @@
 #' str(iris2, 1)
 #'
 #' # save each species as a separate RData file
-#' temp_dir <- fs::path(tempdir(), stringi::stri_rand_strings(1, 5))
+#' temp_dir <- fs::path_temp("list_to_rdata")
+#' fs::dir_create(temp_dir)
 #' list.files(temp_dir)
 #'
 #' list_to_rdata(list = iris2, directory = temp_dir)
@@ -57,7 +58,7 @@
 #' str(loaded_data, 1)
 #'
 #' # clean up
-#' unlink(temp_dir, recursive = TRUE)
+#' fs::dir_delete(temp_dir)
 
 list_to_rdata <- function(
   list, prefix = "", directory = getwd(), overwrite = FALSE) {

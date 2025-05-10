@@ -19,6 +19,8 @@
 #' @export
 #' @name save_session
 #' @examples
+#' load_packages(fs, purrr)
+#'
 #' # Create sample objects in the global environment
 #' assign("df", data.frame(a = 1:1000), envir = .GlobalEnv)
 #' assign("vec", rnorm(1000), envir = .GlobalEnv)
@@ -26,9 +28,8 @@
 #' ls(.GlobalEnv)
 #'
 #' # Save objects to a unique temporary directory, excluding "vec"
-#' temp_dir <- fs::path(tempdir(), "save_session_example")
+#' temp_dir <- fs::path_temp("save_session")
 #' fs::dir_create(temp_dir)
-#' on.exit(unlink(temp_dir, recursive = TRUE), add = TRUE)
 #'
 #' (result <- save_session(out_directory = temp_dir, exclude_objects = "vec"))
 #'
@@ -52,7 +53,7 @@
 #'   unlist()
 #'
 #' # Clean up
-#' unlink(temp_dir, recursive = TRUE)
+#' fs::dir_delete(temp_dir)
 
 ## |------------------------------------------------------------------------| #
 # save_session ----

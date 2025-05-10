@@ -27,7 +27,7 @@
 #' load_packages(remotes, fs)
 #'
 #' # create a temporary directory for package installation
-#' temp_lib <- fs::path(tempdir(), "temp_lib")
+#' temp_lib <- fs::path_temp("temp_lib")
 #' fs::dir_create(temp_lib)
 #'
 #' # install pkgconfig from GitHub into the temporary directory
@@ -43,7 +43,7 @@
 #'
 #' # clean up
 #' remove.packages("pkgconfig", lib = temp_lib)
-#' unlink(temp_lib, recursive = TRUE)
+#' fs::dir_delete(temp_lib)
 #'
 #' \dontrun{
 #'   # the following will give an error

@@ -22,14 +22,13 @@ are in memory, all layers are on disk, or a mix of both. If there's a mix, it
 specifies which layers are on disk.
 }
 \examples{
-# loading packages
 load_packages(raster)
 
-# Create a small in-memory raster
+# create a small in-memory raster
 r_1 <- raster::raster(nrows = 10, ncols = 10, vals = 1)
 r_2 <- raster::raster(nrows = 10, ncols = 10, vals = 2)
 
-# Create a stack with one disk-based and one in-memory layer
+# create a stack with one disk-based and one in-memory layer
 temp_file_1 <- tempfile(fileext = ".tif")
 raster::writeRaster(r_1, temp_file_1)
 temp_file_2 <- tempfile(fileext = ".tif")
@@ -52,8 +51,8 @@ check_stack_in_memory(stack2)
 
 # ---------------------------------------------
 
-# Clean up
-unlink(c(temp_file_1, temp_file_2))
+# clean up
+fs::file_delete(c(temp_file_1, temp_file_2))
 }
 \author{
 Ahmed El-Gabbas

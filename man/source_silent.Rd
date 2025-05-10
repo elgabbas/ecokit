@@ -34,20 +34,20 @@ writeLines(
 
 # -------------------------------------------
 
-# Source with default settings (show messages and warnings)
+# source with default settings (show messages and warnings)
 source_silent(script_file)
 
-# Suppress messages only
+# suppress messages only
 source_silent(script_file, messages = FALSE)
 
-# Suppress warnings only
+# suppress warnings only
 source_silent(script_file, warnings = FALSE)
 
-# Suppress both messages and warnings
+# suppress both messages and warnings
 source_silent(script_file, messages = FALSE, warnings = FALSE)
 
-# Clean up
-unlink(script_file)
+# clean up
+fs::file_delete(script_file)
 }
 \author{
 Ahmed El-Gabbas

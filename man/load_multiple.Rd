@@ -67,7 +67,6 @@ ecokit::load_packages(qs2, arrow, fs, terra, dplyr)
 # Setup temporary directory
 temp_dir <- fs::path_temp("load_multiple")
 fs::dir_create(temp_dir)
-on.exit(fs::dir_delete(temp_dir))
 
 # Create sample data files
 data1 <- terra::wrap(terra::rast(matrix(1:16, nrow = 4)))
@@ -75,11 +74,11 @@ data2 <- matrix(1:9, nrow = 3)
 data3 <- list(a = 1:10, b = letters[1:5])
 data4 <- data.frame(x = 1:5)
 
-save(data1, file = file.path(temp_dir, "data1.RData"))
-saveRDS(data2, file = file.path(temp_dir, "data2.rds"))
-qs2::qs_save(data3, file = file.path(temp_dir, "data3.qs2"))
+save(data1, file = fs::path(temp_dir, "data1.RData"))
+saveRDS(data2, file = fs::path(temp_dir, "data2.rds"))
+qs2::qs_save(data3, file = fs::path(temp_dir, "data3.qs2"), nthreads = 1)
 arrow::write_feather(
-  as.data.frame(data4), sink = file.path(temp_dir, "data4.feather"))
+  as.data.frame(data4), sink = fs::path(temp_dir, "data4.feather"))
 
 files <- fs::path(
   temp_dir, c("data1.RData", "data2.rds", "data3.qs2", "data4.feather"))

@@ -17,14 +17,13 @@
 #'   indicating whether all layers are in memory, all are read from disk, or a
 #'   mix (specifying which layers are read from disk).
 #' @examples
-#' # loading packages
 #' load_packages(raster)
 #'
-#' # Create a small in-memory raster
+#' # create a small in-memory raster
 #' r_1 <- raster::raster(nrows = 10, ncols = 10, vals = 1)
 #' r_2 <- raster::raster(nrows = 10, ncols = 10, vals = 2)
 #'
-#' # Create a stack with one disk-based and one in-memory layer
+#' # create a stack with one disk-based and one in-memory layer
 #' temp_file_1 <- tempfile(fileext = ".tif")
 #' raster::writeRaster(r_1, temp_file_1)
 #' temp_file_2 <- tempfile(fileext = ".tif")
@@ -47,8 +46,8 @@
 #'
 #' # ---------------------------------------------
 #'
-#' # Clean up
-#' unlink(c(temp_file_1, temp_file_2))
+#' # clean up
+#' fs::file_delete(c(temp_file_1, temp_file_2))
 
 check_stack_in_memory <- function(stack = NULL) {
 

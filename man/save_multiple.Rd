@@ -41,10 +41,10 @@ separate \code{.RData} files. It allows for optional file prefixing and
 overwriting of existing files.
 }
 \examples{
-load_packages(fs, purrr, stringi)
+load_packages(fs, purrr)
 
-TMP_Folder <- fs::path(tempdir(), stringi::stri_rand_strings(1, 5))
-fs::dir_create(TMP_Folder)
+temp_dir <- fs::path_temp("save_multiple")
+fs::dir_create(temp_dir)
 
 # ----------------------------------------------
 # Save x1 and x2 to disk
@@ -53,25 +53,25 @@ x1 = 10
 x2 = 20
 
 save_multiple(
-  variables = c("x1", "x2"), out_directory = TMP_Folder, verbose = TRUE)
+  variables = c("x1", "x2"), out_directory = temp_dir, verbose = TRUE)
 
-list.files(path = TMP_Folder, pattern = "^.+.RData")
+list.files(path = temp_dir, pattern = "^.+.RData")
 
-(x1Contents <- ecokit::load_as(fs::path(TMP_Folder, "x1.RData")))
-(x2Contents <- ecokit::load_as(fs::path(TMP_Folder, "x2.RData")))
+(x1Contents <- ecokit::load_as(fs::path(temp_dir, "x1.RData")))
+(x2Contents <- ecokit::load_as(fs::path(temp_dir, "x2.RData")))
 
 # ----------------------------------------------
 # Use prefix
 # ----------------------------------------------
 save_multiple(
-  variables = c("x1", "x2"), out_directory = TMP_Folder, prefix = "A_")
+  variables = c("x1", "x2"), out_directory = temp_dir, prefix = "A_")
 
-list.files(path = TMP_Folder, pattern = "^.+.RData")
+list.files(path = temp_dir, pattern = "^.+.RData")
 
 # ----------------------------------------------
 # File exists, no save
 # ----------------------------------------------
-try(save_multiple(variables = c("x1", "x2"), out_directory = TMP_Folder))
+try(save_multiple(variables = c("x1", "x2"), out_directory = temp_dir))
 
 # ----------------------------------------------
 # overwrite existing file
@@ -80,11 +80,14 @@ x1 = 100; x2 = 200; x3 = 300
 
 save_multiple(
   variables = c("x1", "x2", "x3"),
-  out_directory = TMP_Folder, overwrite = TRUE)
+  out_directory = temp_dir, overwrite = TRUE)
 
-(x1Contents <- ecokit::load_as(fs::path(TMP_Folder, "x1.RData")))
-(x2Contents <- ecokit::load_as(fs::path(TMP_Folder, "x2.RData")))
-(x3Contents <- ecokit::load_as(fs::path(TMP_Folder, "x3.RData")))
+(x1Contents <- ecokit::load_as(fs::path(temp_dir, "x1.RData")))
+(x2Contents <- ecokit::load_as(fs::path(temp_dir, "x2.RData")))
+(x3Contents <- ecokit::load_as(fs::path(temp_dir, "x3.RData")))
+
+# clean up
+fs::dir_delete(temp_dir)
 }
 \author{
 Ahmed El-Gabbas

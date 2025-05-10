@@ -43,12 +43,12 @@
 #' head(log_example, 8)
 #'
 #' # not a git repo
-#' non_git_dir <- fs::path(tempdir(), "test_dir")
+#' non_git_dir <- fs::path_temp("test_dir")
 #' fs::dir_create(non_git_dir)
 #' git_log(path = non_git_dir)
 #'
 #' # clean up
-#' unlink(non_git_dir, recursive = TRUE)
+#' fs::dir_delete(non_git_dir)
 
 git_log <- function(path = ".", n_commits = NULL, return_log = FALSE) {
 

@@ -49,23 +49,26 @@ formats. The format is determined by the extension of the file path
 (case-insensitive).
 }
 \examples{
-load_packages(fs, tibble, stringi)
+load_packages(fs, tibble)
 
-TMP_Folder <- fs::path(tempdir(), stringi::stri_rand_strings(1, 5))
-out_file <- fs::path(TMP_Folder, "iris2.RData")
-fs::dir_create(TMP_Folder)
-list.files(TMP_Folder)
+temp_dir <- fs::path_temp("save_as")
+fs::dir_create(temp_dir)
+out_file <- fs::path(temp_dir, "iris2.RData")
+list.files(temp_dir)
 
 # save iris data as `iris2.RData` with `iris2` object name
 save_as(
   object = tibble::tibble(iris), object_name = "iris2", out_path = out_file)
 
-list.files(TMP_Folder, pattern = "^.+.RData")
+list.files(temp_dir, pattern = "^.+.RData")
 
 # load the object to global environment. The data is loaded as `iris2`
 (loaded_name <- load(out_file))
 
 ecokit::load_as(out_file)
+
+# clean up
+fs::file_delete(out_file)
 }
 \author{
 Ahmed El-Gabbas

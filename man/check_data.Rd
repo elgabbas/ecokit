@@ -55,7 +55,6 @@ extension (case-insensitive). If the extension is unrecognised, it returns
 # Setup temporary directory
 temp_dir <- fs::path_temp("load_multiple")
 fs::dir_create(temp_dir)
-on.exit(fs::dir_delete(temp_dir))
 
 # |||||||||||||||||||||||||||||||||||||||
 # Validate RData files
@@ -63,11 +62,11 @@ on.exit(fs::dir_delete(temp_dir))
 
 # valid RData file
 data <- data.frame(x = 1:5)
-rdata_file <- file.path(temp_dir, "valid.Rdata")
+rdata_file <- fs::path(temp_dir, "valid.Rdata")
 save(data, file = rdata_file)
 
 # Invalid RData file (corrupted)
-bad_rdata <- file.path(temp_dir, "invalid.Rdata")
+bad_rdata <- fs::path(temp_dir, "invalid.Rdata")
 writeLines("not an RData file", bad_rdata)
 
 check_data(rdata_file)                               # TRUE
@@ -84,11 +83,11 @@ check_rdata(bad_rdata, warning = FALSE)              # FALSE, no warning
 # |||||||||||||||||||||||||||||||||||||||
 
 # Valid qs2 file
-qs_file <- file.path(temp_dir, "valid.qs2")
+qs_file <- fs::path(temp_dir, "valid.qs2")
 qs2::qs_save(data, qs_file)
 
 # Invalid qs2 file (corrupted)
-bad_qs <- file.path(temp_dir, "invalid.qs2")
+bad_qs <- fs::path(temp_dir, "invalid.qs2")
 writeLines("not a qs2 file", bad_qs)
 
 check_data(qs_file)                                  # TRUE
@@ -102,11 +101,11 @@ check_qs(bad_qs)                                     # FALSE, with warning
 # |||||||||||||||||||||||||||||||||||||||
 
 # Valid rds file
-rds_file <- file.path(temp_dir, "valid.rds")
+rds_file <- fs::path(temp_dir, "valid.rds")
 saveRDS(data, rds_file)
 
 # Invalid rds file (corrupted)
-bad_rds <- file.path(temp_dir, "invalid.rds")
+bad_rds <- fs::path(temp_dir, "invalid.rds")
 writeLines("not an rds file", bad_rds)
 
 check_data(rds_file)                                 # TRUE
@@ -120,11 +119,11 @@ check_rds(bad_rds)                                   # FALSE, with warning
 # |||||||||||||||||||||||||||||||||||||||
 
 # Valid feather file
-feather_file <- file.path(temp_dir, "valid.feather")
+feather_file <- fs::path(temp_dir, "valid.feather")
 arrow::write_feather(data, feather_file)
 
 # Invalid feather file (corrupted)
-bad_feather <- file.path(temp_dir, "invalid.feather")
+bad_feather <- fs::path(temp_dir, "invalid.feather")
 writeLines("not a feather file", bad_feather)
 
 check_data(feather_file)                             # TRUE
