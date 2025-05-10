@@ -36,8 +36,6 @@
 #' rdata_file <- fs::path(temp_dir, "valid.Rdata")
 #' save(data, file = rdata_file)
 #'
-#' print(ecokit::file_type(rdata_file))
-#'
 #' # Invalid RData file (corrupted)
 #' bad_rdata <- fs::path(temp_dir, "invalid.Rdata")
 #' writeLines("not an RData file", bad_rdata)
@@ -57,21 +55,17 @@
 #'
 #' # Valid qs2 file
 #' qs_file <- fs::path(temp_dir, "valid.qs2")
-#' qs2::qs_save(data, qs_file)
-#'
-#'
-#' print(ecokit::file_type(qs_file))
-#' qs2::qs_read(file = qs_file, nthreads = 1)
+#' qs2::qs_save(data, qs_file, nthreads = 1)
 #'
 #' # Invalid qs2 file (corrupted)
 #' bad_qs <- fs::path(temp_dir, "invalid.qs2")
 #' writeLines("not a qs2 file", bad_qs)
 #'
-#' check_data(qs_file)                                  # TRUE
-#' check_qs(qs_file)                                    # TRUE
+#' check_data(qs_file, n_threads = 1L)                  # TRUE
+#' check_qs(qs_file, n_threads = 1L)                    # TRUE
 #'
-#' check_data(bad_qs)                                   # FALSE, with warning
-#' check_qs(bad_qs)                                     # FALSE, with warning
+#' check_data(bad_qs, n_threads = 1L)                   # FALSE, with warning
+#' check_qs(bad_qs, n_threads = 1L)                     # FALSE, with warning
 #'
 #' # |||||||||||||||||||||||||||||||||||||||
 #' # Validate rds files
@@ -80,8 +74,6 @@
 #' # Valid rds file
 #' rds_file <- fs::path(temp_dir, "valid.rds")
 #' saveRDS(data, rds_file)
-#'
-#' print(ecokit::file_type(rds_file))
 #'
 #' # Invalid rds file (corrupted)
 #' bad_rds <- fs::path(temp_dir, "invalid.rds")
@@ -227,7 +219,7 @@ check_rdata <- function(file, warning = TRUE) {
 
   # check file type
   in_file_type <- ecokit::file_type(file)
-  if (!startsWith(in_file_type, "gzip compressed data, from HPFS filesystem")) {
+  if (!startsWith(in_file_type, "gzip compressed data")) {
     if (warning) {
       warning(
         "Not a valid RData file: ", ecokit::normalize_path(file), call. = FALSE)
@@ -400,7 +392,7 @@ check_rds <- function(file, warning = TRUE) {
 
   # check file type
   in_file_type <- ecokit::file_type(file)
-  if (!startsWith(in_file_type, "gzip compressed data, from HPFS filesystem")) {
+  if (!startsWith(in_file_type, "gzip compressed data")) {
     if (warning) {
       warning(
         "Not a valid rds file: ", ecokit::normalize_path(file), call. = FALSE)

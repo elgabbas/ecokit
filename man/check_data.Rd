@@ -65,8 +65,6 @@ data <- data.frame(x = 1:5)
 rdata_file <- fs::path(temp_dir, "valid.Rdata")
 save(data, file = rdata_file)
 
-print(ecokit::file_type(rdata_file))
-
 # Invalid RData file (corrupted)
 bad_rdata <- fs::path(temp_dir, "invalid.Rdata")
 writeLines("not an RData file", bad_rdata)
@@ -86,21 +84,17 @@ check_rdata(bad_rdata, warning = FALSE)              # FALSE, no warning
 
 # Valid qs2 file
 qs_file <- fs::path(temp_dir, "valid.qs2")
-qs2::qs_save(data, qs_file)
-
-
-print(ecokit::file_type(qs_file))
-qs2::qs_read(file = qs_file, nthreads = 1)
+qs2::qs_save(data, qs_file, nthreads = 1)
 
 # Invalid qs2 file (corrupted)
 bad_qs <- fs::path(temp_dir, "invalid.qs2")
 writeLines("not a qs2 file", bad_qs)
 
-check_data(qs_file)                                  # TRUE
-check_qs(qs_file)                                    # TRUE
+check_data(qs_file, n_threads = 1L)                  # TRUE
+check_qs(qs_file, n_threads = 1L)                    # TRUE
 
-check_data(bad_qs)                                   # FALSE, with warning
-check_qs(bad_qs)                                     # FALSE, with warning
+check_data(bad_qs, n_threads = 1L)                   # FALSE, with warning
+check_qs(bad_qs, n_threads = 1L)                     # FALSE, with warning
 
 # |||||||||||||||||||||||||||||||||||||||
 # Validate rds files
@@ -109,8 +103,6 @@ check_qs(bad_qs)                                     # FALSE, with warning
 # Valid rds file
 rds_file <- fs::path(temp_dir, "valid.rds")
 saveRDS(data, rds_file)
-
-print(ecokit::file_type(rds_file))
 
 # Invalid rds file (corrupted)
 bad_rds <- fs::path(temp_dir, "invalid.rds")
