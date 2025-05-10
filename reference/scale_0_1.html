@@ -86,7 +86,6 @@ maximum values and scales all values between 0 and 1.</p>
 <span class="r-in"><span><span class="co"># Setup temporary directory</span></span></span>
 <span class="r-in"><span><span class="va">temp_dir</span> <span class="op">&lt;-</span> <span class="fu">fs</span><span class="fu">::</span><span class="fu"><a href="https://fs.r-lib.org/reference/file_temp.html" class="external-link">path_temp</a></span><span class="op">(</span><span class="st">"scale_0_1"</span><span class="op">)</span></span></span>
 <span class="r-in"><span><span class="fu">fs</span><span class="fu">::</span><span class="fu"><a href="https://fs.r-lib.org/reference/create.html" class="external-link">dir_create</a></span><span class="op">(</span><span class="va">temp_dir</span><span class="op">)</span></span></span>
-<span class="r-in"><span><span class="fu"><a href="https://rdrr.io/r/base/on.exit.html" class="external-link">on.exit</a></span><span class="op">(</span><span class="fu">fs</span><span class="fu">::</span><span class="fu"><a href="https://fs.r-lib.org/reference/delete.html" class="external-link">dir_delete</a></span><span class="op">(</span><span class="va">temp_dir</span><span class="op">)</span>, add <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></span></span>
 <span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="co"># Example with SpatRaster</span></span></span>
 <span class="r-in"><span><span class="va">r</span> <span class="op">&lt;-</span> <span class="fu">terra</span><span class="fu">::</span><span class="fu"><a href="https://rspatial.github.io/terra/reference/rast.html" class="external-link">rast</a></span><span class="op">(</span>ncols <span class="op">=</span> <span class="fl">10</span>, nrows <span class="op">=</span> <span class="fl">10</span><span class="op">)</span></span></span>
@@ -134,17 +133,18 @@ maximum values and scales all values between 0 and 1.</p>
 <span class="r-in"><span><span class="co"># Example with file path</span></span></span>
 <span class="r-in"><span><span class="va">r_file</span> <span class="op">&lt;-</span> <span class="fu">fs</span><span class="fu">::</span><span class="fu"><a href="https://fs.r-lib.org/reference/path.html" class="external-link">path</a></span><span class="op">(</span><span class="va">temp_dir</span>, <span class="st">"raster.tif"</span><span class="op">)</span></span></span>
 <span class="r-in"><span><span class="fu">terra</span><span class="fu">::</span><span class="fu"><a href="https://rspatial.github.io/terra/reference/writeRaster.html" class="external-link">writeRaster</a></span><span class="op">(</span><span class="va">r</span>, <span class="va">r_file</span>, overwrite <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></span></span>
-<span class="r-err co"><span class="r-pr">#&gt;</span> <span class="error">Error:</span> [writeRaster] cannot write file</span>
 <span class="r-in"><span><span class="va">r_file_scaled</span> <span class="op">&lt;-</span> <span class="fu">scale_0_1</span><span class="op">(</span><span class="va">r_file</span><span class="op">)</span></span></span>
-<span class="r-err co"><span class="r-pr">#&gt;</span> <span class="error">Error in scale_0_1(r_file):</span> <span style="color: #BB0000; font-weight: bold;">File does not exist - 02:08:25</span></span>
-<span class="r-err co"><span class="r-pr">#&gt;</span> </span>
-<span class="r-err co"><span class="r-pr">#&gt;</span> ----- Metadata -----</span>
-<span class="r-err co"><span class="r-pr">#&gt;</span> </span>
-<span class="r-err co"><span class="r-pr">#&gt;</span> <span style="color: #0000BB; font-weight: bold;">file</span> [<span style="text-decoration: underline;">ecokit::normalize_path(raster)</span>]: &lt;fs_path + character&gt;</span>
-<span class="r-err co"><span class="r-pr">#&gt;</span> /tmp/RtmpvK5fBU/scale_0_1/raster.tif</span>
 <span class="r-in"><span><span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fu">terra</span><span class="fu">::</span><span class="fu"><a href="https://rspatial.github.io/terra/reference/rast.html" class="external-link">rast</a></span><span class="op">(</span><span class="va">r_file</span><span class="op">)</span>, <span class="va">r_file_scaled</span><span class="op">)</span></span></span>
-<span class="r-wrn co"><span class="r-pr">#&gt;</span> <span class="warning">Warning: </span>GDAL Error 4: /tmp/RtmpvK5fBU/scale_0_1/raster.tif: No such file or directory</span>
-<span class="r-err co"><span class="r-pr">#&gt;</span> <span class="error">Error:</span> [rast] file does not exist: /tmp/RtmpvK5fBU/scale_0_1/raster.tif</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> class       : SpatRaster </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> dimensions  : 10, 10, 2  (nrow, ncol, nlyr)</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> resolution  : 36, 18  (x, y)</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> extent      : -180, 180, -90, 90  (xmin, xmax, ymin, ymax)</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> coord. ref. : lon/lat WGS 84 (EPSG:4326) </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> sources     : raster.tif  </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>               memory  </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> names       :     lyr.1, lyr.1 </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> min values  : -2.203712,     0 </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> max values  :  1.726844,     1 </span>
 <span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="co"># Visualize results</span></span></span>
 <span class="r-in"><span><span class="fu">ggplot2</span><span class="fu">::</span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggplot.html" class="external-link">ggplot</a></span><span class="op">(</span><span class="op">)</span> <span class="op">+</span></span></span>
@@ -159,7 +159,6 @@ maximum values and scales all values between 0 and 1.</p>
 <span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="co"># clean up</span></span></span>
 <span class="r-in"><span><span class="fu">fs</span><span class="fu">::</span><span class="fu"><a href="https://fs.r-lib.org/reference/delete.html" class="external-link">dir_delete</a></span><span class="op">(</span><span class="va">temp_dir</span><span class="op">)</span></span></span>
-<span class="r-err co"><span class="r-pr">#&gt;</span> <span class="error">Error:</span> [ENOENT] Failed to search directory '/tmp/RtmpvK5fBU/scale_0_1': no such file or directory</span>
 </code></pre></div>
     </div>
   </main><aside class="col-md-3"><nav id="toc" aria-label="Table of contents"><h2>On this page</h2>
