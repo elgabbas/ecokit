@@ -44,7 +44,8 @@ The function will stop with an error message if any of the required
 arguments (\code{image_object}, \code{x}, \code{y}, \code{width}) are \code{NULL}.
 }
 \examples{
-library(png)
+load_packages(png)
+
 URL <- paste0("https://upload.wikimedia.org/wikipedia/commons/",
     "e/e1/Jupiter_\%28transparent\%29.png")
 z <- tempfile()

@@ -31,7 +31,8 @@
 #' @note The function will stop with an error message if any of the required
 #'   arguments (`image_object`, `x`, `y`, `width`) are `NULL`.
 #' @examples
-#' library(png)
+#' load_packages(png)
+#' 
 #' URL <- paste0("https://upload.wikimedia.org/wikipedia/commons/",
 #'     "e/e1/Jupiter_%28transparent%29.png")
 #' z <- tempfile()

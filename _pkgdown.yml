@@ -43,6 +43,7 @@ reference:
 - title: File / data operations
   contents:
   - file_operations
+  - dir_size
   - normalize_path
   - load_as
   - load_multiple

@@ -14,7 +14,7 @@
 #'   of reloading a package rather than for its return value.
 #' @author Ahmed El-Gabbas
 #' @examples
-#' library(sf)
+#' load_packages(sf)
 #'
 #' # Reloads sf and ncdf4. terra0 does not exist
 #' reload_package(sf, ncdf4, terra0)
