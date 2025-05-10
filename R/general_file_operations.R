@@ -111,7 +111,7 @@ file_type <- function(file) {
     ecokit::stop_ctx("File does not exist", file = file)
   }
 
-  output <- paste0("file ", ecokit::normalize_path(file)) %>%
+  output <- paste0('file "', ecokit::normalize_path(file), '"') %>%
     system(intern = TRUE) %>%
     stringr::str_extract_all(": .+", simplify = TRUE) %>%
     as.vector() %>%
