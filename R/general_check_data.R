@@ -36,6 +36,8 @@
 #' rdata_file <- fs::path(temp_dir, "valid.Rdata")
 #' save(data, file = rdata_file)
 #'
+#' print(ecokit::file_type(rdata_file))
+#'
 #' # Invalid RData file (corrupted)
 #' bad_rdata <- fs::path(temp_dir, "invalid.Rdata")
 #' writeLines("not an RData file", bad_rdata)
@@ -57,6 +59,10 @@
 #' qs_file <- fs::path(temp_dir, "valid.qs2")
 #' qs2::qs_save(data, qs_file)
 #'
+#'
+#' print(ecokit::file_type(qs_file))
+#' qs2::qs_read(file = qs_file, nthreads = 1)
+#'
 #' # Invalid qs2 file (corrupted)
 #' bad_qs <- fs::path(temp_dir, "invalid.qs2")
 #' writeLines("not a qs2 file", bad_qs)
@@ -74,6 +80,8 @@
 #' # Valid rds file
 #' rds_file <- fs::path(temp_dir, "valid.rds")
 #' saveRDS(data, rds_file)
+#'
+#' print(ecokit::file_type(rds_file))
 #'
 #' # Invalid rds file (corrupted)
 #' bad_rds <- fs::path(temp_dir, "invalid.rds")

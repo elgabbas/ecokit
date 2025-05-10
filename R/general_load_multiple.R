@@ -71,7 +71,7 @@
 #' # `single_object = TRUE`
 #' # ---------------------------------------------------
 #'
-#' MultiObj <- load_multiple(files = files, single_object = TRUE)
+#' MultiObj <- load_multiple(files = files, single_object = TRUE, n_threads = 1)
 #' str(MultiObj, 1)
 #'
 #' # ---------------------------------------------------
@@ -86,7 +86,7 @@
 #' assign("data2", "conflict", envir = example_env)
 #' load_multiple(
 #'   files = files, single_object = FALSE, conflict = "skip",
-#'   environment = example_env)
+#'   environment = example_env, n_threads = 1)
 #' ls(envir = example_env)
 #'
 #' str(get("data1", envir = example_env), 1)
@@ -105,7 +105,7 @@
 #'
 #' load_multiple(
 #'   files = files, single_object = FALSE, conflict = "overwrite",
-#'   environment = example_env)
+#'   environment = example_env, n_threads = 1)
 #' ls(envir = example_env)
 #'
 #' str(get("data1", envir = example_env), 1)
@@ -127,7 +127,7 @@
 #'
 #' load_multiple(
 #'   files = files, single_object = FALSE, conflict = "rename",
-#'   environment = example_env)
+#'   environment = example_env, n_threads = 1)
 #' ls(envir = example_env)
 #'
 #' str(get("data1", envir = example_env), 1)
