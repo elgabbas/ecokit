@@ -81,17 +81,18 @@ information to a file.</p>
     <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span><span class="fu"><a href="load_packages.html">load_packages</a></span><span class="op">(</span><span class="va">fs</span><span class="op">)</span></span></span>
 <span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="co"># Save session info without object details</span></span></span>
-<span class="r-in"><span><span class="va">temp_dir</span> <span class="op">&lt;-</span> <span class="fu">fs</span><span class="fu">::</span><span class="fu"><a href="https://fs.r-lib.org/reference/path.html" class="external-link">path</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/tempfile.html" class="external-link">tempdir</a></span><span class="op">(</span><span class="op">)</span>, <span class="st">"temp_dir"</span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="va">temp_dir</span> <span class="op">&lt;-</span> <span class="fu">fs</span><span class="fu">::</span><span class="fu"><a href="https://fs.r-lib.org/reference/file_temp.html" class="external-link">path_temp</a></span><span class="op">(</span><span class="st">"save_session_info"</span><span class="op">)</span></span></span>
 <span class="r-in"><span><span class="fu">fs</span><span class="fu">::</span><span class="fu"><a href="https://fs.r-lib.org/reference/create.html" class="external-link">dir_create</a></span><span class="op">(</span><span class="va">temp_dir</span><span class="op">)</span></span></span>
+<span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="fu">save_session_info</span><span class="op">(</span>out_directory <span class="op">=</span> <span class="va">temp_dir</span><span class="op">)</span></span></span>
 <span class="r-msg co"><span class="r-pr">#&gt;</span> Saving session info to:</span>
-<span class="r-msg co"><span class="r-pr">#&gt;</span> <span style="color: #0000BB;">/tmp/RtmpxOZ4K2/temp_dir/S_20250510_0105.txt</span></span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> <span style="color: #0000BB;">/tmp/RtmpvK5fBU/save_session_info/S_20250510_0208.txt</span></span>
 <span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="va">saved_file</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/list.files.html" class="external-link">list.files</a></span><span class="op">(</span></span></span>
 <span class="r-in"><span>  <span class="va">temp_dir</span>, pattern <span class="op">=</span> <span class="st">"S_.+txt$"</span>, full.names <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span> <span class="op"><a href="pipe.html">%&gt;%</a></span></span></span>
 <span class="r-in"><span>  <span class="fu">ecokit</span><span class="fu">::</span><span class="fu"><a href="normalize_path.html">normalize_path</a></span><span class="op">(</span><span class="op">)</span></span></span>
 <span class="r-in"><span><span class="op">(</span><span class="va">saved_file</span> <span class="op">&lt;-</span> <span class="va">saved_file</span><span class="op">[</span><span class="fu"><a href="https://rdrr.io/r/base/length.html" class="external-link">length</a></span><span class="op">(</span><span class="va">saved_file</span><span class="op">)</span><span class="op">]</span><span class="op">)</span></span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> /tmp/RtmpxOZ4K2/temp_dir/S_20250510_0105.txt</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> /tmp/RtmpvK5fBU/save_session_info/S_20250510_0208.txt</span>
 <span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="fu"><a href="https://rdrr.io/r/base/cat.html" class="external-link">cat</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/readLines.html" class="external-link">readLines</a></span><span class="op">(</span><span class="va">saved_file</span><span class="op">)</span>, sep <span class="op">=</span> <span class="st">"\n"</span><span class="op">)</span></span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
@@ -109,7 +110,7 @@ information to a file.</p>
 <span class="r-out co"><span class="r-pr">#&gt;</span>  collate  C</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>  ctype    C.UTF-8</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>  tz       UTC</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  date     2025-05-09</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  date     2025-05-10</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>  pandoc   3.1.11 @ /opt/hostedtoolcache/pandoc/3.1.11/x64/ (via rmarkdown)</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>  quarto   NA</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
@@ -141,7 +142,7 @@ information to a file.</p>
 <span class="r-out co"><span class="r-pr">#&gt;</span>  downlit        0.4.4    <span style="color: #555555;">2024-06-10</span> <span style="color: #555555;">[1]</span> <span style="color: #BB00BB; font-weight: bold;">RSPM</span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>  dplyr        * 1.1.4    <span style="color: #555555;">2023-11-17</span> <span style="color: #555555;">[1]</span> <span style="color: #BB00BB; font-weight: bold;">RSPM</span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>  e1071          1.7-16   <span style="color: #555555;">2024-09-16</span> <span style="color: #555555;">[1]</span> <span style="color: #BB00BB; font-weight: bold;">RSPM</span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  ecokit       * 0.1.0    <span style="color: #555555;">2025-05-09</span> <span style="color: #555555;">[1]</span> <span style="color: #BB00BB; font-weight: bold;">local</span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  ecokit       * 0.1.0    <span style="color: #555555;">2025-05-10</span> <span style="color: #555555;">[1]</span> <span style="color: #BB00BB; font-weight: bold;">local</span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>  ellipsis       0.3.2    <span style="color: #555555;">2021-04-29</span> <span style="color: #555555;">[1]</span> <span style="color: #BB00BB; font-weight: bold;">RSPM</span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>  evaluate       1.0.3    <span style="color: #555555;">2025-01-10</span> <span style="color: #555555;">[1]</span> <span style="color: #BB00BB; font-weight: bold;">RSPM</span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>  fansi          1.0.6    <span style="color: #555555;">2023-12-08</span> <span style="color: #555555;">[1]</span> <span style="color: #BB00BB; font-weight: bold;">RSPM</span></span>
@@ -217,7 +218,7 @@ information to a file.</p>
 <span class="r-out co"><span class="r-pr">#&gt;</span>  sp           * 2.2-0    <span style="color: #555555;">2025-02-01</span> <span style="color: #555555;">[1]</span> <span style="color: #BB00BB; font-weight: bold;">RSPM</span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>  spam           2.11-1   <span style="color: #555555;">2025-01-20</span> <span style="color: #555555;">[1]</span> <span style="color: #BB00BB; font-weight: bold;">RSPM</span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>  stringfish     0.16.0   <span style="color: #555555;">2023-11-28</span> <span style="color: #555555;">[1]</span> <span style="color: #BB00BB; font-weight: bold;">RSPM</span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  stringi      * 1.8.7    <span style="color: #555555;">2025-03-27</span> <span style="color: #555555;">[1]</span> <span style="color: #BB00BB; font-weight: bold;">RSPM</span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  stringi        1.8.7    <span style="color: #555555;">2025-03-27</span> <span style="color: #555555;">[1]</span> <span style="color: #BB00BB; font-weight: bold;">RSPM</span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>  stringr        1.5.1    <span style="color: #555555;">2023-11-14</span> <span style="color: #555555;">[1]</span> <span style="color: #BB00BB; font-weight: bold;">RSPM</span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>  systemfonts    1.2.3    <span style="color: #555555;">2025-04-30</span> <span style="color: #555555;">[1]</span> <span style="color: #BB00BB; font-weight: bold;">RSPM</span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>  terra        * 1.8-42   <span style="color: #555555;">2025-04-02</span> <span style="color: #555555;">[1]</span> <span style="color: #BB00BB; font-weight: bold;">RSPM</span></span>
@@ -259,13 +260,13 @@ information to a file.</p>
 <span class="r-in"><span><span class="va">session_data</span> <span class="op">&lt;-</span> <span class="fu">tibble</span><span class="fu">::</span><span class="fu"><a href="https://tibble.tidyverse.org/reference/tibble.html" class="external-link">tibble</a></span><span class="op">(</span>object <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"df"</span>, <span class="st">"vec"</span><span class="op">)</span>, size <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">0.1</span>, <span class="fl">0.1</span><span class="op">)</span><span class="op">)</span></span></span>
 <span class="r-in"><span><span class="fu">save_session_info</span><span class="op">(</span>out_directory <span class="op">=</span> <span class="va">temp_dir</span>, session_info <span class="op">=</span> <span class="va">session_data</span><span class="op">)</span></span></span>
 <span class="r-msg co"><span class="r-pr">#&gt;</span> Saving session info to:</span>
-<span class="r-msg co"><span class="r-pr">#&gt;</span> <span style="color: #0000BB;">/tmp/RtmpxOZ4K2/temp_dir/S_20250510_0105.txt</span></span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> <span style="color: #0000BB;">/tmp/RtmpvK5fBU/save_session_info/S_20250510_0208.txt</span></span>
 <span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="va">saved_file</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/list.files.html" class="external-link">list.files</a></span><span class="op">(</span></span></span>
 <span class="r-in"><span>  <span class="va">temp_dir</span>, pattern <span class="op">=</span> <span class="st">"S_.+txt$"</span>, full.names <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span> <span class="op"><a href="pipe.html">%&gt;%</a></span></span></span>
 <span class="r-in"><span>  <span class="fu">ecokit</span><span class="fu">::</span><span class="fu"><a href="normalize_path.html">normalize_path</a></span><span class="op">(</span><span class="op">)</span></span></span>
 <span class="r-in"><span><span class="op">(</span><span class="va">saved_file</span> <span class="op">&lt;-</span> <span class="va">saved_file</span><span class="op">[</span><span class="fu"><a href="https://rdrr.io/r/base/length.html" class="external-link">length</a></span><span class="op">(</span><span class="va">saved_file</span><span class="op">)</span><span class="op">]</span><span class="op">)</span></span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> /tmp/RtmpxOZ4K2/temp_dir/S_20250510_0105.txt</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> /tmp/RtmpvK5fBU/save_session_info/S_20250510_0208.txt</span>
 <span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="fu"><a href="https://rdrr.io/r/base/cat.html" class="external-link">cat</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/readLines.html" class="external-link">readLines</a></span><span class="op">(</span><span class="va">saved_file</span><span class="op">)</span>, sep <span class="op">=</span> <span class="st">"\n"</span><span class="op">)</span></span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
@@ -283,7 +284,7 @@ information to a file.</p>
 <span class="r-out co"><span class="r-pr">#&gt;</span>  collate  C</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>  ctype    C.UTF-8</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>  tz       UTC</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  date     2025-05-09</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  date     2025-05-10</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>  pandoc   3.1.11 @ /opt/hostedtoolcache/pandoc/3.1.11/x64/ (via rmarkdown)</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>  quarto   NA</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
@@ -315,7 +316,7 @@ information to a file.</p>
 <span class="r-out co"><span class="r-pr">#&gt;</span>  downlit        0.4.4    <span style="color: #555555;">2024-06-10</span> <span style="color: #555555;">[1]</span> <span style="color: #BB00BB; font-weight: bold;">RSPM</span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>  dplyr        * 1.1.4    <span style="color: #555555;">2023-11-17</span> <span style="color: #555555;">[1]</span> <span style="color: #BB00BB; font-weight: bold;">RSPM</span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>  e1071          1.7-16   <span style="color: #555555;">2024-09-16</span> <span style="color: #555555;">[1]</span> <span style="color: #BB00BB; font-weight: bold;">RSPM</span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  ecokit       * 0.1.0    <span style="color: #555555;">2025-05-09</span> <span style="color: #555555;">[1]</span> <span style="color: #BB00BB; font-weight: bold;">local</span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  ecokit       * 0.1.0    <span style="color: #555555;">2025-05-10</span> <span style="color: #555555;">[1]</span> <span style="color: #BB00BB; font-weight: bold;">local</span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>  ellipsis       0.3.2    <span style="color: #555555;">2021-04-29</span> <span style="color: #555555;">[1]</span> <span style="color: #BB00BB; font-weight: bold;">RSPM</span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>  evaluate       1.0.3    <span style="color: #555555;">2025-01-10</span> <span style="color: #555555;">[1]</span> <span style="color: #BB00BB; font-weight: bold;">RSPM</span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>  fansi          1.0.6    <span style="color: #555555;">2023-12-08</span> <span style="color: #555555;">[1]</span> <span style="color: #BB00BB; font-weight: bold;">RSPM</span></span>
@@ -391,7 +392,7 @@ information to a file.</p>
 <span class="r-out co"><span class="r-pr">#&gt;</span>  sp           * 2.2-0    <span style="color: #555555;">2025-02-01</span> <span style="color: #555555;">[1]</span> <span style="color: #BB00BB; font-weight: bold;">RSPM</span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>  spam           2.11-1   <span style="color: #555555;">2025-01-20</span> <span style="color: #555555;">[1]</span> <span style="color: #BB00BB; font-weight: bold;">RSPM</span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>  stringfish     0.16.0   <span style="color: #555555;">2023-11-28</span> <span style="color: #555555;">[1]</span> <span style="color: #BB00BB; font-weight: bold;">RSPM</span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  stringi      * 1.8.7    <span style="color: #555555;">2025-03-27</span> <span style="color: #555555;">[1]</span> <span style="color: #BB00BB; font-weight: bold;">RSPM</span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  stringi        1.8.7    <span style="color: #555555;">2025-03-27</span> <span style="color: #555555;">[1]</span> <span style="color: #BB00BB; font-weight: bold;">RSPM</span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>  stringr        1.5.1    <span style="color: #555555;">2023-11-14</span> <span style="color: #555555;">[1]</span> <span style="color: #BB00BB; font-weight: bold;">RSPM</span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>  systemfonts    1.2.3    <span style="color: #555555;">2025-04-30</span> <span style="color: #555555;">[1]</span> <span style="color: #BB00BB; font-weight: bold;">RSPM</span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>  terra        * 1.8-42   <span style="color: #555555;">2025-04-02</span> <span style="color: #555555;">[1]</span> <span style="color: #BB00BB; font-weight: bold;">RSPM</span></span>
@@ -431,8 +432,8 @@ information to a file.</p>
 <span class="r-out co"><span class="r-pr">#&gt;</span>      df  0.1</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>     vec  0.1</span>
 <span class="r-in"><span></span></span>
-<span class="r-in"><span><span class="co"># Clean up</span></span></span>
-<span class="r-in"><span><span class="fu"><a href="https://rdrr.io/r/base/unlink.html" class="external-link">unlink</a></span><span class="op">(</span><span class="va">temp_dir</span>, recursive <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="co"># clean up</span></span></span>
+<span class="r-in"><span><span class="fu">fs</span><span class="fu">::</span><span class="fu"><a href="https://fs.r-lib.org/reference/delete.html" class="external-link">dir_delete</a></span><span class="op">(</span><span class="va">temp_dir</span><span class="op">)</span></span></span>
 </code></pre></div>
     </div>
   </main><aside class="col-md-3"><nav id="toc" aria-label="Table of contents"><h2>On this page</h2>
