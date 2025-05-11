@@ -91,7 +91,7 @@ sapply_ <- function(x, fun, simplify = TRUE, silent = TRUE, ...) {
     ecokit::stop_ctx("x or fun cannot be NULL", fun = fun, x = x)
   }
 
-  result <- sapply(X = x, FUN = fun, simplify = simplify, ...)
+  result <- sapply(X = x, FUN = fun, simplify = simplify, ...) #nolint
 
   if (silent) {
     return(invisible(NULL))

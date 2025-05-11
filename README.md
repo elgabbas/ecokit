@@ -1,6 +1,11 @@
 ecokit: Tools for Ecological and General Utilities
 ================
 
+<!-- badges: start -->
+
+[![R-CMD-check](https://github.com/elgabbas/ecokit/actions/workflows/R-CMD-check.yaml/badge.svg)](https://github.com/elgabbas/ecokit/actions/workflows/R-CMD-check.yaml)
+<!-- badges: end -->
+
 ## Overview
 
 `ecokit` is an R package offering a collection of utility functions

@@ -32,7 +32,7 @@
 #'   arguments (`image_object`, `x`, `y`, `width`) are `NULL`.
 #' @examples
 #' load_packages(png)
-#' 
+#'
 #' URL <- paste0("https://upload.wikimedia.org/wikipedia/commons/",
 #'     "e/e1/Jupiter_%28transparent%29.png")
 #' z <- tempfile()
@@ -58,10 +58,10 @@ add_image_to_plot <- function(image_object, x, y, width, interpolate = TRUE) {
 
   # A vector of the form c(x1, x2, y1, y2) giving the extremes of the user
   # coordinates of the plotting region
-  par_user <- graphics::par()$usr
+  par_user <- graphics::par()$usr    #nolint
 
   # The current plot dimensions (width, height), in inches
-  plot_dimensions <- graphics::par()$pin
+  plot_dimensions <- graphics::par()$pin    #nolint
 
   # number of x-y pixels for the image_object
   image_dimension <- dim(image_object)

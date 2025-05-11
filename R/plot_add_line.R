@@ -48,7 +48,7 @@ add_line <- function(at = NULL, outer = FALSE, horizontal = TRUE, ...) {
   }
 
   if (outer) {
-    graphics::par(xpd = TRUE)
+    graphics::par(xpd = TRUE)    #nolint
   }
 
   if (horizontal) {
@@ -58,6 +58,6 @@ add_line <- function(at = NULL, outer = FALSE, horizontal = TRUE, ...) {
   }
 
   if (outer) {
-    graphics::par(xpd = FALSE)
+    graphics::par(xpd = FALSE)    #nolint
   }
 }

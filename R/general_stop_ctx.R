@@ -281,7 +281,7 @@ stop_ctx <- function(
   # Check if there are metadata values to process
   if (length(vals)) {
     # Format each metadata entry with key, label, class, and value
-    blocks <- mapply(function(key, lbl, val) {
+    blocks <- mapply(function(key, lbl, val) {     #nolint
 
       # Show class in `<c1 + c2>` form, or "NULL"
       obj_class <- if (is.null(val)) {
@@ -359,9 +359,9 @@ stop_ctx <- function(
   # Check if backtrace is requested
   if (include_backtrace) {
     # Capture the call stack, starting from the second frame
-    trace <- rlang::trace_back(bottom = 2L)
+    trace <- rlang::trace_back(bottom = 2L)    #nolint
     # Capture the printed backtrace output
-    trace_out <- utils::capture.output(print(trace))
+    trace_out <- utils::capture.output(print(trace))    #nolint
     # Include backtrace if it has content beyond the header
     if (length(trace_out) > 1L) {
       # Join backtrace lines, excluding the first line
@@ -412,11 +412,11 @@ stop_ctx <- function(
   prev_bt_opt  <- getOption("rlang_backtrace_on_error")
 
   # Disable error browsing and rlang backtrace
-  options(error = NULL, rlang_backtrace_on_error = "none")
+  options(error = NULL, rlang_backtrace_on_error = "none")    #nolint
 
   # Restore options on exit
   on.exit(
-    options(error = prev_err_opt, rlang_backtrace_on_error = prev_bt_opt),
+    options(error = prev_err_opt, rlang_backtrace_on_error = prev_bt_opt),    #nolint
     add = TRUE)
 
   # --------------------------------------------------------------------------

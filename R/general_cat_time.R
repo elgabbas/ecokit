@@ -75,10 +75,10 @@ cat_time <- function(
 
   # Format date / time
   if (cat_date && cat_timestamp) {
-    time_now <- format(time_now, "%d/%m/%Y %X")
+    time_now <- format(time_now, "%d/%m/%Y %X") #nolint: nonportable_path_lintr
     time_now_2 <- paste0(" - ", time_now)
   } else if (cat_date) {
-    time_now <- format(time_now, "%d/%m/%Y")
+    time_now <- format(time_now, "%d/%m/%Y") #nolint: nonportable_path_lintr
     time_now_2 <- paste0(" - ", time_now)
   } else if (cat_timestamp) {
     time_now <- format(time_now, "%X")
@@ -87,13 +87,13 @@ cat_time <- function(
     time_now <- time_now_2 <- ""
   }
 
-  n_lines_before <- stringr::str_extract(text, "^\\n+") %>%
+  n_lines_before <- stringr::str_extract(text, "^\\n+") %>% #nolint: nonportable_path_lintr
     stringr::str_count("\n")
   if (is.na(n_lines_before)) {
     n_lines_before <- 0L
   }
 
-  text <- stringr::str_remove(text, "^\\n+")
+  text <- stringr::str_remove(text, "^\\n+") #nolint: nonportable_path_lintr
 
   if (text == "") {
     if (n_lines_before > 0L) {

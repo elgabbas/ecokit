@@ -56,13 +56,13 @@ source_silent <- function(file = NULL, messages = TRUE, warnings = TRUE, ...) {
 
   if (messages && warnings) {
     file %>%
-      source(...) %>%
+      source(...) %>%       #nolint
       utils::capture.output(file = nullfile())
   }
 
   if (isFALSE(messages) && isFALSE(warnings)) {
     file %>%
-      source(...) %>%
+      source(...) %>%    #nolint
       utils::capture.output(file = nullfile()) %>%
       suppressMessages() %>%
       suppressWarnings()
@@ -70,14 +70,14 @@ source_silent <- function(file = NULL, messages = TRUE, warnings = TRUE, ...) {
 
   if (messages && isFALSE(warnings)) {
     file %>%
-      source(...) %>%
+      source(...) %>%    #nolint
       utils::capture.output(file = nullfile()) %>%
       suppressWarnings()
   }
 
   if (isFALSE(messages) && warnings) {
     file %>%
-      source(...) %>%
+      source(...) %>%    #nolint
       utils::capture.output(file = nullfile()) %>%
       suppressMessages()
   }

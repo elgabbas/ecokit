@@ -52,7 +52,7 @@
 #'   package_remote_sha(NULL)
 #' }
 
-package_remote_sha <- function(..., lib_path = .libPaths()[1L]) {
+package_remote_sha <- function(..., lib_path = .libPaths()[1L]) {  #nolint
 
   package <- NULL
 
@@ -107,14 +107,11 @@ package_remote_sha <- function(..., lib_path = .libPaths()[1L]) {
       invalid_names = invalid_names)
   }
 
-  # nolint start
-
   # Retrieve library status once for efficiency and map over packages
-  lib_status <- ecokit::add_missing_columns(
+  lib_status <- ecokit::add_missing_columns(    #nolint
     data = pak::lib_status(lib = lib_path),
     fill_value = NA_character_, "remotesha") %>%
     dplyr::filter(package %in% package_names)
-  # nolint end
 
   output <- purrr::map_chr(
     .x = package_names,

@@ -109,7 +109,7 @@ load_packages <- function(
     purrr::walk(
       .x = packages_to_load,
       .f = ~{
-        library(
+        library(    #nolint
           package = .x, character.only = TRUE,
           quietly = TRUE, warn.conflicts = FALSE) %>%
           suppressWarnings() %>%

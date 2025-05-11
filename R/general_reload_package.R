@@ -61,7 +61,7 @@ reload_package <- function(...) {
         message("Reloading '", crayon::bold(pkg), "'")
         tryCatch(
           expr = {
-            detach(
+            detach(   #nolint
               name = paste0("package:", pkg), character.only = TRUE,
               unload = TRUE, force = TRUE)
           },
@@ -84,7 +84,7 @@ reload_package <- function(...) {
 
       # Reload using devtools::reload
       devtools::reload(pkg = pkg_path, quiet = TRUE)
-      suppressPackageStartupMessages(library(pkg, character.only = TRUE))
+      suppressPackageStartupMessages(library(pkg, character.only = TRUE))  #nolint
     })
 
   invisible(NULL)

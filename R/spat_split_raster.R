@@ -154,7 +154,7 @@ split_raster <- function(
   }
 
   if (plot) {
-    graphics::par(mfrow = c(n_rows, n_columns))
+    graphics::par(mfrow = c(n_rows, n_columns))    #nolint
     for (i in seq_along(r_list)) {
       raster::plot(
         r_list[[i]], axes = FALSE, legend = FALSE, bty = "n",  box = FALSE)

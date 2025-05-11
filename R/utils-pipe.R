@@ -20,7 +20,7 @@ NULL
 
 
 #' @noRd
-.onAttach <- function(...) {
+.onAttach <- function(...) {    #nolint
 
   # Retrieve the package version and date dynamically
   package_version_info <- utils::packageVersion("ecokit")

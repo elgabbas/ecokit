@@ -89,9 +89,9 @@ save_session_info <- function(
         cat_date = FALSE),
       file = file_name, append = TRUE)
 
-    sink(file_name, append = TRUE)
+    sink(file_name, append = TRUE)    #nolint
     print.data.frame(tibble::tibble(session_info), row.names = FALSE)
-    sink()
+    sink()    #nolint
   }
 
   message("Saving session info to:\n", crayon::blue(file_name))
