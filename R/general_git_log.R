@@ -21,8 +21,7 @@
 #'   `return_log = FALSE`, the function is called for its side effect of
 #'   printing to the console and returns `invisible(NULL)`.
 #' @note The function stops with an error if the path does not exist, the OS is
-#'   unsupported, Git is not installed, or `n_commits` is invalid. Supports
-#'   Windows and Linux only.
+#'   unsupported, Git is not installed, or `n_commits` is invalid.
 #' @name git_log
 #' @author Ahmed El-Gabbas
 #' @export
@@ -64,9 +63,9 @@ git_log <- function(path = ".", n_commits = NULL, return_log = FALSE) {
 
   # Determine OS
   os <- ecokit::os()
-  if (!os %in% c("Windows", "Linux")) {
+  if (!os %in% c("Windows", "Linux", "Darwin")) {
     ecokit::stop_ctx(
-      "Unsupported OS. Only Windows and Linux are supported", os = os)
+      "Unsupported OS. Only Windows, macOS and Linux are supported", os = os)
   }
 
   # Construct command to check if directory is a Git repo

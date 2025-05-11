@@ -38,9 +38,8 @@ system_command <- function(command, r_object = TRUE, ...) {
   }
 
   if (ecokit::os() == "Windows") {
-    output <- shell(cmd = command, intern = TRUE, ...)
-  }
-  if (ecokit::os() == "Linux") {
+    output <- shell(cmd = command, intern = TRUE, ...) # nolint: object_usage_linter
+  } else {
     output <- system(command = command, intern = TRUE, ...)
   }
 

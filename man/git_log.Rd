@@ -31,8 +31,7 @@ showing commit hashes, references, messages, relative dates, and authors.
 }
 \note{
 The function stops with an error if the path does not exist, the OS is
-unsupported, Git is not installed, or \code{n_commits} is invalid. Supports
-Windows and Linux only.
+unsupported, Git is not installed, or \code{n_commits} is invalid.
 }
 \examples{
 # Show the most recent commit
