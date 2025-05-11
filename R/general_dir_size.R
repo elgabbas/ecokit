@@ -101,17 +101,17 @@ dir_size <- function(directory, human_readable = TRUE, recursive = TRUE) {
   # Normalize path
   directory <- ecokit::normalize_path(directory)
 
+  # Check directory accessibility (read permission)
+  if (file.access(directory, mode = 4L) != 0L) {
+    ecokit::stop_ctx("Directory is not readable: ", directory = directory)
+  }
+
   # Check if directory exists and is a directory
   if (!fs::dir_exists(directory)) {
     ecokit::stop_ctx("Directory does not exist", directory = directory)
   }
   if (!fs::is_dir(directory)) {
     ecokit::stop_ctx("Path is not a directory", directory = directory)
-  }
-
-  # Check directory accessibility (read permission)
-  if (file.access(directory, mode = 4L) != 0L) {
-    ecokit::stop_ctx("Directory is not readable: ", directory = directory)
   }
 
   # Collect file information
