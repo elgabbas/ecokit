@@ -4,7 +4,7 @@
 \alias{cc}
 \title{Concatenate without quotes}
 \usage{
-cc(..., collapse = NULL)
+cc(..., collapse = NULL, unique = FALSE, sort = FALSE)
 }
 \arguments{
 \item{...}{One or more inputs: unquoted symbols (e.g., \code{A}, \code{B}), quoted
@@ -15,13 +15,16 @@ quoted.}
 \item{collapse}{An optional single character string to separate concatenated
 elements (e.g., \code{""}, " "\code{or}","\verb{). If }NULL` (default), returns a
 character vector of individual elements.}
+
+\item{unique}{Logical. If \code{TRUE}, returns only unique values. Default is
+\code{FALSE}.}
+
+\item{sort}{Logical. If \code{TRUE}, sorts the result alphanumerically using
+\link[gtools:mixedsort]{gtools::mixedsort}. Default is \code{FALSE}.}
 }
 \value{
 A single character string with concatenated inputs (if \code{collapse} is
 a string) or a character vector (if `collapse = NULL``).
-
-A character string representing the concatenated values of the input
-expressions.
 }
 \description{
 Concatenates one or more inputs into a single string without quotes. Inputs
@@ -48,6 +51,13 @@ cc(A, B, 10)
 cc(1:3, "test")
 
 cc(1:3, cc(test1, test2), names(iris))
+
+# remove duplicates
+cc(10:3, 3:5, 5:8, unique = TRUE)
+
+# sort alphanumerically
+cc(A1, A2, A10, A010, A25, sort = TRUE)
+sort(c("A1", "A2", "A10", "A010", "A25")) # base sort
 
 \dontrun{
   # Invalid symbol (will error)

@@ -2,24 +2,50 @@
 % Please edit documentation in R/general_replace_space.R
 \name{replace_space}
 \alias{replace_space}
-\title{Replace space with underscore in a string}
+\title{Replace whitespace with underscores}
 \usage{
-replace_space(x)
+replace_space(x, replacement = "_")
 }
 \arguments{
-\item{x}{Character. The string in which spaces will be replaced with
-underscores.}
+\item{x}{A character vector. Each element is processed to replace whitespace
+with underscores. Missing values (\code{NA}) are preserved.}
+
+\item{replacement}{A single character string to replace whitespace. Defaults
+to \code{"_"} (underscore). Must be of length 1.}
 }
 \value{
-A character string with all spaces replaced by underscores.
+A character vector of the same length as \code{x}, with all whitespace
+characters replaced by \code{replacement}. Missing values (\code{NA}) are returned
+unchanged.
 }
 \description{
-A simple wrapper function for \code{stringr::str_replace_all} that replaces all
-spaces with underscores. It is useful for formatting strings to be used in
-contexts where spaces are not allowed or desired.
+Replaces all whitespace characters (spaces, tabs, etc.) with underscores in a
+character vector. This is a wrapper around \code{\link[stringr:str_replace]{stringr::str_replace_all()}} for
+formatting strings in contexts where whitespace is not allowed (e.g., file
+names, variable names). Optionally, a custom replacement character can be
+specified.
 }
 \examples{
+# Basic usage
 replace_space("Genus species")
 
-replace_space("Genus species subspecies")
+# Vector input
+replace_space(c("Genus species1", "Genus species2"))
+replace_space(c("Genus species 1", "Genus species 2"))
+
+# Multiple whitespace types
+replace_space("Genus   species\tname")
+
+# Custom replacement
+replace_space("Genus species", replacement = "-")
+
+# Handle missing values
+replace_space(c("Genus species 1", NA, "Genus species 2"))
+
+# Empty strings
+replace_space("")
+}
+\seealso{
+\code{\link[stringr:str_replace]{stringr::str_replace_all()}} for the underlying function, \code{\link[=gsub]{gsub()}}
+for base R alternative.
 }

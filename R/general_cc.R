@@ -16,11 +16,13 @@
 #' @param collapse An optional single character string to separate concatenated
 #'   elements (e.g., `""`, " "` or `","`). If `NULL` (default), returns a
 #'   character vector of individual elements.
+#' @param unique Logical. If `TRUE`, returns only unique values. Default is
+#'   `FALSE`.
+#' @param sort Logical. If `TRUE`, sorts the result alphanumerically using
+#'   [gtools::mixedsort]. Default is `FALSE`.
 #' @return A single character string with concatenated inputs (if `collapse` is
 #'   a string) or a character vector (if `collapse = NULL``).
 #' @author Ahmed El-Gabbas
-#' @return A character string representing the concatenated values of the input
-#'   expressions.
 #' @export
 #' @name cc
 #' @examples
@@ -43,6 +45,13 @@
 #'
 #' cc(1:3, cc(test1, test2), names(iris))
 #'
+#' # remove duplicates
+#' cc(10:3, 3:5, 5:8, unique = TRUE)
+#'
+#' # sort alphanumerically
+#' cc(A1, A2, A10, A010, A25, sort = TRUE)
+#' sort(c("A1", "A2", "A10", "A010", "A25")) # base sort
+#'
 #' \dontrun{
 #'   # Invalid symbol (will error)
 #'   cc(12a)
@@ -51,8 +60,7 @@
 #'   cc(`12a`)
 #' }
 
-
-cc <- function(..., collapse = NULL) {
+cc <- function(..., collapse = NULL, unique = FALSE, sort = FALSE) {
 
   # Validate collapse argument
   if (!is.null(collapse) &&
@@ -98,6 +106,14 @@ cc <- function(..., collapse = NULL) {
       }) %>%
     unlist() %>%
     stringr::str_remove_all("`")
+
+  if (unique) {
+    result <- unique(result)
+  }
+
+  if (sort) {
+    result <- gtools::mixedsort(result)
+  }
 
   if (is.null(collapse)) {
     result

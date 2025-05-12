@@ -7,6 +7,7 @@
         "abbrev",
         "alphanum",
         "backquoted",
+        "backticked",
         "bbox",
         "byrow",
         "Cgreen",
