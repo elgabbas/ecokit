@@ -17,6 +17,3 @@ is running on.
 os()
 
 }
-\author{
-Ahmed El-Gabbas
-}

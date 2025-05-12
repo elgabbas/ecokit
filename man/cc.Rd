@@ -4,26 +4,58 @@
 \alias{cc}
 \title{Concatenate without quotes}
 \usage{
-cc(...)
+cc(..., collapse = NULL)
 }
 \arguments{
-\item{...}{strings to be concatenated.}
+\item{...}{One or more inputs: unquoted symbols (e.g., \code{A}, \code{B}), quoted
+strings (e.g., \code{"text"}), numbers (e.g., \code{10}), or simple expressions
+(e.g., \code{1:3}). Invalid R symbols (e.g., \verb{12a}) will cause an error unless
+quoted.}
+
+\item{collapse}{An optional single character string to separate concatenated
+elements (e.g., \code{""}, " "\code{or}","\verb{). If }NULL` (default), returns a
+character vector of individual elements.}
 }
 \value{
+A single character string with concatenated inputs (if \code{collapse} is
+a string) or a character vector (if `collapse = NULL``).
+
 A character string representing the concatenated values of the input
 expressions.
 }
 \description{
-This function takes one or more expressions and concatenates them into a
-single string without quotes. It is particularly useful for creating strings
-from variable names or expressions without including the usual quotes.
+Concatenates one or more inputs into a single string without quotes. Inputs
+can be unquoted symbols (e.g., variable names), quoted strings, numbers, or
+simple expressions. Useful for creating strings from variable names or data
+without including quotes.
 }
 \examples{
+# Concatenate symbols
 cc(A, B, C)
 
+# Concatenate symbols into a single string
+cc(A, B, C, collapse = "")
+cc(A, B, C, collapse = " ")
+cc(A, B, C, collapse = "|")
+
+# Mix symbols and strings
 cc(A, B, "A and B")
 
-cc(A, B, "A and B", 10)
+# Include numbers
+cc(A, B, 10)
+
+# Handle vectors
+cc(1:3, "test")
+
+cc(1:3, cc(test1, test2), names(iris))
+
+\dontrun{
+  # Invalid symbol (will error)
+  cc(12a)
+  # Valid when quoted or backticked
+  cc("12a")
+  cc(`12a`)
+}
 }
 \author{
 Ahmed El-Gabbas

@@ -4,34 +4,104 @@
 
 #' Concatenate without quotes
 #'
-#' This function takes one or more expressions and concatenates them into a
-#' single string without quotes. It is particularly useful for creating strings
-#' from variable names or expressions without including the usual quotes.
+#' Concatenates one or more inputs into a single string without quotes. Inputs
+#' can be unquoted symbols (e.g., variable names), quoted strings, numbers, or
+#' simple expressions. Useful for creating strings from variable names or data
+#' without including quotes.
 #'
-#' @param ... strings to be concatenated.
+#' @param ... One or more inputs: unquoted symbols (e.g., `A`, `B`), quoted
+#'   strings (e.g., `"text"`), numbers (e.g., `10`), or simple expressions
+#'   (e.g., `1:3`). Invalid R symbols (e.g., `12a`) will cause an error unless
+#'   quoted.
+#' @param collapse An optional single character string to separate concatenated
+#'   elements (e.g., `""`, " "` or `","`). If `NULL` (default), returns a
+#'   character vector of individual elements.
+#' @return A single character string with concatenated inputs (if `collapse` is
+#'   a string) or a character vector (if `collapse = NULL``).
 #' @author Ahmed El-Gabbas
 #' @return A character string representing the concatenated values of the input
 #'   expressions.
 #' @export
 #' @name cc
 #' @examples
+#' # Concatenate symbols
 #' cc(A, B, C)
 #'
+#' # Concatenate symbols into a single string
+#' cc(A, B, C, collapse = "")
+#' cc(A, B, C, collapse = " ")
+#' cc(A, B, C, collapse = "|")
+#'
+#' # Mix symbols and strings
 #' cc(A, B, "A and B")
 #'
-#' cc(A, B, "A and B", 10)
+#' # Include numbers
+#' cc(A, B, 10)
+#'
+#' # Handle vectors
+#' cc(1:3, "test")
+#'
+#' cc(1:3, cc(test1, test2), names(iris))
+#'
+#' \dontrun{
+#'   # Invalid symbol (will error)
+#'   cc(12a)
+#'   # Valid when quoted or backticked
+#'   cc("12a")
+#'   cc(`12a`)
+#' }
 
-cc <- function(...) {
 
-  rlang::enexprs(...) %>%
-    purrr::map_chr(
+cc <- function(..., collapse = NULL) {
+
+  # Validate collapse argument
+  if (!is.null(collapse) &&
+      (!is.character(collapse) || length(collapse) != 1L)) {
+    ecokit::stop_ctx(
+      "`collapse` must be `NULL` or a single character string.",
+      collapse = collapse)
+  }
+
+  # Capture all inputs as expressions
+  inputs <- tryCatch(
+    rlang::enexprs(...),
+    error = function(e) {
+      ecokit::stop_ctx(
+        paste0(
+          "Invalid input: ", e$message,
+          ". Ensure inputs are valid R symbols, quoted strings, ",
+          "or simple expressions."))
+    })
+
+  result <- inputs %>%
+    purrr::map(
       .f = ~ {
+
         item_class <- class(.x)
+
         if (inherits(.x, "name")) {
+          # Unquoted symbols (e.g., A, B)
           rlang::as_string(.x)
         } else {
-          as.character(.x)
+          # Strings, numbers, or expressions
+          tryCatch(
+            expr = {
+              # Evaluate if possible (e.g., 1:3, numbers)
+              evaluated <- eval(.x, envir = parent.frame())
+              # Convert to string
+              as.character(evaluated)
+            },
+            error = function(e) {
+              deparse(.x)
+            })
         }
       }) %>%
+    unlist() %>%
     stringr::str_remove_all("`")
+
+  if (is.null(collapse)) {
+    result
+  } else {
+    paste(result, collapse = collapse)
+  }
 }
