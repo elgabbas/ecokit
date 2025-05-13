@@ -94,7 +94,11 @@ returning a description of the file type.</p></li>
 <ul><li><p><code>file_extension</code> does not check file existence or content, only parsing the
 extension from the file name.</p></li>
 <li><p><code>file_type</code> relies on the system's <code>file</code> command, so results may vary
-across platforms.</p></li>
+across platforms. The <code>file</code> system command on Windows (e.g., GnuWin32 or
+other ports) often misidentifies ZIP files as "data" instead of "Zip archive
+data, at least v2.0 to extract", which GNU <code>file</code> correctly reports on
+Unix-like systems (Linux, macOS, Git Bash). This is due to differences in
+<code>file</code> implementations and Windows path handling.</p></li>
 </ul></div>
     <div class="section level2">
     <h2 id="author">Author<a class="anchor" aria-label="anchor" href="#author"></a></h2>
