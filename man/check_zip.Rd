@@ -25,6 +25,7 @@ invalid or if \code{unzip} is unavailable.
 Requires the \code{unzip} system command.
 }
 \examples{
+
 # |||||||||||||||||||||||||||||||||||||||
 # Create ZIP files
 # |||||||||||||||||||||||||||||||||||||||

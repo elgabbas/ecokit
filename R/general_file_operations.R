@@ -27,7 +27,12 @@
 #' - `file_extension` does not check file existence or content, only parsing the
 #' extension from the file name.
 #' - `file_type` relies on the system's `file` command, so results may vary
-#' across platforms.
+#' across platforms. The `file` system command on Windows (e.g., GnuWin32 or
+#' other ports) often misidentifies ZIP files as "data" instead of "Zip archive
+#' data, at least v2.0 to extract", which GNU `file` correctly reports on
+#' Unix-like systems (Linux, macOS, Git Bash). This is due to differences in
+#' `file` implementations and Windows path handling.
+#'
 #' @examples
 #' load_packages(terra)
 #'
@@ -61,7 +66,6 @@ file_extension <- function(file) {
 
   tools::file_ext(file)
 }
-
 
 ## |------------------------------------------------------------------------| #
 # file_size ----
@@ -112,6 +116,7 @@ file_type <- function(file) {
   }
 
   output <- paste0('file "', ecokit::normalize_path(file), '"') %>%
+    noquote() %>%
     system(intern = TRUE) %>%
     stringr::str_extract_all(": .+", simplify = TRUE) %>%
     as.vector() %>%

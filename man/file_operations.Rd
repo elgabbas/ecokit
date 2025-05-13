@@ -51,7 +51,11 @@ returning a description of the file type.
 \item \code{file_extension} does not check file existence or content, only parsing the
 extension from the file name.
 \item \code{file_type} relies on the system's \code{file} command, so results may vary
-across platforms.
+across platforms. The \code{file} system command on Windows (e.g., GnuWin32 or
+other ports) often misidentifies ZIP files as "data" instead of "Zip archive
+data, at least v2.0 to extract", which GNU \code{file} correctly reports on
+Unix-like systems (Linux, macOS, Git Bash). This is due to differences in
+\code{file} implementations and Windows path handling.
 }
 }
 \examples{

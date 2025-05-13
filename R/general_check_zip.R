@@ -19,6 +19,7 @@
 #' @export
 #' @note Requires the `unzip` system command.
 #' @examples
+#'
 #' # |||||||||||||||||||||||||||||||||||||||
 #' # Create ZIP files
 #' # |||||||||||||||||||||||||||||||||||||||
@@ -93,11 +94,14 @@ check_zip <- function(file = NULL) {
     return(FALSE)
   }
 
-  in_file_type <- ecokit::file_type(file)
-  if (!startsWith(in_file_type, "Zip archive")) {
-    warning(
-      "Not a valid ZIP file: ", ecokit::normalize_path(file), call. = FALSE)
-    return(FALSE)
+  # `file` system command gives "data" under windows, not "Zip archive"
+  if (ecokit::os() != "Windows") {
+    in_file_type <- ecokit::file_type(file)
+    if (!startsWith(in_file_type, "Zip archive")) {
+      warning(
+        "Not a valid ZIP file: ", ecokit::normalize_path(file), call. = FALSE)
+      return(FALSE)
+    }
   }
 
   # Validate the ZIP file
