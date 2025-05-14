@@ -70,7 +70,11 @@ check_tiff <- function(x = NULL, warning = TRUE) {
     return(FALSE)
   }
 
+  out_value <- terra::rast(x) %>%
+    terra::hasValues() %>%
+    suppressWarnings()
+
   # # ..................................................................... ###
 
-  return(terra::hasValues(terra::rast(x)))
+  return(out_value)
 }
