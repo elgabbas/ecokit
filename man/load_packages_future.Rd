@@ -45,18 +45,19 @@ package names for loading in workers, typically via the \code{future.packages}
 argument in functions like \code{\link[future.apply:future_lapply]{future.apply::future_lapply()}}.
 }
 \examples{
-pkg_init <- loaded_packages()
+(pkg_init <- loaded_packages())
+pkg_to_load <- c("tidyterra", "lubridate", "tidyr", "sf", "scales")
 
 # future::sequential
-load_packages_future("tidyterra", "future::sequential")
+load_packages_future(pkg_to_load, "future::sequential")
 setdiff(loaded_packages(), pkg_init)
 
 # future::multisession
-load_packages_future("tidyterra", "future::multisession")
+load_packages_future(pkg_to_load, "future::multisession")
 setdiff(loaded_packages(), pkg_init)
 
 # future::multicore
-load_packages_future("tidyterra", "future::multicore")
+load_packages_future(pkg_to_load, "future::multicore")
 setdiff(loaded_packages(), pkg_init)
 }
 \author{
