@@ -32,6 +32,7 @@ reference:
   - stop_ctx
   - package_functions
   - load_packages
+  - load_packages_future
   - reload_package
   - loaded_packages
   - package_remote_sha
@@ -39,6 +40,7 @@ reference:
   - check_args
   - function_arguments
   - record_arguments
+  - used_packages
 
 - title: File / data operations
   contents:
