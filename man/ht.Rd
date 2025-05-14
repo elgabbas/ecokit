@@ -2,37 +2,49 @@
 % Please edit documentation in R/general_ht.R
 \name{ht}
 \alias{ht}
-\title{Print head and tail of data frame}
+\title{Print head and tail of a data frame or vector with indices}
 \usage{
 ht(data = NULL, n_rows = 5L)
 }
 \arguments{
-\item{data}{\code{data.frame}. A data frame to print. This parameter cannot be
-\code{NULL}.}
+\item{data}{A data frame or vector (numeric, character, or other atomic
+types). This parameter cannot be \code{NULL}.}
 
-\item{n_rows}{Integer. Number of rows to print from both the head and tail of
-the data frame. Defaults to 5.}
+\item{n_rows}{Integer. Number of rows (for data frames) or elements (for
+vectors) to print from both the head and tail. Defaults to 5.}
 }
 \value{
-The function is used for its side effect (printing) and does not
-return any value.
+The function is used for its side effect (printing) and returns
+\code{invisible(NULL)}.
 }
 \description{
-This function takes a data frame and an optional number of rows to print from
-both the top (head) and bottom (tail) of the data frame. It is useful for
-quickly inspecting the first few and last few rows of a large data frame to
-understand its structure and contents.
+Prints the first and last few rows of a data frame or elements of a vector,
+displaying row numbers for data frames or indices for vectors in a style
+similar to \code{data.table}. Useful for quickly inspecting the structure and
+contents of large data frames or vectors, with explicit row or index numbers.
 }
 \examples{
-ht(mtcars)
+# Data frame examples
 
-# -------------------------------------------
+ht(mtcars)
 
 ht(data = mtcars, n_rows = 2)
 
+ht(data = mtcars, n_rows = 6)
+
 # -------------------------------------------
 
-ht(data = mtcars, n_rows = 6)
+# Vector examples
+
+ht(1:100)
+
+ht(letters)
+
+colour_vect <- colours()
+colour_vect <- seq_along(colour_vect) \%>\%
+  stats::setNames(paste0("colour:", colour_vect))
+head(colour_vect)
+ht(colour_vect)
 }
 \author{
 Ahmed El-Gabbas

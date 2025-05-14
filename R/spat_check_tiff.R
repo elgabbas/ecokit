@@ -50,9 +50,21 @@ check_tiff <- function(x = NULL, warning = TRUE) {
   # # ..................................................................... ###
 
   # Check file metadata using terra's describe
-  metadata_okay <- as.character(terra::describe(x = x)) %>%
+
+  metadata_okay <- terra::describe(x = x) %>%
+    as.character() %>%
     stringr::str_detect("Driver") %>%
-    any()
+    any() %>%
+    # suppress known warnings that could happen in some cases
+    # https://github.com/rspatial/terra/issues/1212
+    # https://github.com/rspatial/terra/issues/1832
+    # https://stackoverflow.com/questions/78098166
+    #   Warning messages:
+    #   1: In .gdalinfo(x, options, open_opt) :
+    #   GDAL Message 1: dimension #1 (easting) is not a Longitude/X dimension.
+    #   2: In .gdalinfo(x, options, open_opt) :
+    #   GDAL Message 1: dimension #0 (northing) is not a Latitude/Y dimension.
+    suppressWarnings()
 
   if (isFALSE(metadata_okay)) {
     return(FALSE)

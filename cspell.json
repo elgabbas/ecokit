@@ -35,6 +35,8 @@
         "fromdisk",
         "Gabbas",
         "GBIF",
+        "GDAL",
+        "gdalinfo",
         "Gdat",
         "gdata",
         "ggplot",
