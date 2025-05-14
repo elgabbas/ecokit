@@ -47,6 +47,7 @@
 <url><loc>https://elgabbas.github.io/ecokit/reference/load_as.html</loc></url>
 <url><loc>https://elgabbas.github.io/ecokit/reference/load_multiple.html</loc></url>
 <url><loc>https://elgabbas.github.io/ecokit/reference/load_packages.html</loc></url>
+<url><loc>https://elgabbas.github.io/ecokit/reference/load_packages_future.html</loc></url>
 <url><loc>https://elgabbas.github.io/ecokit/reference/loaded_packages.html</loc></url>
 <url><loc>https://elgabbas.github.io/ecokit/reference/n_decimals.html</loc></url>
 <url><loc>https://elgabbas.github.io/ecokit/reference/n_unique.html</loc></url>
@@ -81,5 +82,6 @@
 <url><loc>https://elgabbas.github.io/ecokit/reference/stop_ctx.html</loc></url>
 <url><loc>https://elgabbas.github.io/ecokit/reference/system_command.html</loc></url>
 <url><loc>https://elgabbas.github.io/ecokit/reference/text_to_coordinates.html</loc></url>
+<url><loc>https://elgabbas.github.io/ecokit/reference/used_packages.html</loc></url>
 </urlset>
 
