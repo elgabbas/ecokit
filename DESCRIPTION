@@ -2,7 +2,7 @@ Type: Package
 Package: ecokit
 Title: Tools for Ecological and General Utilities
 Version: 0.1.0
-Date: 2025-05-14
+Date: 2025-05-15
 Authors@R: 
     person("Ahmed", "El-Gabbas", , "elgabbas@outlook.com", role = c("aut", "cre"))
 Description: A collection of utility functions designed for ecologists and

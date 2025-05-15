@@ -15,8 +15,9 @@ exist.}
 file does not exist.}
 }
 \value{
-Logical; returns \code{TRUE} if the tiff file is not corrupted (i.e., it
-can be described and contains "Driver" in its description), and \code{FALSE}
+Logical; returns \code{TRUE} if the TIFF file is not corrupted (i.e., the
+file exists, can be described with a "Driver" in its metadata, has values,
+and its data can be read without errors or warnings), and \code{FALSE}
 otherwise.
 }
 \description{
@@ -35,6 +36,9 @@ check_tiff(x = f)
 (temp_file <- tempfile(fileext = ".tif"))
 fs::file_create(temp_file)
 check_tiff(x = temp_file)
+
+# clean up
+fs::file_delete(temp_file)
 }
 \author{
 Ahmed El-Gabbas

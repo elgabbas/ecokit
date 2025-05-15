@@ -16,8 +16,9 @@
 #'   file does not exist.
 #' @name check_tiff
 #' @author Ahmed El-Gabbas
-#' @return Logical; returns `TRUE` if the tiff file is not corrupted (i.e., it
-#'   can be described and contains "Driver" in its description), and `FALSE`
+#' @return Logical; returns `TRUE` if the TIFF file is not corrupted (i.e., the
+#'   file exists, can be described with a "Driver" in its metadata, has values,
+#'   and its data can be read without errors or warnings), and `FALSE`
 #'   otherwise.
 #' @export
 #' @examples
@@ -29,6 +30,9 @@
 #' (temp_file <- tempfile(fileext = ".tif"))
 #' fs::file_create(temp_file)
 #' check_tiff(x = temp_file)
+#'
+#' # clean up
+#' fs::file_delete(temp_file)
 
 check_tiff <- function(x = NULL, warning = TRUE) {
 
@@ -75,6 +79,59 @@ check_tiff <- function(x = NULL, warning = TRUE) {
     suppressWarnings()
 
   # # ..................................................................... ###
+  # # ..................................................................... ###
+
+  # Test reading data from multiple rows
+
+  # terra::hasValues() alone is insufficient, as some TIFF files may report
+  # values but contain corrupted data, triggering warnings (e.g.,
+  # "TIFFFillStrip" errors) or errors when reading. The following test reads the
+  # first, middle, and last rows to detect such issues.
+
+  if (out_value) {
+
+    r <- terra::rast(x)
+    rows_to_check <- c(1L, floor(terra::nrow(r) / 2L), terra::nrow(r))
+
+    # Apply a function to each row in rows_to_check to test data reading
+    out_value <- purrr::map(
+      .x = rows_to_check,
+      .f = ~ {
+        # Initialize a flag to track if a warning occurs during the read
+        warned <- FALSE
+        # Attempt to read the row, capturing errors and warnings
+        success <- tryCatch(
+          expr = {
+            # Handle warnings without interrupting the read operation
+            withCallingHandlers(
+              expr = {
+                # Read one row of data from the raster using terra::values()
+                v <- terra::values(r, row = .x, nrows = 1L)
+                # Return TRUE if the read succeeds
+                TRUE
+              },
+              # Define a handler for warnings during the read
+              warning = function(w) {
+                # Set the warned flag to TRUE if a warning occurs
+                warned <- TRUE
+                # Muffle the warning to prevent console output
+                invokeRestart("muffleWarning")
+              })
+          },
+          # Define a handler for errors during the read
+          error = function(e) {
+            # Return FALSE if an error occurs (read failure)
+            FALSE
+          })
+        # Return a named list with success and warned states for the row
+        list(success = success, warned = warned)
+      }) %>%
+      # Check if any row has an error (success = FALSE) or warning (warned =
+      # TRUE)
+      purrr::some(~ !.x$success || .x$warned) %>%
+      # Invert the result: TRUE if no errors/warnings, FALSE if any occur
+      magrittr::not()
+  }
 
   return(out_value)
 }
