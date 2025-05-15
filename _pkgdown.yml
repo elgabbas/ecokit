@@ -112,7 +112,6 @@ reference:
   - nc_global_attributes
   - scale_0_1
   - set_raster_crs
-  - set_raster_values
   - add_geometric_features
   - range_to_new_value
 

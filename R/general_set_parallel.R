@@ -160,9 +160,13 @@ set_parallel <- function(
 
     if (show_log) {
       ecokit::cat_time(
-        paste(
-          "Setting up", ifelse(n_cores > 1L, "parallel", "sequential"),
-          "processing with", n_cores, "core(s)"), ...)
+        paste0(
+          "Setting up ",
+          ifelse(n_cores > 1L, "parallel", "sequential"),
+          " processing (", n_cores,
+          ifelse(n_cores > 1L, " cores)", " core)"),
+          ". Strategy: `", strategy, "`"),
+        ...)
     }
 
     withr::local_options(
