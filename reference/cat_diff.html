@@ -57,6 +57,7 @@ print a session summary.</p>
 <span>  cat_info <span class="op">=</span> <span class="cn">FALSE</span>,</span>
 <span>  level <span class="op">=</span> <span class="fl">0L</span>,</span>
 <span>  cat_timestamp <span class="op">=</span> <span class="cn">FALSE</span>,</span>
+<span>  verbose <span class="op">=</span> <span class="cn">TRUE</span>,</span>
 <span>  <span class="va">...</span></span>
 <span><span class="op">)</span></span></code></pre></div>
     </div>
@@ -96,6 +97,12 @@ message: "   &gt;&gt;&gt;   ". Default is <code>0</code>.</p></dd>
 Default is <code>TRUE</code>. If <code>FALSE</code>, only the text is printed.</p></dd>
 
 
+<dt id="arg-verbose">verbose<a class="anchor" aria-label="anchor" href="#arg-verbose"></a></dt>
+<dd><p>logical; whether to print output to console. Default is
+<code>TRUE</code>. If <code>FALSE</code>, the function does nothing. This is useful to suppress
+the function output in certain contexts.</p></dd>
+
+
 <dt id="arg--">...<a class="anchor" aria-label="anchor" href="#arg--"></a></dt>
 <dd><p>Additional arguments for <a href="cat_time.html">cat_time</a>.</p></dd>
 
@@ -128,17 +135,17 @@ and does not return any value.</p>
 <span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="co"># print date</span></span></span>
 <span class="r-in"><span><span class="fu">cat_diff</span><span class="op">(</span><span class="va">reference_time</span>, prefix <span class="op">=</span> <span class="st">"Finished in "</span>, cat_timestamp <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> Finished in 00:00:45 - 15:38:47</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> Finished in 00:00:45 - 14:28:29</span>
 <span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="co"># print date and time</span></span></span>
 <span class="r-in"><span><span class="fu">cat_diff</span><span class="op">(</span><span class="va">reference_time</span>, prefix <span class="op">=</span> <span class="st">"Finished in "</span>, cat_date <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> Finished in 00:00:45 - 15/05/2025</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> Finished in 00:00:45 - 16/05/2025</span>
 <span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="co"># show chunk info</span></span></span>
 <span class="r-in"><span><span class="fu">cat_diff</span><span class="op">(</span><span class="va">reference_time</span>, cat_info <span class="op">=</span> <span class="cn">TRUE</span>, prefix <span class="op">=</span> <span class="st">"Finished in "</span><span class="op">)</span></span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> --------------------------------------------------</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> Session summary - 15/05/2025</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> Session summary - 16/05/2025</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> --------------------------------------------------</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
@@ -150,7 +157,7 @@ and does not return any value.</p>
 <span class="r-in"><span>  prefix <span class="op">=</span> <span class="st">"Finished in "</span><span class="op">)</span></span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> --------------------------------------------------</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> Summary of task - 15/05/2025</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> Summary of task - 16/05/2025</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> --------------------------------------------------</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>

@@ -58,6 +58,7 @@ readability of console output in R scripts or during interactive sessions.</p>
 <span>  line_char_rep <span class="op">=</span> <span class="fl">50L</span>,</span>
 <span>  cat_bold <span class="op">=</span> <span class="cn">FALSE</span>,</span>
 <span>  cat_red <span class="op">=</span> <span class="cn">FALSE</span>,</span>
+<span>  verbose <span class="op">=</span> <span class="cn">TRUE</span>,</span>
 <span>  <span class="va">...</span></span>
 <span><span class="op">)</span></span></code></pre></div>
     </div>
@@ -94,6 +95,12 @@ to form a separator line. Default is <code>50</code>.</p></dd>
 
 <dt id="arg-cat-red">cat_red<a class="anchor" aria-label="anchor" href="#arg-cat-red"></a></dt>
 <dd><p>logical; whether to print the text in red. Default is <code>FALSE</code>.</p></dd>
+
+
+<dt id="arg-verbose">verbose<a class="anchor" aria-label="anchor" href="#arg-verbose"></a></dt>
+<dd><p>logical; whether to print output to console. Default is
+<code>TRUE</code>. If <code>FALSE</code>, the function does nothing. This is useful to suppress
+the function output in certain contexts.</p></dd>
 
 
 <dt id="arg--">...<a class="anchor" aria-label="anchor" href="#arg--"></a></dt>
