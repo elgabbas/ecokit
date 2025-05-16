@@ -16,6 +16,9 @@
 #'   line. Default is `"-"`.
 #' @param line_char_rep integer; the number of times the character is repeated
 #'   to form a separator line. Default is `50`.
+#' @param verbose logical; whether to print output to console. Default is
+#'   `TRUE`. If `FALSE`, the function does nothing. This is useful to suppress
+#'   the function output in certain contexts.
 #' @param ... additional arguments to be passed to [base::cat()].
 #' @name cat_sep
 #' @inheritParams cat_time
@@ -41,7 +44,15 @@
 cat_sep <- function(
     n_separators = 1L, sep_lines_before = 0L, sep_lines_after = 1L,
     line_char = "-", line_char_rep = 50L, cat_bold = FALSE, cat_red = FALSE,
-    ...) {
+    verbose = TRUE, ...) {
+
+  # return NULL if verbose is FALSE
+  if (!is.logical(verbose) || length(verbose) != 1L) {
+    ecokit::stop_ctx("`verbose` has to be logic of length 1", verbose = verbose)
+  }
+  if (!verbose) {
+    return(invisible(NULL))
+  }
 
   # ****************************************************************
 

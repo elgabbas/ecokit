@@ -12,6 +12,7 @@ cat_sep(
   line_char_rep = 50L,
   cat_bold = FALSE,
   cat_red = FALSE,
+  verbose = TRUE,
   ...
 )
 }
@@ -33,6 +34,10 @@ to form a separator line. Default is \code{50}.}
 \code{FALSE}.}
 
 \item{cat_red}{logical; whether to print the text in red. Default is \code{FALSE}.}
+
+\item{verbose}{logical; whether to print output to console. Default is
+\code{TRUE}. If \code{FALSE}, the function does nothing. This is useful to suppress
+the function output in certain contexts.}
 
 \item{...}{additional arguments to be passed to \code{\link[base:cat]{base::cat()}}.}
 }

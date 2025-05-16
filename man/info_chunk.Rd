@@ -15,6 +15,7 @@ info_chunk(
   level = 0L,
   msg_n_lines = 1L,
   info_lines_before = 0L,
+  verbose = TRUE,
   ...
 )
 }
@@ -47,6 +48,10 @@ the message. Default is 1.}
 
 \item{info_lines_before}{Integer. Number of extra empty lines to print before
 the message. Default is \code{0L}.}
+
+\item{verbose}{logical; whether to print output to console. Default is
+\code{TRUE}. If \code{FALSE}, the function does nothing. This is useful to suppress
+the function output in certain contexts.}
 
 \item{...}{Additional arguments passed to \link{cat_sep} for customizing
 the separators.}

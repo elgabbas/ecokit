@@ -11,6 +11,7 @@ cat_diff(
   cat_info = FALSE,
   level = 0L,
   cat_timestamp = FALSE,
+  verbose = TRUE,
   ...
 )
 }
@@ -33,6 +34,10 @@ message: "   >>>   ". Default is \code{0}.}
 
 \item{cat_timestamp}{logical; whether to include the time in the timestamp.
 Default is \code{TRUE}. If \code{FALSE}, only the text is printed.}
+
+\item{verbose}{logical; whether to print output to console. Default is
+\code{TRUE}. If \code{FALSE}, the function does nothing. This is useful to suppress
+the function output in certain contexts.}
 
 \item{...}{Additional arguments for \link{cat_time}.}
 }

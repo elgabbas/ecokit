@@ -25,6 +25,9 @@
 #' @param cat_bold logical; whether to print the text in bold. Default is
 #'   `FALSE`.
 #' @param cat_red logical; whether to print the text in red. Default is `FALSE`.
+#' @param verbose logical; whether to print output to console. Default is
+#'   `TRUE`. If `FALSE`, the function does nothing. This is useful to suppress
+#'   the function output in certain contexts.
 #' @param ... additional arguments passed to `cat`.
 #' @name cat_time
 #' @author Ahmed El-Gabbas
@@ -51,10 +54,23 @@
 #'   cat_time("subtask L2", level = 2L)
 #'   cat_time("subtask L3", level = 3L)
 #' }
+#'
+#' # disabling the function output
+#' cat_time(verbose = FALSE)
+
 
 cat_time <- function(
     text = "", msg_n_lines = 1L, cat_timestamp = TRUE, cat_bold = FALSE,
-    cat_red = FALSE, cat_date = FALSE, time_zone = "CET", level = 0L, ...) {
+    cat_red = FALSE, cat_date = FALSE, time_zone = "CET", level = 0L,
+    verbose = TRUE, ...) {
+
+  # return NULL if verbose is FALSE
+  if (!is.logical(verbose) || length(verbose) != 1L) {
+    ecokit::stop_ctx("`verbose` has to be logic of length 1", verbose = verbose)
+  }
+  if (!verbose) {
+    return(invisible(NULL))
+  }
 
   # Validate inputs
   all_arguments <- ls(envir = environment())

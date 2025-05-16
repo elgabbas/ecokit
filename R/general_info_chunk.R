@@ -19,6 +19,9 @@
 #'   Default is `FALSE`.
 #' @param info_lines_before Integer. Number of extra empty lines to print before
 #'   the message. Default is `0L`.
+#' @param verbose logical; whether to print output to console. Default is
+#'   `TRUE`. If `FALSE`, the function does nothing. This is useful to suppress
+#'   the function output in certain contexts.
 #' @param ... Additional arguments passed to [ecokit::cat_sep] for customizing
 #'   the separators.
 #' @inheritParams cat_time
@@ -38,7 +41,16 @@
 info_chunk <- function(
     message = "", cat_date = TRUE, sep_lines_before = 0L, sep_lines_after = 1L,
     cat_bold = FALSE, cat_red = FALSE, cat_timestamp = FALSE, level = 0L,
-    msg_n_lines = 1L, info_lines_before = 0L, ...) {
+    msg_n_lines = 1L, info_lines_before = 0L, verbose = TRUE, ...) {
+
+  # return NULL if verbose is FALSE
+  if (!is.logical(verbose) || length(verbose) != 1L) {
+    ecokit::stop_ctx("`verbose` has to be logic of length 1", verbose = verbose)
+  }
+  if (!verbose) {
+    return(invisible(NULL))
+  }
+
 
   if (is.null(message)) {
     ecokit::stop_ctx("message cannot be NULL", message = message)

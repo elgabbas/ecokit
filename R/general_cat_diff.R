@@ -19,6 +19,9 @@
 #' @param cat_info Logical. If `TRUE`, prints a session summary using
 #'   [ecokit::info_chunk] ("Session summary"). Defaults to `FALSE`.
 #' @param ... Additional arguments for [cat_time].
+#' @param verbose logical; whether to print output to console. Default is
+#'   `TRUE`. If `FALSE`, the function does nothing. This is useful to suppress
+#'   the function output in certain contexts.
 #' @return The function is used for its side effect of printing to the console
 #'   and does not return any value.
 #' @inheritParams cat_time
@@ -70,7 +73,16 @@
 
 cat_diff <- function(
     init_time, chunk_text = "Session summary", prefix = "Completed in ",
-    cat_info = FALSE, level = 0L, cat_timestamp = FALSE, ...) {
+    cat_info = FALSE, level = 0L, cat_timestamp = FALSE, verbose = TRUE, ...) {
+
+  # return NULL if verbose is FALSE
+  if (!is.logical(verbose) || length(verbose) != 1L) {
+    ecokit::stop_ctx("`verbose` has to be logic of length 1", verbose = verbose)
+  }
+  if (!verbose) {
+    return(invisible(NULL))
+  }
+
 
   if (is.null(init_time)) {
     ecokit::stop_ctx("`init_time` cannot be NULL", init_time = init_time)

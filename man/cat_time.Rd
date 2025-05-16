@@ -13,6 +13,7 @@ cat_time(
   cat_date = FALSE,
   time_zone = "CET",
   level = 0L,
+  verbose = TRUE,
   ...
 )
 }
@@ -41,6 +42,10 @@ is \code{CET}.}
 \item{level}{integer; the level at which the message will be printed. If e.g.
 \code{level = 1L}, the following string will be printed at the beginning of the
 message: "   >>>   ". Default is \code{0}.}
+
+\item{verbose}{logical; whether to print output to console. Default is
+\code{TRUE}. If \code{FALSE}, the function does nothing. This is useful to suppress
+the function output in certain contexts.}
 
 \item{...}{additional arguments passed to \code{cat}.}
 }
@@ -74,6 +79,9 @@ cat_time(
   cat_time("subtask L2", level = 2L)
   cat_time("subtask L3", level = 3L)
 }
+
+# disabling the function output
+cat_time(verbose = FALSE)
 }
 \author{
 Ahmed El-Gabbas
