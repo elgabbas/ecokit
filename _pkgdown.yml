@@ -51,6 +51,7 @@ reference:
   - load_multiple
   - check_data
   - check_zip
+  - check_image
   - save_as
   - save_multiple
   - list_to_rdata
