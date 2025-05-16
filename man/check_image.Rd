@@ -2,32 +2,46 @@
 % Please edit documentation in R/general_check_image.R
 \name{check_image}
 \alias{check_image}
-\title{Check the integrity of image files}
+\title{Verify Image File Integrity}
 \usage{
-check_image(file)
+check_image(file, warning = TRUE)
 }
 \arguments{
 \item{file}{A character string specifying the path to the image file.}
+
+\item{warning}{A logical value indicating whether to issue warnings for
+invalid files (e.g., empty files, unrecognized extensions). Defaults to
+\code{TRUE}.}
 }
 \value{
-A logical value: \code{TRUE} if the image file is valid, \code{FALSE}
+A logical value: \code{TRUE} if the file is a valid image or PDF, \code{FALSE}
 otherwise.
 }
 \description{
-This function verifies the integrity of image files (e.g., JPEG, PNG, TIFF,
-PDF, etc.) by checking if they can be read without errors. It performs input
-validation, checks file existence, and optionally uses the \code{file} bash
-command to verify the file type. For PDFs, it uses
-\code{magick::image_read_pdf()}; otherwise, \code{magick::image_read()}.
+This function checks the integrity of image files (JPEG, PNG, TIFF, and PDF)
+by validating their existence, size, extension, and type using the \code{file}
+bash command. It confirms that the file has a recognized image or PDF format
+and non-zero dimensions (or page count for PDFs).
 }
 \details{
-The function validates that \code{file} is a single character string,
-checks if the file exists and is not a directory, and uses the \code{file} bash
-command (if available) to confirm the file is likely an image or PDF.
+The function performs the following checks:
+\itemize{
+\item Validates that \code{file} is a single character string.
+\item Ensures the file exists and is not a directory.
+\item Checks that the file size is non-zero, issuing a warning if empty (when
+\code{warning = TRUE}).
+\item Verifies the file extension is one of \code{jpg}, \code{jpeg}, \code{png}, \code{tif},
+\code{tiff}, or \code{pdf}, issuing a warning if not (when \code{warning = TRUE}).
+\item Uses the \code{file} bash command to confirm the file type and extract
+metadata (e.g., dimensions for images, page count for PDFs). The file is
+considered valid if it matches the expected type and has positive
+dimensions (or page count). The \code{file} command must be available on the
+system.
+}
 }
 \examples{
 # Load required packages
-ecokit::load_packages(fs, magick, pdftools)
+ecokit::load_packages(fs)
 
 # Create a temporary directory for test files
 temp_dir <- fs::dir_create(fs::path_temp("image_test"))
@@ -36,45 +50,51 @@ temp_dir <- fs::dir_create(fs::path_temp("image_test"))
 
 # Valid image files
 
-# JPEG
+# jpeg
 jpeg_path <- fs::path(temp_dir, "valid_image.jpg")
-img <- magick::image_blank(100, 100, color = "blue")
-magick::image_write(img, path = jpeg_path, format = "jpg")
+grDevices::jpeg(
+  filename = jpeg_path, width = 6, height = 6, units = "cm", res = 200)
+plot(1:10, 1:10, main = "Valid Image")
+invisible(grDevices::dev.off())
 check_image(jpeg_path)
-plot(magick::image_read(jpeg_path))
 
-# PNG
+# png
 png_path <- fs::path(temp_dir, "valid_image.png")
-img <- magick::image_blank(200, 200, color = "green")
-magick::image_write(img, path = png_path, format = "png")
+png(
+  filename = png_path, width = 6, height = 6, units = "cm", res = 200)
+plot(1:10, 1:10, main = "Valid Image")
+invisible(grDevices::dev.off())
 check_image(png_path)
-plot(magick::image_read(png_path))
 
-# TIFF
+
+# tiff
 tiff_path <- fs::path(temp_dir, "valid_image.tiff")
-img <- magick::image_blank(150, 150, color = "red")
-magick::image_write(img, path = tiff_path, format = "tiff")
+tiff(
+  filename = tiff_path, width = 6, height = 6, units = "cm", res = 200)
+plot(1:10, 1:10, main = "Valid Image")
+invisible(grDevices::dev.off())
 check_image(tiff_path)
-plot(magick::image_read(tiff_path))
 
-# PDF
+# pdf
 pdf_path <- fs::path(temp_dir, "valid_document.pdf")
-temp_png <- fs::path(temp_dir, "temp_png.png")
-img <- magick::image_blank(300, 300, color = "purple")
-magick::image_write(img, path = pdf_path, format = "pdf")
+grDevices::pdf(file = pdf_path, width = 6, height = 6)
+plot(1:10, 1:10, main = "Valid Document")
+invisible(grDevices::dev.off())
 check_image(pdf_path)
-plot(magick::image_read_pdf(pdf_path))
 
 # --------------------------------------------
 
 # Corrupted image file
 
 corrupt_path <- fs::path(temp_dir, "corrupt_image.jpg")
-img <- magick::image_blank(100, 100, color = "yellow")
-magick::image_write(img, path = corrupt_path, format = "jpg")
+fs::file_create(corrupt_path)
 writeBin(charToRaw("This is not an image"), corrupt_path)
-
 check_image(corrupt_path)
+
+corrupt_pdf_path <- fs::path(temp_dir, "valid_document.pdf")
+grDevices::pdf(file = corrupt_pdf_path, width = 6, height = 6)
+invisible(grDevices::dev.off())
+check_image(corrupt_pdf_path)
 
 # --------------------------------------------
 
@@ -85,6 +105,7 @@ fs::file_create(text_path)
 writeLines("This is a text file", text_path)
 
 check_image(text_path)
+check_image(text_path, warning = FALSE)
 
 # --------------------------------------------
 
@@ -92,6 +113,8 @@ check_image(text_path)
 
 nonexistent_path <- fs::path(temp_dir, "nonexistent_image.jpg")
 check_image(nonexistent_path)
+
+check_image(temp_dir)
 
 # --------------------------------------------
 
