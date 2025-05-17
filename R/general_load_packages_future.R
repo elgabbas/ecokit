@@ -8,31 +8,30 @@
 #' package, determining whether to load packages in the main process or pass
 #' them to parallel workers based on the specified `future` strategy. This
 #' function is designed to minimize package-loading messages in SLURM
-#' environments, especially for `future::multicore`.
+#' environments, especially for `multicore`.
 #'
 #' @param packages Character vector of package names to load, or `NULL` to
 #'   indicate no packages are needed (returns `NULL`).
 #' @param strategy Character string specifying the `future` strategy, one of
-#'   `"future::sequential"`, `"future::multisession"`, `"future::multicore"`, or
-#'   `"future::cluster"`.
+#'   `"sequential"`, `"multisession"`, `"multicore"`, or `"cluster"`.
 #' @return A value depending on `strategy`:
-#'   - `future::sequential`: `NULL` (no workers; packages not loaded).
-#'   - `future::multicore` (non-Windows): `NULL` (packages loaded in the
-#'   main process, inherited by forks).
-#'   - `future::multicore` (Windows), `future::multisession`, or
-#'   `future::cluster`: `packages` (character vector of package names to load in
+#'   - `sequential`: `NULL` (no workers; packages not loaded).
+#'   - `multicore` (non-Windows): `NULL` (packages loaded in the main process,
+#'   inherited by forks).
+#'   - `multicore` (Windows), `multisession`, or
+#'   `cluster`: `packages` (character vector of package names to load in
 #'   workers, e.g., via `future.packages`).
 #'   - If `packages` is `NULL`: `NULL` (no packages to load).
 #'
 #' @details This function helps manage package loading for parallel processing
 #'   with the `future` package. It ensures efficient package handling and
 #'   minimizes package-loading messages in SLURM environments, particularly for
-#'   `future::multicore` on non-Windows systems, where packages are loaded in
-#'   the main process to avoid redundant messages in worker forks. For
-#'   `future::multisession`, `future::cluster`, or `future::multicore` on
-#'   Windows (where `multicore` falls back to `multisession`), it returns the
-#'   package names for loading in workers, typically via the `future.packages`
-#'   argument in functions like [future.apply::future_lapply()].
+#'   `multicore` on non-Windows systems, where packages are loaded in the main
+#'   process to avoid redundant messages in worker forks. For `multisession`,
+#'   `cluster`, or `multicore` on Windows (where `multicore` falls back to
+#'   `multisession`), it returns the package names for loading in workers,
+#'   typically via the `future.packages` argument in functions like
+#'   [future.apply::future_lapply()].
 #'
 #' @author Ahmed El-Gabbas
 #' @name load_packages_future
@@ -41,20 +40,20 @@
 #' (pkg_init <- loaded_packages())
 #' pkg_to_load <- c("tidyterra", "lubridate", "tidyr", "sf", "scales")
 #'
-#' # future::sequential
-#' load_packages_future(pkg_to_load, "future::sequential")
+#' # sequential
+#' load_packages_future(pkg_to_load, "sequential")
 #' setdiff(loaded_packages(), pkg_init)
 #'
-#' # future::multisession
-#' load_packages_future(pkg_to_load, "future::multisession")
+#' # multisession
+#' load_packages_future(pkg_to_load, "multisession")
 #' setdiff(loaded_packages(), pkg_init)
 #'
-#' # future::multicore
-#' load_packages_future(pkg_to_load, "future::multicore")
+#' # multicore
+#' load_packages_future(pkg_to_load, "multicore")
 #' setdiff(loaded_packages(), pkg_init)
 
 load_packages_future <- function(
-    packages = character(), strategy = "future::sequential") {
+    packages = character(), strategy = "sequential") {
 
   if (length(packages) > 0L) {
     if (!is.character(packages) || anyNA(packages) || !all(nzchar(packages))) {
@@ -86,18 +85,15 @@ load_packages_future <- function(
       strategy = strategy, length_strategy = length(strategy))
   }
 
-  valid_strategies <- c(
-    "future::sequential", "future::multisession",
-    "future::multicore", "future::cluster")
+  valid_strategies <- c("sequential", "multisession", "multicore", "cluster")
   if (!strategy %in% valid_strategies) {
     ecokit::stop_ctx(
-      paste(
-        "`strategy` must be one of:", toString(shQuote(valid_strategies))),
+      paste("`strategy` must be one of:", toString(shQuote(valid_strategies))),
       strategy = strategy)
   }
 
   # Handle strategies
-  if (strategy == "future::sequential") {
+  if (strategy == "sequential") {
     # No workers; no need to load packages separately
     return(NULL)
   }
@@ -105,11 +101,12 @@ load_packages_future <- function(
   # Check OS for multicore
   is_windows <- (ecokit::os() == "Windows")
 
-  if (strategy == "future::multicore" && !is_windows) {
+  if (strategy == "multicore" && !is_windows) {
     # Multicore on non-Windows: forks inherit environment, load in main process
     ecokit::load_packages(package_list = packages)
     return(NULL)
   }
+
   # Multisession, cluster, or multicore on Windows: return packages for workers
   return(packages)
 }

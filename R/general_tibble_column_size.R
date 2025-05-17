@@ -15,7 +15,7 @@
 #' - `col_name`: Character; The name of the column.
 #' - `col_class`: Character; The class(es) of the column, collapsed into a
 #'   single string.
-#' - col_size: Numeric; The memory size of the column in bytes, as calculated
+#' - `col_size`: Numeric; The memory size of the column in bytes, as calculated
 #'   by [lobstr::obj_size].
 #' @details The memory size is computed using [lobstr::obj_size], which includes
 #'   the overhead of the column's vector structure. Columns with complex data
@@ -25,7 +25,9 @@
 #' # Load required packages
 #' ecokit::load_packages(tibble, dplyr, purrr, lobstr, terra)
 #'
+#' # # ---------------------------------------------------------------
 #' # Generate a moderately sized tibble with various column types
+#' # # ---------------------------------------------------------------
 #'
 #' # Create a moderately sized tibble (100 rows)
 #' n_rows <- 100
@@ -71,7 +73,10 @@
 #' # Verify the tibble
 #' dplyr::glimpse(species_data, 1)
 #'
+#' # # ---------------------------------------------------------------
 #' # Calculate column sizes
+#' # # ---------------------------------------------------------------
+#'
 #' tibble_column_size(species_data)
 
 tibble_column_size <- function(tibble) {
@@ -96,7 +101,7 @@ tibble_column_size <- function(tibble) {
     .f = ~ {
       col_name <- names(tibble)[.x]
       col_data <- dplyr::pull(tibble, .x)
-      col_class <- toString(class(col_data))
+      col_class <- toString(class(col_data[[1L]]))
       col_size <- lobstr::obj_size(col_data)
 
       tibble::tibble(

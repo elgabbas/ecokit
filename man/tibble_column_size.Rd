@@ -17,7 +17,7 @@ descending order):
 \item \code{col_name}: Character; The name of the column.
 \item \code{col_class}: Character; The class(es) of the column, collapsed into a
 single string.
-\item col_size: Numeric; The memory size of the column in bytes, as calculated
+\item \code{col_size}: Numeric; The memory size of the column in bytes, as calculated
 by \link[lobstr:obj_size]{lobstr::obj_size}.
 }
 }
@@ -35,7 +35,9 @@ the overhead of the column's vector structure. Columns with complex data
 # Load required packages
 ecokit::load_packages(tibble, dplyr, purrr, lobstr, terra)
 
+# # ---------------------------------------------------------------
 # Generate a moderately sized tibble with various column types
+# # ---------------------------------------------------------------
 
 # Create a moderately sized tibble (100 rows)
 n_rows <- 100
@@ -81,6 +83,9 @@ species_data$raster_map <- rasters
 # Verify the tibble
 dplyr::glimpse(species_data, 1)
 
+# # ---------------------------------------------------------------
 # Calculate column sizes
+# # ---------------------------------------------------------------
+
 tibble_column_size(species_data)
 }

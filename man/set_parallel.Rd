@@ -6,7 +6,7 @@
 \usage{
 set_parallel(
   n_cores = 1L,
-  strategy = "future::multisession",
+  strategy = "multisession",
   stop_cluster = FALSE,
   show_log = TRUE,
   future_max_size = 500L,
@@ -18,11 +18,10 @@ set_parallel(
 sequential mode. Default is \code{1}.}
 
 \item{strategy}{Character. The parallel processing strategy to use. Valid
-options are \code{future::sequential} (sequential), \code{future::multisession}
-(default), \code{future::multicore} (not supported on Windows), and
-\code{future::cluster}. If \code{strategy} is not one of the valid options or if
-\code{future::multicore} on Windows PC, it defaults to \code{future::multisession}.
-See \code{\link[future:plan]{future::plan()}} for more details.}
+options are \code{sequential}, \code{multisession} (default), \code{multicore} (not
+supported on Windows), and \code{cluster}. If \code{strategy} is not one of the valid
+options or if \code{multicore} on Windows PC, it defaults to \code{multisession}. See
+\code{\link[future:plan]{future::plan()}} for more details.}
 
 \item{stop_cluster}{Logical. If \code{TRUE}, stops any parallel cluster and
 resets to sequential mode. If \code{FALSE} (default), sets up a new plan.}
@@ -65,7 +64,7 @@ future::nbrOfWorkers()
 # ---------------------------------------------
 
 # Prepare working in parallel
-set_parallel(n_cores = 2, strategy = "future::cluster")
+set_parallel(n_cores = 2, strategy = "cluster")
 future::plan("list")
 future::nbrOfWorkers()
 
@@ -79,7 +78,7 @@ future::nbrOfWorkers()
 # ---------------------------------------------
 
 # Prepare working in parallel
-set_parallel(n_cores = 2, strategy = "future::multicore")
+set_parallel(n_cores = 2, strategy = "multicore")
 future::plan("list")
 future::nbrOfWorkers()
 
@@ -92,7 +91,7 @@ future::nbrOfWorkers()
 # `future::sequential`
 # ---------------------------------------------
 
-set_parallel(n_cores = 1, strategy = "future::sequential")
+set_parallel(n_cores = 1, strategy = "sequential")
 future::nbrOfWorkers()
 }
 \author{

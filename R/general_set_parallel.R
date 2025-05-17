@@ -10,11 +10,10 @@
 #' @param n_cores Integer. Number of cores to use. If `NULL`, defaults to
 #'   sequential mode. Default is `1`.
 #' @param strategy Character. The parallel processing strategy to use. Valid
-#'   options are `future::sequential` (sequential), `future::multisession`
-#'   (default), `future::multicore` (not supported on Windows), and
-#'   `future::cluster`. If `strategy` is not one of the valid options or if
-#'   `future::multicore` on Windows PC, it defaults to `future::multisession`.
-#'   See [future::plan()] for more details.
+#'   options are `sequential`, `multisession` (default), `multicore` (not
+#'   supported on Windows), and `cluster`. If `strategy` is not one of the valid
+#'   options or if `multicore` on Windows PC, it defaults to `multisession`. See
+#'   [future::plan()] for more details.
 #' @param stop_cluster  Logical. If `TRUE`, stops any parallel cluster and
 #'   resets to sequential mode. If `FALSE` (default), sets up a new plan.
 #' @param show_log Logical. If `TRUE` (default), logs messages via
@@ -51,7 +50,7 @@
 #' # ---------------------------------------------
 #'
 #' # Prepare working in parallel
-#' set_parallel(n_cores = 2, strategy = "future::cluster")
+#' set_parallel(n_cores = 2, strategy = "cluster")
 #' future::plan("list")
 #' future::nbrOfWorkers()
 #'
@@ -65,7 +64,7 @@
 #' # ---------------------------------------------
 #'
 #' # Prepare working in parallel
-#' set_parallel(n_cores = 2, strategy = "future::multicore")
+#' set_parallel(n_cores = 2, strategy = "multicore")
 #' future::plan("list")
 #' future::nbrOfWorkers()
 #'
@@ -78,11 +77,11 @@
 #' # `future::sequential`
 #' # ---------------------------------------------
 #'
-#' set_parallel(n_cores = 1, strategy = "future::sequential")
+#' set_parallel(n_cores = 1, strategy = "sequential")
 #' future::nbrOfWorkers()
 
 set_parallel <- function(
-    n_cores = 1L, strategy = "future::multisession", stop_cluster = FALSE,
+    n_cores = 1L, strategy = "multisession", stop_cluster = FALSE,
     show_log = TRUE, future_max_size = 500L, ...) {
 
   # Validate n_cores input
@@ -90,18 +89,18 @@ set_parallel <- function(
 
   # n_cores can not be more than the available cores
   available_cores <- parallelly::availableCores()
-  n_cores <- ifelse(
-    n_cores > available_cores,
-    {
-      warning(
-        "`n_cores` > number of available cores. ",
-        "It was reset to the number of available cores: ", available_cores,
-        call. = FALSE)
-      available_cores
-    },
-    n_cores)
+  if (n_cores > available_cores) {
+    if (show_log) {
+      ecokit::cat_time(
+        paste0(
+          "`n_cores` > number of available cores (", available_cores, "). ",
+          "It was reset to ", available_cores, "."),
+        cat_timestamp = FALSE)
+    }
+    n_cores <- available_cores
+  }
 
-  if (strategy == "future::sequential") {
+  if (strategy == "sequential") {
     n_cores <- 1L
   }
 
@@ -111,20 +110,18 @@ set_parallel <- function(
     }
 
     # stop any running future plan and reset to sequential
-    future::plan("future::sequential", gc = TRUE)
+    future::plan(strategy = "sequential")
 
   } else {
 
     # strategy can not be NULL
-    strategy <- ifelse(
-      is.null(strategy),
-      {
-        message(
-          "`strategy` cannot be NULL. It was reset to `future::multisession`",
-          call. = FALSE)
-        "future::multisession"
-      },
-      strategy)
+
+    if (is.null(strategy)) {
+      message(
+        "`strategy` cannot be NULL. It was reset to `multisession`",
+        call. = FALSE)
+      strategy <- "multisession"
+    }
 
     # strategy should be a character vector of length 1
     if (length(strategy) != 1L) {
@@ -133,28 +130,24 @@ set_parallel <- function(
         strategy = strategy, length_strategy = length(strategy))
     }
 
-    # strategy can be only one of the following: "future::sequential",
-    # "future::multisession", "future::multicore", "future::cluster".
-    valid_strategy <- c(
-      "future::sequential", "future::multisession", "future::multicore",
-      "future::cluster")
-    strategy <- ifelse(
-      (strategy %in% valid_strategy),
-      strategy,
-      {
-        warning(
-          "`strategy` must be one of the following: `",
-          paste(valid_strategy, collapse = "`, `"),
-          "` It was reset to `future::multisession`", call. = FALSE)
-        "future::multisession"
-      })
+    # strategy can be only one of the following: "sequential",
+    # "multisession", "multicore", "cluster".
+    valid_strategy <- c("sequential", "multisession", "multicore", "cluster")
 
-    # "future::multicore" can not be used on Windows.
-    if (strategy == "future::multicore" && .Platform$OS.type == "windows") {
+    if (!(strategy %in% valid_strategy)) {
       warning(
-        "`future::multicore` is not supported on Windows. ",
-        "It was reset to `future::multisession`", call. = FALSE)
-      strategy <- "future::multisession"
+        "`strategy` must be one of the following: `",
+        paste(valid_strategy, collapse = "`, `"),
+        "` It was reset to `multisession`", call. = FALSE)
+      strategy <- "multisession"
+    }
+
+    # "multicore" can not be used on Windows.
+    if (strategy == "multicore" && .Platform$OS.type == "windows") {
+      warning(
+        "`multicore` is not supported on Windows. ",
+        "It was reset to `multisession`", call. = FALSE)
+      strategy <- "multisession"
     }
 
 
@@ -162,10 +155,9 @@ set_parallel <- function(
       ecokit::cat_time(
         paste0(
           "Setting up ",
-          ifelse(n_cores > 1L, "parallel", "sequential"),
-          " processing (", n_cores,
-          ifelse(n_cores > 1L, " cores)", " core)"),
-          ". Strategy: `", strategy, "`"),
+          ifelse(n_cores > 1L, "parallel", "sequential"), " processing (",
+          n_cores, ifelse(n_cores > 1L, " cores)", " core)"), ". Strategy: `",
+          strategy, "`"),
         ...)
     }
 
@@ -177,7 +169,7 @@ set_parallel <- function(
     if (n_cores > 1L) {
       future::plan(strategy = strategy, workers = n_cores)
     } else {
-      future::plan("future::sequential", gc = TRUE)
+      future::plan(strategy = "sequential")
     }
   }
   return(invisible(NULL))

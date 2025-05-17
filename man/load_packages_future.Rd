@@ -4,24 +4,23 @@
 \alias{load_packages_future}
 \title{Prepare Packages for Parallel Processing with Future}
 \usage{
-load_packages_future(packages = character(), strategy = "future::sequential")
+load_packages_future(packages = character(), strategy = "sequential")
 }
 \arguments{
 \item{packages}{Character vector of package names to load, or \code{NULL} to
 indicate no packages are needed (returns \code{NULL}).}
 
 \item{strategy}{Character string specifying the \code{future} strategy, one of
-\code{"future::sequential"}, \code{"future::multisession"}, \code{"future::multicore"}, or
-\code{"future::cluster"}.}
+\code{"sequential"}, \code{"multisession"}, \code{"multicore"}, or \code{"cluster"}.}
 }
 \value{
 A value depending on \code{strategy}:
 \itemize{
-\item \code{future::sequential}: \code{NULL} (no workers; packages not loaded).
-\item \code{future::multicore} (non-Windows): \code{NULL} (packages loaded in the
-main process, inherited by forks).
-\item \code{future::multicore} (Windows), \code{future::multisession}, or
-\code{future::cluster}: \code{packages} (character vector of package names to load in
+\item \code{sequential}: \code{NULL} (no workers; packages not loaded).
+\item \code{multicore} (non-Windows): \code{NULL} (packages loaded in the main process,
+inherited by forks).
+\item \code{multicore} (Windows), \code{multisession}, or
+\code{cluster}: \code{packages} (character vector of package names to load in
 workers, e.g., via \code{future.packages}).
 \item If \code{packages} is \code{NULL}: \code{NULL} (no packages to load).
 }
@@ -31,33 +30,33 @@ Prepares a list of packages for use in parallel processing with the \code{future
 package, determining whether to load packages in the main process or pass
 them to parallel workers based on the specified \code{future} strategy. This
 function is designed to minimize package-loading messages in SLURM
-environments, especially for \code{future::multicore}.
+environments, especially for \code{multicore}.
 }
 \details{
 This function helps manage package loading for parallel processing
 with the \code{future} package. It ensures efficient package handling and
 minimizes package-loading messages in SLURM environments, particularly for
-\code{future::multicore} on non-Windows systems, where packages are loaded in
-the main process to avoid redundant messages in worker forks. For
-\code{future::multisession}, \code{future::cluster}, or \code{future::multicore} on
-Windows (where \code{multicore} falls back to \code{multisession}), it returns the
-package names for loading in workers, typically via the \code{future.packages}
-argument in functions like \code{\link[future.apply:future_lapply]{future.apply::future_lapply()}}.
+\code{multicore} on non-Windows systems, where packages are loaded in the main
+process to avoid redundant messages in worker forks. For \code{multisession},
+\code{cluster}, or \code{multicore} on Windows (where \code{multicore} falls back to
+\code{multisession}), it returns the package names for loading in workers,
+typically via the \code{future.packages} argument in functions like
+\code{\link[future.apply:future_lapply]{future.apply::future_lapply()}}.
 }
 \examples{
 (pkg_init <- loaded_packages())
 pkg_to_load <- c("tidyterra", "lubridate", "tidyr", "sf", "scales")
 
-# future::sequential
-load_packages_future(pkg_to_load, "future::sequential")
+# sequential
+load_packages_future(pkg_to_load, "sequential")
 setdiff(loaded_packages(), pkg_init)
 
-# future::multisession
-load_packages_future(pkg_to_load, "future::multisession")
+# multisession
+load_packages_future(pkg_to_load, "multisession")
 setdiff(loaded_packages(), pkg_init)
 
-# future::multicore
-load_packages_future(pkg_to_load, "future::multicore")
+# multicore
+load_packages_future(pkg_to_load, "multicore")
 setdiff(loaded_packages(), pkg_init)
 }
 \author{
