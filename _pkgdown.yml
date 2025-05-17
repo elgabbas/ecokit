@@ -66,6 +66,7 @@ reference:
   - split_df_to_chunks
   - range_to_new_value
   - all_objects_sizes
+  - column_size
   - keep_only
   - source_silent
   - n_unique
