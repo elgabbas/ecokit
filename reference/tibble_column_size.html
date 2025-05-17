@@ -68,7 +68,7 @@ descending order):</p><ul><li><p><code>col_index</code>: Integer; The original c
 <li><p><code>col_name</code>: Character; The name of the column.</p></li>
 <li><p><code>col_class</code>: Character; The class(es) of the column, collapsed into a
 single string.</p></li>
-<li><p>col_size: Numeric; The memory size of the column in bytes, as calculated
+<li><p><code>col_size</code>: Numeric; The memory size of the column in bytes, as calculated
 by <a href="https://lobstr.r-lib.org/reference/obj_size.html" class="external-link">lobstr::obj_size</a>.</p></li>
 </ul></div>
     <div class="section level2">
@@ -83,7 +83,9 @@ the overhead of the column's vector structure. Columns with complex data
     <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span><span class="co"># Load required packages</span></span></span>
 <span class="r-in"><span><span class="fu">ecokit</span><span class="fu">::</span><span class="fu"><a href="load_packages.html">load_packages</a></span><span class="op">(</span><span class="va">tibble</span>, <span class="va">dplyr</span>, <span class="va">purrr</span>, <span class="va">lobstr</span>, <span class="va">terra</span><span class="op">)</span></span></span>
 <span class="r-in"><span></span></span>
+<span class="r-in"><span><span class="co"># # ---------------------------------------------------------------</span></span></span>
 <span class="r-in"><span><span class="co"># Generate a moderately sized tibble with various column types</span></span></span>
+<span class="r-in"><span><span class="co"># # ---------------------------------------------------------------</span></span></span>
 <span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="co"># Create a moderately sized tibble (100 rows)</span></span></span>
 <span class="r-in"><span><span class="va">n_rows</span> <span class="op">&lt;-</span> <span class="fl">100</span></span></span>
@@ -138,18 +140,21 @@ the overhead of the column's vector structure. Columns with complex data
 <span class="r-out co"><span class="r-pr">#&gt;</span> $ traits       <span style="color: #949494; font-style: italic;">&lt;list&gt;</span> …</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> $ raster_map   <span style="color: #949494; font-style: italic;">&lt;list&gt;</span> …</span>
 <span class="r-in"><span></span></span>
+<span class="r-in"><span><span class="co"># # ---------------------------------------------------------------</span></span></span>
 <span class="r-in"><span><span class="co"># Calculate column sizes</span></span></span>
+<span class="r-in"><span><span class="co"># # ---------------------------------------------------------------</span></span></span>
+<span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="fu">tibble_column_size</span><span class="op">(</span><span class="va">species_data</span><span class="op">)</span></span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># A tibble: 7 × 4</span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>   col_index col_name     col_class col_size  </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>       <span style="color: #949494; font-style: italic;">&lt;int&gt;</span> <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>        <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>     <span style="color: #949494; font-style: italic;">&lt;lbstr_by&gt;</span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">1</span>         7 raster_map   list      10.81 MB  </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">2</span>         6 traits       list      72.13 kB  </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">3</span>         5 obs_coords   list      17.12 kB  </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">4</span>         2 species_name character  7.25 kB  </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">5</span>         1 species_id   integer    1.13 kB  </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">6</span>         4 habitat      factor     1.04 kB  </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">7</span>         3 n_cells      integer      448 B  </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   col_index col_name     col_class               col_size  </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>       <span style="color: #949494; font-style: italic;">&lt;int&gt;</span> <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>        <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>                   <span style="color: #949494; font-style: italic;">&lt;lbstr_by&gt;</span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">1</span>         7 raster_map   SpatRaster              10.81 MB  </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">2</span>         6 traits       tbl_df, tbl, data.frame 72.13 kB  </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">3</span>         5 obs_coords   numeric                 17.12 kB  </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">4</span>         2 species_name character                7.25 kB  </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">5</span>         1 species_id   integer                  1.13 kB  </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">6</span>         4 habitat      factor                   1.04 kB  </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">7</span>         3 n_cells      integer                    448 B  </span>
 </code></pre></div>
     </div>
   </main><aside class="col-md-3"><nav id="toc" aria-label="Table of contents"><h2>On this page</h2>
