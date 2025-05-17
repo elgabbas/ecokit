@@ -1,5 +1,5 @@
 # # |------------------------------------------------------------------------| #
-# column_sizes ----
+# tibble_column_size ----
 ## |------------------------------------------------------------------------| #
 
 #' Calculate Column Sizes in a Tibble
@@ -72,9 +72,9 @@
 #' dplyr::glimpse(species_data, 1)
 #'
 #' # Calculate column sizes
-#' column_sizes(species_data)
+#' tibble_column_size(species_data)
 
-column_sizes <- function(tibble) {
+tibble_column_size <- function(tibble) {
 
   col_size <- NULL
 
