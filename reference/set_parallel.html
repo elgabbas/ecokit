@@ -68,10 +68,8 @@ sequential mode. Default is <code>1</code>.</p></dd>
 
 <dt id="arg-strategy">strategy<a class="anchor" aria-label="anchor" href="#arg-strategy"></a></dt>
 <dd><p>Character. The parallel processing strategy to use. Valid
-options are <code>sequential</code>, <code>multisession</code> (default), <code>multicore</code> (not
-supported on Windows), and <code>cluster</code>. If <code>strategy</code> is not one of the valid
-options or if <code>multicore</code> on Windows PC, it defaults to <code>multisession</code>. See
-<code><a href="https://future.futureverse.org/reference/plan.html" class="external-link">future::plan()</a></code> for more details.</p></dd>
+options are "sequential", "multisession" (default), "multicore", and
+"cluster". See <code><a href="https://future.futureverse.org/reference/plan.html" class="external-link">future::plan()</a></code> and <code>set_parallel()</code> for details.</p></dd>
 
 
 <dt id="arg-stop-cluster">stop_cluster<a class="anchor" aria-label="anchor" href="#arg-stop-cluster"></a></dt>
@@ -108,12 +106,12 @@ global variables identified. See <code>future.globals.maxSize</code> argument of
 <span class="r-out co"><span class="r-pr">#&gt;</span> [1] 1</span>
 <span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="co"># ---------------------------------------------</span></span></span>
-<span class="r-in"><span><span class="co"># `future::multisession`</span></span></span>
+<span class="r-in"><span><span class="co"># `multisession`</span></span></span>
 <span class="r-in"><span><span class="co"># ---------------------------------------------</span></span></span>
 <span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="co"># Prepare working in parallel</span></span></span>
 <span class="r-in"><span><span class="fu">set_parallel</span><span class="op">(</span>n_cores <span class="op">=</span> <span class="fl">2</span><span class="op">)</span></span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> Setting up parallel processing (2 cores). Strategy: `multisession` - 01:34:44</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> Setting up parallel processing using 2 cores (strategy: `multisession`). - 03:18:38</span>
 <span class="r-in"><span><span class="fu">future</span><span class="fu">::</span><span class="fu"><a href="https://future.futureverse.org/reference/plan.html" class="external-link">plan</a></span><span class="op">(</span><span class="st">"list"</span><span class="op">)</span></span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> List of future strategies:</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> 1. multisession:</span>
@@ -125,7 +123,6 @@ global variables identified. See <code>future.globals.maxSize</code> argument of
 <span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="co"># Stopping parallel processing</span></span></span>
 <span class="r-in"><span><span class="fu">set_parallel</span><span class="op">(</span>stop_cluster <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> Stopping parallel processing - 01:34:45</span>
 <span class="r-in"><span><span class="fu">future</span><span class="fu">::</span><span class="fu"><a href="https://future.futureverse.org/reference/plan.html" class="external-link">plan</a></span><span class="op">(</span><span class="st">"list"</span><span class="op">)</span></span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> List of future strategies:</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> 1. sequential:</span>
@@ -136,12 +133,12 @@ global variables identified. See <code>future.globals.maxSize</code> argument of
 <span class="r-out co"><span class="r-pr">#&gt;</span> [1] 1</span>
 <span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="co"># ---------------------------------------------</span></span></span>
-<span class="r-in"><span><span class="co"># `future::cluster`</span></span></span>
+<span class="r-in"><span><span class="co"># `cluster`</span></span></span>
 <span class="r-in"><span><span class="co"># ---------------------------------------------</span></span></span>
 <span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="co"># Prepare working in parallel</span></span></span>
 <span class="r-in"><span><span class="fu">set_parallel</span><span class="op">(</span>n_cores <span class="op">=</span> <span class="fl">2</span>, strategy <span class="op">=</span> <span class="st">"cluster"</span><span class="op">)</span></span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> Setting up parallel processing (2 cores). Strategy: `cluster` - 01:34:45</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> Setting up parallel processing using 2 cores (strategy: `cluster`). - 03:18:39</span>
 <span class="r-in"><span><span class="fu">future</span><span class="fu">::</span><span class="fu"><a href="https://future.futureverse.org/reference/plan.html" class="external-link">plan</a></span><span class="op">(</span><span class="st">"list"</span><span class="op">)</span></span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> List of future strategies:</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> 1. cluster:</span>
@@ -153,7 +150,6 @@ global variables identified. See <code>future.globals.maxSize</code> argument of
 <span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="co"># Stopping parallel processing</span></span></span>
 <span class="r-in"><span><span class="fu">set_parallel</span><span class="op">(</span>stop_cluster <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> Stopping parallel processing - 01:34:46</span>
 <span class="r-in"><span><span class="fu">future</span><span class="fu">::</span><span class="fu"><a href="https://future.futureverse.org/reference/plan.html" class="external-link">plan</a></span><span class="op">(</span><span class="st">"list"</span><span class="op">)</span></span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> List of future strategies:</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> 1. sequential:</span>
@@ -164,12 +160,12 @@ global variables identified. See <code>future.globals.maxSize</code> argument of
 <span class="r-out co"><span class="r-pr">#&gt;</span> [1] 1</span>
 <span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="co"># ---------------------------------------------</span></span></span>
-<span class="r-in"><span><span class="co"># `future::multicore`</span></span></span>
+<span class="r-in"><span><span class="co"># `multicore`</span></span></span>
 <span class="r-in"><span><span class="co"># ---------------------------------------------</span></span></span>
 <span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="co"># Prepare working in parallel</span></span></span>
 <span class="r-in"><span><span class="fu">set_parallel</span><span class="op">(</span>n_cores <span class="op">=</span> <span class="fl">2</span>, strategy <span class="op">=</span> <span class="st">"multicore"</span><span class="op">)</span></span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> Setting up parallel processing (2 cores). Strategy: `multicore` - 01:34:46</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> Setting up parallel processing using 2 cores (strategy: `multicore`). - 03:18:39</span>
 <span class="r-in"><span><span class="fu">future</span><span class="fu">::</span><span class="fu"><a href="https://future.futureverse.org/reference/plan.html" class="external-link">plan</a></span><span class="op">(</span><span class="st">"list"</span><span class="op">)</span></span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> List of future strategies:</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> 1. multicore:</span>
@@ -183,7 +179,6 @@ global variables identified. See <code>future.globals.maxSize</code> argument of
 <span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="co"># Stopping parallel processing</span></span></span>
 <span class="r-in"><span><span class="fu">set_parallel</span><span class="op">(</span>stop_cluster <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> Stopping parallel processing - 01:34:46</span>
 <span class="r-in"><span><span class="fu">future</span><span class="fu">::</span><span class="fu"><a href="https://future.futureverse.org/reference/plan.html" class="external-link">plan</a></span><span class="op">(</span><span class="st">"list"</span><span class="op">)</span></span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> List of future strategies:</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> 1. sequential:</span>
@@ -194,11 +189,10 @@ global variables identified. See <code>future.globals.maxSize</code> argument of
 <span class="r-out co"><span class="r-pr">#&gt;</span> [1] 1</span>
 <span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="co"># ---------------------------------------------</span></span></span>
-<span class="r-in"><span><span class="co"># `future::sequential`</span></span></span>
+<span class="r-in"><span><span class="co"># `sequential`</span></span></span>
 <span class="r-in"><span><span class="co"># ---------------------------------------------</span></span></span>
 <span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="fu">set_parallel</span><span class="op">(</span>n_cores <span class="op">=</span> <span class="fl">1</span>, strategy <span class="op">=</span> <span class="st">"sequential"</span><span class="op">)</span></span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> Setting up sequential processing (1 core). Strategy: `sequential` - 01:34:46</span>
 <span class="r-in"><span><span class="fu">future</span><span class="fu">::</span><span class="fu"><a href="https://future.futureverse.org/reference/nbrOfWorkers.html" class="external-link">nbrOfWorkers</a></span><span class="op">(</span><span class="op">)</span></span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> [1] 1</span>
 </code></pre></div>
