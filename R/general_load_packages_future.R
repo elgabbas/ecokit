@@ -12,8 +12,9 @@
 #'
 #' @param packages Character vector of package names to load, or `NULL` to
 #'   indicate no packages are needed (returns `NULL`).
-#' @param strategy Character string specifying the `future` strategy, one of
-#'   `"sequential"`, `"multisession"`, `"multicore"`, or `"cluster"`.
+#' @param strategy Character. The parallel processing strategy to use. Valid
+#'   options are "sequential", "multisession" (default), "multicore", and
+#'   "cluster". See [future::plan()].
 #' @return A value depending on `strategy`:
 #'   - `sequential`: `NULL` (no workers; packages not loaded).
 #'   - `multicore` (non-Windows): `NULL` (packages loaded in the main process,
@@ -53,7 +54,7 @@
 #' setdiff(loaded_packages(), pkg_init)
 
 load_packages_future <- function(
-    packages = character(), strategy = "sequential") {
+  packages = character(), strategy = "multisession") {
 
   if (length(packages) > 0L) {
     if (!is.character(packages) || anyNA(packages) || !all(nzchar(packages))) {

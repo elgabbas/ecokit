@@ -4,14 +4,15 @@
 \alias{load_packages_future}
 \title{Prepare Packages for Parallel Processing with Future}
 \usage{
-load_packages_future(packages = character(), strategy = "sequential")
+load_packages_future(packages = character(), strategy = "multisession")
 }
 \arguments{
 \item{packages}{Character vector of package names to load, or \code{NULL} to
 indicate no packages are needed (returns \code{NULL}).}
 
-\item{strategy}{Character string specifying the \code{future} strategy, one of
-\code{"sequential"}, \code{"multisession"}, \code{"multicore"}, or \code{"cluster"}.}
+\item{strategy}{Character. The parallel processing strategy to use. Valid
+options are "sequential", "multisession" (default), "multicore", and
+"cluster". See \code{\link[future:plan]{future::plan()}}.}
 }
 \value{
 A value depending on \code{strategy}:

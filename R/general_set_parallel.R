@@ -10,10 +10,8 @@
 #' @param n_cores Integer. Number of cores to use. If `NULL`, defaults to
 #'   sequential mode. Default is `1`.
 #' @param strategy Character. The parallel processing strategy to use. Valid
-#'   options are `sequential`, `multisession` (default), `multicore` (not
-#'   supported on Windows), and `cluster`. If `strategy` is not one of the valid
-#'   options or if `multicore` on Windows PC, it defaults to `multisession`. See
-#'   [future::plan()] for more details.
+#'   options are "sequential", "multisession" (default), "multicore", and
+#'   "cluster". See [future::plan()] and [ecokit::set_parallel()] for details.
 #' @param stop_cluster  Logical. If `TRUE`, stops any parallel cluster and
 #'   resets to sequential mode. If `FALSE` (default), sets up a new plan.
 #' @param show_log Logical. If `TRUE` (default), logs messages via
@@ -32,7 +30,7 @@
 #' future::nbrOfWorkers()
 #'
 #' # ---------------------------------------------
-#' # `future::multisession`
+#' # `multisession`
 #' # ---------------------------------------------
 #'
 #' # Prepare working in parallel
@@ -46,7 +44,7 @@
 #' future::nbrOfWorkers()
 #'
 #' # ---------------------------------------------
-#' # `future::cluster`
+#' # `cluster`
 #' # ---------------------------------------------
 #'
 #' # Prepare working in parallel
@@ -60,7 +58,7 @@
 #' future::nbrOfWorkers()
 #'
 #' # ---------------------------------------------
-#' # `future::multicore`
+#' # `multicore`
 #' # ---------------------------------------------
 #'
 #' # Prepare working in parallel
@@ -74,7 +72,7 @@
 #' future::nbrOfWorkers()
 #'
 #' # ---------------------------------------------
-#' # `future::sequential`
+#' # `sequential`
 #' # ---------------------------------------------
 #'
 #' set_parallel(n_cores = 1, strategy = "sequential")
@@ -105,7 +103,7 @@ set_parallel <- function(
   }
 
   if (stop_cluster) {
-    if (show_log) {
+    if (show_log && n_cores > 1L) {
       ecokit::cat_time("Stopping parallel processing", ...)
     }
 
@@ -151,25 +149,27 @@ set_parallel <- function(
     }
 
 
-    if (show_log) {
-      ecokit::cat_time(
-        paste0(
-          "Setting up ",
-          ifelse(n_cores > 1L, "parallel", "sequential"), " processing (",
-          n_cores, ifelse(n_cores > 1L, " cores)", " core)"), ". Strategy: `",
-          strategy, "`"),
-        ...)
-    }
-
-    withr::local_options(
-      future.globals.maxSize = future_max_size * 1024L^2L,
-      future.gc = TRUE, future.seed = TRUE,
-      .local_envir = parent.frame())
-
     if (n_cores > 1L) {
+
+      if (show_log) {
+        ecokit::cat_time(
+          paste0(
+            "Setting up parallel processing using ", n_cores,
+            " cores (strategy: `", strategy, "`)."),
+          ...)
+      }
+
+      withr::local_options(
+        future.globals.maxSize = future_max_size * 1024L^2L,
+        future.gc = TRUE, future.seed = TRUE,
+        .local_envir = parent.frame())
+
       future::plan(strategy = strategy, workers = n_cores)
+
     } else {
+
       future::plan(strategy = "sequential")
+
     }
   }
   return(invisible(NULL))

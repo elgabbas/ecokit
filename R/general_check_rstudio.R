@@ -30,7 +30,7 @@ check_rstudio <- function() {
   if (Sys.getenv("RSTUDIO") == "1" && rstudioapi::isAvailable()) {
 
     installed_version <- rstudioapi::versionInfo() %>%
-      magrittr::extract2("long_version") %>%
+      purrr::pluck("long_version") %>%
       stringr::str_replace_all("\\+", "\\.")
 
     if (identical(online_version, installed_version)) {
