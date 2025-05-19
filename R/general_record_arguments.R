@@ -13,14 +13,12 @@
 #'   tibble will be exported. If `NULL` (default), the tibble is returned
 #'   without saving. If provided, the tibble is saved to the specified file and
 #'   `NULL` is returned invisibly.
-#'
 #' @return A `tibble` containing the evaluated forms of the parent function’s
 #'   arguments and any additional named arguments passed via `...`, with columns
 #'   named after the arguments (e.g., `w`, `x`, `y`, `extra1`). Evaluated values
 #'   are presented as scalars (e.g., `8`) or list columns for complex objects
 #'   (e.g., `<SpatRaster>`). If `out_path` is provided, the tibble is saved to
 #'   the specified `.RData` file and `NULL` is returned invisibly.
-#'
 #' @details This function evaluates all arguments in the grandparent environment
 #'   (two frames up), with a fallback to the global environment if evaluation
 #'   fails. This ensures correct evaluation in iterative contexts like `lapply`.

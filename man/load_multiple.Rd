@@ -9,7 +9,7 @@ load_multiple(
   verbose = TRUE,
   single_object = TRUE,
   return_names = TRUE,
-  n_threads = 5L,
+  n_threads = 1L,
   conflict = c("skip", "overwrite", "rename"),
   environment = .GlobalEnv
 )
@@ -29,7 +29,8 @@ objects. Defaults to \code{TRUE}. Only effective when \code{single_object} is
 \code{FALSE}.}
 
 \item{n_threads}{Integer. Number of threads for reading \code{.qs2} files. Must be
-a positive integer. Default is 5.}
+a positive integer. See \link[qs2:qs_read]{qs2::qs_read} and \link{load_as} for more
+details.}
 
 \item{conflict}{Character. Strategy for handling naming conflicts when
 \code{single_object = FALSE}: \code{"skip"} (default, skip conflicting files),

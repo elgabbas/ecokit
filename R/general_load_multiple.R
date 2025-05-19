@@ -18,7 +18,8 @@
 #'   objects. Defaults to `TRUE`. Only effective when `single_object` is
 #'   `FALSE`.
 #' @param n_threads Integer. Number of threads for reading `.qs2` files. Must be
-#'   a positive integer. Default is 5.
+#'   a positive integer. See [qs2::qs_read] and [ecokit::load_as] for more
+#'   details.
 #' @param conflict Character. Strategy for handling naming conflicts when
 #'   `single_object = FALSE`: `"skip"` (default, skip conflicting files),
 #'   `"overwrite"` (replace existing objects), or `"rename"` (append a suffix to
@@ -143,7 +144,7 @@
 
 load_multiple <- function(
     files = NULL, verbose = TRUE, single_object = TRUE, return_names = TRUE,
-    n_threads = 5L, conflict = c("skip", "overwrite", "rename"),
+    n_threads = 1L, conflict = c("skip", "overwrite", "rename"),
     environment = .GlobalEnv) {
 
   # Validate inputs ----

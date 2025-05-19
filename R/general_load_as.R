@@ -16,8 +16,8 @@
 #'   temporary file and load it.
 #' @param timeout integer; time in seconds before the download times out.
 #'   Default 300 seconds; see [download.file].
-#' @param n_threads Number of threads to use when reading `qs2` files. Default
-#'   5; see [qs2::qs_read].
+#' @param n_threads Number of threads to use when reading `qs2` files. See
+#'   [qs2::qs_read].
 #' @param ... Additional arguments to be passed to the respective load
 #'   functions. [base::load] for `RData` files; [qs2::qs_read] for `qs2` files;
 #'   [arrow::read_feather] for `feather` files; and [base::readRDS] for `rds`
@@ -74,7 +74,7 @@
 #' mtcars_all_2 <- load_as(TempFile_2)
 #' str(mtcars_all_2, 1)
 
-load_as <- function(file = NULL, n_threads = 5L, timeout = 300L, ...) {
+load_as <- function(file = NULL, n_threads = 1L, timeout = 300L, ...) {
 
   if (is.null(file)) {
     ecokit::stop_ctx("file or URL cannot be NULL", file = file)

@@ -54,7 +54,7 @@
 #' fs::file_delete(out_file)
 
 save_as <- function(
-    object = NULL, object_name = NULL, out_path = NULL, n_threads = 5L,
+    object = NULL, object_name = NULL, out_path = NULL, n_threads = 1L,
     feather_compression = "zstd", ...) {
 
   if (is.null(object) || is.null(out_path)) {

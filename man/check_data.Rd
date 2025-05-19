@@ -8,11 +8,11 @@
 \alias{check_feather}
 \title{Check Integrity of Data Files}
 \usage{
-check_data(file = NULL, warning = TRUE, n_threads = 5L)
+check_data(file = NULL, warning = TRUE, n_threads = 1L)
 
 check_rdata(file, warning = TRUE)
 
-check_qs(file, warning = TRUE, n_threads = 5L)
+check_qs(file, warning = TRUE, n_threads = 1L)
 
 check_rds(file, warning = TRUE)
 
@@ -26,7 +26,7 @@ check_feather(file, warning = TRUE)
 files (e.g., non-existent, wrong extension, or loading failure).}
 
 \item{n_threads}{Integer. Number of threads for reading \code{qs2} files. Must be
-a positive integer. Default is 5. See \link[qs2:qs_read]{qs2::qs_read} for more details.}
+a positive integer. See \link[qs2:qs_read]{qs2::qs_read} for more details.}
 }
 \value{
 Logical: \code{TRUE} if the file is valid and loads successfully; \code{FALSE}

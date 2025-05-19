@@ -8,7 +8,7 @@ save_as(
   object = NULL,
   object_name = NULL,
   out_path = NULL,
-  n_threads = 5L,
+  n_threads = 1L,
   feather_compression = "zstd",
   ...
 )

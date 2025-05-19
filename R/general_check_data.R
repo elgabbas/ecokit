@@ -9,7 +9,7 @@
 #' @param warning Logical. If `TRUE` (default), warnings are issued for invalid
 #'   files (e.g., non-existent, wrong extension, or loading failure).
 #' @param n_threads Integer. Number of threads for reading `qs2` files. Must be
-#'   a positive integer. Default is 5. See [qs2::qs_read] for more details.
+#'   a positive integer. See [qs2::qs_read] for more details.
 #' @return Logical: `TRUE` if the file is valid and loads successfully; `FALSE`
 #'   otherwise, with a warning if `warning = TRUE`.
 #' @author Ahmed El-Gabbas
@@ -124,7 +124,7 @@
 #' @order 1
 #' @export
 
-check_data <- function(file = NULL, warning = TRUE, n_threads = 5L) {
+check_data <- function(file = NULL, warning = TRUE, n_threads = 1L) {
 
   # Validate inputs
   if (is.null(file)) {
@@ -271,7 +271,7 @@ check_rdata <- function(file, warning = TRUE) {
 #' @rdname check_data
 #' @order 3
 
-check_qs <- function(file, warning = TRUE, n_threads = 5L) {
+check_qs <- function(file, warning = TRUE, n_threads = 1L) {
 
   # Validate inputs
   if (is.null(file)) {

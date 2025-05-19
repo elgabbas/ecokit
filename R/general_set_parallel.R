@@ -108,7 +108,7 @@ set_parallel <- function(
     }
 
     # stop any running future plan and reset to sequential
-    future::plan(strategy = "sequential")
+    future::plan(strategy = "sequential", gc = TRUE)
 
   } else {
 
@@ -155,7 +155,7 @@ set_parallel <- function(
         ecokit::cat_time(
           paste0(
             "Setting up parallel processing using ", n_cores,
-            " cores (strategy: `", strategy, "`)."),
+            " cores (strategy: `", strategy, "`)"),
           ...)
       }
 
@@ -164,11 +164,11 @@ set_parallel <- function(
         future.gc = TRUE, future.seed = TRUE,
         .local_envir = parent.frame())
 
-      future::plan(strategy = strategy, workers = n_cores)
+      future::plan(strategy = strategy, workers = n_cores, gc = TRUE)
 
     } else {
 
-      future::plan(strategy = "sequential")
+      future::plan(strategy = "sequential", gc = TRUE)
 
     }
   }

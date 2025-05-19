@@ -4,15 +4,15 @@
 \alias{load_as}
 \title{Load objects from \code{RData} / \code{qs2} / \code{rds} / \code{feather} file}
 \usage{
-load_as(file = NULL, n_threads = 5L, timeout = 300L, ...)
+load_as(file = NULL, n_threads = 1L, timeout = 300L, ...)
 }
 \arguments{
 \item{file}{Character. the file path or URL of the file to be loaded. If
 \code{file} is a URL, the function will download the file from the URL to a
 temporary file and load it.}
 
-\item{n_threads}{Number of threads to use when reading \code{qs2} files. Default
-5; see \link[qs2:qs_read]{qs2::qs_read}.}
+\item{n_threads}{Number of threads to use when reading \code{qs2} files. See
+\link[qs2:qs_read]{qs2::qs_read}.}
 
 \item{timeout}{integer; time in seconds before the download times out.
 Default 300 seconds; see \link{download.file}.}
