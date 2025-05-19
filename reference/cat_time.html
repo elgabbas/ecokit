@@ -135,25 +135,25 @@ console.</p>
     <div class="section level2">
     <h2 id="ref-examples">Examples<a class="anchor" aria-label="anchor" href="#ref-examples"></a></h2>
     <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span><span class="fu">cat_time</span><span class="op">(</span><span class="op">)</span></span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 03:17:53</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 15:40:42</span>
 <span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="fu">cat_time</span><span class="op">(</span>cat_date <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 19/05/2025 03:17:53</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 19/05/2025 15:40:42</span>
 <span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="fu">cat_time</span><span class="op">(</span><span class="st">"time now"</span><span class="op">)</span></span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> time now - 03:17:53</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> time now - 15:40:42</span>
 <span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="fu">cat_time</span><span class="op">(</span><span class="st">"\n\nTime now"</span>, msg_n_lines <span class="op">=</span> <span class="fl">2L</span>, level <span class="op">=</span> <span class="fl">1L</span><span class="op">)</span></span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>   &gt;&gt;&gt;  Time now - 03:17:53</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   &gt;&gt;&gt;  Time now - 15:40:42</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>  </span>
 <span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="fu">cat_time</span><span class="op">(</span></span></span>
 <span class="r-in"><span>  <span class="st">"\ntime now"</span>, cat_date <span class="op">=</span> <span class="cn">TRUE</span>, cat_bold <span class="op">=</span> <span class="cn">TRUE</span>, cat_red <span class="op">=</span> <span class="cn">TRUE</span>,</span></span>
 <span class="r-in"><span>  msg_n_lines <span class="op">=</span> <span class="fl">2L</span>, level <span class="op">=</span> <span class="fl">1L</span><span class="op">)</span></span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BB0000; font-weight: bold;">  &gt;&gt;&gt;  time now - 19/05/2025 03:17:53</span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BB0000; font-weight: bold;">  &gt;&gt;&gt;  time now - 19/05/2025 15:40:42</span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>  </span>
 <span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="co"># The use of levels</span></span></span>
@@ -163,10 +163,10 @@ console.</p>
 <span class="r-in"><span>  <span class="fu">cat_time</span><span class="op">(</span><span class="st">"subtask L2"</span>, level <span class="op">=</span> <span class="fl">2L</span><span class="op">)</span></span></span>
 <span class="r-in"><span>  <span class="fu">cat_time</span><span class="op">(</span><span class="st">"subtask L3"</span>, level <span class="op">=</span> <span class="fl">3L</span><span class="op">)</span></span></span>
 <span class="r-in"><span><span class="op">}</span></span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> Task 1 - 03:17:53</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>   &gt;&gt;&gt;  subtask L1 - 03:17:53</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>   &gt;&gt;&gt;  &gt;&gt;&gt;  subtask L2 - 03:17:53</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>   &gt;&gt;&gt;  &gt;&gt;&gt;  &gt;&gt;&gt;  subtask L3 - 03:17:53</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> Task 1 - 15:40:42</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   &gt;&gt;&gt;  subtask L1 - 15:40:42</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   &gt;&gt;&gt;  &gt;&gt;&gt;  subtask L2 - 15:40:42</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   &gt;&gt;&gt;  &gt;&gt;&gt;  &gt;&gt;&gt;  subtask L3 - 15:40:42</span>
 <span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="co"># disabling the function output</span></span></span>
 <span class="r-in"><span><span class="fu">cat_time</span><span class="op">(</span>verbose <span class="op">=</span> <span class="cn">FALSE</span><span class="op">)</span></span></span>

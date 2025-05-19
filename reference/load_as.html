@@ -62,7 +62,7 @@ file ahead of time. The function also supports loading <code>feather</code>, <co
 
     <div class="section level2">
     <h2 id="ref-usage">Usage<a class="anchor" aria-label="anchor" href="#ref-usage"></a></h2>
-    <div class="sourceCode"><pre class="sourceCode r"><code><span><span class="fu">load_as</span><span class="op">(</span>file <span class="op">=</span> <span class="cn">NULL</span>, n_threads <span class="op">=</span> <span class="fl">5L</span>, timeout <span class="op">=</span> <span class="fl">300L</span>, <span class="va">...</span><span class="op">)</span></span></code></pre></div>
+    <div class="sourceCode"><pre class="sourceCode r"><code><span><span class="fu">load_as</span><span class="op">(</span>file <span class="op">=</span> <span class="cn">NULL</span>, n_threads <span class="op">=</span> <span class="fl">1L</span>, timeout <span class="op">=</span> <span class="fl">300L</span>, <span class="va">...</span><span class="op">)</span></span></code></pre></div>
     </div>
 
     <div class="section level2">
@@ -76,8 +76,8 @@ temporary file and load it.</p></dd>
 
 
 <dt id="arg-n-threads">n_threads<a class="anchor" aria-label="anchor" href="#arg-n-threads"></a></dt>
-<dd><p>Number of threads to use when reading <code>qs2</code> files. Default
-5; see <a href="https://rdrr.io/pkg/qs2/man/qs_read.html" class="external-link">qs2::qs_read</a>.</p></dd>
+<dd><p>Number of threads to use when reading <code>qs2</code> files. See
+<a href="https://rdrr.io/pkg/qs2/man/qs_read.html" class="external-link">qs2::qs_read</a>.</p></dd>
 
 
 <dt id="arg-timeout">timeout<a class="anchor" aria-label="anchor" href="#arg-timeout"></a></dt>
