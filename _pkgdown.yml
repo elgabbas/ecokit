@@ -33,6 +33,7 @@ reference:
   - package_functions
   - load_packages
   - load_packages_future
+  - quiet_device
   - reload_package
   - loaded_packages
   - package_remote_sha
