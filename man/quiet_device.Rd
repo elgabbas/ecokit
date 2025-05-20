@@ -36,40 +36,39 @@ processes may emit startup messages from packages (particularly when using
 types of output while allowing other warnings and messages to pass through.
 }
 \examples{
-library(future)
-library(future.apply)
-library(ggplot2)
-library(parallelly)
+\dontrun{
+  library(future)
+  library(future.apply)
+  library(ggplot2)
+  library(parallelly)
 
-# Use multicore if supported, otherwise fall back to multisession
-plan_type <- ifelse(
-    parallelly::supportsMulticore(), "multicore", "multisession")
-future::plan(plan_type, workers = 2, gc = TRUE)
+  # Use multicore if supported, otherwise fall back to multisession
+  plan_type <- ifelse(
+      parallelly::supportsMulticore(), "multicore", "multisession")
+  future::plan(plan_type, workers = 2, gc = TRUE)
 
-fun1 <- function(x) {
-  # Loading terra triggers startup messages
-  library(terra)
+  fun1 <- function(x) {
+    # Loading ecokit triggers startup messages
+    library(ecokit)
 
-  p <- data.frame(x = rnorm(100), y = rnorm(100)) \%>\%
-    ggplot2::ggplot(ggplot2::aes(x, y)) +
-    ggplot2::geom_point()
-  # this triggers device warnings
-  grob <- ggplot2::ggplotGrob(p)
-  return(grob)
+    p <- data.frame(x = rnorm(100), y = rnorm(100)) \%>\%
+      ggplot2::ggplot(ggplot2::aes(x, y)) +
+      ggplot2::geom_point()
+
+    # this triggers device warnings
+    return(grob)
+  }
+
+  # This will trigger device warnings and startup messages
+  plots <- future.apply::future_lapply(1:5, fun1, future.seed = TRUE)
+
+  # Run with suppression of device warnings and startup messages
+  plots <- future.apply::future_lapply(1:5, fun1, future.seed = TRUE) \%>\%
+    quiet_device()
+  plot(plots[[1]])
+
+  future::plan("sequential")
 }
-
-if (FALSE) {
- # This will trigger device warnings and startup messages
- plots <- future.apply::future_lapply(1:5, fun1, future.seed = TRUE)
-}
-
-# Run with suppression of device warnings and startup messages
-plots <- future.apply::future_lapply(1:5, fun1, future.seed = TRUE) \%>\%
-  quiet_device()
-plot(plots[[1]])
-
-future::plan("sequential")
-
 }
 \author{
 Ahmed El-Gabbas

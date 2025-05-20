@@ -22,42 +22,42 @@
 #' @return The result of evaluating `expr`, with specific future device warnings
 #'   and package startup messages suppressed.
 #' @author Ahmed El-Gabbas
-#' @examples
-#' library(future)
-#' library(future.apply)
-#' library(ggplot2)
-#' library(parallelly)
-#'
-#' # Use multicore if supported, otherwise fall back to multisession
-#' plan_type <- ifelse(
-#'     parallelly::supportsMulticore(), "multicore", "multisession")
-#' future::plan(plan_type, workers = 2, gc = TRUE)
-#'
-#' fun1 <- function(x) {
-#'   # Loading terra triggers startup messages
-#'   library(terra)
-#'
-#'   p <- data.frame(x = rnorm(100), y = rnorm(100)) %>%
-#'     ggplot2::ggplot(ggplot2::aes(x, y)) +
-#'     ggplot2::geom_point()
-#'   # this triggers device warnings
-#'   grob <- ggplot2::ggplotGrob(p)
-#'   return(grob)
-#' }
-#'
-#' if (FALSE) {
-#'  # This will trigger device warnings and startup messages
-#'  plots <- future.apply::future_lapply(1:5, fun1, future.seed = TRUE)
-#' }
-#'
-#' # Run with suppression of device warnings and startup messages
-#' plots <- future.apply::future_lapply(1:5, fun1, future.seed = TRUE) %>%
-#'   quiet_device()
-#' plot(plots[[1]])
-#'
-#' future::plan("sequential")
-#'
 #' @export
+#' @examples
+#' \dontrun{
+#'   library(future)
+#'   library(future.apply)
+#'   library(ggplot2)
+#'   library(parallelly)
+#'
+#'   # Use multicore if supported, otherwise fall back to multisession
+#'   plan_type <- ifelse(
+#'       parallelly::supportsMulticore(), "multicore", "multisession")
+#'   future::plan(plan_type, workers = 2, gc = TRUE)
+#'
+#'   fun1 <- function(x) {
+#'     # Loading ecokit triggers startup messages
+#'     library(ecokit)
+#'
+#'     p <- data.frame(x = rnorm(100), y = rnorm(100)) %>%
+#'       ggplot2::ggplot(ggplot2::aes(x, y)) +
+#'       ggplot2::geom_point()
+#'
+#'     # this triggers device warnings
+#  '   grob <- ggplot2::ggplotGrob(p)
+#'     return(grob)
+#'   }
+#'
+#'   # This will trigger device warnings and startup messages
+#'   plots <- future.apply::future_lapply(1:5, fun1, future.seed = TRUE)
+#'
+#'   # Run with suppression of device warnings and startup messages
+#'   plots <- future.apply::future_lapply(1:5, fun1, future.seed = TRUE) %>%
+#'     quiet_device()
+#'   plot(plots[[1]])
+#'
+#'   future::plan("sequential")
+#'}
 
 quiet_device <- function(expr) {
   withCallingHandlers(
