@@ -103,7 +103,7 @@ set_parallel <- function(
   }
 
   if (stop_cluster) {
-    if (show_log && n_cores > 1L) {
+    if (show_log) {
       ecokit::cat_time("Stopping parallel processing", ...)
     }
 
