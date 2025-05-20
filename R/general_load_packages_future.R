@@ -99,11 +99,9 @@ load_packages_future <- function(
     return(NULL)
   }
 
-  # Check OS for multicore
-  is_windows <- (ecokit::os() == "Windows")
-
-  if (strategy == "multicore" && !is_windows) {
-    # Multicore on non-Windows: forks inherit environment, load in main process
+  # Check OS for multicore support
+  if (strategy == "multicore" && parallelly::supportsMulticore()) {
+    # Multicore forks inherit environment, load in main process
     ecokit::load_packages(package_list = packages)
     return(NULL)
   }

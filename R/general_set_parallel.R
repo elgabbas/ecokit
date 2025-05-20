@@ -141,10 +141,10 @@ set_parallel <- function(
     }
 
     # "multicore" can not be used on Windows.
-    if (strategy == "multicore" && .Platform$OS.type == "windows") {
+    if (strategy == "multicore" && !parallelly::supportsMulticore()) {
       warning(
-        "`multicore` is not supported on Windows. ",
-        "It was reset to `multisession`", call. = FALSE)
+        "`multicore` is not supported; `strategy` was reset to `multisession`",
+        call. = FALSE)
       strategy <- "multisession"
     }
 
