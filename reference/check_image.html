@@ -40,7 +40,7 @@ and non-zero dimensions (or page count for PDFs)."></head><body>
   <main id="main" class="col-md-9"><div class="page-header">
 
       <h1>Verify Image File Integrity</h1>
-      <small class="dont-index">Source: <a href="https://github.com/elgabbas/ecokit/blob/main/R/general_check_image.R" class="external-link"><code>R/general_check_image.R</code></a></small>
+      <small class="dont-index">Source: <a href="https://github.com/elgabbas/ecokit/blob/v0.1.0/R/general_check_image.R" class="external-link"><code>R/general_check_image.R</code></a></small>
       <div class="d-none name"><code>check_image.Rd</code></div>
     </div>
 
@@ -168,7 +168,7 @@ system.</p></li>
 <span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="fu">check_image</span><span class="op">(</span><span class="va">text_path</span><span class="op">)</span></span></span>
 <span class="r-wrn co"><span class="r-pr">#&gt;</span> <span class="warning">Warning: </span>The file extension 'txt' is not a supported image format (JPEG, PNG, TIFF, PDF).</span>
-<span class="r-wrn co"><span class="r-pr">#&gt;</span> File: /tmp/RtmpLutUr5/image_test/not_an_image.txt</span>
+<span class="r-wrn co"><span class="r-pr">#&gt;</span> File: /tmp/RtmpCukg6J/image_test/not_an_image.txt</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> [1] FALSE</span>
 <span class="r-in"><span><span class="fu">check_image</span><span class="op">(</span><span class="va">text_path</span>, warning <span class="op">=</span> <span class="cn">FALSE</span><span class="op">)</span></span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> [1] FALSE</span>
@@ -179,11 +179,11 @@ system.</p></li>
 <span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="va">nonexistent_path</span> <span class="op">&lt;-</span> <span class="fu">fs</span><span class="fu">::</span><span class="fu"><a href="https://fs.r-lib.org/reference/path.html" class="external-link">path</a></span><span class="op">(</span><span class="va">temp_dir</span>, <span class="st">"nonexistent_image.jpg"</span><span class="op">)</span></span></span>
 <span class="r-in"><span><span class="fu">check_image</span><span class="op">(</span><span class="va">nonexistent_path</span><span class="op">)</span></span></span>
-<span class="r-wrn co"><span class="r-pr">#&gt;</span> <span class="warning">Warning: </span>The file '/tmp/RtmpLutUr5/image_test/nonexistent_image.jpg' does not exist.</span>
+<span class="r-wrn co"><span class="r-pr">#&gt;</span> <span class="warning">Warning: </span>The file '/tmp/RtmpCukg6J/image_test/nonexistent_image.jpg' does not exist.</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> [1] FALSE</span>
 <span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="fu">check_image</span><span class="op">(</span><span class="va">temp_dir</span><span class="op">)</span></span></span>
-<span class="r-wrn co"><span class="r-pr">#&gt;</span> <span class="warning">Warning: </span>Input `file` '/tmp/RtmpLutUr5/image_test' is a directory.</span>
+<span class="r-wrn co"><span class="r-pr">#&gt;</span> <span class="warning">Warning: </span>Input `file` '/tmp/RtmpCukg6J/image_test' is a directory.</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> [1] FALSE</span>
 <span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="co"># --------------------------------------------</span></span></span>

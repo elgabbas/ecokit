@@ -42,7 +42,7 @@ function works also for reading netCDF files with the terra package.'></head><bo
   <main id="main" class="col-md-9"><div class="page-header">
 
       <h1>Check if a tiff file corrupted</h1>
-      <small class="dont-index">Source: <a href="https://github.com/elgabbas/ecokit/blob/main/R/spat_check_tiff.R" class="external-link"><code>R/spat_check_tiff.R</code></a></small>
+      <small class="dont-index">Source: <a href="https://github.com/elgabbas/ecokit/blob/v0.1.0/R/spat_check_tiff.R" class="external-link"><code>R/spat_check_tiff.R</code></a></small>
       <div class="d-none name"><code>check_tiff.Rd</code></div>
     </div>
 
@@ -96,7 +96,7 @@ otherwise.</p>
 <span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="co"># a temp file ends with .tif (not a valid tiff file)</span></span></span>
 <span class="r-in"><span><span class="op">(</span><span class="va">temp_file</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/tempfile.html" class="external-link">tempfile</a></span><span class="op">(</span>fileext <span class="op">=</span> <span class="st">".tif"</span><span class="op">)</span><span class="op">)</span></span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [1] "/tmp/RtmpLutUr5/file206642af0cfd.tif"</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [1] "/tmp/RtmpCukg6J/file203d30e545e.tif"</span>
 <span class="r-in"><span><span class="fu">fs</span><span class="fu">::</span><span class="fu"><a href="https://fs.r-lib.org/reference/create.html" class="external-link">file_create</a></span><span class="op">(</span><span class="va">temp_file</span><span class="op">)</span></span></span>
 <span class="r-in"><span><span class="fu">check_tiff</span><span class="op">(</span>x <span class="op">=</span> <span class="va">temp_file</span><span class="op">)</span></span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> [1] FALSE</span>
