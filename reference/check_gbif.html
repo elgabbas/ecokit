@@ -72,20 +72,19 @@ working directory.</p></dd>
     <div class="section level2">
     <h2 id="value">Value<a class="anchor" aria-label="anchor" href="#value"></a></h2>
     <p>Returns <code>NULL</code> invisibly if the GBIF credentials are successfully
-validated or loaded. Stops with an error if the credentials cannot be found
-or loaded.</p>
+loaded. Stops with an error if the credentials cannot be found or loaded.</p>
     </div>
     <div class="section level2">
     <h2 id="details">Details<a class="anchor" aria-label="anchor" href="#details"></a></h2>
     <p>This function ensures that the necessary GBIF credentials are loaded
-into the R environment for accessing GBIF services, e.g. using <code>rgbif</code> R
-package. It first checks if the credentials are already set as environment
-variables. If any are missing, it attempts to read them from the specified
-<code>.Renviron</code> file. If the file does not exist, is not readable, or does not
-contain all required credentials, the function stops with an informative
-error message. The function is designed to be used in workflows requiring
-GBIF API access, such as downloading occurrence data. It returns <code>NULL</code>
-invisibly on success, indicating that the credentials are properly set.</p>
+into the R environment for accessing GBIF services, typically for using
+<a href="https://docs.ropensci.org/rgbif" class="external-link">rgbif</a> R package. It first checks if the
+credentials are already set as environment variables. If any are missing,
+it attempts to read them from the specified <code>.Renviron</code> file. If the file
+does not exist, is not readable, or does not contain all required
+credentials, the function stops with an informative error message. Note,
+however, that the function does not check if the credentials are valid or
+if they work with GBIF; only that they are present in the environment.</p>
     </div>
     <div class="section level2">
     <h2 id="author">Author<a class="anchor" aria-label="anchor" href="#author"></a></h2>
@@ -95,11 +94,13 @@ invisibly on success, indicating that the credentials are properly set.</p>
     <div class="section level2">
     <h2 id="ref-examples">Examples<a class="anchor" aria-label="anchor" href="#ref-examples"></a></h2>
     <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span><span class="kw">if</span> <span class="op">(</span><span class="cn">FALSE</span><span class="op">)</span> <span class="op">{</span> <span class="co"># \dontrun{</span></span></span>
+<span class="r-in"><span></span></span>
 <span class="r-in"><span>  <span class="co"># Check GBIF credentials using the default .Renviron file</span></span></span>
 <span class="r-in"><span>  <span class="fu">check_gbif</span><span class="op">(</span><span class="op">)</span></span></span>
 <span class="r-in"><span></span></span>
 <span class="r-in"><span>  <span class="co"># Specify a custom .Renviron file</span></span></span>
 <span class="r-in"><span>  <span class="fu">check_gbif</span><span class="op">(</span>r_environ <span class="op">=</span> <span class="st">"~/.Renviron"</span><span class="op">)</span></span></span>
+<span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="op">}</span> <span class="co"># }</span></span></span>
 </code></pre></div>
     </div>
