@@ -14,26 +14,27 @@
 #'   where GBIF credentials are stored. Defaults to `".Renviron"` in the current
 #'   working directory.
 #' @return Returns `NULL` invisibly if the GBIF credentials are successfully
-#'   validated or loaded. Stops with an error if the credentials cannot be found
-#'   or loaded.
+#'   loaded. Stops with an error if the credentials cannot be found or loaded.
 #' @details This function ensures that the necessary GBIF credentials are loaded
-#'   into the R environment for accessing GBIF services, e.g. using `rgbif` R
-#'   package. It first checks if the credentials are already set as environment
-#'   variables. If any are missing, it attempts to read them from the specified
-#'   `.Renviron` file. If the file does not exist, is not readable, or does not
-#'   contain all required credentials, the function stops with an informative
-#'   error message. The function is designed to be used in workflows requiring
-#'   GBIF API access, such as downloading occurrence data. It returns `NULL`
-#'   invisibly on success, indicating that the credentials are properly set.
+#'   into the R environment for accessing GBIF services, typically for using
+#'   [rgbif](https://docs.ropensci.org/rgbif) R package. It first checks if the
+#'   credentials are already set as environment variables. If any are missing,
+#'   it attempts to read them from the specified `.Renviron` file. If the file
+#'   does not exist, is not readable, or does not contain all required
+#'   credentials, the function stops with an informative error message. Note,
+#'   however, that the function does not check if the credentials are valid or
+#'   if they work with GBIF; only that they are present in the environment.
 #' @author Ahmed El-Gabbas
 #' @export
 #' @examples
 #' \dontrun{
+#'
 #'   # Check GBIF credentials using the default .Renviron file
 #'   check_gbif()
 #'
 #'   # Specify a custom .Renviron file
 #'   check_gbif(r_environ = "~/.Renviron")
+#'
 #' }
 #' @name check_gbif
 
