@@ -90,6 +90,7 @@ reference:
   - clear_console
   - check_rstudio
   - check_quarto
+  - check_gbif
   - save_session
   - save_session_info
   - git_log
