@@ -40,7 +40,7 @@ invalid or if unzip is unavailable."></head><body>
   <main id="main" class="col-md-9"><div class="page-header">
 
       <h1>Check the Integrity of a ZIP File</h1>
-      <small class="dont-index">Source: <a href="https://github.com/elgabbas/ecokit/blob/v0.1.0/R/general_check_zip.R" class="external-link"><code>R/general_check_zip.R</code></a></small>
+      <small class="dont-index">Source: <a href="https://github.com/elgabbas/ecokit/blob/main/R/general_check_zip.R" class="external-link"><code>R/general_check_zip.R</code></a></small>
       <div class="d-none name"><code>check_zip.Rd</code></div>
     </div>
 
@@ -115,7 +115,7 @@ failure.</p>
 <span class="r-out co"><span class="r-pr">#&gt;</span> [1] TRUE</span>
 <span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="fu">check_zip</span><span class="op">(</span><span class="va">bad_zip</span><span class="op">)</span>                               <span class="co"># FALSE, with warning</span></span></span>
-<span class="r-wrn co"><span class="r-pr">#&gt;</span> <span class="warning">Warning: </span>Not a valid ZIP file: /tmp/RtmpCukg6J/check_zip/invalid.zip</span>
+<span class="r-wrn co"><span class="r-pr">#&gt;</span> <span class="warning">Warning: </span>Not a valid ZIP file: /tmp/RtmpaT8ZrF/check_zip/invalid.zip</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> [1] FALSE</span>
 <span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="co"># non-existent file</span></span></span>
@@ -124,11 +124,11 @@ failure.</p>
 <span class="r-out co"><span class="r-pr">#&gt;</span> [1] FALSE</span>
 <span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="fu">check_zip</span><span class="op">(</span><span class="va">empty_zip</span><span class="op">)</span>                             <span class="co"># FALSE, with warning</span></span></span>
-<span class="r-wrn co"><span class="r-pr">#&gt;</span> <span class="warning">Warning: </span>File is empty: /tmp/RtmpCukg6J/check_zip/empty.zip</span>
+<span class="r-wrn co"><span class="r-pr">#&gt;</span> <span class="warning">Warning: </span>File is empty: /tmp/RtmpaT8ZrF/check_zip/empty.zip</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> [1] FALSE</span>
 <span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="fu">check_zip</span><span class="op">(</span><span class="va">non_zip_file</span><span class="op">)</span>                          <span class="co"># FALSE, with warning</span></span></span>
-<span class="r-wrn co"><span class="r-pr">#&gt;</span> <span class="warning">Warning: </span>Not a valid ZIP file: /tmp/RtmpCukg6J/check_zip/test.txt</span>
+<span class="r-wrn co"><span class="r-pr">#&gt;</span> <span class="warning">Warning: </span>Not a valid ZIP file: /tmp/RtmpaT8ZrF/check_zip/test.txt</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> [1] FALSE</span>
 <span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="co"># clean up</span></span></span>
