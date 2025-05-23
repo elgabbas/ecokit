@@ -90,9 +90,9 @@ check_gbif <- function(r_environ = ".Renviron") {
     missing_vars <- required_vars[missing_vars]
     ecokit::stop_ctx(
       paste0(
-        "The following GBIF log in credentials  are missing",
-        "from the environment ", "after reading ", r_environ, ": ",
-        toString(missing_vars)),
+        "The following GBIF log in credentials are missing ",
+        "from the environment ", "after reading the `.Renviron` file\n",
+        r_environ, "\n", toString(missing_vars)),
       include_backtrace = TRUE)
   }
 
