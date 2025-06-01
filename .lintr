@@ -1,5 +1,7 @@
 exclusions: list(
-    "vignettes/"
+	"vignettes/",
+	"data-raw/",
+	"R/ecokit_data.R" = list(line_length_linter = Inf)
 	)
 linters: linters_with_defaults(
 	absolute_path_linter(),

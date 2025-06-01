@@ -11,3 +11,4 @@ LICENSE.md
 ^pkgdown$
 ^\.github$
 ecokit.code-workspace
+^data-raw$

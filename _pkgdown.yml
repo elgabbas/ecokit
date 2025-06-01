@@ -27,6 +27,12 @@ reference:
   contents:
   - ecokit-package
 
+- title: ecology-related functions
+  contents:
+  - chelsa_var_info
+  - get_chelsa_links
+  - check_gbif
+
 - title: Package management
   contents:
   - stop_ctx
@@ -90,7 +96,6 @@ reference:
   - clear_console
   - check_rstudio
   - check_quarto
-  - check_gbif
   - save_session
   - save_session_info
   - git_log
