@@ -476,7 +476,7 @@ check_feather <- function(file, warning = TRUE) {
 
   # check file type
   in_file_type <- ecokit::file_type(file)
-  if (in_file_type != "data") {
+  if (stringr::str_detect(in_file_type, "^data|^DIY", negate = TRUE)) {
     if (warning) {
       warning(
         "Not a valid feather file: ", ecokit::normalize_path(file),
