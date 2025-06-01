@@ -114,19 +114,19 @@ typically via the <code>future.packages</code> argument in functions like
 <span class="r-in"><span><span class="co"># sequential</span></span></span>
 <span class="r-in"><span><span class="fu">load_packages_future</span><span class="op">(</span><span class="va">pkg_to_load</span>, <span class="st">"sequential"</span><span class="op">)</span></span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> NULL</span>
-<span class="r-in"><span><span class="fu"><a href="https://rdrr.io/r/base/sets.html" class="external-link">setdiff</a></span><span class="op">(</span><span class="fu"><a href="loaded_packages.html">loaded_packages</a></span><span class="op">(</span><span class="op">)</span>, <span class="va">pkg_init</span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="fu"><a href="https://generics.r-lib.org/reference/setops.html" class="external-link">setdiff</a></span><span class="op">(</span><span class="fu"><a href="loaded_packages.html">loaded_packages</a></span><span class="op">(</span><span class="op">)</span>, <span class="va">pkg_init</span><span class="op">)</span></span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> character(0)</span>
 <span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="co"># multisession</span></span></span>
 <span class="r-in"><span><span class="fu">load_packages_future</span><span class="op">(</span><span class="va">pkg_to_load</span>, <span class="st">"multisession"</span><span class="op">)</span></span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> [1] "tidyterra" "lubridate" "tidyr"     "sf"        "scales"   </span>
-<span class="r-in"><span><span class="fu"><a href="https://rdrr.io/r/base/sets.html" class="external-link">setdiff</a></span><span class="op">(</span><span class="fu"><a href="loaded_packages.html">loaded_packages</a></span><span class="op">(</span><span class="op">)</span>, <span class="va">pkg_init</span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="fu"><a href="https://generics.r-lib.org/reference/setops.html" class="external-link">setdiff</a></span><span class="op">(</span><span class="fu"><a href="loaded_packages.html">loaded_packages</a></span><span class="op">(</span><span class="op">)</span>, <span class="va">pkg_init</span><span class="op">)</span></span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> character(0)</span>
 <span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="co"># multicore</span></span></span>
 <span class="r-in"><span><span class="fu">load_packages_future</span><span class="op">(</span><span class="va">pkg_to_load</span>, <span class="st">"multicore"</span><span class="op">)</span></span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> NULL</span>
-<span class="r-in"><span><span class="fu"><a href="https://rdrr.io/r/base/sets.html" class="external-link">setdiff</a></span><span class="op">(</span><span class="fu"><a href="loaded_packages.html">loaded_packages</a></span><span class="op">(</span><span class="op">)</span>, <span class="va">pkg_init</span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="fu"><a href="https://generics.r-lib.org/reference/setops.html" class="external-link">setdiff</a></span><span class="op">(</span><span class="fu"><a href="loaded_packages.html">loaded_packages</a></span><span class="op">(</span><span class="op">)</span>, <span class="va">pkg_init</span><span class="op">)</span></span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> [1] "scales"    "lubridate"</span>
 </code></pre></div>
     </div>
