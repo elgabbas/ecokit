@@ -30,7 +30,10 @@
 #' - `explanation` (character): Brief description of the variable.
 #' @author Ahmed El-Gabbas
 #' @examples
+#' library(tibble)
+#' library(dplyr)
 #' options(tibble.print_max = 200)
+#'
 #' CHELSA_links <- get_chelsa_links()
 #'
 #' dplyr::glimpse(CHELSA_links)

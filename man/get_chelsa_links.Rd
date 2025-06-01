@@ -40,7 +40,10 @@ for variables available under current and future climate scenarios, and
 extracts metadata to create a tibble with detailed file information.
 }
 \examples{
+library(tibble)
+library(dplyr)
 options(tibble.print_max = 200)
+
 CHELSA_links <- get_chelsa_links()
 
 dplyr::glimpse(CHELSA_links)
