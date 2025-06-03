@@ -56,21 +56,19 @@ the URLs and the link text.</p>
 
 <dl><dt id="arg-url">url<a class="anchor" aria-label="anchor" href="#arg-url"></a></dt>
 <dd><p>Character. The URL of the web page to scrape. This URL is also
-used to resolve relative links to absolute URLs.</p></dd>
+used to resolve relative links to absolute URLs if no <code>&lt;base&gt;</code> tag is
+found.</p></dd>
 
 
 <dt id="arg-sort-by">sort_by<a class="anchor" aria-label="anchor" href="#arg-sort-by"></a></dt>
 <dd><p>Character vector of length 1 or 2. The columns to arrange the
-output by. The default is c("link", "link_text"). The first column is the
-URL of the link, and the second column is the text of the link. The
-function will arrange the output in ascending order by the column(s)
-specified in this argument.</p></dd>
+output by. The default is c("link", "link_text").</p></dd>
 
 </dl></div>
     <div class="section level2">
     <h2 id="value">Value<a class="anchor" aria-label="anchor" href="#value"></a></h2>
     <p>A tibble with two columns: <code>link_text</code> containing the text of each
-link, and <code>link</code> containing  the absolute URL of each link. The tibble is
+link, and <code>link</code> containing the absolute URL of each link. The tibble is
 sorted by link and then by link text, and only unique links are included.</p>
     </div>
 
@@ -81,26 +79,26 @@ sorted by link and then by link text, and only unique links are included.</p>
 <span class="r-in"><span><span class="fu">scrape_link</span><span class="op">(</span>url <span class="op">=</span> <span class="st">"https://github.com/tidyverse/dplyr"</span><span class="op">)</span><span class="op">)</span></span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># A tibble: 6 × 2</span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>   link_text          link                                                       </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>   <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>              <span style="color: #949494; font-style: italic;">&lt;fs::path&gt;</span>                                                 </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">1</span> Acero              https:/arrow.apache.org/docs/cpp/streaming_execution.html  </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">2</span> arrow              https:/arrow.apache.org/docs/r                             </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">3</span> dbplyr             https:/dbplyr.tidyverse.org                                </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">4</span> Docs               https:/docs.github.com                                     </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">5</span> Documentation      https:/docs.github.com                                     </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">6</span> Search syntax tips …github-code-search/understanding-github-code-search-syntax</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>              <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>                                                      </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">1</span> Acero              https://arrow.apache.org/docs/cpp/streaming_execution.html </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">2</span> arrow              https://arrow.apache.org/docs/r/                           </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">3</span> dbplyr             https://dbplyr.tidyverse.org/                              </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">4</span> Documentation      https://docs.github.com                                    </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">5</span> Docs               https://docs.github.com/                                   </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">6</span> Search syntax tips https://docs.github.com/search-github/github-code-search/u…</span>
 <span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="fu"><a href="https://rdrr.io/r/utils/head.html" class="external-link">head</a></span><span class="op">(</span></span></span>
 <span class="r-in"><span>  <span class="fu">scrape_link</span><span class="op">(</span></span></span>
 <span class="r-in"><span>    url <span class="op">=</span> <span class="st">"https://github.com/tidyverse/dplyr"</span>, sort_by <span class="op">=</span> <span class="st">"link_text"</span><span class="op">)</span><span class="op">)</span></span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># A tibble: 6 × 2</span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>   link_text          link                                                       </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>   <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>              <span style="color: #949494; font-style: italic;">&lt;fs::path&gt;</span>                                                 </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">1</span> + 257 contributors …ub.com/tidyverse/dplyr/tidyverse/dplyr/graphs/contributors</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">2</span> + 42 releases      https:/github.com/tidyverse/dplyr/tidyverse/dplyr/releases </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">3</span> .Rbuildignore      …om/tidyverse/dplyr/tidyverse/dplyr/blob/main/.Rbuildignore</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">4</span> .github            …thub.com/tidyverse/dplyr/tidyverse/dplyr/tree/main/.github</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">5</span> .gitignore         …b.com/tidyverse/dplyr/tidyverse/dplyr/blob/main/.gitignore</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">6</span> .vscode            …thub.com/tidyverse/dplyr/tidyverse/dplyr/tree/main/.vscode</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   link_text          link                                                      </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>              <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>                                                     </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">1</span> + 257 contributors https://github.com/tidyverse/dplyr/graphs/contributors    </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">2</span> + 42 releases      https://github.com/tidyverse/dplyr/releases               </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">3</span> .Rbuildignore      https://github.com/tidyverse/dplyr/blob/main/.Rbuildignore</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">4</span> .github            https://github.com/tidyverse/dplyr/tree/main/.github      </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">5</span> .gitignore         https://github.com/tidyverse/dplyr/blob/main/.gitignore   </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">6</span> .vscode            https://github.com/tidyverse/dplyr/tree/main/.vscode      </span>
 <span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="co"># This will give an "Invalid url" error</span></span></span>
 <span class="r-in"><span><span class="kw">if</span> <span class="op">(</span><span class="cn">FALSE</span><span class="op">)</span> <span class="op">{</span> <span class="co"># \dontrun{</span></span></span>
