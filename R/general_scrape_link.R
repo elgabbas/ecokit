@@ -7,15 +7,13 @@
 #' This function scrapes a web page for all links (`<a>` tags) and extracts both
 #' the URLs and the link text.
 #' @param url Character. The URL of the web page to scrape. This URL is also
-#'   used to resolve relative links to absolute URLs.
+#'   used to resolve relative links to absolute URLs if no `<base>` tag is
+#'   found.
 #' @param sort_by Character vector of length 1 or 2. The columns to arrange the
-#'   output by. The default is c("link", "link_text"). The first column is the
-#'   URL of the link, and the second column is the text of the link. The
-#'   function will arrange the output in ascending order by the column(s)
-#'   specified in this argument.
+#'   output by. The default is c("link", "link_text").
 #' @name scrape_link
 #' @return A tibble with two columns: `link_text` containing the text of each
-#'   link, and `link` containing  the absolute URL of each link. The tibble is
+#'   link, and `link` containing the absolute URL of each link. The tibble is
 #'   sorted by link and then by link text, and only unique links are included.
 #' @importFrom rlang .data
 #' @examples
@@ -60,12 +58,22 @@ scrape_link <- function(url, sort_by = c("link", "link_text")) {
   }
 
   # Create an html document from the url
-  webpage <- xml2::read_html(url) %>%
-    rvest::html_nodes("a")
+  webpage <- xml2::read_html(url)
+
+  # Extract the base URL from the <base> tag, if present
+  base_url <- webpage %>%
+    rvest::html_node("base") %>%
+    rvest::html_attr("href")
+
+  # If no <base> tag, use the input url as the base
+  base_url <- if (is.na(base_url) || is.null(base_url)) url else base_url
+
+  # Extract all <a> tags
+  links <- rvest::html_nodes(webpage, "a")
 
   # Extract the URLs
   output <- purrr::map(
-    .x = webpage,
+    .x = links,
     .f = ~ tibble::tibble(
       link = stringr::str_trim(rvest::html_attr(.x, "href")),
       link_text = stringr::str_trim(rvest::html_text(.x)))) %>%
@@ -75,12 +83,7 @@ scrape_link <- function(url, sort_by = c("link", "link_text")) {
       !is.na(link) & !stringr::str_starts(link, "#"),
       link != "..", nzchar(link_text)) %>%
     dplyr::mutate(
-      link = dplyr::if_else(
-        stringr::str_starts(link, "http"), link,
-        fs::path(
-          stringr::str_remove(url, "/$"), stringr::str_remove(link, "^/")
-        )),
-
+      link = xml2::url_absolute(link, base = base_url),
       link_text = {
         stringr::str_remove_all(link_text, "\n") %>%
           stringr::str_replace_all("\\s+", " ") %>%

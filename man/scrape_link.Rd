@@ -8,17 +8,15 @@ scrape_link(url, sort_by = c("link", "link_text"))
 }
 \arguments{
 \item{url}{Character. The URL of the web page to scrape. This URL is also
-used to resolve relative links to absolute URLs.}
+used to resolve relative links to absolute URLs if no \verb{<base>} tag is
+found.}
 
 \item{sort_by}{Character vector of length 1 or 2. The columns to arrange the
-output by. The default is c("link", "link_text"). The first column is the
-URL of the link, and the second column is the text of the link. The
-function will arrange the output in ascending order by the column(s)
-specified in this argument.}
+output by. The default is c("link", "link_text").}
 }
 \value{
 A tibble with two columns: \code{link_text} containing the text of each
-link, and \code{link} containing  the absolute URL of each link. The tibble is
+link, and \code{link} containing the absolute URL of each link. The tibble is
 sorted by link and then by link text, and only unique links are included.
 }
 \description{
