@@ -12,6 +12,8 @@
 #' @author Ahmed El-Gabbas
 #' @param file Character. Path to a ZIP file. Must be a single, non-empty
 #'   string.
+#' @param warning Logical. If `TRUE`, issues a warning if the file does not
+#'   exist, is empty, or fails the integrity check. Default is `TRUE`.
 #' @return Logical: `TRUE` if the file exists, is non-empty, and passes the
 #'   integrity check; `FALSE` otherwise, accompanied by a warning explaining the
 #'   failure.
@@ -51,19 +53,23 @@
 #' check_zip(zip_file)                              # TRUE
 #'
 #' check_zip(bad_zip)                               # FALSE, with warning
+#' check_zip(bad_zip, warning = FALSE)              # FALSE, without warning
 #'
 #' # non-existent file
 #' check_zip("nonexistent.zip")                     # FALSE, with warning
+#' check_zip("nonexistent.zip", warning = FALSE)    # FALSE, without warning
 #'
 #' check_zip(empty_zip)                             # FALSE, with warning
+#' check_zip(empty_zip, warning = FALSE)            # FALSE, without warning
 #'
 #' check_zip(non_zip_file)                          # FALSE, with warning
+#' check_zip(non_zip_file, warning = FALSE)         # FALSE, without warning
 #'
 #' # clean up
 #' fs::file_delete(c(zip_file, bad_zip, empty_zip, temp_file))
 #' fs::dir_delete(temp_dir)
 
-check_zip <- function(file = NULL) {
+check_zip <- function(file = NULL, warning = TRUE) {
 
   # Check for unzip command
   if (isFALSE(ecokit::check_system_command("unzip"))) {
@@ -83,14 +89,18 @@ check_zip <- function(file = NULL) {
 
   # Verify the file exists
   if (!file.exists(file)) {
-    warning(
-      "File does not exist: ", ecokit::normalize_path(file), call. = FALSE)
+    if (warning) {
+      warning(
+        "File does not exist: ", ecokit::normalize_path(file), call. = FALSE)
+    }
     return(FALSE)
   }
 
   # Verify the file is not empty
   if (file.info(file)$size == 0L) {
-    warning("File is empty: ", ecokit::normalize_path(file), call. = FALSE)
+    if (warning) {
+      warning("File is empty: ", ecokit::normalize_path(file), call. = FALSE)
+    }
     return(FALSE)
   }
 
@@ -98,8 +108,10 @@ check_zip <- function(file = NULL) {
   if (ecokit::os() != "Windows") {
     in_file_type <- ecokit::file_type(file)
     if (!startsWith(in_file_type, "Zip archive")) {
-      warning(
-        "Not a valid ZIP file: ", ecokit::normalize_path(file), call. = FALSE)
+      if (warning) {
+        warning(
+          "Not a valid ZIP file: ", ecokit::normalize_path(file), call. = FALSE)
+      }
       return(FALSE)
     }
   }
@@ -112,13 +124,18 @@ check_zip <- function(file = NULL) {
         any()
     },
     warning = function(w) {
-      message(
-        "Warning during file validation: ", conditionMessage(w), call. = FALSE)
+      if (warning) {
+        warning(
+          "Warning during file validation: ",
+          conditionMessage(w), call. = FALSE)
+      }
       FALSE
     },
     error = function(e) {
-      message(
-        "Error during file validation: ", conditionMessage(e), call. = FALSE)
+      if (warning) {
+        warning(
+          "Error during file validation: ", conditionMessage(e), call. = FALSE)
+      }
       FALSE
     })
 

@@ -42,9 +42,10 @@ extracts metadata to create a tibble with detailed file information.
 \examples{
 library(tibble)
 library(dplyr)
-options(tibble.print_max = 200)
+library(ecokit)
+options(pillar.print_max = 64)
 
-CHELSA_links <- get_chelsa_links()
+CHELSA_links <- ecokit::get_chelsa_links()
 
 dplyr::glimpse(CHELSA_links)
 

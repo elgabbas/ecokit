@@ -31,6 +31,7 @@ units, and descriptions.
 # Load the CHELSA variable information
 library(ecokit)
 library(tibble)
+options(pillar.print_max = 64)
 
 data("chelsa_var_info", package = "ecokit")
 print(chelsa_var_info, n = Inf)

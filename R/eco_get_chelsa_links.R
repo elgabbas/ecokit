@@ -32,9 +32,10 @@
 #' @examples
 #' library(tibble)
 #' library(dplyr)
-#' options(tibble.print_max = 200)
+#' library(ecokit)
+#' options(pillar.print_max = 64)
 #'
-#' CHELSA_links <- get_chelsa_links()
+#' CHELSA_links <- ecokit::get_chelsa_links()
 #'
 #' dplyr::glimpse(CHELSA_links)
 #'
@@ -66,7 +67,7 @@ get_chelsa_links <- function(
   retry_count <- 0L
 
   # Climate models for regex pattern matching
-  clim_models <- c(
+  climate_models <- c(
     "MRI-ESM2-0", "MPI-ESM1-2-HR", "UKESM1-0-LL",
     "GFDL-ESM4", "IPSL-CM6A-LR") %>%
     # Combine into a single regex pattern
@@ -164,7 +165,7 @@ get_chelsa_links <- function(
       climate_scenario = stringr::str_extract(
         relative_url, "ssp\\d{1,3}"), # nolint: nonportable_path_linter
       # Extract climate model
-      climate_model = stringr::str_extract(relative_url, clim_models),
+      climate_model = stringr::str_extract(relative_url, climate_models),
       # Extract year range (e.g., 1981-2010)
       year = stringr::str_extract(relative_url, "[0-9]{4}-[0-9]{4}"),
       # Assign "current" for 1981-2010 scenarios if missing

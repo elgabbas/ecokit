@@ -4,11 +4,14 @@
 \alias{check_zip}
 \title{Check the Integrity of a ZIP File}
 \usage{
-check_zip(file = NULL)
+check_zip(file = NULL, warning = TRUE)
 }
 \arguments{
 \item{file}{Character. Path to a ZIP file. Must be a single, non-empty
 string.}
+
+\item{warning}{Logical. If \code{TRUE}, issues a warning if the file does not
+exist, is empty, or fails the integrity check. Default is \code{TRUE}.}
 }
 \value{
 Logical: \code{TRUE} if the file exists, is non-empty, and passes the
@@ -57,13 +60,17 @@ writeLines("Hello, world!", non_zip_file)
 check_zip(zip_file)                              # TRUE
 
 check_zip(bad_zip)                               # FALSE, with warning
+check_zip(bad_zip, warning = FALSE)              # FALSE, without warning
 
 # non-existent file
 check_zip("nonexistent.zip")                     # FALSE, with warning
+check_zip("nonexistent.zip", warning = FALSE)    # FALSE, without warning
 
 check_zip(empty_zip)                             # FALSE, with warning
+check_zip(empty_zip, warning = FALSE)            # FALSE, without warning
 
 check_zip(non_zip_file)                          # FALSE, with warning
+check_zip(non_zip_file, warning = FALSE)         # FALSE, without warning
 
 # clean up
 fs::file_delete(c(zip_file, bad_zip, empty_zip, temp_file))

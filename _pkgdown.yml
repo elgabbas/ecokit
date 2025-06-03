@@ -65,6 +65,7 @@ reference:
   - assign_if_not_exist
   - cc
   - ht
+  - cat_names
   - arrange_alphanum
   - n_decimals
   - replace_space
