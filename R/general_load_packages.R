@@ -41,7 +41,6 @@
 #'
 #' # non-existent package
 #' load_packages("non_existent")
-#'
 
 load_packages <- function(
     ..., package_list = NULL, verbose = FALSE, install_missing = FALSE) {
@@ -53,6 +52,8 @@ load_packages <- function(
     unique() %>%
     sort()
 
+  prefix <- "  >>>>  "
+
   # List of installed packages
   installed_packages <- rownames(utils::installed.packages())
 
@@ -63,7 +64,7 @@ load_packages <- function(
     if (install_missing) {
       message(
         "The following packages will be installed:\n",
-        paste("  >>>>>  ", packages_to_install, collapse = "\n"))
+        paste(prefix, packages_to_install, collapse = "\n"))
 
       # Installing missing packages
       purrr::walk(
@@ -77,7 +78,7 @@ load_packages <- function(
       message(
         "The following packages are neither available nor installed ",
         "as install_missing = FALSE:\n",
-        paste("  >>>>>  ", crayon::blue(packages_to_install), collapse = "\n"))
+        paste(prefix, crayon::blue(packages_to_install), collapse = "\n"))
       packages <- setdiff(packages, packages_to_install)
     }
   }
@@ -95,7 +96,7 @@ load_packages <- function(
       .f = ~{
         utils::packageDescription(.x)$Version %>%
           as.character() %>%
-          paste0("  >>>>>  ", crayon::blue(.x), ": ", .) %>%
+          paste0(prefix, crayon::bold(crayon::blue(.x)), " (", ., ")") %>%
           message()
       }) %>%
       invisible()
@@ -118,7 +119,7 @@ load_packages <- function(
         if (verbose) {
           utils::packageDescription(.x)$Version %>%
             as.character() %>%
-            paste0("  >>>>>  ", crayon::blue(.x), ": ", .) %>%
+            paste0(prefix, crayon::bold(crayon::blue(.x)), " (", ., ")") %>%
             message()
         }
 

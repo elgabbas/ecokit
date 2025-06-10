@@ -54,7 +54,6 @@ load_packages(tidyr, tidyterra, verbose = TRUE)
 
 # non-existent package
 load_packages("non_existent")
-
 }
 \author{
 Ahmed El-Gabbas
