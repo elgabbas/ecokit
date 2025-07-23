@@ -9,9 +9,16 @@
 #' [pak::pkg_install]. It supports a wide range of repositories, including CRAN,
 #' Bioconductor, GitHub, GitLab, Bitbucket, and other common remote sources, as
 #' well as tarball URLs (which `pak` cannot install directly). The function
-#' returns a list of two character vectors: one containing installable
-#' references for `pak`, and one containing tarball URLs for manual installation
-#' (e.g., with [remotes::install_url]).
+#' returns a list of multiple character vectors:
+#' - `pak`: installable references for `pak` (CRAN/BioC only, no remotes)
+#' - `tarballs`: tarball URLs for manual installation (e.g., with remotes)
+#' - `remote`: GitHub/GitLab/Bitbucket package references (user/repo, no
+#' SHA/ref)
+#'
+#' These lists allow you to separately process packages by source, or install
+#' GitHub/GitLab/Bitbucket packages without strict versioning/commit, which can
+#' sometimes help avoid dependency resolution conflicts in pak (and other
+#' tools).
 #'
 #' @details [`renv`](https://rstudio.github.io/renv/index.html) is a popular R
 #'   package for project-local dependency management, creating lock files
@@ -29,12 +36,21 @@
 #'   cached packages, ensuring a reproducible environment with minimal download
 #'   time.
 #'
+#'   In addition to the main installable references, the function outputs a
+#'   separate list for all remotes (GitHub, GitLab, Bitbucket) without SHA/ref,
+#'   which can be useful for alternative install strategies, e.g., to install
+#'   all CRAN/Bioc packages first, and then install all remotes without version
+#'   pinning.
+#'
 #' @param lockfile Path to the `renv.lock` file (JSON format).
 #'
-#' @return A list with two elements:
+#' @return A list with the following elements:
 #'   \describe{
-#'     \item{pak}{Character vector of installable references for `pak`}
+#'     \item{pak}{Character vector of installable references for `pak`
+#'     (CRAN/BioC only)}
 #'     \item{tarballs}{Character vector of tarball URLs (install with remotes)}
+#'     \item{remote}{Character vector of all remote package references
+#'     (user/repo, no SHA)}
 #'   }
 #'
 #' @examples
@@ -46,6 +62,9 @@
 #'
 #' # Install packages using pak
 #' # pak::pak_install(pak_packages$pak)
+#'
+#' # Install all remote packages (latest HEAD, no SHA)
+#' # pak::pak_install(pak_packages$remote)
 #'
 #' @seealso [pak::pkg_install()], [renv::restore()], [remotes::install_url()]
 #'
@@ -98,6 +117,8 @@ pak_from_renv <- function(lockfile) {
   # Initialize output lists
   pak_refs <- character()
   tarball_urls <- character()
+  # all remotes (github/gitlab/bitbucket) as "username/repo"
+  remote_refs <- character()
 
   # Loop through each package in the lock file
   for (package in names(packages)) {
@@ -111,57 +132,18 @@ pak_from_renv <- function(lockfile) {
     if (!is.null(rec$RemoteType)) {
 
       remote_type <- tolower(rec$RemoteType)
-      # Handle GitHub remotes
-      if (remote_type == "github") {
+      # Handle GitHub/GitLab/Bitbucket remotes
+      if (remote_type %in% c("github", "gitlab", "bitbucket")) {
         username <- rec$RemoteUsername
         repo <- rec$RemoteRepo
-        ref <- rec$RemoteRef
-        # Use commit sha if available and not a branch/tag
-        sha <- rec$RemoteSha
-        use_ref <- if (!is.null(sha) && nchar(sha) >= 7L) sha else ref
-        if (is.null(username) || is.null(repo) || is.null(use_ref)) {
-          warning(
-            sprintf("Missing GitHub info for %s; skipping.", package),
-            call. = FALSE)
+        # Only add "username/repo" (without @sha/ref) to remote_refs
+        if (!is.null(username) && !is.null(repo)) {
+          remote_refs <- c(
+            remote_refs, sprintf("%s/%s", username, repo)) # nolint: nonportable_path_linter
         } else {
-          pak_refs <- c(
-            pak_refs, sprintf("%s/%s@%s", username, repo, use_ref)) # nolint: nonportable_path_linter
-        }
-        next
-      }
-
-      # Handle GitLab remotes
-      if (remote_type == "gitlab") {
-        username <- rec$RemoteUsername
-        repo <- rec$RemoteRepo
-        ref <- rec$RemoteRef
-        sha <- rec$RemoteSha
-        use_ref <- if (!is.null(sha) && nchar(sha) >= 7L) sha else ref
-        if (is.null(username) || is.null(repo) || is.null(use_ref)) {
           warning(
-            sprintf("Missing GitLab info for %s; skipping.", package),
+            sprintf("Missing %s info for %s; skipping.", remote_type, package),
             call. = FALSE)
-        } else {
-          pak_refs <- c(
-            pak_refs, sprintf("gitlab::%s/%s@%s", username, repo, use_ref))
-        }
-        next
-      }
-
-      # Handle Bitbucket remotes
-      if (remote_type == "bitbucket") {
-        username <- rec$RemoteUsername
-        repo <- rec$RemoteRepo
-        ref <- rec$RemoteRef
-        sha <- rec$RemoteSha
-        use_ref <- if (!is.null(sha) && nchar(sha) >= 7L) sha else ref
-        if (is.null(username) || is.null(repo) || is.null(use_ref)) {
-          warning(
-            sprintf("Missing Bitbucket info for %s; skipping.", package),
-            call. = FALSE)
-        } else {
-          pak_refs <- c(
-            pak_refs, sprintf("bitbucket::%s/%s@%s", username, repo, use_ref))
         }
         next
       }
@@ -219,7 +201,12 @@ pak_from_renv <- function(lockfile) {
   # Remove duplicates, sort for consistency
   pak_refs <- sort(unique(pak_refs))
   tarball_urls <- sort(unique(tarball_urls))
+  remote_refs <- sort(unique(remote_refs))
 
-  # Return list of installable refs and tarballs
-  list(pak = pak_refs, tarballs = tarball_urls)
+  # Return list of installable refs, tarballs, and remotes
+  list(
+    pak = pak_refs,
+    tarballs = tarball_urls,
+    remote = remote_refs
+  )
 }

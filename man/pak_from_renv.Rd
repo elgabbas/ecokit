@@ -10,10 +10,13 @@ pak_from_renv(lockfile)
 \item{lockfile}{Path to the \code{renv.lock} file (JSON format).}
 }
 \value{
-A list with two elements:
+A list with the following elements:
 \describe{
-\item{pak}{Character vector of installable references for \code{pak}}
+\item{pak}{Character vector of installable references for \code{pak}
+(CRAN/BioC only)}
 \item{tarballs}{Character vector of tarball URLs (install with remotes)}
+\item{remote}{Character vector of all remote package references
+(user/repo, no SHA)}
 }
 }
 \description{
@@ -22,11 +25,20 @@ references that can be directly installed using the \code{pak} package
 \link[pak:pkg_install]{pak::pkg_install}. It supports a wide range of repositories, including CRAN,
 Bioconductor, GitHub, GitLab, Bitbucket, and other common remote sources, as
 well as tarball URLs (which \code{pak} cannot install directly). The function
-returns a list of two character vectors: one containing installable
-references for \code{pak}, and one containing tarball URLs for manual installation
-(e.g., with \link[remotes:install_url]{remotes::install_url}).
+returns a list of multiple character vectors:
+\itemize{
+\item \code{pak}: installable references for \code{pak} (CRAN/BioC only, no remotes)
+\item \code{tarballs}: tarball URLs for manual installation (e.g., with remotes)
+\item \code{remote}: GitHub/GitLab/Bitbucket package references (user/repo, no
+SHA/ref)
+}
 }
 \details{
+These lists allow you to separately process packages by source, or install
+GitHub/GitLab/Bitbucket packages without strict versioning/commit, which can
+sometimes help avoid dependency resolution conflicts in pak (and other
+tools).
+
 \href{https://rstudio.github.io/renv/index.html}{\code{renv}} is a popular R
 package for project-local dependency management, creating lock files
 (\code{renv.lock}) to ensure reproducible environments.
@@ -42,6 +54,12 @@ from any \code{renv.lock} for rapid, parallel installation via \code{pak}. After
 installing with \link[pak:pkg_install]{pak::pkg_install}, you can run \link[renv:restore]{renv::restore} to link
 cached packages, ensuring a reproducible environment with minimal download
 time.
+
+In addition to the main installable references, the function outputs a
+separate list for all remotes (GitHub, GitLab, Bitbucket) without SHA/ref,
+which can be useful for alternative install strategies, e.g., to install
+all CRAN/Bioc packages first, and then install all remotes without version
+pinning.
 }
 \examples{
 lock_path <- file.path(
@@ -52,6 +70,9 @@ lock_path <- file.path(
 
 # Install packages using pak
 # pak::pak_install(pak_packages$pak)
+
+# Install all remote packages (latest HEAD, no SHA)
+# pak::pak_install(pak_packages$remote)
 
 }
 \seealso{
