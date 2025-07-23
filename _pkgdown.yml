@@ -48,6 +48,7 @@ reference:
   - function_arguments
   - record_arguments
   - used_packages
+  - pak_from_renv
 
 - title: File / data operations
   contents:
