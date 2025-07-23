@@ -3,23 +3,29 @@
 references that can be directly installed using the pak package
 pak::pkg_install. It supports a wide range of repositories, including CRAN,
 Bioconductor, GitHub, GitLab, Bitbucket, and other common remote sources, as
-well as tarball URLs (which pak cannot install directly). The function
-returns a list of multiple character vectors:
+well as tarball URLs. The function returns a list of multiple character
+vectors:
 pak: installable references for pak (CRAN/BioC only, no remotes)
-tarballs: tarball URLs for manual installation (e.g., with remotes)
-remote: GitHub/GitLab/Bitbucket package references (user/repo, no
-SHA/ref)
+tarballs: package references for tarball URLs, formatted for pak as
+pkg=url::https://... if the package name is known, or just
+url::https://... if not.
+remote: GitHub/GitLab/Bitbucket package references, formatted for pak as
+github::user/repo, gitlab::user/repo, or bitbucket::user/repo (or, if
+the package name differs from the repo, as pkg=github::user/repo etc.).
 
 "><meta property="og:description" content="This function parses a given renv.lock file and extracts all package
 references that can be directly installed using the pak package
 pak::pkg_install. It supports a wide range of repositories, including CRAN,
 Bioconductor, GitHub, GitLab, Bitbucket, and other common remote sources, as
-well as tarball URLs (which pak cannot install directly). The function
-returns a list of multiple character vectors:
+well as tarball URLs. The function returns a list of multiple character
+vectors:
 pak: installable references for pak (CRAN/BioC only, no remotes)
-tarballs: tarball URLs for manual installation (e.g., with remotes)
-remote: GitHub/GitLab/Bitbucket package references (user/repo, no
-SHA/ref)
+tarballs: package references for tarball URLs, formatted for pak as
+pkg=url::https://... if the package name is known, or just
+url::https://... if not.
+remote: GitHub/GitLab/Bitbucket package references, formatted for pak as
+github::user/repo, gitlab::user/repo, or bitbucket::user/repo (or, if
+the package name differs from the repo, as pkg=github::user/repo etc.).
 
 "></head><body>
     <a href="#main" class="visually-hidden-focusable">Skip to contents</a>
@@ -65,11 +71,14 @@ SHA/ref)
 references that can be directly installed using the <code>pak</code> package
 <a href="https://pak.r-lib.org/reference/pkg_install.html" class="external-link">pak::pkg_install</a>. It supports a wide range of repositories, including CRAN,
 Bioconductor, GitHub, GitLab, Bitbucket, and other common remote sources, as
-well as tarball URLs (which <code>pak</code> cannot install directly). The function
-returns a list of multiple character vectors:</p><ul><li><p><code>pak</code>: installable references for <code>pak</code> (CRAN/BioC only, no remotes)</p></li>
-<li><p><code>tarballs</code>: tarball URLs for manual installation (e.g., with remotes)</p></li>
-<li><p><code>remote</code>: GitHub/GitLab/Bitbucket package references (user/repo, no
-SHA/ref)</p></li>
+well as tarball URLs. The function returns a list of multiple character
+vectors:</p><ul><li><p><code>pak</code>: installable references for <code>pak</code> (CRAN/BioC only, no remotes)</p></li>
+<li><p><code>tarballs</code>: package references for tarball URLs, formatted for pak as
+<code>pkg=url::https://...</code> if the package name is known, or just
+<code>url::https://...</code> if not.</p></li>
+<li><p><code>remote</code>: GitHub/GitLab/Bitbucket package references, formatted for pak as
+<code>github::user/repo</code>, <code>gitlab::user/repo</code>, or <code>bitbucket::user/repo</code> (or, if
+the package name differs from the repo, as <code>pkg=github::user/repo</code> etc.).</p></li>
 </ul></div>
 
     <div class="section level2">
@@ -92,11 +101,12 @@ SHA/ref)</p></li>
 (CRAN/BioC only)</p></dd>
 
 <dt>tarballs</dt>
-<dd><p>Character vector of tarball URLs (install with remotes)</p></dd>
+<dd><p>Character vector of tarball URLs in pak syntax
+(see Details)</p></dd>
 
 <dt>remote</dt>
-<dd><p>Character vector of all remote package references
-(user/repo, no SHA)</p></dd>
+<dd><p>Character vector of all remote package references in pak
+syntax</p></dd>
 
 
 </dl></div>
@@ -105,7 +115,7 @@ SHA/ref)</p></li>
     <p>These lists allow you to separately process packages by source, or install
 GitHub/GitLab/Bitbucket packages without strict versioning/commit, which can
 sometimes help avoid dependency resolution conflicts in pak (and other
-tools).</p>
+tools). Tarball URLs are provided in a pak-compatible format.</p>
 <p><a href="https://rstudio.github.io/renv/index.html" class="external-link"><code>renv</code></a> is a popular R
 package for project-local dependency management, creating lock files
 (<code>renv.lock</code>) to ensure reproducible environments.
@@ -121,10 +131,9 @@ installing with <a href="https://pak.r-lib.org/reference/pkg_install.html" class
 cached packages, ensuring a reproducible environment with minimal download
 time.</p>
 <p>In addition to the main installable references, the function outputs a
-separate list for all remotes (GitHub, GitLab, Bitbucket) without SHA/ref,
-which can be useful for alternative install strategies, e.g., to install
-all CRAN/Bioc packages first, and then install all remotes without version
-pinning.</p>
+separate list for all remotes (GitHub, GitLab, Bitbucket) in pak-compatible
+syntax, and a tarballs list in pak-compatible syntax (<code>url::</code> or
+<code>pkg=url::...</code>).</p>
     </div>
     <div class="section level2">
     <h2 id="see-also">See also<a class="anchor" aria-label="anchor" href="#see-also"></a></h2>
@@ -235,6 +244,9 @@ pinning.</p>
 <span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="co"># Install all remote packages (latest HEAD, no SHA)</span></span></span>
 <span class="r-in"><span><span class="co"># pak::pak_install(pak_packages$remote)</span></span></span>
+<span class="r-in"><span></span></span>
+<span class="r-in"><span><span class="co"># Install tarballs</span></span></span>
+<span class="r-in"><span><span class="co"># pak::pak_install(pak_packages$tarballs)</span></span></span>
 <span class="r-in"><span></span></span>
 </code></pre></div>
     </div>
