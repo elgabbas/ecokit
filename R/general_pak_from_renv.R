@@ -8,17 +8,20 @@
 #' references that can be directly installed using the `pak` package
 #' [pak::pkg_install]. It supports a wide range of repositories, including CRAN,
 #' Bioconductor, GitHub, GitLab, Bitbucket, and other common remote sources, as
-#' well as tarball URLs (which `pak` cannot install directly). The function
-#' returns a list of multiple character vectors:
+#' well as tarball URLs. The function returns a list of multiple character
+#' vectors:
 #' - `pak`: installable references for `pak` (CRAN/BioC only, no remotes)
-#' - `tarballs`: tarball URLs for manual installation (e.g., with remotes)
-#' - `remote`: GitHub/GitLab/Bitbucket package references (user/repo, no
-#' SHA/ref)
+#' - `tarballs`: package references for tarball URLs, formatted for pak as
+#' `pkg=url::https://...` if the package name is known, or just
+#' `url::https://...` if not.
+#' - `remote`: GitHub/GitLab/Bitbucket package references, formatted for pak as
+#' `github::user/repo`, `gitlab::user/repo`, or `bitbucket::user/repo` (or, if
+#' the package name differs from the repo, as `pkg=github::user/repo` etc.).
 #'
 #' These lists allow you to separately process packages by source, or install
 #' GitHub/GitLab/Bitbucket packages without strict versioning/commit, which can
 #' sometimes help avoid dependency resolution conflicts in pak (and other
-#' tools).
+#' tools). Tarball URLs are provided in a pak-compatible format.
 #'
 #' @details [`renv`](https://rstudio.github.io/renv/index.html) is a popular R
 #'   package for project-local dependency management, creating lock files
@@ -37,10 +40,9 @@
 #'   time.
 #'
 #'   In addition to the main installable references, the function outputs a
-#'   separate list for all remotes (GitHub, GitLab, Bitbucket) without SHA/ref,
-#'   which can be useful for alternative install strategies, e.g., to install
-#'   all CRAN/Bioc packages first, and then install all remotes without version
-#'   pinning.
+#'   separate list for all remotes (GitHub, GitLab, Bitbucket) in pak-compatible
+#'   syntax, and a tarballs list in pak-compatible syntax (`url::` or
+#'   `pkg=url::...`).
 #'
 #' @param lockfile Path to the `renv.lock` file (JSON format).
 #'
@@ -48,9 +50,10 @@
 #'   \describe{
 #'     \item{pak}{Character vector of installable references for `pak`
 #'     (CRAN/BioC only)}
-#'     \item{tarballs}{Character vector of tarball URLs (install with remotes)}
-#'     \item{remote}{Character vector of all remote package references
-#'     (user/repo, no SHA)}
+#'     \item{tarballs}{Character vector of tarball URLs in pak syntax
+#'      (see Details)}
+#'     \item{remote}{Character vector of all remote package references in pak
+#'      syntax}
 #'   }
 #'
 #' @examples
@@ -65,6 +68,9 @@
 #'
 #' # Install all remote packages (latest HEAD, no SHA)
 #' # pak::pak_install(pak_packages$remote)
+#'
+#' # Install tarballs
+#' # pak::pak_install(pak_packages$tarballs)
 #'
 #' @seealso [pak::pkg_install()], [renv::restore()], [remotes::install_url()]
 #'
@@ -117,7 +123,6 @@ pak_from_renv <- function(lockfile) {
   # Initialize output lists
   pak_refs <- character()
   tarball_urls <- character()
-  # all remotes (github/gitlab/bitbucket) as "username/repo"
   remote_refs <- character()
 
   # Loop through each package in the lock file
@@ -136,10 +141,32 @@ pak_from_renv <- function(lockfile) {
       if (remote_type %in% c("github", "gitlab", "bitbucket")) {
         username <- rec$RemoteUsername
         repo <- rec$RemoteRepo
-        # Only add "username/repo" (without @sha/ref) to remote_refs
+        # For pak, always use source::username/repo,
+        # or pkg=source::username/repo if package is not equal to repo
+        # (see pak's documentation)
         if (!is.null(username) && !is.null(repo)) {
-          remote_refs <- c(
-            remote_refs, sprintf("%s/%s", username, repo)) # nolint: nonportable_path_linter
+          remote_string <- switch(
+            remote_type,
+            # nolint start
+            github    = sprintf("%s/%s", username, repo),
+            gitlab    = sprintf("gitlab::%s/%s", username, repo),
+            bitbucket = sprintf("bitbucket::%s/%s", username, repo),
+            # nolint end
+            ""
+          )
+          # If repo != package, add pkg=source::username/repo
+          # pak expects e.g. pins=github::rstudio/pins-r
+          if (tolower(package) != tolower(repo)) {
+            remote_string <- switch(
+              remote_type,
+              github    = sprintf("%s=github::%s/%s", package, username, repo),
+              gitlab    = sprintf("%s=gitlab::%s/%s", package, username, repo),
+              bitbucket = sprintf(
+                "%s=bitbucket::%s/%s", package, username, repo),
+              ""
+            )
+          }
+          remote_refs <- c(remote_refs, remote_string)
         } else {
           warning(
             sprintf("Missing %s info for %s; skipping.", remote_type, package),
@@ -158,8 +185,15 @@ pak_from_renv <- function(lockfile) {
 
       # Handle direct tarball or url installs
       if (remote_type == "url" && !is.null(rec$RemoteUrl)) {
-        # pak does not support direct tarball install
-        tarball_urls <- c(tarball_urls, rec$RemoteUrl)
+        # pak expects url::, or pkg=url:: if package name is known
+        url_entry <- rec$RemoteUrl
+        if (!is.null(package) && nzchar(package)) {
+          tarball_urls <- c(
+            tarball_urls, sprintf("%s=url::%s", package, url_entry))
+        } else {
+          tarball_urls <- c(
+            tarball_urls, sprintf("url::%s", url_entry))
+        }
         next
       }
 
@@ -188,7 +222,14 @@ pak_from_renv <- function(lockfile) {
     # Handle fallback: try tarball if available
     if (!is.null(rec$Source) && rec$Source == "URL" &&
         !is.null(rec$RemoteUrl)) {
-      tarball_urls <- c(tarball_urls, rec$RemoteUrl)
+      url_entry <- rec$RemoteUrl
+      if (!is.null(package) && nzchar(package)) {
+        tarball_urls <- c(
+          tarball_urls, sprintf("%s=url::%s", package, url_entry))
+      } else {
+        tarball_urls <- c(
+          tarball_urls, sprintf("url::%s", url_entry))
+      }
       next
     }
 
