@@ -20,6 +20,8 @@
 #'   Default 300 seconds; see [download.file].
 #' @param load_packages Logical. If TRUE (default), attempt to load R packages
 #'   that correspond to the main classes of the loaded object(s).
+#' @param unwrap_r Logical. If TRUE, and the loaded object is a
+#'   `PackedSpatRaster`, it will be unwrapped using [terra::unwrap].
 #' @param ... Additional arguments to be passed to the respective load
 #'   functions. [base::load] for `RData` files; [qs2::qs_read] for `qs2` files;
 #'   [arrow::read_feather] for `feather` files; and [base::readRDS] for `rds`
@@ -78,7 +80,8 @@
 #' str(mtcars_all_2, 1)
 
 load_as <- function(
-    file = NULL, n_threads = 1L, timeout = 300L, load_packages = TRUE, ...) {
+    file = NULL, n_threads = 1L, timeout = 300L, load_packages = TRUE,
+    unwrap_r = FALSE, ...) {
 
   if (is.null(file)) ecokit::stop_ctx("file or URL cannot be NULL")
 
@@ -136,7 +139,7 @@ load_as <- function(
     ecokit::stop_ctx(
       "Unknown file extension", file = file, extension = extension))
   
-  if (inherits(output_file, "PackedSpatRaster")) {
+  if (inherits(output_file, "PackedSpatRaster") && unwrap_r) {
     output_file <- terra::unwrap(output_file)
   }
   

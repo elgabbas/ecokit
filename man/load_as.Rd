@@ -4,7 +4,14 @@
 \alias{load_as}
 \title{Load objects from \code{RData} / \code{qs2} / \code{rds} / \code{feather} file}
 \usage{
-load_as(file = NULL, n_threads = 1L, timeout = 300L, load_packages = TRUE, ...)
+load_as(
+  file = NULL,
+  n_threads = 1L,
+  timeout = 300L,
+  load_packages = TRUE,
+  unwrap_r = FALSE,
+  ...
+)
 }
 \arguments{
 \item{file}{Character. the file path or URL of the file to be loaded. If
@@ -19,6 +26,9 @@ Default 300 seconds; see \link{download.file}.}
 
 \item{load_packages}{Logical. If TRUE (default), attempt to load R packages
 that correspond to the main classes of the loaded object(s).}
+
+\item{unwrap_r}{Logical. If TRUE, and the loaded object is a
+\code{PackedSpatRaster}, it will be unwrapped using \link[terra:wrap]{terra::unwrap}.}
 
 \item{...}{Additional arguments to be passed to the respective load
 functions. \link[base:load]{base::load} for \code{RData} files; \link[qs2:qs_read]{qs2::qs_read} for \code{qs2} files;
