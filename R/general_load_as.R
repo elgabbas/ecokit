@@ -150,10 +150,11 @@ load_as <- function(
     mda = "mda", fda = "mda", glmnet = "glmnet", mars = "earth", rbf = "RSNNS",
     maxNet = "maxnet", rf = "randomForest", svm = "kernlab", rpart = "rpart",
     fs_path = "fs", sf = "sf", sfc = "sf", SpatVector = "terra",
-    SpatRaster = "terra", SpatExtent = "terra", Extent = "raster",
-    Raster = "raster", RasterLayer = "raster", RasterStack = "raster",
-    RasterBrick = "raster", data.table = "data.table", tbl_df = "tibble",
-    SpatialPoints = "sp", SpatialPolygons = "sp", SpatialLines = "sp")
+    SpatRaster = "terra", SpatExtent = "terra", PackedSpatRaster = "terra",
+    Extent = "raster", Raster = "raster", RasterLayer = "raster",
+    RasterStack = "raster", RasterBrick = "raster", data.table = "data.table",
+    tbl_df = "tibble", SpatialPoints = "sp", SpatialPolygons = "sp",
+    SpatialLines = "sp")
 
   classes <- class(output_file)
 
