@@ -138,11 +138,11 @@ load_as <- function(
     feather = arrow::read_feather(file = file, ...),
     ecokit::stop_ctx(
       "Unknown file extension", file = file, extension = extension))
-  
+
   if (inherits(output_file, "PackedSpatRaster") && unwrap_r) {
     output_file <- terra::unwrap(output_file)
   }
-  
+
   # ***********************************************************************
 
   # Optionally load required packages as determined by object class
