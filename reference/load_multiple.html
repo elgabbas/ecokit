@@ -172,7 +172,7 @@ Non-conflicting objects retain their original names in <code>rename</code> mode.
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-in"><span><span class="fu"><a href="https://rdrr.io/r/utils/str.html" class="external-link">str</a></span><span class="op">(</span><span class="va">MultiObj</span>, <span class="fl">1</span><span class="op">)</span></span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> List of 4</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  $ data1:S4 class 'SpatRaster' [package "terra"]</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  $ data1:Formal class 'PackedSpatRaster' [package "terra"] with 3 slots</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>  $ data2: int [1:3, 1:3] 1 2 3 4 5 6 7 8 9</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>  $ data3:List of 2</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>  $ data4: tibble [5 × 1] (S3: tbl_df/tbl/data.frame)</span>
@@ -201,7 +201,7 @@ Non-conflicting objects retain their original names in <code>rename</code> mode.
 <span class="r-out co"><span class="r-pr">#&gt;</span> [1] "data1" "data2" "data3" "data4"</span>
 <span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="fu"><a href="https://rdrr.io/r/utils/str.html" class="external-link">str</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/get.html" class="external-link">get</a></span><span class="op">(</span><span class="st">"data1"</span>, envir <span class="op">=</span> <span class="va">example_env</span><span class="op">)</span>, <span class="fl">1</span><span class="op">)</span></span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> S4 class 'SpatRaster' [package "terra"]</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> Formal class 'PackedSpatRaster' [package "terra"] with 3 slots</span>
 <span class="r-in"><span><span class="fu"><a href="https://rdrr.io/r/utils/str.html" class="external-link">str</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/get.html" class="external-link">get</a></span><span class="op">(</span><span class="st">"data2"</span>, envir <span class="op">=</span> <span class="va">example_env</span><span class="op">)</span>, <span class="fl">1</span><span class="op">)</span></span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>  chr "conflict"</span>
 <span class="r-in"><span><span class="fu"><a href="https://rdrr.io/r/utils/str.html" class="external-link">str</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/get.html" class="external-link">get</a></span><span class="op">(</span><span class="st">"data3"</span>, envir <span class="op">=</span> <span class="va">example_env</span><span class="op">)</span>, <span class="fl">1</span><span class="op">)</span></span></span>
@@ -235,7 +235,7 @@ Non-conflicting objects retain their original names in <code>rename</code> mode.
 <span class="r-out co"><span class="r-pr">#&gt;</span> [1] "data1" "data2" "data3" "data4"</span>
 <span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="fu"><a href="https://rdrr.io/r/utils/str.html" class="external-link">str</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/get.html" class="external-link">get</a></span><span class="op">(</span><span class="st">"data1"</span>, envir <span class="op">=</span> <span class="va">example_env</span><span class="op">)</span>, <span class="fl">1</span><span class="op">)</span></span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> S4 class 'SpatRaster' [package "terra"]</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> Formal class 'PackedSpatRaster' [package "terra"] with 3 slots</span>
 <span class="r-in"><span><span class="fu"><a href="https://rdrr.io/r/utils/str.html" class="external-link">str</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/get.html" class="external-link">get</a></span><span class="op">(</span><span class="st">"data2"</span>, envir <span class="op">=</span> <span class="va">example_env</span><span class="op">)</span>, <span class="fl">1</span><span class="op">)</span></span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>  int [1:3, 1:3] 1 2 3 4 5 6 7 8 9</span>
 <span class="r-in"><span><span class="fu"><a href="https://rdrr.io/r/utils/str.html" class="external-link">str</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/get.html" class="external-link">get</a></span><span class="op">(</span><span class="st">"data3"</span>, envir <span class="op">=</span> <span class="va">example_env</span><span class="op">)</span>, <span class="fl">1</span><span class="op">)</span></span></span>
@@ -272,7 +272,7 @@ Non-conflicting objects retain their original names in <code>rename</code> mode.
 <span class="r-out co"><span class="r-pr">#&gt;</span> [1] "data1"     "data2"     "data2_new" "data3"     "data4"    </span>
 <span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="fu"><a href="https://rdrr.io/r/utils/str.html" class="external-link">str</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/get.html" class="external-link">get</a></span><span class="op">(</span><span class="st">"data1"</span>, envir <span class="op">=</span> <span class="va">example_env</span><span class="op">)</span>, <span class="fl">1</span><span class="op">)</span></span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> S4 class 'SpatRaster' [package "terra"]</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> Formal class 'PackedSpatRaster' [package "terra"] with 3 slots</span>
 <span class="r-in"><span><span class="fu"><a href="https://rdrr.io/r/utils/str.html" class="external-link">str</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/get.html" class="external-link">get</a></span><span class="op">(</span><span class="st">"data2"</span>, envir <span class="op">=</span> <span class="va">example_env</span><span class="op">)</span>, <span class="fl">1</span><span class="op">)</span></span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>  int [1:10] 1 2 3 4 5 6 7 8 9 10</span>
 <span class="r-in"><span><span class="fu"><a href="https://rdrr.io/r/utils/str.html" class="external-link">str</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/get.html" class="external-link">get</a></span><span class="op">(</span><span class="st">"data2_new"</span>, envir <span class="op">=</span> <span class="va">example_env</span><span class="op">)</span>, <span class="fl">1</span><span class="op">)</span></span></span>
