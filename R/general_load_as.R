@@ -14,10 +14,12 @@
 #' @param file Character. the file path or URL of the file to be loaded. If
 #'   `file` is a URL, the function will download the file from the URL to a
 #'   temporary file and load it.
-#' @param timeout integer; time in seconds before the download times out.
-#'   Default 300 seconds; see [download.file].
 #' @param n_threads Number of threads to use when reading `qs2` files. See
 #'   [qs2::qs_read].
+#' @param timeout integer; time in seconds before the download times out.
+#'   Default 300 seconds; see [download.file].
+#' @param load_packages Logical. If TRUE (default), attempt to load R packages
+#'   that correspond to the main classes of the loaded object(s).
 #' @param ... Additional arguments to be passed to the respective load
 #'   functions. [base::load] for `RData` files; [qs2::qs_read] for `qs2` files;
 #'   [arrow::read_feather] for `feather` files; and [base::readRDS] for `rds`
@@ -36,6 +38,7 @@
 #' # ---------------------------------------------------------
 #' # loading RData using base::load
 #' # ---------------------------------------------------------
+#'
 #' (load(file))
 #'
 #' ls()
@@ -45,6 +48,7 @@
 #' # ---------------------------------------------------------
 #' # Loading as custom object name
 #' # ---------------------------------------------------------
+#'
 #' NewObj <- load_as(file = file)
 #'
 #' ls()
@@ -66,7 +70,6 @@
 #' TempFile_2 <- tempfile(pattern = "mtcars_", fileext = ".RData")
 #' save(mtcars, mtcars2, mtcars3, file = TempFile_2)
 #'
-#'
 #' # loading as a single list  with 3 items, keeping original order
 #' mtcars_all_1 <- load_as(TempFile_1)
 #' str(mtcars_all_1, 1)
@@ -74,10 +77,18 @@
 #' mtcars_all_2 <- load_as(TempFile_2)
 #' str(mtcars_all_2, 1)
 
-load_as <- function(file = NULL, n_threads = 1L, timeout = 300L, ...) {
+load_as <- function(
+    file = NULL, n_threads = 1L, timeout = 300L, load_packages = TRUE, ...) {
 
-  if (is.null(file)) {
-    ecokit::stop_ctx("file or URL cannot be NULL", file = file)
+  if (is.null(file)) ecokit::stop_ctx("file or URL cannot be NULL")
+
+  if (!is.numeric(n_threads) || n_threads < 1L) {
+    ecokit::stop_ctx(
+      "`n_threads` must be a positive integer", n_threads = n_threads)
+  }
+
+  if (!is.numeric(timeout) || timeout < 1L) {
+    ecokit::stop_ctx("`timeout` must be a positive integer", timeout = timeout)
   }
 
   if (startsWith(file, "http")) {
@@ -118,12 +129,81 @@ load_as <- function(file = NULL, n_threads = 1L, timeout = 300L, ...) {
         })
         names(output_file) <- in_file_0
       }
-      return(output_file)
+      output_file
     },
     rds = readRDS(file, ...),
     feather = arrow::read_feather(file = file, ...),
     ecokit::stop_ctx(
-      "Unknown file extension", file = file, extension = tools::file_ext(file)))
+      "Unknown file extension", file = file, extension = extension))
+
+  # ***********************************************************************
+
+  # Optionally load required packages as determined by object class
+
+  if (isFALSE(load_packages)) return(output_file)
+
+  # Mapping of object classes to required packages
+  class_to_package <- list(
+    sdmModels = "sdm", sdmdata = "sdm", maxent = c("dismo", "rJava"),
+    domain.dismo = "dismo", bioclim.dismo = "dismo", brt = "gbm", gam = "mgcv",
+    ranger = "ranger", rbf = "RSNNS", mlp = "RSNNS", cart = "tree",
+    mda = "mda", fda = "mda", glmnet = "glmnet", mars = "earth", rbf = "RSNNS",
+    maxNet = "maxnet", rf = "randomForest", svm = "kernlab", rpart = "rpart",
+    fs_path = "fs", sf = "sf", sfc = "sf", SpatVector = "terra",
+    SpatRaster = "terra", SpatExtent = "terra", Extent = "raster",
+    Raster = "raster", RasterLayer = "raster", RasterStack = "raster",
+    RasterBrick = "raster", data.table = "data.table", tbl_df = "tibble",
+    SpatialPoints = "sp", SpatialPolygons = "sp", SpatialLines = "sp")
+
+  classes <- class(output_file)
+
+  if (inherits(output_file, "sdmModels")) {
+
+    classes <- c(as.character(output_file@run.info$method), classes)
+
+  } else if (inherits(output_file, "tbl_df") && nrow(output_file) > 0L) {
+
+    classes <- purrr::map(
+      .x = seq_len(ncol(output_file)),
+      .f = ~ {
+        col <- dplyr::pull(output_file, .x)
+        unlist(class(col[[1L]]))
+      }) %>%
+      unlist() %>%
+      c(classes)
+
+    if ("sdmModels" %in% classes) {
+      classes <- c(as.character(output_file@run.info$method), classes)
+    }
+
+  } else if (inherits(output_file, "list") && length(output_file) > 0L) {
+    classes <- purrr::map(
+      .x = output_file,
+      .f = ~ {
+        if (length(.x) == 0L || is.null(.x[[1L]])) {
+          return(character(0L))
+        }
+        class(.x[[1L]])
+      }) %>%
+      unlist() %>%
+      c(classes)
+  }
+
+  class_to_package[unname(unique(classes))] %>%
+    unlist() %>%
+    unique() %>%
+    purrr::walk(
+      .f  = ~{
+        if (requireNamespace(.x, quietly = TRUE)) {
+          library( # nolint: undesirable_function_linter
+            package = .x, character.only = TRUE, quietly = TRUE,
+            warn.conflicts = FALSE)
+        }
+      }) %>%
+    suppressWarnings() %>%
+    suppressMessages()
+
+  # ***********************************************************************
 
   return(output_file)
 }

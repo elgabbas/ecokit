@@ -32,6 +32,8 @@ reference:
   - chelsa_var_info
   - get_chelsa_links
   - check_gbif
+  - maxent_open
+  - maxent_variable_importance
 
 - title: Package management
   contents:

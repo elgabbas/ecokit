@@ -52,6 +52,12 @@ load_packages <- function(
     unique() %>%
     sort()
 
+  base_pkgs <- c(
+    "base", "utils", "graphics", "grDevices", "stats",
+    "methods", "datasets", "tools", "compiler")
+  packages <- setdiff(packages, base_pkgs)
+  if (length(packages) == 0L) return(invisible(NULL))
+
   prefix <- "  >>>>  "
 
   # List of installed packages

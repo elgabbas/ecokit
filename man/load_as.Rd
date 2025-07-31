@@ -4,7 +4,7 @@
 \alias{load_as}
 \title{Load objects from \code{RData} / \code{qs2} / \code{rds} / \code{feather} file}
 \usage{
-load_as(file = NULL, n_threads = 1L, timeout = 300L, ...)
+load_as(file = NULL, n_threads = 1L, timeout = 300L, load_packages = TRUE, ...)
 }
 \arguments{
 \item{file}{Character. the file path or URL of the file to be loaded. If
@@ -16,6 +16,9 @@ temporary file and load it.}
 
 \item{timeout}{integer; time in seconds before the download times out.
 Default 300 seconds; see \link{download.file}.}
+
+\item{load_packages}{Logical. If TRUE (default), attempt to load R packages
+that correspond to the main classes of the loaded object(s).}
 
 \item{...}{Additional arguments to be passed to the respective load
 functions. \link[base:load]{base::load} for \code{RData} files; \link[qs2:qs_read]{qs2::qs_read} for \code{qs2} files;
@@ -44,6 +47,7 @@ file <- system.file("testdata", "culcita_dat.RData", package = "lme4")
 # ---------------------------------------------------------
 # loading RData using base::load
 # ---------------------------------------------------------
+
 (load(file))
 
 ls()
@@ -53,6 +57,7 @@ tibble::tibble(culcita_dat)
 # ---------------------------------------------------------
 # Loading as custom object name
 # ---------------------------------------------------------
+
 NewObj <- load_as(file = file)
 
 ls()
@@ -73,7 +78,6 @@ save(mtcars2, mtcars3, mtcars, file = TempFile_1)
 # save in another order: mtcars, mtcars2, mtcars3
 TempFile_2 <- tempfile(pattern = "mtcars_", fileext = ".RData")
 save(mtcars, mtcars2, mtcars3, file = TempFile_2)
-
 
 # loading as a single list  with 3 items, keeping original order
 mtcars_all_1 <- load_as(TempFile_1)
