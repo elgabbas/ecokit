@@ -210,6 +210,7 @@ check_rdata <- function(file, warning = TRUE) {
     }
     return(FALSE)
   }
+
   if (file.info(file)$size == 0L) {
     if (warning) {
       warning("File is empty: ", ecokit::normalize_path(file), call. = FALSE)

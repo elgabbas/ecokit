@@ -185,16 +185,20 @@ load_as <- function(
     }
 
   } else if (inherits(output_file, "list") && length(output_file) > 0L) {
+
     classes <- purrr::map(
       .x = output_file,
       .f = ~ {
-        if (length(.x) == 0L || is.null(.x[[1L]])) {
+        if (inherits(.x, "PackedSpatRaster")) return("PackedSpatRaster")
+        if (isS4(.x) || length(.x) == 0L || is.null(.x[[1L]])) {
           return(character(0L))
         }
         class(.x[[1L]])
       }) %>%
       unlist() %>%
-      c(classes)
+      c(classes) %>%
+      unname() %>%
+      unique()
   }
 
   class_to_package[unname(unique(classes))] %>%
