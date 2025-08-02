@@ -18,8 +18,7 @@
 #' @importFrom rlang .data
 #' @examples
 #'
-#' head(
-#' scrape_link(url = "https://github.com/tidyverse/dplyr"))
+#' head(scrape_link(url = "https://github.com/tidyverse/dplyr"))
 #'
 #' head(
 #'   scrape_link(
@@ -53,6 +52,15 @@ scrape_link <- function(url, sort_by = c("link", "link_text")) {
     ecokit::stop_ctx("url cannot be NULL", url = url)
   }
 
+  if (!is.character(url) || length(url) != 1L || !nzchar(url)) {
+    ecokit::stop_ctx("url must be a single character string", url = url)
+  }
+
+  # replace spaces with %20
+  if (stringr::str_detect(url, " ")) {
+    url <- stringr::str_replace_all(url, " ", "%20")
+  }
+
   if (isFALSE(ecokit::check_url(url))) {
     ecokit::stop_ctx("Invalid url", url = url)
   }
@@ -72,18 +80,30 @@ scrape_link <- function(url, sort_by = c("link", "link_text")) {
   links <- rvest::html_nodes(webpage, "a")
 
   # Extract the URLs
-  output <- purrr::map(
+  output <- purrr::map_dfr(
     .x = links,
     .f = ~ tibble::tibble(
       link = stringr::str_trim(rvest::html_attr(.x, "href")),
       link_text = stringr::str_trim(rvest::html_text(.x)))) %>%
-    dplyr::bind_rows() %>%
     # Remove empty or anchor links
     dplyr::filter(
       !is.na(link) & !stringr::str_starts(link, "#"),
-      link != "..", nzchar(link_text)) %>%
+      link != "..", nzchar(link_text),
+      !stringr::str_detect(link, "^javascript:"),
+      !stringr::str_detect(link, "^mailto:"),
+      !is.na(link) & nzchar(link)) %>%
+    # If the link is relative, make it absolute using the base URL
     dplyr::mutate(
-      link = xml2::url_absolute(link, base = base_url),
+      link = purrr::map_chr(
+        .x = link,
+        .f = ~ {
+          if (stringr::str_starts(.x, "http://|https://")) {
+            .x
+          } else {
+            xml2::url_absolute(.x, base = base_url)
+          }
+        }),
+      link = stringr::str_replace_all(link, " ", "%20"),
       link_text = {
         stringr::str_remove_all(link_text, "\n") %>%
           stringr::str_replace_all("\\s+", " ") %>%
