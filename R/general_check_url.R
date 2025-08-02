@@ -28,7 +28,7 @@ check_url <- function(url, timeout = 2L) {
   if (is.null(url)) {
     ecokit::stop_ctx("url cannot be NULL", url = url)
   }
-  
+
   if (!is.numeric(timeout) || timeout < 1L) {
     ecokit::stop_ctx("`timeout` must be a positive integer", timeout = timeout)
   }

@@ -89,8 +89,7 @@ scrape_link <- function(url, sort_by = c("link", "link_text")) {
     dplyr::filter(
       !is.na(link) & !stringr::str_starts(link, "#"),
       link != "..", nzchar(link_text),
-      !stringr::str_detect(link, "^javascript:"),
-      !stringr::str_detect(link, "^mailto:"),
+      !startsWith(link, "^javascript:"), !startsWith(link, "^mailto:"),
       !is.na(link) & nzchar(link)) %>%
     # If the link is relative, make it absolute using the base URL
     dplyr::mutate(

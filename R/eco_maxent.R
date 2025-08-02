@@ -30,6 +30,9 @@
 #' @author Ahmed El-Gabbas
 #' @examples
 #' \dontrun{
+#' require(ecokit)
+#' ecokit::load_packages(dismo, rJava)
+#'
 #' # Launch Maxent GUI from the dismo package
 #' maxent_open()
 #' }

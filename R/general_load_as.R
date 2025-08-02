@@ -95,7 +95,7 @@ load_as <- function(
   }
 
   if (startsWith(file, "http")) {
-    
+
     # replace spaces with %20
     if (stringr::str_detect(file, " ")) {
       file <- stringr::str_replace_all(file, " ", "%20")
