@@ -56,6 +56,17 @@ package_remote_sha <- function(..., lib_path = .libPaths()[1L]) {  #nolint
 
   package <- NULL
 
+  if (!is.character(lib_path) || !nzchar(lib_path) || is.na(lib_path)) {
+    ecokit::stop_ctx(
+      "`lib_path` must be a single, non-empty character string",
+      lib_path = lib_path)
+  }
+
+  if (!requireNamespace("pak", quietly = TRUE)) {
+    ecokit::stop_ctx(
+      "The `pak` package is required to manage package dependencies.")
+  }
+
   # Capture package names (quoted or unquoted)
   quos <- rlang::enquos(...)
 

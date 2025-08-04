@@ -199,10 +199,10 @@ load_multiple <- function(
   }
 
   # Check file existence and valid extensions
-  if (!all(file.exists(files))) {
+  if (!all(fs::file_exists(files))) {
     ecokit::stop_ctx(
       "Some files do not exist. No objects were loaded!",
-      files = files[!file.exists(files)])
+      files = files[!fs::file_exists(files)])
   }
 
   extensions <- tolower(tools::file_ext(files))

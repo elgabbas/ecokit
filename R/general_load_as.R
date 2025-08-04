@@ -99,6 +99,11 @@ load_as <- function(
       ecokit::stop_ctx("URL is not valid", file = file)
     }
 
+    if (!requireNamespace("withr", quietly = TRUE)) {
+      ecokit::stop_ctx(
+        "The `withr` package is required to manage temporary options.")
+    }
+
     withr::local_options(list(timeout = timeout))
 
     # Download file to temporary location
@@ -110,12 +115,17 @@ load_as <- function(
     on.exit(file.remove(temp_file), add = TRUE)
   }
 
-  if (!file.exists(file)) {
+  if (!fs::file_exists(file)) {
     ecokit::stop_ctx("`file` does not exist", file = file)
   }
 
   # file extension
   extension <- stringr::str_to_lower(tools::file_ext(file))
+
+  # check if arrow is installed
+  if (extension == "feather" && !requireNamespace("arrow", quietly = TRUE)) {
+    ecokit::stop_ctx("The `arrow` package is required to read feather files.")
+  }
 
   output_file <- switch(
     extension,

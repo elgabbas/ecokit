@@ -81,9 +81,7 @@ pak_from_renv <- function(lockfile) {
 
   # Check for required dependency
   if (!requireNamespace("jsonlite", quietly = TRUE)) {
-    stop(
-      "The 'jsonlite' package is required. Please install it first.",
-      call. = FALSE)
+    ecokit::stop_ctx("The `jsonlite` package is required to read JSON files.")
   }
 
   if (is.null(lockfile) || !nzchar(lockfile)) {
@@ -102,7 +100,7 @@ pak_from_renv <- function(lockfile) {
       url = lockfile_url, destfile = lockfile, quiet = TRUE)
   }
 
-  if (!file.exists(lockfile)) {
+  if (!fs::file_exists(lockfile)) {
     stop(sprintf("File does not exist: %s", lockfile), call. = FALSE)
   }
 

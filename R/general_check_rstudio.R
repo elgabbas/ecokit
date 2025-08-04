@@ -20,6 +20,18 @@
 
 check_rstudio <- function() {
 
+  if (!requireNamespace("rvest", quietly = TRUE)) {
+    ecokit::stop_ctx("The `rvest` package is required to scrape web content.")
+  }
+
+  if (!requireNamespace("xml2", quietly = TRUE)) {
+    ecokit::stop_ctx("The `xml2` package is required to read XML files.")
+  }
+
+  if (!requireNamespace("rstudioapi", quietly = TRUE)) {
+    ecokit::stop_ctx(
+      "The `rstudioapi` package is required to check RStudio version.")
+  }
   online_version <- "https://posit.co/download/rstudio-desktop/" %>%
     xml2::read_html() %>%
     rvest::html_node(".flex-inhe:nth-child(8)") %>%

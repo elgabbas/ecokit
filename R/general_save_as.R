@@ -80,6 +80,10 @@ save_as <- function(
   # Create directory if not available
   fs::dir_create(dirname(out_path))
 
+  if (extension == "feather" && !requireNamespace("arrow", quietly = TRUE)) {
+    ecokit::stop_ctx("The `arrow` package is required to save feather files.")
+  }
+
   switch(
     extension,
     qs2 = {

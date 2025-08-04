@@ -69,7 +69,7 @@ scale_0_1 <- function(raster) {
 
   # Handle file path input
   if (is.character(raster)) {
-    if (!file.exists(raster)) {
+    if (!fs::file_exists(raster)) {
       ecokit::stop_ctx(
         "File does not exist", file = ecokit::normalize_path(raster))
     }

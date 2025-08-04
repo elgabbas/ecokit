@@ -112,6 +112,11 @@ cc <- function(..., collapse = NULL, unique = FALSE, sort = FALSE) {
   }
 
   if (sort) {
+    if (!requireNamespace("gtools", quietly = TRUE)) {
+      ecokit::stop_ctx(
+        "The `gtools` package is required for alphanumeric sorting.")
+    }
+
     result <- gtools::mixedsort(result)
   }
 

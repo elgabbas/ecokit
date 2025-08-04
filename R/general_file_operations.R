@@ -82,7 +82,12 @@ file_size <- function(file, ...) {
     ecokit::stop_ctx("`file` cannot be NULL", file = file)
   }
 
+  if (!requireNamespace("gdata", quietly = TRUE)) {
+    ecokit::stop_ctx("The `gdata` package is required to format file sizes.")
+  }
+
   gdata::humanReadable(fs::file_size(file), ...)
+
 }
 
 ## |------------------------------------------------------------------------| #
@@ -111,7 +116,7 @@ file_type <- function(file) {
   }
 
   # Ensure file exists
-  if (!file.exists(file)) {
+  if (!fs::file_exists(file)) {
     ecokit::stop_ctx("File does not exist", file = file)
   }
 

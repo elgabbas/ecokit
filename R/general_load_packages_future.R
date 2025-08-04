@@ -56,6 +56,11 @@
 load_packages_future <- function(
   packages = character(), strategy = "multisession") {
 
+  if (!requireNamespace("parallelly", quietly = TRUE)) {
+    ecokit::stop_ctx(
+      "The `parallelly` package is required for parallel processing.")
+  }
+
   if (length(packages) > 0L) {
     if (!is.character(packages) || anyNA(packages) || !all(nzchar(packages))) {
       ecokit::stop_ctx(

@@ -55,6 +55,14 @@ get_chelsa_links <- function(
   url <- relative_url <- climate_scenario <- climate_model <- var_name <-
     dir_name <- year <-  NULL
 
+  if (!requireNamespace("httr", quietly = TRUE)) {
+    ecokit::stop_ctx("The `httr` package is required for HTTP requests.")
+  }
+
+  if (!requireNamespace("xml2", quietly = TRUE)) {
+    ecokit::stop_ctx("The `xml2` package is required to read XML files.")
+  }
+
   # Initialise variables for pagination and retries
 
   # Tracks pagination token for API requests

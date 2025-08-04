@@ -35,6 +35,14 @@ scrape_link <- function(url, sort_by = c("link", "link_text")) {
 
   link <- link_text <- NULL
 
+  if (!requireNamespace("rvest", quietly = TRUE)) {
+    ecokit::stop_ctx("The `rvest` package is required to scrape web content.")
+  }
+
+  if (!requireNamespace("xml2", quietly = TRUE)) {
+    ecokit::stop_ctx("The `xml2` package is required to read XML files.")
+  }
+
   # Ensure that sort_by is a character vector of length 1 or 2
   if (!is.character(sort_by) || length(sort_by) > 2L ||
       length(sort_by) < 1L) {

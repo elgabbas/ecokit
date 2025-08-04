@@ -104,7 +104,7 @@ save_multiple <- function(
 
   # Check existing files
   paths <- fs::path(out_directory, paste0(prefix, variables, ".RData"))
-  exists_any <- any(file.exists(paths))
+  exists_any <- any(fs::file_exists(paths))
 
   if (exists_any && !overwrite) {
     message(

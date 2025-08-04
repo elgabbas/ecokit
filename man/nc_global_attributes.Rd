@@ -19,14 +19,17 @@ returns them as a character vector where each element is an attribute
 name-value pair.
 }
 \examples{
+require(ecokit)
+ecokit::load_packages(stars, sf, fs)
+
 nc_example_1 <- system.file("nc/sub.nc", package = "stars")
-if (file.exists(nc_example_1)) nc_global_attributes(nc = nc_example_1)
+if (fs::file_exists(nc_example_1)) nc_global_attributes(nc = nc_example_1)
 
 nc_example_2 <- system.file("nc/timeseries.nc", package = "stars")
-if (file.exists(nc_example_2)) nc_global_attributes(nc = nc_example_2)
+if (fs::file_exists(nc_example_2)) nc_global_attributes(nc = nc_example_2)
 
 nc_example_3 <- system.file("nc/cropped.nc", package = "sf")
-if (file.exists(nc_example_3)) nc_global_attributes(nc = nc_example_3)
+if (fs::file_exists(nc_example_3)) nc_global_attributes(nc = nc_example_3)
 }
 \references{
 \href{https://github.com/rspatial/terra/issues/1443}{Click here}

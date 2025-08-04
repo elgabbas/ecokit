@@ -51,6 +51,8 @@ extension (case-insensitive). If the extension is unrecognised, it returns
 }
 }
 \examples{
+require(ecokit)
+ecokit::load_packages(fs, arrow)
 
 # Setup temporary directory
 temp_dir <- fs::path_temp("load_multiple")

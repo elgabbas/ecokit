@@ -102,6 +102,23 @@ set_parallel <- function(
     n_cores <- 1L
   }
 
+  if (!requireNamespace("future", quietly = TRUE)) {
+    ecokit::stop_ctx(
+      "The `future` package is required for parallel processing.")
+  }
+
+  if (!requireNamespace("withr", quietly = TRUE)) {
+    ecokit::stop_ctx(
+      paste0(
+        "The `withr` package is required for setting options in ",
+        "parallel processing."))
+  }
+
+  if (!requireNamespace("parallelly", quietly = TRUE)) {
+    ecokit::stop_ctx(
+      "The `parallelly` package is required for parallel processing.")
+  }
+
   if (stop_cluster) {
     if (show_log) {
       ecokit::cat_time("Stopping parallel processing", ...)

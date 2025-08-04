@@ -93,7 +93,7 @@ list_to_rdata <- function(
       # check if the file already exists. If it does and overwrite is FALSE, it
       # prints a message indicating that the file already exists and will not be
       # overwritten.
-      if (file.exists(file) && isFALSE(overwrite)) {
+      if (fs::file_exists(file) && isFALSE(overwrite)) {
         stringr::str_glue(
           "\n\nFile: {file} already exists. No files were created.") %>%
           ecokit::cat_time()

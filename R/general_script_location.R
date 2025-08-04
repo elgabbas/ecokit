@@ -41,6 +41,15 @@
 
 script_location <- function() {
 
+  if (!requireNamespace("rstudioapi", quietly = TRUE)) {
+    ecokit::stop_ctx(
+      "The `rstudioapi` package is required to retrieve the script location.")
+  }
+
+  if (!requireNamespace("tidyr", quietly = TRUE)) {
+    ecokit::stop_ctx("The `tidyr` package is required to reshape data.")
+  }
+
   # Attempt to extract the script path from command line arguments (e.g.,
   # Rscript)
   this_file <- commandArgs() %>%

@@ -88,7 +88,7 @@ check_zip <- function(file = NULL, warning = TRUE) {
   }
 
   # Verify the file exists
-  if (!file.exists(file)) {
+  if (!fs::file_exists(file)) {
     if (warning) {
       warning(
         "File does not exist: ", ecokit::normalize_path(file), call. = FALSE)

@@ -80,7 +80,7 @@ assign_env_vars <- function(env_file = ".env", env_variables_data = NULL) {
   }
 
   # check that env_file exists
-  if (!file.exists(env_file)) {
+  if (!fs::file_exists(env_file)) {
     ecokit::stop_ctx("`env_file` does not exist", env_file = env_file)
   }
 
@@ -204,7 +204,7 @@ assign_env_vars <- function(env_file = ".env", env_variables_data = NULL) {
           var_value = in_value, check_dir = in_check_dir)
       }
 
-      if (in_check_file && !file.exists(env_value)) {
+      if (in_check_file && !fs::file_exists(env_value)) {
         ecokit::stop_ctx(
           stringr::str_glue("`{env_value}` file does not exist"),
           file = env_value, var_name = in_name,

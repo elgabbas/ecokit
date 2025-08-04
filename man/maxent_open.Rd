@@ -34,8 +34,11 @@ returns (invisibly) the result from the system call to launch Maxent.
 }
 \examples{
 \dontrun{
-# Launch Maxent GUI from the dismo package
-maxent_open()
+  # Launch Maxent GUI from the dismo package
+  require(dismo)
+  require(rJava)
+
+  ecokit::maxent_open()
 }
 }
 \author{

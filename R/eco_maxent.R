@@ -30,8 +30,11 @@
 #' @author Ahmed El-Gabbas
 #' @examples
 #' \dontrun{
-#' # Launch Maxent GUI from the dismo package
-#' maxent_open()
+#'   # Launch Maxent GUI from the dismo package
+#'   require(dismo)
+#'   require(rJava)
+#'
+#'   ecokit::maxent_open()
 #' }
 #' @export
 
@@ -48,6 +51,14 @@ maxent_open <- function() {
         "The following required packages are not installed: %s",
         toString(missing_pkgs)),
       call. = FALSE)
+  }
+
+  if (!requireNamespace("dismo", quietly = TRUE)) {
+    ecokit::stop_ctx("The `dismo` package is required to use Maxent.")
+  }
+
+  if (!requireNamespace("rJava", quietly = TRUE)) {
+    ecokit::stop_ctx("The `rJava` package is required to use Maxent.")
   }
 
   # Check if dismo::maxent is functional (Java/rJava configuration)

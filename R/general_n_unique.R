@@ -38,6 +38,10 @@ n_unique <- function(data, arrange = TRUE) {
     ecokit::stop_ctx("`data` cannot be NULL", data = data)
   }
 
+  if (!requireNamespace("tidyr", quietly = TRUE)) {
+    ecokit::stop_ctx("The `tidyr` package is required to reshape data.")
+  }
+
   data <- data %>%
     dplyr::summarise(
       dplyr::across(tidyselect::everything(), dplyr::n_distinct)) %>%

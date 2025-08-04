@@ -35,6 +35,7 @@
 #' @examples
 #' # increase the number of printed rows
 #' options(pillar.print_max = 40)
+#' load_packages(dplyr, tidyr, tibble)
 #'
 #' # create a sample dataframe
 #' set.seed(100)
@@ -100,6 +101,11 @@ arrange_alphanum <- function(
 
   # treat NA in desc as FALSE for user convenience
   desc[is.na(desc)] <- FALSE
+
+  if (!requireNamespace("gtools", quietly = TRUE)) {
+    ecokit::stop_ctx(
+      "The `gtools` package is required for alphanumeric sorting.")
+  }
 
   # Validate gtools::mixedsort arguments
   if (!is.logical(na_last) || length(na_last) != 1L || is.na(na_last)) {

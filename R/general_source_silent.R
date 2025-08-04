@@ -50,7 +50,7 @@ source_silent <- function(file = NULL, messages = TRUE, warnings = TRUE, ...) {
   if (!is.character(file) || length(file) != 1L) {
     ecokit::stop_ctx("`file` must be a single character string")
   }
-  if (!file.exists(file)) {
+  if (!fs::file_exists(file)) {
     ecokit::stop_ctx("`file` does not exist", file = file)
   }
 

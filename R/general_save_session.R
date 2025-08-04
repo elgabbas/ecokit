@@ -66,6 +66,11 @@ save_session <- function(
   # https://www.r-bloggers.com/2019/08/no-visible-binding-for-global-variable/
   object <- class <- size <- NULL
 
+  if (!requireNamespace("lobstr", quietly = TRUE)) {
+    ecokit::stop_ctx(
+      "The `lobstr` package is required to calculate object sizes.")
+  }
+
   # Input validation
   if (!is.character(out_directory) || length(out_directory) != 1L) {
     ecokit::stop_ctx("`out_directory` must be a single character string")

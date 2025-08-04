@@ -135,7 +135,7 @@ check_image <- function(file, warning = TRUE) {
   }
 
   # Check if the file exists
-  if (!file.exists(file)) {
+  if (!fs::file_exists(file)) {
     if (warning) {
       warning("The file '", file, "' does not exist.", call. = FALSE)
     }

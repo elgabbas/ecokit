@@ -62,7 +62,7 @@ check_gbif <- function(r_environ = ".Renviron") {
     )
   }
   # Check if the .Renviron file exists and is readable
-  if (!file.exists(r_environ)) {
+  if (!fs::file_exists(r_environ)) {
     ecokit::stop_ctx(
       "`.Renviron` file does not exist", r_environ = r_environ,
       include_backtrace = TRUE)

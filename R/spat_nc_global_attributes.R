@@ -14,14 +14,17 @@
 #' @references [Click here](https://github.com/rspatial/terra/issues/1443)
 #' @export
 #' @examples
+#' require(ecokit)
+#' ecokit::load_packages(stars, sf, fs)
+#'
 #' nc_example_1 <- system.file("nc/sub.nc", package = "stars")
-#' if (file.exists(nc_example_1)) nc_global_attributes(nc = nc_example_1)
+#' if (fs::file_exists(nc_example_1)) nc_global_attributes(nc = nc_example_1)
 #'
 #' nc_example_2 <- system.file("nc/timeseries.nc", package = "stars")
-#' if (file.exists(nc_example_2)) nc_global_attributes(nc = nc_example_2)
+#' if (fs::file_exists(nc_example_2)) nc_global_attributes(nc = nc_example_2)
 #'
 #' nc_example_3 <- system.file("nc/cropped.nc", package = "sf")
-#' if (file.exists(nc_example_3)) nc_global_attributes(nc = nc_example_3)
+#' if (fs::file_exists(nc_example_3)) nc_global_attributes(nc = nc_example_3)
 
 nc_global_attributes <- function(nc = NULL) {
 
@@ -29,12 +32,15 @@ nc_global_attributes <- function(nc = NULL) {
   if (is.null(nc)) {
     ecokit::stop_ctx("Input file cannot be NULL", nc = nc)
   }
+
   if (!is.character(nc) || length(nc) != 1L) {
     ecokit::stop_ctx("`nc` must be a single character string", nc = nc)
   }
-  if (!file.exists(nc)) {
+
+  if (!fs::file_exists(nc)) {
     ecokit::stop_ctx("NetCDF file does not exist", nc = nc)
   }
+
   if (tolower(tools::file_ext(nc)) != "nc") {
     ecokit::stop_ctx("File must have a `.nc` extension", nc = nc)
   }
@@ -42,6 +48,10 @@ nc_global_attributes <- function(nc = NULL) {
   is_nc <- ecokit::file_type(nc)
   if (!startsWith(is_nc, "NetCDF Data Format data")) {
     ecokit::stop_ctx("File is not a valid NetCDF file", nc = nc)
+  }
+
+  if (!requireNamespace("RNetCDF", quietly = TRUE)) {
+    ecokit::stop_ctx("The `RNetCDF` package is required to read NetCDF files.")
   }
 
   # Open the NetCDF File

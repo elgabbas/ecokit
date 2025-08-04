@@ -82,6 +82,11 @@ reload_package <- function(...) {
             "' in library paths")
         })
 
+      if (!requireNamespace("devtools", quietly = TRUE)) {
+        ecokit::stop_ctx(
+          "The `devtools` package is required to reload packages.")
+      }
+
       # Reload using devtools::reload
       devtools::reload(pkg = pkg_path, quiet = TRUE)
       suppressPackageStartupMessages(library(pkg, character.only = TRUE))  #nolint

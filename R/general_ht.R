@@ -79,6 +79,11 @@ ht <- function(data = NULL, n_rows = 5L) {
       data = data, class_data = class(data))
   }
 
+  if (!requireNamespace("data.table", quietly = TRUE)) {
+    ecokit::stop_ctx(
+      "The `data.table` package is required to print data frames.")
+  }
+
   data.table::data.table(data2) %>%
     print(topn = n_rows)
 

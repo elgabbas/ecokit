@@ -61,8 +61,14 @@ save_session_info <- function(
   if (!is.character(out_directory) || length(out_directory) != 1L) {
     ecokit::stop_ctx("`out_directory` must be a single character string")
   }
+
   if (!is.character(prefix) || length(prefix) != 1L) {
     ecokit::stop_ctx("`prefix` must be a single character string")
+  }
+
+  if (!requireNamespace("sessioninfo", quietly = TRUE)) {
+    ecokit::stop_ctx(
+      "The `sessioninfo` package is required to save session information.")
   }
 
   # Create output directory if it doesn't exist

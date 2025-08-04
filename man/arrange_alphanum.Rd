@@ -57,6 +57,7 @@ lexicographic sorting, which may order them incorrectly (e.g., "A1", "A10",
 \examples{
 # increase the number of printed rows
 options(pillar.print_max = 40)
+load_packages(dplyr, tidyr, tibble)
 
 # create a sample dataframe
 set.seed(100)

@@ -83,6 +83,11 @@ tibble_column_size <- function(tibble) {
 
   col_size <- NULL
 
+  if (!requireNamespace("lobstr", quietly = TRUE)) {
+    ecokit::stop_ctx(
+      "The `lobstr` package is required to calculate object sizes.")
+  }
+
   # Ensure the input is a data frame
   if (!is.data.frame(tibble)) {
     ecokit::stop_ctx("Input must be a data frame", class_tibble = class(tibble))

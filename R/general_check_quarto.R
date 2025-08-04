@@ -25,6 +25,10 @@ check_quarto <- function(pre_release = FALSE) {
 
   quarto_version <- labels <- NULL
 
+  if (!requireNamespace("rvest", quietly = TRUE)) {
+    ecokit::stop_ctx("The `rvest` package is required to scrape web content.")
+  }
+
   # URL of the Quarto releases page
   release_blocks <- "https://github.com/quarto-dev/quarto-cli/releases/" %>%
     # Read the HTML content of the page
@@ -82,6 +86,11 @@ check_quarto <- function(pre_release = FALSE) {
 
     if (pre_release) {
 
+      if (!requireNamespace("gtools", quietly = TRUE)) {
+        ecokit::stop_ctx(
+          "The `gtools` package is required for alphanumeric sorting.")
+      }
+
       version_pre_release <- releases %>%
         dplyr::slice(gtools::mixedorder(quarto_version)) %>%
         dplyr::slice_tail(n = 1L) %>%
@@ -93,6 +102,7 @@ check_quarto <- function(pre_release = FALSE) {
             "Available pre-release version is: ",
             crayon::red(crayon::bold(version_pre_release)), " [installed: ",
             crayon::red(crayon::bold(installed_version)), "]\n")))
+
     } else {
       cat(
         crayon::blue(

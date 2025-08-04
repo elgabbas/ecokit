@@ -22,6 +22,8 @@
 #' - **feather**: Checked with `check_feather()`, read using
 #'   [arrow::read_feather]
 #' @examples
+#' require(ecokit)
+#' ecokit::load_packages(fs, arrow)
 #'
 #' # Setup temporary directory
 #' temp_dir <- fs::path_temp("load_multiple")
@@ -144,7 +146,7 @@ check_data <- function(file = NULL, warning = TRUE, n_threads = 1L) {
       "`n_threads` must be a positive integer", n_threads = n_threads)
   }
 
-  if (!file.exists(file)) {
+  if (!fs::file_exists(file)) {
     if (warning) {
       warning(
         "File does not exist: `", ecokit::normalize_path(file),
@@ -202,7 +204,7 @@ check_rdata <- function(file, warning = TRUE) {
       "`warning` must be a single logical value", warning = warning)
   }
 
-  if (!file.exists(file)) {
+  if (!fs::file_exists(file)) {
     if (warning) {
       warning(
         "File does not exist: `", ecokit::normalize_path(file),
@@ -278,9 +280,11 @@ check_qs <- function(file, warning = TRUE, n_threads = 1L) {
   if (is.null(file)) {
     ecokit::stop_ctx("`file` cannot be NULL or empty string")
   }
+
   if (!is.character(file) || length(file) != 1L || !nzchar(file)) {
     ecokit::stop_ctx("`file` must be a character string", file = file)
   }
+
   if (!is.logical(warning) || length(warning) != 1L) {
     ecokit::stop_ctx(
       "`warning` must be a single logical value", warning = warning)
@@ -292,8 +296,7 @@ check_qs <- function(file, warning = TRUE, n_threads = 1L) {
       "`n_threads` must be a positive integer", n_threads = n_threads)
   }
 
-
-  if (!file.exists(file)) {
+  if (!fs::file_exists(file)) {
     if (warning) {
       warning(
         "File does not exist: `", ecokit::normalize_path(file),
@@ -301,6 +304,7 @@ check_qs <- function(file, warning = TRUE, n_threads = 1L) {
     }
     return(FALSE)
   }
+
   if (file.info(file)$size == 0L) {
     if (warning) {
       warning("File is empty: ", ecokit::normalize_path(file), call. = FALSE)
@@ -368,15 +372,17 @@ check_rds <- function(file, warning = TRUE) {
   if (is.null(file)) {
     ecokit::stop_ctx("`file` cannot be NULL or empty string")
   }
+
   if (!is.character(file) || length(file) != 1L || !nzchar(file)) {
     ecokit::stop_ctx("`file` must be a character string", file = file)
   }
+
   if (!is.logical(warning) || length(warning) != 1L) {
     ecokit::stop_ctx(
       "`warning` must be a single logical value", warning = warning)
   }
 
-  if (!file.exists(file)) {
+  if (!fs::file_exists(file)) {
     if (warning) {
       warning(
         "File does not exist: `", ecokit::normalize_path(file), "`",
@@ -384,6 +390,7 @@ check_rds <- function(file, warning = TRUE) {
     }
     return(FALSE)
   }
+
   if (file.info(file)$size == 0L) {
     if (warning) {
       warning("File is empty: ", file, call. = FALSE)
@@ -452,15 +459,17 @@ check_feather <- function(file, warning = TRUE) {
   if (is.null(file)) {
     ecokit::stop_ctx("`file` cannot be NULL or empty string")
   }
+
   if (!is.character(file) || length(file) != 1L || !nzchar(file)) {
     ecokit::stop_ctx("`file` must be a character string", file = file)
   }
+
   if (!is.logical(warning) || length(warning) != 1L) {
     ecokit::stop_ctx(
       "`warning` must be a single logical value", warning = warning)
   }
 
-  if (!file.exists(file)) {
+  if (!fs::file_exists(file)) {
     if (warning) {
       warning(
         "File does not exist: `", ecokit::normalize_path(file), "`",
@@ -468,6 +477,7 @@ check_feather <- function(file, warning = TRUE) {
     }
     return(FALSE)
   }
+
   if (file.info(file)$size == 0L) {
     if (warning) {
       warning("File is empty: ", ecokit::normalize_path(file), call. = FALSE)
@@ -490,6 +500,11 @@ check_feather <- function(file, warning = TRUE) {
   extension <- stringr::str_to_lower(tools::file_ext(file))
 
   if (extension == "feather") {
+
+    # check if arrow is installed
+    if (!requireNamespace("arrow", quietly = TRUE)) {
+      ecokit::stop_ctx("The `arrow` package is required to read feather files.")
+    }
 
     object <- try(arrow::read_feather(file), silent = TRUE)
 

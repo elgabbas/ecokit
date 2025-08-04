@@ -72,6 +72,16 @@
 all_objects_sizes <- function(
     greater_than = 0L, in_function = FALSE, n_decimals = 2L, n_objects = Inf) {
 
+  if (!requireNamespace("lobstr", quietly = TRUE)) {
+    ecokit::stop_ctx(
+      "The `lobstr` package is required to calculate object sizes.")
+  }
+
+  if (!requireNamespace("withr", quietly = TRUE)) {
+    ecokit::stop_ctx(
+      "The `withr` package is required to manage temporary options.")
+  }
+
   if (in_function) {
     current_environment <- parent.frame()
   } else {
