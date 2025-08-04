@@ -25,8 +25,7 @@ the URLs and the link text.
 }
 \examples{
 
-head(
-scrape_link(url = "https://github.com/tidyverse/dplyr"))
+head(scrape_link(url = "https://github.com/tidyverse/dplyr"))
 
 head(
   scrape_link(

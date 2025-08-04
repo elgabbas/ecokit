@@ -48,6 +48,7 @@ Suggests:
     png (>= 0.1-8),
     remotes (>= 2.5.0),
     rJava (>= 1.0-11),
+    rJava (>= 1.0-11),
     RNetCDF (>= 2.11-1),
     rstudioapi (>= 0.17.1),
     rvest (>= 1.0.4),

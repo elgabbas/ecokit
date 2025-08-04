@@ -29,6 +29,19 @@ check_url <- function(url, timeout = 2L) {
     ecokit::stop_ctx("url cannot be NULL", url = url)
   }
 
+  if (!is.numeric(timeout) || timeout < 1L) {
+    ecokit::stop_ctx("`timeout` must be a positive integer", timeout = timeout)
+  }
+
+  if (!is.character(url) || length(url) != 1L || !nzchar(url)) {
+    ecokit::stop_ctx("url must be a single character string", url = url)
+  }
+
+  # replace spaces with %20
+  if (stringr::str_detect(url, " ")) {
+    url <- stringr::str_replace_all(url, " ", "%20")
+  }
+
   con <- url(url)
   check <- suppressWarnings(
     try(
