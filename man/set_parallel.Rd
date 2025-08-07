@@ -10,6 +10,7 @@ set_parallel(
   stop_cluster = FALSE,
   show_log = TRUE,
   future_max_size = 500L,
+  cat_timestamp = FALSE,
   ...
 )
 }
@@ -30,6 +31,10 @@ resets to sequential mode. If \code{FALSE} (default), sets up a new plan.}
 \item{future_max_size}{Numeric. Maximum allowed total size (in megabytes) of
 global variables identified. See \code{future.globals.maxSize} argument of
 \link[future:zzz-future.options]{future::future.options} for more details. Default is \code{500L} for 500 MB.}
+
+\item{cat_timestamp}{logical; whether to include the time in the timestamp.
+Default is TRUE. If FALSE, only the text is printed. See
+\code{\link[=cat_time]{cat_time()}}.}
 
 \item{...}{Additional arguments to pass to \link{cat_time}.}
 }

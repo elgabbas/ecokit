@@ -13,8 +13,11 @@
 #'   specify package names as a vector.
 #' @param verbose Logical. If `TRUE`, prints the names and versions of the
 #'   loaded packages. Defaults to `FALSE`.
-#' @param install_missing Logical. If `TRUE`, missing packages are
-#'   automatically installed and then loaded. Defaults to `FALSE`.
+#' @param install_missing Logical. If `TRUE`, missing packages are automatically
+#'   installed and then loaded. Defaults to `FALSE`.
+#' @param n_cpus Integer. Number of CPUs to use for parallel installation of
+#'   packages. Defaults to the value of the `Ncpus` option. This is only valid
+#'   if `install_missing` is `TRUE`.
 #' @return This function is used for its side effects (loading/installing
 #'   packages) and does not return any value.
 #' @author Ahmed El-Gabbas
@@ -43,7 +46,24 @@
 #' load_packages("non_existent")
 
 load_packages <- function(
-    ..., package_list = NULL, verbose = FALSE, install_missing = FALSE) {
+    ..., package_list = NULL, verbose = FALSE, install_missing = FALSE,
+    n_cpus = getOption("Ncpus", 1L)) {
+
+
+  # Check inputs
+  if (!is.logical(verbose) || length(verbose) != 1L) {
+    ecokit::stop_ctx(
+      "`verbose` must be a logical of length 1", verbose = verbose)
+  }
+  if (!is.logical(install_missing) || length(install_missing) != 1L) {
+    ecokit::stop_ctx(
+      "`install_missing` must be a logical of length 1",
+      install_missing = install_missing)
+  }
+  if (!is.numeric(n_cpus) || length(n_cpus) != 1L || n_cpus < 1L) {
+    ecokit::stop_ctx(
+      "`n_cpus` must be a positive integer of length 1", n_cpus = n_cpus)
+  }
 
   # Packages to load
   packages <- rlang::ensyms(...) %>%
@@ -73,13 +93,12 @@ load_packages <- function(
         paste(prefix, packages_to_install, collapse = "\n"))
 
       # Installing missing packages
-      purrr::walk(
-        .x = packages_to_install, .f = utils::install.packages,
-        repos = "http://cran.us.r-project.org",
-        dependencies = TRUE, quiet = TRUE) %>%
-        utils::capture.output(file = nullfile()) %>%
-        suppressMessages() %>%
-        suppressWarnings()
+      utils::capture.output(
+        utils::install.packages(
+          pkgs = packages_to_install, repos = "http://cran.us.r-project.org",
+          dependencies = TRUE, quiet = TRUE, verbose = FALSE, Ncpus = n_cpus),
+        file = nullfile())
+
     } else {
       message(
         "The following packages are neither available nor installed ",
@@ -116,11 +135,13 @@ load_packages <- function(
     purrr::walk(
       .x = packages_to_load,
       .f = ~{
-        library(    #nolint
-          package = .x, character.only = TRUE,
-          quietly = TRUE, warn.conflicts = FALSE) %>%
-          suppressWarnings() %>%
-          suppressMessages()
+        suppressMessages(
+          suppressWarnings(
+            suppressPackageStartupMessages(
+              library(    #nolint
+                package = .x, character.only = TRUE,
+                quietly = TRUE, warn.conflicts = FALSE)
+            )))
 
         if (verbose) {
           utils::packageDescription(.x)$Version %>%

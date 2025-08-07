@@ -8,7 +8,8 @@ load_packages(
   ...,
   package_list = NULL,
   verbose = FALSE,
-  install_missing = FALSE
+  install_missing = FALSE,
+  n_cpus = getOption("Ncpus", 1L)
 )
 }
 \arguments{
@@ -20,8 +21,12 @@ specify package names as a vector.}
 \item{verbose}{Logical. If \code{TRUE}, prints the names and versions of the
 loaded packages. Defaults to \code{FALSE}.}
 
-\item{install_missing}{Logical. If \code{TRUE}, missing packages are
-automatically installed and then loaded. Defaults to \code{FALSE}.}
+\item{install_missing}{Logical. If \code{TRUE}, missing packages are automatically
+installed and then loaded. Defaults to \code{FALSE}.}
+
+\item{n_cpus}{Integer. Number of CPUs to use for parallel installation of
+packages. Defaults to the value of the \code{Ncpus} option. This is only valid
+if \code{install_missing} is \code{TRUE}.}
 }
 \value{
 This function is used for its side effects (loading/installing

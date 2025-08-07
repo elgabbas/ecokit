@@ -19,6 +19,9 @@
 #' @param future_max_size Numeric. Maximum allowed total size (in megabytes) of
 #'   global variables identified. See `future.globals.maxSize` argument of
 #'   [future::future.options] for more details. Default is `500L` for 500 MB.
+#' @param cat_timestamp	logical; whether to include the time in the timestamp.
+#'   Default is TRUE. If FALSE, only the text is printed. See
+#'   [ecokit::cat_time()].
 #' @param ... Additional arguments to pass to [cat_time].
 #' @export
 #' @name set_parallel
@@ -80,7 +83,7 @@
 
 set_parallel <- function(
     n_cores = 1L, strategy = "multisession", stop_cluster = FALSE,
-    show_log = TRUE, future_max_size = 500L, ...) {
+    show_log = TRUE, future_max_size = 500L, cat_timestamp = FALSE, ...) {
 
   # Validate n_cores input
   n_cores <- ifelse((is.null(n_cores) || n_cores < 1L), 1L, as.integer(n_cores))
@@ -93,7 +96,7 @@ set_parallel <- function(
         paste0(
           "`n_cores` > number of available cores (", available_cores, "). ",
           "It was reset to ", available_cores, "."),
-        cat_timestamp = FALSE)
+        cat_timestamp = cat_timestamp)
     }
     n_cores <- available_cores
   }
@@ -121,7 +124,8 @@ set_parallel <- function(
 
   if (stop_cluster) {
     if (show_log) {
-      ecokit::cat_time("Stopping parallel processing", ...)
+      ecokit::cat_time(
+        "Stopping parallel processing", cat_timestamp = cat_timestamp, ...)
     }
 
     # stop any running future plan and reset to sequential
@@ -172,7 +176,7 @@ set_parallel <- function(
         ecokit::cat_time(
           paste0(
             "Setting up parallel processing using ", n_cores,
-            " cores (strategy: `", strategy, "`)"),
+            " cores (`", strategy, "`)"), cat_timestamp = cat_timestamp,
           ...)
       }
 

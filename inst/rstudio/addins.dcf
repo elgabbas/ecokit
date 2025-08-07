@@ -1,0 +1,4 @@
+Name: Open qs2 files
+Description: Opens .qs2 files
+Binding: open_qs2
+Interactive: true
