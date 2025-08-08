@@ -221,8 +221,14 @@ check_rdata <- function(file, warning = TRUE) {
   }
 
   # check file type
-  in_file_type <- ecokit::file_type(file)
-  if (!startsWith(in_file_type, "gzip compressed data")) {
+  invalid_file_type <- ecokit::file_type(file) %>%
+    stringr::str_detect(
+      paste(
+        "^gzip compressed data", "^data", "^DOS/MBR boot sector",
+        "^R workspace image", "^bzip2 compressed data", sep = "|"),
+      negate = TRUE)
+
+  if (invalid_file_type) {
     if (warning) {
       warning(
         "Not a valid RData file: ", ecokit::normalize_path(file), call. = FALSE)
