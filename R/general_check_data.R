@@ -220,22 +220,6 @@ check_rdata <- function(file, warning = TRUE) {
     return(FALSE)
   }
 
-  # check file type
-  invalid_file_type <- ecokit::file_type(file) %>%
-    stringr::str_detect(
-      paste(
-        "^gzip compressed data", "^data", "^DOS/MBR boot sector",
-        "^R workspace image", "^bzip2 compressed data", sep = "|"),
-      negate = TRUE)
-
-  if (invalid_file_type) {
-    if (warning) {
-      warning(
-        "Not a valid RData file: ", ecokit::normalize_path(file), call. = FALSE)
-    }
-    return(FALSE)
-  }
-
   # Get file extension
   extension <- stringr::str_to_lower(tools::file_ext(file))
 
@@ -318,16 +302,6 @@ check_qs <- function(file, warning = TRUE, n_threads = 1L) {
     return(FALSE)
   }
 
-  # check file type
-  in_file_type <- ecokit::file_type(file)
-  if (in_file_type != "data") {
-    if (warning) {
-      warning(
-        "Not a valid qs2 file: ", ecokit::normalize_path(file), call. = FALSE)
-    }
-    return(FALSE)
-  }
-
   # Get file extension
   extension <- stringr::str_to_lower(tools::file_ext(file))
 
@@ -400,16 +374,6 @@ check_rds <- function(file, warning = TRUE) {
   if (file.info(file)$size == 0L) {
     if (warning) {
       warning("File is empty: ", file, call. = FALSE)
-    }
-    return(FALSE)
-  }
-
-  # check file type
-  in_file_type <- ecokit::file_type(file)
-  if (!startsWith(in_file_type, "gzip compressed data")) {
-    if (warning) {
-      warning(
-        "Not a valid rds file: ", ecokit::normalize_path(file), call. = FALSE)
     }
     return(FALSE)
   }
@@ -487,17 +451,6 @@ check_feather <- function(file, warning = TRUE) {
   if (file.info(file)$size == 0L) {
     if (warning) {
       warning("File is empty: ", ecokit::normalize_path(file), call. = FALSE)
-    }
-    return(FALSE)
-  }
-
-  # check file type
-  in_file_type <- ecokit::file_type(file)
-  if (stringr::str_detect(in_file_type, "^data|^DIY", negate = TRUE)) {
-    if (warning) {
-      warning(
-        "Not a valid feather file: ", ecokit::normalize_path(file),
-        call. = FALSE)
     }
     return(FALSE)
   }

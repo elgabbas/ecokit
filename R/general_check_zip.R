@@ -104,18 +104,6 @@ check_zip <- function(file = NULL, warning = TRUE) {
     return(FALSE)
   }
 
-  # `file` system command gives "data" under windows, not "Zip archive"
-  if (ecokit::os() != "Windows") {
-    in_file_type <- ecokit::file_type(file)
-    if (!startsWith(in_file_type, "Zip archive")) {
-      if (warning) {
-        warning(
-          "Not a valid ZIP file: ", ecokit::normalize_path(file), call. = FALSE)
-      }
-      return(FALSE)
-    }
-  }
-
   # Validate the ZIP file
   file_okay <- tryCatch(
     expr = {
