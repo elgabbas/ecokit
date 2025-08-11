@@ -33,7 +33,7 @@ open_qs2 <- function() {
     ecokit::load_packages(package_list = c("ecokit", "qs2"))
 
     obj <- ecokit::load_as(file, load_packages = TRUE, unwrap_r = TRUE)
-    assign("qs2_object", obj, envir = .GlobalEnv)
+    assign("qs2_object", obj, envir = parent.frame())
     message("Loaded qs2 file as 'qs2_object' in the global environment.")
   } else {
     message("Unsupported file type.")

@@ -108,6 +108,7 @@ reference:
   - get_mode
   - check_system_command
   - apply_functions
+  - quietly
 
 - title: Spatial functions
   contents:
