@@ -62,6 +62,7 @@ reference:
   - check_data
   - check_zip
   - check_image
+  - check_env_file
   - save_as
   - save_multiple
   - list_to_rdata
