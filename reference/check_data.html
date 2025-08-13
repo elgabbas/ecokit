@@ -133,12 +133,12 @@ extension (case-insensitive). If the extension is unrecognised, it returns
 <span class="r-in"><span><span class="fu">check_data</span><span class="op">(</span><span class="va">bad_rdata</span><span class="op">)</span>                                <span class="co"># FALSE, with warning</span></span></span>
 <span class="r-wrn co"><span class="r-pr">#&gt;</span> <span class="warning">Warning: </span>file ‘invalid.Rdata’ has magic number 'not a'</span>
 <span class="r-wrn co"><span class="r-pr">#&gt;</span>   Use of save versions prior to 2 is deprecated</span>
-<span class="r-wrn co"><span class="r-pr">#&gt;</span> <span class="warning">Warning: </span>Failed to load RData file: /tmp/Rtmp1gYy0H/load_multiple/invalid.Rdata</span>
+<span class="r-wrn co"><span class="r-pr">#&gt;</span> <span class="warning">Warning: </span>Failed to load RData file: /tmp/RtmpePCauH/load_multiple/invalid.Rdata</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> [1] FALSE</span>
 <span class="r-in"><span><span class="fu">check_rdata</span><span class="op">(</span><span class="va">bad_rdata</span><span class="op">)</span>                               <span class="co"># FALSE, with warning</span></span></span>
 <span class="r-wrn co"><span class="r-pr">#&gt;</span> <span class="warning">Warning: </span>file ‘invalid.Rdata’ has magic number 'not a'</span>
 <span class="r-wrn co"><span class="r-pr">#&gt;</span>   Use of save versions prior to 2 is deprecated</span>
-<span class="r-wrn co"><span class="r-pr">#&gt;</span> <span class="warning">Warning: </span>Failed to load RData file: /tmp/Rtmp1gYy0H/load_multiple/invalid.Rdata</span>
+<span class="r-wrn co"><span class="r-pr">#&gt;</span> <span class="warning">Warning: </span>Failed to load RData file: /tmp/RtmpePCauH/load_multiple/invalid.Rdata</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> [1] FALSE</span>
 <span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="fu">check_data</span><span class="op">(</span><span class="va">bad_rdata</span>, warning <span class="op">=</span> <span class="cn">FALSE</span><span class="op">)</span>               <span class="co"># FALSE, no warning</span></span></span>
@@ -168,10 +168,10 @@ extension (case-insensitive). If the extension is unrecognised, it returns
 <span class="r-out co"><span class="r-pr">#&gt;</span> [1] TRUE</span>
 <span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="fu">check_data</span><span class="op">(</span><span class="va">bad_qs</span>, n_threads <span class="op">=</span> <span class="fl">1L</span><span class="op">)</span>                   <span class="co"># FALSE, with warning</span></span></span>
-<span class="r-wrn co"><span class="r-pr">#&gt;</span> <span class="warning">Warning: </span>Failed to load qs2 file: /tmp/Rtmp1gYy0H/load_multiple/invalid.qs2</span>
+<span class="r-wrn co"><span class="r-pr">#&gt;</span> <span class="warning">Warning: </span>Failed to load qs2 file: /tmp/RtmpePCauH/load_multiple/invalid.qs2</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> [1] FALSE</span>
 <span class="r-in"><span><span class="fu">check_qs</span><span class="op">(</span><span class="va">bad_qs</span>, n_threads <span class="op">=</span> <span class="fl">1L</span><span class="op">)</span>                     <span class="co"># FALSE, with warning</span></span></span>
-<span class="r-wrn co"><span class="r-pr">#&gt;</span> <span class="warning">Warning: </span>Failed to load qs2 file: /tmp/Rtmp1gYy0H/load_multiple/invalid.qs2</span>
+<span class="r-wrn co"><span class="r-pr">#&gt;</span> <span class="warning">Warning: </span>Failed to load qs2 file: /tmp/RtmpePCauH/load_multiple/invalid.qs2</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> [1] FALSE</span>
 <span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="co"># |||||||||||||||||||||||||||||||||||||||</span></span></span>
@@ -192,10 +192,10 @@ extension (case-insensitive). If the extension is unrecognised, it returns
 <span class="r-out co"><span class="r-pr">#&gt;</span> [1] TRUE</span>
 <span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="fu">check_data</span><span class="op">(</span><span class="va">bad_rds</span><span class="op">)</span>                                  <span class="co"># FALSE, with warning</span></span></span>
-<span class="r-wrn co"><span class="r-pr">#&gt;</span> <span class="warning">Warning: </span>Failed to load rds file: /tmp/Rtmp1gYy0H/load_multiple/invalid.rds</span>
+<span class="r-wrn co"><span class="r-pr">#&gt;</span> <span class="warning">Warning: </span>Failed to load rds file: /tmp/RtmpePCauH/load_multiple/invalid.rds</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> [1] FALSE</span>
 <span class="r-in"><span><span class="fu">check_rds</span><span class="op">(</span><span class="va">bad_rds</span><span class="op">)</span>                                   <span class="co"># FALSE, with warning</span></span></span>
-<span class="r-wrn co"><span class="r-pr">#&gt;</span> <span class="warning">Warning: </span>Failed to load rds file: /tmp/Rtmp1gYy0H/load_multiple/invalid.rds</span>
+<span class="r-wrn co"><span class="r-pr">#&gt;</span> <span class="warning">Warning: </span>Failed to load rds file: /tmp/RtmpePCauH/load_multiple/invalid.rds</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> [1] FALSE</span>
 <span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="co"># |||||||||||||||||||||||||||||||||||||||</span></span></span>
@@ -216,10 +216,10 @@ extension (case-insensitive). If the extension is unrecognised, it returns
 <span class="r-out co"><span class="r-pr">#&gt;</span> [1] TRUE</span>
 <span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="fu">check_data</span><span class="op">(</span><span class="va">bad_feather</span><span class="op">)</span>                              <span class="co"># FALSE, with warning</span></span></span>
-<span class="r-wrn co"><span class="r-pr">#&gt;</span> <span class="warning">Warning: </span>Failed to load feather file: /tmp/Rtmp1gYy0H/load_multiple/invalid.feather</span>
+<span class="r-wrn co"><span class="r-pr">#&gt;</span> <span class="warning">Warning: </span>Failed to load feather file: /tmp/RtmpePCauH/load_multiple/invalid.feather</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> [1] FALSE</span>
 <span class="r-in"><span><span class="fu">check_feather</span><span class="op">(</span><span class="va">bad_feather</span><span class="op">)</span>                           <span class="co"># FALSE, with warning</span></span></span>
-<span class="r-wrn co"><span class="r-pr">#&gt;</span> <span class="warning">Warning: </span>Failed to load feather file: /tmp/Rtmp1gYy0H/load_multiple/invalid.feather</span>
+<span class="r-wrn co"><span class="r-pr">#&gt;</span> <span class="warning">Warning: </span>Failed to load feather file: /tmp/RtmpePCauH/load_multiple/invalid.feather</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> [1] FALSE</span>
 <span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="co"># |||||||||||||||||||||||||||||||||||||||</span></span></span>
