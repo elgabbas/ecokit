@@ -49,6 +49,18 @@ check_env_file <- function(env_file = ".env", warning = TRUE) {
 
   errors <- character()
 
+  if (!is.character(env_file) || length(env_file) != 1L) {
+    ecokit::stop_ctx(
+      "env_file must be a character of length 1",
+      env_file = env_file, class_env_file = class(env_file))
+  }
+  
+  if (!is.logical(warning) || length(warning) != 1L) {
+    ecokit::stop_ctx(
+      "warning must be a logical of length 1",
+      env_file = env_file, class_env_file = class(env_file))
+  }
+
   # Check if file exists and is readable
   if (!fs::file_exists(env_file)) {
     if (warning) {
