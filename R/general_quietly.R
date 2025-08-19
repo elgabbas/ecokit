@@ -5,15 +5,17 @@
 #' Quietly Evaluate an Expression with Custom Warning Patterns
 #'
 #' Evaluates an R expression while suppressing package startup messages and
-#' selected warnings. By default, warnings containing "was built under R
-#' version" or "Loading required namespace" are muffled. Additional warning
-#' patterns can be provided via `...`.
+#' selected warnings and messages. By default, warnings containing "was built
+#' under R version" or "Loading required namespace" are muffled. Additional
+#' patterns (regular expressions) can be provided via `...` to suppress matching
+#' warnings or messages.
 #'
 #' @param expr An R expression to be evaluated quietly. This can be a single
 #'   expression or a block of code wrapped in curly brackets.
 #' @param ...  Additional character strings. Each value will be treated as a
-#'   pattern to match in warning messages to muffle. For example, `quietly(expr,
-#'   "Picked up JAVA_TOOL_OPTIONS", "Couldn't flush user prefs")`.
+#'   regular expression pattern to match in warning or message text to muffle.
+#'   For example, `quietly(expr, "Picked up JAVA_TOOL_OPTIONS", "Scale for [xy]
+#'   is already present\\.")`.
 #'
 #' @return The result of evaluating `expr`, with specified messages and warnings
 #'   suppressed.
@@ -63,6 +65,16 @@
 #'   # Error if expr is not a language object
 #'   quietly("not an expression")
 #' }
+#'
+#' # Suppress specific messages using regular expression patterns
+#' quietly({
+#'   message("Scale for y is already present.")
+#'   message("Scale for x is already present.")
+#'   message("TTT")
+#'   warning("Something else")
+#' },
+#' "Scale for [xy] is already present\\."
+#' )
 
 quietly <- function(expr, ...) {
 
@@ -88,15 +100,19 @@ quietly <- function(expr, ...) {
   }
 
   patterns <- c(
-    "was built under R version", "Loading required namespace",
-    unlist(dots))
+    "was built under R version", "Loading required namespace", unlist(dots))
+  regex <- paste(patterns, collapse = "|")
 
   withCallingHandlers(
     suppressPackageStartupMessages(eval(expr_sub, parent.frame())),
     warning = function(w) {
-      warnings_to_hide <- paste(patterns, collapse = "|")
-      if (grepl(warnings_to_hide, conditionMessage(w))) {
+      if (stringr::str_detect(conditionMessage(w), regex)) {
         invokeRestart("muffleWarning")
+      }
+    },
+    message = function(m) {
+      if (stringr::str_detect(conditionMessage(m), regex)) {
+        invokeRestart("muffleMessage")
       }
     }
   )

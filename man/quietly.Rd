@@ -11,7 +11,8 @@ quietly(expr, ...)
 expression or a block of code wrapped in curly brackets.}
 
 \item{...}{Additional character strings. Each value will be treated as a
-pattern to match in warning messages to muffle. For example, \code{quietly(expr, "Picked up JAVA_TOOL_OPTIONS", "Couldn't flush user prefs")}.}
+regular expression pattern to match in warning or message text to muffle.
+For example, \code{quietly(expr, "Picked up JAVA_TOOL_OPTIONS", "Scale for [xy] is already present\\\\.")}.}
 }
 \value{
 The result of evaluating \code{expr}, with specified messages and warnings
@@ -19,9 +20,10 @@ suppressed.
 }
 \description{
 Evaluates an R expression while suppressing package startup messages and
-selected warnings. By default, warnings containing "was built under R
-version" or "Loading required namespace" are muffled. Additional warning
-patterns can be provided via \code{...}.
+selected warnings and messages. By default, warnings containing "was built
+under R version" or "Loading required namespace" are muffled. Additional
+patterns (regular expressions) can be provided via \code{...} to suppress matching
+warnings or messages.
 }
 \examples{
 # Suppress a package startup message and a version warning
@@ -67,6 +69,16 @@ if (FALSE) {
   # Error if expr is not a language object
   quietly("not an expression")
 }
+
+# Suppress specific messages using regular expression patterns
+quietly({
+  message("Scale for y is already present.")
+  message("Scale for x is already present.")
+  message("TTT")
+  warning("Something else")
+},
+"Scale for [xy] is already present\\\\."
+)
 }
 \author{
 Ahmed El-Gabbas

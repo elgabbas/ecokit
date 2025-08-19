@@ -17,7 +17,7 @@
 #' @param out_path Character. File path (ends with either `*.RData`, `*.qs2`,
 #'   `feather`, and `rds`) where the object be saved. This includes the
 #'   directory and the file name.
-#' @param n_threads Character. Number of threads to use when compressing data.
+#' @param n_threads Numeric. Number of threads to use when compressing data.
 #'   See [qs2::qs_save].
 #' @param feather_compression Character. The compression algorithm to use when
 #'   saving the object in the `feather` format. The default is "zstd". See
@@ -57,10 +57,33 @@ save_as <- function(
     object = NULL, object_name = NULL, out_path = NULL, n_threads = 1L,
     feather_compression = "zstd", ...) {
 
+  # input validation
+
   if (is.null(object) || is.null(out_path)) {
     ecokit::stop_ctx(
       "`object` and `out_path` cannot be NULL",
-      object = object, out_path = out_path)
+      class_object = class(object), out_path = out_path,
+      include_backtrace = TRUE)
+  }
+
+  if (!is.null(object_name) &&
+      (!is.character(object_name) || length(object_name) != 1L ||
+       !nzchar(object_name))) {
+    ecokit::stop_ctx(
+      "`object_name` must be a character of length 1 or NULL",
+      object_name = object_name, include_backtrace = TRUE)
+  }
+
+  if (!is.character(out_path) || length(out_path) != 1L || !nzchar(out_path)) {
+    ecokit::stop_ctx(
+      "`out_path` must be a single non-empty character string",
+      out_path = out_path, include_backtrace = TRUE)
+  }
+  if (!is.numeric(n_threads) || length(n_threads) != 1L ||
+      n_threads < 1L || n_threads != round(n_threads)) {
+    ecokit::stop_ctx(
+      "`n_threads` must be a positive integer", n_threads = n_threads,
+      include_backtrace = TRUE)
   }
 
   if (inherits(object, "character")) {
@@ -81,7 +104,9 @@ save_as <- function(
   fs::dir_create(dirname(out_path))
 
   if (extension == "feather" && !requireNamespace("arrow", quietly = TRUE)) {
-    ecokit::stop_ctx("The `arrow` package is required to save feather files.")
+    ecokit::stop_ctx(
+      "The `arrow` package is required to save feather files.",
+      include_backtrace = TRUE)
   }
 
   switch(
@@ -100,6 +125,16 @@ save_as <- function(
       save(list = object_name, file = out_path, ...)
     },
     feather = {
+      supported_compression <- c(
+        "default", "lz4", "lz4_frame", "uncompressed", "zstd")
+      if (!feather_compression %in% supported_compression) {
+        ecokit::stop_ctx(
+          paste0(
+            "Invalid `feather_compression`. Supported values are: ",
+            paste(supported_compression, collapse = ", ")),
+          feather_compression = feather_compression,
+          include_backtrace = TRUE)
+      }
       arrow::write_feather(
         x = object, sink = out_path, compression = feather_compression, ...)
     },
@@ -109,5 +144,5 @@ save_as <- function(
     ecokit::stop_ctx("Invalid file extension", extension = extension)
   )
 
-  return(invisible())
+  return(invisible(NULL))
 }

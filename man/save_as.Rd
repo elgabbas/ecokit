@@ -25,7 +25,7 @@ is required when saving \code{RData} files.}
 \code{feather}, and \code{rds}) where the object be saved. This includes the
 directory and the file name.}
 
-\item{n_threads}{Character. Number of threads to use when compressing data.
+\item{n_threads}{Numeric. Number of threads to use when compressing data.
 See \link[qs2:qs_save]{qs2::qs_save}.}
 
 \item{feather_compression}{Character. The compression algorithm to use when

@@ -54,7 +54,7 @@ check_env_file <- function(env_file = ".env", warning = TRUE) {
       "env_file must be a character of length 1",
       env_file = env_file, class_env_file = class(env_file))
   }
-  
+
   if (!is.logical(warning) || length(warning) != 1L) {
     ecokit::stop_ctx(
       "warning must be a logical of length 1",
