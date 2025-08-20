@@ -129,10 +129,9 @@ save_as <- function(
         "default", "lz4", "lz4_frame", "uncompressed", "zstd")
       if (!feather_compression %in% supported_compression) {
         ecokit::stop_ctx(
-          paste0(
-            "Invalid `feather_compression`. Supported values are: ",
-            paste(supported_compression, collapse = ", ")),
+          "Invalid `feather_compression`",
           feather_compression = feather_compression,
+          supported_compression = supported_compression,
           include_backtrace = TRUE)
       }
       arrow::write_feather(

@@ -71,6 +71,11 @@ cat_time <- function(
   if (!verbose) {
     return(invisible(NULL))
   }
+  if (!is.character(text) || length(text) != 1L) {
+    ecokit::stop_ctx(
+      "`text` has to be character of length 1",
+      text = text, include_backtrace = TRUE)
+  }
 
   # Validate inputs
   all_arguments <- ls(envir = environment())
