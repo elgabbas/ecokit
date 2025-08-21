@@ -14,6 +14,9 @@
 #' @param extract_full Logical. If `TRUE` and `levels` exceeds the number of
 #'   path components minus one, returns the root of the path. If `FALSE`, an
 #'   error is thrown when `levels` exceeds the available ancestors.
+#' @param warning Logical. If `TRUE`, prints a warning message when `path` is a
+#'   file or has an extension, indicating that the parent directory is being
+#'   used instead. Defaults to `TRUE`.
 #' @param ... Additional arguments passed to [ecokit::stop_ctx] for error
 #'   reporting.
 #' @return Character. The resulting path after jumping. If `extract_full = TRUE`
@@ -22,12 +25,27 @@
 #' @author Ahmed El-Gabbas
 #' @export
 #' @examples
-#' parent_dir("/home/user/projects/data/file.txt", levels = 2)
-#' # this will give an error
+#' example_path <- "/home/user/projects/data"
+#' {
+#'   cat(parent_dir(example_path, levels = 0), "\n")
+#'   cat(parent_dir(example_path, levels = 1), "\n")
+#'   cat(parent_dir(example_path, levels = 2), "\n")
+#'   cat(parent_dir(example_path, levels = 3), "\n")
+#'   cat(parent_dir(example_path, levels = 4), "\n")
+#' }
+#'
+#' # input as file
+#' example_file <- "/home/user/projects/data/file.txt"
+#' parent_dir(example_file, levels = 2)
+#' # suppress warning
+#' parent_dir(example_file, levels = 2, warning = FALSE)
+#'
+#' # not enough levels; this will give an error
 #' try(parent_dir("/home/user", levels = 4, extract_full = TRUE))
 
 parent_dir <- function(
-    path = NULL, levels = 1L, check_dir = FALSE, extract_full = FALSE, ...) {
+    path = NULL, levels = 1L, check_dir = FALSE,
+    extract_full = FALSE, warning = TRUE, ...) {
 
   # Check path --------
   if (is.null(path) || !is.character(path) || length(path) != 1L) {
@@ -41,12 +59,14 @@ parent_dir <- function(
   }
 
   # If path is a file or has extension, use its parent directory
-  if (check_dir && (fs::is_file(path) || nzchar(fs::path_ext(path)))) {
-    cat(
-      crayon::blue(
-        paste0(
-          "Input `path` appears to be a file (exists as file or has",
-          "extension), using its parent directory.\n\n")))
+  if (fs::is_file(path) || nzchar(fs::path_ext(path))) {
+    if (warning) {
+      cat(
+        crayon::blue(
+          paste0(
+            "  >>>  Input `path` appears to be a file (exists as file or has ",
+            "extension), using its parent directory.\n  >>>  ", path, "\n")))
+    }
     path <- fs::path_dir(path)
   }
 
