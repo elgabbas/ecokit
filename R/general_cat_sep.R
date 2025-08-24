@@ -46,51 +46,26 @@ cat_sep <- function(
     line_char = "-", line_char_rep = 50L, cat_bold = FALSE, cat_red = FALSE,
     verbose = TRUE, ...) {
 
-  # return NULL if verbose is FALSE
-  if (!is.logical(verbose) || length(verbose) != 1L) {
-    ecokit::stop_ctx("`verbose` has to be logic of length 1", verbose = verbose)
-  }
-  if (!verbose) {
-    return(invisible(NULL))
-  }
-
-  # ****************************************************************
-
   # Check input arguments
-  all_arguments <- ls(envir = environment())
-  all_arguments <- purrr::map(
-    all_arguments,
-    function(x) get(x, envir = parent.env(env = environment()))) %>%
-    stats::setNames(all_arguments)
+  ecokit::check_args(args_to_check = "verbose", args_type = "logical")
+  if (!verbose) return(invisible(NULL))
+
   numeric_arguments <- c(
     "n_separators", "sep_lines_before", "sep_lines_after", "line_char_rep")
-  ecokit::check_args(
-    args_all = all_arguments,
-    args_to_check = numeric_arguments, args_type = "numeric")
-  ecokit::check_args(
-    args_all = all_arguments,
-    args_to_check = "line_char", args_type = "character")
+  ecokit::check_args(args_to_check = numeric_arguments, args_type = "numeric")
+  ecokit::check_args(args_to_check = "line_char", args_type = "character")
 
   # ****************************************************************
 
-  if (cat_bold) {
-    line_char <- crayon::bold(line_char)
-  }
-  if (cat_red) {
-    line_char <- crayon::red(line_char)
-  }
-
-  if (sep_lines_before > 0L) {
-    cat(strrep("\n", sep_lines_before), ...)
-  }
+  if (cat_bold) line_char <- crayon::bold(line_char)
+  if (cat_red) line_char <- crayon::red(line_char)
+  if (sep_lines_before > 0L)  cat(strrep("\n", sep_lines_before), ...)
 
   paste(rep(line_char, line_char_rep), collapse = "") %>%
     rep(n_separators) %>%
     paste(collapse = "\n") %>%
     cat(...)
 
-  if (sep_lines_after > 0L) {
-    cat(strrep("\n", sep_lines_after), ...)
-  }
+  if (sep_lines_after > 0L)  cat(strrep("\n", sep_lines_after), ...)
   return(invisible(NULL))
 }

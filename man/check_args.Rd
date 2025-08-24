@@ -4,19 +4,18 @@
 \alias{check_args}
 \title{Check function arguments for specific types}
 \usage{
-check_args(args_all, args_to_check, args_type, include_backtrace = FALSE)
+check_args(args_to_check = NULL, args_type = NULL, arg_length = 1L, ...)
 }
 \arguments{
-\item{args_all}{Character vector. Input parameters of the function. Usually
-as a result of \code{formals()} function}
-
 \item{args_to_check}{Character vector. Names of the arguments to be checked.}
 
 \item{args_type}{Character. The expected type of the arguments. Must be one
 of "character", "logical", or "numeric".}
 
-\item{include_backtrace}{Logical. If \code{TRUE}, includes the backtrace in the
-error message. Default is \code{FALSE}. See \link{stop_ctx} for more details.}
+\item{arg_length}{Numeric vector. Expected length of each argument in
+\code{args_to_check}. Default is 1L.}
+
+\item{...}{Additional arguments passed to \link{stop_ctx}.}
 }
 \value{
 The function does not return a value but will stop execution and
@@ -28,39 +27,24 @@ This function checks if the specified arguments of a function match the
 expected type. It is useful for validating function inputs.
 }
 \examples{
-# define a function with arguments
 f1 <- function(x = "AA", y = "BB", z = 1) {
-  all_arguments <- ls(envir = environment())
-  all_arguments <- purrr::map(
-    all_arguments,
-    function(x) get(x, envir = parent.env(env = environment()))) \%>\%
-    stats::setNames(all_arguments)
-
  # Check if x and y are a character
- check_args(
-    args_all = all_arguments, args_type = "character",
-    args_to_check = c("x", "y"))
+ check_args(args_to_check = c("x", "y"), args_type = "character")
 
  # Check if z is a numeric
+ check_args(args_to_check = "z", args_type = "numeric")
+}
+
+f1(x = "X", z = 20)
+try(f1(x = 1))
+
+try(f1(x = c("X1", "x2", "x3"), y = c(20, 30)))
+
+f2 <- function(x = "AA", y = "BB", z = 1) {
  check_args(
-    args_all = all_arguments, args_type = "numeric",
-    args_to_check = "z")
-
- # the rest of the function
+  args_to_check = c("x", "y"), args_type = "character", arg_length = c(3, 2))
 }
-
-#  |||||||||||||||||||||||||||||||||||||||||||||||||
-
-# no output as x is a character
-f1(x = "X")
-
-# no output as z is a numeric
-f1(z = 20)
-
-\dontrun{
-  # error as x is not a character
-  f1(x = 1)
-}
+f2(x = c("X1", "x2", "x3"), y = c("20", "30"))
 }
 \author{
 Ahmed El-Gabbas

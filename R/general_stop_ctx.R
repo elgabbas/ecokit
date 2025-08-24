@@ -142,19 +142,10 @@ stop_ctx <- function(
   # 1. Validate flag arguments are logical
   # --------------------------------------------------------------------------
 
-  all_arguments <- ls(envir = environment())
-  all_arguments <- purrr::map(
-    .x = all_arguments,
-    .f = function(x) {
-      get(x, envir = parent.env(env = environment()))
-    }) %>%
-    stats::setNames(all_arguments)
-
   # Validate that include_backtrace, cat_timestamp, cat_date are logical
   ecokit::check_args(
-    args_all = all_arguments, args_type = "logical",
-    args_to_check = c("include_backtrace", "cat_timestamp", "cat_date"))
-  rm(all_arguments, envir = environment())
+    args_to_check = c("include_backtrace", "cat_timestamp", "cat_date"),
+    args_type = "logical")
 
   # --------------------------------------------------------------------------
   # 2. Helper functions

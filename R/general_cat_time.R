@@ -78,18 +78,11 @@ cat_time <- function(
   }
 
   # Validate inputs
-  all_arguments <- ls(envir = environment())
-  all_arguments <- purrr::map(
-    all_arguments,
-    function(x) get(x, envir = parent.env(env = environment()))) %>%
-    stats::setNames(all_arguments)
   ecokit::check_args(
-    args_all = all_arguments, args_type = "logical",
-    args_to_check = c("cat_timestamp", "cat_bold", "cat_red", "cat_date"))
+    args_to_check = c("cat_timestamp", "cat_bold", "cat_red", "cat_date"),
+    args_type = "logical")
   ecokit::check_args(
-    args_all = all_arguments, args_type = "numeric",
-    args_to_check = c("msg_n_lines", "level"))
-  rm(all_arguments, envir = environment())
+    args_to_check = c("msg_n_lines", "level"), args_type = "numeric")
 
   # Current time
   time_now <- lubridate::now(tzone = time_zone)
