@@ -2,9 +2,9 @@
 % Please edit documentation in R/general_check_zip.R
 \name{check_zip}
 \alias{check_zip}
-\title{Check the Integrity of a ZIP File}
+\title{Check the Integrity of ZIP Files}
 \usage{
-check_zip(file = NULL, warning = TRUE)
+check_zip(file = NULL, warning = TRUE, all_okay = TRUE)
 }
 \arguments{
 \item{file}{Character. Path to a ZIP file. Must be a single, non-empty
@@ -12,17 +12,18 @@ string.}
 
 \item{warning}{Logical. If \code{TRUE}, issues a warning if the file does not
 exist, is empty, or fails the integrity check. Default is \code{TRUE}.}
+
+\item{all_okay}{Logical. If \code{TRUE} (default), returns a single logical output
+indicating the validity of all ZIP files; if \code{FALSE}, returns a logical
+vector for each ZIP file.}
 }
 \value{
-Logical: \code{TRUE} if the file exists, is non-empty, and passes the
-integrity check; \code{FALSE} otherwise, accompanied by a warning explaining the
-failure.
+Logical: \code{TRUE} if all checks pass; \code{FALSE} otherwise.
 }
 \description{
-Tests the integrity of a ZIP file using the \code{unzip -t} system command.
-Verifies that the file exists, is non-empty, has a \code{.zip} extension, and
-passes the integrity check. Returns \code{FALSE} with a warning if the file is
-invalid or if \code{unzip} is unavailable.
+Tests the integrity of ZIP files using the \code{unzip -t} system command.
+Verifies that files exist, non-empty, have a \code{.zip} extension, and
+pass the integrity check.
 }
 \note{
 Requires the \code{unzip} system command.
@@ -40,40 +41,38 @@ temp_file <- fs::path(temp_dir, "test.txt")
 writeLines("Hello, world!", temp_file)
 zip_file <- fs::path(temp_dir, "valid.zip")
 zip(zip_file, temp_file, flags = "-jq")
+check_zip(zip_file)
 
 # invalid ZIP file (corrupted)
 bad_zip <- fs::path(temp_dir, "invalid.zip")
 writeLines("Not a ZIP file", bad_zip)
+check_zip(bad_zip)
+check_zip(bad_zip, warning = FALSE)
 
 # empty ZIP file
 empty_zip <- fs::path(temp_dir, "empty.zip")
 fs::file_create(empty_zip)
+check_zip(empty_zip)
+check_zip(empty_zip, warning = FALSE)
 
 # non-ZIP file
 non_zip_file <- fs::path(temp_dir, "test.txt")
 writeLines("Hello, world!", non_zip_file)
-
-# |||||||||||||||||||||||||||||||||||||||
-# Check ZIP files
-# |||||||||||||||||||||||||||||||||||||||
-
-check_zip(zip_file)                              # TRUE
-
-check_zip(bad_zip)                               # FALSE, with warning
-check_zip(bad_zip, warning = FALSE)              # FALSE, without warning
+check_zip(non_zip_file)
+check_zip(non_zip_file, warning = FALSE)
 
 # non-existent file
-check_zip("nonexistent.zip")                     # FALSE, with warning
-check_zip("nonexistent.zip", warning = FALSE)    # FALSE, without warning
+check_zip("nonexistent.zip")
+check_zip("nonexistent.zip", warning = FALSE)
 
-check_zip(empty_zip)                             # FALSE, with warning
-check_zip(empty_zip, warning = FALSE)            # FALSE, without warning
-
-check_zip(non_zip_file)                          # FALSE, with warning
-check_zip(non_zip_file, warning = FALSE)         # FALSE, without warning
+# Check multiple files
+zip_files <- c(zip_file, bad_zip, empty_zip, temp_file)
+check_zip(zip_files)
+check_zip(zip_files, all_okay = FALSE)
+check_zip(zip_files, all_okay = FALSE, warning = FALSE)
 
 # clean up
-fs::file_delete(c(zip_file, bad_zip, empty_zip, temp_file))
+fs::file_delete(zip_files)
 fs::dir_delete(temp_dir)
 }
 \author{

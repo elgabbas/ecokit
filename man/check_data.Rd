@@ -8,7 +8,7 @@
 \alias{check_feather}
 \title{Check Integrity of Data Files}
 \usage{
-check_data(file = NULL, warning = TRUE, n_threads = 1L)
+check_data(file = NULL, warning = TRUE, all_okay = TRUE, n_threads = 1L)
 
 check_rdata(file, warning = TRUE)
 
@@ -19,18 +19,21 @@ check_rds(file, warning = TRUE)
 check_feather(file, warning = TRUE)
 }
 \arguments{
-\item{file}{Character. Path to a data file (e.g., \code{.rdata}, \code{.qs2}, \code{.rds},
-\code{.feather}). Must be a single, non-empty string.}
+\item{file}{Character vector. Path to a data file (e.g., \code{.rdata}, \code{.qs2},
+\code{.rds}, \code{.feather}).}
 
 \item{warning}{Logical. If \code{TRUE} (default), warnings are issued for invalid
 files (e.g., non-existent, wrong extension, or loading failure).}
+
+\item{all_okay}{Logical. If \code{TRUE} (default), returns a single logical output
+indicating the integrity of all files; if \code{FALSE}, returns logical vectors
+for each file.}
 
 \item{n_threads}{Integer. Number of threads for reading \code{qs2} files. Must be
 a positive integer. See \link[qs2:qs_read]{qs2::qs_read} for more details.}
 }
 \value{
-Logical: \code{TRUE} if the file is valid and loads successfully; \code{FALSE}
-otherwise, with a warning if \code{warning = TRUE}.
+Logical: \code{TRUE} if all checks pass; \code{FALSE} otherwise.
 }
 \description{
 Validates a data file by checking its extension and attempting to load its
@@ -66,19 +69,13 @@ fs::dir_create(temp_dir)
 data <- data.frame(x = 1:5)
 rdata_file <- fs::path(temp_dir, "valid.Rdata")
 save(data, file = rdata_file)
+check_rdata(rdata_file)
 
 # Invalid RData file (corrupted)
 bad_rdata <- fs::path(temp_dir, "invalid.Rdata")
 writeLines("not an RData file", bad_rdata)
-
-check_data(rdata_file)                               # TRUE
-check_rdata(rdata_file)                              # TRUE
-
-check_data(bad_rdata)                                # FALSE, with warning
-check_rdata(bad_rdata)                               # FALSE, with warning
-
-check_data(bad_rdata, warning = FALSE)               # FALSE, no warning
-check_rdata(bad_rdata, warning = FALSE)              # FALSE, no warning
+check_rdata(bad_rdata)
+check_rdata(bad_rdata, warning = FALSE)
 
 # |||||||||||||||||||||||||||||||||||||||
 # Validate qs2 files
@@ -87,16 +84,13 @@ check_rdata(bad_rdata, warning = FALSE)              # FALSE, no warning
 # Valid qs2 file
 qs_file <- fs::path(temp_dir, "valid.qs2")
 qs2::qs_save(data, qs_file, nthreads = 1)
+check_qs(qs_file, n_threads = 1L)
 
 # Invalid qs2 file (corrupted)
 bad_qs <- fs::path(temp_dir, "invalid.qs2")
 writeLines("not a qs2 file", bad_qs)
-
-check_data(qs_file, n_threads = 1L)                  # TRUE
-check_qs(qs_file, n_threads = 1L)                    # TRUE
-
-check_data(bad_qs, n_threads = 1L)                   # FALSE, with warning
-check_qs(bad_qs, n_threads = 1L)                     # FALSE, with warning
+check_qs(bad_qs, n_threads = 1L)
+check_qs(bad_qs, n_threads = 1L, warning = FALSE)
 
 # |||||||||||||||||||||||||||||||||||||||
 # Validate rds files
@@ -105,16 +99,13 @@ check_qs(bad_qs, n_threads = 1L)                     # FALSE, with warning
 # Valid rds file
 rds_file <- fs::path(temp_dir, "valid.rds")
 saveRDS(data, rds_file)
+check_rds(rds_file)
 
 # Invalid rds file (corrupted)
 bad_rds <- fs::path(temp_dir, "invalid.rds")
 writeLines("not an rds file", bad_rds)
-
-check_data(rds_file)                                 # TRUE
-check_rds(rds_file)                                  # TRUE
-
-check_data(bad_rds)                                  # FALSE, with warning
-check_rds(bad_rds)                                   # FALSE, with warning
+check_rds(bad_rds)
+check_rds(bad_rds, warning = FALSE)
 
 # |||||||||||||||||||||||||||||||||||||||
 # Validate feather files
@@ -123,27 +114,31 @@ check_rds(bad_rds)                                   # FALSE, with warning
 # Valid feather file
 feather_file <- fs::path(temp_dir, "valid.feather")
 arrow::write_feather(data, feather_file)
+check_feather(feather_file)
 
 # Invalid feather file (corrupted)
 bad_feather <- fs::path(temp_dir, "invalid.feather")
 writeLines("not a feather file", bad_feather)
-
-check_data(feather_file)                             # TRUE
-check_feather(feather_file)                          # TRUE
-
-check_data(bad_feather)                              # FALSE, with warning
-check_feather(bad_feather)                           # FALSE, with warning
+check_feather(bad_feather)
+check_feather(bad_feather, warning = FALSE)
 
 # |||||||||||||||||||||||||||||||||||||||
 # Non-existent file
 # |||||||||||||||||||||||||||||||||||||||
+check_data("nonexistent.rds")
 
-check_data("nonexistent.rds")                        # FALSE, with warning
+# |||||||||||||||||||||||||||||||||||||||
+# check_data
+# |||||||||||||||||||||||||||||||||||||||
+all_files <- c(
+  rdata_file, bad_rdata, qs_file, bad_qs, rds_file, bad_rds,
+  feather_file, bad_feather)
+check_data(all_files)
+check_data(all_files, all_okay = FALSE)
+check_data(all_files, all_okay = FALSE, warning = FALSE)
 
-# Clean up
-fs::file_delete(
-  c(rdata_file, bad_rdata, qs_file, bad_qs, rds_file, bad_rds,
-  feather_file, bad_feather))
+# clean up
+fs::file_delete(all_files)
 fs::dir_delete(temp_dir)
 }
 \author{
