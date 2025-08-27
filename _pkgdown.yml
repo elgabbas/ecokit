@@ -58,6 +58,7 @@ reference:
   - dir_size
   - parent_dir
   - normalize_path
+  - find_duplicates
   - load_as
   - load_multiple
   - check_data

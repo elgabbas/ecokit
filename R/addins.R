@@ -21,8 +21,12 @@
 #' @noRd
 
 open_qs2 <- function() {
+
   file <- rstudioapi::selectFile(
     caption = "Select a file to open", filter = "qs2 files (*.qs2)")
+
+  cat(crayon::blue(paste("Selected file: ", file)), "\n")
+
   if (is.null(file)) return(invisible(NULL))
 
   if (tools::file_ext(file) == "qs2") {
