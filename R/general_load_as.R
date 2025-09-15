@@ -21,7 +21,8 @@
 #' @param load_packages Logical. If TRUE (default), attempt to load R packages
 #'   that correspond to the main classes of the loaded object(s).
 #' @param unwrap_r Logical. If TRUE, and the loaded object is a
-#'   `PackedSpatRaster`, it will be unwrapped using [terra::unwrap].
+#'   `PackedSpatRaster` or `PackedSpatVector`, it will be unwrapped using
+#'   [terra::unwrap].
 #' @param ... Additional arguments to be passed to the respective load
 #'   functions. [base::load] for `RData` files; [qs2::qs_read] for `qs2` files;
 #'   [arrow::read_feather] for `feather` files; and [base::readRDS] for `rds`
@@ -155,7 +156,8 @@ load_as <- function(
     ecokit::stop_ctx(
       "Unknown file extension", file = file, extension = extension))
 
-  if (inherits(output_file, "PackedSpatRaster") && unwrap_r) {
+  if (inherits(output_file, c("PackedSpatRaster", "PackedSpatVector")) &&
+      unwrap_r) {
     output_file <- terra::unwrap(output_file)
   }
 
@@ -174,6 +176,7 @@ load_as <- function(
     maxNet = "maxnet", rf = "randomForest", svm = "kernlab", rpart = "rpart",
     fs_path = "fs", sf = "sf", sfc = "sf", SpatVector = "terra",
     SpatRaster = "terra", SpatExtent = "terra", PackedSpatRaster = "terra",
+    PackedSpatVector = "terra",
     Extent = "raster", Raster = "raster", RasterLayer = "raster",
     RasterStack = "raster", RasterBrick = "raster", data.table = "data.table",
     tbl_df = "tibble", SpatialPoints = "sp", SpatialPolygons = "sp",

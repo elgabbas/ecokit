@@ -28,7 +28,8 @@ Default 300 seconds; see \link{download.file}.}
 that correspond to the main classes of the loaded object(s).}
 
 \item{unwrap_r}{Logical. If TRUE, and the loaded object is a
-\code{PackedSpatRaster}, it will be unwrapped using \link[terra:wrap]{terra::unwrap}.}
+\code{PackedSpatRaster} or \code{PackedSpatVector}, it will be unwrapped using
+\link[terra:wrap]{terra::unwrap}.}
 
 \item{...}{Additional arguments to be passed to the respective load
 functions. \link[base:load]{base::load} for \code{RData} files; \link[qs2:qs_read]{qs2::qs_read} for \code{qs2} files;
