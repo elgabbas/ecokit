@@ -55,28 +55,33 @@ check_tiff <- function(x = NULL, warning = TRUE) {
 
   # Check file metadata using terra's describe
 
-  metadata_okay <- terra::describe(x = x) %>%
-    as.character() %>%
-    stringr::str_detect("Driver") %>%
-    any() %>%
-    # suppress known warnings that could happen in some cases
-    # https://github.com/rspatial/terra/issues/1212
-    # https://github.com/rspatial/terra/issues/1832
-    # https://stackoverflow.com/questions/78098166
-    #   Warning messages:
-    #   1: In .gdalinfo(x, options, open_opt) :
-    #   GDAL Message 1: dimension #1 (easting) is not a Longitude/X dimension.
-    #   2: In .gdalinfo(x, options, open_opt) :
-    #   GDAL Message 1: dimension #0 (northing) is not a Latitude/Y dimension.
-    suppressWarnings()
+  # suppress known warnings that could happen in some cases
+  # https://github.com/rspatial/terra/issues/1212
+  # https://github.com/rspatial/terra/issues/1832
+  # https://stackoverflow.com/questions/78098166
+  #   Warning messages:
+  #   1: In .gdalinfo(x, options, open_opt) :
+  #   GDAL Message 1: dimension #1 (easting) is not a Longitude/X dimension.
+  #   2: In .gdalinfo(x, options, open_opt) :
+  #   GDAL Message 1: dimension #0 (northing) is not a Latitude/Y dimension.
+
+  metadata_okay <- ecokit::quietly({
+    terra::describe(x = x) %>%
+      as.character() %>%
+      stringr::str_detect("Driver") %>%
+      any()
+  },
+  "is not a Latitude/Y dimension.",
+  "is not a Longitude/X dimension.")
 
   if (isFALSE(metadata_okay)) {
     return(FALSE)
   }
 
-  out_value <- terra::rast(x) %>%
-    terra::hasValues() %>%
-    suppressWarnings()
+  out_value <- ecokit::quietly(
+    terra::hasValues(terra::rast(x)),
+    "is not a Latitude/Y dimension.",
+    "is not a Longitude/X dimension.")
 
   # # ..................................................................... ###
   # # ..................................................................... ###
@@ -90,7 +95,11 @@ check_tiff <- function(x = NULL, warning = TRUE) {
 
   if (out_value) {
 
-    r <- terra::rast(x)
+    r <- ecokit::quietly(
+      terra::rast(x),
+      "is not a Latitude/Y dimension.",
+      "is not a Longitude/X dimension.")
+
     rows_to_check <- c(1L, floor(terra::nrow(r) / 2L), terra::nrow(r))
 
     # Apply a function to each row in rows_to_check to test data reading
