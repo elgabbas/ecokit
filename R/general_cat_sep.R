@@ -47,13 +47,17 @@ cat_sep <- function(
     verbose = TRUE, ...) {
 
   # Check input arguments
-  ecokit::check_args(args_to_check = "verbose", args_type = "logical")
+  ecokit::check_args(
+    args_to_check = "verbose", args_type = "logical", cat_timestamp = FALSE)
   if (!verbose) return(invisible(NULL))
 
   numeric_arguments <- c(
     "n_separators", "sep_lines_before", "sep_lines_after", "line_char_rep")
-  ecokit::check_args(args_to_check = numeric_arguments, args_type = "numeric")
-  ecokit::check_args(args_to_check = "line_char", args_type = "character")
+  ecokit::check_args(
+    args_to_check = numeric_arguments, args_type = "numeric",
+    cat_timestamp = FALSE)
+  ecokit::check_args(
+    args_to_check = "line_char", args_type = "character", cat_timestamp = FALSE)
 
   # ****************************************************************
 

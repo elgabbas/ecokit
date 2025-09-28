@@ -145,7 +145,7 @@ stop_ctx <- function(
   # Validate that include_backtrace, cat_timestamp, cat_date are logical
   ecokit::check_args(
     args_to_check = c("include_backtrace", "cat_timestamp", "cat_date"),
-    args_type = "logical")
+    args_type = "logical", cat_timestamp = FALSE)
 
   # --------------------------------------------------------------------------
   # 2. Helper functions

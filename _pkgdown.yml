@@ -112,6 +112,9 @@ reference:
   - check_system_command
   - apply_functions
   - quietly
+  - extract_options
+  - remove_options
+  - assign_from_options
 
 - title: Spatial functions
   contents:

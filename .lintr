@@ -2,7 +2,8 @@ exclusions: list(
 	"vignettes/",
 	"data-raw/",
 	"R/spat_check_tiff.R" = list("nonportable_path_linter" = Inf),
-	"R/ecokit_data.R" = list("line_length_linter" = Inf)
+	"R/ecokit_data.R" = list("line_length_linter" = Inf),
+	"R/general_options.R" = list("undesirable_function_linter" = Inf)
 	)
 linters: linters_with_defaults(
 	absolute_path_linter(),
