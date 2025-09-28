@@ -13,6 +13,7 @@
 <url><loc>https://elgabbas.github.io/ecokit/reference/apply_functions.html</loc></url>
 <url><loc>https://elgabbas.github.io/ecokit/reference/arrange_alphanum.html</loc></url>
 <url><loc>https://elgabbas.github.io/ecokit/reference/assign_env_vars.html</loc></url>
+<url><loc>https://elgabbas.github.io/ecokit/reference/assign_from_options.html</loc></url>
 <url><loc>https://elgabbas.github.io/ecokit/reference/assign_if_not_exist.html</loc></url>
 <url><loc>https://elgabbas.github.io/ecokit/reference/bash_variables.html</loc></url>
 <url><loc>https://elgabbas.github.io/ecokit/reference/boundary_to_WKT.html</loc></url>
@@ -39,6 +40,7 @@
 <url><loc>https://elgabbas.github.io/ecokit/reference/detect_alias.html</loc></url>
 <url><loc>https://elgabbas.github.io/ecokit/reference/dir_size.html</loc></url>
 <url><loc>https://elgabbas.github.io/ecokit/reference/ecokit-package.html</loc></url>
+<url><loc>https://elgabbas.github.io/ecokit/reference/extract_options.html</loc></url>
 <url><loc>https://elgabbas.github.io/ecokit/reference/file_operations.html</loc></url>
 <url><loc>https://elgabbas.github.io/ecokit/reference/find_duplicates.html</loc></url>
 <url><loc>https://elgabbas.github.io/ecokit/reference/function_arguments.html</loc></url>
@@ -74,6 +76,7 @@
 <url><loc>https://elgabbas.github.io/ecokit/reference/raster_to_pres_abs.html</loc></url>
 <url><loc>https://elgabbas.github.io/ecokit/reference/record_arguments.html</loc></url>
 <url><loc>https://elgabbas.github.io/ecokit/reference/reload_package.html</loc></url>
+<url><loc>https://elgabbas.github.io/ecokit/reference/remove_options.html</loc></url>
 <url><loc>https://elgabbas.github.io/ecokit/reference/rename_geometry.html</loc></url>
 <url><loc>https://elgabbas.github.io/ecokit/reference/replace_space.html</loc></url>
 <url><loc>https://elgabbas.github.io/ecokit/reference/save_as.html</loc></url>
