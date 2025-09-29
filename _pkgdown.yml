@@ -135,6 +135,7 @@ reference:
   - set_raster_crs
   - add_geometric_features
   - range_to_new_value
+  - write_terra_to_nc
 
 - title: Plotting functions
   contents:
