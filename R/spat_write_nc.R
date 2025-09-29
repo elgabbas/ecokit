@@ -1,3 +1,7 @@
+## |------------------------------------------------------------------------| #
+# write_nc ------
+## |------------------------------------------------------------------------| #
+
 #' Write a SpatRaster to a NetCDF File with Multiple Variables
 #'
 #' This function takes a `terra::SpatRaster` object and writes it to a NetCDF
@@ -44,7 +48,7 @@
 #' output_file <- tempfile(fileext = ".nc")
 #'
 #' # Use the function to write the SpatRaster to a NetCDF file
-#' write_terra_to_nc(
+#' write_nc(
 #'   input_raster = predictors,
 #'   filename = output_file,
 #'   overwrite = TRUE,
@@ -60,7 +64,7 @@
 #' # Clean up the temporary file
 #' unlink(output_file)
 
-write_terra_to_nc <- function(
+write_nc <- function(
     input_raster = NULL, filename = NULL, overwrite = FALSE,
     compression_level = 9L, missval = -9999L, var_units = "unknown") {
 
