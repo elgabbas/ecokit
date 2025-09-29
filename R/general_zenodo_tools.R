@@ -55,7 +55,7 @@
 #' print(class(nc_file))
 #'
 #' print(nc_file)
-#' fs::file_delete(nc_file)
+#' try(fs::file_delete(nc_file), silent = TRUE)
 
 ## |------------------------------------------------------------------------| #
 # zenodo_file_list ----

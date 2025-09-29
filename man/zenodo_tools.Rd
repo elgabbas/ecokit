@@ -82,7 +82,7 @@ nc_file <- download_zenodo_file(
 print(class(nc_file))
 
 print(nc_file)
-fs::file_delete(nc_file)
+try(fs::file_delete(nc_file), silent = TRUE)
 }
 \author{
 Ahmed El-Gabbas

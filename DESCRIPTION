@@ -43,6 +43,7 @@ Suggests:
     httr (>= 1.4.7),
     jsonlite (>= 2.0.0),
     lobstr (>= 1.1.2),
+    ncdf4 (>= 1.24),
     pak (>= 0.8.0.2),
     parallelly (>= 1.43.0),
     png (>= 0.1-8),
