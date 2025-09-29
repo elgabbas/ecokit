@@ -7,15 +7,19 @@
 #' This utility function is designed to be called from within another function.
 #' If a function argument is missing or `NULL`, this function attempts to assign
 #' a value from a global option. If neither the argument nor the option is set,
-#' an informative error is thrown. Optionally, it checks that the resulting
-#' value inherits from a specified class.
+#' an informative error is thrown, unless `allow_null = TRUE`, in which case
+#' `NULL` is allowed. Optionally, it checks that the resulting value inherits
+#' from a specified class.
 #'
 #' @param arg Bare name of the argument to check and (potentially) assign.
 #'   Should be unquoted.
 #' @param option_name Character. The name of the global option (as in
-#'   `getOption()` to use as a fallback value.
+#'   `getOption()`) to use as a fallback value.
 #' @param expected_class Character vector or `NULL`; if not `NULL`, the result
 #'   must inherit from one of these classes, otherwise an error is thrown.
+#' @param allow_null Logical; if `TRUE`, both the argument and the global option
+#'   are allowed to be `NULL` without error. If `FALSE` (default), an error is
+#'   thrown if both are `NULL`.
 #' @author Ahmed El-Gabbas
 #' @details This function is intended for use inside another function's body to
 #'   help set default argument values using global options.
@@ -24,7 +28,8 @@
 #'   `getOption(option_name)`, if available.
 #' - If the argument is explicitly supplied but is `NULL`, it will also assign
 #'   the value from the option if available.
-#' - If neither the argument nor the option is set, an error is thrown.
+#' - If neither the argument nor the option is set, an error is thrown,
+#'   unless `allow_null = TRUE`, in which case `NULL` is allowed.
 #' - If `expected_class` is provided, the final value is checked for class
 #'   inheritance.
 #' @return Invisibly returns the final value of the argument (after assignment,
@@ -47,12 +52,12 @@
 #'
 #' # error: Argument `x` is missing/NULL and option `my_x_option` is not set.
 #' try(my_fun())
-
-assign_from_options <- function(arg, option_name, expected_class = NULL) {
+assign_from_options <- function(
+    arg, option_name, expected_class = NULL, allow_null = FALSE) {
 
   if (sys.parent() == 0L) {
     ecokit::stop_ctx(
-      "assign_if_options_null() must be called from inside another function.",
+      "assign_from_options() must be called from inside another function.",
       cat_timestamp = FALSE)
   }
 
@@ -97,7 +102,7 @@ assign_from_options <- function(arg, option_name, expected_class = NULL) {
     if (!is.null(opt_val)) {
       val <- opt_val
       rlang::env_poke(pf, arg_name, val)
-    } else if (is.null(val)) {
+    } else if (is.null(val) && !allow_null) {
       ecokit::stop_ctx(
         paste0(
           "Argument `", arg_name, "` is NULL and option `",
@@ -105,17 +110,22 @@ assign_from_options <- function(arg, option_name, expected_class = NULL) {
           "` or set options(", option_name, " = ...)."),
         cat_timestamp = FALSE)
     }
+    # If allow_null is TRUE and both argument and option are NULL, leave as NULL
   } else if (is.null(val)) {
     if (is.null(opt_val)) {
-      ecokit::stop_ctx(
-        paste0(
-          "Argument `", arg_name, "` is NULL and option `", option_name,
-          "` is not set. Provide `", arg_name,
-          "` or set options(", option_name, " = ...)."),
-        cat_timestamp = FALSE)
+      if (!allow_null) {
+        ecokit::stop_ctx(
+          paste0(
+            "Argument `", arg_name, "` is NULL and option `", option_name,
+            "` is not set. Provide `", arg_name,
+            "` or set options(", option_name, " = ...)."),
+          cat_timestamp = FALSE)
+      }
+      # else leave val as NULL, do not poke environment
+    } else {
+      val <- opt_val
+      rlang::env_poke(pf, arg_name, val)
     }
-    val <- opt_val
-    rlang::env_poke(pf, arg_name, val)
   }
 
   if (!is.null(expected_class)) {
@@ -126,7 +136,7 @@ assign_from_options <- function(arg, option_name, expected_class = NULL) {
         "`expected_class` must be a non-empty character vector of class names.",
         cat_timestamp = FALSE)
     }
-    if (!inherits(val, expected_class)) {
+    if (!is.null(val) && !inherits(val, expected_class)) {
       ecokit::stop_ctx(
         paste0(
           "Argument `", arg_name, "` must inherit from class [",

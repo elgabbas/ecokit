@@ -4,17 +4,26 @@
 \alias{assign_from_options}
 \title{Assign Argument Value from Option if NULL or Missing}
 \usage{
-assign_from_options(arg, option_name, expected_class = NULL)
+assign_from_options(
+  arg,
+  option_name,
+  expected_class = NULL,
+  allow_null = FALSE
+)
 }
 \arguments{
 \item{arg}{Bare name of the argument to check and (potentially) assign.
 Should be unquoted.}
 
 \item{option_name}{Character. The name of the global option (as in
-\code{getOption()} to use as a fallback value.}
+\code{getOption()}) to use as a fallback value.}
 
 \item{expected_class}{Character vector or \code{NULL}; if not \code{NULL}, the result
 must inherit from one of these classes, otherwise an error is thrown.}
+
+\item{allow_null}{Logical; if \code{TRUE}, both the argument and the global option
+are allowed to be \code{NULL} without error. If \code{FALSE} (default), an error is
+thrown if both are \code{NULL}.}
 }
 \value{
 Invisibly returns the final value of the argument (after assignment,
@@ -24,8 +33,9 @@ if performed).
 This utility function is designed to be called from within another function.
 If a function argument is missing or \code{NULL}, this function attempts to assign
 a value from a global option. If neither the argument nor the option is set,
-an informative error is thrown. Optionally, it checks that the resulting
-value inherits from a specified class.
+an informative error is thrown, unless \code{allow_null = TRUE}, in which case
+\code{NULL} is allowed. Optionally, it checks that the resulting value inherits
+from a specified class.
 }
 \details{
 This function is intended for use inside another function's body to
@@ -35,7 +45,8 @@ help set default argument values using global options.
 \code{getOption(option_name)}, if available.
 \item If the argument is explicitly supplied but is \code{NULL}, it will also assign
 the value from the option if available.
-\item If neither the argument nor the option is set, an error is thrown.
+\item If neither the argument nor the option is set, an error is thrown,
+unless \code{allow_null = TRUE}, in which case \code{NULL} is allowed.
 \item If \code{expected_class} is provided, the final value is checked for class
 inheritance.
 }
