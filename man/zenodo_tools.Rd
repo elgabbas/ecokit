@@ -3,16 +3,18 @@
 \name{zenodo_tools}
 \alias{zenodo_tools}
 \alias{zenodo_file_list}
-\alias{download_zenodo_file}
+\alias{zenodo_download_file}
 \title{List and Download Files from a Zenodo Record}
 \usage{
 zenodo_file_list(record_id)
 
-download_zenodo_file(
+zenodo_download_file(
   record_id = NULL,
-  zenodo_file = NULL,
+  file_name = NULL,
   dest_file = NULL,
   read_func = NULL,
+  delete_temp = TRUE,
+  unwrap_r = TRUE,
   ...
 )
 }
@@ -20,7 +22,7 @@ download_zenodo_file(
 \item{record_id}{Character or numeric. The Zenodo record ID (e.g.,
 \code{"1234567"}).}
 
-\item{zenodo_file}{Character. The file key (or filename) as listed in the
+\item{file_name}{Character. The file key (or filename) as listed in the
 Zenodo record.}
 
 \item{dest_file}{Character (optional). Local destination path to save the
@@ -31,6 +33,15 @@ deleted if \code{read_func} is used.}
 downloaded file (e.g., \code{\link[=read.csv]{read.csv()}}, \code{\link[readr:read_delim]{readr::read_csv()}}, \code{\link[=readLines]{readLines()}},
 \code{\link[readxl:read_excel]{readxl::read_excel()}}, etc.). If \code{NULL}, only the file path is returned.}
 
+\item{delete_temp}{Logical. Whether to delete temporary files after reading
+them with \code{read_func}. Default is \code{TRUE}. Set to \code{FALSE} if you need the
+file to persist or if you're experiencing "resource busy" errors with
+complex read functions.}
+
+\item{unwrap_r}{Logical. If \code{read_func} returns an \code{PackedSpatRaster} or
+\code{PackedSpatVector} object, this argument controls whether to unwrap packed
+objects using \code{terra::unwrap()}. Default is \code{TRUE}.}
+
 \item{...}{Additional arguments passed to \code{read_func}.}
 }
 \value{
@@ -38,7 +49,7 @@ downloaded file (e.g., \code{\link[=read.csv]{read.csv()}}, \code{\link[readr:re
 \item \code{zenodo_file_list} returns a \code{tibble} with metadata for each file in the
 Zenodo record, including file key, filename, download link, and record-level
 metadata such as title, DOI, and creation dates.
-\item \code{download_zenodo_file}: If \code{read_func} is \code{NULL}, returns the path to the
+\item \code{zenodo_download_file}: If \code{read_func} is \code{NULL}, returns the path to the
 downloaded file. If \code{read_func} is provided, returns the output of that
 function.
 }
@@ -51,14 +62,14 @@ and to download one of those files (optionally reading it into R).
 \itemize{
 \item \code{zenodo_file_list()} lists all files and their metadata for a given
 Zenodo record.
-\item \code{download_zenodo_file()} downloads a specified file from a
+\item \code{zenodo_download_file()} downloads a specified file from a
 Zenodo record and can optionally read its contents into R using a
 user-supplied function.
 }
 }
 \examples{
 require(ecokit)
-require(terra)
+ecokit::load_packages(terra, dplyr, fs)
 
 files <- zenodo_file_list("6620748")
 dplyr::glimpse(files)
@@ -66,23 +77,46 @@ dplyr::glimpse(files)
 # --------------------------------------------
 
 # Download as file only
-pdf_file <- download_zenodo_file(
-   record_id = "1234567", zenodo_file = "article.pdf")
+pdf_file <- zenodo_download_file(
+  record_id = "1234567", file_name = "article.pdf")
 print(pdf_file)
 
 ecokit::file_type(pdf_file)
-fs::file_delete(pdf_file)
+try(fs::file_delete(pdf_file), silent = TRUE)
 
-# Download and read as data frame
-nc_file <- download_zenodo_file(
+# --------------------------------------------
+
+# Download and read NetCDF as SpatRaster
+nc_file <- zenodo_download_file(
   record_id = "6620748",
-  zenodo_file = "100Ma_Pohletal2022_DIB_PhaneroContinentalClimate.nc",
+  file_name = "100Ma_Pohletal2022_DIB_PhaneroContinentalClimate.nc",
   read_func = terra::rast)
 
 print(class(nc_file))
 
 print(nc_file)
-try(fs::file_delete(nc_file), silent = TRUE)
+
+terra::inMemory(nc_file)
+
+# --------------------------------------------
+
+# Download and read NetCDF as SpatRaster; using custom function
+nc_file2 <- zenodo_download_file(
+  record_id = "6620748",
+  file_name = "100Ma_Pohletal2022_DIB_PhaneroContinentalClimate.nc",
+  read_func = function(x) { terra::rast(x) * 10 })
+
+print(class(nc_file2))
+
+print(nc_file2)
+
+terra::inMemory(nc_file2)
+
+# --------------------------------------------
+
+terra::app(nc_file, "range")
+terra::app(nc_file2, "range")
+
 }
 \author{
 Ahmed El-Gabbas

@@ -20,7 +20,7 @@
 #'   global variables identified. See `future.globals.maxSize` argument of
 #'   [future::future.options] for more details. Default is `500L` for 500 MB.
 #' @param cat_timestamp	logical; whether to include the time in the timestamp.
-#'   Default is TRUE. If FALSE, only the text is printed. See
+#'   Default is `TRUE`. If `FALSE`, only the text is printed. See
 #'   [ecokit::cat_time()].
 #' @param ... Additional arguments to pass to [cat_time].
 #' @export

@@ -25,7 +25,7 @@
 #' @param var_units A character string or a vector of character strings
 #'   specifying the units for each variable. If a single string is provided, it
 #'   will be applied to all variables. If a vector, its length must match the
-#'   number of layers in `input_raster`. Defaults to `"unknown"`.
+#'   number of layers in `input_raster`. Defaults to empty string `""`.
 #'
 #' @return This function does not return a value. It is called for its side
 #'   effect of writing a file to disk.
@@ -66,22 +66,33 @@
 
 write_nc <- function(
     input_raster = NULL, filename = NULL, overwrite = FALSE,
-    compression_level = 9L, missval = -9999L, var_units = "unknown") {
-
+    compression_level = 9L, missval = -9999L, var_units = "") {
 
   # Input Validation -------
+
+  ecokit::check_args(args_to_check = "overwrite", args_type = "logical")
+  ecokit::check_args(args_to_check = "filename", args_type = "character")
+  ecokit::check_args(
+    args_to_check = c("compression_level", "missval"), args_type = "numeric")
+
+  if (!is.character(var_units)) {
+    ecokit::stop_ctx("`var_units` must be a character string or vector.")
+  }
+
+  if (inherits(input_raster, "PackedSpatRaster")) {
+    input_raster <- terra::unwrap(input_raster)
+  }
 
   if (!inherits(input_raster, "SpatRaster")) {
     ecokit::stop_ctx(
       "`input_raster` must be a SpatRaster object from the 'terra' package.",
-      class_input_raster = class(input_raster), cat_timestamp = FALSE)
+      class_input_raster = class(input_raster))
   }
 
   n_layers <- terra::nlyr(input_raster)
 
   if (terra::nlyr(input_raster) == 0L) {
-    ecokit::stop_ctx(
-      "`input_raster` must have at least one layer.", cat_timestamp = FALSE)
+    ecokit::stop_ctx("`input_raster` must have at least one layer.")
   }
 
   if (file.exists(filename) && !overwrite) {
@@ -89,14 +100,13 @@ write_nc <- function(
       paste0(
         "File already exists: ", filename,
         " - Use `overwrite = TRUE` to replace it."),
-      filename = filename, overwrite = overwrite, cat_timestamp = FALSE)
+      filename = filename, overwrite = overwrite)
   }
 
   if (!is.numeric(compression_level) || compression_level < 0L ||
       compression_level > 9L || (compression_level %% 1L != 0L)) {
     ecokit::stop_ctx(
-      "`compression_level` must be an integer between 0 and 9.",
-      cat_timestamp = FALSE)
+      "`compression_level` must be an integer between 0 and 9.")
   }
 
   if (length(var_units) > 1L && length(var_units) != n_layers) {
@@ -104,14 +114,14 @@ write_nc <- function(
       paste0(
         "`var_units` must be a single string or a character vector of ",
         "the same length as the number of layers in `input_raster`."),
-      var_units = var_units, n_layers = n_layers, cat_timestamp = FALSE)
+      var_units = var_units, n_layers = n_layers)
   }
 
   original_names <- names(input_raster)
   if (any(is.null(original_names)) || !all(nzchar(original_names))) {
     ecokit::stop_ctx(
       "All layers in `input_raster` must have valid names.",
-      original_names = original_names, cat_timestamp = FALSE)
+      original_names = original_names)
   }
 
   # Recycle var_units if it's a single value

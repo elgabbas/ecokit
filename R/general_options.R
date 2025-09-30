@@ -24,9 +24,7 @@
 
 extract_options <- function(pattern = "", case_sensitive = FALSE) {
 
-  ecokit::check_args(
-    args_to_check = "case_sensitive", args_type = "logical",
-    cat_timestamp = FALSE)
+  ecokit::check_args(args_to_check = "case_sensitive", args_type = "logical")
 
   if (!is.character(pattern) || length(pattern) != 1L) {
     ecokit::stop_ctx(
@@ -90,11 +88,9 @@ extract_options <- function(pattern = "", case_sensitive = FALSE) {
 remove_options <- function(
     pattern = NULL, regex = FALSE, case_sensitive = FALSE) {
 
+  ecokit::check_args(args_to_check = "pattern", args_type = "character")
   ecokit::check_args(
-    args_to_check = "pattern", args_type = "character", cat_timestamp = FALSE)
-  ecokit::check_args(
-    args_to_check = c("regex", "case_sensitive"),
-    args_type = "logical", cat_timestamp = FALSE)
+    args_to_check = c("regex", "case_sensitive"), args_type = "logical")
 
   existing_options <- names(options())
 

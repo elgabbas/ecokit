@@ -15,8 +15,8 @@ range_to_new_value(
 )
 }
 \arguments{
-\item{x}{A numeric \code{vector}, \code{data.frame}, \code{RasterLayer}, or \code{SpatRaster}
-object whose values are to be modified.}
+\item{x}{A numeric \code{vector}, \code{data.frame}, \code{RasterLayer}, \code{SpatRaster}, or
+\code{PackedSpatRaster} object whose values are to be modified.}
 
 \item{between}{Numeric. A numeric vector of length 2 specifying the range of
 values to be changed or kept. If specified, \code{greater_than} and \code{less_than}

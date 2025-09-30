@@ -57,16 +57,6 @@
 
 scale_0_1 <- function(raster) {
 
-  # Input validation
-  accepted_classes <- c(
-    "SpatRaster", "RasterLayer", "RasterStack", "RasterBrick")
-  if (!is.character(raster) && !inherits(raster, accepted_classes)) {
-    ecokit::stop_ctx(
-      paste0(
-        "`raster` must be a SpatRaster, RasterLayer, RasterStack, ",
-        "RasterBrick, or a file path loadable by terra::rast()"))
-  }
-
   # Handle file path input
   if (is.character(raster)) {
     if (!fs::file_exists(raster)) {
@@ -81,6 +71,23 @@ scale_0_1 <- function(raster) {
         "Failed to load raster file with terra::rast()",
         file = ecokit::normalize_path(raster))
     })
+  }
+
+  # Input validation
+  accepted_classes <- c(
+    "SpatRaster", "RasterLayer", "RasterStack",
+    "RasterBrick", "PackedSpatRaster")
+
+  if (!is.character(raster) && !inherits(raster, accepted_classes)) {
+    ecokit::stop_ctx(
+      paste0(
+        "`raster` must be a SpatRaster, RasterLayer, RasterStack, ",
+        "RasterBrick, PackedSpatRaster or a file path loadable by ",
+        "terra::rast()"))
+  }
+
+  if (inherits(raster, "PackedSpatRaster")) {
+    raster <- terra::unwrap(raster)
   }
 
   # Coerce Raster* to SpatRaster if necessary

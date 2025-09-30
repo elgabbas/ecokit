@@ -11,7 +11,7 @@ stop_ctx(
   call = NULL,
   parent = NULL,
   include_backtrace = FALSE,
-  cat_timestamp = TRUE,
+  cat_timestamp = FALSE,
   cat_date = FALSE
 )
 }

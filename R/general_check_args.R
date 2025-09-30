@@ -44,8 +44,7 @@ check_args <- function(
 
   if (is.null(sys.call(-1L))) {
     ecokit::stop_ctx(
-      "`check_args` function must be called from within another function",
-      cat_timestamp = FALSE, ...)
+      "`check_args` function must be called from within another function", ...)
   }
 
   if (is.null(args_to_check) || is.null(args_type)) {

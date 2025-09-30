@@ -10,7 +10,7 @@ write_nc(
   overwrite = FALSE,
   compression_level = 9L,
   missval = -9999L,
-  var_units = "unknown"
+  var_units = ""
 )
 }
 \arguments{
@@ -33,7 +33,7 @@ to \code{-9999}.}
 \item{var_units}{A character string or a vector of character strings
 specifying the units for each variable. If a single string is provided, it
 will be applied to all variables. If a vector, its length must match the
-number of layers in \code{input_raster}. Defaults to \code{"unknown"}.}
+number of layers in \code{input_raster}. Defaults to empty string \code{""}.}
 }
 \value{
 This function does not return a value. It is called for its side

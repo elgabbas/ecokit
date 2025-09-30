@@ -57,15 +57,12 @@ assign_from_options <- function(
 
   if (sys.parent() == 0L) {
     ecokit::stop_ctx(
-      "assign_from_options() must be called from inside another function.",
-      cat_timestamp = FALSE)
+      "assign_from_options() must be called from inside another function.")
   }
 
   if (missing(option_name) || !rlang::is_string(option_name) ||
       is.na(option_name) || !nzchar(option_name)) {
-    ecokit::stop_ctx(
-      "`option_name` must be a non-empty character scalar.",
-      cat_timestamp = FALSE)
+    ecokit::stop_ctx("`option_name` must be a non-empty character scalar.")
   }
 
   pf <- parent.frame()
@@ -75,8 +72,7 @@ assign_from_options <- function(
     ecokit::stop_ctx(
       paste0(
         "`arg` must be a bare argument name or a single character ",
-        "string naming the argument."),
-      cat_timestamp = FALSE)
+        "string naming the argument."))
   }
   arg_name <- rlang::as_name(arg_sym)
 
@@ -107,8 +103,7 @@ assign_from_options <- function(
         paste0(
           "Argument `", arg_name, "` is NULL and option `",
           option_name, "` is not set. Provide `", arg_name,
-          "` or set options(", option_name, " = ...)."),
-        cat_timestamp = FALSE)
+          "` or set options(", option_name, " = ...)."))
     }
     # If allow_null is TRUE and both argument and option are NULL, leave as NULL
   } else if (is.null(val)) {
@@ -118,8 +113,7 @@ assign_from_options <- function(
           paste0(
             "Argument `", arg_name, "` is NULL and option `", option_name,
             "` is not set. Provide `", arg_name,
-            "` or set options(", option_name, " = ...)."),
-          cat_timestamp = FALSE)
+            "` or set options(", option_name, " = ...)."))
       }
       # else leave val as NULL, do not poke environment
     } else {
@@ -133,16 +127,14 @@ assign_from_options <- function(
     if (!is.character(expected_class) || length(expected_class) < 1L ||
         anyNA(expected_class)) {
       ecokit::stop_ctx(
-        "`expected_class` must be a non-empty character vector of class names.",
-        cat_timestamp = FALSE)
+        "`expected_class` must be a non-empty character vector of class names.")
     }
     if (!is.null(val) && !inherits(val, expected_class)) {
       ecokit::stop_ctx(
         paste0(
           "Argument `", arg_name, "` must inherit from class [",
           toString(expected_class), "], but has class [",
-          toString(base::class(val)), "]."),
-        cat_timestamp = FALSE)
+          toString(base::class(val)), "]."))
     }
   }
 

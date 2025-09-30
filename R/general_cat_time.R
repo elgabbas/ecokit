@@ -80,10 +80,9 @@ cat_time <- function(
   # Validate inputs
   ecokit::check_args(
     args_to_check = c("cat_timestamp", "cat_bold", "cat_red", "cat_date"),
-    args_type = "logical", cat_timestamp = FALSE)
+    args_type = "logical")
   ecokit::check_args(
-    args_to_check = c("msg_n_lines", "level"), args_type = "numeric",
-    cat_timestamp = FALSE)
+    args_to_check = c("msg_n_lines", "level"), args_type = "numeric")
 
   # Current time
   time_now <- lubridate::now(tzone = time_zone)

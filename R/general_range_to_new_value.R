@@ -13,8 +13,8 @@
 #' invert the selection is also available for ranges.
 #' @name range_to_new_value
 #' @author Ahmed El-Gabbas
-#' @param x A numeric `vector`, `data.frame`, `RasterLayer`, or `SpatRaster`
-#'   object whose values are to be modified.
+#' @param x A numeric `vector`, `data.frame`, `RasterLayer`, `SpatRaster`, or
+#'   `PackedSpatRaster` object whose values are to be modified.
 #' @param between Numeric. A numeric vector of length 2 specifying the range of
 #'   values to be changed or kept. If specified, `greater_than` and `less_than`
 #'   are ignored.
@@ -148,6 +148,10 @@ range_to_new_value <- function(
         "At least one of `greater_than`, `less_than`, and `between` ",
         "should be not NULL"),
       greater_than = greater_than, between = between, less_than = less_than)
+  }
+
+  if (inherits(x, "PackedSpatRaster")) {
+    x <- terra::unwrap(x)
   }
 
   if (!is.null(between)) {

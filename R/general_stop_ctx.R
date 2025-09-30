@@ -136,7 +136,7 @@
 
 stop_ctx <- function(
     message, ..., class = NULL, call = NULL, parent = NULL,
-    include_backtrace = FALSE, cat_timestamp = TRUE, cat_date = FALSE) {
+    include_backtrace = FALSE, cat_timestamp = FALSE, cat_date = FALSE) {
 
   # --------------------------------------------------------------------------
   # 1. Validate flag arguments are logical
@@ -145,7 +145,7 @@ stop_ctx <- function(
   # Validate that include_backtrace, cat_timestamp, cat_date are logical
   ecokit::check_args(
     args_to_check = c("include_backtrace", "cat_timestamp", "cat_date"),
-    args_type = "logical", cat_timestamp = FALSE)
+    args_type = "logical")
 
   # --------------------------------------------------------------------------
   # 2. Helper functions
@@ -253,12 +253,9 @@ stop_ctx <- function(
       rlang::eval_tidy(quos[[nm]]),
       error = function(e) {
         # Re-signal error with context if evaluation fails
-        stop_ctx(
-          message = paste0(
-            "Error evaluating argument '", nm, "': ", conditionMessage(e)),
-          class = class, call = call, parent = e,
-          include_backtrace = include_backtrace, cat_timestamp = cat_timestamp,
-          cat_date = cat_date)
+        stop(
+          "Error evaluating argument '", nm, "': ", conditionMessage(e),
+          call. = FALSE)
       })
   }
 

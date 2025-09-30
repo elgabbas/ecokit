@@ -7,8 +7,8 @@
 set_raster_crs(raster = NULL, crs = NULL)
 }
 \arguments{
-\item{raster}{A \code{SpatRaster} object whose CRS is to be set. Cannot be \code{NULL}
-or non-\code{SpatRaster}.}
+\item{raster}{A \code{SpatRaster} or \code{PackedSpatRaster} object whose CRS is to be
+set. Cannot be \code{NULL} or non-\code{SpatRaster}.}
 
 \item{crs}{Character. A valid CRS string (e.g., EPSG code, WKT, or PROJ4) to
 set for the \code{raster}.}

@@ -56,6 +56,10 @@ check_stack_in_memory <- function(stack = NULL) {
     ecokit::stop_ctx("Input stack cannot be NULL", stack = stack)
   }
 
+  if (inherits(stack, "PackedSpatRaster")) {
+    stack <- terra::unwrap(stack)
+  }
+
   if (!inherits(stack, "RasterStack")) {
     ecokit::stop_ctx(
       "The object should be a RasterStack object",

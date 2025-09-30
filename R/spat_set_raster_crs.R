@@ -9,8 +9,8 @@
 #' with `%>%`). Wraps `terra::crs<-` to assign a valid CRS, such as an EPSG
 #' code.
 #' @name set_raster_crs
-#' @param raster A `SpatRaster` object whose CRS is to be set. Cannot be `NULL`
-#'   or non-`SpatRaster`.
+#' @param raster A `SpatRaster` or `PackedSpatRaster` object whose CRS is to be
+#'   set. Cannot be `NULL` or non-`SpatRaster`.
 #' @param crs Character. A valid CRS string (e.g., EPSG code, WKT, or PROJ4) to
 #'   set for the `raster`.
 #' @author Ahmed El-Gabbas
@@ -36,6 +36,9 @@ set_raster_crs <- function(raster = NULL, crs = NULL) {
   # Validate raster
   if (is.null(raster)) {
     ecokit::stop_ctx("`raster` cannot be NULL", raster = raster)
+  }
+  if (inherits(raster, "PackedSpatRaster")) {
+    raster <- terra::unwrap(raster)
   }
   if (!inherits(raster, "SpatRaster")) {
     ecokit::stop_ctx(
