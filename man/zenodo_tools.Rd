@@ -15,6 +15,8 @@ zenodo_download_file(
   read_func = NULL,
   delete_temp = TRUE,
   unwrap_r = TRUE,
+  verbose = FALSE,
+  check_md5sum = TRUE,
   ...
 )
 }
@@ -41,6 +43,14 @@ complex read functions.}
 \item{unwrap_r}{Logical. If \code{read_func} returns an \code{PackedSpatRaster} or
 \code{PackedSpatVector} object, this argument controls whether to unwrap packed
 objects using \code{terra::unwrap()}. Default is \code{TRUE}.}
+
+\item{verbose}{Logical. Whether to print progress messages during download.
+Default is \code{FALSE}.}
+
+\item{check_md5sum}{Logical. Whether to verify the MD5 checksum of the
+downloaded file against the checksum provided by Zenodo. Default is \code{TRUE}.
+If the checksums do not match, an error is raised and the file is deleted.
+Set to \code{FALSE} to skip this verification step.}
 
 \item{...}{Additional arguments passed to \code{read_func}.}
 }

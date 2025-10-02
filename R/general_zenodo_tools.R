@@ -20,6 +20,12 @@
 #' @param unwrap_r Logical. If `read_func` returns an `PackedSpatRaster` or
 #'   `PackedSpatVector` object, this argument controls whether to unwrap packed
 #'   objects using `terra::unwrap()`. Default is `TRUE`.
+#' @param verbose Logical. Whether to print progress messages during download.
+#'   Default is `FALSE`.
+#' @param check_md5sum Logical. Whether to verify the MD5 checksum of the
+#'   downloaded file against the checksum provided by Zenodo. Default is `TRUE`.
+#'   If the checksums do not match, an error is raised and the file is deleted.
+#'   Set to `FALSE` to skip this verification step.
 #' @param ... Additional arguments passed to `read_func`.
 #'
 #' @details
@@ -100,6 +106,7 @@ zenodo_file_list <- function(record_id) {
 
   self <- NULL
 
+  record_id <- try(as.character(record_id), silent = TRUE)
   ecokit::check_args(args_to_check = "record_id", args_type = "character")
 
   if (is.null(record_id) ||
@@ -149,12 +156,14 @@ zenodo_file_list <- function(record_id) {
 
 zenodo_download_file <- function(
     record_id = NULL, file_name = NULL, dest_file = NULL,
-    read_func = NULL, delete_temp = TRUE, unwrap_r = TRUE, ...) {
+    read_func = NULL, delete_temp = TRUE, unwrap_r = TRUE,
+    verbose = FALSE, check_md5sum = TRUE, ...) {
 
   key <- NULL
 
   ecokit::check_args(
-    args_to_check = c("delete_temp", "unwrap_r"), args_type = "logical")
+    args_to_check = c("delete_temp", "unwrap_r", "verbose", "check_md5sum"),
+    args_type = "logical")
   ecokit::check_args(
     args_to_check = c("record_id", "file_name"), args_type = "character")
 
@@ -167,7 +176,7 @@ zenodo_download_file <- function(
     ecokit::stop_ctx("file_name must be a non-null character string.")
   }
 
-  file_list <- zenodo_file_list(record_id = record_id)
+  file_list <- ecokit::zenodo_file_list(record_id = record_id)
   if (nrow(file_list) == 0L) {
     ecokit::stop_ctx("The specified Zenodo record contains no files.")
   }
@@ -181,12 +190,21 @@ zenodo_download_file <- function(
   }
 
   # Get the direct download URL from API (handles encoding automatically)
-  download_url <- paste0(matched_files$link, "?download=1")
+  download_url <- stringr::str_replace_all(
+    paste0(matched_files$link, "?download=1"), " ", "%20")
 
   # Check file accessibility with HEAD request
   head_response <- httr::HEAD(download_url)
   if (httr::status_code(head_response) != 200L) {
     ecokit::stop_ctx("The file is not accessible (may be restricted).")
+  }
+
+  if (verbose) {
+    file_size <- head_response$headers$`content-length` %>%
+      as.numeric() %>%
+      gdata::humanReadable()
+    ecokit::cat_time(
+      paste0("File size: ", file_size), cat_timestamp = FALSE)
   }
 
   # file extension
@@ -202,12 +220,28 @@ zenodo_download_file <- function(
 
   # Download the file with progress
   file_down <- httr::GET(
-    download_url, httr::write_disk(down_path, overwrite = TRUE))
+    download_url, httr::write_disk(down_path, overwrite = TRUE),
+    if (verbose) httr::progress() else NULL)
+
   if (httr::status_code(file_down) != 200L) {
     ecokit::stop_ctx("Failed to download the file from Zenodo.")
   }
   if (!fs::file_exists(down_path)) {
     ecokit::stop_ctx("Downloaded file does not exist at the expected path.")
+  }
+
+  if (check_md5sum) {
+    md5sum_local <- as.character(tools::md5sum(down_path))
+    md5sum_remote <- stringr::str_remove(matched_files$checksum, "md5:")
+
+    identical_md5sum <- identical(md5sum_local, md5sum_remote)
+
+    if (!identical_md5sum) {
+      try(fs::file_delete(down_path), silent = TRUE)
+      ecokit::stop_ctx(
+        "Downloaded file checksum does not match the expected.",
+        md5sum_local = md5sum_local, md5sum_remote = md5sum_remote)
+    }
   }
 
   # Optionally read the final file
