@@ -56,6 +56,8 @@ and to download one of those files (optionally reading it into R).</p>
 <span>  read_func <span class="op">=</span> <span class="cn">NULL</span>,</span>
 <span>  delete_temp <span class="op">=</span> <span class="cn">TRUE</span>,</span>
 <span>  unwrap_r <span class="op">=</span> <span class="cn">TRUE</span>,</span>
+<span>  verbose <span class="op">=</span> <span class="cn">FALSE</span>,</span>
+<span>  check_md5sum <span class="op">=</span> <span class="cn">TRUE</span>,</span>
 <span>  <span class="va">...</span></span>
 <span><span class="op">)</span></span></code></pre></div>
     </div>
@@ -97,6 +99,18 @@ complex read functions.</p></dd>
 <dd><p>Logical. If <code>read_func</code> returns an <code>PackedSpatRaster</code> or
 <code>PackedSpatVector</code> object, this argument controls whether to unwrap packed
 objects using <code><a href="https://rspatial.github.io/terra/reference/wrap.html" class="external-link">terra::unwrap()</a></code>. Default is <code>TRUE</code>.</p></dd>
+
+
+<dt id="arg-verbose">verbose<a class="anchor" aria-label="anchor" href="#arg-verbose"></a></dt>
+<dd><p>Logical. Whether to print progress messages during download.
+Default is <code>FALSE</code>.</p></dd>
+
+
+<dt id="arg-check-md-sum">check_md5sum<a class="anchor" aria-label="anchor" href="#arg-check-md-sum"></a></dt>
+<dd><p>Logical. Whether to verify the MD5 checksum of the
+downloaded file against the checksum provided by Zenodo. Default is <code>TRUE</code>.
+If the checksums do not match, an error is raised and the file is deleted.
+Set to <code>FALSE</code> to skip this verification step.</p></dd>
 
 
 <dt id="arg--">...<a class="anchor" aria-label="anchor" href="#arg--"></a></dt>
@@ -155,7 +169,7 @@ user-supplied function.</p></li>
 <span class="r-in"><span><span class="va">pdf_file</span> <span class="op">&lt;-</span> <span class="fu">zenodo_download_file</span><span class="op">(</span></span></span>
 <span class="r-in"><span>  record_id <span class="op">=</span> <span class="st">"1234567"</span>, file_name <span class="op">=</span> <span class="st">"article.pdf"</span><span class="op">)</span></span></span>
 <span class="r-in"><span><span class="fu"><a href="https://rdrr.io/r/base/print.html" class="external-link">print</a></span><span class="op">(</span><span class="va">pdf_file</span><span class="op">)</span></span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> /tmp/RtmprNinDF/article24c51f4baa31.pdf</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> /tmp/Rtmph1183t/article257b3d3f8bff.pdf</span>
 <span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="fu">ecokit</span><span class="fu">::</span><span class="fu"><a href="file_operations.html">file_type</a></span><span class="op">(</span><span class="va">pdf_file</span><span class="op">)</span></span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> [1] "PDF document, version 1.6"</span>
