@@ -2,49 +2,47 @@
 # n_decimals ----
 ## |------------------------------------------------------------------------| #
 
-#' Number of decimal places in a numeric value
+#' Number of decimal places in a numeric or character value
 #'
-#' This function calculates the number of decimal places in a numeric value. It
-#' is designed to work with numeric inputs that can be coerced to character
-#' format.
+#' This function calculates the number of decimal places in a numeric or
+#' character value by counting all digits after the decimal point in the string
+#' representation, including trailing zeros for characters. It is vectorized and
+#' designed to work with numeric inputs or character strings representing
+#' numbers, making it suitable for use with `dplyr::mutate`.
 #'
-#' @param x Numeric (or character) numeric value.
-#' @name n_decimals
+#' @param x Numeric or character vector representing numeric values.
+#' @return An integer vector of the same length as `x`, where each element
+#'   represents the number of decimal places in the corresponding input value.
 #' @author Ahmed El-Gabbas
-#' @return An integer representing the number of decimal places in the input
-#'   value. If the input value does not have any decimal places, the function
-#'   returns 0.
 #' @examples
-#' n_decimals(x = "13.45554545")
-#' n_decimals(x = 13.45554545)
+#' # Character input with trailing zeros
+#' n_decimals(c("1.35965", "65.5484900000", "0.11840000"))
 #'
-#' # -------------------------------------------
+#' # Numeric input with trailing zeros
+#' n_decimals(c(1.35965, 65.5484900000, 0.11840000))
 #'
-#' # the function ignores trailing zeros for doubles
-#' n_decimals(x = 15.01500)
-#'
-#' n_decimals(x = '15.01500')
+#' # Use with dplyr
+#' library(dplyr)
+#' mtcars %>%
+#'   dplyr::select(wt) %>%
+#'   dplyr::mutate(n_decimals = n_decimals(wt))
 #' @export
 
 n_decimals <- function(x = NULL) {
 
+  # Input validation
   if (is.null(x)) {
-    ecokit::stop_ctx("x cannot be NULL", x = x)
+    stop("x cannot be NULL")
   }
 
-  data_split <- x %>%
-    as.character() %>%
-    format(scientific = FALSE) %>%
-    stringr::str_split(pattern = "\\.", n = Inf, simplify = TRUE)
+  # Split strings at decimal point, limit to 2 parts
+  data_split <- stringr::str_split(
+    as.character(x), pattern = "\\.", n = 2, simplify = TRUE)
 
-  if (ncol(data_split) == 2L) {
-    output <- data_split %>%
-      as.vector() %>%
-      utils::tail(1L) %>%
-      nchar() %>%
-      as.integer()
-    return(output)
-  } else {
-    return(0L)
-  }
+  # Count characters in decimal part; return 0 if no decimal part
+  ifelse(
+    ncol(data_split) == 1 | data_split[, 2] == "",
+    0L,
+    nchar(data_split[, 2])
+  )
 }

@@ -2,33 +2,36 @@
 % Please edit documentation in R/general_n_decimals.R
 \name{n_decimals}
 \alias{n_decimals}
-\title{Number of decimal places in a numeric value}
+\title{Number of decimal places in a numeric or character value}
 \usage{
 n_decimals(x = NULL)
 }
 \arguments{
-\item{x}{Numeric (or character) numeric value.}
+\item{x}{Numeric or character vector representing numeric values.}
 }
 \value{
-An integer representing the number of decimal places in the input
-value. If the input value does not have any decimal places, the function
-returns 0.
+An integer vector of the same length as \code{x}, where each element
+represents the number of decimal places in the corresponding input value.
 }
 \description{
-This function calculates the number of decimal places in a numeric value. It
-is designed to work with numeric inputs that can be coerced to character
-format.
+This function calculates the number of decimal places in a numeric or
+character value by counting all digits after the decimal point in the string
+representation, including trailing zeros for characters. It is vectorized and
+designed to work with numeric inputs or character strings representing
+numbers, making it suitable for use with \code{dplyr::mutate}.
 }
 \examples{
-n_decimals(x = "13.45554545")
-n_decimals(x = 13.45554545)
+# Character input with trailing zeros
+n_decimals(c("1.35965", "65.5484900000", "0.11840000"))
 
-# -------------------------------------------
+# Numeric input with trailing zeros
+n_decimals(c(1.35965, 65.5484900000, 0.11840000))
 
-# the function ignores trailing zeros for doubles
-n_decimals(x = 15.01500)
-
-n_decimals(x = '15.01500')
+# Use with dplyr
+library(dplyr)
+mtcars \%>\%
+  dplyr::select(wt) \%>\%
+  dplyr::mutate(n_decimals = n_decimals(wt))
 }
 \author{
 Ahmed El-Gabbas
