@@ -32,17 +32,15 @@ n_decimals <- function(x = NULL) {
 
   # Input validation
   if (is.null(x)) {
-    stop("x cannot be NULL")
+    ecokit::stop_ctx("x cannot be NULL")
   }
 
   # Split strings at decimal point, limit to 2 parts
   data_split <- stringr::str_split(
-    as.character(x), pattern = "\\.", n = 2, simplify = TRUE)
+    as.character(x), pattern = "\\.", n = 2L, simplify = TRUE)
 
   # Count characters in decimal part; return 0 if no decimal part
   ifelse(
-    ncol(data_split) == 1 | data_split[, 2] == "",
-    0L,
-    nchar(data_split[, 2])
-  )
+    (ncol(data_split) == 1L | !nzchar(data_split[, 2L])),
+    0L, nchar(data_split[, 2L]))
 }

@@ -52,6 +52,7 @@
 #'
 #' # error: Argument `x` is missing/NULL and option `my_x_option` is not set.
 #' try(my_fun())
+
 assign_from_options <- function(
     arg, option_name, expected_class = NULL, allow_null = FALSE) {
 
