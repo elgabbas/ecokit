@@ -26,6 +26,9 @@
 #'   downloaded file against the checksum provided by Zenodo. Default is `TRUE`.
 #'   If the checksums do not match, an error is raised and the file is deleted.
 #'   Set to `FALSE` to skip this verification step.
+#' @param timeout Numeric. Maximum time (in seconds) to wait for the download to
+#'   complete. Default is `600L` seconds (10 minutes). Increase this value for
+#'   larger files or slower connections.
 #' @param ... Additional arguments passed to `read_func`.
 #'
 #' @details
@@ -157,7 +160,7 @@ zenodo_file_list <- function(record_id) {
 zenodo_download_file <- function(
     record_id = NULL, file_name = NULL, dest_file = NULL,
     read_func = NULL, delete_temp = TRUE, unwrap_r = TRUE,
-    verbose = FALSE, check_md5sum = TRUE, ...) {
+    verbose = FALSE, check_md5sum = TRUE, timeout = 600L, ...) {
 
   key <- NULL
 
@@ -166,6 +169,7 @@ zenodo_download_file <- function(
     args_type = "logical")
   ecokit::check_args(
     args_to_check = c("record_id", "file_name"), args_type = "character")
+  ecokit::check_args(args_to_check = "timeout", args_type = "numeric")
 
   # Validate inputs
   if (is.null(record_id) ||
@@ -221,6 +225,7 @@ zenodo_download_file <- function(
   # Download the file with progress
   file_down <- httr::GET(
     download_url, httr::write_disk(down_path, overwrite = TRUE),
+    httr::timeout(timeout),
     if (verbose) httr::progress() else NULL)
 
   if (httr::status_code(file_down) != 200L) {

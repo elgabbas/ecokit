@@ -17,6 +17,7 @@ zenodo_download_file(
   unwrap_r = TRUE,
   verbose = FALSE,
   check_md5sum = TRUE,
+  timeout = 600L,
   ...
 )
 }
@@ -51,6 +52,10 @@ Default is \code{FALSE}.}
 downloaded file against the checksum provided by Zenodo. Default is \code{TRUE}.
 If the checksums do not match, an error is raised and the file is deleted.
 Set to \code{FALSE} to skip this verification step.}
+
+\item{timeout}{Numeric. Maximum time (in seconds) to wait for the download to
+complete. Default is \code{600L} seconds (10 minutes). Increase this value for
+larger files or slower connections.}
 
 \item{...}{Additional arguments passed to \code{read_func}.}
 }
