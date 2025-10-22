@@ -116,6 +116,7 @@ reference:
   - extract_options
   - remove_options
   - assign_from_options
+  - get_option_with_default
   - zenodo_tools
 
 - title: Spatial functions

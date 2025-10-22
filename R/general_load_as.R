@@ -190,17 +190,21 @@ load_as <- function(
 
   } else if (inherits(output_file, "tbl_df") && nrow(output_file) > 0L) {
 
-    classes <- purrr::map(
+    is_sdm_models <- purrr::map_chr(
       .x = seq_len(ncol(output_file)),
       .f = ~ {
-        col <- dplyr::pull(output_file, .x)
-        unlist(class(col[[1L]]))
+        col_data <- dplyr::pull(output_file, .x)[[1L]]
+        if (isS4(col_data) && inherits(col_data, "sdmModels")) {
+          as.character(col_data@run.info$method)
+        } else {
+          NA_character_
+        }
       }) %>%
-      unlist() %>%
-      c(classes)
+      stats::na.omit() %>%
+      as.character()
 
-    if ("sdmModels" %in% classes) {
-      classes <- c(as.character(output_file@run.info$method), classes)
+    if (length(is_sdm_models) > 0L) {
+      classes <- c(is_sdm_models, classes)
     }
 
   } else if (inherits(output_file, "list") && length(output_file) > 0L) {

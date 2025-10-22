@@ -112,3 +112,76 @@ remove_options <- function(
   }
   invisible(NULL)
 }
+
+## |------------------------------------------------------------------------| #
+# get_option_with_default ----
+## |------------------------------------------------------------------------| #
+
+#' Retrieve Option Value with Function Argument Default Fallback
+#'
+#' This function returns the value of a specified R option if it is set;
+#' otherwise, it falls back to the default value of a specified argument of a
+#' given function. The function can be identified by name only or with package
+#' qualification (e.g., `"pkg::fun"`). It supports arguments with default values
+#' that are constants or quoted expressions.
+#'
+#' **Important:** This function only works for standard R functions whose
+#' default argument values are accessible via `formals()`. It does **not** work
+#' for primitive functions (such as `max`, `mean`), functions implemented in
+#' C/C++, S4 methods, or functions whose defaults are not accessible
+#' programmatically.
+#'
+#' @param option_name Character. The name of the R option to retrieve (e.g.,
+#'   `"my_pkg_option"`).
+#' @param fun_name Character. The name of the function, optionally qualified
+#'   with a package (e.g., `"my_fun"` or `"mypkg::my_fun"`).
+#' @param arg_name Character. The name of the argument whose default value
+#'   should be used as a fallback.
+#'
+#' @return The value of the option if set, otherwise the default value of the
+#'   specified function argument. Returns `NULL` if the default is not
+#'   accessible (e.g., for primitive or non-standard functions).
+#'
+#' @examples
+#' # No option is called `.add_changed`
+#' getOption(".add_changed")
+#'
+#' # return the default value of the `.add` argument of `dplyr::group_by()`
+#' get_option_with_default(".add_changed", "dplyr::group_by", ".add")
+#'
+#' # Setting and retrieving the option
+#' options(.add_changed = TRUE)
+#' get_option_with_default(".add_changed", "dplyr::group_by", ".add")
+#'
+#' # Removing the option, should fall back to default again
+#' ecokit::remove_options(".add_changed")
+#' get_option_with_default(".add_changed", "dplyr::group_by", ".add")
+#'
+#' # Will return NULL for primitives:
+#' get_option_with_default("base_max_na.rm", "base::max", "na.rm")
+#'
+#' @export
+#' @author Ahmed El-Gabbas
+
+get_option_with_default <- function(option_name, fun_name, arg_name) {
+
+  # Get function object, handling package qualification if present
+  fn <- if (grepl("::", fun_name)) {
+    parts <- strsplit(fun_name, "::")[[1L]]
+    get(parts[2L], envir = asNamespace(parts[1L]))
+  } else {
+    get(fun_name, mode = "function")
+  }
+
+  # Get default argument value; will be NULL for primitives/C++/S4/non-standard
+  default <- tryCatch(formals(fn)[[arg_name]], error = function(e) NULL)
+
+  # Evaluate default if it's a language object (e.g., expression, call)
+  default <- if (is.language(default)) eval(default) else default
+
+  # Get option or default
+  val <- getOption(option_name, default = default)
+
+  # Evaluate if it's still a language object (e.g., default was quote(expr))
+  if (is.language(val)) eval(val) else val
+}
