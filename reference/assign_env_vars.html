@@ -109,8 +109,8 @@ only letters, numbers, dots, or underscores. Only one of <code>check_dir</code> 
 <span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="co"># contents of the .env file</span></span></span>
 <span class="r-in"><span><span class="fu"><a href="https://rdrr.io/r/base/readLines.html" class="external-link">readLines</a></span><span class="op">(</span><span class="va">tmp_env_file</span><span class="op">)</span></span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [1] "MY_FILE=/tmp/RtmpCu8siL/file25f466e1a2dc.txt"</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [2] "MY_DIR=/tmp/RtmpCu8siL/assign_env_vars"      </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [1] "MY_FILE=/tmp/RtmpKk5OEi/file257a492499e9.txt"</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [2] "MY_DIR=/tmp/RtmpKk5OEi/assign_env_vars"      </span>
 <span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="co"># Define simple environment variables data</span></span></span>
 <span class="r-in"><span><span class="op">(</span><span class="va">env_vars</span> <span class="op">&lt;-</span> <span class="fu">tibble</span><span class="fu">::</span><span class="fu"><a href="https://tibble.tidyverse.org/reference/tibble.html" class="external-link">tibble</a></span><span class="op">(</span></span></span>
@@ -134,9 +134,9 @@ only letters, numbers, dots, or underscores. Only one of <code>check_dir</code> 
 <span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="co"># Verify</span></span></span>
 <span class="r-in"><span><span class="va">my_file</span></span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [1] "/tmp/RtmpCu8siL/file25f466e1a2dc.txt"</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [1] "/tmp/RtmpKk5OEi/file257a492499e9.txt"</span>
 <span class="r-in"><span><span class="va">my_dir</span></span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [1] "/tmp/RtmpCu8siL/assign_env_vars"</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [1] "/tmp/RtmpKk5OEi/assign_env_vars"</span>
 <span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="co"># clean up</span></span></span>
 <span class="r-in"><span><span class="fu">fs</span><span class="fu">::</span><span class="fu"><a href="https://fs.r-lib.org/reference/delete.html" class="external-link">dir_delete</a></span><span class="op">(</span><span class="fu">fs</span><span class="fu">::</span><span class="fu"><a href="https://fs.r-lib.org/reference/file_temp.html" class="external-link">path_temp</a></span><span class="op">(</span><span class="st">"assign_env_vars"</span><span class="op">)</span><span class="op">)</span></span></span>
