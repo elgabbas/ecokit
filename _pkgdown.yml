@@ -138,6 +138,7 @@ reference:
   - add_geometric_features
   - range_to_new_value
   - write_nc
+  - nearest_dist_sf
 
 - title: Plotting functions
   contents:
