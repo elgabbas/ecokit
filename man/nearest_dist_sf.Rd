@@ -45,26 +45,30 @@ feature itself)
 }
 \examples{
 # Create sample sf object
-ecokit:::load_packages(sf, dismo, fs, dplyr, tibble)
+ecokit:::load_packages(sf, dismo, fs, dplyr, tibble, rworldmap, ggplot2)
 
 occurrence <- system.file(package = "dismo") \%>\%
   fs::path("ex", "bradypus.csv") \%>\%
   read.table(header = TRUE, sep = ",") \%>\%
   tibble::tibble() \%>\%
-  # add clear outline
-  dplyr::bind_rows(
-    tibble::tibble(
-      species = "Bradypus variegatus", lon = -40.2, lat = 14.1 )) \%>\%
   st_as_sf(crs = 4326L, coords = c("lon", "lat"))
 head(occurrence)
-
-plot(occurrence["species"], key.pos = NULL, pch = 20, col = "blue")
 
 # Calculate nearest distances
 result <- nearest_dist_sf(occurrence, resolution = 0.25, n_cores = 2)
 head(result)
 
-plot(result["nearest_dist"], pch = 20)
+global_map <- sf::st_as_sf(rworldmap::getMap(resolution = "low"))
+
+ggplot2::ggplot() +
+  ggplot2::geom_sf(data = global_map, fill = "lightgray", color = "white") +
+  ggplot2::geom_sf(
+    data = result, ggplot2::aes(color = nearest_dist), size = 3) +
+  ggplot2::scale_color_gradient(low = "blue", high = "red") +
+  ggplot2::coord_sf(xlim = c(-85.9333, -40.0667), ylim = c(-23.45, 13.95)) +
+  ggplot2::labs(
+    title = "Minimum Nearest Neighbour Distances (km)",
+    color = "Nearest\nDist (km)")
 
 }
 \author{
