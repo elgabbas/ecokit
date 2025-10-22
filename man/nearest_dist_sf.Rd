@@ -27,7 +27,8 @@ nearest neighbour for each feature.
 This function calculates the nearest neighbour distance for each feature in
 an sf object. It rasterizes the input data at a specified resolution,
 converts to polygons, and then computes the distance to the nearest neighbour
-for each feature.
+for each feature. The function can be used to detect spatial outliers before
+use in ecological modelling like species distribution models.
 }
 \details{
 The function performs the following steps:
@@ -44,15 +45,16 @@ feature itself)
 }
 \examples{
 # Create sample sf object
-ecokit:::load_packages(sf, dismo, fs, dplyr, tibble, rworldmap)
-
-map <- rworldmap::getMap(resolution = "low") \%>\%
-  sf::st_as_sf()
+ecokit:::load_packages(sf, dismo, fs, dplyr, tibble)
 
 occurrence <- system.file(package = "dismo") \%>\%
   fs::path("ex", "bradypus.csv") \%>\%
   read.table(header = TRUE, sep = ",") \%>\%
   tibble::tibble() \%>\%
+  # add clear outline
+  dplyr::bind_rows(
+    tibble::tibble(
+      species = "Bradypus variegatus", lon = -40.2, lat = 14.1 )) \%>\%
   st_as_sf(crs = 4326L, coords = c("lon", "lat"))
 head(occurrence)
 
@@ -63,7 +65,6 @@ result <- nearest_dist_sf(occurrence, resolution = 0.25, n_cores = 2)
 head(result)
 
 plot(result["nearest_dist"], pch = 20)
-plot(map$geometry, add = TRUE, border = "darkgrey")
 
 }
 \author{
