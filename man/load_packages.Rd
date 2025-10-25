@@ -43,7 +43,7 @@ loaded packages.
 (P1 <- ecokit::loaded_packages())
 
 # Load tidyr
-load_packages(tidyr, raster, ggplot2, verbose = TRUE)
+load_packages(tidyr, raster, ggplot2, nnet, verbose = TRUE)
 
 # Loaded packages after implementing the function
 (P2 <- ecokit::loaded_packages())

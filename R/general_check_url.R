@@ -20,7 +20,9 @@
 #' urls <- c(
 #'      "http://www.amazon.com", "http://this.isafakelink.biz",
 #'      "https://stackoverflow.com", "https://stackoverflow505.com")
+#'
 #' check_url(urls)
+#'
 #' check_url(urls, all_okay = FALSE)
 #' @export
 

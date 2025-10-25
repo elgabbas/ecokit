@@ -13,7 +13,7 @@
 #'   are excluded if they don't match. Defaults to `NULL` (all files are
 #'   considered).
 #' @param n_cores Integer. Number of parallel workers to use (default: 1).
-#' @param print_results Logical. Whether to print results to the console
+#' @param verbose Logical. Whether to print results to the console
 #'   (default: `TRUE`).
 #'
 #' @return A list of tibbles with duplicated files and directories, if found.
@@ -35,10 +35,134 @@
 #'
 #' @export
 #' @author Ahmed El-Gabbas
+#'
+#' @examples
+#'
+#' ecokit::load_packages(fs)
+#'
+#' # ----------------------------------------------------
+#' # Example 1: Detect duplicate files with identical content
+#' # ----------------------------------------------------
+#'
+#' temp_dir1 <- fs::path_temp("example1")
+#' fs::dir_create(temp_dir1)
+#'
+#' # Create files with identical content
+#' file1 <- fs::path(temp_dir1, "file1.txt")
+#' file2 <- fs::path(temp_dir1, "file2.txt")
+#' file3 <- fs::path(temp_dir1, "subdir", "file3.txt")
+#' fs::dir_create(path(temp_dir1, "subdir"))
+#' writeLines("This is some test content.", file1)
+#' fs::file_copy(file1, file2, overwrite = TRUE)
+#' fs::file_copy(file1, file3, overwrite = TRUE)
+#'
+#' # Create a unique file
+#' unique_file <- fs::path(temp_dir1, "unique.txt")
+#' writeLines("Different content.", unique_file)
+#'
+#' # Find duplicates
+#' dups <- find_duplicates(temp_dir1, size_threshold = 0)
+#'
+#' dups$duplicated_files$files
+#'
+#' # Clean up
+#' fs::dir_delete(temp_dir1)
+#'
+#' # # ||||||||||||||||||||||||||||||||||||||||||||||||||||| #
+#'
+#' # ----------------------------------------------------
+#' # Example 2: Detect duplicate directories with identical file sets
+#' # ----------------------------------------------------
+#'
+#' temp_dir2 <- fs::path_temp("example2")
+#' fs::dir_create(temp_dir2)
+#'
+#' # Create duplicate directories
+#' dir_a <- fs::path(temp_dir2, "dir_a")
+#' dir_b <- fs::path(temp_dir2, "dir_b")
+#' dir_c <- fs::path(temp_dir2, "dir_c")
+#' fs::dir_create(dir_a)
+#' fs::dir_create(dir_b)
+#' fs::dir_create(dir_c)
+#'
+#' # Files in dir_a and dir_b (identical)
+#' writeLines("Content 1", fs::path(dir_a, "file1.txt"))
+#' writeLines("Content 2", fs::path(dir_a, "file2.txt"))
+#' fs::file_copy(path(dir_a, "file1.txt"), fs::path(dir_b, "file1.txt"))
+#' fs::file_copy(path(dir_a, "file2.txt"), fs::path(dir_b, "file2.txt"))
+#'
+#' # Different files in dir_c
+#' writeLines("Content 3", path(dir_c, "file3.txt"))
+#'
+#' # Run the function (no extensions filter to include dirs)
+#' dups <- find_duplicates(temp_dir2, size_threshold = 0)
+#'
+#' dups$duplicated_dirs
+#'
+#' dups$duplicated_files$files
+#'
+#' # Clean up
+#' fs::dir_delete(temp_dir2)
+#'
+#' # # ||||||||||||||||||||||||||||||||||||||||||||||||||||| #
+#'
+#' # ----------------------------------------------------
+#' # Example 3: Filter by extensions and size threshold
+#' # ----------------------------------------------------
+#'
+#' temp_dir3 <- fs::path_temp("example3")
+#' fs::dir_create(temp_dir3)
+#'
+#' # Create duplicate CSV files
+#' csv1 <- fs::path(temp_dir3, "data1.csv")
+#' csv2 <- fs::path(temp_dir3, "data2.csv")
+#' writeLines("col1,col2\n1,2", csv1)
+#' fs::file_copy(csv1, csv2)
+#'
+#' # Create small duplicate TXT file (below threshold)
+#' txt1 <- fs::path(temp_dir3, "small1.txt")
+#' txt2 <- fs::path(temp_dir3, "small2.txt")
+#' writeLines("Small", txt1)
+#' fs::file_copy(txt1, txt2)
+#'
+#' # Run with extensions filter and size threshold
+#' dups <- find_duplicates(
+#'   temp_dir3, extensions = "csv", size_threshold = 0.001)
+#'
+#' dups
+#'
+#' # Clean up
+#' fs::dir_delete(temp_dir3)
+#'
+#' # # ||||||||||||||||||||||||||||||||||||||||||||||||||||| #
+#'
+#' # ----------------------------------------------------
+#' # Example 4: Parallel processing with multiple cores
+#' # ----------------------------------------------------
+#'
+#' temp_dir4 <- fs::path_temp("example4")
+#' fs::dir_create(temp_dir3)
+#'
+#' # Create many duplicate files to test parallel
+#' for (i in 1:5) {
+#'   fs::dir_create(path(temp_dir4, paste0("group", i)))
+#'   for (j in 1:3) {
+#'     file_path <- fs::path(
+#'       temp_dir4, paste0("group", i), paste0("dup", j, ".txt"))
+#'     writeLines(paste("Content for group", i), file_path)
+#'   }
+#' }
+#'
+#' # Run with 2 cores
+#' find_duplicates(temp_dir4, n_cores = 2, size_threshold = 0)
+#'
+#' # Clean up
+#' dir_delete(temp_dir4)
+
 
 find_duplicates <- function(
     path = ".", size_threshold = 0L, extensions = NULL, n_cores = 1L,
-    print_results = TRUE) {
+    verbose = TRUE) {
 
   if (is.null(path) || !is.character(path) || length(path) != 1L ||
       !nzchar(path)) {
@@ -143,7 +267,7 @@ find_duplicates <- function(
       dplyr::mutate(
         dir = fs::path(dir), dir_abs = fs::path(path, dir), .before = 2L)
     if (nrow(duplicated_dirs) > 0L) {
-      if (print_results) {
+      if (verbose) {
         ecokit::info_chunk(
           "  >>  Duplicated directories", cat_date = FALSE,
           cat_bold = TRUE, line_char_rep = 32L)
@@ -198,7 +322,7 @@ find_duplicates <- function(
     dplyr::select(tidyselect::all_of(selected_columns)) %>%
     dplyr::mutate(path = fs::path(path), .before = 1L)
 
-  if (print_results) {
+  if (verbose) {
     ecokit::info_chunk(
       "  >>  Duplicated files", cat_date = FALSE,
       cat_bold = TRUE, line_char_rep = 32L)

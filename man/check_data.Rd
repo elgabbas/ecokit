@@ -125,16 +125,23 @@ check_feather(bad_feather, warning = FALSE)
 # |||||||||||||||||||||||||||||||||||||||
 # Non-existent file
 # |||||||||||||||||||||||||||||||||||||||
+
 check_data("nonexistent.rds")
 
 # |||||||||||||||||||||||||||||||||||||||
 # check_data
 # |||||||||||||||||||||||||||||||||||||||
+
 all_files <- c(
   rdata_file, bad_rdata, qs_file, bad_qs, rds_file, bad_rds,
   feather_file, bad_feather)
+
 check_data(all_files)
+
+check_data(all_files, warning = FALSE)
+
 check_data(all_files, all_okay = FALSE)
+
 check_data(all_files, all_okay = FALSE, warning = FALSE)
 
 # clean up

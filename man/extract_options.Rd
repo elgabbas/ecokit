@@ -22,11 +22,19 @@ Returns a subset of the current R session options whose names match a given
 pattern.
 }
 \examples{
+
+# all options
+all_options <- extract_options()
+length(all_options)
+
 # all options with "warn" in the name (case-insensitive)
-ecokit::extract_options("warn")
+extract_options(pattern = "warn")
 
 # options starting with "r" (case-sensitive)
-ecokit::extract_options("^r", TRUE)
+extract_options(pattern = "^r", case_sensitive = TRUE)
+
+# non-existing pattern
+extract_options(pattern = "non_existing_pattern_123")
 }
 \author{
 Ahmed El-Gabbas

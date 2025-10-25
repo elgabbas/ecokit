@@ -67,8 +67,13 @@ check_zip("nonexistent.zip", warning = FALSE)
 
 # Check multiple files
 zip_files <- c(zip_file, bad_zip, empty_zip, temp_file)
+
 check_zip(zip_files)
+
+check_zip(zip_files, warning = FALSE)
+
 check_zip(zip_files, all_okay = FALSE)
+
 check_zip(zip_files, all_okay = FALSE, warning = FALSE)
 
 # clean up

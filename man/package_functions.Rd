@@ -25,10 +25,8 @@ str(package_functions(package = "sf"))
 
 package_functions(package = "ecokit")
 
-\dontrun{
-  # Error: package not found
-  package_functions(package = "non_exist")
-}
+# Error: package not found
+ try(package_functions(package = "non_exist"))
 }
 \author{
 Ahmed El-Gabbas

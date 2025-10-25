@@ -6,8 +6,8 @@
 \usage{
 sf_add_coords(
   sf_object,
-  name_x = "Long",
-  name_y = "Lat",
+  name_x = "longitude",
+  name_y = "latitude",
   overwrite = FALSE,
   suffix = "_NEW"
 )

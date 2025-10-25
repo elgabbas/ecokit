@@ -27,14 +27,20 @@ pattern.
  # removes option named "my_option"
  options(my_option = 42)
  ecokit::extract_options("my_option")
- ecokit::remove_options("my_option")
+
+ remove_options("my_option")
  ecokit::extract_options("my_option")
 
  options(plot1 = 42, plot2 = "yes", plot_extra = TRUE)
- ecokit::remove_options("plot_", regex = FALSE)
+ remove_options("plot_", regex = FALSE)
  ecokit::extract_options("plot")
- ecokit::remove_options("plot_", regex = TRUE)
+
+ remove_options("plot_", regex = TRUE)
  ecokit::extract_options("plot")
+
+ # non-existing pattern (no output or error)
+ remove_options("non_existing_pattern_123", regex = TRUE)
+ remove_options("non_existing_pattern_123")
 }
 \author{
 Ahmed El-Gabbas

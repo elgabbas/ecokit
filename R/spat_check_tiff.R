@@ -43,6 +43,13 @@ check_tiff <- function(x = NULL, warning = TRUE) {
 
   # # ..................................................................... ###
 
+  # x should be a character string of length 1
+  if (!is.character(x) || length(x) != 1L || is.na(x) || !nzchar(x)) {
+    ecokit::stop_ctx(
+      "Input 'x' must be a non-empty character string of length 1",
+      x = x)
+  }
+
   # Check if file exists
   if (!file.exists(x)) {
     if (warning) {

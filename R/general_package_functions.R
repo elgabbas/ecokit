@@ -20,10 +20,8 @@
 #'
 #' package_functions(package = "ecokit")
 #'
-#' \dontrun{
-#'   # Error: package not found
-#'   package_functions(package = "non_exist")
-#' }
+#' # Error: package not found
+#'  try(package_functions(package = "non_exist"))
 
 package_functions <- function(package) {
 
@@ -61,13 +59,11 @@ package_functions <- function(package) {
 #'   available, an error message is generated listing all missing packages.
 #'
 #' @examples
-#' \dontrun{
 #' # Check if packages are available
 #' check_packages(c("dplyr", "ggplot2"))
 #'
 #' # Will throw an error if packages are missing
-#' check_packages("nonexistent_package")
-#' }
+#' try(check_packages("nonexistent_package"))
 #'
 #' @author Ahmed El-Gabbas
 #' @export

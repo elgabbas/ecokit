@@ -14,10 +14,10 @@
 #'   of reloading a package rather than for its return value.
 #' @author Ahmed El-Gabbas
 #' @examples
-#' load_packages(sf)
+#' load_packages(nngeo)
 #'
-#' # Reloads sf and ncdf4. terra0 does not exist
-#' reload_package(sf, ncdf4, terra0)
+#' # Reloads nngeo; terra0 does not exist
+#' reload_package(nngeo, terra0)
 #' @export
 
 reload_package <- function(...) {

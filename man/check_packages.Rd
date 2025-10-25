@@ -27,13 +27,11 @@ check if each package can be loaded. If one or more packages are not
 available, an error message is generated listing all missing packages.
 }
 \examples{
-\dontrun{
 # Check if packages are available
 check_packages(c("dplyr", "ggplot2"))
 
 # Will throw an error if packages are missing
-check_packages("nonexistent_package")
-}
+try(check_packages("nonexistent_package"))
 
 }
 \author{

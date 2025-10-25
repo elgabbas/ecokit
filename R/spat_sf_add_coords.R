@@ -59,7 +59,7 @@
 #' sf_add_coords(df2, overwrite = TRUE)
 
 sf_add_coords <- function(
-    sf_object, name_x = "Long", name_y = "Lat", overwrite = FALSE,
+    sf_object, name_x = "longitude", name_y = "latitude", overwrite = FALSE,
     suffix = "_NEW") {
 
   if (!inherits(sf_object, "sf")) {

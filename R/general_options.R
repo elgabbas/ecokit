@@ -16,11 +16,19 @@
 #' @export
 #' @author Ahmed El-Gabbas
 #' @examples
+#'
+#' # all options
+#' all_options <- extract_options()
+#' length(all_options)
+#'
 #' # all options with "warn" in the name (case-insensitive)
-#' ecokit::extract_options("warn")
+#' extract_options(pattern = "warn")
 #'
 #' # options starting with "r" (case-sensitive)
-#' ecokit::extract_options("^r", TRUE)
+#' extract_options(pattern = "^r", case_sensitive = TRUE)
+#'
+#' # non-existing pattern
+#' extract_options(pattern = "non_existing_pattern_123")
 
 extract_options <- function(pattern = "", case_sensitive = FALSE) {
 
@@ -76,14 +84,20 @@ extract_options <- function(pattern = "", case_sensitive = FALSE) {
 #'  # removes option named "my_option"
 #'  options(my_option = 42)
 #'  ecokit::extract_options("my_option")
-#'  ecokit::remove_options("my_option")
+#'
+#'  remove_options("my_option")
 #'  ecokit::extract_options("my_option")
 #'
 #'  options(plot1 = 42, plot2 = "yes", plot_extra = TRUE)
-#'  ecokit::remove_options("plot_", regex = FALSE)
+#'  remove_options("plot_", regex = FALSE)
 #'  ecokit::extract_options("plot")
-#'  ecokit::remove_options("plot_", regex = TRUE)
+#'
+#'  remove_options("plot_", regex = TRUE)
 #'  ecokit::extract_options("plot")
+#'
+#'  # non-existing pattern (no output or error)
+#'  remove_options("non_existing_pattern_123", regex = TRUE)
+#'  remove_options("non_existing_pattern_123")
 
 remove_options <- function(
     pattern = NULL, regex = FALSE, case_sensitive = FALSE) {

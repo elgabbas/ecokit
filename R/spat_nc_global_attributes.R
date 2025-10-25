@@ -15,13 +15,7 @@
 #' @export
 #' @examples
 #' require(ecokit)
-#' ecokit::load_packages(stars, sf, fs)
-#'
-#' nc_example_1 <- system.file("nc/sub.nc", package = "stars")
-#' if (fs::file_exists(nc_example_1)) nc_global_attributes(nc = nc_example_1)
-#'
-#' nc_example_2 <- system.file("nc/timeseries.nc", package = "stars")
-#' if (fs::file_exists(nc_example_2)) nc_global_attributes(nc = nc_example_2)
+#' ecokit::load_packages(sf, fs)
 #'
 #' nc_example_3 <- system.file("nc/cropped.nc", package = "sf")
 #' if (fs::file_exists(nc_example_3)) nc_global_attributes(nc = nc_example_3)

@@ -28,6 +28,7 @@
 #'   dplyr::select(AREA)
 #' # add a new geometry column
 #' nc$centroid <- sf::st_centroid(st_geometry(nc))
+#'
 #' nc
 #'
 #' # set centroid as active geometry in a pipeline

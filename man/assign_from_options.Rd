@@ -56,6 +56,7 @@ my_fun <- function(x = NULL) {
   ecokit::assign_from_options(x, "my_x_option", expected_class = "numeric")
   x  # x is now set from option if not provided
 }
+
 options(my_x_option = 42)
 
 # returns 42

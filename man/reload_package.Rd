@@ -20,10 +20,10 @@ loaded; if already loaded, it is detached and reloaded from its library
 location.
 }
 \examples{
-load_packages(sf)
+load_packages(nngeo)
 
-# Reloads sf and ncdf4. terra0 does not exist
-reload_package(sf, ncdf4, terra0)
+# Reloads nngeo; terra0 does not exist
+reload_package(nngeo, terra0)
 }
 \author{
 Ahmed El-Gabbas

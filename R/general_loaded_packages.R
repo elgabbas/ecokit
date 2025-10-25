@@ -12,7 +12,7 @@
 #' @examples
 #' loaded_packages()
 #'
-#' load_packages(tidyterra, lubridate)
+#' load_packages(tidyterra, lubridate, nngeo)
 #'
 #' loaded_packages()
 #'
