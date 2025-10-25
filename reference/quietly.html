@@ -87,41 +87,34 @@ suppressed.</p>
     <div class="section level2">
     <h2 id="ref-examples">Examples<a class="anchor" aria-label="anchor" href="#ref-examples"></a></h2>
     <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span><span class="co"># Suppress a package startup message and a version warning</span></span></span>
-<span class="r-in"><span><span class="fu">quietly</span><span class="op">(</span><span class="op">{</span></span></span>
+<span class="r-in"><span><span class="fu">ecokit</span><span class="fu">::</span><span class="fu">quietly</span><span class="op">(</span><span class="op">{</span></span></span>
 <span class="r-in"><span>  <span class="kw"><a href="https://rdrr.io/r/base/warning.html" class="external-link">warning</a></span><span class="op">(</span><span class="st">"This package was built under R version 4.3.1"</span>, call. <span class="op">=</span> <span class="cn">FALSE</span><span class="op">)</span></span></span>
 <span class="r-in"><span><span class="op">}</span><span class="op">)</span></span></span>
-<span class="r-wrn co"><span class="r-pr">#&gt;</span> <span class="warning">Warning: </span>This package was built under R version 4.3.1</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> function (...) </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> capture_output(.f(...))</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> &lt;bytecode: 0x563c85b0efd8&gt;</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> &lt;environment: 0x563c85b0ed00&gt;</span>
 <span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="co"># Suppress a custom warning pattern (e.g., JAVA_TOOL_OPTIONS)</span></span></span>
-<span class="r-in"><span><span class="fu">quietly</span><span class="op">(</span><span class="op">{</span></span></span>
+<span class="r-in"><span><span class="fu">ecokit</span><span class="fu">::</span><span class="fu">quietly</span><span class="op">(</span><span class="op">{</span></span></span>
 <span class="r-in"><span> <span class="kw"><a href="https://rdrr.io/r/base/warning.html" class="external-link">warning</a></span><span class="op">(</span></span></span>
 <span class="r-in"><span>   <span class="st">"Picked up JAVA_TOOL_OPTIONS: -Djava.util.prefs.userRoot=/tmp/.java1234"</span>,</span></span>
 <span class="r-in"><span>   call. <span class="op">=</span> <span class="cn">FALSE</span><span class="op">)</span></span></span>
 <span class="r-in"><span><span class="op">}</span>,</span></span>
 <span class="r-in"><span><span class="st">"Picked up JAVA_TOOL_OPTIONS"</span><span class="op">)</span></span></span>
-<span class="r-err co"><span class="r-pr">#&gt;</span> <span class="error">Error in quietly({    warning("Picked up JAVA_TOOL_OPTIONS: -Djava.util.prefs.userRoot=/tmp/.java1234",         call. = FALSE)}, "Picked up JAVA_TOOL_OPTIONS"):</span> unused argument ("Picked up JAVA_TOOL_OPTIONS")</span>
 <span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="co"># Suppress multiple custom warning patterns</span></span></span>
-<span class="r-in"><span><span class="fu">quietly</span><span class="op">(</span><span class="op">{</span></span></span>
+<span class="r-in"><span><span class="fu">ecokit</span><span class="fu">::</span><span class="fu">quietly</span><span class="op">(</span><span class="op">{</span></span></span>
 <span class="r-in"><span>  <span class="kw"><a href="https://rdrr.io/r/base/warning.html" class="external-link">warning</a></span><span class="op">(</span><span class="st">"Couldn't flush user prefs"</span>, call. <span class="op">=</span> <span class="cn">FALSE</span><span class="op">)</span></span></span>
 <span class="r-in"><span>  <span class="kw"><a href="https://rdrr.io/r/base/warning.html" class="external-link">warning</a></span><span class="op">(</span><span class="st">"java.util.prefs.FileSystemPreferences error"</span>, call. <span class="op">=</span> <span class="cn">FALSE</span><span class="op">)</span></span></span>
 <span class="r-in"><span><span class="op">}</span>,</span></span>
 <span class="r-in"><span><span class="st">"Couldn't flush user prefs"</span>, <span class="st">"java.util.prefs.FileSystemPreferences"</span><span class="op">)</span></span></span>
-<span class="r-err co"><span class="r-pr">#&gt;</span> <span class="error">Error in quietly({    warning("Couldn't flush user prefs", call. = FALSE)    warning("java.util.prefs.FileSystemPreferences error", call. = FALSE)}, "Couldn't flush user prefs", "java.util.prefs.FileSystemPreferences"):</span> unused arguments ("Couldn't flush user prefs", "java.util.prefs.FileSystemPreferences")</span>
 <span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="co"># Show that a non-matching warning still prints</span></span></span>
-<span class="r-in"><span><span class="fu">quietly</span><span class="op">(</span><span class="op">{</span></span></span>
+<span class="r-in"><span><span class="fu">ecokit</span><span class="fu">::</span><span class="fu">quietly</span><span class="op">(</span><span class="op">{</span></span></span>
 <span class="r-in"><span>  <span class="kw"><a href="https://rdrr.io/r/base/warning.html" class="external-link">warning</a></span><span class="op">(</span><span class="st">"This is a normal warning and should be displayed"</span>, call. <span class="op">=</span> <span class="cn">FALSE</span><span class="op">)</span></span></span>
 <span class="r-in"><span><span class="op">}</span>,</span></span>
 <span class="r-in"><span><span class="st">"Picked up JAVA_TOOL_OPTIONS"</span><span class="op">)</span></span></span>
-<span class="r-err co"><span class="r-pr">#&gt;</span> <span class="error">Error in quietly({    warning("This is a normal warning and should be displayed",         call. = FALSE)}, "Picked up JAVA_TOOL_OPTIONS"):</span> unused argument ("Picked up JAVA_TOOL_OPTIONS")</span>
+<span class="r-wrn co"><span class="r-pr">#&gt;</span> <span class="warning">Warning: </span>This is a normal warning and should be displayed</span>
 <span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="co"># Use a code block with multiple lines, some of which trigger warnings</span></span></span>
-<span class="r-in"><span><span class="fu">quietly</span><span class="op">(</span><span class="op">{</span></span></span>
+<span class="r-in"><span><span class="fu">ecokit</span><span class="fu">::</span><span class="fu">quietly</span><span class="op">(</span><span class="op">{</span></span></span>
 <span class="r-in"><span>  <span class="co"># suppressed by default</span></span></span>
 <span class="r-in"><span>  <span class="kw"><a href="https://rdrr.io/r/base/warning.html" class="external-link">warning</a></span><span class="op">(</span><span class="st">"Loading required namespace: foo"</span>, call. <span class="op">=</span> <span class="cn">FALSE</span><span class="op">)</span></span></span>
 <span class="r-in"><span>  <span class="co"># suppressed by default</span></span></span>
@@ -129,21 +122,7 @@ suppressed.</p>
 <span class="r-in"><span>  <span class="co"># not suppressed, will be shown</span></span></span>
 <span class="r-in"><span>  <span class="kw"><a href="https://rdrr.io/r/base/warning.html" class="external-link">warning</a></span><span class="op">(</span><span class="st">"Something else"</span>, call. <span class="op">=</span> <span class="cn">FALSE</span><span class="op">)</span></span></span>
 <span class="r-in"><span><span class="op">}</span><span class="op">)</span></span></span>
-<span class="r-wrn co"><span class="r-pr">#&gt;</span> <span class="warning">Warning: </span>Loading required namespace: foo</span>
-<span class="r-wrn co"><span class="r-pr">#&gt;</span> <span class="warning">Warning: </span>was built under R version 4.3.0</span>
 <span class="r-wrn co"><span class="r-pr">#&gt;</span> <span class="warning">Warning: </span>Something else</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> function (...) </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> capture_output(.f(...))</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> &lt;bytecode: 0x563c85b0efd8&gt;</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> &lt;environment: 0x563c880cb5b0&gt;</span>
-<span class="r-in"><span></span></span>
-<span class="r-in"><span><span class="kw">if</span> <span class="op">(</span><span class="cn">FALSE</span><span class="op">)</span> <span class="op">{</span></span></span>
-<span class="r-in"><span>  <span class="co"># Error if ... is not character</span></span></span>
-<span class="r-in"><span>  <span class="fu">quietly</span><span class="op">(</span><span class="op">{</span> <span class="kw"><a href="https://rdrr.io/r/base/warning.html" class="external-link">warning</a></span><span class="op">(</span><span class="st">"test"</span>, call. <span class="op">=</span> <span class="cn">FALSE</span><span class="op">)</span> <span class="op">}</span>, <span class="fl">1L</span><span class="op">)</span></span></span>
-<span class="r-in"><span></span></span>
-<span class="r-in"><span>  <span class="co"># Error if expr is not a language object</span></span></span>
-<span class="r-in"><span>  <span class="fu">quietly</span><span class="op">(</span><span class="st">"not an expression"</span><span class="op">)</span></span></span>
-<span class="r-in"><span><span class="op">}</span></span></span>
 <span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="co"># Suppress specific messages using regular expression patterns</span></span></span>
 <span class="r-in"><span><span class="fu">quietly</span><span class="op">(</span><span class="op">{</span></span></span>
@@ -152,9 +131,28 @@ suppressed.</p>
 <span class="r-in"><span>  <span class="fu"><a href="https://rdrr.io/r/base/message.html" class="external-link">message</a></span><span class="op">(</span><span class="st">"TTT"</span><span class="op">)</span></span></span>
 <span class="r-in"><span>  <span class="kw"><a href="https://rdrr.io/r/base/warning.html" class="external-link">warning</a></span><span class="op">(</span><span class="st">"Something else"</span><span class="op">)</span></span></span>
 <span class="r-in"><span><span class="op">}</span>,</span></span>
-<span class="r-in"><span><span class="st">"Scale for [xy] is already present\\."</span></span></span>
-<span class="r-in"><span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="st">"Scale for [xy] is already present\\."</span><span class="op">)</span></span></span>
 <span class="r-err co"><span class="r-pr">#&gt;</span> <span class="error">Error in quietly({    message("Scale for y is already present.")    message("Scale for x is already present.")    message("TTT")    warning("Something else")}, "Scale for [xy] is already present\\."):</span> unused argument ("Scale for [xy] is already present\\.")</span>
+<span class="r-in"><span></span></span>
+<span class="r-in"><span><span class="co"># Error if ... is not character</span></span></span>
+<span class="r-in"><span><span class="kw"><a href="https://rdrr.io/r/base/try.html" class="external-link">try</a></span><span class="op">(</span><span class="fu">ecokit</span><span class="fu">::</span><span class="fu">quietly</span><span class="op">(</span><span class="op">{</span> <span class="kw"><a href="https://rdrr.io/r/base/warning.html" class="external-link">warning</a></span><span class="op">(</span><span class="st">"test"</span>, call. <span class="op">=</span> <span class="cn">FALSE</span><span class="op">)</span> <span class="op">}</span>, <span class="fl">1L</span><span class="op">)</span><span class="op">)</span></span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> Error in ecokit::quietly({ : </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   <span style="color: #BB0000; font-weight: bold;">All `...` arguments to `quietly` must be character strings.</span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> ----- Metadata -----</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #0000BB; font-weight: bold;">class_dots</span> [<span style="text-decoration: underline;">toString(sapply(dots, class))</span>]: &lt;character&gt;</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> integer</span>
+<span class="r-in"><span></span></span>
+<span class="r-in"><span><span class="co"># Error if expr is not a language object</span></span></span>
+<span class="r-in"><span><span class="kw"><a href="https://rdrr.io/r/base/try.html" class="external-link">try</a></span><span class="op">(</span><span class="fu">ecokit</span><span class="fu">::</span><span class="fu">quietly</span><span class="op">(</span><span class="st">"not an expression"</span><span class="op">)</span><span class="op">)</span></span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> Error in ecokit::quietly("not an expression") : </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   <span style="color: #BB0000; font-weight: bold;">Argument `expr` must be an R expression (code or block wrapped in curly brackets).</span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> ----- Metadata -----</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #0000BB; font-weight: bold;">class_expr</span> [<span style="text-decoration: underline;">class(expr_sub)</span>]: &lt;character&gt;</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> character</span>
 </code></pre></div>
     </div>
   </main><aside class="col-md-3"><nav id="toc" aria-label="Table of contents"><h2>On this page</h2>

@@ -105,30 +105,32 @@ packages) and does not return any value.</p>
     <h2 id="ref-examples">Examples<a class="anchor" aria-label="anchor" href="#ref-examples"></a></h2>
     <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span><span class="co"># Currently loaded packages</span></span></span>
 <span class="r-in"><span><span class="op">(</span><span class="va">P1</span> <span class="op">&lt;-</span> <span class="fu">ecokit</span><span class="fu">::</span><span class="fu"><a href="loaded_packages.html">loaded_packages</a></span><span class="op">(</span><span class="op">)</span><span class="op">)</span></span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  [1] "qs2"       "purrr"     "car"       "carData"   "rworldmap" "raster"   </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  [7] "sp"        "arrow"     "terra"     "fs"        "tidyr"     "tibble"   </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [13] "png"       "sf"        "ggplot2"   "dplyr"     "ecokit"    "magrittr" </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [19] "stats"     "graphics"  "grDevices" "utils"     "datasets"  "methods"  </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [25] "base"     </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  [1] "qs2"       "stringr"   "purrr"     "tools"     "future"    "car"      </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  [7] "carData"   "rworldmap" "raster"    "sp"        "arrow"     "terra"    </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [13] "fs"        "tidyr"     "tibble"    "png"       "sf"        "ggplot2"  </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [19] "dplyr"     "ecokit"    "magrittr"  "stats"     "graphics"  "grDevices"</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [25] "utils"     "datasets"  "methods"   "base"     </span>
 <span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="co"># Load tidyr</span></span></span>
-<span class="r-in"><span><span class="fu">load_packages</span><span class="op">(</span><span class="va">tidyr</span>, <span class="va">raster</span>, <span class="va">ggplot2</span>, verbose <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="fu">load_packages</span><span class="op">(</span><span class="va">tidyr</span>, <span class="va">raster</span>, <span class="va">ggplot2</span>, <span class="va">nnet</span>, verbose <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></span></span>
 <span class="r-msg co"><span class="r-pr">#&gt;</span> The following packages were already loaded:</span>
 <span class="r-msg co"><span class="r-pr">#&gt;</span>   &gt;&gt;&gt;&gt;  <span style="color: #0000BB; font-weight: bold;">ggplot2</span> (4.0.0)</span>
 <span class="r-msg co"><span class="r-pr">#&gt;</span>   &gt;&gt;&gt;&gt;  <span style="color: #0000BB; font-weight: bold;">raster</span> (3.6-32)</span>
 <span class="r-msg co"><span class="r-pr">#&gt;</span>   &gt;&gt;&gt;&gt;  <span style="color: #0000BB; font-weight: bold;">tidyr</span> (1.3.1)</span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> Loading packages:</span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span>   &gt;&gt;&gt;&gt;  <span style="color: #0000BB; font-weight: bold;">nnet</span> (7.3-20)</span>
 <span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="co"># Loaded packages after implementing the function</span></span></span>
 <span class="r-in"><span><span class="op">(</span><span class="va">P2</span> <span class="op">&lt;-</span> <span class="fu">ecokit</span><span class="fu">::</span><span class="fu"><a href="loaded_packages.html">loaded_packages</a></span><span class="op">(</span><span class="op">)</span><span class="op">)</span></span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  [1] "qs2"       "purrr"     "car"       "carData"   "rworldmap" "raster"   </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  [7] "sp"        "arrow"     "terra"     "fs"        "tidyr"     "tibble"   </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [13] "png"       "sf"        "ggplot2"   "dplyr"     "ecokit"    "magrittr" </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [19] "stats"     "graphics"  "grDevices" "utils"     "datasets"  "methods"  </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [25] "base"     </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  [1] "nnet"      "qs2"       "stringr"   "purrr"     "tools"     "future"   </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  [7] "car"       "carData"   "rworldmap" "raster"    "sp"        "arrow"    </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [13] "terra"     "fs"        "tidyr"     "tibble"    "png"       "sf"       </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [19] "ggplot2"   "dplyr"     "ecokit"    "magrittr"  "stats"     "graphics" </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [25] "grDevices" "utils"     "datasets"  "methods"   "base"     </span>
 <span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="co"># Which packages were loaded?</span></span></span>
 <span class="r-in"><span><span class="fu"><a href="https://generics.r-lib.org/reference/setops.html" class="external-link">setdiff</a></span><span class="op">(</span><span class="va">P2</span>, <span class="va">P1</span><span class="op">)</span></span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> character(0)</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [1] "nnet"</span>
 <span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="co"># verbose = FALSE (default)</span></span></span>
 <span class="r-in"><span><span class="fu">load_packages</span><span class="op">(</span><span class="va">tidyterra</span>, verbose <span class="op">=</span> <span class="cn">FALSE</span><span class="op">)</span></span></span>

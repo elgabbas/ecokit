@@ -74,14 +74,11 @@ of reloading a package rather than for its return value.</p>
 
     <div class="section level2">
     <h2 id="ref-examples">Examples<a class="anchor" aria-label="anchor" href="#ref-examples"></a></h2>
-    <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span><span class="fu"><a href="load_packages.html">load_packages</a></span><span class="op">(</span><span class="va">sf</span><span class="op">)</span></span></span>
+    <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span><span class="fu"><a href="load_packages.html">load_packages</a></span><span class="op">(</span><span class="va">nngeo</span><span class="op">)</span></span></span>
 <span class="r-in"><span></span></span>
-<span class="r-in"><span><span class="co"># Reloads sf and ncdf4. terra0 does not exist</span></span></span>
-<span class="r-in"><span><span class="fu">reload_package</span><span class="op">(</span><span class="va">sf</span>, <span class="va">ncdf4</span>, <span class="va">terra0</span><span class="op">)</span></span></span>
-<span class="r-msg co"><span class="r-pr">#&gt;</span> Reloading '<span style="font-weight: bold;">sf</span>'</span>
-<span class="r-wrn co"><span class="r-pr">#&gt;</span> <span class="warning">Warning: </span>‘sf’ namespace cannot be unloaded:</span>
-<span class="r-wrn co"><span class="r-pr">#&gt;</span>   namespace ‘sf’ is imported by ‘nngeo’ so cannot be unloaded</span>
-<span class="r-msg co"><span class="r-pr">#&gt;</span> Loading '<span style="font-weight: bold;">ncdf4</span>'</span>
+<span class="r-in"><span><span class="co"># Reloads nngeo; terra0 does not exist</span></span></span>
+<span class="r-in"><span><span class="fu">reload_package</span><span class="op">(</span><span class="va">nngeo</span>, <span class="va">terra0</span><span class="op">)</span></span></span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> Reloading '<span style="font-weight: bold;">nngeo</span>'</span>
 <span class="r-msg co"><span class="r-pr">#&gt;</span> Not installed: <span style="font-weight: bold;">terra0</span></span>
 </code></pre></div>
     </div>

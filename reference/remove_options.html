@@ -86,12 +86,13 @@ is <code>FALSE</code>.</p></dd>
 <span class="r-out co"><span class="r-pr">#&gt;</span> $my_option</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> [1] 42</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
-<span class="r-in"><span> <span class="fu">ecokit</span><span class="fu">::</span><span class="fu">remove_options</span><span class="op">(</span><span class="st">"my_option"</span><span class="op">)</span></span></span>
+<span class="r-in"><span></span></span>
+<span class="r-in"><span> <span class="fu">remove_options</span><span class="op">(</span><span class="st">"my_option"</span><span class="op">)</span></span></span>
 <span class="r-in"><span> <span class="fu">ecokit</span><span class="fu">::</span><span class="fu"><a href="extract_options.html">extract_options</a></span><span class="op">(</span><span class="st">"my_option"</span><span class="op">)</span></span></span>
 <span class="r-msg co"><span class="r-pr">#&gt;</span> No options found with the specified pattern</span>
 <span class="r-in"><span></span></span>
 <span class="r-in"><span> <span class="fu"><a href="https://rdrr.io/r/base/options.html" class="external-link">options</a></span><span class="op">(</span>plot1 <span class="op">=</span> <span class="fl">42</span>, plot2 <span class="op">=</span> <span class="st">"yes"</span>, plot_extra <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></span></span>
-<span class="r-in"><span> <span class="fu">ecokit</span><span class="fu">::</span><span class="fu">remove_options</span><span class="op">(</span><span class="st">"plot_"</span>, regex <span class="op">=</span> <span class="cn">FALSE</span><span class="op">)</span></span></span>
+<span class="r-in"><span> <span class="fu">remove_options</span><span class="op">(</span><span class="st">"plot_"</span>, regex <span class="op">=</span> <span class="cn">FALSE</span><span class="op">)</span></span></span>
 <span class="r-in"><span> <span class="fu">ecokit</span><span class="fu">::</span><span class="fu"><a href="extract_options.html">extract_options</a></span><span class="op">(</span><span class="st">"plot"</span><span class="op">)</span></span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> $plot1</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> [1] 42</span>
@@ -102,7 +103,8 @@ is <code>FALSE</code>.</p></dd>
 <span class="r-out co"><span class="r-pr">#&gt;</span> $plot_extra</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> [1] TRUE</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
-<span class="r-in"><span> <span class="fu">ecokit</span><span class="fu">::</span><span class="fu">remove_options</span><span class="op">(</span><span class="st">"plot_"</span>, regex <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></span></span>
+<span class="r-in"><span></span></span>
+<span class="r-in"><span> <span class="fu">remove_options</span><span class="op">(</span><span class="st">"plot_"</span>, regex <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></span></span>
 <span class="r-in"><span> <span class="fu">ecokit</span><span class="fu">::</span><span class="fu"><a href="extract_options.html">extract_options</a></span><span class="op">(</span><span class="st">"plot"</span><span class="op">)</span></span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> $plot1</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> [1] 42</span>
@@ -110,6 +112,10 @@ is <code>FALSE</code>.</p></dd>
 <span class="r-out co"><span class="r-pr">#&gt;</span> $plot2</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> [1] "yes"</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
+<span class="r-in"><span></span></span>
+<span class="r-in"><span> <span class="co"># non-existing pattern (no output or error)</span></span></span>
+<span class="r-in"><span> <span class="fu">remove_options</span><span class="op">(</span><span class="st">"non_existing_pattern_123"</span>, regex <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></span></span>
+<span class="r-in"><span> <span class="fu">remove_options</span><span class="op">(</span><span class="st">"non_existing_pattern_123"</span><span class="op">)</span></span></span>
 </code></pre></div>
     </div>
   </main><aside class="col-md-3"><nav id="toc" aria-label="Table of contents"><h2>On this page</h2>

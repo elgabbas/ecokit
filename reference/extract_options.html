@@ -76,8 +76,14 @@ matches are found, returns <code>NULL</code> (invisibly) and prints a message.</
 
     <div class="section level2">
     <h2 id="ref-examples">Examples<a class="anchor" aria-label="anchor" href="#ref-examples"></a></h2>
-    <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span><span class="co"># all options with "warn" in the name (case-insensitive)</span></span></span>
-<span class="r-in"><span><span class="fu">ecokit</span><span class="fu">::</span><span class="fu">extract_options</span><span class="op">(</span><span class="st">"warn"</span><span class="op">)</span></span></span>
+    <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span></span></span>
+<span class="r-in"><span><span class="co"># all options</span></span></span>
+<span class="r-in"><span><span class="va">all_options</span> <span class="op">&lt;-</span> <span class="fu">extract_options</span><span class="op">(</span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="fu"><a href="https://rdrr.io/r/base/length.html" class="external-link">length</a></span><span class="op">(</span><span class="va">all_options</span><span class="op">)</span></span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [1] 115</span>
+<span class="r-in"><span></span></span>
+<span class="r-in"><span><span class="co"># all options with "warn" in the name (case-insensitive)</span></span></span>
+<span class="r-in"><span><span class="fu">extract_options</span><span class="op">(</span>pattern <span class="op">=</span> <span class="st">"warn"</span><span class="op">)</span></span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> $nwarnings</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> [1] 50</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
@@ -104,7 +110,7 @@ matches are found, returns <code>NULL</code> (invisibly) and prints a message.</
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="co"># options starting with "r" (case-sensitive)</span></span></span>
-<span class="r-in"><span><span class="fu">ecokit</span><span class="fu">::</span><span class="fu">extract_options</span><span class="op">(</span><span class="st">"^r"</span>, <span class="cn">TRUE</span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="fu">extract_options</span><span class="op">(</span>pattern <span class="op">=</span> <span class="st">"^r"</span>, case_sensitive <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> $repos</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>                                                          RSPM </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> "https://packagemanager.posit.co/cran/__linux__/noble/latest" </span>
@@ -118,8 +124,12 @@ matches are found, returns <code>NULL</code> (invisibly) and prints a message.</
 <span class="r-out co"><span class="r-pr">#&gt;</span> [1] FALSE</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> $rlang_trace_top_env</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> &lt;environment: 0x563c6d1c4b98&gt;</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> &lt;environment: 0x5578db8c3730&gt;</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
+<span class="r-in"><span></span></span>
+<span class="r-in"><span><span class="co"># non-existing pattern</span></span></span>
+<span class="r-in"><span><span class="fu">extract_options</span><span class="op">(</span>pattern <span class="op">=</span> <span class="st">"non_existing_pattern_123"</span><span class="op">)</span></span></span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> No options found with the specified pattern</span>
 </code></pre></div>
     </div>
   </main><aside class="col-md-3"><nav id="toc" aria-label="Table of contents"><h2>On this page</h2>
