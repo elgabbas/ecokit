@@ -16,8 +16,8 @@
 #'   link, and `link` containing the absolute URL of each link. The tibble is
 #'   sorted by link and then by link text, and only unique links are included.
 #' @importFrom rlang .data
+#' @export
 #' @examples
-#'
 #' head(scrape_link(url = "https://github.com/tidyverse/dplyr"))
 #'
 #' head(
@@ -25,10 +25,7 @@
 #'     url = "https://github.com/tidyverse/dplyr", sort_by = "link_text"))
 #'
 #' # This will give an "Invalid url" error
-#' \dontrun{
-#'  scrape_link(url = "https://github50.com")
-#' }
-#' @export
+#' try(scrape_link(url = "https://github50.com"))
 
 scrape_link <- function(url, sort_by = c("link", "link_text")) {
 

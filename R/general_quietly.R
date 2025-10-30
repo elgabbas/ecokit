@@ -59,7 +59,7 @@
 #' })
 #'
 #' # Suppress specific messages using regular expression patterns
-#' quietly({
+#' ecokit::quietly({
 #'   message("Scale for y is already present.")
 #'   message("Scale for x is already present.")
 #'   message("TTT")

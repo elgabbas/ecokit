@@ -24,7 +24,6 @@ This function scrapes a web page for all links (\verb{<a>} tags) and extracts bo
 the URLs and the link text.
 }
 \examples{
-
 head(scrape_link(url = "https://github.com/tidyverse/dplyr"))
 
 head(
@@ -32,7 +31,5 @@ head(
     url = "https://github.com/tidyverse/dplyr", sort_by = "link_text"))
 
 # This will give an "Invalid url" error
-\dontrun{
- scrape_link(url = "https://github50.com")
-}
+try(scrape_link(url = "https://github50.com"))
 }
