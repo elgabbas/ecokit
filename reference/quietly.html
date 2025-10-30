@@ -125,14 +125,15 @@ suppressed.</p>
 <span class="r-wrn co"><span class="r-pr">#&gt;</span> <span class="warning">Warning: </span>Something else</span>
 <span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="co"># Suppress specific messages using regular expression patterns</span></span></span>
-<span class="r-in"><span><span class="fu">quietly</span><span class="op">(</span><span class="op">{</span></span></span>
+<span class="r-in"><span><span class="fu">ecokit</span><span class="fu">::</span><span class="fu">quietly</span><span class="op">(</span><span class="op">{</span></span></span>
 <span class="r-in"><span>  <span class="fu"><a href="https://rdrr.io/r/base/message.html" class="external-link">message</a></span><span class="op">(</span><span class="st">"Scale for y is already present."</span><span class="op">)</span></span></span>
 <span class="r-in"><span>  <span class="fu"><a href="https://rdrr.io/r/base/message.html" class="external-link">message</a></span><span class="op">(</span><span class="st">"Scale for x is already present."</span><span class="op">)</span></span></span>
 <span class="r-in"><span>  <span class="fu"><a href="https://rdrr.io/r/base/message.html" class="external-link">message</a></span><span class="op">(</span><span class="st">"TTT"</span><span class="op">)</span></span></span>
 <span class="r-in"><span>  <span class="kw"><a href="https://rdrr.io/r/base/warning.html" class="external-link">warning</a></span><span class="op">(</span><span class="st">"Something else"</span><span class="op">)</span></span></span>
 <span class="r-in"><span><span class="op">}</span>,</span></span>
 <span class="r-in"><span><span class="st">"Scale for [xy] is already present\\."</span><span class="op">)</span></span></span>
-<span class="r-err co"><span class="r-pr">#&gt;</span> <span class="error">Error in quietly({    message("Scale for y is already present.")    message("Scale for x is already present.")    message("TTT")    warning("Something else")}, "Scale for [xy] is already present\\."):</span> unused argument ("Scale for [xy] is already present\\.")</span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> TTT</span>
+<span class="r-wrn co"><span class="r-pr">#&gt;</span> <span class="warning">Warning: </span>Something else</span>
 <span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="co"># Error if ... is not character</span></span></span>
 <span class="r-in"><span><span class="kw"><a href="https://rdrr.io/r/base/try.html" class="external-link">try</a></span><span class="op">(</span><span class="fu">ecokit</span><span class="fu">::</span><span class="fu">quietly</span><span class="op">(</span><span class="op">{</span> <span class="kw"><a href="https://rdrr.io/r/base/warning.html" class="external-link">warning</a></span><span class="op">(</span><span class="st">"test"</span>, call. <span class="op">=</span> <span class="cn">FALSE</span><span class="op">)</span> <span class="op">}</span>, <span class="fl">1L</span><span class="op">)</span><span class="op">)</span></span></span>

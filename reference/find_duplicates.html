@@ -147,16 +147,16 @@ The <code>duplicated_dirs</code> tibble (if any) contains the following columns:
 <span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># A tibble: 1 × 7</span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>   path             dup_group files    file_ext n_files file_size_mb content_hash</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>   <span style="color: #949494; font-style: italic;">&lt;fs::path&gt;</span>           <span style="color: #949494; font-style: italic;">&lt;int&gt;</span> <span style="color: #949494; font-style: italic;">&lt;list&gt;</span>   <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>      <span style="color: #949494; font-style: italic;">&lt;int&gt;</span>        <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>       </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">1</span> …<span style="color: #0000BB; font-weight: bold;">cq5akW/example1</span>         1 <span style="color: #949494;">&lt;tibble&gt;</span> txt            3            0 d3608428aac…</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">1</span> …<span style="color: #0000BB; font-weight: bold;">UKvO9B/example1</span>         1 <span style="color: #949494;">&lt;tibble&gt;</span> txt            3            0 d3608428aac…</span>
 <span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="va">dups</span><span class="op">$</span><span class="va">duplicated_files</span><span class="op">$</span><span class="va">files</span></span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> [[1]]</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># A tibble: 3 × 3</span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>   file_abs                                  file_rel         modified           </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>   <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>                                     <span style="color: #949494; font-style: italic;">&lt;fs::path&gt;</span>       <span style="color: #949494; font-style: italic;">&lt;dttm&gt;</span>             </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">1</span> /tmp/Rtmpcq5akW/example1/file1.txt        file1.txt        2025-10-25 <span style="color: #949494;">01:30:41</span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">2</span> /tmp/Rtmpcq5akW/example1/file2.txt        file2.txt        2025-10-25 <span style="color: #949494;">01:30:41</span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">3</span> /tmp/Rtmpcq5akW/example1/subdir/file3.txt subdir/file3.txt 2025-10-25 <span style="color: #949494;">01:30:41</span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">1</span> /tmp/RtmpUKvO9B/example1/file1.txt        file1.txt        2025-10-30 <span style="color: #949494;">22:52:07</span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">2</span> /tmp/RtmpUKvO9B/example1/file2.txt        file2.txt        2025-10-30 <span style="color: #949494;">22:52:07</span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">3</span> /tmp/RtmpUKvO9B/example1/subdir/file3.txt subdir/file3.txt 2025-10-30 <span style="color: #949494;">22:52:07</span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="co"># Clean up</span></span></span>
@@ -198,9 +198,9 @@ The <code>duplicated_dirs</code> tibble (if any) contains the following columns:
 <span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># A tibble: 3 × 5</span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>   dir        dir_abs                        n_files n_dup_dirs dup_group</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>   <span style="color: #949494; font-style: italic;">&lt;fs::path&gt;</span> <span style="color: #949494; font-style: italic;">&lt;fs::path&gt;</span>                       <span style="color: #949494; font-style: italic;">&lt;int&gt;</span>      <span style="color: #949494; font-style: italic;">&lt;int&gt;</span>     <span style="color: #949494; font-style: italic;">&lt;int&gt;</span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">1</span> dir_a      <span style="color: #0000BB; font-weight: bold;">/tmp/Rtmpcq5akW/example2/dir_a</span>       1          3         1</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">2</span> dir_b      <span style="color: #0000BB; font-weight: bold;">/tmp/Rtmpcq5akW/example2/dir_b</span>       1          3         1</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">3</span> dir_c      <span style="color: #0000BB; font-weight: bold;">/tmp/Rtmpcq5akW/example2/dir_c</span>       1          3         1</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">1</span> dir_a      <span style="color: #0000BB; font-weight: bold;">/tmp/RtmpUKvO9B/example2/dir_a</span>       1          3         1</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">2</span> dir_b      <span style="color: #0000BB; font-weight: bold;">/tmp/RtmpUKvO9B/example2/dir_b</span>       1          3         1</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">3</span> dir_c      <span style="color: #0000BB; font-weight: bold;">/tmp/RtmpUKvO9B/example2/dir_c</span>       1          3         1</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> <span style="font-weight: bold;">--------------------------------</span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> <span style="font-weight: bold;">  &gt;&gt;  Duplicated files</span></span>
@@ -209,31 +209,31 @@ The <code>duplicated_dirs</code> tibble (if any) contains the following columns:
 <span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># A tibble: 2 × 7</span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>   path             dup_group files    file_ext n_files file_size_mb content_hash</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>   <span style="color: #949494; font-style: italic;">&lt;fs::path&gt;</span>           <span style="color: #949494; font-style: italic;">&lt;int&gt;</span> <span style="color: #949494; font-style: italic;">&lt;list&gt;</span>   <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>      <span style="color: #949494; font-style: italic;">&lt;int&gt;</span>        <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>       </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">1</span> …<span style="color: #0000BB; font-weight: bold;">cq5akW/example2</span>         1 <span style="color: #949494;">&lt;tibble&gt;</span> txt            2            0 39a16930dd4…</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">2</span> …<span style="color: #0000BB; font-weight: bold;">cq5akW/example2</span>         2 <span style="color: #949494;">&lt;tibble&gt;</span> txt            2            0 3294155fa14…</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">1</span> …<span style="color: #0000BB; font-weight: bold;">UKvO9B/example2</span>         1 <span style="color: #949494;">&lt;tibble&gt;</span> txt            2            0 39a16930dd4…</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">2</span> …<span style="color: #0000BB; font-weight: bold;">UKvO9B/example2</span>         2 <span style="color: #949494;">&lt;tibble&gt;</span> txt            2            0 3294155fa14…</span>
 <span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="va">dups</span><span class="op">$</span><span class="va">duplicated_dirs</span></span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># A tibble: 3 × 5</span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>   dir        dir_abs                        n_files n_dup_dirs dup_group</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>   <span style="color: #949494; font-style: italic;">&lt;fs::path&gt;</span> <span style="color: #949494; font-style: italic;">&lt;fs::path&gt;</span>                       <span style="color: #949494; font-style: italic;">&lt;int&gt;</span>      <span style="color: #949494; font-style: italic;">&lt;int&gt;</span>     <span style="color: #949494; font-style: italic;">&lt;int&gt;</span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">1</span> dir_a      <span style="color: #0000BB; font-weight: bold;">/tmp/Rtmpcq5akW/example2/dir_a</span>       1          3         1</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">2</span> dir_b      <span style="color: #0000BB; font-weight: bold;">/tmp/Rtmpcq5akW/example2/dir_b</span>       1          3         1</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">3</span> dir_c      <span style="color: #0000BB; font-weight: bold;">/tmp/Rtmpcq5akW/example2/dir_c</span>       1          3         1</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">1</span> dir_a      <span style="color: #0000BB; font-weight: bold;">/tmp/RtmpUKvO9B/example2/dir_a</span>       1          3         1</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">2</span> dir_b      <span style="color: #0000BB; font-weight: bold;">/tmp/RtmpUKvO9B/example2/dir_b</span>       1          3         1</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">3</span> dir_c      <span style="color: #0000BB; font-weight: bold;">/tmp/RtmpUKvO9B/example2/dir_c</span>       1          3         1</span>
 <span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="va">dups</span><span class="op">$</span><span class="va">duplicated_files</span><span class="op">$</span><span class="va">files</span></span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> [[1]]</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># A tibble: 2 × 3</span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>   file_abs                                 file_rel        modified           </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>   <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>                                    <span style="color: #949494; font-style: italic;">&lt;fs::path&gt;</span>      <span style="color: #949494; font-style: italic;">&lt;dttm&gt;</span>             </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">1</span> /tmp/Rtmpcq5akW/example2/dir_a/file1.txt dir_a/file1.txt 2025-10-25 <span style="color: #949494;">01:30:41</span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">2</span> /tmp/Rtmpcq5akW/example2/dir_b/file1.txt dir_b/file1.txt 2025-10-25 <span style="color: #949494;">01:30:41</span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">1</span> /tmp/RtmpUKvO9B/example2/dir_a/file1.txt dir_a/file1.txt 2025-10-30 <span style="color: #949494;">22:52:08</span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">2</span> /tmp/RtmpUKvO9B/example2/dir_b/file1.txt dir_b/file1.txt 2025-10-30 <span style="color: #949494;">22:52:08</span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> [[2]]</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># A tibble: 2 × 3</span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>   file_abs                                 file_rel        modified           </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>   <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>                                    <span style="color: #949494; font-style: italic;">&lt;fs::path&gt;</span>      <span style="color: #949494; font-style: italic;">&lt;dttm&gt;</span>             </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">1</span> /tmp/Rtmpcq5akW/example2/dir_a/file2.txt dir_a/file2.txt 2025-10-25 <span style="color: #949494;">01:30:41</span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">2</span> /tmp/Rtmpcq5akW/example2/dir_b/file2.txt dir_b/file2.txt 2025-10-25 <span style="color: #949494;">01:30:41</span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">1</span> /tmp/RtmpUKvO9B/example2/dir_a/file2.txt dir_a/file2.txt 2025-10-30 <span style="color: #949494;">22:52:08</span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">2</span> /tmp/RtmpUKvO9B/example2/dir_b/file2.txt dir_b/file2.txt 2025-10-30 <span style="color: #949494;">22:52:08</span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="co"># Clean up</span></span></span>
@@ -299,11 +299,11 @@ The <code>duplicated_dirs</code> tibble (if any) contains the following columns:
 <span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># A tibble: 5 × 5</span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>   dir        dir_abs                         n_files n_dup_dirs dup_group</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>   <span style="color: #949494; font-style: italic;">&lt;fs::path&gt;</span> <span style="color: #949494; font-style: italic;">&lt;fs::path&gt;</span>                        <span style="color: #949494; font-style: italic;">&lt;int&gt;</span>      <span style="color: #949494; font-style: italic;">&lt;int&gt;</span>     <span style="color: #949494; font-style: italic;">&lt;int&gt;</span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">1</span> group1     <span style="color: #0000BB; font-weight: bold;">/tmp/Rtmpcq5akW/example4/group1</span>       1          5         1</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">2</span> group2     <span style="color: #0000BB; font-weight: bold;">/tmp/Rtmpcq5akW/example4/group2</span>       1          5         1</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">3</span> group3     <span style="color: #0000BB; font-weight: bold;">/tmp/Rtmpcq5akW/example4/group3</span>       1          5         1</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">4</span> group4     <span style="color: #0000BB; font-weight: bold;">/tmp/Rtmpcq5akW/example4/group4</span>       1          5         1</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">5</span> group5     <span style="color: #0000BB; font-weight: bold;">/tmp/Rtmpcq5akW/example4/group5</span>       1          5         1</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">1</span> group1     <span style="color: #0000BB; font-weight: bold;">/tmp/RtmpUKvO9B/example4/group1</span>       1          5         1</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">2</span> group2     <span style="color: #0000BB; font-weight: bold;">/tmp/RtmpUKvO9B/example4/group2</span>       1          5         1</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">3</span> group3     <span style="color: #0000BB; font-weight: bold;">/tmp/RtmpUKvO9B/example4/group3</span>       1          5         1</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">4</span> group4     <span style="color: #0000BB; font-weight: bold;">/tmp/RtmpUKvO9B/example4/group4</span>       1          5         1</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">5</span> group5     <span style="color: #0000BB; font-weight: bold;">/tmp/RtmpUKvO9B/example4/group5</span>       1          5         1</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> <span style="font-weight: bold;">--------------------------------</span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> <span style="font-weight: bold;">  &gt;&gt;  Duplicated files</span></span>
@@ -312,11 +312,11 @@ The <code>duplicated_dirs</code> tibble (if any) contains the following columns:
 <span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># A tibble: 5 × 7</span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>   path             dup_group files    file_ext n_files file_size_mb content_hash</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>   <span style="color: #949494; font-style: italic;">&lt;fs::path&gt;</span>           <span style="color: #949494; font-style: italic;">&lt;int&gt;</span> <span style="color: #949494; font-style: italic;">&lt;list&gt;</span>   <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>      <span style="color: #949494; font-style: italic;">&lt;int&gt;</span>        <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>       </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">1</span> …<span style="color: #0000BB; font-weight: bold;">cq5akW/example4</span>         1 <span style="color: #949494;">&lt;tibble&gt;</span> txt            3            0 289d4cf190e…</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">2</span> …<span style="color: #0000BB; font-weight: bold;">cq5akW/example4</span>         2 <span style="color: #949494;">&lt;tibble&gt;</span> txt            3            0 d5735c1086d…</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">3</span> …<span style="color: #0000BB; font-weight: bold;">cq5akW/example4</span>         3 <span style="color: #949494;">&lt;tibble&gt;</span> txt            3            0 31575137fb5…</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">4</span> …<span style="color: #0000BB; font-weight: bold;">cq5akW/example4</span>         4 <span style="color: #949494;">&lt;tibble&gt;</span> txt            3            0 e4f4464959f…</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">5</span> …<span style="color: #0000BB; font-weight: bold;">cq5akW/example4</span>         5 <span style="color: #949494;">&lt;tibble&gt;</span> txt            3            0 8506efe5d5b…</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">1</span> …<span style="color: #0000BB; font-weight: bold;">UKvO9B/example4</span>         1 <span style="color: #949494;">&lt;tibble&gt;</span> txt            3            0 289d4cf190e…</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">2</span> …<span style="color: #0000BB; font-weight: bold;">UKvO9B/example4</span>         2 <span style="color: #949494;">&lt;tibble&gt;</span> txt            3            0 d5735c1086d…</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">3</span> …<span style="color: #0000BB; font-weight: bold;">UKvO9B/example4</span>         3 <span style="color: #949494;">&lt;tibble&gt;</span> txt            3            0 31575137fb5…</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">4</span> …<span style="color: #0000BB; font-weight: bold;">UKvO9B/example4</span>         4 <span style="color: #949494;">&lt;tibble&gt;</span> txt            3            0 e4f4464959f…</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">5</span> …<span style="color: #0000BB; font-weight: bold;">UKvO9B/example4</span>         5 <span style="color: #949494;">&lt;tibble&gt;</span> txt            3            0 8506efe5d5b…</span>
 <span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="co"># Clean up</span></span></span>
 <span class="r-in"><span><span class="fu">dir_delete</span><span class="op">(</span><span class="va">temp_dir4</span><span class="op">)</span></span></span>

@@ -74,17 +74,16 @@ sorted by link and then by link text, and only unique links are included.</p>
 
     <div class="section level2">
     <h2 id="ref-examples">Examples<a class="anchor" aria-label="anchor" href="#ref-examples"></a></h2>
-    <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span></span></span>
-<span class="r-in"><span><span class="fu"><a href="https://rdrr.io/r/utils/head.html" class="external-link">head</a></span><span class="op">(</span><span class="fu">scrape_link</span><span class="op">(</span>url <span class="op">=</span> <span class="st">"https://github.com/tidyverse/dplyr"</span><span class="op">)</span><span class="op">)</span></span></span>
+    <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span><span class="fu"><a href="https://rdrr.io/r/utils/head.html" class="external-link">head</a></span><span class="op">(</span><span class="fu">scrape_link</span><span class="op">(</span>url <span class="op">=</span> <span class="st">"https://github.com/tidyverse/dplyr"</span><span class="op">)</span><span class="op">)</span></span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># A tibble: 6 × 2</span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>   link_text          link                                                       </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>   <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>              <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>                                                      </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">1</span> Acero              https://arrow.apache.org/docs/cpp/streaming_execution.html </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">2</span> arrow              https://arrow.apache.org/docs/r/                           </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">3</span> dbplyr             https://dbplyr.tidyverse.org/                              </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">4</span> Documentation      https://docs.github.com                                    </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">5</span> Docs               https://docs.github.com/                                   </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">6</span> Search syntax tips https://docs.github.com/search-github/github-code-search/u…</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   link_text       link                                                      </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>           <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>                                                     </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">1</span> Archive Program https://archiveprogram.github.com                         </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">2</span> Acero           https://arrow.apache.org/docs/cpp/streaming_execution.html</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">3</span> arrow           https://arrow.apache.org/docs/r/                          </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">4</span> dbplyr          https://dbplyr.tidyverse.org/                             </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">5</span> Documentation   https://docs.github.com                                   </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">6</span> Docs            https://docs.github.com/                                  </span>
 <span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="fu"><a href="https://rdrr.io/r/utils/head.html" class="external-link">head</a></span><span class="op">(</span></span></span>
 <span class="r-in"><span>  <span class="fu">scrape_link</span><span class="op">(</span></span></span>
@@ -92,7 +91,7 @@ sorted by link and then by link text, and only unique links are included.</p>
 <span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># A tibble: 6 × 2</span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>   link_text          link                                                      </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>   <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>              <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>                                                     </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">1</span> + 265 contributors https://github.com/tidyverse/dplyr/graphs/contributors    </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">1</span> + 266 contributors https://github.com/tidyverse/dplyr/graphs/contributors    </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">2</span> + 42 releases      https://github.com/tidyverse/dplyr/releases               </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">3</span> .Rbuildignore      https://github.com/tidyverse/dplyr/blob/main/.Rbuildignore</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">4</span> .github            https://github.com/tidyverse/dplyr/tree/main/.github      </span>
@@ -100,9 +99,14 @@ sorted by link and then by link text, and only unique links are included.</p>
 <span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">6</span> .vscode            https://github.com/tidyverse/dplyr/tree/main/.vscode      </span>
 <span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="co"># This will give an "Invalid url" error</span></span></span>
-<span class="r-in"><span><span class="kw">if</span> <span class="op">(</span><span class="cn">FALSE</span><span class="op">)</span> <span class="op">{</span> <span class="co"># \dontrun{</span></span></span>
-<span class="r-in"><span> <span class="fu">scrape_link</span><span class="op">(</span>url <span class="op">=</span> <span class="st">"https://github50.com"</span><span class="op">)</span></span></span>
-<span class="r-in"><span><span class="op">}</span> <span class="co"># }</span></span></span>
+<span class="r-in"><span><span class="kw"><a href="https://rdrr.io/r/base/try.html" class="external-link">try</a></span><span class="op">(</span><span class="fu">scrape_link</span><span class="op">(</span>url <span class="op">=</span> <span class="st">"https://github50.com"</span><span class="op">)</span><span class="op">)</span></span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> Error in scrape_link(url = "https://github50.com") : </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   <span style="color: #BB0000; font-weight: bold;">Invalid url</span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> ----- Metadata -----</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #0000BB; font-weight: bold;">url</span> [<span style="text-decoration: underline;">url</span>]: &lt;character&gt;</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> https://github50.com</span>
 </code></pre></div>
     </div>
   </main><aside class="col-md-3"><nav id="toc" aria-label="Table of contents"><h2>On this page</h2>
