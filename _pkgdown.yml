@@ -93,6 +93,7 @@ reference:
   - cat_time
   - cat_diff
   - info_chunk
+  - format_number
 
 - title: Utility functions
   contents:
