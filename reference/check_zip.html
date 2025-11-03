@@ -107,7 +107,7 @@ vector for each ZIP file.</p></dd>
 <span class="r-in"><span><span class="va">bad_zip</span> <span class="op">&lt;-</span> <span class="fu">fs</span><span class="fu">::</span><span class="fu"><a href="https://fs.r-lib.org/reference/path.html" class="external-link">path</a></span><span class="op">(</span><span class="va">temp_dir</span>, <span class="st">"invalid.zip"</span><span class="op">)</span></span></span>
 <span class="r-in"><span><span class="fu"><a href="https://rdrr.io/r/base/writeLines.html" class="external-link">writeLines</a></span><span class="op">(</span><span class="st">"Not a ZIP file"</span>, <span class="va">bad_zip</span><span class="op">)</span></span></span>
 <span class="r-in"><span><span class="fu">check_zip</span><span class="op">(</span><span class="va">bad_zip</span><span class="op">)</span></span></span>
-<span class="r-wrn co"><span class="r-pr">#&gt;</span> <span class="warning">Warning: </span>Warning during file validation: running command 'unzip -t '/tmp/RtmpUKvO9B/check_zip/invalid.zip'' had status 9</span>
+<span class="r-wrn co"><span class="r-pr">#&gt;</span> <span class="warning">Warning: </span>Warning during file validation: running command 'unzip -t '/tmp/Rtmph1PjGb/check_zip/invalid.zip'' had status 9</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> [1] FALSE</span>
 <span class="r-in"><span><span class="fu">check_zip</span><span class="op">(</span><span class="va">bad_zip</span>, warning <span class="op">=</span> <span class="cn">FALSE</span><span class="op">)</span></span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> [1] FALSE</span>
@@ -116,7 +116,7 @@ vector for each ZIP file.</p></dd>
 <span class="r-in"><span><span class="va">empty_zip</span> <span class="op">&lt;-</span> <span class="fu">fs</span><span class="fu">::</span><span class="fu"><a href="https://fs.r-lib.org/reference/path.html" class="external-link">path</a></span><span class="op">(</span><span class="va">temp_dir</span>, <span class="st">"empty.zip"</span><span class="op">)</span></span></span>
 <span class="r-in"><span><span class="fu">fs</span><span class="fu">::</span><span class="fu"><a href="https://fs.r-lib.org/reference/create.html" class="external-link">file_create</a></span><span class="op">(</span><span class="va">empty_zip</span><span class="op">)</span></span></span>
 <span class="r-in"><span><span class="fu">check_zip</span><span class="op">(</span><span class="va">empty_zip</span><span class="op">)</span></span></span>
-<span class="r-wrn co"><span class="r-pr">#&gt;</span> <span class="warning">Warning: </span>File is empty: /tmp/RtmpUKvO9B/check_zip/empty.zip</span>
+<span class="r-wrn co"><span class="r-pr">#&gt;</span> <span class="warning">Warning: </span>File is empty: /tmp/Rtmph1PjGb/check_zip/empty.zip</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> [1] FALSE</span>
 <span class="r-in"><span><span class="fu">check_zip</span><span class="op">(</span><span class="va">empty_zip</span>, warning <span class="op">=</span> <span class="cn">FALSE</span><span class="op">)</span></span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> [1] FALSE</span>
@@ -125,7 +125,7 @@ vector for each ZIP file.</p></dd>
 <span class="r-in"><span><span class="va">non_zip_file</span> <span class="op">&lt;-</span> <span class="fu">fs</span><span class="fu">::</span><span class="fu"><a href="https://fs.r-lib.org/reference/path.html" class="external-link">path</a></span><span class="op">(</span><span class="va">temp_dir</span>, <span class="st">"test.txt"</span><span class="op">)</span></span></span>
 <span class="r-in"><span><span class="fu"><a href="https://rdrr.io/r/base/writeLines.html" class="external-link">writeLines</a></span><span class="op">(</span><span class="st">"Hello, world!"</span>, <span class="va">non_zip_file</span><span class="op">)</span></span></span>
 <span class="r-in"><span><span class="fu">check_zip</span><span class="op">(</span><span class="va">non_zip_file</span><span class="op">)</span></span></span>
-<span class="r-wrn co"><span class="r-pr">#&gt;</span> <span class="warning">Warning: </span>Warning during file validation: running command 'unzip -t '/tmp/RtmpUKvO9B/check_zip/test.txt'' had status 9</span>
+<span class="r-wrn co"><span class="r-pr">#&gt;</span> <span class="warning">Warning: </span>Warning during file validation: running command 'unzip -t '/tmp/Rtmph1PjGb/check_zip/test.txt'' had status 9</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> [1] FALSE</span>
 <span class="r-in"><span><span class="fu">check_zip</span><span class="op">(</span><span class="va">non_zip_file</span>, warning <span class="op">=</span> <span class="cn">FALSE</span><span class="op">)</span></span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> [1] FALSE</span>
@@ -141,18 +141,18 @@ vector for each ZIP file.</p></dd>
 <span class="r-in"><span><span class="va">zip_files</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="va">zip_file</span>, <span class="va">bad_zip</span>, <span class="va">empty_zip</span>, <span class="va">temp_file</span><span class="op">)</span></span></span>
 <span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="fu">check_zip</span><span class="op">(</span><span class="va">zip_files</span><span class="op">)</span></span></span>
-<span class="r-wrn co"><span class="r-pr">#&gt;</span> <span class="warning">Warning: </span>Warning during file validation: running command 'unzip -t '/tmp/RtmpUKvO9B/check_zip/invalid.zip'' had status 9</span>
-<span class="r-wrn co"><span class="r-pr">#&gt;</span> <span class="warning">Warning: </span>File is empty: /tmp/RtmpUKvO9B/check_zip/empty.zip</span>
-<span class="r-wrn co"><span class="r-pr">#&gt;</span> <span class="warning">Warning: </span>Warning during file validation: running command 'unzip -t '/tmp/RtmpUKvO9B/check_zip/test.txt'' had status 9</span>
+<span class="r-wrn co"><span class="r-pr">#&gt;</span> <span class="warning">Warning: </span>Warning during file validation: running command 'unzip -t '/tmp/Rtmph1PjGb/check_zip/invalid.zip'' had status 9</span>
+<span class="r-wrn co"><span class="r-pr">#&gt;</span> <span class="warning">Warning: </span>File is empty: /tmp/Rtmph1PjGb/check_zip/empty.zip</span>
+<span class="r-wrn co"><span class="r-pr">#&gt;</span> <span class="warning">Warning: </span>Warning during file validation: running command 'unzip -t '/tmp/Rtmph1PjGb/check_zip/test.txt'' had status 9</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> [1] FALSE</span>
 <span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="fu">check_zip</span><span class="op">(</span><span class="va">zip_files</span>, warning <span class="op">=</span> <span class="cn">FALSE</span><span class="op">)</span></span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> [1] FALSE</span>
 <span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="fu">check_zip</span><span class="op">(</span><span class="va">zip_files</span>, all_okay <span class="op">=</span> <span class="cn">FALSE</span><span class="op">)</span></span></span>
-<span class="r-wrn co"><span class="r-pr">#&gt;</span> <span class="warning">Warning: </span>Warning during file validation: running command 'unzip -t '/tmp/RtmpUKvO9B/check_zip/invalid.zip'' had status 9</span>
-<span class="r-wrn co"><span class="r-pr">#&gt;</span> <span class="warning">Warning: </span>File is empty: /tmp/RtmpUKvO9B/check_zip/empty.zip</span>
-<span class="r-wrn co"><span class="r-pr">#&gt;</span> <span class="warning">Warning: </span>Warning during file validation: running command 'unzip -t '/tmp/RtmpUKvO9B/check_zip/test.txt'' had status 9</span>
+<span class="r-wrn co"><span class="r-pr">#&gt;</span> <span class="warning">Warning: </span>Warning during file validation: running command 'unzip -t '/tmp/Rtmph1PjGb/check_zip/invalid.zip'' had status 9</span>
+<span class="r-wrn co"><span class="r-pr">#&gt;</span> <span class="warning">Warning: </span>File is empty: /tmp/Rtmph1PjGb/check_zip/empty.zip</span>
+<span class="r-wrn co"><span class="r-pr">#&gt;</span> <span class="warning">Warning: </span>Warning during file validation: running command 'unzip -t '/tmp/Rtmph1PjGb/check_zip/test.txt'' had status 9</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> [1]  TRUE FALSE FALSE FALSE</span>
 <span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="fu">check_zip</span><span class="op">(</span><span class="va">zip_files</span>, all_okay <span class="op">=</span> <span class="cn">FALSE</span>, warning <span class="op">=</span> <span class="cn">FALSE</span><span class="op">)</span></span></span>
