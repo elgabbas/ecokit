@@ -57,19 +57,27 @@ check_gbif <- function(r_environ = ".Renviron") {
   # Validate input
   if (!is.character(r_environ) || !nzchar(r_environ)) {
     ecokit::stop_ctx(
-      "The 'r_environ' parameter must be a non-empty character string",
-      include_backtrace = TRUE
-    )
+      paste0(
+        "`GBIF` credentials are not set in the environment.\n",
+        "Additionally, the 'r_environ' parameter is invalid.\n",
+        "It must be a non-empty character string"),
+      include_backtrace = TRUE)
   }
+
   # Check if the .Renviron file exists and is readable
   if (!fs::file_exists(r_environ)) {
     ecokit::stop_ctx(
-      "`.Renviron` file does not exist", r_environ = r_environ,
-      include_backtrace = TRUE)
+      paste0(
+        "`GBIF` credentials are not set in the environment.\n",
+        "Additionally, the 'r_environ' file could not be found."),
+      r_environ = r_environ, include_backtrace = TRUE)
   }
+
   if (file.access(r_environ, mode = 4L) < 0L) {
     ecokit::stop_ctx(
-      "The specified `.Renviron` file is not readable",
+      paste0(
+        "`GBIF` credentials are not set in the environment.\n",
+        "Additionally, the 'r_environ' file is not readable"),
       r_environ = r_environ, include_backtrace = TRUE)
   }
 
@@ -78,7 +86,9 @@ check_gbif <- function(r_environ = ".Renviron") {
 
   if (isFALSE(r_environ_loaded)) {
     ecokit::stop_ctx(
-      "Failed to read the `.Renviron` file",
+      paste0(
+        "`GBIF` credentials are not set in the environment.\n",
+        "Additionally, the 'r_environ' file could not be loaded."),
       r_environ = r_environ, include_backtrace = TRUE)
   }
 
