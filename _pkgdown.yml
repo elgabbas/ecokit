@@ -147,3 +147,4 @@ reference:
   - add_image_to_plot
   - add_line
   - integer_breaks
+  - binned_heatmap
