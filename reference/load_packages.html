@@ -106,10 +106,10 @@ packages) and does not return any value.</p>
     <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span><span class="co"># Currently loaded packages</span></span></span>
 <span class="r-in"><span><span class="op">(</span><span class="va">P1</span> <span class="op">&lt;-</span> <span class="fu">ecokit</span><span class="fu">::</span><span class="fu"><a href="loaded_packages.html">loaded_packages</a></span><span class="op">(</span><span class="op">)</span><span class="op">)</span></span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>  [1] "qs2"       "stringr"   "purrr"     "tools"     "future"    "car"      </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  [7] "carData"   "rworldmap" "raster"    "sp"        "arrow"     "terra"    </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [13] "fs"        "tidyr"     "tibble"    "png"       "sf"        "ggplot2"  </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [19] "dplyr"     "ecokit"    "magrittr"  "stats"     "graphics"  "grDevices"</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [25] "utils"     "datasets"  "methods"   "base"     </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  [7] "carData"   "rworldmap" "arrow"     "dismo"     "raster"    "sp"       </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [13] "terra"     "fs"        "tidyr"     "tibble"    "png"       "sf"       </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [19] "ggplot2"   "dplyr"     "ecokit"    "magrittr"  "stats"     "graphics" </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [25] "grDevices" "utils"     "datasets"  "methods"   "base"     </span>
 <span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="co"># Load tidyr</span></span></span>
 <span class="r-in"><span><span class="fu">load_packages</span><span class="op">(</span><span class="va">tidyr</span>, <span class="va">raster</span>, <span class="va">ggplot2</span>, <span class="va">nnet</span>, verbose <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></span></span>
@@ -123,10 +123,10 @@ packages) and does not return any value.</p>
 <span class="r-in"><span><span class="co"># Loaded packages after implementing the function</span></span></span>
 <span class="r-in"><span><span class="op">(</span><span class="va">P2</span> <span class="op">&lt;-</span> <span class="fu">ecokit</span><span class="fu">::</span><span class="fu"><a href="loaded_packages.html">loaded_packages</a></span><span class="op">(</span><span class="op">)</span><span class="op">)</span></span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>  [1] "nnet"      "qs2"       "stringr"   "purrr"     "tools"     "future"   </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  [7] "car"       "carData"   "rworldmap" "raster"    "sp"        "arrow"    </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [13] "terra"     "fs"        "tidyr"     "tibble"    "png"       "sf"       </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [19] "ggplot2"   "dplyr"     "ecokit"    "magrittr"  "stats"     "graphics" </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [25] "grDevices" "utils"     "datasets"  "methods"   "base"     </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  [7] "car"       "carData"   "rworldmap" "arrow"     "dismo"     "raster"   </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [13] "sp"        "terra"     "fs"        "tidyr"     "tibble"    "png"      </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [19] "sf"        "ggplot2"   "dplyr"     "ecokit"    "magrittr"  "stats"    </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [25] "graphics"  "grDevices" "utils"     "datasets"  "methods"   "base"     </span>
 <span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="co"># Which packages were loaded?</span></span></span>
 <span class="r-in"><span><span class="fu"><a href="https://generics.r-lib.org/reference/setops.html" class="external-link">setdiff</a></span><span class="op">(</span><span class="va">P2</span>, <span class="va">P1</span><span class="op">)</span></span></span>
