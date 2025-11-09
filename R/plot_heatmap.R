@@ -161,7 +161,7 @@ binned_heatmap <- function(
     data,
     x_bin = (plot_x - min_x) / (max_x - min_x),
     y_bin = (plot_y - min_y) / (max_y - min_y)) %>%
-    dplyr::count(x, y, plot_x, plot_y, x_bin, y_bin) %>%
+    dplyr::count(!!x, !!y, plot_x, plot_y, x_bin, y_bin) %>%
     sf::st_as_sf(coords = c("x_bin", "y_bin")) %>%
     terra::vect()
 
