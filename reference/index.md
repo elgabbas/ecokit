@@ -1,0 +1,310 @@
+# Package index
+
+## Package info
+
+- [`ecokit`](https://elgabbas.github.io/ecokit/reference/ecokit-package.md)
+  [`ecokit-package`](https://elgabbas.github.io/ecokit/reference/ecokit-package.md)
+  : ecokit: Tools for Ecological and General Utilities
+
+## ecology-related functions
+
+- [`chelsa_var_info`](https://elgabbas.github.io/ecokit/reference/chelsa_var_info.md)
+  : CHELSA Variable Information
+- [`get_chelsa_links()`](https://elgabbas.github.io/ecokit/reference/get_chelsa_links.md)
+  : Retrieve CHELSA Data Links
+- [`check_gbif()`](https://elgabbas.github.io/ecokit/reference/check_gbif.md)
+  : Check and Load GBIF Credentials from .Renviron
+- [`maxent_open()`](https://elgabbas.github.io/ecokit/reference/maxent_open.md)
+  : Launch the Maxent Java Application from the dismo Package
+- [`maxent_variable_importance()`](https://elgabbas.github.io/ecokit/reference/maxent_variable_importance.md)
+  : Extract Variable Importance from a Maxent Model Object
+
+## Package management
+
+- [`stop_ctx()`](https://elgabbas.github.io/ecokit/reference/stop_ctx.md)
+  : Signal structured errors with metadata, timestamps, and backtraces
+- [`package_functions()`](https://elgabbas.github.io/ecokit/reference/package_functions.md)
+  : List of functions in a package
+- [`load_packages()`](https://elgabbas.github.io/ecokit/reference/load_packages.md)
+  : Load or install multiple R packages
+- [`load_packages_future()`](https://elgabbas.github.io/ecokit/reference/load_packages_future.md)
+  : Prepare Packages for Parallel Processing with Future
+- [`quiet_device()`](https://elgabbas.github.io/ecokit/reference/quiet_device.md)
+  : Suppress Future Device Warnings and Startup Messages
+- [`reload_package()`](https://elgabbas.github.io/ecokit/reference/reload_package.md)
+  : Reload an R package
+- [`loaded_packages()`](https://elgabbas.github.io/ecokit/reference/loaded_packages.md)
+  : List of loaded packages
+- [`package_remote_sha()`](https://elgabbas.github.io/ecokit/reference/package_remote_sha.md)
+  : Retrieve Remote SHAs for R Packages
+- [`assign_env_vars()`](https://elgabbas.github.io/ecokit/reference/assign_env_vars.md)
+  : Assign environment variables from a .env file
+- [`check_args()`](https://elgabbas.github.io/ecokit/reference/check_args.md)
+  : Check function arguments for specific types
+- [`function_arguments()`](https://elgabbas.github.io/ecokit/reference/function_arguments.md)
+  : Print function Arguments
+- [`record_arguments()`](https://elgabbas.github.io/ecokit/reference/record_arguments.md)
+  : Capture and record evaluated function arguments
+- [`used_packages()`](https://elgabbas.github.io/ecokit/reference/used_packages.md)
+  : Extract package names used with :: in an R script
+- [`pak_from_renv()`](https://elgabbas.github.io/ecokit/reference/pak_from_renv.md)
+  : Extract Installable Package References from renv.lock for Use with
+  pak
+
+## File / data operations
+
+- [`file_extension()`](https://elgabbas.github.io/ecokit/reference/file_operations.md)
+  [`file_size()`](https://elgabbas.github.io/ecokit/reference/file_operations.md)
+  [`file_type()`](https://elgabbas.github.io/ecokit/reference/file_operations.md)
+  : File Information Utilities
+
+- [`dir_size()`](https://elgabbas.github.io/ecokit/reference/dir_size.md)
+  : Calculate the Size of a Directory
+
+- [`parent_dir()`](https://elgabbas.github.io/ecokit/reference/parent_dir.md)
+  : Jump Up Parent Directories
+
+- [`normalize_path()`](https://elgabbas.github.io/ecokit/reference/normalize_path.md)
+  : Normalise and quote file paths
+
+- [`find_duplicates()`](https://elgabbas.github.io/ecokit/reference/find_duplicates.md)
+  : Find duplicated files and directories within a given path
+
+- [`load_as()`](https://elgabbas.github.io/ecokit/reference/load_as.md)
+  :
+
+  Load objects from `RData` / `qs2` / `rds` / `feather` file
+
+- [`load_multiple()`](https://elgabbas.github.io/ecokit/reference/load_multiple.md)
+  : Load multiple data files together
+
+- [`check_data()`](https://elgabbas.github.io/ecokit/reference/check_data.md)
+  [`check_rdata()`](https://elgabbas.github.io/ecokit/reference/check_data.md)
+  [`check_qs()`](https://elgabbas.github.io/ecokit/reference/check_data.md)
+  [`check_rds()`](https://elgabbas.github.io/ecokit/reference/check_data.md)
+  [`check_feather()`](https://elgabbas.github.io/ecokit/reference/check_data.md)
+  : Check Integrity of Data Files
+
+- [`check_zip()`](https://elgabbas.github.io/ecokit/reference/check_zip.md)
+  : Check the Integrity of ZIP Files
+
+- [`check_image()`](https://elgabbas.github.io/ecokit/reference/check_image.md)
+  : Verify Image File Integrity
+
+- [`check_env_file()`](https://elgabbas.github.io/ecokit/reference/check_env_file.md)
+  :
+
+  Check the integrity of a `.env` file before loading environment
+  variables
+
+- [`save_as()`](https://elgabbas.github.io/ecokit/reference/save_as.md)
+  : Save an object to a file with a new name
+
+- [`save_multiple()`](https://elgabbas.github.io/ecokit/reference/save_multiple.md)
+  :
+
+  Save multiple objects to their respective `.RData` files
+
+- [`list_to_rdata()`](https://elgabbas.github.io/ecokit/reference/list_to_RData.md)
+  :
+
+  Split list items into separate `.RData` files
+
+- [`assign_if_not_exist()`](https://elgabbas.github.io/ecokit/reference/assign_if_not_exist.md)
+  : Assign a value to a variable if it does not already exist in the
+  specified environment
+
+- [`cc()`](https://elgabbas.github.io/ecokit/reference/cc.md) :
+  Concatenate without quotes
+
+- [`ht()`](https://elgabbas.github.io/ecokit/reference/ht.md) : Print
+  head and tail of a data frame or vector with indices
+
+- [`cat_names()`](https://elgabbas.github.io/ecokit/reference/cat_names.md)
+  : Print Names of an Object with Optional Sorting
+
+- [`arrange_alphanum()`](https://elgabbas.github.io/ecokit/reference/arrange_alphanum.md)
+  : Arrange Dataframe Rows Alphanumerically
+
+- [`n_decimals()`](https://elgabbas.github.io/ecokit/reference/n_decimals.md)
+  : Number of decimal places in a numeric or character value
+
+- [`replace_space()`](https://elgabbas.github.io/ecokit/reference/replace_space.md)
+  : Replace whitespace with underscores
+
+- [`scrape_link()`](https://elgabbas.github.io/ecokit/reference/scrape_link.md)
+  : Extracts link texts and URLs from a web page
+
+- [`split_vector()`](https://elgabbas.github.io/ecokit/reference/split_vector.md)
+  : Split a vector into smaller chunks
+
+- [`split_df_to_chunks()`](https://elgabbas.github.io/ecokit/reference/split_df_to_chunks.md)
+  : Split a data.frame into smaller chunks
+
+- [`range_to_new_value()`](https://elgabbas.github.io/ecokit/reference/range_to_new_value.md)
+  : Changes values within a specified range, or greater than or less
+  than a specific value to a new value in a vector, data.frame, or
+  raster
+
+- [`all_objects_sizes()`](https://elgabbas.github.io/ecokit/reference/all_objects_sizes.md)
+  : Size of objects in memory
+
+- [`tibble_column_size()`](https://elgabbas.github.io/ecokit/reference/tibble_column_size.md)
+  : Calculate Column Sizes in a Tibble
+
+- [`keep_only()`](https://elgabbas.github.io/ecokit/reference/keep_only.md)
+  : Keep only specified objects in the environment, removing all others.
+
+- [`source_silent()`](https://elgabbas.github.io/ecokit/reference/source_silent.md)
+  : Silently source R script with optional message and warning
+  suppression
+
+- [`n_unique()`](https://elgabbas.github.io/ecokit/reference/n_unique.md)
+  : Number of unique values for all columns of a data frame
+
+- [`add_missing_columns()`](https://elgabbas.github.io/ecokit/reference/add_missing_columns.md)
+  : Add missing columns to a data frame with specified fill values
+
+- [`load_tar_file()`](https://elgabbas.github.io/ecokit/reference/load_tar_file.md)
+  : Load a File from a Tar Archive
+
+## Printing/logging functions
+
+- [`cat_sep()`](https://elgabbas.github.io/ecokit/reference/cat_sep.md)
+  : Print separator(s) to the console
+- [`cat_time()`](https://elgabbas.github.io/ecokit/reference/cat_time.md)
+  : Print text with time stamp
+- [`cat_diff()`](https://elgabbas.github.io/ecokit/reference/cat_diff.md)
+  : Print time difference
+- [`info_chunk()`](https://elgabbas.github.io/ecokit/reference/info_chunk.md)
+  : Print Information chunk with time stamp
+- [`format_number()`](https://elgabbas.github.io/ecokit/reference/format_number.md)
+  : Format a numbers with thousands separator and crayon styles
+
+## Utility functions
+
+- [`set_parallel()`](https://elgabbas.github.io/ecokit/reference/set_parallel.md)
+  : Set up or stop parallel processing plan
+- [`os()`](https://elgabbas.github.io/ecokit/reference/OS.md) : Current
+  operating system
+- [`system_command()`](https://elgabbas.github.io/ecokit/reference/system_command.md)
+  : Run a system command in a cross-platform manner
+- [`check_url()`](https://elgabbas.github.io/ecokit/reference/check_URL.md)
+  : Check the validity of URLs
+- [`script_location()`](https://elgabbas.github.io/ecokit/reference/script_location.md)
+  : Retrieve the location of the current R script.
+- [`clear_console()`](https://elgabbas.github.io/ecokit/reference/clear_console.md)
+  : Clear the console
+- [`check_rstudio()`](https://elgabbas.github.io/ecokit/reference/check_RStudio.md)
+  : Check if the installed RStudio version is up to date
+- [`check_quarto()`](https://elgabbas.github.io/ecokit/reference/check_quarto.md)
+  : Check if the installed Quarto version is up to date
+- [`check_packages()`](https://elgabbas.github.io/ecokit/reference/check_packages.md)
+  : Check Package Availability
+- [`save_session()`](https://elgabbas.github.io/ecokit/reference/save_session.md)
+  : Save non-function objects from the global environment to an RData
+  file
+- [`save_session_info()`](https://elgabbas.github.io/ecokit/reference/save_session_info.md)
+  : Save session information to a text file
+- [`git_log()`](https://elgabbas.github.io/ecokit/reference/git_log.md)
+  : Print or return a detailed Git log of a repository
+- [`bash_variables()`](https://elgabbas.github.io/ecokit/reference/bash_variables.md)
+  : Read command line arguments passed to an R script
+- [`detect_alias()`](https://elgabbas.github.io/ecokit/reference/detect_alias.md)
+  : Detect aliased variables in a linear model
+- [`get_mode()`](https://elgabbas.github.io/ecokit/reference/get_mode.md)
+  : Calculate the mode of a numeric vector
+- [`check_system_command()`](https://elgabbas.github.io/ecokit/reference/check_system_command.md)
+  : Check system commands availability
+- [`lapply_()`](https://elgabbas.github.io/ecokit/reference/apply_functions.md)
+  [`sapply_()`](https://elgabbas.github.io/ecokit/reference/apply_functions.md)
+  : Apply a function over a list or vector with optional silence
+- [`quietly()`](https://elgabbas.github.io/ecokit/reference/quietly.md)
+  : Quietly Evaluate an Expression with Custom Warning Patterns
+- [`extract_options()`](https://elgabbas.github.io/ecokit/reference/extract_options.md)
+  : Extract Options Matching a Pattern
+- [`remove_options()`](https://elgabbas.github.io/ecokit/reference/remove_options.md)
+  : Remove Options by Name or Pattern
+- [`assign_from_options()`](https://elgabbas.github.io/ecokit/reference/assign_from_options.md)
+  : Assign Argument Value from Option if NULL or Missing
+- [`get_option_with_default()`](https://elgabbas.github.io/ecokit/reference/get_option_with_default.md)
+  : Retrieve Option Value with Function Argument Default Fallback
+- [`zenodo_file_list()`](https://elgabbas.github.io/ecokit/reference/zenodo_tools.md)
+  [`zenodo_download_file()`](https://elgabbas.github.io/ecokit/reference/zenodo_tools.md)
+  : List and Download Files from a Zenodo Record
+
+## Spatial functions
+
+- [`check_tiff()`](https://elgabbas.github.io/ecokit/reference/check_tiff.md)
+  : Check if a tiff file corrupted
+
+- [`boundary_to_wkt()`](https://elgabbas.github.io/ecokit/reference/boundary_to_WKT.md)
+  : Determine the boundaries of the requested GBIF data
+
+- [`polygon_centroid()`](https://elgabbas.github.io/ecokit/reference/polygon_centroid.md)
+  : Replace Polygon Geometry with Centroid Point
+
+- [`rename_geometry()`](https://elgabbas.github.io/ecokit/reference/rename_geometry.md)
+  :
+
+  Rename Active Geometry Column of an `sf` Object
+
+- [`split_raster()`](https://elgabbas.github.io/ecokit/reference/split_raster.md)
+  : Split a raster object into a list of smaller rasters
+
+- [`set_geometry()`](https://elgabbas.github.io/ecokit/reference/set_geometry.md)
+  :
+
+  Set Geometry Column of an `sf` Object in a Pipeline
+
+- [`text_to_coordinates()`](https://elgabbas.github.io/ecokit/reference/text_to_coordinates.md)
+  : Extract longitude and latitude from string
+
+- [`clip_raster_by_polygon()`](https://elgabbas.github.io/ecokit/reference/clip_raster_by_polygon.md)
+  : Clip a raster layer by a spatial polygon
+
+- [`check_stack_in_memory()`](https://elgabbas.github.io/ecokit/reference/check_stack_in_memory.md)
+  : Check if a raster stack reads from disk or memory
+
+- [`sf_add_coords()`](https://elgabbas.github.io/ecokit/reference/sf_add_coords.md)
+  : Add longitude and latitude coordinates to an sf object
+
+- [`raster_to_pres_abs()`](https://elgabbas.github.io/ecokit/reference/raster_to_pres_abs.md)
+  : Convert raster map into binary (1/0)
+
+- [`nc_global_attributes()`](https://elgabbas.github.io/ecokit/reference/nc_global_attributes.md)
+  :
+
+  Get global attributes for `NetCDF` files
+
+- [`scale_0_1()`](https://elgabbas.github.io/ecokit/reference/scale_0_1.md)
+  : Scale a raster object’s values to a range between 0 and 1
+
+- [`set_raster_crs()`](https://elgabbas.github.io/ecokit/reference/set_raster_CRS.md)
+  : Set CRS for a SpatRaster in a Pipeline
+
+- [`add_cross_to_grid()`](https://elgabbas.github.io/ecokit/reference/add_geometric_features.md)
+  [`add_diagonals_to_grid()`](https://elgabbas.github.io/ecokit/reference/add_geometric_features.md)
+  : Add Geometric Features to Spatial Grid Cells
+
+- [`range_to_new_value()`](https://elgabbas.github.io/ecokit/reference/range_to_new_value.md)
+  : Changes values within a specified range, or greater than or less
+  than a specific value to a new value in a vector, data.frame, or
+  raster
+
+- [`write_nc()`](https://elgabbas.github.io/ecokit/reference/write_nc.md)
+  : Write a SpatRaster to a NetCDF File with Multiple Variables
+
+- [`nearest_dist_sf()`](https://elgabbas.github.io/ecokit/reference/nearest_dist_sf.md)
+  : Calculate Nearest Neighbour Distances for Spatial Features
+
+## Plotting functions
+
+- [`add_image_to_plot()`](https://elgabbas.github.io/ecokit/reference/add_image_to_plot.md)
+  : Add an image to an existing plot in R
+- [`add_line()`](https://elgabbas.github.io/ecokit/reference/add_line.md)
+  : Add a horizontal or vertical line to the current plot
+- [`integer_breaks()`](https://elgabbas.github.io/ecokit/reference/integer_breaks.md)
+  : Integer breaks for ggplot axis
+- [`binned_heatmap()`](https://elgabbas.github.io/ecokit/reference/binned_heatmap.md)
+  : Plot Binned Heatmap

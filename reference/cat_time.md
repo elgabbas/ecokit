@@ -1,0 +1,123 @@
+# Print text with time stamp
+
+This function prints a given text followed by the current time (and
+optionally the date) to the console. It allows for customization of the
+time zone, the inclusion of the date, and the number of newline
+characters to print after the message.
+
+## Usage
+
+``` r
+cat_time(
+  text = "",
+  msg_n_lines = 1L,
+  cat_timestamp = TRUE,
+  cat_bold = FALSE,
+  cat_red = FALSE,
+  cat_date = FALSE,
+  time_zone = "CET",
+  level = 0L,
+  verbose = TRUE,
+  ...
+)
+```
+
+## Arguments
+
+- text:
+
+  character; the text to print before the timestamp. If empty (default),
+  only the timestamp is printed.
+
+- msg_n_lines:
+
+  integer; the number of newline characters to print after the message.
+  Default is 1.
+
+- cat_timestamp:
+
+  logical; whether to include the time in the timestamp. Default is
+  `TRUE`. If `FALSE`, only the text is printed.
+
+- cat_bold:
+
+  logical; whether to print the text in bold. Default is `FALSE`.
+
+- cat_red:
+
+  logical; whether to print the text in red. Default is `FALSE`.
+
+- cat_date:
+
+  logical; whether to include the date in the timestamp. Only effective
+  if `time` is `TRUE`. Default is `FALSE`, meaning only the time is
+  printed. If `TRUE`, the date is printed in the format `%d/%m/%Y %X`.
+
+- time_zone:
+
+  character; the time zone to use for the timestamp. Default is `CET`.
+
+- level:
+
+  integer; the level at which the message will be printed. If e.g.
+  `level = 1L`, the following string will be printed at the beginning of
+  the message: " \>\>\> ". Default is `0`.
+
+- verbose:
+
+  logical; whether to print output to console. Default is `TRUE`. If
+  `FALSE`, the function does nothing. This is useful to suppress the
+  function output in certain contexts.
+
+- ...:
+
+  additional arguments passed to `cat`.
+
+## Value
+
+The function is called for its side effect of printing to the console.
+
+## Author
+
+Ahmed El-Gabbas
+
+## Examples
+
+``` r
+cat_time()
+#> 18:55:32
+
+cat_time(cat_date = TRUE)
+#> 09/11/2025 18:55:32
+
+cat_time("time now")
+#> time now - 18:55:32
+
+cat_time("\n\nTime now", msg_n_lines = 2L, level = 1L)
+#> 
+#> 
+#>   >>>  Time now - 18:55:32
+#>  
+
+cat_time(
+  "\ntime now", cat_date = TRUE, cat_bold = TRUE, cat_red = TRUE,
+  msg_n_lines = 2L, level = 1L)
+#> 
+#>   >>>  time now - 09/11/2025 18:55:32
+#>  
+
+# The use of levels
+{
+  cat_time("Task 1")
+  cat_time("subtask L1", level = 1L)
+  cat_time("subtask L2", level = 2L)
+  cat_time("subtask L3", level = 3L)
+}
+#> Task 1 - 18:55:32
+#>   >>>  subtask L1 - 18:55:32
+#>   >>>  >>>  subtask L2 - 18:55:32
+#>   >>>  >>>  >>>  subtask L3 - 18:55:32
+
+# disabling the function output
+cat_time(verbose = FALSE)
+```

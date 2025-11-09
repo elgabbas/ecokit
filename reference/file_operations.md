@@ -1,0 +1,87 @@
+# File Information Utilities
+
+A collection of functions to extract information about files, including
+their extension, size, and type.
+
+## Usage
+
+``` r
+file_extension(file)
+
+file_size(file, ...)
+
+file_type(file)
+```
+
+## Arguments
+
+- file:
+
+  A character string representing the file path. Must not be `NULL` and
+  must be a character string. For `file_type`, the file must exist.
+
+- ...:
+
+  Additional arguments passed to
+  [gdata::humanReadable](https://rdrr.io/pkg/gdata/man/humanReadable.html)
+  for customizing the output format (for `file_size` only).
+
+## Value
+
+- `file_extension`: A character string with the file extension (e.g.,
+  "txt"). Returns an empty string if no extension is present.
+
+- `file_size`: A character string representing the file size in a
+  human-readable format (e.g., "1.2 MB").
+
+- `file_type`: A character string describing the file type (e.g., "ASCII
+  text").
+
+## Details
+
+The following functions are included:
+
+- `file_extension`: Extracts the file extension from a file path using
+  tools::file_ext. It does not verify file existence or content, only
+  parsing the extension from the file name.
+
+- `file_size`: Returns the file size in a human-readable format (e.g.,
+  KB, MB, GB) using
+  [gdata::humanReadable](https://rdrr.io/pkg/gdata/man/humanReadable.html).
+
+- `file_type`: Determines the file type using the system's `file`
+  command, returning a description of the file type.
+
+## Note
+
+- `file_extension` does not check file existence or content, only
+  parsing the extension from the file name.
+
+- `file_type` relies on the system's `file` command, so results may vary
+  across platforms. The `file` system command on Windows (e.g., GnuWin32
+  or other ports) often misidentifies ZIP files as "data" instead of
+  "Zip archive data, at least v2.0 to extract", which GNU `file`
+  correctly reports on Unix-like systems (Linux, macOS, Git Bash). This
+  is due to differences in `file` implementations and Windows path
+  handling.
+
+## Author
+
+Ahmed El-Gabbas
+
+## Examples
+
+``` r
+load_packages(terra)
+
+f <- system.file("ex/elev.tif", package = "terra")
+
+file_extension(f)                         # "tif"
+#> [1] "tif"
+
+file_size(f)                              # "7.8 KiB"
+#> 7.81K
+
+file_type(f)                              # e.g., "TIFF image data ..."
+#> [1] "TIFF image data, little-endian, direntries=19, height=90, bps=16, compression=LZW, PhotometricInterpretation=BlackIsZero, width=95"
+```
