@@ -122,7 +122,7 @@ binned_heatmap <- function(
     log_fill = FALSE, xlab = NULL, ylab = NULL, title = NULL, subtitle = NULL,
     n_breaks = 6L) {
 
-  plot_x <- plot_y <- NULL
+  plot_x <- plot_y <- x_bin <- y_bin <- NULL
 
   # Set terra options for memory management
   terra::terraOptions(memfrac = 0.05, todisk = TRUE, memmax = 1e5L)
@@ -139,41 +139,45 @@ binned_heatmap <- function(
     ecokit::stop_ctx("Cannot apply log10 to y: values must be positive.")
   }
 
+  # Compute original ranges for x and y
+  x_range_orig <- range(data[[x]], na.rm = TRUE)
+  y_range_orig <- range(data[[y]], na.rm = TRUE)
+
   # Transform variables for plotting (log10 if specified)
-  data2 <- data %>%
+  data <- data %>%
     dplyr::mutate(
       plot_x = if (log_x) log10(.data[[x]]) else .data[[x]],
       plot_y = if (log_y) log10(.data[[y]]) else .data[[y]])
 
   # Compute min and max for transformed variables
-  min_x <- min(data2$plot_x, na.rm = TRUE)
-  max_x <- max(data2$plot_x, na.rm = TRUE)
-  min_y <- min(data2$plot_y, na.rm = TRUE)
-  max_y <- max(data2$plot_y, na.rm = TRUE)
+  min_x <- min(data$plot_x, na.rm = TRUE)
+  max_x <- max(data$plot_x, na.rm = TRUE)
+  min_y <- min(data$plot_y, na.rm = TRUE)
+  max_y <- max(data$plot_y, na.rm = TRUE)
+
 
   # Normalize transformed values to [0, 1] for binning
-  data2 <- dplyr::mutate(
-    data2,
+  data <- dplyr::mutate(
+    data,
     x_bin = (plot_x - min_x) / (max_x - min_x),
-    y_bin = (plot_y - min_y) / (max_y - min_y))
+    y_bin = (plot_y - min_y) / (max_y - min_y)) %>%
+    dplyr::count(x, y, plot_x, plot_y, x_bin, y_bin) %>%
+    sf::st_as_sf(coords = c("x_bin", "y_bin")) %>%
+    terra::vect()
+
+  invisible(gc())
 
   # Create an empty raster grid for binning
   r <- terra::rast(
     nrow = nrow, ncol = ncol, xmin = 0L, xmax = 1L, ymin = 0L, ymax = 1L)
 
   # Rasterize points to count frequencies in bins
-  rast_freq <- terra::rasterize(
-    x = terra::vect(sf::st_as_sf(data2, coords = c("x_bin", "y_bin"))),
-    y = r, field = 1L, fun = "count")
+  rast_freq <- terra::rasterize(x = data, y = r, field = "n", fun = "sum")
   terra::crs(rast_freq) <- NA
 
   # Clean up temporary data and garbage collect
-  rm(data2)
+  rm(data)
   invisible(gc())
-
-  # Compute original ranges for x and y
-  x_range_orig <- range(data[[x]], na.rm = TRUE)
-  y_range_orig <- range(data[[y]], na.rm = TRUE)
 
   # Compute breaks on original scale
   x_breaks_orig <- if (log_x) {
