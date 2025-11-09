@@ -94,7 +94,7 @@ check_rdata(rdata_file)
 bad_rdata <- fs::path(temp_dir, "invalid.Rdata")
 writeLines("not an RData file", bad_rdata)
 check_rdata(bad_rdata)
-#> Warning: Failed to load RData file: /tmp/Rtmp9s80iV/load_multiple/invalid.Rdata
+#> Warning: Failed to load RData file: /tmp/RtmpIhN7qQ/load_multiple/invalid.Rdata
 #> [1] FALSE
 check_rdata(bad_rdata, warning = FALSE)
 #> [1] FALSE
@@ -113,7 +113,7 @@ check_qs(qs_file, n_threads = 1L)
 bad_qs <- fs::path(temp_dir, "invalid.qs2")
 writeLines("not a qs2 file", bad_qs)
 check_qs(bad_qs, n_threads = 1L)
-#> Warning: Failed to load qs2 file: /tmp/Rtmp9s80iV/load_multiple/invalid.qs2
+#> Warning: Failed to load qs2 file: /tmp/RtmpIhN7qQ/load_multiple/invalid.qs2
 #> [1] FALSE
 check_qs(bad_qs, n_threads = 1L, warning = FALSE)
 #> [1] FALSE
@@ -132,7 +132,7 @@ check_rds(rds_file)
 bad_rds <- fs::path(temp_dir, "invalid.rds")
 writeLines("not an rds file", bad_rds)
 check_rds(bad_rds)
-#> Warning: Failed to load rds file: /tmp/Rtmp9s80iV/load_multiple/invalid.rds
+#> Warning: Failed to load rds file: /tmp/RtmpIhN7qQ/load_multiple/invalid.rds
 #> [1] FALSE
 check_rds(bad_rds, warning = FALSE)
 #> [1] FALSE
@@ -151,7 +151,7 @@ check_feather(feather_file)
 bad_feather <- fs::path(temp_dir, "invalid.feather")
 writeLines("not a feather file", bad_feather)
 check_feather(bad_feather)
-#> Warning: Failed to load feather file: /tmp/Rtmp9s80iV/load_multiple/invalid.feather
+#> Warning: Failed to load feather file: /tmp/RtmpIhN7qQ/load_multiple/invalid.feather
 #> [1] FALSE
 check_feather(bad_feather, warning = FALSE)
 #> [1] FALSE
@@ -173,20 +173,20 @@ all_files <- c(
   feather_file, bad_feather)
 
 check_data(all_files)
-#> Warning: Failed to load RData file: /tmp/Rtmp9s80iV/load_multiple/invalid.Rdata
-#> Warning: Failed to load qs2 file: /tmp/Rtmp9s80iV/load_multiple/invalid.qs2
-#> Warning: Failed to load rds file: /tmp/Rtmp9s80iV/load_multiple/invalid.rds
-#> Warning: Failed to load feather file: /tmp/Rtmp9s80iV/load_multiple/invalid.feather
+#> Warning: Failed to load RData file: /tmp/RtmpIhN7qQ/load_multiple/invalid.Rdata
+#> Warning: Failed to load qs2 file: /tmp/RtmpIhN7qQ/load_multiple/invalid.qs2
+#> Warning: Failed to load rds file: /tmp/RtmpIhN7qQ/load_multiple/invalid.rds
+#> Warning: Failed to load feather file: /tmp/RtmpIhN7qQ/load_multiple/invalid.feather
 #> [1] FALSE
 
 check_data(all_files, warning = FALSE)
 #> [1] FALSE
 
 check_data(all_files, all_okay = FALSE)
-#> Warning: Failed to load RData file: /tmp/Rtmp9s80iV/load_multiple/invalid.Rdata
-#> Warning: Failed to load qs2 file: /tmp/Rtmp9s80iV/load_multiple/invalid.qs2
-#> Warning: Failed to load rds file: /tmp/Rtmp9s80iV/load_multiple/invalid.rds
-#> Warning: Failed to load feather file: /tmp/Rtmp9s80iV/load_multiple/invalid.feather
+#> Warning: Failed to load RData file: /tmp/RtmpIhN7qQ/load_multiple/invalid.Rdata
+#> Warning: Failed to load qs2 file: /tmp/RtmpIhN7qQ/load_multiple/invalid.qs2
+#> Warning: Failed to load rds file: /tmp/RtmpIhN7qQ/load_multiple/invalid.rds
+#> Warning: Failed to load feather file: /tmp/RtmpIhN7qQ/load_multiple/invalid.feather
 #> [1]  TRUE FALSE  TRUE FALSE  TRUE FALSE  TRUE FALSE
 
 check_data(all_files, all_okay = FALSE, warning = FALSE)

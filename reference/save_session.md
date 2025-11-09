@@ -54,7 +54,7 @@ fs::dir_create(temp_dir)
 
 (result <- save_session(out_directory = temp_dir, exclude_objects = "vec"))
 #> Saved objects to:
-#> /tmp/Rtmp9s80iV/save_session/S_20251109_1856.RData
+#> /tmp/RtmpIhN7qQ/save_session/S_20251109_1926.RData
 #> # A tibble: 13 × 2
 #>    object           size
 #>    <chr>           <dbl>
@@ -80,7 +80,7 @@ if (length(saved_files) == 0) {
 }
 # pick the most recent file, if there is more than one file
 (saved_file <- saved_files[length(saved_files)])
-#> [1] "/tmp/Rtmp9s80iV/save_session/S_20251109_1856.RData"
+#> [1] "/tmp/RtmpIhN7qQ/save_session/S_20251109_1926.RData"
 
 saved_objects <- ecokit::load_as(saved_file)
 #> Error in purrr::map(.x = output_file, .f = ~{    if (inherits(.x, "PackedSpatRaster"))         return("PackedSpatRaster")    if (isS4(.x) || length(.x) == 0L || is.null(.x[[1L]])) {        return(character(0L))    }    class(.x[[1L]])}): ℹ In index: 6.

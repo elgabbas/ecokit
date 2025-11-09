@@ -60,7 +60,7 @@ check_zip(zip_file)
 bad_zip <- fs::path(temp_dir, "invalid.zip")
 writeLines("Not a ZIP file", bad_zip)
 check_zip(bad_zip)
-#> Warning: Warning during file validation: running command 'unzip -t '/tmp/Rtmp9s80iV/check_zip/invalid.zip'' had status 9
+#> Warning: Warning during file validation: running command 'unzip -t '/tmp/RtmpIhN7qQ/check_zip/invalid.zip'' had status 9
 #> [1] FALSE
 check_zip(bad_zip, warning = FALSE)
 #> [1] FALSE
@@ -69,7 +69,7 @@ check_zip(bad_zip, warning = FALSE)
 empty_zip <- fs::path(temp_dir, "empty.zip")
 fs::file_create(empty_zip)
 check_zip(empty_zip)
-#> Warning: File is empty: /tmp/Rtmp9s80iV/check_zip/empty.zip
+#> Warning: File is empty: /tmp/RtmpIhN7qQ/check_zip/empty.zip
 #> [1] FALSE
 check_zip(empty_zip, warning = FALSE)
 #> [1] FALSE
@@ -78,7 +78,7 @@ check_zip(empty_zip, warning = FALSE)
 non_zip_file <- fs::path(temp_dir, "test.txt")
 writeLines("Hello, world!", non_zip_file)
 check_zip(non_zip_file)
-#> Warning: Warning during file validation: running command 'unzip -t '/tmp/Rtmp9s80iV/check_zip/test.txt'' had status 9
+#> Warning: Warning during file validation: running command 'unzip -t '/tmp/RtmpIhN7qQ/check_zip/test.txt'' had status 9
 #> [1] FALSE
 check_zip(non_zip_file, warning = FALSE)
 #> [1] FALSE
@@ -94,18 +94,18 @@ check_zip("nonexistent.zip", warning = FALSE)
 zip_files <- c(zip_file, bad_zip, empty_zip, temp_file)
 
 check_zip(zip_files)
-#> Warning: Warning during file validation: running command 'unzip -t '/tmp/Rtmp9s80iV/check_zip/invalid.zip'' had status 9
-#> Warning: File is empty: /tmp/Rtmp9s80iV/check_zip/empty.zip
-#> Warning: Warning during file validation: running command 'unzip -t '/tmp/Rtmp9s80iV/check_zip/test.txt'' had status 9
+#> Warning: Warning during file validation: running command 'unzip -t '/tmp/RtmpIhN7qQ/check_zip/invalid.zip'' had status 9
+#> Warning: File is empty: /tmp/RtmpIhN7qQ/check_zip/empty.zip
+#> Warning: Warning during file validation: running command 'unzip -t '/tmp/RtmpIhN7qQ/check_zip/test.txt'' had status 9
 #> [1] FALSE
 
 check_zip(zip_files, warning = FALSE)
 #> [1] FALSE
 
 check_zip(zip_files, all_okay = FALSE)
-#> Warning: Warning during file validation: running command 'unzip -t '/tmp/Rtmp9s80iV/check_zip/invalid.zip'' had status 9
-#> Warning: File is empty: /tmp/Rtmp9s80iV/check_zip/empty.zip
-#> Warning: Warning during file validation: running command 'unzip -t '/tmp/Rtmp9s80iV/check_zip/test.txt'' had status 9
+#> Warning: Warning during file validation: running command 'unzip -t '/tmp/RtmpIhN7qQ/check_zip/invalid.zip'' had status 9
+#> Warning: File is empty: /tmp/RtmpIhN7qQ/check_zip/empty.zip
+#> Warning: Warning during file validation: running command 'unzip -t '/tmp/RtmpIhN7qQ/check_zip/test.txt'' had status 9
 #> [1]  TRUE FALSE FALSE FALSE
 
 check_zip(zip_files, all_okay = FALSE, warning = FALSE)

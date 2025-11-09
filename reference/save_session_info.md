@@ -45,13 +45,13 @@ fs::dir_create(temp_dir)
 
 save_session_info(out_directory = temp_dir)
 #> Saving session info to:
-#> /tmp/Rtmp9s80iV/save_session_info/S_20251109_1856.txt
+#> /tmp/RtmpIhN7qQ/save_session_info/S_20251109_1926.txt
 
 saved_file <- list.files(
   temp_dir, pattern = "S_.+txt$", full.names = TRUE) %>%
   ecokit::normalize_path()
 (saved_file <- saved_file[length(saved_file)])
-#> /tmp/Rtmp9s80iV/save_session_info/S_20251109_1856.txt
+#> /tmp/RtmpIhN7qQ/save_session_info/S_20251109_1926.txt
 
 cat(readLines(saved_file), sep = "\n")
 #> 
@@ -220,13 +220,13 @@ vec <- rnorm(1000)
 session_data <- tibble::tibble(object = c("df", "vec"), size = c(0.1, 0.1))
 save_session_info(out_directory = temp_dir, session_info = session_data)
 #> Saving session info to:
-#> /tmp/Rtmp9s80iV/save_session_info/S_20251109_1856.txt
+#> /tmp/RtmpIhN7qQ/save_session_info/S_20251109_1926.txt
 
 saved_file <- list.files(
   temp_dir, pattern = "S_.+txt$", full.names = TRUE) %>%
   ecokit::normalize_path()
 (saved_file <- saved_file[length(saved_file)])
-#> /tmp/Rtmp9s80iV/save_session_info/S_20251109_1856.txt
+#> /tmp/RtmpIhN7qQ/save_session_info/S_20251109_1926.txt
 
 cat(readLines(saved_file), sep = "\n")
 #> 

@@ -137,7 +137,7 @@ dplyr::glimpse(files)
 pdf_file <- zenodo_download_file(
   record_id = "1234567", file_name = "article.pdf")
 print(pdf_file)
-#> /tmp/Rtmp9s80iV/article24671059d179.pdf
+#> /tmp/RtmpIhN7qQ/article24655b66ebf8.pdf
 
 ecokit::file_type(pdf_file)
 #> [1] "PDF document, version 1.6"
@@ -205,7 +205,7 @@ terra::app(nc_file, "range")
 #> resolution  : 1.40625, 2.8125  (x, y)
 #> extent      : -90, 90, 0, 360  (xmin, xmax, ymin, ymax)
 #> coord. ref. :  
-#> source      : spat_246765d5369e_9319_8nr4ZcY08gqXcRL.tif 
+#> source      : spat_24657da2e389_9317_Py3ptIw2UFUXKtt.tif 
 #> names       : lyr.1,       lyr.2 
 #> min values  :     1,   599912192 
 #> max values  :    13, 48882786304 
@@ -215,7 +215,7 @@ terra::app(nc_file2, "range")
 #> resolution  : 1.40625, 2.8125  (x, y)
 #> extent      : -90, 90, 0, 360  (xmin, xmax, ymin, ymax)
 #> coord. ref. :  
-#> source      : spat_246748a40c61_9319_CV8ON4lE27FBVEp.tif 
+#> source      : spat_2465100d79ca_9317_LM26AmsODEGPU5D.tif 
 #> names       : lyr.1,        lyr.2 
 #> min values  :    10,   5999121920 
 #> max values  :   130, 488827879424 

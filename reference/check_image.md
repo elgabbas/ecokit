@@ -126,7 +126,7 @@ writeLines("This is a text file", text_path)
 
 check_image(text_path)
 #> Warning: The file extension 'txt' is not a supported image format (JPEG, PNG, TIFF, PDF).
-#> File: /tmp/Rtmp9s80iV/image_test/not_an_image.txt
+#> File: /tmp/RtmpIhN7qQ/image_test/not_an_image.txt
 #> [1] FALSE
 check_image(text_path, warning = FALSE)
 #> [1] FALSE
@@ -137,11 +137,11 @@ check_image(text_path, warning = FALSE)
 
 nonexistent_path <- fs::path(temp_dir, "nonexistent_image.jpg")
 check_image(nonexistent_path)
-#> Warning: The file '/tmp/Rtmp9s80iV/image_test/nonexistent_image.jpg' does not exist.
+#> Warning: The file '/tmp/RtmpIhN7qQ/image_test/nonexistent_image.jpg' does not exist.
 #> [1] FALSE
 
 check_image(temp_dir)
-#> Warning: Input `file` '/tmp/Rtmp9s80iV/image_test' is a directory.
+#> Warning: Input `file` '/tmp/RtmpIhN7qQ/image_test' is a directory.
 #> [1] FALSE
 
 # --------------------------------------------
