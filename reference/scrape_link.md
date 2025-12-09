@@ -33,14 +33,14 @@ included.
 ``` r
 head(scrape_link(url = "https://github.com/tidyverse/dplyr"))
 #> # A tibble: 6 × 2
-#>   link_text       link                                                      
-#>   <chr>           <chr>                                                     
-#> 1 Archive Program https://archiveprogram.github.com                         
-#> 2 Acero           https://arrow.apache.org/docs/cpp/streaming_execution.html
-#> 3 arrow           https://arrow.apache.org/docs/r/                          
-#> 4 dbplyr          https://dbplyr.tidyverse.org/                             
-#> 5 Documentation   https://docs.github.com                                   
-#> 6 Docs            https://docs.github.com/                                  
+#>   link_text          link                                                       
+#>   <chr>              <chr>                                                      
+#> 1 Acero              https://arrow.apache.org/docs/cpp/acero/overview.html      
+#> 2 arrow              https://arrow.apache.org/docs/r/                           
+#> 3 dbplyr             https://dbplyr.tidyverse.org/                              
+#> 4 Documentation      https://docs.github.com                                    
+#> 5 Docs               https://docs.github.com/                                   
+#> 6 Search syntax tips https://docs.github.com/search-github/github-code-search/u…
 
 head(
   scrape_link(
@@ -48,7 +48,7 @@ head(
 #> # A tibble: 6 × 2
 #>   link_text          link                                                      
 #>   <chr>              <chr>                                                     
-#> 1 + 266 contributors https://github.com/tidyverse/dplyr/graphs/contributors    
+#> 1 + 268 contributors https://github.com/tidyverse/dplyr/graphs/contributors    
 #> 2 + 42 releases      https://github.com/tidyverse/dplyr/releases               
 #> 3 .Rbuildignore      https://github.com/tidyverse/dplyr/blob/main/.Rbuildignore
 #> 4 .github            https://github.com/tidyverse/dplyr/tree/main/.github      

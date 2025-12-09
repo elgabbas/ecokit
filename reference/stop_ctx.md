@@ -96,7 +96,7 @@ with its name, the verbatim expression used, its class, and its value:
 
 - **Value**: The formatted output of the object, using methods like
   [`print()`](https://rdrr.io/r/base/print.html),
-  [`summary()`](https://rdrr.io/r/base/summary.html),
+  [`summary()`](https://rspatial.github.io/terra/reference/summary.html),
   [`glimpse()`](https://pillar.r-lib.org/reference/glimpse.html), or
   [`str()`](https://rdrr.io/r/utils/str.html), depending on the object
   type.
@@ -187,7 +187,7 @@ try(
     message = "File not found", file = "data.csv",
     type = "missing_input", cat_date = TRUE))
 #> Error in try(stop_ctx(message = "File not found", file = "data.csv", type = "missing_input",  : 
-#>   File not found - 09/11/2025
+#>   File not found - 09/12/2025
 #> 
 #> ----- Metadata -----
 #> 

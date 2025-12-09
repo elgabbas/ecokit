@@ -67,7 +67,7 @@ Ahmed El-Gabbas
 # Load tidyr
 load_packages(tidyr, raster, ggplot2, nnet, verbose = TRUE)
 #> The following packages were already loaded:
-#>   >>>>  ggplot2 (4.0.0)
+#>   >>>>  ggplot2 (4.0.1)
 #>   >>>>  raster (3.6-32)
 #>   >>>>  tidyr (1.3.1)
 #> Loading packages:

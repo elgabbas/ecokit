@@ -298,6 +298,9 @@
 - [`nearest_dist_sf()`](https://elgabbas.github.io/ecokit/reference/nearest_dist_sf.md)
   : Calculate Nearest Neighbour Distances for Spatial Features
 
+- [`raster_dims_km()`](https://elgabbas.github.io/ecokit/reference/raster_dims_km.md)
+  : Raster dimensions in kilometres for lon/lat SpatRaster
+
 ## Plotting functions
 
 - [`add_image_to_plot()`](https://elgabbas.github.io/ecokit/reference/add_image_to_plot.md)

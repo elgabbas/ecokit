@@ -33,7 +33,7 @@ Ahmed El-Gabbas
 ``` r
 check_quarto()
 #> Quarto is not available in the system.
-#> Latest quarto version is v1.8.25 [installed: NA]
+#> Latest quarto version is v1.8.26 [installed: NA]
 #> 
 
 check_quarto(pre_release = TRUE)

@@ -45,13 +45,13 @@ fs::dir_create(temp_dir)
 
 save_session_info(out_directory = temp_dir)
 #> Saving session info to:
-#> /tmp/RtmpIhN7qQ/save_session_info/S_20251109_1926.txt
+#> /tmp/Rtmpyp01Cy/save_session_info/S_20251209_1519.txt
 
 saved_file <- list.files(
   temp_dir, pattern = "S_.+txt$", full.names = TRUE) %>%
   ecokit::normalize_path()
 (saved_file <- saved_file[length(saved_file)])
-#> /tmp/RtmpIhN7qQ/save_session_info/S_20251109_1926.txt
+#> /tmp/Rtmpyp01Cy/save_session_info/S_20251209_1519.txt
 
 cat(readLines(saved_file), sep = "\n")
 #> 
@@ -69,7 +69,7 @@ cat(readLines(saved_file), sep = "\n")
 #>  collate  C
 #>  ctype    C.UTF-8
 #>  tz       UTC
-#>  date     2025-11-09
+#>  date     2025-12-09
 #>  pandoc   3.1.11 @ /opt/hostedtoolcache/pandoc/3.1.11/x64/ (via rmarkdown)
 #>  quarto   NA
 #> 
@@ -97,35 +97,35 @@ cat(readLines(saved_file), sep = "\n")
 #>  DBI            1.2.3    2024-06-02 [1] RSPM
 #>  desc           1.4.3    2023-12-10 [1] RSPM
 #>  devtools       2.4.6    2025-10-03 [1] RSPM
-#>  digest         0.6.37   2024-08-19 [1] RSPM
+#>  digest         0.6.39   2025-11-19 [1] RSPM
 #>  dismo        * 1.3-16   2024-11-25 [1] RSPM
 #>  dotCall64      1.2      2024-10-04 [1] RSPM
-#>  downlit        0.4.4    2024-06-10 [1] RSPM
+#>  downlit        0.4.5    2025-11-14 [1] RSPM
 #>  dplyr        * 1.1.4    2023-11-17 [1] RSPM
 #>  e1071          1.7-16   2024-09-16 [1] RSPM
-#>  ecokit       * 0.1.0    2025-11-09 [1] local
+#>  ecokit       * 0.1.0    2025-12-09 [1] local
 #>  ellipsis       0.3.2    2021-04-29 [1] RSPM
 #>  evaluate       1.0.5    2025-08-27 [1] RSPM
-#>  fansi          1.0.6    2023-12-08 [1] RSPM
+#>  fansi          1.0.7    2025-11-19 [1] RSPM
 #>  farver         2.1.2    2024-05-13 [1] RSPM
 #>  fastmap        1.2.0    2024-05-15 [1] RSPM
 #>  fields         17.1     2025-09-08 [1] RSPM
 #>  fontawesome    0.5.3    2024-11-16 [1] RSPM
 #>  Formula        1.2-5    2023-02-24 [1] RSPM
 #>  fs           * 1.6.6    2025-04-12 [1] RSPM
-#>  future       * 1.67.0   2025-07-29 [1] RSPM
+#>  future       * 1.68.0   2025-11-17 [1] RSPM
 #>  future.apply   1.20.0   2025-06-06 [1] RSPM
 #>  gdata          3.0.1    2024-10-22 [1] RSPM
 #>  generics       0.1.4    2025-05-09 [1] RSPM
-#>  ggplot2      * 4.0.0    2025-09-11 [1] RSPM
+#>  ggplot2      * 4.0.1    2025-11-14 [1] RSPM
 #>  globals        0.18.0   2025-05-08 [1] RSPM
 #>  glue           1.8.0    2024-09-30 [1] RSPM
 #>  gtable         0.3.6    2024-10-25 [1] RSPM
 #>  gtools         3.9.5    2023-11-20 [1] RSPM
-#>  htmltools      0.5.8.1  2024-04-04 [1] RSPM
+#>  htmltools      0.5.9    2025-12-04 [1] RSPM
 #>  htmlwidgets    1.6.4    2023-12-06 [1] RSPM
 #>  httr           1.4.7    2023-08-15 [1] RSPM
-#>  httr2          1.2.1    2025-07-22 [1] RSPM
+#>  httr2          1.2.2    2025-12-08 [1] RSPM
 #>  jquerylib      0.1.4    2021-04-26 [1] RSPM
 #>  jsonlite       2.0.0    2025-03-27 [1] RSPM
 #>  KernSmooth     2.23-26  2025-01-01 [3] CRAN (R 4.5.2)
@@ -134,7 +134,7 @@ cat(readLines(saved_file), sep = "\n")
 #>  lattice        0.22-7   2025-04-02 [3] CRAN (R 4.5.2)
 #>  lifecycle      1.0.4    2023-11-07 [1] RSPM
 #>  listenv        0.10.0   2025-11-02 [1] RSPM
-#>  lobstr         1.1.2    2022-06-22 [1] RSPM
+#>  lobstr         1.1.3    2025-11-14 [1] RSPM
 #>  lubridate    * 1.9.4    2024-12-08 [1] RSPM
 #>  magrittr     * 2.0.4    2025-09-12 [1] RSPM
 #>  maps           3.4.3    2025-05-26 [1] RSPM
@@ -142,7 +142,8 @@ cat(readLines(saved_file), sep = "\n")
 #>  memoise        2.0.1    2021-11-26 [1] RSPM
 #>  nnet         * 7.3-20   2025-01-01 [3] CRAN (R 4.5.2)
 #>  openssl        2.3.4    2025-09-30 [1] RSPM
-#>  pak            0.9.0    2025-05-27 [1] RSPM
+#>  otel           0.2.0    2025-08-29 [1] RSPM
+#>  pak            0.9.1    2025-12-01 [1] RSPM
 #>  parallelly     1.45.1   2025-07-24 [1] RSPM
 #>  pillar         1.11.1   2025-09-17 [1] RSPM
 #>  pkgbuild       1.4.8    2025-05-26 [1] RSPM
@@ -154,7 +155,7 @@ cat(readLines(saved_file), sep = "\n")
 #>  proxy          0.4-27   2022-06-09 [1] RSPM
 #>  ps             1.9.1    2025-04-12 [1] RSPM
 #>  purrr        * 1.2.0    2025-11-04 [1] RSPM
-#>  qs2          * 0.1.5    2025-03-07 [1] RSPM
+#>  qs2          * 0.1.6    2025-11-21 [1] RSPM
 #>  R6             2.6.1    2025-02-15 [1] RSPM
 #>  ragg           1.5.0    2025-09-02 [1] RSPM
 #>  rappdirs       0.3.3    2021-01-31 [1] RSPM
@@ -171,19 +172,19 @@ cat(readLines(saved_file), sep = "\n")
 #>  rvest          1.0.5    2025-08-29 [1] RSPM
 #>  rworldmap    * 1.3-8    2023-10-16 [1] RSPM
 #>  s2             1.1.9    2025-05-23 [1] RSPM
-#>  S7             0.2.0    2024-11-07 [1] RSPM
+#>  S7             0.2.1    2025-11-14 [1] RSPM
 #>  sass           0.4.10   2025-04-11 [1] RSPM
 #>  scales       * 1.4.0    2025-04-24 [1] RSPM
-#>  selectr        0.4-2    2019-11-20 [1] RSPM
+#>  selectr        0.5-0    2025-11-21 [1] RSPM
 #>  sessioninfo    1.2.3    2025-02-05 [1] RSPM
-#>  sf           * 1.0-21   2025-05-15 [1] RSPM
+#>  sf           * 1.0-23   2025-11-28 [1] RSPM
 #>  sp           * 2.2-0    2025-02-01 [1] RSPM
 #>  spam           2.11-1   2025-01-20 [1] RSPM
 #>  stringfish     0.17.0   2025-07-13 [1] RSPM
 #>  stringi        1.8.7    2025-03-27 [1] RSPM
 #>  stringr      * 1.6.0    2025-11-04 [1] RSPM
 #>  systemfonts    1.3.1    2025-10-01 [1] RSPM
-#>  terra        * 1.8-80   2025-11-05 [1] RSPM
+#>  terra        * 1.8-86   2025-11-28 [1] RSPM
 #>  textshaping    1.0.4    2025-10-10 [1] RSPM
 #>  tibble       * 3.3.0    2025-06-08 [1] RSPM
 #>  tidyr        * 1.3.1    2024-01-24 [1] RSPM
@@ -199,8 +200,8 @@ cat(readLines(saved_file), sep = "\n")
 #>  withr          3.0.2    2024-10-28 [1] RSPM
 #>  wk             0.9.4    2024-10-11 [1] RSPM
 #>  xfun           0.54     2025-10-30 [1] RSPM
-#>  xml2           1.4.1    2025-10-27 [1] RSPM
-#>  yaml           2.3.10   2024-07-26 [1] RSPM
+#>  xml2           1.5.1    2025-12-01 [1] RSPM
+#>  yaml           2.3.11   2025-11-28 [1] RSPM
 #> 
 #>  [1] /home/runner/work/_temp/Library
 #>  [2] /opt/R/4.5.2/lib/R/site-library
@@ -220,13 +221,13 @@ vec <- rnorm(1000)
 session_data <- tibble::tibble(object = c("df", "vec"), size = c(0.1, 0.1))
 save_session_info(out_directory = temp_dir, session_info = session_data)
 #> Saving session info to:
-#> /tmp/RtmpIhN7qQ/save_session_info/S_20251109_1926.txt
+#> /tmp/Rtmpyp01Cy/save_session_info/S_20251209_1519.txt
 
 saved_file <- list.files(
   temp_dir, pattern = "S_.+txt$", full.names = TRUE) %>%
   ecokit::normalize_path()
 (saved_file <- saved_file[length(saved_file)])
-#> /tmp/RtmpIhN7qQ/save_session_info/S_20251109_1926.txt
+#> /tmp/Rtmpyp01Cy/save_session_info/S_20251209_1519.txt
 
 cat(readLines(saved_file), sep = "\n")
 #> 
@@ -244,7 +245,7 @@ cat(readLines(saved_file), sep = "\n")
 #>  collate  C
 #>  ctype    C.UTF-8
 #>  tz       UTC
-#>  date     2025-11-09
+#>  date     2025-12-09
 #>  pandoc   3.1.11 @ /opt/hostedtoolcache/pandoc/3.1.11/x64/ (via rmarkdown)
 #>  quarto   NA
 #> 
@@ -272,35 +273,35 @@ cat(readLines(saved_file), sep = "\n")
 #>  DBI            1.2.3    2024-06-02 [1] RSPM
 #>  desc           1.4.3    2023-12-10 [1] RSPM
 #>  devtools       2.4.6    2025-10-03 [1] RSPM
-#>  digest         0.6.37   2024-08-19 [1] RSPM
+#>  digest         0.6.39   2025-11-19 [1] RSPM
 #>  dismo        * 1.3-16   2024-11-25 [1] RSPM
 #>  dotCall64      1.2      2024-10-04 [1] RSPM
-#>  downlit        0.4.4    2024-06-10 [1] RSPM
+#>  downlit        0.4.5    2025-11-14 [1] RSPM
 #>  dplyr        * 1.1.4    2023-11-17 [1] RSPM
 #>  e1071          1.7-16   2024-09-16 [1] RSPM
-#>  ecokit       * 0.1.0    2025-11-09 [1] local
+#>  ecokit       * 0.1.0    2025-12-09 [1] local
 #>  ellipsis       0.3.2    2021-04-29 [1] RSPM
 #>  evaluate       1.0.5    2025-08-27 [1] RSPM
-#>  fansi          1.0.6    2023-12-08 [1] RSPM
+#>  fansi          1.0.7    2025-11-19 [1] RSPM
 #>  farver         2.1.2    2024-05-13 [1] RSPM
 #>  fastmap        1.2.0    2024-05-15 [1] RSPM
 #>  fields         17.1     2025-09-08 [1] RSPM
 #>  fontawesome    0.5.3    2024-11-16 [1] RSPM
 #>  Formula        1.2-5    2023-02-24 [1] RSPM
 #>  fs           * 1.6.6    2025-04-12 [1] RSPM
-#>  future       * 1.67.0   2025-07-29 [1] RSPM
+#>  future       * 1.68.0   2025-11-17 [1] RSPM
 #>  future.apply   1.20.0   2025-06-06 [1] RSPM
 #>  gdata          3.0.1    2024-10-22 [1] RSPM
 #>  generics       0.1.4    2025-05-09 [1] RSPM
-#>  ggplot2      * 4.0.0    2025-09-11 [1] RSPM
+#>  ggplot2      * 4.0.1    2025-11-14 [1] RSPM
 #>  globals        0.18.0   2025-05-08 [1] RSPM
 #>  glue           1.8.0    2024-09-30 [1] RSPM
 #>  gtable         0.3.6    2024-10-25 [1] RSPM
 #>  gtools         3.9.5    2023-11-20 [1] RSPM
-#>  htmltools      0.5.8.1  2024-04-04 [1] RSPM
+#>  htmltools      0.5.9    2025-12-04 [1] RSPM
 #>  htmlwidgets    1.6.4    2023-12-06 [1] RSPM
 #>  httr           1.4.7    2023-08-15 [1] RSPM
-#>  httr2          1.2.1    2025-07-22 [1] RSPM
+#>  httr2          1.2.2    2025-12-08 [1] RSPM
 #>  jquerylib      0.1.4    2021-04-26 [1] RSPM
 #>  jsonlite       2.0.0    2025-03-27 [1] RSPM
 #>  KernSmooth     2.23-26  2025-01-01 [3] CRAN (R 4.5.2)
@@ -309,7 +310,7 @@ cat(readLines(saved_file), sep = "\n")
 #>  lattice        0.22-7   2025-04-02 [3] CRAN (R 4.5.2)
 #>  lifecycle      1.0.4    2023-11-07 [1] RSPM
 #>  listenv        0.10.0   2025-11-02 [1] RSPM
-#>  lobstr         1.1.2    2022-06-22 [1] RSPM
+#>  lobstr         1.1.3    2025-11-14 [1] RSPM
 #>  lubridate    * 1.9.4    2024-12-08 [1] RSPM
 #>  magrittr     * 2.0.4    2025-09-12 [1] RSPM
 #>  maps           3.4.3    2025-05-26 [1] RSPM
@@ -317,7 +318,8 @@ cat(readLines(saved_file), sep = "\n")
 #>  memoise        2.0.1    2021-11-26 [1] RSPM
 #>  nnet         * 7.3-20   2025-01-01 [3] CRAN (R 4.5.2)
 #>  openssl        2.3.4    2025-09-30 [1] RSPM
-#>  pak            0.9.0    2025-05-27 [1] RSPM
+#>  otel           0.2.0    2025-08-29 [1] RSPM
+#>  pak            0.9.1    2025-12-01 [1] RSPM
 #>  parallelly     1.45.1   2025-07-24 [1] RSPM
 #>  pillar         1.11.1   2025-09-17 [1] RSPM
 #>  pkgbuild       1.4.8    2025-05-26 [1] RSPM
@@ -329,7 +331,7 @@ cat(readLines(saved_file), sep = "\n")
 #>  proxy          0.4-27   2022-06-09 [1] RSPM
 #>  ps             1.9.1    2025-04-12 [1] RSPM
 #>  purrr        * 1.2.0    2025-11-04 [1] RSPM
-#>  qs2          * 0.1.5    2025-03-07 [1] RSPM
+#>  qs2          * 0.1.6    2025-11-21 [1] RSPM
 #>  R6             2.6.1    2025-02-15 [1] RSPM
 #>  ragg           1.5.0    2025-09-02 [1] RSPM
 #>  rappdirs       0.3.3    2021-01-31 [1] RSPM
@@ -346,19 +348,19 @@ cat(readLines(saved_file), sep = "\n")
 #>  rvest          1.0.5    2025-08-29 [1] RSPM
 #>  rworldmap    * 1.3-8    2023-10-16 [1] RSPM
 #>  s2             1.1.9    2025-05-23 [1] RSPM
-#>  S7             0.2.0    2024-11-07 [1] RSPM
+#>  S7             0.2.1    2025-11-14 [1] RSPM
 #>  sass           0.4.10   2025-04-11 [1] RSPM
 #>  scales       * 1.4.0    2025-04-24 [1] RSPM
-#>  selectr        0.4-2    2019-11-20 [1] RSPM
+#>  selectr        0.5-0    2025-11-21 [1] RSPM
 #>  sessioninfo    1.2.3    2025-02-05 [1] RSPM
-#>  sf           * 1.0-21   2025-05-15 [1] RSPM
+#>  sf           * 1.0-23   2025-11-28 [1] RSPM
 #>  sp           * 2.2-0    2025-02-01 [1] RSPM
 #>  spam           2.11-1   2025-01-20 [1] RSPM
 #>  stringfish     0.17.0   2025-07-13 [1] RSPM
 #>  stringi        1.8.7    2025-03-27 [1] RSPM
 #>  stringr      * 1.6.0    2025-11-04 [1] RSPM
 #>  systemfonts    1.3.1    2025-10-01 [1] RSPM
-#>  terra        * 1.8-80   2025-11-05 [1] RSPM
+#>  terra        * 1.8-86   2025-11-28 [1] RSPM
 #>  textshaping    1.0.4    2025-10-10 [1] RSPM
 #>  tibble       * 3.3.0    2025-06-08 [1] RSPM
 #>  tidyr        * 1.3.1    2024-01-24 [1] RSPM
@@ -374,8 +376,8 @@ cat(readLines(saved_file), sep = "\n")
 #>  withr          3.0.2    2024-10-28 [1] RSPM
 #>  wk             0.9.4    2024-10-11 [1] RSPM
 #>  xfun           0.54     2025-10-30 [1] RSPM
-#>  xml2           1.4.1    2025-10-27 [1] RSPM
-#>  yaml           2.3.10   2024-07-26 [1] RSPM
+#>  xml2           1.5.1    2025-12-01 [1] RSPM
+#>  yaml           2.3.11   2025-11-28 [1] RSPM
 #> 
 #>  [1] /home/runner/work/_temp/Library
 #>  [2] /opt/R/4.5.2/lib/R/site-library
