@@ -141,6 +141,7 @@ reference:
   - range_to_new_value
   - write_nc
   - nearest_dist_sf
+  - raster_dims_km
 
 - title: Plotting functions
   contents:
