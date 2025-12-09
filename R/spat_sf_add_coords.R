@@ -111,5 +111,6 @@ sf_add_coords <- function(
   } else {
     coordinates <- stats::setNames(coordinates, c(name_x, name_y))
   }
-  return(dplyr::bind_cols(sf_object, coordinates))
+
+  dplyr::bind_cols(sf_object, coordinates)
 }

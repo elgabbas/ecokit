@@ -70,9 +70,9 @@ lapply_ <- function(x, fun, silent = TRUE, ...) {
   result <- lapply(X = x, FUN = fun, ...)
 
   if (silent) {
-    return(invisible(NULL))
+    invisible(NULL)
   } else {
-    return(result)
+    result
   }
 }
 
@@ -94,8 +94,8 @@ sapply_ <- function(x, fun, simplify = TRUE, silent = TRUE, ...) {
   result <- sapply(X = x, FUN = fun, simplify = simplify, ...) #nolint
 
   if (silent) {
-    return(invisible(NULL))
+    invisible(NULL)
   } else {
-    return(result)
+    result
   }
 }

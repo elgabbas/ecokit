@@ -149,5 +149,5 @@ check_tiff <- function(x = NULL, warning = TRUE) {
       magrittr::not()
   }
 
-  return(out_value)
+  out_value
 }

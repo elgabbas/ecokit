@@ -6,6 +6,11 @@ exclusions: list(
 	"R/general_options.R" = list("undesirable_function_linter" = Inf)
 	)
 linters: linters_with_defaults(
+  # Set pipe_consistency_linter to NULL in the defaults list
+  defaults = list(
+    pipe_consistency_linter = NULL,
+    commented_code_linter = NULL,
+    indentation_linter = NULL),
 	absolute_path_linter(),
 	# consecutive_blank_linter = NULL,
 	# cyclocomp_linter = NULL,
@@ -17,14 +22,13 @@ linters: linters_with_defaults(
 	string_boundary_linter(),
 	# trailing_whitespace_linter = NULL,
 	undesirable_function_linter(),
-    implicit_integer_linter(),
+  implicit_integer_linter(),
 	any_is_na_linter(),
 	assignment_linter(),
 	boolean_arithmetic_linter(),
 	brace_linter(),
 	class_equals_linter(),
 	commas_linter(),
-	commented_code_linter = NULL,
 	comparison_negation_linter(),
 	condition_call_linter(),
 	condition_message_linter(),
@@ -39,7 +43,6 @@ linters: linters_with_defaults(
 	if_switch_linter(),
 	ifelse_censor_linter(),
 	implicit_assignment_linter(),
-	indentation_linter = NULL,
 	infix_spaces_linter(),
 	inner_combine_linter(),
 	is_numeric_linter(),
@@ -64,7 +67,6 @@ linters: linters_with_defaults(
 	paren_body_linter(),
 	paste_linter(),
 	pipe_call_linter(),
-	# pipe_consistency_linter = NULL, # #pipe_consistency_linter(),
 	pipe_continuation_linter(),
 	pipe_return_linter(),
 	print_linter(),

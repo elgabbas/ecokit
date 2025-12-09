@@ -83,5 +83,6 @@ raster_to_pres_abs <- function(
     if (na_to_0) raster <- terra::classify(raster, cbind(NA, 0L))
     if (zero_to_na) raster <- terra::classify(raster, cbind(0L, NA))
   }
-  return(raster)
+
+  raster
 }

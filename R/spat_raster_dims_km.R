@@ -47,6 +47,8 @@
 #' @examples
 #' require(terra)
 #' require(dismo)
+#' require(tibble)
+#' options(tibble.width = 400)
 #'
 #' # Global lon/lat raster (1-degree)
 #' r1 <- terra::rast()

@@ -87,7 +87,7 @@ check_args <- function(
     args_to_check, envir = parent.frame(), ifnotfound = list(NULL))
 
   length_mismatches <- purrr::map_lgl(
-    .x = seq_len(length(arg_list)),
+    .x = seq_along(arg_list),
     .f = ~ length(arg_list[[.x]]) != arg_length[.x])
   if (any(length_mismatches)) {
     ecokit::stop_ctx(
@@ -143,5 +143,5 @@ check_args <- function(
       }
     })
 
-  return(invisible(NULL))
+  invisible(NULL)
 }

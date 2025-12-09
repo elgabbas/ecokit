@@ -160,5 +160,6 @@ split_raster <- function(
         r_list[[i]], axes = FALSE, legend = FALSE, bty = "n",  box = FALSE)
     }
   }
-  return(r_list)
+
+  r_list
 }

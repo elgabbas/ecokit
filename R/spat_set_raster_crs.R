@@ -75,5 +75,5 @@ set_raster_crs <- function(raster = NULL, crs = NULL) {
   # Set crs
   terra::crs(raster) <- crs
 
-  return(raster)
+  raster
 }

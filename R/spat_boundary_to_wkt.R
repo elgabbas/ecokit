@@ -19,7 +19,7 @@
 #' boundary_to_wkt(left = 20, right = 30, bottom = 40, top = 50)
 
 boundary_to_wkt <- function(
-  left = NULL, right = NULL, bottom = NULL, top = NULL) {
+    left = NULL, right = NULL, bottom = NULL, top = NULL) {
 
   if (any(c(is.null(left), is.null(right), is.null(bottom), is.null(top)))) {
     ecokit::stop_ctx(
@@ -32,5 +32,5 @@ boundary_to_wkt <- function(
     "{left} {top},{left} {bottom}))") %>%
     as.character()
 
-  return(boundaries)
+  boundaries
 }

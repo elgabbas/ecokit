@@ -71,5 +71,5 @@ clip_raster_by_polygon <- function(raster = NULL, shape = NULL) {
   clipped_raster <- a1_crop * step1
   names(clipped_raster) <- names(raster)
 
-  return(clipped_raster)
+  clipped_raster
 }

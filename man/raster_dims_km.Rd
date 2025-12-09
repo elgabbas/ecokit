@@ -22,7 +22,7 @@ A tibble with:
 \item \code{ncol}, \code{nrow}: raster dimensions (cells).
 \item \code{cell_width}, \code{cell_height}: centre cell size (km).
 \item \code{extent_width}, \code{extent_height}: extent size (km).
-\item If \code{exclude_na} is TRUE, also \code{extent_width_occupied},
+\item If \code{exclude_na} is \code{TRUE}, also \code{extent_width_occupied},
 \code{extent_height_occupied}.
 }
 }
@@ -57,6 +57,8 @@ used for determining non-NA rows and columns.
 \examples{
 require(terra)
 require(dismo)
+require(tibble)
+options(tibble.width = 400)
 
 # Global lon/lat raster (1-degree)
 r1 <- terra::rast()
@@ -75,12 +77,20 @@ plot(r2)
 raster_dims_km(r2)
 raster_dims_km(r2, exclude_na = TRUE)
 
+# Example with real multi-layer raster files from dismo package
 fnames <- list.files(
   path = fs::path(system.file(package = "dismo"), "ex"),
   pattern = "grd", full.names = TRUE)
-r2 <- terra::rast(fnames)
-raster_dims_km(r2)
-raster_dims_km(r2, exclude_na = TRUE, warning = FALSE)
+r3 <- terra::rast(fnames)
+raster_dims_km(r3)
+
+# a single column is completely NA in the first layer
+# raster_dims_km uses the first layer to check for NA rows/columns
+raster_dims_km(r3, exclude_na = TRUE, warning = FALSE)
+# the same as previous
+raster_dims_km(r3[[1]], exclude_na = TRUE, warning = FALSE)
+
+raster_dims_km(r3[[2]], exclude_na = TRUE, warning = FALSE)
 
 }
 \author{

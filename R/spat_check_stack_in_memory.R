@@ -84,5 +84,5 @@ check_stack_in_memory <- function(stack = NULL) {
   } else {
     message("All stack layers are read from ", crayon::bold("disk"))
   }
-  return(invisible(NULL))
+  invisible(NULL)
 }

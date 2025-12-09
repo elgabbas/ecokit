@@ -194,5 +194,5 @@ get_chelsa_links <- function(
     ecokit::arrange_alphanum(climate_scenario, climate_model, year, var_name)
 
   # Return the final tibble
-  return(all_links)
+  all_links
 }

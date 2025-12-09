@@ -138,7 +138,7 @@ all_objects_sizes <- function(
       withr::local_options(list(pillar.sigfig = 4L))
       print(all_vars_size, n = n_objects)
 
-      if (sum(is.na(all_vars_size$size_mb)) > 0L) {
+      if (any(is.na(all_vars_size$size_mb))) {
         na_var <- all_vars_size %>%
           dplyr::filter(is.na(.data$size_mb)) %>%
           dplyr::pull(.data$object) %>%

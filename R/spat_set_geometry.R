@@ -91,5 +91,5 @@ set_geometry <- function(sf_object = NULL, geometry_column = NULL) {
   # Set geometry column
   sf::st_geometry(sf_object) <- geometry_column
 
-  return(sf_object)
+  sf_object
 }

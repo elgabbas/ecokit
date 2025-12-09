@@ -65,5 +65,5 @@ add_missing_columns <- function(data, fill_value = NA_character_, ...) {
     data <- tibble::add_column(data, !!!add_data) %>%
       tibble::tibble()
   }
-  return(data)
+  data
 }

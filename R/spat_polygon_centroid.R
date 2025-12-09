@@ -45,7 +45,7 @@
 #' attr(nc_centroid_renamed, "sf_column")
 
 polygon_centroid <- function(
-  sf_object = NULL, rename = FALSE, new_name = NULL) {
+    sf_object = NULL, rename = FALSE, new_name = NULL) {
 
   # Validate sf_object
   if (is.null(sf_object)) {
@@ -94,5 +94,5 @@ polygon_centroid <- function(
       sf_object = sf_object, new_name = new_name)
   }
 
-  return(sf_object)
+  sf_object
 }

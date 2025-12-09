@@ -68,5 +68,5 @@ nc_global_attributes <- function(nc = NULL) {
   # Closing the NetCDF File
   RNetCDF::close.nc(nc_handle)
 
-  return(global_attributes)
+  global_attributes
 }

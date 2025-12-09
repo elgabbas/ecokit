@@ -35,5 +35,5 @@ integer_breaks <- function(n_breaks = 5L, ...) {
     breaks
   }
 
-  return(fxn)
+  fxn
 }

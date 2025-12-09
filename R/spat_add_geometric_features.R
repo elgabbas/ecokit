@@ -124,7 +124,7 @@ add_cross_to_grid <- function(sf_object = NULL) {
     dplyr::bind_rows() %>%
     sf::st_as_sf()
 
-  return(sf_object)
+  sf_object
 }
 
 ## |------------------------------------------------------------------------| #
@@ -181,6 +181,5 @@ add_diagonals_to_grid <- function(sf_object = NULL) {
     dplyr::bind_rows() %>%
     sf::st_as_sf()
 
-  return(sf_object)
-
+  sf_object
 }

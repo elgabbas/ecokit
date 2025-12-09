@@ -70,5 +70,6 @@ rename_geometry <- function(sf_object = NULL, new_name = NULL) {
   # Rename geometry column
   names(sf_object)[names(sf_object) == current] <- new_name
   sf::st_geometry(sf_object) <- new_name
-  return(sf_object)
+
+  sf_object
 }
