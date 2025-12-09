@@ -53,6 +53,10 @@ jobs:
           rm -rf ~/.cache/pak
           rm -rf ~/Library/Caches/pak
 
+      - name: Force base package installer on macOS
+        if: runner.os == 'macOS'
+        run: echo "R_PKG_INSTALLER=default" >> $GITHUB_ENV
+
       - uses: r-lib/actions/setup-r-dependencies@v2
         with:
           extra-packages: any::rcmdcheck
