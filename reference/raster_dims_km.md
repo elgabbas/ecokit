@@ -39,7 +39,7 @@ A tibble with:
 
 - `extent_width`, `extent_height`: extent size (km).
 
-- If `exclude_na` is TRUE, also `extent_width_occupied`,
+- If `exclude_na` is `TRUE`, also `extent_width_occupied`,
   `extent_height_occupied`.
 
 ## Details
@@ -82,6 +82,8 @@ Ahmed El-Gabbas
 ``` r
 require(terra)
 require(dismo)
+require(tibble)
+options(tibble.width = 400)
 
 # Global lon/lat raster (1-degree)
 r1 <- terra::rast()
@@ -112,21 +114,47 @@ raster_dims_km(r2, exclude_na = TRUE)
 #>    ncol  nrow cell_width cell_height extent_width extent_height
 #>   <dbl> <dbl>      <dbl>       <dbl>        <dbl>         <dbl>
 #> 1    40    40       26.9        27.8        1075.         1113.
-#> # ℹ 2 more variables: extent_width_occupied <dbl>, extent_height_occupied <dbl>
+#>   extent_width_occupied extent_height_occupied
+#>                   <dbl>                  <dbl>
+#> 1                  914.                   807.
 
+# Example with real multi-layer raster files from dismo package
 fnames <- list.files(
   path = fs::path(system.file(package = "dismo"), "ex"),
   pattern = "grd", full.names = TRUE)
-r2 <- terra::rast(fnames)
-raster_dims_km(r2)
+r3 <- terra::rast(fnames)
+raster_dims_km(r3)
 #> # A tibble: 1 × 6
 #>    ncol  nrow cell_width cell_height extent_width extent_height
 #>   <dbl> <dbl>      <dbl>       <dbl>        <dbl>         <dbl>
 #> 1   186   192       55.1        55.7       10223.        10687.
-raster_dims_km(r2, exclude_na = TRUE, warning = FALSE)
+
+# a single column is completely NA in the first layer
+# raster_dims_km uses the first layer to check for NA rows/columns
+raster_dims_km(r3, exclude_na = TRUE, warning = FALSE)
 #> # A tibble: 1 × 8
 #>    ncol  nrow cell_width cell_height extent_width extent_height
 #>   <dbl> <dbl>      <dbl>       <dbl>        <dbl>         <dbl>
 #> 1   186   192       55.1        55.7       10223.        10687.
-#> # ℹ 2 more variables: extent_width_occupied <dbl>, extent_height_occupied <dbl>
+#>   extent_width_occupied extent_height_occupied
+#>                   <dbl>                  <dbl>
+#> 1                10031.                 10687.
+# the same as previous
+raster_dims_km(r3[[1]], exclude_na = TRUE, warning = FALSE)
+#> # A tibble: 1 × 8
+#>    ncol  nrow cell_width cell_height extent_width extent_height
+#>   <dbl> <dbl>      <dbl>       <dbl>        <dbl>         <dbl>
+#> 1   186   192       55.1        55.7       10223.        10687.
+#>   extent_width_occupied extent_height_occupied
+#>                   <dbl>                  <dbl>
+#> 1                10031.                 10687.
+
+raster_dims_km(r3[[2]], exclude_na = TRUE, warning = FALSE)
+#> # A tibble: 1 × 8
+#>    ncol  nrow cell_width cell_height extent_width extent_height
+#>   <dbl> <dbl>      <dbl>       <dbl>        <dbl>         <dbl>
+#> 1   186   192       55.1        55.7       10223.        10687.
+#>   extent_width_occupied extent_height_occupied
+#>                   <dbl>                  <dbl>
+#> 1                10087.                 10687.
 ```
