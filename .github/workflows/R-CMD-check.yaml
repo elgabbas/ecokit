@@ -45,7 +45,7 @@ jobs:
           http-user-agent: ${{ matrix.config.http-user-agent }}
           use-public-rspm: true
 
-      - name: Remove pak cache on macOS
+      - name: Clean pak cache on macOS
         if: runner.os == 'macOS'
         run: |
           rm -rf ~/Library/Caches/org.R-project.R
@@ -57,7 +57,6 @@ jobs:
         with:
           extra-packages: any::rcmdcheck
           needs: check
-          use-pak: ${{ runner.os != 'macOS' }}
 
       - uses: r-lib/actions/check-r-package@v2
         with:
