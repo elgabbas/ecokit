@@ -4,10 +4,17 @@
 \alias{raster_dims_km}
 \title{Raster dimensions in kilometres for lon/lat SpatRaster}
 \usage{
-raster_dims_km(r)
+raster_dims_km(r, exclude_na = FALSE, warning = TRUE)
 }
 \arguments{
 \item{r}{A \code{terra::SpatRaster} in longitude/latitude coordinates (degrees).}
+
+\item{exclude_na}{Logical. If \code{TRUE}, also return \code{extent_width_occupied} and
+\code{extent_height_occupied}, after excluding all columns/rows that are only
+\code{NA}. Default is \code{FALSE}.}
+
+\item{warning}{Logical. If \code{TRUE}, prints warning for multi-layer rasters and
+for other checks. Default is \code{TRUE}.}
 }
 \value{
 A tibble with:
@@ -15,6 +22,8 @@ A tibble with:
 \item \code{ncol}, \code{nrow}: raster dimensions (cells).
 \item \code{cell_width}, \code{cell_height}: centre cell size (km).
 \item \code{extent_width}, \code{extent_height}: extent size (km).
+\item If \code{exclude_na} is TRUE, also \code{extent_width_occupied},
+\code{extent_height_occupied}.
 }
 }
 \description{
@@ -23,29 +32,55 @@ the raster centre, and the raster extent width/height in kilometres, for an
 unprojected longitude/latitude \code{SpatRaster}.
 }
 \details{
-The function uses \link[terra:distance]{terra::distance} and includes an anti-meridian
-guard: if the longitudinal span exceeds 180 degrees (e.g., a global extent
-\verb{-180, 180}), the shortest geodesic between \code{xmin} and \code{xmax} collapses to
-zero. In that case, the extent width is estimated as \code{ncol(r) * cell_width} (cell width evaluated at the raster centre).
 \itemize{
+\item The function uses \link[terra:distance]{terra::distance} for width/height calculations, and
+includes an anti-meridian guard: if the longitudinal span exceeds 180 degrees
+(global extents like \verb{-180, 180}), the geodesic between \code{xmin} and \code{xmax}
+collapses to zero. In that case, the extent width is estimated as \code{ncol(r) * cell_width}.
 \item East-west cell width varies with latitude; width is calculated at the
-raster's centre latitude for a single representative value.
-\item North-south cell height varies slightly with latitude; the centre value
-is reported.
+raster's centre latitude.
+\item North-south cell height varies slightly with latitude; centre value is
+reported.
 \item The CRS must be a geographic lon/lat CRS (e.g., EPSG:4326).
+\item Optionally, you can exclude any row or column that is completely NA (not
+just outer cells, but \emph{any} row or column that consists entirely of NA
+values), by using the \code{exclude_na = TRUE} argument. When enabled, returns
+additional columns \code{extent_width_occupied} and \code{extent_height_occupied},
+which are calculated as the number of internal columns/rows \strong{not completely
+NA} times the cell size at raster centre. This is useful when a raster
+contains large internal regions (rows, columns) of missing data (e.g., ocean
+bands between landmasses).
+\item If \code{exclude_na = TRUE} and \code{r} has multiple layers, only the first layer is
+used for determining non-NA rows and columns.
 }
 }
 \examples{
 require(terra)
+require(dismo)
 
 # Global lon/lat raster (1-degree)
 r1 <- terra::rast()
 raster_dims_km(r1)
+# This gives error as input raster has no values:
+# raster_dims_km(r1, exclude_na = TRUE)
 
 # Regional raster over Europe
 r2 <- terra::rast(
-  ncols = 400, nrows = 200, xmin = -10, xmax = 30, ymin = 35, ymax = 55)
+  ncols = 40, nrows = 40, xmin = 10, xmax = 20,
+  ymin = 10, ymax = 20, vals = 1L)
+# make some rows and columns NA
+r2[15:25, ] <- NA
+r2[, 10:15] <- NA
+plot(r2)
 raster_dims_km(r2)
+raster_dims_km(r2, exclude_na = TRUE)
+
+fnames <- list.files(
+  path = fs::path(system.file(package = "dismo"), "ex"),
+  pattern = "grd", full.names = TRUE)
+r2 <- terra::rast(fnames)
+raster_dims_km(r2)
+raster_dims_km(r2, exclude_na = TRUE, warning = FALSE)
 
 }
 \author{

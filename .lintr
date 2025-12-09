@@ -64,7 +64,7 @@ linters: linters_with_defaults(
 	paren_body_linter(),
 	paste_linter(),
 	pipe_call_linter(),
-	pipe_consistency_linter(),
+	# pipe_consistency_linter = NULL, # #pipe_consistency_linter(),
 	pipe_continuation_linter(),
 	pipe_return_linter(),
 	print_linter(),

@@ -106,5 +106,5 @@ check_gbif <- function(r_environ = ".Renviron") {
       include_backtrace = TRUE)
   }
 
-  return(invisible(NULL))
+  invisible(NULL)
 }
