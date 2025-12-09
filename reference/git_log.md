@@ -51,15 +51,15 @@ Ahmed El-Gabbas
 ``` r
 # Show the most recent commit
 git_log(n_commits = 1)
-#> * 7dd163b - (grafted, HEAD -> main, origin/main) Multiple changes to fix linting issues using github actions. (3 minutes ago) <Ahmed El-Gabbas>
+#> * 7ff9ca8 - (grafted, HEAD -> main, origin/main) Fix package checking on macOS (3 minutes ago) <Ahmed El-Gabbas>
 
 # Show the most recent 5 commits
 git_log(n_commits = 5)
-#> * 7dd163b - (grafted, HEAD -> main, origin/main) Multiple changes to fix linting issues using github actions. (3 minutes ago) <Ahmed El-Gabbas>
+#> * 7ff9ca8 - (grafted, HEAD -> main, origin/main) Fix package checking on macOS (3 minutes ago) <Ahmed El-Gabbas>
 
 # by default, the log is only printed, not returned
 log_example <- git_log(n_commits = 1)
-#> * 7dd163b - (grafted, HEAD -> main, origin/main) Multiple changes to fix linting issues using github actions. (3 minutes ago) <Ahmed El-Gabbas>
+#> * 7ff9ca8 - (grafted, HEAD -> main, origin/main) Fix package checking on macOS (3 minutes ago) <Ahmed El-Gabbas>
 print(log_example)
 #> NULL
 
@@ -68,7 +68,7 @@ log_example <- git_log(return_log = TRUE)
 length(log_example)
 #> [1] 1
 head(log_example, 8)
-#> [1] "* 7dd163b - (grafted, HEAD -> main, origin/main) Multiple changes to fix linting issues using github actions. (3 minutes ago) <Ahmed El-Gabbas>"
+#> [1] "* 7ff9ca8 - (grafted, HEAD -> main, origin/main) Fix package checking on macOS (3 minutes ago) <Ahmed El-Gabbas>"
 
 # not a git repo
 non_git_dir <- fs::path_temp("test_dir")
