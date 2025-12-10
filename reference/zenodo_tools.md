@@ -115,13 +115,21 @@ require(ecokit)
 ecokit::load_packages(terra, dplyr, fs)
 
 files <- zenodo_file_list("6620748")
-#> No encoding supplied: defaulting to UTF-8.
-#> Error in zenodo_file_list("6620748"): Failed to retrieve record metadata: <html><body><h1>504 Gateway Time-out</h1>
-#> The server didn't respond in time.
-#> </body></html>
-#> 
 dplyr::glimpse(files)
-#> Error: object 'files' not found
+#> Rows: 59
+#> Columns: 12
+#> $ title       <chr> "Phanerozoic continental climate and Köppen–Geiger climate classes", "Phanerozoic continental climate and Köppen–Geiger climate classes", "Phanerozoic continental climate and Köppen–Geiger climate classes", "Phanerozoic continental climate and Köppen–Geiger climate classes", "Phanerozoic continental climate and Köppen–Geiger climate classes", "Phanerozoic continental climate …
+#> $ id_url      <chr> "https://zenodo.org/api/records/6620748", "https://zenodo.org/api/records/6620748", "https://zenodo.org/api/records/6620748", "https://zenodo.org/api/records/6620748", "https://zenodo.org/api/records/6620748", "https://zenodo.org/api/records/6620748", "https://zenodo.org/api/records/6620748", "https://zenodo.org/api/records/6620748", "https://zenodo.org/api/records/6620748", …
+#> $ created     <dttm> 2022-06-07 15:21:05, 2022-06-07 15:21:05, 2022-06-07 15:21:05, 2022-06-07 15:21:05, 2022-06-07 15:21:05, 2022-06-07 15:21:05, 2022-06-07 15:21:05, 2022-06-07 15:21:05, 2022-06-07 15:21:05, 2022-06-07 15:21:05, 2022-06-07 15:21:05, 2022-06-07 15:21:05, 2022-06-07 15:21:05, 2022-06-07 15:21:05, 2022-06-07 15:21:05, 2022-06-07 15:21:05, 2022-06-07 15:21:05, 2022-06-07 15:21:05,…
+#> $ modified    <dttm> 2024-07-16 15:44:29, 2024-07-16 15:44:29, 2024-07-16 15:44:29, 2024-07-16 15:44:29, 2024-07-16 15:44:29, 2024-07-16 15:44:29, 2024-07-16 15:44:29, 2024-07-16 15:44:29, 2024-07-16 15:44:29, 2024-07-16 15:44:29, 2024-07-16 15:44:29, 2024-07-16 15:44:29, 2024-07-16 15:44:29, 2024-07-16 15:44:29, 2024-07-16 15:44:29, 2024-07-16 15:44:29, 2024-07-16 15:44:29, 2024-07-16 15:44:29,…
+#> $ updated     <dttm> 2024-07-16 15:44:29, 2024-07-16 15:44:29, 2024-07-16 15:44:29, 2024-07-16 15:44:29, 2024-07-16 15:44:29, 2024-07-16 15:44:29, 2024-07-16 15:44:29, 2024-07-16 15:44:29, 2024-07-16 15:44:29, 2024-07-16 15:44:29, 2024-07-16 15:44:29, 2024-07-16 15:44:29, 2024-07-16 15:44:29, 2024-07-16 15:44:29, 2024-07-16 15:44:29, 2024-07-16 15:44:29, 2024-07-16 15:44:29, 2024-07-16 15:44:29,…
+#> $ doi_version <chr> "10.5281/zenodo.6620748", "10.5281/zenodo.6620748", "10.5281/zenodo.6620748", "10.5281/zenodo.6620748", "10.5281/zenodo.6620748", "10.5281/zenodo.6620748", "10.5281/zenodo.6620748", "10.5281/zenodo.6620748", "10.5281/zenodo.6620748", "10.5281/zenodo.6620748", "10.5281/zenodo.6620748", "10.5281/zenodo.6620748", "10.5281/zenodo.6620748", "10.5281/zenodo.6620748", "10.5281/zenod…
+#> $ doi         <chr> "10.5281/zenodo.6402040", "10.5281/zenodo.6402040", "10.5281/zenodo.6402040", "10.5281/zenodo.6402040", "10.5281/zenodo.6402040", "10.5281/zenodo.6402040", "10.5281/zenodo.6402040", "10.5281/zenodo.6402040", "10.5281/zenodo.6402040", "10.5281/zenodo.6402040", "10.5281/zenodo.6402040", "10.5281/zenodo.6402040", "10.5281/zenodo.6402040", "10.5281/zenodo.6402040", "10.5281/zenod…
+#> $ id          <int> 6620748, 6620748, 6620748, 6620748, 6620748, 6620748, 6620748, 6620748, 6620748, 6620748, 6620748, 6620748, 6620748, 6620748, 6620748, 6620748, 6620748, 6620748, 6620748, 6620748, 6620748, 6620748, 6620748, 6620748, 6620748, 6620748, 6620748, 6620748, 6620748, 6620748, 6620748, 6620748, 6620748, 6620748, 6620748, 6620748, 6620748, 6620748, 6620748, 6620748, 6620748, 6620748, …
+#> $ key         <chr> "40Ma_Pohletal2022_DIB_PhaneroContinentalClimate.nc", "0Ma_Pohletal2022_DIB_PhaneroContinentalClimate.csv", "0Ma_Pohletal2022_DIB_PhaneroContinentalClimate.nc", "100Ma_Pohletal2022_DIB_PhaneroContinentalClimate.csv", "100Ma_Pohletal2022_DIB_PhaneroContinentalClimate.nc", "120Ma_Pohletal2022_DIB_PhaneroContinentalClimate.csv", "120Ma_Pohletal2022_DIB_PhaneroContinentalClimate.…
+#> $ size        <int> 8261200, 14498683, 8261200, 14573851, 8261200, 14407735, 8261200, 15328128, 8261200, 12718896, 8261200, 14026230, 8261200, 15003813, 8261200, 15117199, 8261200, 14141045, 8261200, 14804994, 8261200, 12550434, 8261200, 11977973, 8261200, 11629677, 32824202, 19087436, 68368591, 8261200, 13335048, 8261200, 14727520, 8261200, 11330048, 8261200, 10698643, 8261200, 11087698, 826120…
+#> $ checksum    <chr> "md5:e9ca6e5e58b7b892c2dfd00fffdcc7af", "md5:65ee19cbf3da6a3190f8be8b2312055e", "md5:b59dacf289dc4a3d01a5c551ffab76f2", "md5:8ff79ab6df7e2858edf30a03d5c2b5b7", "md5:69b44851e9c05aa82be467e38d94e79e", "md5:be7376d7971abd7c195576fd018942df", "md5:1a518b2ecb281d9d11c34ceb6ccc1b89", "md5:b67a50025999b71288407d6c085a97d2", "md5:92e4f4a102f0ab4a4952fd77f58eb9d1", "md5:ab390d845300d…
+#> $ link        <chr> "https://zenodo.org/api/records/6620748/files/40Ma_Pohletal2022_DIB_PhaneroContinentalClimate.nc/content", "https://zenodo.org/api/records/6620748/files/0Ma_Pohletal2022_DIB_PhaneroContinentalClimate.csv/content", "https://zenodo.org/api/records/6620748/files/0Ma_Pohletal2022_DIB_PhaneroContinentalClimate.nc/content", "https://zenodo.org/api/records/6620748/files/100Ma_Pohlet…
 
 # --------------------------------------------
 
@@ -129,7 +137,7 @@ dplyr::glimpse(files)
 pdf_file <- zenodo_download_file(
   record_id = "1234567", file_name = "article.pdf")
 print(pdf_file)
-#> /tmp/Rtmp1AocuM/article209f28a8ed31.pdf
+#> /tmp/Rtmp42TNH2/article21941082f7ae.pdf
 
 ecokit::file_type(pdf_file)
 #> [1] "PDF document, version 1.6"
@@ -197,7 +205,7 @@ terra::app(nc_file, "range")
 #> resolution  : 1.40625, 2.8125  (x, y)
 #> extent      : -90, 90, 0, 360  (xmin, xmax, ymin, ymax)
 #> coord. ref. :  
-#> source      : spat_209f5f38d2bf_8351_LM26AmsODEGPU5D.tif 
+#> source      : spat_21946e6d516a_8596_LM26AmsODEGPU5D.tif 
 #> names       : lyr.1,       lyr.2 
 #> min values  :     1,   599912192 
 #> max values  :    13, 48882786304 
@@ -207,7 +215,7 @@ terra::app(nc_file2, "range")
 #> resolution  : 1.40625, 2.8125  (x, y)
 #> extent      : -90, 90, 0, 360  (xmin, xmax, ymin, ymax)
 #> coord. ref. :  
-#> source      : spat_209fcc74c2e_8351_8UwxxeZk3QEYL3o.tif 
+#> source      : spat_219436583066_8596_8UwxxeZk3QEYL3o.tif 
 #> names       : lyr.1,        lyr.2 
 #> min values  :    10,   5999121920 
 #> max values  :   130, 488827879424 

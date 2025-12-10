@@ -33,22 +33,14 @@ included.
 ``` r
 head(scrape_link(url = "https://github.com/tidyverse/dplyr"))
 #> # A tibble: 6 × 2
-#>   link_text         
-#>   <chr>             
-#> 1 Acero             
-#> 2 arrow             
-#> 3 dbplyr            
-#> 4 Documentation     
-#> 5 Docs              
-#> 6 Search syntax tips
-#>   link                                                                          
-#>   <chr>                                                                         
-#> 1 https://arrow.apache.org/docs/cpp/acero/overview.html                         
-#> 2 https://arrow.apache.org/docs/r/                                              
-#> 3 https://dbplyr.tidyverse.org/                                                 
-#> 4 https://docs.github.com                                                       
-#> 5 https://docs.github.com/                                                      
-#> 6 https://docs.github.com/search-github/github-code-search/understanding-github…
+#>   link_text       link                                                 
+#>   <chr>           <chr>                                                
+#> 1 Archive Program https://archiveprogram.github.com                    
+#> 2 Acero           https://arrow.apache.org/docs/cpp/acero/overview.html
+#> 3 arrow           https://arrow.apache.org/docs/r/                     
+#> 4 dbplyr          https://dbplyr.tidyverse.org/                        
+#> 5 Documentation   https://docs.github.com                              
+#> 6 Docs            https://docs.github.com/                             
 
 head(
   scrape_link(

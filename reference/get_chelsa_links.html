@@ -221,213 +221,111 @@ temperature".</p></li>
 <span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">45</span> scd      Snow cover days                 count  <span style="color: #BB0000;">NA</span>      <span style="color: #BB0000;">NA</span>  <span style="color: #949494;">"</span>Number of…    46</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">46</span> swe      Snow water equivalent           kg m…   0.1     0  <span style="color: #949494;">"</span>Amount of…    46</span>
 <span class="r-in"><span></span></span>
-<span class="r-in"><span><span class="fu"><a href="https://rdrr.io/r/base/print.html" class="external-link">print</a></span><span class="op">(</span><span class="va">CHELSA_links</span>, n <span class="op">=</span> <span class="fl">200</span><span class="op">)</span></span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># A tibble: 2,116 × 13</span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>     url     relative_url file_name dir_name climate_scenario climate_model year </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>     <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>   <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>        <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>     <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>    <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>            <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>         <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">  1</span> https:… GLOBAL/clim… CHELSA_b… GLOBAL/… current          current       1981…</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">  2</span> https:… GLOBAL/clim… CHELSA_b… GLOBAL/… current          current       1981…</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">  3</span> https:… GLOBAL/clim… CHELSA_b… GLOBAL/… current          current       1981…</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">  4</span> https:… GLOBAL/clim… CHELSA_b… GLOBAL/… current          current       1981…</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">  5</span> https:… GLOBAL/clim… CHELSA_b… GLOBAL/… current          current       1981…</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">  6</span> https:… GLOBAL/clim… CHELSA_b… GLOBAL/… current          current       1981…</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">  7</span> https:… GLOBAL/clim… CHELSA_b… GLOBAL/… current          current       1981…</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">  8</span> https:… GLOBAL/clim… CHELSA_b… GLOBAL/… current          current       1981…</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">  9</span> https:… GLOBAL/clim… CHELSA_b… GLOBAL/… current          current       1981…</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 10</span> https:… GLOBAL/clim… CHELSA_b… GLOBAL/… current          current       1981…</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 11</span> https:… GLOBAL/clim… CHELSA_b… GLOBAL/… current          current       1981…</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 12</span> https:… GLOBAL/clim… CHELSA_b… GLOBAL/… current          current       1981…</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 13</span> https:… GLOBAL/clim… CHELSA_b… GLOBAL/… current          current       1981…</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 14</span> https:… GLOBAL/clim… CHELSA_b… GLOBAL/… current          current       1981…</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 15</span> https:… GLOBAL/clim… CHELSA_b… GLOBAL/… current          current       1981…</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 16</span> https:… GLOBAL/clim… CHELSA_b… GLOBAL/… current          current       1981…</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 17</span> https:… GLOBAL/clim… CHELSA_b… GLOBAL/… current          current       1981…</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 18</span> https:… GLOBAL/clim… CHELSA_b… GLOBAL/… current          current       1981…</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 19</span> https:… GLOBAL/clim… CHELSA_b… GLOBAL/… current          current       1981…</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 20</span> https:… GLOBAL/clim… CHELSA_f… GLOBAL/… current          current       1981…</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 21</span> https:… GLOBAL/clim… CHELSA_f… GLOBAL/… current          current       1981…</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 22</span> https:… GLOBAL/clim… CHELSA_g… GLOBAL/… current          current       1981…</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 23</span> https:… GLOBAL/clim… CHELSA_g… GLOBAL/… current          current       1981…</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 24</span> https:… GLOBAL/clim… CHELSA_g… GLOBAL/… current          current       1981…</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 25</span> https:… GLOBAL/clim… CHELSA_g… GLOBAL/… current          current       1981…</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 26</span> https:… GLOBAL/clim… CHELSA_g… GLOBAL/… current          current       1981…</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 27</span> https:… GLOBAL/clim… CHELSA_g… GLOBAL/… current          current       1981…</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 28</span> https:… GLOBAL/clim… CHELSA_g… GLOBAL/… current          current       1981…</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 29</span> https:… GLOBAL/clim… CHELSA_g… GLOBAL/… current          current       1981…</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 30</span> https:… GLOBAL/clim… CHELSA_g… GLOBAL/… current          current       1981…</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 31</span> https:… GLOBAL/clim… CHELSA_g… GLOBAL/… current          current       1981…</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 32</span> https:… GLOBAL/clim… CHELSA_g… GLOBAL/… current          current       1981…</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 33</span> https:… GLOBAL/clim… CHELSA_g… GLOBAL/… current          current       1981…</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 34</span> https:… GLOBAL/clim… CHELSA_k… GLOBAL/… current          current       1981…</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 35</span> https:… GLOBAL/clim… CHELSA_k… GLOBAL/… current          current       1981…</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 36</span> https:… GLOBAL/clim… CHELSA_k… GLOBAL/… current          current       1981…</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 37</span> https:… GLOBAL/clim… CHELSA_k… GLOBAL/… current          current       1981…</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 38</span> https:… GLOBAL/clim… CHELSA_k… GLOBAL/… current          current       1981…</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 39</span> https:… GLOBAL/clim… CHELSA_k… GLOBAL/… current          current       1981…</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 40</span> https:… GLOBAL/clim… CHELSA_l… GLOBAL/… current          current       1981…</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 41</span> https:… GLOBAL/clim… CHELSA_n… GLOBAL/… current          current       1981…</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 42</span> https:… GLOBAL/clim… CHELSA_n… GLOBAL/… current          current       1981…</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 43</span> https:… GLOBAL/clim… CHELSA_n… GLOBAL/… current          current       1981…</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 44</span> https:… GLOBAL/clim… CHELSA_n… GLOBAL/… current          current       1981…</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 45</span> https:… GLOBAL/clim… CHELSA_s… GLOBAL/… current          current       1981…</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 46</span> https:… GLOBAL/clim… CHELSA_s… GLOBAL/… current          current       1981…</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 47</span> https:… GLOBAL/clim… CHELSA_b… GLOBAL/… ssp126           GFDL-ESM4     2011…</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 48</span> https:… GLOBAL/clim… CHELSA_b… GLOBAL/… ssp126           GFDL-ESM4     2011…</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 49</span> https:… GLOBAL/clim… CHELSA_b… GLOBAL/… ssp126           GFDL-ESM4     2011…</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 50</span> https:… GLOBAL/clim… CHELSA_b… GLOBAL/… ssp126           GFDL-ESM4     2011…</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 51</span> https:… GLOBAL/clim… CHELSA_b… GLOBAL/… ssp126           GFDL-ESM4     2011…</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 52</span> https:… GLOBAL/clim… CHELSA_b… GLOBAL/… ssp126           GFDL-ESM4     2011…</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 53</span> https:… GLOBAL/clim… CHELSA_b… GLOBAL/… ssp126           GFDL-ESM4     2011…</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 54</span> https:… GLOBAL/clim… CHELSA_b… GLOBAL/… ssp126           GFDL-ESM4     2011…</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 55</span> https:… GLOBAL/clim… CHELSA_b… GLOBAL/… ssp126           GFDL-ESM4     2011…</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 56</span> https:… GLOBAL/clim… CHELSA_b… GLOBAL/… ssp126           GFDL-ESM4     2011…</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 57</span> https:… GLOBAL/clim… CHELSA_b… GLOBAL/… ssp126           GFDL-ESM4     2011…</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 58</span> https:… GLOBAL/clim… CHELSA_b… GLOBAL/… ssp126           GFDL-ESM4     2011…</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 59</span> https:… GLOBAL/clim… CHELSA_b… GLOBAL/… ssp126           GFDL-ESM4     2011…</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 60</span> https:… GLOBAL/clim… CHELSA_b… GLOBAL/… ssp126           GFDL-ESM4     2011…</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 61</span> https:… GLOBAL/clim… CHELSA_b… GLOBAL/… ssp126           GFDL-ESM4     2011…</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 62</span> https:… GLOBAL/clim… CHELSA_b… GLOBAL/… ssp126           GFDL-ESM4     2011…</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 63</span> https:… GLOBAL/clim… CHELSA_b… GLOBAL/… ssp126           GFDL-ESM4     2011…</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 64</span> https:… GLOBAL/clim… CHELSA_b… GLOBAL/… ssp126           GFDL-ESM4     2011…</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 65</span> https:… GLOBAL/clim… CHELSA_b… GLOBAL/… ssp126           GFDL-ESM4     2011…</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 66</span> https:… GLOBAL/clim… CHELSA_f… GLOBAL/… ssp126           GFDL-ESM4     2011…</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 67</span> https:… GLOBAL/clim… CHELSA_f… GLOBAL/… ssp126           GFDL-ESM4     2011…</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 68</span> https:… GLOBAL/clim… CHELSA_g… GLOBAL/… ssp126           GFDL-ESM4     2011…</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 69</span> https:… GLOBAL/clim… CHELSA_g… GLOBAL/… ssp126           GFDL-ESM4     2011…</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 70</span> https:… GLOBAL/clim… CHELSA_g… GLOBAL/… ssp126           GFDL-ESM4     2011…</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 71</span> https:… GLOBAL/clim… CHELSA_g… GLOBAL/… ssp126           GFDL-ESM4     2011…</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 72</span> https:… GLOBAL/clim… CHELSA_g… GLOBAL/… ssp126           GFDL-ESM4     2011…</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 73</span> https:… GLOBAL/clim… CHELSA_g… GLOBAL/… ssp126           GFDL-ESM4     2011…</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 74</span> https:… GLOBAL/clim… CHELSA_g… GLOBAL/… ssp126           GFDL-ESM4     2011…</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 75</span> https:… GLOBAL/clim… CHELSA_g… GLOBAL/… ssp126           GFDL-ESM4     2011…</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 76</span> https:… GLOBAL/clim… CHELSA_g… GLOBAL/… ssp126           GFDL-ESM4     2011…</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 77</span> https:… GLOBAL/clim… CHELSA_g… GLOBAL/… ssp126           GFDL-ESM4     2011…</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 78</span> https:… GLOBAL/clim… CHELSA_g… GLOBAL/… ssp126           GFDL-ESM4     2011…</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 79</span> https:… GLOBAL/clim… CHELSA_g… GLOBAL/… ssp126           GFDL-ESM4     2011…</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 80</span> https:… GLOBAL/clim… CHELSA_k… GLOBAL/… ssp126           GFDL-ESM4     2011…</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 81</span> https:… GLOBAL/clim… CHELSA_k… GLOBAL/… ssp126           GFDL-ESM4     2011…</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 82</span> https:… GLOBAL/clim… CHELSA_k… GLOBAL/… ssp126           GFDL-ESM4     2011…</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 83</span> https:… GLOBAL/clim… CHELSA_k… GLOBAL/… ssp126           GFDL-ESM4     2011…</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 84</span> https:… GLOBAL/clim… CHELSA_k… GLOBAL/… ssp126           GFDL-ESM4     2011…</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 85</span> https:… GLOBAL/clim… CHELSA_k… GLOBAL/… ssp126           GFDL-ESM4     2011…</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 86</span> https:… GLOBAL/clim… CHELSA_l… GLOBAL/… ssp126           GFDL-ESM4     2011…</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 87</span> https:… GLOBAL/clim… CHELSA_n… GLOBAL/… ssp126           GFDL-ESM4     2011…</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 88</span> https:… GLOBAL/clim… CHELSA_n… GLOBAL/… ssp126           GFDL-ESM4     2011…</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 89</span> https:… GLOBAL/clim… CHELSA_n… GLOBAL/… ssp126           GFDL-ESM4     2011…</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 90</span> https:… GLOBAL/clim… CHELSA_n… GLOBAL/… ssp126           GFDL-ESM4     2011…</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 91</span> https:… GLOBAL/clim… CHELSA_s… GLOBAL/… ssp126           GFDL-ESM4     2011…</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 92</span> https:… GLOBAL/clim… CHELSA_s… GLOBAL/… ssp126           GFDL-ESM4     2011…</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 93</span> https:… GLOBAL/clim… CHELSA_b… GLOBAL/… ssp126           GFDL-ESM4     2041…</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 94</span> https:… GLOBAL/clim… CHELSA_b… GLOBAL/… ssp126           GFDL-ESM4     2041…</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 95</span> https:… GLOBAL/clim… CHELSA_b… GLOBAL/… ssp126           GFDL-ESM4     2041…</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 96</span> https:… GLOBAL/clim… CHELSA_b… GLOBAL/… ssp126           GFDL-ESM4     2041…</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 97</span> https:… GLOBAL/clim… CHELSA_b… GLOBAL/… ssp126           GFDL-ESM4     2041…</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 98</span> https:… GLOBAL/clim… CHELSA_b… GLOBAL/… ssp126           GFDL-ESM4     2041…</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 99</span> https:… GLOBAL/clim… CHELSA_b… GLOBAL/… ssp126           GFDL-ESM4     2041…</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">100</span> https:… GLOBAL/clim… CHELSA_b… GLOBAL/… ssp126           GFDL-ESM4     2041…</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">101</span> https:… GLOBAL/clim… CHELSA_b… GLOBAL/… ssp126           GFDL-ESM4     2041…</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">102</span> https:… GLOBAL/clim… CHELSA_b… GLOBAL/… ssp126           GFDL-ESM4     2041…</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">103</span> https:… GLOBAL/clim… CHELSA_b… GLOBAL/… ssp126           GFDL-ESM4     2041…</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">104</span> https:… GLOBAL/clim… CHELSA_b… GLOBAL/… ssp126           GFDL-ESM4     2041…</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">105</span> https:… GLOBAL/clim… CHELSA_b… GLOBAL/… ssp126           GFDL-ESM4     2041…</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">106</span> https:… GLOBAL/clim… CHELSA_b… GLOBAL/… ssp126           GFDL-ESM4     2041…</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">107</span> https:… GLOBAL/clim… CHELSA_b… GLOBAL/… ssp126           GFDL-ESM4     2041…</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">108</span> https:… GLOBAL/clim… CHELSA_b… GLOBAL/… ssp126           GFDL-ESM4     2041…</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">109</span> https:… GLOBAL/clim… CHELSA_b… GLOBAL/… ssp126           GFDL-ESM4     2041…</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">110</span> https:… GLOBAL/clim… CHELSA_b… GLOBAL/… ssp126           GFDL-ESM4     2041…</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">111</span> https:… GLOBAL/clim… CHELSA_b… GLOBAL/… ssp126           GFDL-ESM4     2041…</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">112</span> https:… GLOBAL/clim… CHELSA_f… GLOBAL/… ssp126           GFDL-ESM4     2041…</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">113</span> https:… GLOBAL/clim… CHELSA_f… GLOBAL/… ssp126           GFDL-ESM4     2041…</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">114</span> https:… GLOBAL/clim… CHELSA_g… GLOBAL/… ssp126           GFDL-ESM4     2041…</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">115</span> https:… GLOBAL/clim… CHELSA_g… GLOBAL/… ssp126           GFDL-ESM4     2041…</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">116</span> https:… GLOBAL/clim… CHELSA_g… GLOBAL/… ssp126           GFDL-ESM4     2041…</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">117</span> https:… GLOBAL/clim… CHELSA_g… GLOBAL/… ssp126           GFDL-ESM4     2041…</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">118</span> https:… GLOBAL/clim… CHELSA_g… GLOBAL/… ssp126           GFDL-ESM4     2041…</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">119</span> https:… GLOBAL/clim… CHELSA_g… GLOBAL/… ssp126           GFDL-ESM4     2041…</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">120</span> https:… GLOBAL/clim… CHELSA_g… GLOBAL/… ssp126           GFDL-ESM4     2041…</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">121</span> https:… GLOBAL/clim… CHELSA_g… GLOBAL/… ssp126           GFDL-ESM4     2041…</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">122</span> https:… GLOBAL/clim… CHELSA_g… GLOBAL/… ssp126           GFDL-ESM4     2041…</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">123</span> https:… GLOBAL/clim… CHELSA_g… GLOBAL/… ssp126           GFDL-ESM4     2041…</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">124</span> https:… GLOBAL/clim… CHELSA_g… GLOBAL/… ssp126           GFDL-ESM4     2041…</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">125</span> https:… GLOBAL/clim… CHELSA_g… GLOBAL/… ssp126           GFDL-ESM4     2041…</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">126</span> https:… GLOBAL/clim… CHELSA_k… GLOBAL/… ssp126           GFDL-ESM4     2041…</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">127</span> https:… GLOBAL/clim… CHELSA_k… GLOBAL/… ssp126           GFDL-ESM4     2041…</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">128</span> https:… GLOBAL/clim… CHELSA_k… GLOBAL/… ssp126           GFDL-ESM4     2041…</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">129</span> https:… GLOBAL/clim… CHELSA_k… GLOBAL/… ssp126           GFDL-ESM4     2041…</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">130</span> https:… GLOBAL/clim… CHELSA_k… GLOBAL/… ssp126           GFDL-ESM4     2041…</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">131</span> https:… GLOBAL/clim… CHELSA_k… GLOBAL/… ssp126           GFDL-ESM4     2041…</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">132</span> https:… GLOBAL/clim… CHELSA_l… GLOBAL/… ssp126           GFDL-ESM4     2041…</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">133</span> https:… GLOBAL/clim… CHELSA_n… GLOBAL/… ssp126           GFDL-ESM4     2041…</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">134</span> https:… GLOBAL/clim… CHELSA_n… GLOBAL/… ssp126           GFDL-ESM4     2041…</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">135</span> https:… GLOBAL/clim… CHELSA_n… GLOBAL/… ssp126           GFDL-ESM4     2041…</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">136</span> https:… GLOBAL/clim… CHELSA_n… GLOBAL/… ssp126           GFDL-ESM4     2041…</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">137</span> https:… GLOBAL/clim… CHELSA_s… GLOBAL/… ssp126           GFDL-ESM4     2041…</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">138</span> https:… GLOBAL/clim… CHELSA_s… GLOBAL/… ssp126           GFDL-ESM4     2041…</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">139</span> https:… GLOBAL/clim… CHELSA_b… GLOBAL/… ssp126           GFDL-ESM4     2071…</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">140</span> https:… GLOBAL/clim… CHELSA_b… GLOBAL/… ssp126           GFDL-ESM4     2071…</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">141</span> https:… GLOBAL/clim… CHELSA_b… GLOBAL/… ssp126           GFDL-ESM4     2071…</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">142</span> https:… GLOBAL/clim… CHELSA_b… GLOBAL/… ssp126           GFDL-ESM4     2071…</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">143</span> https:… GLOBAL/clim… CHELSA_b… GLOBAL/… ssp126           GFDL-ESM4     2071…</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">144</span> https:… GLOBAL/clim… CHELSA_b… GLOBAL/… ssp126           GFDL-ESM4     2071…</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">145</span> https:… GLOBAL/clim… CHELSA_b… GLOBAL/… ssp126           GFDL-ESM4     2071…</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">146</span> https:… GLOBAL/clim… CHELSA_b… GLOBAL/… ssp126           GFDL-ESM4     2071…</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">147</span> https:… GLOBAL/clim… CHELSA_b… GLOBAL/… ssp126           GFDL-ESM4     2071…</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">148</span> https:… GLOBAL/clim… CHELSA_b… GLOBAL/… ssp126           GFDL-ESM4     2071…</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">149</span> https:… GLOBAL/clim… CHELSA_b… GLOBAL/… ssp126           GFDL-ESM4     2071…</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">150</span> https:… GLOBAL/clim… CHELSA_b… GLOBAL/… ssp126           GFDL-ESM4     2071…</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">151</span> https:… GLOBAL/clim… CHELSA_b… GLOBAL/… ssp126           GFDL-ESM4     2071…</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">152</span> https:… GLOBAL/clim… CHELSA_b… GLOBAL/… ssp126           GFDL-ESM4     2071…</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">153</span> https:… GLOBAL/clim… CHELSA_b… GLOBAL/… ssp126           GFDL-ESM4     2071…</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">154</span> https:… GLOBAL/clim… CHELSA_b… GLOBAL/… ssp126           GFDL-ESM4     2071…</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">155</span> https:… GLOBAL/clim… CHELSA_b… GLOBAL/… ssp126           GFDL-ESM4     2071…</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">156</span> https:… GLOBAL/clim… CHELSA_b… GLOBAL/… ssp126           GFDL-ESM4     2071…</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">157</span> https:… GLOBAL/clim… CHELSA_b… GLOBAL/… ssp126           GFDL-ESM4     2071…</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">158</span> https:… GLOBAL/clim… CHELSA_f… GLOBAL/… ssp126           GFDL-ESM4     2071…</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">159</span> https:… GLOBAL/clim… CHELSA_f… GLOBAL/… ssp126           GFDL-ESM4     2071…</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">160</span> https:… GLOBAL/clim… CHELSA_g… GLOBAL/… ssp126           GFDL-ESM4     2071…</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">161</span> https:… GLOBAL/clim… CHELSA_g… GLOBAL/… ssp126           GFDL-ESM4     2071…</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">162</span> https:… GLOBAL/clim… CHELSA_g… GLOBAL/… ssp126           GFDL-ESM4     2071…</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">163</span> https:… GLOBAL/clim… CHELSA_g… GLOBAL/… ssp126           GFDL-ESM4     2071…</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">164</span> https:… GLOBAL/clim… CHELSA_g… GLOBAL/… ssp126           GFDL-ESM4     2071…</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">165</span> https:… GLOBAL/clim… CHELSA_g… GLOBAL/… ssp126           GFDL-ESM4     2071…</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">166</span> https:… GLOBAL/clim… CHELSA_g… GLOBAL/… ssp126           GFDL-ESM4     2071…</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">167</span> https:… GLOBAL/clim… CHELSA_g… GLOBAL/… ssp126           GFDL-ESM4     2071…</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">168</span> https:… GLOBAL/clim… CHELSA_g… GLOBAL/… ssp126           GFDL-ESM4     2071…</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">169</span> https:… GLOBAL/clim… CHELSA_g… GLOBAL/… ssp126           GFDL-ESM4     2071…</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">170</span> https:… GLOBAL/clim… CHELSA_g… GLOBAL/… ssp126           GFDL-ESM4     2071…</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">171</span> https:… GLOBAL/clim… CHELSA_g… GLOBAL/… ssp126           GFDL-ESM4     2071…</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">172</span> https:… GLOBAL/clim… CHELSA_k… GLOBAL/… ssp126           GFDL-ESM4     2071…</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">173</span> https:… GLOBAL/clim… CHELSA_k… GLOBAL/… ssp126           GFDL-ESM4     2071…</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">174</span> https:… GLOBAL/clim… CHELSA_k… GLOBAL/… ssp126           GFDL-ESM4     2071…</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">175</span> https:… GLOBAL/clim… CHELSA_k… GLOBAL/… ssp126           GFDL-ESM4     2071…</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">176</span> https:… GLOBAL/clim… CHELSA_k… GLOBAL/… ssp126           GFDL-ESM4     2071…</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">177</span> https:… GLOBAL/clim… CHELSA_k… GLOBAL/… ssp126           GFDL-ESM4     2071…</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">178</span> https:… GLOBAL/clim… CHELSA_l… GLOBAL/… ssp126           GFDL-ESM4     2071…</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">179</span> https:… GLOBAL/clim… CHELSA_n… GLOBAL/… ssp126           GFDL-ESM4     2071…</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">180</span> https:… GLOBAL/clim… CHELSA_n… GLOBAL/… ssp126           GFDL-ESM4     2071…</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">181</span> https:… GLOBAL/clim… CHELSA_n… GLOBAL/… ssp126           GFDL-ESM4     2071…</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">182</span> https:… GLOBAL/clim… CHELSA_n… GLOBAL/… ssp126           GFDL-ESM4     2071…</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">183</span> https:… GLOBAL/clim… CHELSA_s… GLOBAL/… ssp126           GFDL-ESM4     2071…</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">184</span> https:… GLOBAL/clim… CHELSA_s… GLOBAL/… ssp126           GFDL-ESM4     2071…</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">185</span> https:… GLOBAL/clim… CHELSA_b… GLOBAL/… ssp126           IPSL-CM6A-LR  2011…</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">186</span> https:… GLOBAL/clim… CHELSA_b… GLOBAL/… ssp126           IPSL-CM6A-LR  2011…</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">187</span> https:… GLOBAL/clim… CHELSA_b… GLOBAL/… ssp126           IPSL-CM6A-LR  2011…</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">188</span> https:… GLOBAL/clim… CHELSA_b… GLOBAL/… ssp126           IPSL-CM6A-LR  2011…</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">189</span> https:… GLOBAL/clim… CHELSA_b… GLOBAL/… ssp126           IPSL-CM6A-LR  2011…</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">190</span> https:… GLOBAL/clim… CHELSA_b… GLOBAL/… ssp126           IPSL-CM6A-LR  2011…</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">191</span> https:… GLOBAL/clim… CHELSA_b… GLOBAL/… ssp126           IPSL-CM6A-LR  2011…</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">192</span> https:… GLOBAL/clim… CHELSA_b… GLOBAL/… ssp126           IPSL-CM6A-LR  2011…</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">193</span> https:… GLOBAL/clim… CHELSA_b… GLOBAL/… ssp126           IPSL-CM6A-LR  2011…</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">194</span> https:… GLOBAL/clim… CHELSA_b… GLOBAL/… ssp126           IPSL-CM6A-LR  2011…</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">195</span> https:… GLOBAL/clim… CHELSA_b… GLOBAL/… ssp126           IPSL-CM6A-LR  2011…</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">196</span> https:… GLOBAL/clim… CHELSA_b… GLOBAL/… ssp126           IPSL-CM6A-LR  2011…</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">197</span> https:… GLOBAL/clim… CHELSA_b… GLOBAL/… ssp126           IPSL-CM6A-LR  2011…</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">198</span> https:… GLOBAL/clim… CHELSA_b… GLOBAL/… ssp126           IPSL-CM6A-LR  2011…</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">199</span> https:… GLOBAL/clim… CHELSA_b… GLOBAL/… ssp126           IPSL-CM6A-LR  2011…</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">200</span> https:… GLOBAL/clim… CHELSA_b… GLOBAL/… ssp126           IPSL-CM6A-LR  2011…</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># ℹ 1,916 more rows</span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># ℹ 6 more variables: var_name &lt;chr&gt;, long_name &lt;chr&gt;, unit &lt;chr&gt;, scale &lt;dbl&gt;,</span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;">#   offset &lt;dbl&gt;, explanation &lt;chr&gt;</span></span>
+<span class="r-in"><span><span class="fu">ecokit</span><span class="fu">::</span><span class="fu"><a href="ht.html">ht</a></span><span class="op">(</span><span class="va">CHELSA_links</span><span class="op">)</span></span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>                                                                                                                                                      url</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>                                                                                                                                                   &lt;char&gt;</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>    1:                                        https://os.zhdk.cloud.switch.ch/chelsav2/GLOBAL/climatologies/1981-2010/bio/CHELSA_bio1_1981-2010_V.2.1.tif</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>    2:                                        https://os.zhdk.cloud.switch.ch/chelsav2/GLOBAL/climatologies/1981-2010/bio/CHELSA_bio2_1981-2010_V.2.1.tif</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>    3:                                        https://os.zhdk.cloud.switch.ch/chelsav2/GLOBAL/climatologies/1981-2010/bio/CHELSA_bio3_1981-2010_V.2.1.tif</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>    4:                                        https://os.zhdk.cloud.switch.ch/chelsav2/GLOBAL/climatologies/1981-2010/bio/CHELSA_bio4_1981-2010_V.2.1.tif</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>    5:                                        https://os.zhdk.cloud.switch.ch/chelsav2/GLOBAL/climatologies/1981-2010/bio/CHELSA_bio5_1981-2010_V.2.1.tif</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   ---                                                                                                                                                   </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 2112:  https://os.zhdk.cloud.switch.ch/chelsav2/GLOBAL/climatologies/2071-2100/UKESM1-0-LL/ssp585/bio/CHELSA_ngd5_2071-2100_ukesm1-0-ll_ssp585_V.2.1.tif</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 2113: https://os.zhdk.cloud.switch.ch/chelsav2/GLOBAL/climatologies/2071-2100/UKESM1-0-LL/ssp585/bio/CHELSA_ngd10_2071-2100_ukesm1-0-ll_ssp585_V.2.1.tif</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 2114:   https://os.zhdk.cloud.switch.ch/chelsav2/GLOBAL/climatologies/2071-2100/UKESM1-0-LL/ssp585/bio/CHELSA_npp_2071-2100_ukesm1-0-ll_ssp585_V.2.1.tif</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 2115:   https://os.zhdk.cloud.switch.ch/chelsav2/GLOBAL/climatologies/2071-2100/UKESM1-0-LL/ssp585/bio/CHELSA_scd_2071-2100_ukesm1-0-ll_ssp585_V.2.1.tif</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 2116:   https://os.zhdk.cloud.switch.ch/chelsav2/GLOBAL/climatologies/2071-2100/UKESM1-0-LL/ssp585/bio/CHELSA_swe_2071-2100_ukesm1-0-ll_ssp585_V.2.1.tif</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>                                                                                                    relative_url</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>                                                                                                          &lt;char&gt;</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>    1:                                        GLOBAL/climatologies/1981-2010/bio/CHELSA_bio1_1981-2010_V.2.1.tif</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>    2:                                        GLOBAL/climatologies/1981-2010/bio/CHELSA_bio2_1981-2010_V.2.1.tif</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>    3:                                        GLOBAL/climatologies/1981-2010/bio/CHELSA_bio3_1981-2010_V.2.1.tif</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>    4:                                        GLOBAL/climatologies/1981-2010/bio/CHELSA_bio4_1981-2010_V.2.1.tif</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>    5:                                        GLOBAL/climatologies/1981-2010/bio/CHELSA_bio5_1981-2010_V.2.1.tif</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   ---                                                                                                          </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 2112:  GLOBAL/climatologies/2071-2100/UKESM1-0-LL/ssp585/bio/CHELSA_ngd5_2071-2100_ukesm1-0-ll_ssp585_V.2.1.tif</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 2113: GLOBAL/climatologies/2071-2100/UKESM1-0-LL/ssp585/bio/CHELSA_ngd10_2071-2100_ukesm1-0-ll_ssp585_V.2.1.tif</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 2114:   GLOBAL/climatologies/2071-2100/UKESM1-0-LL/ssp585/bio/CHELSA_npp_2071-2100_ukesm1-0-ll_ssp585_V.2.1.tif</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 2115:   GLOBAL/climatologies/2071-2100/UKESM1-0-LL/ssp585/bio/CHELSA_scd_2071-2100_ukesm1-0-ll_ssp585_V.2.1.tif</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 2116:   GLOBAL/climatologies/2071-2100/UKESM1-0-LL/ssp585/bio/CHELSA_swe_2071-2100_ukesm1-0-ll_ssp585_V.2.1.tif</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>                                                 file_name</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>                                                    &lt;char&gt;</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>    1:                     CHELSA_bio1_1981-2010_V.2.1.tif</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>    2:                     CHELSA_bio2_1981-2010_V.2.1.tif</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>    3:                     CHELSA_bio3_1981-2010_V.2.1.tif</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>    4:                     CHELSA_bio4_1981-2010_V.2.1.tif</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>    5:                     CHELSA_bio5_1981-2010_V.2.1.tif</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   ---                                                    </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 2112:  CHELSA_ngd5_2071-2100_ukesm1-0-ll_ssp585_V.2.1.tif</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 2113: CHELSA_ngd10_2071-2100_ukesm1-0-ll_ssp585_V.2.1.tif</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 2114:   CHELSA_npp_2071-2100_ukesm1-0-ll_ssp585_V.2.1.tif</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 2115:   CHELSA_scd_2071-2100_ukesm1-0-ll_ssp585_V.2.1.tif</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 2116:   CHELSA_swe_2071-2100_ukesm1-0-ll_ssp585_V.2.1.tif</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>                                                    dir_name climate_scenario</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>                                                      &lt;char&gt;           &lt;char&gt;</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>    1:                    GLOBAL/climatologies/1981-2010/bio          current</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>    2:                    GLOBAL/climatologies/1981-2010/bio          current</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>    3:                    GLOBAL/climatologies/1981-2010/bio          current</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>    4:                    GLOBAL/climatologies/1981-2010/bio          current</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>    5:                    GLOBAL/climatologies/1981-2010/bio          current</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   ---                                                                       </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 2112: GLOBAL/climatologies/2071-2100/UKESM1-0-LL/ssp585/bio           ssp585</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 2113: GLOBAL/climatologies/2071-2100/UKESM1-0-LL/ssp585/bio           ssp585</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 2114: GLOBAL/climatologies/2071-2100/UKESM1-0-LL/ssp585/bio           ssp585</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 2115: GLOBAL/climatologies/2071-2100/UKESM1-0-LL/ssp585/bio           ssp585</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 2116: GLOBAL/climatologies/2071-2100/UKESM1-0-LL/ssp585/bio           ssp585</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>       climate_model      year var_name</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>              &lt;char&gt;    &lt;char&gt;   &lt;char&gt;</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>    1:       current 1981-2010     bio1</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>    2:       current 1981-2010     bio2</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>    3:       current 1981-2010     bio3</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>    4:       current 1981-2010     bio4</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>    5:       current 1981-2010     bio5</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   ---                                 </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 2112:   UKESM1-0-LL 2071-2100     ngd5</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 2113:   UKESM1-0-LL 2071-2100    ngd10</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 2114:   UKESM1-0-LL 2071-2100      npp</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 2115:   UKESM1-0-LL 2071-2100      scd</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 2116:   UKESM1-0-LL 2071-2100      swe</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>                                                     long_name           unit</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>                                                        &lt;char&gt;         &lt;char&gt;</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>    1:                             mean annual air temperature             °C</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>    2:                      mean diurnal air temperature range             °C</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>    3:                                           isothermality             °C</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>    4:                                 temperature seasonality         °C/100</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>    5: mean daily maximum air temperature of the warmest month             °C</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   ---                                                                       </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 2112:                           Number of growing degree days number of days</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 2113:                           Number of growing degree days number of days</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 2114:                                Net primary productivity   g C m−2 yr−1</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 2115:                                         Snow cover days          count</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 2116:                                   Snow water equivalent  kg m-2 year-1</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>       scale  offset</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>       &lt;num&gt;   &lt;num&gt;</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>    1:   0.1 -273.15</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>    2:   0.1    0.00</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>    3:   0.1    0.00</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>    4:   0.1    0.00</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>    5:   0.1 -273.15</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   ---              </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 2112:    NA      NA</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 2113:    NA      NA</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 2114:   0.1    0.00</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 2115:    NA      NA</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 2116:   0.1    0.00</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>                                                                                                                                                  explanation</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>                                                                                                                                                       &lt;char&gt;</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>    1:                                                                                           mean annual daily mean air temperatures averaged over 1 year</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>    2:                                                                                                mean diurnal range of temperatures averaged over 1 year</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>    3:                                                                                         ratio of diurnal variation to annual variation in temperatures</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>    4:                                                                                                    standard deviation of the monthly mean temperatures</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>    5:                                                                                  The highest temperature of any monthly daily mean maximum temperature</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   ---                                                                                                                                                       </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 2112:                                                                                                                      Number of days at which tas &gt; 5°C</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 2113:                                                                                                                     Number of days at which tas &gt; 10°C</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 2114: Calculated based on the ‘Miami model’, Lieth, H., 1972. "Modelling the primary productivity of the earth. Nature and resources", UNESCO, VIII, 2:5-10.</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 2115:            Number of days with snowcover calculated using the snowpack model implementation in from TREELIM (https://doi.org/10.1007/s00035-0140124-0)</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 2116:                                                                                                               Amount of liquid water if snow is melted</span>
 <span class="r-in"><span></span></span>
 </code></pre></div>
     </div>
