@@ -45,18 +45,6 @@ jobs:
           http-user-agent: ${{ matrix.config.http-user-agent }}
           use-public-rspm: true
 
-      - name: Clean pak cache on macOS
-        if: runner.os == 'macOS'
-        run: |
-          rm -rf ~/Library/Caches/org.R-project.R
-          rm -rf ~/.cache/R
-          rm -rf ~/.cache/pak
-          rm -rf ~/Library/Caches/pak
-
-      - name: Force base package installer on macOS
-        if: runner.os == 'macOS'
-        run: echo "R_PKG_INSTALLER=default" >> $GITHUB_ENV
-
       - uses: r-lib/actions/setup-r-dependencies@v2
         with:
           extra-packages: any::rcmdcheck

@@ -55,7 +55,7 @@ dplyr::count(CHELSA_links, climate_scenario, climate_model, year)
 CHELSA_links \%>\%
   dplyr::count(var_name, long_name, unit, scale, offset, explanation)
 
-print(CHELSA_links, n = 200)
+ecokit::ht(CHELSA_links)
 
 }
 \author{

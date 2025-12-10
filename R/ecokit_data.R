@@ -22,5 +22,6 @@
 #' options(pillar.print_max = 64)
 #'
 #' data("chelsa_var_info", package = "ecokit")
-#' print(chelsa_var_info, n = Inf)
+#' ecokit::ht(chelsa_var_info)
+
 "chelsa_var_info"

@@ -4,8 +4,9 @@ on:
   push:
     branches: [main, master]
   pull_request:
+    branches: [main, master]
 
-name: lint.yaml
+name: lint
 
 permissions: read-all
 
@@ -14,10 +15,10 @@ jobs:
 
     # Only run this job if the repository is elgabbas/ecokit
     if: ${{ github.repository == 'elgabbas/ecokit'}}
-    
+
     # Only run this job if the commit message contains 'run-check'
     # if: ${{ github.repository == 'elgabbas/ecokit' && contains(github.event.head_commit.message, 'run-check') }}
-    
+
     runs-on: ubuntu-latest
     env:
       GITHUB_PAT: ${{ secrets.GITHUB_TOKEN }}
