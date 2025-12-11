@@ -1,5 +1,5 @@
-ecokit: Tools for Ecological and General Utilities
-================
+
+# ecokit: Tools for Ecological and General Utilities <a href="https://elgabbas.github.io/ecokit/"><img src="man/figures/logo.png" align="right" height="138" alt=""/></a>
 
 <!-- badges: start -->
 
@@ -22,14 +22,13 @@ for a complete list of functions.
 ## Installation
 
 You can install the development version of `ecokit` from GitHub using
-the `devtools` package:
+the `remotes` package:
 
 ``` r
-# Install devtools if not already installed
-if (!require("devtools")) install.packages("devtools")
-
+# Install remotes if not already installed
+if (!require("remotes")) install.packages("remotes")
 # Install ecokit from GitHub
-devtools::install_github("elgabbas/ecokit", dependencies = TRUE)
+remotes::install_github("elgabbas/ecokit", dependencies = TRUE)
 ```
 
 <br/>

@@ -6,6 +6,8 @@
 \alias{ecokit-package}
 \title{ecokit: Tools for Ecological and General Utilities}
 \description{
+\if{html}{\figure{logo.png}{options: style='float: right' alt='logo' width='120'}}
+
 A collection of utility functions designed for ecologists and general R users, providing tools for data manipulation, statistical analysis, and spatial data handling.
 }
 \seealso{
