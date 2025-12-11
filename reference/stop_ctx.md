@@ -146,7 +146,7 @@ try(
 #> 1, 2, 3
 #> 
 #> ----- Backtrace -----
-#>   1. └─pkgdown::build_site_github_pages(new_process = FALSE, install = FALSE)
+#>   1. └─pkgdown::build_site_github_pages(...)
 #>   2.   └─pkgdown::build_site(...)
 #>   3.     └─pkgdown:::build_site_local(...)
 #>   4.       └─pkgdown::build_reference(...)
@@ -301,7 +301,7 @@ try(f1())
 #> Error in f3() : Error in f3()
 #> 
 #> ----- Backtrace -----
-#>   1. └─pkgdown::build_site_github_pages(new_process = FALSE, install = FALSE)
+#>   1. └─pkgdown::build_site_github_pages(...)
 #>   2.   └─pkgdown::build_site(...)
 #>   3.     └─pkgdown:::build_site_local(...)
 #>   4.       └─pkgdown::build_reference(...)

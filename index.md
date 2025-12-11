@@ -1,4 +1,4 @@
-# ecokit: Tools for Ecological and General Utilities
+# ecokit
 
 ## Overview
 
@@ -39,3 +39,5 @@ features, please:
   [GitHub repository](https://github.com/elgabbas/ecokit).
 - **Contact me** directly at *elgabbas\[at\]outlook\[dot\]com* for
   collaboration ideas or questions.
+
+Last update: 2025-12-11
