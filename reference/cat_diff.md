@@ -93,17 +93,17 @@ cat_diff(reference_time, prefix = "Finished in ", level = 1L)
 
 # print date
 cat_diff(reference_time, prefix = "Finished in ", cat_timestamp = TRUE)
-#> Finished in 00:00:45 - 23:21:33
+#> Finished in 00:00:45 - 17:27:37
 
 # print date and time
 cat_diff(reference_time, prefix = "Finished in ", cat_date = TRUE)
-#> Finished in 00:00:45 - 10/12/2025
+#> Finished in 00:00:45 - 11/12/2025
 
 # show chunk info
 cat_diff(reference_time, cat_info = TRUE, prefix = "Finished in ")
 #> 
 #> --------------------------------------------------
-#> Session summary - 10/12/2025
+#> Session summary - 11/12/2025
 #> --------------------------------------------------
 #> 
 #> 
@@ -115,7 +115,7 @@ cat_diff(
   prefix = "Finished in ")
 #> 
 #> --------------------------------------------------
-#> Summary of task - 10/12/2025
+#> Summary of task - 11/12/2025
 #> --------------------------------------------------
 #> 
 #> 

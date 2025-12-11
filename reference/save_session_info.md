@@ -45,13 +45,13 @@ fs::dir_create(temp_dir)
 
 save_session_info(out_directory = temp_dir)
 #> Saving session info to:
-#> /tmp/Rtmp42TNH2/save_session_info/S_20251210_2322.txt
+#> /tmp/RtmpQ9v8tB/save_session_info/S_20251211_1728.txt
 
 saved_file <- list.files(
   temp_dir, pattern = "S_.+txt$", full.names = TRUE) %>%
   ecokit::normalize_path()
 (saved_file <- saved_file[length(saved_file)])
-#> /tmp/Rtmp42TNH2/save_session_info/S_20251210_2322.txt
+#> /tmp/RtmpQ9v8tB/save_session_info/S_20251211_1728.txt
 
 cat(readLines(saved_file), sep = "\n")
 #> 
@@ -69,7 +69,7 @@ cat(readLines(saved_file), sep = "\n")
 #>  collate  C
 #>  ctype    C.UTF-8
 #>  tz       UTC
-#>  date     2025-12-10
+#>  date     2025-12-11
 #>  pandoc   3.1.11 @ /opt/hostedtoolcache/pandoc/3.1.11/x64/ (via rmarkdown)
 #>  quarto   NA
 #> 
@@ -96,15 +96,13 @@ cat(readLines(saved_file), sep = "\n")
 #>  data.table     1.17.8   2025-07-10 [1] RSPM
 #>  DBI            1.2.3    2024-06-02 [1] RSPM
 #>  desc           1.4.3    2023-12-10 [1] RSPM
-#>  devtools       2.4.6    2025-10-03 [1] RSPM
 #>  digest         0.6.39   2025-11-19 [1] RSPM
 #>  dismo        * 1.3-16   2024-11-25 [1] RSPM
 #>  dotCall64      1.2      2024-10-04 [1] RSPM
 #>  downlit        0.4.5    2025-11-14 [1] RSPM
 #>  dplyr        * 1.1.4    2023-11-17 [1] RSPM
 #>  e1071          1.7-16   2024-09-16 [1] RSPM
-#>  ecokit       * 0.1.0    2025-12-10 [1] local
-#>  ellipsis       0.3.2    2021-04-29 [1] RSPM
+#>  ecokit       * 0.1.0    2025-12-11 [1] local
 #>  evaluate       1.0.5    2025-08-27 [1] RSPM
 #>  fansi          1.0.7    2025-11-19 [1] RSPM
 #>  farver         2.1.2    2024-05-13 [1] RSPM
@@ -114,7 +112,7 @@ cat(readLines(saved_file), sep = "\n")
 #>  Formula        1.2-5    2023-02-24 [1] RSPM
 #>  fs           * 1.6.6    2025-04-12 [1] RSPM
 #>  future       * 1.68.0   2025-11-17 [1] RSPM
-#>  future.apply   1.20.0   2025-06-06 [1] RSPM
+#>  future.apply   1.20.1   2025-12-09 [1] RSPM
 #>  gdata          3.0.1    2024-10-22 [1] RSPM
 #>  generics       0.1.4    2025-05-09 [1] RSPM
 #>  ggplot2      * 4.0.1    2025-11-14 [1] RSPM
@@ -149,7 +147,6 @@ cat(readLines(saved_file), sep = "\n")
 #>  pkgbuild       1.4.8    2025-05-26 [1] RSPM
 #>  pkgconfig      2.0.3    2019-09-22 [1] RSPM
 #>  pkgdown        2.2.0    2025-11-06 [1] RSPM
-#>  pkgload        1.4.1    2025-09-23 [1] RSPM
 #>  png          * 0.1-8    2022-11-29 [1] RSPM
 #>  processx       3.8.6    2025-02-21 [1] RSPM
 #>  proxy          0.4-27   2022-06-09 [1] RSPM
@@ -192,7 +189,6 @@ cat(readLines(saved_file), sep = "\n")
 #>  tidyterra    * 0.7.2    2025-04-14 [1] RSPM
 #>  timechange     0.3.0    2024-01-18 [1] RSPM
 #>  units          1.0-0    2025-10-09 [1] RSPM
-#>  usethis        3.2.1    2025-09-06 [1] RSPM
 #>  utf8           1.2.6    2025-06-08 [1] RSPM
 #>  vctrs          0.6.5    2023-12-01 [1] RSPM
 #>  viridisLite    0.4.2    2023-05-02 [1] RSPM
@@ -201,7 +197,7 @@ cat(readLines(saved_file), sep = "\n")
 #>  wk             0.9.4    2024-10-11 [1] RSPM
 #>  xfun           0.54     2025-10-30 [1] RSPM
 #>  xml2           1.5.1    2025-12-01 [1] RSPM
-#>  yaml           2.3.11   2025-11-28 [1] RSPM
+#>  yaml           2.3.12   2025-12-10 [1] RSPM
 #> 
 #>  [1] /home/runner/work/_temp/Library
 #>  [2] /opt/R/4.5.2/lib/R/site-library
@@ -221,13 +217,13 @@ vec <- rnorm(1000)
 session_data <- tibble::tibble(object = c("df", "vec"), size = c(0.1, 0.1))
 save_session_info(out_directory = temp_dir, session_info = session_data)
 #> Saving session info to:
-#> /tmp/Rtmp42TNH2/save_session_info/S_20251210_2322.txt
+#> /tmp/RtmpQ9v8tB/save_session_info/S_20251211_1728.txt
 
 saved_file <- list.files(
   temp_dir, pattern = "S_.+txt$", full.names = TRUE) %>%
   ecokit::normalize_path()
 (saved_file <- saved_file[length(saved_file)])
-#> /tmp/Rtmp42TNH2/save_session_info/S_20251210_2322.txt
+#> /tmp/RtmpQ9v8tB/save_session_info/S_20251211_1728.txt
 
 cat(readLines(saved_file), sep = "\n")
 #> 
@@ -245,7 +241,7 @@ cat(readLines(saved_file), sep = "\n")
 #>  collate  C
 #>  ctype    C.UTF-8
 #>  tz       UTC
-#>  date     2025-12-10
+#>  date     2025-12-11
 #>  pandoc   3.1.11 @ /opt/hostedtoolcache/pandoc/3.1.11/x64/ (via rmarkdown)
 #>  quarto   NA
 #> 
@@ -272,15 +268,13 @@ cat(readLines(saved_file), sep = "\n")
 #>  data.table     1.17.8   2025-07-10 [1] RSPM
 #>  DBI            1.2.3    2024-06-02 [1] RSPM
 #>  desc           1.4.3    2023-12-10 [1] RSPM
-#>  devtools       2.4.6    2025-10-03 [1] RSPM
 #>  digest         0.6.39   2025-11-19 [1] RSPM
 #>  dismo        * 1.3-16   2024-11-25 [1] RSPM
 #>  dotCall64      1.2      2024-10-04 [1] RSPM
 #>  downlit        0.4.5    2025-11-14 [1] RSPM
 #>  dplyr        * 1.1.4    2023-11-17 [1] RSPM
 #>  e1071          1.7-16   2024-09-16 [1] RSPM
-#>  ecokit       * 0.1.0    2025-12-10 [1] local
-#>  ellipsis       0.3.2    2021-04-29 [1] RSPM
+#>  ecokit       * 0.1.0    2025-12-11 [1] local
 #>  evaluate       1.0.5    2025-08-27 [1] RSPM
 #>  fansi          1.0.7    2025-11-19 [1] RSPM
 #>  farver         2.1.2    2024-05-13 [1] RSPM
@@ -290,7 +284,7 @@ cat(readLines(saved_file), sep = "\n")
 #>  Formula        1.2-5    2023-02-24 [1] RSPM
 #>  fs           * 1.6.6    2025-04-12 [1] RSPM
 #>  future       * 1.68.0   2025-11-17 [1] RSPM
-#>  future.apply   1.20.0   2025-06-06 [1] RSPM
+#>  future.apply   1.20.1   2025-12-09 [1] RSPM
 #>  gdata          3.0.1    2024-10-22 [1] RSPM
 #>  generics       0.1.4    2025-05-09 [1] RSPM
 #>  ggplot2      * 4.0.1    2025-11-14 [1] RSPM
@@ -325,7 +319,6 @@ cat(readLines(saved_file), sep = "\n")
 #>  pkgbuild       1.4.8    2025-05-26 [1] RSPM
 #>  pkgconfig      2.0.3    2019-09-22 [1] RSPM
 #>  pkgdown        2.2.0    2025-11-06 [1] RSPM
-#>  pkgload        1.4.1    2025-09-23 [1] RSPM
 #>  png          * 0.1-8    2022-11-29 [1] RSPM
 #>  processx       3.8.6    2025-02-21 [1] RSPM
 #>  proxy          0.4-27   2022-06-09 [1] RSPM
@@ -368,7 +361,6 @@ cat(readLines(saved_file), sep = "\n")
 #>  tidyterra    * 0.7.2    2025-04-14 [1] RSPM
 #>  timechange     0.3.0    2024-01-18 [1] RSPM
 #>  units          1.0-0    2025-10-09 [1] RSPM
-#>  usethis        3.2.1    2025-09-06 [1] RSPM
 #>  utf8           1.2.6    2025-06-08 [1] RSPM
 #>  vctrs          0.6.5    2023-12-01 [1] RSPM
 #>  viridisLite    0.4.2    2023-05-02 [1] RSPM
@@ -377,7 +369,7 @@ cat(readLines(saved_file), sep = "\n")
 #>  wk             0.9.4    2024-10-11 [1] RSPM
 #>  xfun           0.54     2025-10-30 [1] RSPM
 #>  xml2           1.5.1    2025-12-01 [1] RSPM
-#>  yaml           2.3.11   2025-11-28 [1] RSPM
+#>  yaml           2.3.12   2025-12-10 [1] RSPM
 #> 
 #>  [1] /home/runner/work/_temp/Library
 #>  [2] /opt/R/4.5.2/lib/R/site-library

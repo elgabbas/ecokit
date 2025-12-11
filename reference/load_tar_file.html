@@ -3,7 +3,7 @@
 directory, loads it using a provided loading function, and returns the loaded
 object."><meta property="og:description" content="This function extracts a specified file from a tar archive to a temporary
 directory, loads it using a provided loading function, and returns the loaded
-object."></head><body>
+object."><meta property="og:image" content="https://elgabbas.github.io/ecokit/logo.png"></head><body>
     <a href="#main" class="visually-hidden-focusable">Skip to contents</a>
 
 
@@ -36,8 +36,7 @@ object."></head><body>
 </nav><div class="container template-reference-topic">
 <div class="row">
   <main id="main" class="col-md-9"><div class="page-header">
-
-      <h1>Load a File from a Tar Archive</h1>
+      <img src="../logo.png" class="logo" alt=""><h1>Load a File from a Tar Archive</h1>
       <small class="dont-index">Source: <a href="https://github.com/elgabbas/ecokit/blob/main/R/general_load_tar_file.R" class="external-link"><code>R/general_load_tar_file.R</code></a></small>
       <div class="d-none name"><code>load_tar_file.Rd</code></div>
     </div>
@@ -111,7 +110,7 @@ file.</p>
 <span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="co"># List contents of the tar file</span></span></span>
 <span class="r-in"><span><span class="fu"><a href="https://rdrr.io/r/base/print.html" class="external-link">print</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/system2.html" class="external-link">system2</a></span><span class="op">(</span><span class="st">"tar"</span>, <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"-tf"</span>, <span class="va">tmp_tar</span><span class="op">)</span>, stdout <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span><span class="op">)</span></span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [1] "elev.tif"             "file21946eb47d7.csv"  "file21941ee79d3f.rds"</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [1] "elev.tif"             "file20eb412fe32.csv"  "file20eb2f458f0f.rds"</span>
 <span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="co"># example SpatRaster</span></span></span>
 <span class="r-in"><span><span class="fu">load_tar_file</span><span class="op">(</span></span></span>

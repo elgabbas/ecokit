@@ -32,9 +32,7 @@ Ahmed El-Gabbas
 
 ``` r
 check_quarto()
-#> Quarto is not available in the system.
-#> Latest quarto version is v1.8.26 [installed: NA]
-#> 
+#> Error in open.connection(x, "rb"): cannot open the connection
 
 check_quarto(pre_release = TRUE)
 #> Quarto is not available in the system.

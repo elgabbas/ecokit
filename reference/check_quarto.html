@@ -7,7 +7,7 @@ the installed version."><meta property="og:description" content="This function c
 the latest version available online. If the versions differ, it suggests the
 user to update Quarto. It uses web scraping to find the latest version
 available on the Quarto GitHub releases page and the system command to find
-the installed version."></head><body>
+the installed version."><meta property="og:image" content="https://elgabbas.github.io/ecokit/logo.png"></head><body>
     <a href="#main" class="visually-hidden-focusable">Skip to contents</a>
 
 
@@ -40,8 +40,7 @@ the installed version."></head><body>
 </nav><div class="container template-reference-topic">
 <div class="row">
   <main id="main" class="col-md-9"><div class="page-header">
-
-      <h1>Check if the installed Quarto version is up to date</h1>
+      <img src="../logo.png" class="logo" alt=""><h1>Check if the installed Quarto version is up to date</h1>
       <small class="dont-index">Source: <a href="https://github.com/elgabbas/ecokit/blob/main/R/general_check_quarto.R" class="external-link"><code>R/general_check_quarto.R</code></a></small>
       <div class="d-none name"><code>check_quarto.Rd</code></div>
     </div>
@@ -81,9 +80,7 @@ date or suggesting an update if it is not.</p>
     <div class="section level2">
     <h2 id="ref-examples">Examples<a class="anchor" aria-label="anchor" href="#ref-examples"></a></h2>
     <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span><span class="fu">check_quarto</span><span class="op">(</span><span class="op">)</span></span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #0000BB;">Quarto is not available in the system.</span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #0000BB;">Latest quarto version is </span><span style="color: #BB0000; font-weight: bold;">v1.8.26</span><span style="color: #0000BB;"> [installed: </span><span style="color: #BB0000; font-weight: bold;">NA</span><span style="color: #0000BB;">]</span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> </span>
+<span class="r-err co"><span class="r-pr">#&gt;</span> <span class="error">Error in open.connection(x, "rb"):</span> cannot open the connection</span>
 <span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="fu">check_quarto</span><span class="op">(</span>pre_release <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #0000BB;">Quarto is not available in the system.</span></span>

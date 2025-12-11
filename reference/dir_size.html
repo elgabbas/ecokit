@@ -3,7 +3,7 @@
 recursively. The size can be returned in bytes or in a human-readable format
 (e.g., KB, MB, GB)."><meta property="og:description" content="Computes the total size of a directory, including all its contents,
 recursively. The size can be returned in bytes or in a human-readable format
-(e.g., KB, MB, GB)."></head><body>
+(e.g., KB, MB, GB)."><meta property="og:image" content="https://elgabbas.github.io/ecokit/logo.png"></head><body>
     <a href="#main" class="visually-hidden-focusable">Skip to contents</a>
 
 
@@ -36,8 +36,7 @@ recursively. The size can be returned in bytes or in a human-readable format
 </nav><div class="container template-reference-topic">
 <div class="row">
   <main id="main" class="col-md-9"><div class="page-header">
-
-      <h1>Calculate the Size of a Directory</h1>
+      <img src="../logo.png" class="logo" alt=""><h1>Calculate the Size of a Directory</h1>
       <small class="dont-index">Source: <a href="https://github.com/elgabbas/ecokit/blob/main/R/general_dir_size.R" class="external-link"><code>R/general_dir_size.R</code></a></small>
       <div class="d-none name"><code>dir_size.Rd</code></div>
     </div>
@@ -93,10 +92,10 @@ directories, and cross-platform path normalization.</p>
     <h2 id="ref-examples">Examples<a class="anchor" aria-label="anchor" href="#ref-examples"></a></h2>
     <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span><span class="co"># Calculate the size of the current working directory (recursive)</span></span></span>
 <span class="r-in"><span><span class="fu">dir_size</span><span class="op">(</span><span class="st">"."</span>, human_readable <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span>      <span class="co"># human-readable format</span></span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [1] "1.59 MB"</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [1] "1.66 MB"</span>
 <span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="fu">dir_size</span><span class="op">(</span><span class="st">"."</span>, human_readable <span class="op">=</span> <span class="cn">FALSE</span><span class="op">)</span>     <span class="co"># size in bytes</span></span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [1] 1662576</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [1] 1742432</span>
 <span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="fu">dir_size</span><span class="op">(</span><span class="st">"."</span>, recursive <span class="op">=</span> <span class="cn">FALSE</span><span class="op">)</span>          <span class="co"># non-recursive size calculation</span></span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> [1] "1.59 MB"</span>
