@@ -1,5 +1,5 @@
 
-# ecokit: Tools for Ecological and General Utilities <a href="https://elgabbas.github.io/ecokit/"><img src="man/figures/logo.png" align="right" height="138" alt=""/></a>
+# ecokit <a href="https://elgabbas.github.io/ecokit/"><img src="man/figures/logo.png" align="right" height="120" alt="ecokit logo"/></a>
 
 <!-- badges: start -->
 
@@ -45,3 +45,6 @@ features, please:
   [GitHub repository](https://github.com/elgabbas/ecokit).
 - **Contact me** directly at *elgabbas\[at\]outlook\[dot\]com* for
   collaboration ideas or questions.
+
+<span style="     color: grey !important;">Last update:
+2025-12-11</span>

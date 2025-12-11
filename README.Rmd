@@ -2,11 +2,21 @@
 output: github_document
 ---
 
-# ecokit: Tools for Ecological and General Utilities <a href="https://elgabbas.github.io/ecokit/"><img src="man/figures/logo.png" align="right" height="138" alt=""/></a>
+# ecokit <a href="https://elgabbas.github.io/ecokit/"><img src="man/figures/logo.png" align="right" height="120" alt="ecokit logo"/></a>
 
 <!-- badges: start -->
 [![R-CMD-check](https://github.com/elgabbas/ecokit/actions/workflows/R-CMD-check.yaml/badge.svg)](https://github.com/elgabbas/ecokit/actions/workflows/R-CMD-check.yaml)
 <!-- badges: end -->
+
+```{r}
+#| include = FALSE
+knitr::opts_chunk$set(
+  collapse = TRUE,
+  comment = "#>",
+  out.width = "100%")
+
+.Today <- paste0("Last update: ", lubridate::today())
+```
 
 ## Overview
 
@@ -36,3 +46,5 @@ remotes::install_github("elgabbas/ecokit", dependencies = TRUE)
 - **Report issues** or suggest features on the [GitHub issue tracker](https://github.com/elgabbas/ecokit/issues).
 - **Submit pull requests** with bug fixes or enhancements via the [GitHub repository](https://github.com/elgabbas/ecokit).
 - **Contact me** directly at *elgabbas\[at]outlook\[dot]com* for collaboration ideas or questions.
+
+`r kableExtra::text_spec(.Today, color = "grey")`
