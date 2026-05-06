@@ -15,18 +15,21 @@ mask_cumulative_pct(rast, top_pct = 90L)
 \value{
 A SpatRaster with three layers:
 \itemize{
-\item \code{top}: cells cumulatively accounting for the top \code{top_pct}\%
-\item \code{bottom}: cells cumulatively accounting for the lowest \code{(100 - top_pct)}\%
+\item \code{top_xx_percent_cumulative}: cells cumulatively accounting for the top
+\code{top_pct}\%; where \code{xx} is the value of \code{top_pct}
+\item \code{bottom_xx_percent_cumulative}: cells cumulatively accounting for the
+lowest \code{(100 - top_pct)}\%; where \code{xx} is the value of \code{top_pct}
 \item \code{zero_observations}: cells with original value equal to zero
 }
 }
 \description{
-Creates two masked rasters:
-\itemize{
-\item \code{top}: cells cumulatively accounting for the top \code{top_pct} \% of total sum
-\item \code{bottom}: cells cumulatively accounting for the remaining bottom
-\code{(100 - top_pct)} \%
-}
+This function complements the \code{get_sampling_effort()} function by creating
+masked rasters that highlight areas contributing to the top and bottom
+percentages of the cumulative sum of the original raster values. This can be
+useful for identifying areas with the highest and lowest sampling efforts
+based on the original raster (i.e., number of observations). The function
+also identifies cells with zero observations. For more information, see \href{https://github.com/elgabbas/global_sampling_efforts/}{this repo} and \emph{El-Gabbas
+(2026). Diversity and Distributions (accepted)}.
 }
 \examples{
 require(terra)

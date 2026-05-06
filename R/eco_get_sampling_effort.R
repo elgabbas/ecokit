@@ -3,7 +3,9 @@
 #' Downloads sampling effort raster files from the Open Science Framework (OSF)
 #' based on specified taxonomic groups, descendants, metrics, years, and spatial
 #' resolution. The function validates all inputs and retrieves corresponding
-#' raster data files.
+#' raster data files. For more information, see [this
+#' repo](https://github.com/elgabbas/global_sampling_efforts/) and *El-Gabbas
+#' (2026). Diversity and Distributions (accepted)*.
 #'
 #' @param group Character. The taxonomic group to download sampling effort data
 #'   for. Must be one of: "all", "amphibia", "arachnida", "aves", "fungi",
@@ -27,8 +29,8 @@
 #'   it will be created.
 #' @param conflicts A character string specifying how to handle existing files.
 #'   Must be either "skip" (default) or "overwrite".
-#' @param verbose Logical. If `TRUE`, prints progress messages during the download
-#' process. Defaults to `FALSE`.
+#' @param verbose Logical. If `TRUE`, prints progress messages during the
+#'   download process. Defaults to `FALSE`.
 #'
 #' @return A tibble containing downloaded sampling effort data with columns:
 #'   - `group`: The taxonomic group
@@ -48,7 +50,7 @@
 #' global sampling effort grids: a reproducible workflow for bias-aware
 #' ecological modelling"** by providing a programmatic way to access the
 #' underlying data used in the study. Please cite the manuscript when using the
-#' data retrieved by this function. DOI: XXXXXX
+#' data retrieved by this function.
 #'
 #' Files on the OSF project are organized hierarchically by group, resolution,
 #' metric, and descendant-year combinations.
@@ -535,17 +537,23 @@ get_sampling_effort <- function(
 
 #' Mask raster to show top % and bottom % of cumulative sum
 #'
-#' Creates two masked rasters:
-#' - `top`: cells cumulatively accounting for the top `top_pct` % of total sum
-#' - `bottom`: cells cumulatively accounting for the remaining bottom
-#' `(100 - top_pct)` %
+#' This function complements the `get_sampling_effort()` function by creating
+#' masked rasters that highlight areas contributing to the top and bottom
+#' percentages of the cumulative sum of the original raster values. This can be
+#' useful for identifying areas with the highest and lowest sampling efforts
+#' based on the original raster (i.e., number of observations). The function
+#' also identifies cells with zero observations. For more information, see [this
+#' repo](https://github.com/elgabbas/global_sampling_efforts/) and *El-Gabbas
+#' (2026). Diversity and Distributions (accepted)*.
 #'
 #' @param rast A SpatRaster object with numeric values (e.g., counts per cell)
 #' @param top_pct Numeric, percentage (0–100) for the top cumulative sum
 #'   (default: 90)
 #' @return A SpatRaster with three layers:
-#'   - `top`: cells cumulatively accounting for the top `top_pct`%
-#'   - `bottom`: cells cumulatively accounting for the lowest `(100 - top_pct)`%
+#'   - `top_xx_percent_cumulative`: cells cumulatively accounting for the top
+#'   `top_pct`%; where `xx` is the value of `top_pct`
+#'   - `bottom_xx_percent_cumulative`: cells cumulatively accounting for the
+#'   lowest `(100 - top_pct)`%; where `xx` is the value of `top_pct`
 #'   - `zero_observations`: cells with original value equal to zero
 #' @examples
 #' require(terra)

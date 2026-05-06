@@ -45,8 +45,8 @@ it will be created.}
 \item{conflicts}{A character string specifying how to handle existing files.
 Must be either "skip" (default) or "overwrite".}
 
-\item{verbose}{Logical. If \code{TRUE}, prints progress messages during the download
-process. Defaults to \code{FALSE}.}
+\item{verbose}{Logical. If \code{TRUE}, prints progress messages during the
+download process. Defaults to \code{FALSE}.}
 }
 \value{
 A tibble containing downloaded sampling effort data with columns:
@@ -66,7 +66,8 @@ A tibble containing downloaded sampling effort data with columns:
 Downloads sampling effort raster files from the Open Science Framework (OSF)
 based on specified taxonomic groups, descendants, metrics, years, and spatial
 resolution. The function validates all inputs and retrieves corresponding
-raster data files.
+raster data files. For more information, see \href{https://github.com/elgabbas/global_sampling_efforts/}{this repo} and \emph{El-Gabbas
+(2026). Diversity and Distributions (accepted)}.
 }
 \details{
 This function downloads sampling effort raster files from the OSF project.
@@ -74,7 +75,7 @@ This function complements the manuscript \strong{"High-resolution, taxon-stratif
 global sampling effort grids: a reproducible workflow for bias-aware
 ecological modelling"} by providing a programmatic way to access the
 underlying data used in the study. Please cite the manuscript when using the
-data retrieved by this function. DOI: XXXXXX
+data retrieved by this function.
 
 Files on the OSF project are organized hierarchically by group, resolution,
 metric, and descendant-year combinations.
