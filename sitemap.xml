@@ -50,6 +50,7 @@
 <url><loc>https://elgabbas.github.io/ecokit/reference/get_chelsa_links.html</loc></url>
 <url><loc>https://elgabbas.github.io/ecokit/reference/get_mode.html</loc></url>
 <url><loc>https://elgabbas.github.io/ecokit/reference/get_option_with_default.html</loc></url>
+<url><loc>https://elgabbas.github.io/ecokit/reference/get_sampling_effort.html</loc></url>
 <url><loc>https://elgabbas.github.io/ecokit/reference/git_log.html</loc></url>
 <url><loc>https://elgabbas.github.io/ecokit/reference/ht.html</loc></url>
 <url><loc>https://elgabbas.github.io/ecokit/reference/index.html</loc></url>
@@ -63,6 +64,7 @@
 <url><loc>https://elgabbas.github.io/ecokit/reference/load_packages_future.html</loc></url>
 <url><loc>https://elgabbas.github.io/ecokit/reference/load_tar_file.html</loc></url>
 <url><loc>https://elgabbas.github.io/ecokit/reference/loaded_packages.html</loc></url>
+<url><loc>https://elgabbas.github.io/ecokit/reference/mask_cumulative_pct.html</loc></url>
 <url><loc>https://elgabbas.github.io/ecokit/reference/maxent_open.html</loc></url>
 <url><loc>https://elgabbas.github.io/ecokit/reference/maxent_variable_importance.html</loc></url>
 <url><loc>https://elgabbas.github.io/ecokit/reference/n_decimals.html</loc></url>

@@ -48,7 +48,7 @@ check_tiff(x = f)
 
 # a temp file ends with .tif (not a valid tiff file)
 (temp_file <- tempfile(fileext = ".tif"))
-#> [1] "/tmp/Rtmpl44rQi/file211369434c7f.tif"
+#> [1] "/tmp/RtmpJ6pmpX/file229a1c5b4ba2.tif"
 fs::file_create(temp_file)
 check_tiff(x = temp_file)
 #> [1] FALSE

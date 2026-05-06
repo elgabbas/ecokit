@@ -42,8 +42,9 @@ file_type(file)
 The following functions are included:
 
 - `file_extension`: Extracts the file extension from a file path using
-  tools::file_ext. It does not verify file existence or content, only
-  parsing the extension from the file name.
+  [tools::file_ext](https://rdrr.io/r/tools/fileutils.html). It does not
+  verify file existence or content, only parsing the extension from the
+  file name.
 
 - `file_size`: Returns the file size in a human-readable format (e.g.,
   KB, MB, GB) using

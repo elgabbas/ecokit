@@ -18,6 +18,10 @@
   : Launch the Maxent Java Application from the dismo Package
 - [`maxent_variable_importance()`](https://elgabbas.github.io/ecokit/reference/maxent_variable_importance.md)
   : Extract Variable Importance from a Maxent Model Object
+- [`get_sampling_effort()`](https://elgabbas.github.io/ecokit/reference/get_sampling_effort.md)
+  : Get Sampling Effort Rasters
+- [`mask_cumulative_pct()`](https://elgabbas.github.io/ecokit/reference/mask_cumulative_pct.md)
+  : Mask raster to show top % and bottom % of cumulative sum
 
 ## Package management
 

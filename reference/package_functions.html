@@ -76,7 +76,7 @@ specified package.</p>
 <span class="r-out co"><span class="r-pr">#&gt;</span>  chr [1:281] "%in%" "Arith" "Compare" "Geary" "GearyLocal" "KML" "Logic" ...</span>
 <span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="fu"><a href="https://rdrr.io/r/utils/str.html" class="external-link">str</a></span><span class="op">(</span><span class="fu">package_functions</span><span class="op">(</span>package <span class="op">=</span> <span class="st">"sf"</span><span class="op">)</span><span class="op">)</span></span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  chr [1:156] "%&gt;%" "FULL_bbox_" "NA_agr_" "NA_bbox_" "NA_crs_" ...</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  chr [1:155] "%&gt;%" "FULL_bbox_" "NA_agr_" "NA_bbox_" "NA_crs_" ...</span>
 <span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="fu">package_functions</span><span class="op">(</span>package <span class="op">=</span> <span class="st">"ecokit"</span><span class="op">)</span></span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>   [1] "%&gt;%"                        "add_cross_to_grid"         </span>
@@ -104,37 +104,38 @@ specified package.</p>
 <span class="r-out co"><span class="r-pr">#&gt;</span>  [45] "file_type"                  "find_duplicates"           </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>  [47] "format_number"              "function_arguments"        </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>  [49] "get_chelsa_links"           "get_mode"                  </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  [51] "get_option_with_default"    "git_log"                   </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  [53] "ht"                         "info_chunk"                </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  [55] "integer_breaks"             "keep_only"                 </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  [57] "lapply_"                    "list_to_rdata"             </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  [59] "load_as"                    "load_multiple"             </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  [61] "load_packages"              "load_packages_future"      </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  [63] "load_tar_file"              "loaded_packages"           </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  [65] "maxent_open"                "maxent_variable_importance"</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  [67] "n_decimals"                 "n_unique"                  </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  [69] "nc_global_attributes"       "nearest_dist_sf"           </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  [71] "normalize_path"             "os"                        </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  [73] "package_functions"          "package_remote_sha"        </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  [75] "pak_from_renv"              "parent_dir"                </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  [77] "polygon_centroid"           "quiet_device"              </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  [79] "quietly"                    "range_to_new_value"        </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  [81] "raster_dims_km"             "raster_to_pres_abs"        </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  [83] "record_arguments"           "reload_package"            </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  [85] "remove_options"             "rename_geometry"           </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  [87] "replace_space"              "sapply_"                   </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  [89] "save_as"                    "save_multiple"             </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  [91] "save_session"               "save_session_info"         </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  [93] "scale_0_1"                  "scrape_link"               </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  [95] "script_location"            "set_geometry"              </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  [97] "set_parallel"               "set_raster_crs"            </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  [99] "sf_add_coords"              "source_silent"             </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [101] "split_df_to_chunks"         "split_raster"              </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [103] "split_vector"               "stop_ctx"                  </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [105] "system_command"             "text_to_coordinates"       </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [107] "tibble_column_size"         "used_packages"             </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [109] "write_nc"                   "zenodo_download_file"      </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [111] "zenodo_file_list"          </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  [51] "get_option_with_default"    "get_sampling_effort"       </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  [53] "git_log"                    "ht"                        </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  [55] "info_chunk"                 "integer_breaks"            </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  [57] "keep_only"                  "lapply_"                   </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  [59] "list_to_rdata"              "load_as"                   </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  [61] "load_multiple"              "load_packages"             </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  [63] "load_packages_future"       "load_tar_file"             </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  [65] "loaded_packages"            "mask_cumulative_pct"       </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  [67] "maxent_open"                "maxent_variable_importance"</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  [69] "n_decimals"                 "n_unique"                  </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  [71] "nc_global_attributes"       "nearest_dist_sf"           </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  [73] "normalize_path"             "os"                        </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  [75] "package_functions"          "package_remote_sha"        </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  [77] "pak_from_renv"              "parent_dir"                </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  [79] "polygon_centroid"           "quiet_device"              </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  [81] "quietly"                    "range_to_new_value"        </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  [83] "raster_dims_km"             "raster_to_pres_abs"        </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  [85] "record_arguments"           "reload_package"            </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  [87] "remove_options"             "rename_geometry"           </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  [89] "replace_space"              "sapply_"                   </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  [91] "save_as"                    "save_multiple"             </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  [93] "save_session"               "save_session_info"         </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  [95] "scale_0_1"                  "scrape_link"               </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  [97] "script_location"            "set_geometry"              </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  [99] "set_parallel"               "set_raster_crs"            </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [101] "sf_add_coords"              "source_silent"             </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [103] "split_df_to_chunks"         "split_raster"              </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [105] "split_vector"               "stop_ctx"                  </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [107] "system_command"             "text_to_coordinates"       </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [109] "tibble_column_size"         "used_packages"             </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [111] "write_nc"                   "zenodo_download_file"      </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [113] "zenodo_file_list"          </span>
 <span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="co"># Error: package not found</span></span></span>
 <span class="r-in"><span> <span class="kw"><a href="https://rdrr.io/r/base/try.html" class="external-link">try</a></span><span class="op">(</span><span class="fu">package_functions</span><span class="op">(</span>package <span class="op">=</span> <span class="st">"non_exist"</span><span class="op">)</span><span class="op">)</span></span></span>

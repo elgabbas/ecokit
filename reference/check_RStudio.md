@@ -29,5 +29,5 @@ Ahmed El-Gabbas
 
 ``` r
 check_rstudio()
-#> Not called from RStudio. The most recent version of RStudio is 2025.09.2.418.
+#> Not called from RStudio. The most recent version of RStudio is NA.
 ```

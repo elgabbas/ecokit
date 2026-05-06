@@ -10,14 +10,14 @@
 Source:
 [`DESCRIPTION`](https://github.com/elgabbas/ecokit/blob/main/DESCRIPTION)
 
-El-Gabbas A (2025). *ecokit: Tools for Ecological and General
+El-Gabbas A (2026). *ecokit: Tools for Ecological and General
 Utilities*. R package version 0.1.0,
 <https://github.com/elgabbas/ecokit>.
 
     @Manual{,
       title = {ecokit: Tools for Ecological and General Utilities},
       author = {Ahmed El-Gabbas},
-      year = {2025},
+      year = {2026},
       note = {R package version 0.1.0},
       url = {https://github.com/elgabbas/ecokit},
     }

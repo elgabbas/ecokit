@@ -46,14 +46,14 @@ head(
   scrape_link(
     url = "https://github.com/tidyverse/dplyr", sort_by = "link_text"))
 #> # A tibble: 6 × 2
-#>   link_text          link                                                      
-#>   <chr>              <chr>                                                     
-#> 1 + 268 contributors https://github.com/tidyverse/dplyr/graphs/contributors    
-#> 2 + 42 releases      https://github.com/tidyverse/dplyr/releases               
-#> 3 .Rbuildignore      https://github.com/tidyverse/dplyr/blob/main/.Rbuildignore
-#> 4 .github            https://github.com/tidyverse/dplyr/tree/main/.github      
-#> 5 .gitignore         https://github.com/tidyverse/dplyr/blob/main/.gitignore   
-#> 6 .vscode            https://github.com/tidyverse/dplyr/tree/main/.vscode      
+#>   link_text     link                                                      
+#>   <chr>         <chr>                                                     
+#> 1 + 44 releases https://github.com/tidyverse/dplyr/releases               
+#> 2 .Rbuildignore https://github.com/tidyverse/dplyr/blob/main/.Rbuildignore
+#> 3 .claude       https://github.com/tidyverse/dplyr/tree/main/.claude      
+#> 4 .github       https://github.com/tidyverse/dplyr/tree/main/.github      
+#> 5 .gitignore    https://github.com/tidyverse/dplyr/blob/main/.gitignore   
+#> 6 .vscode       https://github.com/tidyverse/dplyr/tree/main/.vscode      
 
 # This will give an "Invalid url" error
 try(scrape_link(url = "https://github50.com"))

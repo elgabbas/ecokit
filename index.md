@@ -19,6 +19,7 @@ You can install the development version of `ecokit` from GitHub using
 the `remotes` package:
 
 ``` r
+
 # Install remotes if not already installed
 if (!require("remotes")) install.packages("remotes")
 # Install ecokit from GitHub
@@ -40,4 +41,4 @@ features, please:
 - **Contact me** directly at *elgabbas\[at\]outlook\[dot\]com* for
   collaboration ideas or questions.
 
-Last update: 2025-12-11
+Last update: 2026-05-06

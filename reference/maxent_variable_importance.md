@@ -65,13 +65,13 @@ if (dismo::maxent(silent = TRUE)) {
 #> # A tibble: 9 × 3
 #>   variable percent_contribution permutation_importance
 #>   <chr>                   <dbl>                  <dbl>
-#> 1 bio1                    2.89                    2.50
-#> 2 bio12                   1.69                   10.8 
-#> 3 bio16                  10.1                     1.33
-#> 4 bio17                   3.57                    3.44
-#> 5 bio5                    3.53                    5.27
-#> 6 bio6                    3.00                    3.82
-#> 7 bio7                   28.2                    59.6 
-#> 8 bio8                    0.303                   2.94
-#> 9 biome                  46.8                    10.3 
+#> 1 bio1                    2.89                    3.96
+#> 2 bio12                   1.69                   14.3 
+#> 3 bio16                  10.1                     0   
+#> 4 bio17                   3.57                    3.05
+#> 5 bio5                    3.53                    1.08
+#> 6 bio6                    3.00                    3.20
+#> 7 bio7                   28.2                    60.9 
+#> 8 bio8                    0.303                   2.01
+#> 9 biome                  46.8                    11.5 
 ```

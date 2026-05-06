@@ -67,9 +67,9 @@ Ahmed El-Gabbas
 # Load tidyr
 load_packages(tidyr, raster, ggplot2, nnet, verbose = TRUE)
 #> The following packages were already loaded:
-#>   >>>>  ggplot2 (4.0.1)
+#>   >>>>  ggplot2 (4.0.3)
 #>   >>>>  raster (3.6-32)
-#>   >>>>  tidyr (1.3.1)
+#>   >>>>  tidyr (1.3.2)
 #> Loading packages:
 #>   >>>>  nnet (7.3-20)
 
@@ -91,8 +91,8 @@ load_packages(tidyterra, verbose = FALSE)
 # load already loaded packages
 load_packages(tidyr, tidyterra, verbose = TRUE)
 #> The following packages were already loaded:
-#>   >>>>  tidyr (1.3.1)
-#>   >>>>  tidyterra (0.7.2)
+#>   >>>>  tidyr (1.3.2)
+#>   >>>>  tidyterra (1.1.0)
 
 # non-existent package
 load_packages("non_existent")

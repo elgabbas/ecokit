@@ -88,14 +88,14 @@ sorted by link and then by link text, and only unique links are included.</p>
 <span class="r-in"><span>  <span class="fu">scrape_link</span><span class="op">(</span></span></span>
 <span class="r-in"><span>    url <span class="op">=</span> <span class="st">"https://github.com/tidyverse/dplyr"</span>, sort_by <span class="op">=</span> <span class="st">"link_text"</span><span class="op">)</span><span class="op">)</span></span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># A tibble: 6 × 2</span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>   link_text          link                                                      </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>   <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>              <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>                                                     </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">1</span> + 268 contributors https://github.com/tidyverse/dplyr/graphs/contributors    </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">2</span> + 42 releases      https://github.com/tidyverse/dplyr/releases               </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">3</span> .Rbuildignore      https://github.com/tidyverse/dplyr/blob/main/.Rbuildignore</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">4</span> .github            https://github.com/tidyverse/dplyr/tree/main/.github      </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">5</span> .gitignore         https://github.com/tidyverse/dplyr/blob/main/.gitignore   </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">6</span> .vscode            https://github.com/tidyverse/dplyr/tree/main/.vscode      </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   link_text     link                                                      </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>         <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>                                                     </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">1</span> + 44 releases https://github.com/tidyverse/dplyr/releases               </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">2</span> .Rbuildignore https://github.com/tidyverse/dplyr/blob/main/.Rbuildignore</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">3</span> .claude       https://github.com/tidyverse/dplyr/tree/main/.claude      </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">4</span> .github       https://github.com/tidyverse/dplyr/tree/main/.github      </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">5</span> .gitignore    https://github.com/tidyverse/dplyr/blob/main/.gitignore   </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">6</span> .vscode       https://github.com/tidyverse/dplyr/tree/main/.vscode      </span>
 <span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="co"># This will give an "Invalid url" error</span></span></span>
 <span class="r-in"><span><span class="kw"><a href="https://rdrr.io/r/base/try.html" class="external-link">try</a></span><span class="op">(</span><span class="fu">scrape_link</span><span class="op">(</span>url <span class="op">=</span> <span class="st">"https://github50.com"</span><span class="op">)</span><span class="op">)</span></span></span>

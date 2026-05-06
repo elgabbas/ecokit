@@ -110,7 +110,7 @@ file.</p>
 <span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="co"># List contents of the tar file</span></span></span>
 <span class="r-in"><span><span class="fu"><a href="https://rdrr.io/r/base/print.html" class="external-link">print</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/system2.html" class="external-link">system2</a></span><span class="op">(</span><span class="st">"tar"</span>, <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"-tf"</span>, <span class="va">tmp_tar</span><span class="op">)</span>, stdout <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span><span class="op">)</span></span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [1] "elev.tif"             "file21132354a89.csv"  "file211377543e34.rds"</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [1] "elev.tif"             "file229a4bf92516.csv" "file229a645d1d13.rds"</span>
 <span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="co"># example SpatRaster</span></span></span>
 <span class="r-in"><span><span class="fu">load_tar_file</span><span class="op">(</span></span></span>
@@ -130,7 +130,7 @@ file.</p>
 <span class="r-in"><span><span class="fu">load_tar_file</span><span class="op">(</span></span></span>
 <span class="r-in"><span>  tar_file <span class="op">=</span> <span class="va">tmp_tar</span>, file_to_extract <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/basename.html" class="external-link">basename</a></span><span class="op">(</span><span class="va">csv_file</span><span class="op">)</span>,</span></span>
 <span class="r-in"><span>  load_fun <span class="op">=</span> <span class="st">"read.csv"</span><span class="op">)</span> <span class="op"><a href="pipe.html">%&gt;%</a></span></span></span>
-<span class="r-in"><span>  <span class="fu"><a href="https://rdrr.io/r/utils/head.html" class="external-link">head</a></span><span class="op">(</span><span class="op">)</span></span></span>
+<span class="r-in"><span>  <span class="fu"><a href="https://rspatial.github.io/terra/reference/headtail.html" class="external-link">head</a></span><span class="op">(</span><span class="op">)</span></span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>   Sepal.Length Sepal.Width Petal.Length Petal.Width Species</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> 1          5.1         3.5          1.4         0.2  setosa</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> 2          4.9         3.0          1.4         0.2  setosa</span>
@@ -143,7 +143,7 @@ file.</p>
 <span class="r-in"><span><span class="fu">load_tar_file</span><span class="op">(</span></span></span>
 <span class="r-in"><span>  tar_file <span class="op">=</span> <span class="va">tmp_tar</span>, file_to_extract <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/basename.html" class="external-link">basename</a></span><span class="op">(</span><span class="va">rds_file</span><span class="op">)</span>,</span></span>
 <span class="r-in"><span>  load_fun <span class="op">=</span> <span class="va">readRDS</span><span class="op">)</span> <span class="op"><a href="pipe.html">%&gt;%</a></span></span></span>
-<span class="r-in"><span>  <span class="fu"><a href="https://rdrr.io/r/utils/head.html" class="external-link">head</a></span><span class="op">(</span><span class="op">)</span></span></span>
+<span class="r-in"><span>  <span class="fu"><a href="https://rspatial.github.io/terra/reference/headtail.html" class="external-link">head</a></span><span class="op">(</span><span class="op">)</span></span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>                    mpg cyl disp  hp drat    wt  qsec vs am gear carb</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> Mazda RX4         21.0   6  160 110 3.90 2.620 16.46  0  1    4    4</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> Mazda RX4 Wag     21.0   6  160 110 3.90 2.875 17.02  0  1    4    4</span>

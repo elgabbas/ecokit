@@ -33,10 +33,11 @@ Ahmed El-Gabbas
 ## Examples
 
 ``` r
+
 # all options
 all_options <- extract_options()
 length(all_options)
-#> [1] 128
+#> [1] 130
 
 # all options with "warn" in the name (case-insensitive)
 extract_options(pattern = "warn")
@@ -80,13 +81,13 @@ extract_options(pattern = "^r", case_sensitive = TRUE)
 #>                                    "https://cran.rstudio.com" 
 #> 
 #> $rl_word_breaks
-#> [1] " \t\n\"\\'`><=%;,|&{()}"
+#> [1] " \t\n\"\\'`><=;,|&{()}"
 #> 
 #> $rlang_interactive
 #> [1] FALSE
 #> 
 #> $rlang_trace_top_env
-#> <environment: 0x556548a6b6f0>
+#> <environment: 0x5612476a0500>
 #> 
 
 # non-existing pattern

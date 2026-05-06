@@ -75,6 +75,7 @@ Ahmed El-Gabbas
 ## Examples
 
 ``` r
+
 file <- system.file("testdata", "culcita_dat.RData", package = "lme4")
 
 # ---------------------------------------------------------

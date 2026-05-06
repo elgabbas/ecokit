@@ -52,18 +52,18 @@ summary(model)
 #> 
 #> Residuals:
 #>      Min       1Q   Median       3Q      Max 
-#> -2.18111 -0.65444  0.00364  0.59620  2.53164 
+#> -2.41023 -0.65355  0.00811  0.56445  2.64364 
 #> 
 #> Coefficients: (1 not defined because of singularities)
 #>             Estimate Std. Error t value Pr(>|t|)
-#> (Intercept) -0.12555    0.09861  -1.273    0.206
-#> x1           0.05724    0.11085   0.516    0.607
+#> (Intercept) -0.10923    0.09999  -1.092    0.277
+#> x1          -0.03670    0.10457  -0.351    0.726
 #> x2                NA         NA      NA       NA
-#> x3           0.05847    0.10946   0.534    0.594
+#> x3           0.11295    0.11621   0.972    0.334
 #> 
-#> Residual standard error: 0.9736 on 97 degrees of freedom
-#> Multiple R-squared:  0.006902,   Adjusted R-squared:  -0.01357 
-#> F-statistic: 0.3371 on 2 and 97 DF,  p-value: 0.7147
+#> Residual standard error: 0.9926 on 97 degrees of freedom
+#> Multiple R-squared:  0.01032,    Adjusted R-squared:  -0.01008 
+#> F-statistic: 0.5059 on 2 and 97 DF,  p-value: 0.6045
 #> 
 
 # there are aliased coefficients in the model
@@ -88,20 +88,20 @@ summary(model)
 #> 
 #> Residuals:
 #>      Min       1Q   Median       3Q      Max 
-#> -2.18111 -0.65444  0.00364  0.59620  2.53164 
+#> -2.41023 -0.65355  0.00811  0.56445  2.64364 
 #> 
 #> Coefficients:
 #>             Estimate Std. Error t value Pr(>|t|)
-#> (Intercept) -0.12555    0.09861  -1.273    0.206
-#> x1           0.05724    0.11085   0.516    0.607
-#> x3           0.05847    0.10946   0.534    0.594
+#> (Intercept) -0.10923    0.09999  -1.092    0.277
+#> x1          -0.03670    0.10457  -0.351    0.726
+#> x3           0.11295    0.11621   0.972    0.334
 #> 
-#> Residual standard error: 0.9736 on 97 degrees of freedom
-#> Multiple R-squared:  0.006902,   Adjusted R-squared:  -0.01357 
-#> F-statistic: 0.3371 on 2 and 97 DF,  p-value: 0.7147
+#> Residual standard error: 0.9926 on 97 degrees of freedom
+#> Multiple R-squared:  0.01032,    Adjusted R-squared:  -0.01008 
+#> F-statistic: 0.5059 on 2 and 97 DF,  p-value: 0.6045
 #> 
 
 try(car::vif(model))
-#>    x1    x3 
-#> 1.034 1.034 
+#>       x1       x3 
+#> 1.009248 1.009248 
 ```

@@ -40,6 +40,7 @@ Ahmed El-Gabbas
 ## Examples
 
 ``` r
+
 # loading packages
 load_packages(dplyr, purrr)
 

@@ -17,3 +17,7 @@ Useful links:
 ## Author
 
 **Maintainer**: Ahmed El-Gabbas <elgabbas@outlook.com>
+
+Authors:
+
+- Ahmed El-Gabbas <elgabbas@outlook.com>

@@ -103,6 +103,7 @@ with its name, the verbatim expression used, its class, and its value:
 
 For example:
 
+
       ----- Metadata -----
       file ["data.csv"]: <character>
       "data.csv"
@@ -187,7 +188,7 @@ try(
     message = "File not found", file = "data.csv",
     type = "missing_input", cat_date = TRUE))
 #> Error in try(stop_ctx(message = "File not found", file = "data.csv", type = "missing_input",  : 
-#>   File not found - 11/12/2025
+#>   File not found - 06/05/2026
 #> 
 #> ----- Metadata -----
 #> 
