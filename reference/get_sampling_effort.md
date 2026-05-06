@@ -3,7 +3,9 @@
 Downloads sampling effort raster files from the Open Science Framework
 (OSF) based on specified taxonomic groups, descendants, metrics, years,
 and spatial resolution. The function validates all inputs and retrieves
-corresponding raster data files.
+corresponding raster data files. For more information, see [this
+repo](https://github.com/elgabbas/global_sampling_efforts/) and
+*El-Gabbas (2026). Diversity and Distributions (accepted)*.
 
 ## Usage
 
@@ -100,7 +102,7 @@ project. This function complements the manuscript **"High-resolution,
 taxon-stratified global sampling effort grids: a reproducible workflow
 for bias-aware ecological modelling"** by providing a programmatic way
 to access the underlying data used in the study. Please cite the
-manuscript when using the data retrieved by this function. DOI: XXXXXX
+manuscript when using the data retrieved by this function.
 
 Files on the OSF project are organized hierarchically by group,
 resolution, metric, and descendant-year combinations.

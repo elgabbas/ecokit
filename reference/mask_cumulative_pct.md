@@ -1,12 +1,15 @@
 # Mask raster to show top % and bottom % of cumulative sum
 
-Creates two masked rasters:
-
-- `top`: cells cumulatively accounting for the top `top_pct` % of total
-  sum
-
-- `bottom`: cells cumulatively accounting for the remaining bottom
-  `(100 - top_pct)` %
+This function complements the
+[`get_sampling_effort()`](https://elgabbas.github.io/ecokit/reference/get_sampling_effort.md)
+function by creating masked rasters that highlight areas contributing to
+the top and bottom percentages of the cumulative sum of the original
+raster values. This can be useful for identifying areas with the highest
+and lowest sampling efforts based on the original raster (i.e., number
+of observations). The function also identifies cells with zero
+observations. For more information, see [this
+repo](https://github.com/elgabbas/global_sampling_efforts/) and
+*El-Gabbas (2026). Diversity and Distributions (accepted)*.
 
 ## Usage
 
@@ -28,10 +31,11 @@ mask_cumulative_pct(rast, top_pct = 90L)
 
 A SpatRaster with three layers:
 
-- `top`: cells cumulatively accounting for the top `top_pct`%
+- `top_xx_percent_cumulative`: cells cumulatively accounting for the top
+  `top_pct`%; where `xx` is the value of `top_pct`
 
-- `bottom`: cells cumulatively accounting for the lowest
-  `(100 - top_pct)`%
+- `bottom_xx_percent_cumulative`: cells cumulatively accounting for the
+  lowest `(100 - top_pct)`%; where `xx` is the value of `top_pct`
 
 - `zero_observations`: cells with original value equal to zero
 
