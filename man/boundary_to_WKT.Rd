@@ -17,7 +17,7 @@ the specified boundaries.
 \description{
 This function constructs a Well-Known Text (WKT) string representing a
 polygon that outlines the specified boundaries. It is used to define the area
-of interest for downloading GBIF data through the \code{\link[rgbif:download_predicate_dsl]{rgbif::pred_within()}}
+of interest for downloading GBIF data through the \code{\link[rgbif:pred_within]{rgbif::pred_within()}}
 function.
 }
 \examples{

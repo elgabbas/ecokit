@@ -34,6 +34,8 @@ reference:
   - check_gbif
   - maxent_open
   - maxent_variable_importance
+  - get_sampling_effort
+  - mask_cumulative_pct
 
 - title: Package management
   contents:

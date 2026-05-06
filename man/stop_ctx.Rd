@@ -22,7 +22,7 @@ stop_ctx(
 types, such as vectors, lists, data frames, tibbles, SpatRaster,
 RasterLayer, RasterStack, RasterBrick, sf objects, regression models (e.g.,
 lm, glm), ggplot objects, S4 objects, and more. Unnamed arguments will
-cause an error due to \code{.named = TRUE} in \code{\link[rlang:enquo]{rlang::enquos()}}. \code{NULL} values
+cause an error due to \code{.named = TRUE} in \code{\link[rlang:enquos]{rlang::enquos()}}. \code{NULL} values
 are displayed as "NULL".}
 
 \item{class}{Character or \code{NULL.} Subclass(es) for the error condition.

@@ -12,3 +12,5 @@ LICENSE.md
 ^\.github$
 ecokit.code-workspace
 ^data-raw$
+^\.positai$
+^\.claude$

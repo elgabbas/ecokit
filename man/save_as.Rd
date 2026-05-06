@@ -34,7 +34,7 @@ saving the object in the \code{feather} format. The default is "zstd". See
 
 \item{...}{Additional arguments to be passed to the respective save
 functions. \link[base:save]{base::save} for \code{RData} files; \link[qs2:qs_save]{qs2::qs_save} for \code{qs2} files;
-\link[arrow:write_feather]{arrow::write_feather} for \code{feather} files; and \link[base:readRDS]{base::saveRDS} for \code{rds}
+\link[arrow:write_feather]{arrow::write_feather} for \code{feather} files; and \link[base:saveRDS]{base::saveRDS} for \code{rds}
 files.}
 }
 \value{

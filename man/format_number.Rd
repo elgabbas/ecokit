@@ -21,16 +21,16 @@ to \code{format(..., big.mark = big_mark)}). Must be non-NULL, non-empty, and of
 length 1. Default: \code{","}.}
 
 \item{blue}{Logical; if \code{TRUE} (default) the formatted output is wrapped with
-\code{\link[crayon:crayon]{crayon::blue()}}.}
+\code{\link[crayon:blue]{crayon::blue()}}.}
 
 \item{red}{Logical; if \code{TRUE} the formatted output is wrapped with
-\code{\link[crayon:crayon]{crayon::red()}}. Default: \code{FALSE}.}
+\code{\link[crayon:red]{crayon::red()}}. Default: \code{FALSE}.}
 
 \item{bold}{Logical; if \code{TRUE} the formatted output is wrapped with
-\code{\link[crayon:crayon]{crayon::bold()}}. Default: \code{FALSE}.}
+\code{\link[crayon:bold]{crayon::bold()}}. Default: \code{FALSE}.}
 
 \item{underline}{Logical; if \code{TRUE} the formatted output is wrapped with
-\code{\link[crayon:crayon]{crayon::underline()}}. Default: \code{FALSE}.}
+\code{\link[crayon:underline]{crayon::underline()}}. Default: \code{FALSE}.}
 }
 \value{
 A character scalar containing the formatted number(s) with the

@@ -20,7 +20,7 @@ unchanged.
 }
 \description{
 Replaces all whitespace characters (spaces, tabs, etc.) with underscores in a
-character vector. This is a wrapper around \code{\link[stringr:str_replace]{stringr::str_replace_all()}} for
+character vector. This is a wrapper around \code{\link[stringr:str_replace_all]{stringr::str_replace_all()}} for
 formatting strings in contexts where whitespace is not allowed (e.g., file
 names, variable names). Optionally, a custom replacement character can be
 specified.
@@ -46,6 +46,6 @@ replace_space(c("Genus species 1", NA, "Genus species 2"))
 replace_space("")
 }
 \seealso{
-\code{\link[stringr:str_replace]{stringr::str_replace_all()}} for the underlying function, \code{\link[=gsub]{gsub()}}
+\code{\link[stringr:str_replace_all]{stringr::str_replace_all()}} for the underlying function, \code{\link[=gsub]{gsub()}}
 for base R alternative.
 }

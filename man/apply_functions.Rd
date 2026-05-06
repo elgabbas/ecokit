@@ -12,7 +12,7 @@ sapply_(x, fun, simplify = TRUE, silent = TRUE, ...)
 }
 \arguments{
 \item{x}{a vector (atomic or list) or an expression object. Other objects
-(including classed objects) will be coerced by \link[base:list]{base::as.list}.}
+(including classed objects) will be coerced by \link[base:as.list]{base::as.list}.}
 
 \item{fun}{the function to be applied to each element of x. In the case of
 functions like +, \%*\%, the function name must be backquoted or quoted.}
@@ -32,11 +32,11 @@ list of the same length as \code{x}, where each element is the result of
 applying \code{fun} to the corresponding element of \code{x}.
 }
 \description{
-Wrapper functions around the base \link[base:lapply]{base::lapply} and \link[base:lapply]{base::sapply} functions
+Wrapper functions around the base \link[base:lapply]{base::lapply} and \link[base:sapply]{base::sapply} functions
 that allow for the application of a function over a list or vector. It
 extends original functions by providing an option to suppress the output,
 effectively allowing for operations where the user may not care about the
-return value (e.g., plotting). This behaviour is similar to the \link[purrr:map]{purrr::walk}
+return value (e.g., plotting). This behaviour is similar to the \link[purrr:walk]{purrr::walk}
 function.
 }
 \examples{

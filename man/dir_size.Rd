@@ -26,7 +26,7 @@ recursively. The size can be returned in bytes or in a human-readable format
 (e.g., KB, MB, GB).
 }
 \details{
-The function uses \code{\link[fs:dir_ls]{fs::dir_info()}} to recursively calculate the
+The function uses \code{\link[fs:dir_info]{fs::dir_info()}} to recursively calculate the
 total size of all files in the specified directory. It handles edge cases
 such as: non-existent directories, invalid or inaccessible paths, empty
 directories, and cross-platform path normalization.

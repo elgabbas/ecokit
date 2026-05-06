@@ -33,7 +33,7 @@ downloaded file. If \code{NULL} (default), a temporary file is created and
 deleted if \code{read_func} is used.}
 
 \item{read_func}{Function (optional). A function to read or process the
-downloaded file (e.g., \code{\link[=read.csv]{read.csv()}}, \code{\link[readr:read_delim]{readr::read_csv()}}, \code{\link[=readLines]{readLines()}},
+downloaded file (e.g., \code{\link[=read.csv]{read.csv()}}, \code{\link[readr:read_csv]{readr::read_csv()}}, \code{\link[=readLines]{readLines()}},
 \code{\link[readxl:read_excel]{readxl::read_excel()}}, etc.). If \code{NULL}, only the file path is returned.}
 
 \item{delete_temp}{Logical. Whether to delete temporary files after reading

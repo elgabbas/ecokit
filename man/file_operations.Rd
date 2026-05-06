@@ -38,7 +38,7 @@ extension, size, and type.
 The following functions are included:
 \itemize{
 \item \code{file_extension}: Extracts the file extension from a file path using
-\link[tools:fileutils]{tools::file_ext}. It does not verify file existence or content, only
+\link[tools:file_ext]{tools::file_ext}. It does not verify file existence or content, only
 parsing the extension from the file name.
 \item \code{file_size}: Returns the file size in a human-readable format (e.g., KB,
 MB, GB) using \link[gdata:humanReadable]{gdata::humanReadable}.

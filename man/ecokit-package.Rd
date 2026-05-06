@@ -22,5 +22,10 @@ Useful links:
 \author{
 \strong{Maintainer}: Ahmed El-Gabbas \email{elgabbas@outlook.com}
 
+Authors:
+\itemize{
+  \item Ahmed El-Gabbas \email{elgabbas@outlook.com}
+}
+
 }
 \keyword{internal}
