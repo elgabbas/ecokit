@@ -204,11 +204,9 @@ zenodo_download_file <- function(
   }
 
   if (verbose) {
-    file_size <- head_response$headers$`content-length` %>%
-      as.numeric() %>%
-      gdata::humanReadable()
     ecokit::cat_time(
-      paste0("File size: ", file_size), cat_timestamp = FALSE)
+      paste0("File size: ", gdata::humanReadable(matched_files$size)),
+      cat_timestamp = FALSE)
   }
 
   # file extension
