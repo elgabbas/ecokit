@@ -271,20 +271,20 @@ specified conditions.</p>
 <span class="r-in"><span><span class="va">R_terra3</span> <span class="op">&lt;-</span> <span class="fu">range_to_new_value</span><span class="op">(</span></span></span>
 <span class="r-in"><span>    x <span class="op">=</span> <span class="va">R_terra</span>, greater_than <span class="op">=</span> <span class="fl">600</span>, new_value <span class="op">=</span> <span class="cn">NA</span><span class="op">)</span></span></span>
 <span class="r-in"><span><span class="op">(</span><span class="va">R_terras</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="va">R_terra</span>, <span class="va">R_terra2</span>, <span class="va">R_terra3</span><span class="op">)</span><span class="op">)</span></span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> class       : SpatRaster </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> class       : SpatRaster</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> size        : 115, 80, 3  (nrow, ncol, nlyr)</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> resolution  : 40, 40  (x, y)</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> extent      : 178400, 181600, 329400, 334000  (xmin, xmax, ymin, ymax)</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> coord. ref. : +proj=sterea +lat_0=52.1561605555556 +lon_0=5.38763888888889 +k=0.9999079 +x_0=155000 +y_0=463000 +datum=WGS84 +units=m +no_defs </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> sources     : test.grd  </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>               spat_22de1d172a84_8926_cAgIOdM9zl2ssxu.tif  </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>               spat_22de13584045_8926_6Ve0U0mHi6uNtMK.tif  </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> varnames    : test </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>               test </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>               test </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> names       :      test,      test,     test </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> min values  :  138.7071,  500.1736, 138.7071 </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> max values  : 1736.0579, 1736.0580, 599.6334 </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> coord. ref. : +proj=sterea +lat_0=52.1561605555556 +lon_0=5.38763888888889 +k=0.9999079 +x_0=155000 +y_0=463000 +datum=WGS84 +units=m +no_defs</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> sources     : test.grd</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>               spat_22002c373ae_8704_cAgIOdM9zl2ssxu.tif</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>               spat_22005ae20082_8704_6Ve0U0mHi6uNtMK.tif</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> varnames    : test</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>               test</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>               test</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> names       :       test,        test,       test</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> min values  : 138.707073,  500.173645, 138.707077</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> max values  : 1736.05793, 1736.057983, 599.633423</span>
 <span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="fu"><a href="https://rspatial.github.io/terra/reference/as.data.frame.html" class="external-link">as.data.frame</a></span><span class="op">(</span><span class="va">R_terras</span>, xy <span class="op">=</span> <span class="cn">TRUE</span>, na.rm <span class="op">=</span> <span class="cn">FALSE</span><span class="op">)</span> <span class="op"><a href="pipe.html">%&gt;%</a></span></span></span>
 <span class="r-in"><span>  <span class="fu">stats</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/r/stats/setNames.html" class="external-link">setNames</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"x"</span>, <span class="st">"y"</span>, <span class="st">"R_terra"</span>, <span class="st">"R_terra2"</span>, <span class="st">"R_terra3"</span><span class="op">)</span><span class="op">)</span> <span class="op"><a href="pipe.html">%&gt;%</a></span></span></span>

@@ -222,20 +222,20 @@ R_terra2 <- range_to_new_value(x = R_terra, less_than = 500, new_value = NA)
 R_terra3 <- range_to_new_value(
     x = R_terra, greater_than = 600, new_value = NA)
 (R_terras <- c(R_terra, R_terra2, R_terra3))
-#> class       : SpatRaster 
+#> class       : SpatRaster
 #> size        : 115, 80, 3  (nrow, ncol, nlyr)
 #> resolution  : 40, 40  (x, y)
 #> extent      : 178400, 181600, 329400, 334000  (xmin, xmax, ymin, ymax)
-#> coord. ref. : +proj=sterea +lat_0=52.1561605555556 +lon_0=5.38763888888889 +k=0.9999079 +x_0=155000 +y_0=463000 +datum=WGS84 +units=m +no_defs 
-#> sources     : test.grd  
-#>               spat_22de1d172a84_8926_cAgIOdM9zl2ssxu.tif  
-#>               spat_22de13584045_8926_6Ve0U0mHi6uNtMK.tif  
-#> varnames    : test 
-#>               test 
-#>               test 
-#> names       :      test,      test,     test 
-#> min values  :  138.7071,  500.1736, 138.7071 
-#> max values  : 1736.0579, 1736.0580, 599.6334 
+#> coord. ref. : +proj=sterea +lat_0=52.1561605555556 +lon_0=5.38763888888889 +k=0.9999079 +x_0=155000 +y_0=463000 +datum=WGS84 +units=m +no_defs
+#> sources     : test.grd
+#>               spat_22002c373ae_8704_cAgIOdM9zl2ssxu.tif
+#>               spat_22005ae20082_8704_6Ve0U0mHi6uNtMK.tif
+#> varnames    : test
+#>               test
+#>               test
+#> names       :       test,        test,       test
+#> min values  : 138.707073,  500.173645, 138.707077
+#> max values  : 1736.05793, 1736.057983, 599.633423
 
 as.data.frame(R_terras, xy = TRUE, na.rm = FALSE) %>%
   stats::setNames(c("x", "y", "R_terra", "R_terra2", "R_terra3")) %>%

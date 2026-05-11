@@ -188,7 +188,7 @@ try(
     message = "File not found", file = "data.csv",
     type = "missing_input", cat_date = TRUE))
 #> Error in try(stop_ctx(message = "File not found", file = "data.csv", type = "missing_input",  : 
-#>   File not found - 06/05/2026
+#>   File not found - 11/05/2026
 #> 
 #> ----- Metadata -----
 #> 
@@ -223,11 +223,11 @@ try(
 #> crs        : +proj=longlat +datum=WGS84 +no_defs 
 #> 
 #> terra [terra_obj]: <SpatRaster>
-#> class       : SpatRaster 
+#> class       : SpatRaster
 #> size        : 180, 360, 1  (nrow, ncol, nlyr)
 #> resolution  : 1, 1  (x, y)
 #> extent      : -180, 180, -90, 90  (xmin, xmax, ymin, ymax)
-#> coord. ref. : lon/lat WGS 84 (CRS84) (OGC:CRS84) 
+#> coord. ref. : lon/lat WGS 84 (CRS84) (OGC:CRS84)
 #> 
 #> data_frame [iris]: <data.frame>
 #> Rows: 150

@@ -67,21 +67,21 @@ tar_flag <- ifelse(i == 1, "c", "r")
 
 # List contents of the tar file
 print(system2("tar", c("-tf", tmp_tar), stdout = TRUE))
-#> [1] "elev.tif"             "file22de5afd546.csv"  "file22de21e793a4.rds"
+#> [1] "elev.tif"             "file22006e5c4b2b.csv" "file220011d424f.rds" 
 
 # example SpatRaster
 load_tar_file(
   tar_file = tmp_tar, file_to_extract = "elev.tif",
   load_fun = "terra::rast")
-#> class       : SpatRaster 
+#> class       : SpatRaster
 #> size        : 90, 95, 1  (nrow, ncol, nlyr)
 #> resolution  : 0.008333333, 0.008333333  (x, y)
 #> extent      : 5.741667, 6.533333, 49.44167, 50.19167  (xmin, xmax, ymin, ymax)
-#> coord. ref. : lon/lat WGS 84 (EPSG:4326) 
-#> source      : elev.tif 
-#> name        : elevation 
-#> min value   :       141 
-#> max value   :       547 
+#> coord. ref. : lon/lat WGS 84 (EPSG:4326)
+#> source      : elev.tif
+#> name        : elevation
+#> min value   :       141
+#> max value   :       547
 
 # example CSV file using readr
 load_tar_file(

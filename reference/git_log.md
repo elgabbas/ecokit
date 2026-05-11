@@ -51,15 +51,15 @@ Ahmed El-Gabbas
 ``` r
 # Show the most recent commit
 git_log(n_commits = 1)
-#> * df3aae9 - (grafted, HEAD -> main, origin/main) Comment out deprecated Ubuntu devel configuration in CI workflow (47 minutes ago) <Ahmed El-Gabbas>
+#> * 4335284 - (grafted, HEAD -> main, origin/main) Small fix for `zenodo_download_file` when `verbose = TRUE` (5 minutes ago) <Ahmed El-Gabbas>
 
 # Show the most recent 5 commits
 git_log(n_commits = 5)
-#> * df3aae9 - (grafted, HEAD -> main, origin/main) Comment out deprecated Ubuntu devel configuration in CI workflow (47 minutes ago) <Ahmed El-Gabbas>
+#> * 4335284 - (grafted, HEAD -> main, origin/main) Small fix for `zenodo_download_file` when `verbose = TRUE` (5 minutes ago) <Ahmed El-Gabbas>
 
 # by default, the log is only printed, not returned
 log_example <- git_log(n_commits = 1)
-#> * df3aae9 - (grafted, HEAD -> main, origin/main) Comment out deprecated Ubuntu devel configuration in CI workflow (47 minutes ago) <Ahmed El-Gabbas>
+#> * 4335284 - (grafted, HEAD -> main, origin/main) Small fix for `zenodo_download_file` when `verbose = TRUE` (5 minutes ago) <Ahmed El-Gabbas>
 print(log_example)
 #> NULL
 
@@ -68,7 +68,7 @@ log_example <- git_log(return_log = TRUE)
 length(log_example)
 #> [1] 1
 head(log_example, 8)
-#> [1] "* df3aae9 - (grafted, HEAD -> main, origin/main) Comment out deprecated Ubuntu devel configuration in CI workflow (47 minutes ago) <Ahmed El-Gabbas>"
+#> [1] "* 4335284 - (grafted, HEAD -> main, origin/main) Small fix for `zenodo_download_file` when `verbose = TRUE` (5 minutes ago) <Ahmed El-Gabbas>"
 
 # not a git repo
 non_git_dir <- fs::path_temp("test_dir")

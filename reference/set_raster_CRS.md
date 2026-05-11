@@ -40,15 +40,15 @@ load_packages(terra)
 r <- terra::rast(nrows = 10, ncols = 10, vals = 1:100)
 terra::crs(r) <- NULL
 print(r)
-#> class       : SpatRaster 
+#> class       : SpatRaster
 #> size        : 10, 10, 1  (nrow, ncol, nlyr)
 #> resolution  : 36, 18  (x, y)
 #> extent      : -180, 180, -90, 90  (xmin, xmax, ymin, ymax)
-#> coord. ref. :  
+#> coord. ref. : 
 #> source(s)   : memory
-#> name        : lyr.1 
-#> min value   :     1 
-#> max value   :   100 
+#> name        : lyr.1
+#> min value   :     1
+#> max value   :   100
 
 terra::crs(r, describe = TRUE)$code
 #> [1] NA
@@ -56,15 +56,15 @@ terra::crs(r, describe = TRUE)$code
 
 # Set CRS to EPSG:4326
 (r_modified <- set_raster_crs(r, "epsg:4326"))
-#> class       : SpatRaster 
+#> class       : SpatRaster
 #> size        : 10, 10, 1  (nrow, ncol, nlyr)
 #> resolution  : 36, 18  (x, y)
 #> extent      : -180, 180, -90, 90  (xmin, xmax, ymin, ymax)
-#> coord. ref. : lon/lat WGS 84 (EPSG:4326) 
+#> coord. ref. : lon/lat WGS 84 (EPSG:4326)
 #> source(s)   : memory
-#> name        : lyr.1 
-#> min value   :     1 
-#> max value   :   100 
+#> name        : lyr.1
+#> min value   :     1
+#> max value   :   100
 terra::crs(r_modified, describe = TRUE)$code
 #> [1] "4326"
 ```

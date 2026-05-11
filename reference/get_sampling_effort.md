@@ -263,17 +263,17 @@ dplyr::glimpse(efforts_insects)
 
 efforts_insects_r <- terra::rast(efforts_insects$local_path)
 efforts_insects_r
-#> class       : SpatRaster 
+#> class       : SpatRaster
 #> size        : 2160, 4320, 3  (nrow, ncol, nlyr)
 #> resolution  : 0.08333333, 0.08333333  (x, y)
 #> extent      : -180, 180, -90, 90  (xmin, xmax, ymin, ymax)
-#> coord. ref. : lon/lat WGS 84 (EPSG:4326) 
-#> sources     : n_obs_Hemiptera_total_res_10.tif  
-#>               n_obs_Hymenoptera_total_res_10.tif  
-#>               n_obs_Lepidoptera_total_res_10.tif  
-#> names       : n_obs_Hemi~tal_res_10, n_obs_Hyme~tal_res_10, n_obs_Lepi~tal_res_10 
-#> min values  :                     0,                     0,                     0 
-#> max values  :                 92257,                270776,                324427 
+#> coord. ref. : lon/lat WGS 84 (EPSG:4326)
+#> sources     : n_obs_Hemiptera_total_res_10.tif
+#>               n_obs_Hymenoptera_total_res_10.tif
+#>               n_obs_Lepidoptera_total_res_10.tif
+#> names       : n_obs_Hemi~tal_res_10, n_obs_Hyme~tal_res_10, n_obs_Lepi~tal_res_10
+#> min values  :                     0,                     0,                     0
+#> max values  :                 92257,                270776,                324427
 
 # Plot at log10 scale
 terra::classify(efforts_insects_r, cbind(0, NA)) %>%

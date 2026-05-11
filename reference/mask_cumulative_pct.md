@@ -52,16 +52,16 @@ efforts_birds_all_r <- terra::rast(efforts_birds_all$local_path)
 
 result <- mask_cumulative_pct(rast = efforts_birds_all_r, top_pct = 90)
 result
-#> class       : SpatRaster 
+#> class       : SpatRaster
 #> size        : 1080, 2160, 3  (nrow, ncol, nlyr)
 #> resolution  : 0.1666667, 0.1666667  (x, y)
 #> extent      : -180, 180, -90, 90  (xmin, xmax, ymin, ymax)
-#> coord. ref. : lon/lat WGS 84 (EPSG:4326) 
+#> coord. ref. : lon/lat WGS 84 (EPSG:4326)
 #> source(s)   : memory
-#> varname     : n_obs_Aves_res_20 
-#> names       : top_90_per~cumulative, lowest_10_~cumulative, zero_observations 
-#> min values  :                 11303,                     1,                 1 
-#> max values  :               6193941,                 11303,                 1 
+#> varname     : n_obs_Aves_res_20
+#> names       : top_90_per~cumulative, lowest_10_~cumulative, zero_observations
+#> min values  :                 11303,                     1,                 1
+#> max values  :               6193941,                 11303,                 1
 
 # Areas contributing to the top 90% of cumulative sum (log10 scale; computed
 # on the global scale and cropped to USA)

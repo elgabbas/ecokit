@@ -51,16 +51,16 @@ r <- terra::rast(ncols = 10, nrows = 10)
 terra::values(r) <- rnorm(terra::ncell(r))
 r_scaled <- scale_0_1(r)
 c(r, r_scaled)
-#> class       : SpatRaster 
+#> class       : SpatRaster
 #> size        : 10, 10, 2  (nrow, ncol, nlyr)
 #> resolution  : 36, 18  (x, y)
 #> extent      : -180, 180, -90, 90  (xmin, xmax, ymin, ymax)
-#> coord. ref. : lon/lat WGS 84 (CRS84) (OGC:CRS84) 
-#> sources     : memory  
-#>               spat_22de4dc84b9a_8926_V1aUJAxyEikVJTJ.tif  
-#> names       :     lyr.1, lyr.1 
-#> min values  : -2.668758,     0 
-#> max values  :  2.859658,     1 
+#> coord. ref. : lon/lat WGS 84 (CRS84) (OGC:CRS84)
+#> sources     : memory
+#>               spat_2200783d9bf_8704_V1aUJAxyEikVJTJ.tif
+#> names       :     lyr.1, lyr.1
+#> min values  : -2.668758,     0
+#> max values  :  2.859658,     1
 
 # Example with RasterLayer
 r_raster <- raster::raster(ncol = 10, nrow = 10)
@@ -79,15 +79,15 @@ c(r_raster, r_raster_scaled)
 #> 
 #> 
 #> [[2]]
-#> class       : SpatRaster 
+#> class       : SpatRaster
 #> size        : 10, 10, 1  (nrow, ncol, nlyr)
 #> resolution  : 36, 18  (x, y)
 #> extent      : -180, 180, -90, 90  (xmin, xmax, ymin, ymax)
-#> coord. ref. : lon/lat WGS 84 (EPSG:4326) 
-#> source      : spat_22de1d049510_8926_3xgX2s4vWf5Ho4o.tif 
-#> name        : lyr.1 
-#> min value   :     0 
-#> max value   :     1 
+#> coord. ref. : lon/lat WGS 84 (EPSG:4326)
+#> source      : spat_22007d6aab8_8704_3xgX2s4vWf5Ho4o.tif
+#> name        : lyr.1
+#> min value   :     0
+#> max value   :     1
 #> 
 
 # Example with file path
@@ -95,16 +95,16 @@ r_file <- fs::path(temp_dir, "raster.tif")
 terra::writeRaster(r, r_file, overwrite = TRUE)
 r_file_scaled <- scale_0_1(r_file)
 c(terra::rast(r_file), r_file_scaled)
-#> class       : SpatRaster 
+#> class       : SpatRaster
 #> size        : 10, 10, 2  (nrow, ncol, nlyr)
 #> resolution  : 36, 18  (x, y)
 #> extent      : -180, 180, -90, 90  (xmin, xmax, ymin, ymax)
-#> coord. ref. : lon/lat WGS 84 (EPSG:4326) 
-#> sources     : raster.tif  
-#>               spat_22de62e13889_8926_Eih9CeQWwy8ednT.tif  
-#> names       :     lyr.1, lyr.1 
-#> min values  : -2.668758,     0 
-#> max values  :  2.859658,     1 
+#> coord. ref. : lon/lat WGS 84 (EPSG:4326)
+#> sources     : raster.tif
+#>               spat_2200538fe23c_8704_Eih9CeQWwy8ednT.tif
+#> names       :     lyr.1, lyr.1
+#> min values  : -2.668758,     0
+#> max values  :  2.859658,     1
 
 # Visualize results
 ggplot2::ggplot() +

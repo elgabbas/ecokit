@@ -91,16 +91,16 @@ maximum values and scales all values between 0 and 1.</p>
 <span class="r-in"><span><span class="fu">terra</span><span class="fu">::</span><span class="fu"><a href="https://rspatial.github.io/terra/reference/values.html" class="external-link">values</a></span><span class="op">(</span><span class="va">r</span><span class="op">)</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/stats/Normal.html" class="external-link">rnorm</a></span><span class="op">(</span><span class="fu">terra</span><span class="fu">::</span><span class="fu"><a href="https://rspatial.github.io/terra/reference/dimensions.html" class="external-link">ncell</a></span><span class="op">(</span><span class="va">r</span><span class="op">)</span><span class="op">)</span></span></span>
 <span class="r-in"><span><span class="va">r_scaled</span> <span class="op">&lt;-</span> <span class="fu">scale_0_1</span><span class="op">(</span><span class="va">r</span><span class="op">)</span></span></span>
 <span class="r-in"><span><span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="va">r</span>, <span class="va">r_scaled</span><span class="op">)</span></span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> class       : SpatRaster </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> class       : SpatRaster</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> size        : 10, 10, 2  (nrow, ncol, nlyr)</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> resolution  : 36, 18  (x, y)</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> extent      : -180, 180, -90, 90  (xmin, xmax, ymin, ymax)</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> coord. ref. : lon/lat WGS 84 (CRS84) (OGC:CRS84) </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> sources     : memory  </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>               spat_22de4dc84b9a_8926_V1aUJAxyEikVJTJ.tif  </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> names       :     lyr.1, lyr.1 </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> min values  : -2.668758,     0 </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> max values  :  2.859658,     1 </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> coord. ref. : lon/lat WGS 84 (CRS84) (OGC:CRS84)</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> sources     : memory</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>               spat_2200783d9bf_8704_V1aUJAxyEikVJTJ.tif</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> names       :     lyr.1, lyr.1</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> min values  : -2.668758,     0</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> max values  :  2.859658,     1</span>
 <span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="co"># Example with RasterLayer</span></span></span>
 <span class="r-in"><span><span class="va">r_raster</span> <span class="op">&lt;-</span> <span class="fu">raster</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/raster/man/raster.html" class="external-link">raster</a></span><span class="op">(</span>ncol <span class="op">=</span> <span class="fl">10</span>, nrow <span class="op">=</span> <span class="fl">10</span><span class="op">)</span></span></span>
@@ -119,15 +119,15 @@ maximum values and scales all values between 0 and 1.</p>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> [[2]]</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> class       : SpatRaster </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> class       : SpatRaster</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> size        : 10, 10, 1  (nrow, ncol, nlyr)</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> resolution  : 36, 18  (x, y)</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> extent      : -180, 180, -90, 90  (xmin, xmax, ymin, ymax)</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> coord. ref. : lon/lat WGS 84 (EPSG:4326) </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> source      : spat_22de1d049510_8926_3xgX2s4vWf5Ho4o.tif </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> name        : lyr.1 </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> min value   :     0 </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> max value   :     1 </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> coord. ref. : lon/lat WGS 84 (EPSG:4326)</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> source      : spat_22007d6aab8_8704_3xgX2s4vWf5Ho4o.tif</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> name        : lyr.1</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> min value   :     0</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> max value   :     1</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="co"># Example with file path</span></span></span>
@@ -135,16 +135,16 @@ maximum values and scales all values between 0 and 1.</p>
 <span class="r-in"><span><span class="fu">terra</span><span class="fu">::</span><span class="fu"><a href="https://rspatial.github.io/terra/reference/writeRaster.html" class="external-link">writeRaster</a></span><span class="op">(</span><span class="va">r</span>, <span class="va">r_file</span>, overwrite <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></span></span>
 <span class="r-in"><span><span class="va">r_file_scaled</span> <span class="op">&lt;-</span> <span class="fu">scale_0_1</span><span class="op">(</span><span class="va">r_file</span><span class="op">)</span></span></span>
 <span class="r-in"><span><span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fu">terra</span><span class="fu">::</span><span class="fu"><a href="https://rspatial.github.io/terra/reference/rast.html" class="external-link">rast</a></span><span class="op">(</span><span class="va">r_file</span><span class="op">)</span>, <span class="va">r_file_scaled</span><span class="op">)</span></span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> class       : SpatRaster </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> class       : SpatRaster</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> size        : 10, 10, 2  (nrow, ncol, nlyr)</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> resolution  : 36, 18  (x, y)</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> extent      : -180, 180, -90, 90  (xmin, xmax, ymin, ymax)</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> coord. ref. : lon/lat WGS 84 (EPSG:4326) </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> sources     : raster.tif  </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>               spat_22de62e13889_8926_Eih9CeQWwy8ednT.tif  </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> names       :     lyr.1, lyr.1 </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> min values  : -2.668758,     0 </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> max values  :  2.859658,     1 </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> coord. ref. : lon/lat WGS 84 (EPSG:4326)</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> sources     : raster.tif</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>               spat_2200538fe23c_8704_Eih9CeQWwy8ednT.tif</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> names       :     lyr.1, lyr.1</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> min values  : -2.668758,     0</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> max values  :  2.859658,     1</span>
 <span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="co"># Visualize results</span></span></span>
 <span class="r-in"><span><span class="fu">ggplot2</span><span class="fu">::</span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggplot.html" class="external-link">ggplot</a></span><span class="op">(</span><span class="op">)</span> <span class="op">+</span></span></span>

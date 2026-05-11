@@ -111,7 +111,7 @@ tibble_column_size(species_data)
 #> # A tibble: 7 × 4
 #>   col_index col_name     col_class               col_size  
 #>       <int> <chr>        <chr>                   <lbstr_by>
-#> 1         7 raster_map   SpatRaster               8.85 MB  
+#> 1         7 raster_map   SpatRaster               9.00 MB  
 #> 2         6 traits       tbl_df, tbl, data.frame 72.13 kB  
 #> 3         5 obs_coords   numeric                 17.12 kB  
 #> 4         2 species_name character                7.25 kB  

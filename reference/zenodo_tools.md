@@ -137,7 +137,7 @@ dplyr::glimpse(files)
 pdf_file <- zenodo_download_file(
   record_id = "1234567", file_name = "article.pdf")
 print(pdf_file)
-#> /tmp/RtmpK60W75/article22de55781cc7.pdf
+#> /tmp/RtmpsRrw5J/article2200cb4e2.pdf
 
 ecokit::file_type(pdf_file)
 #> [1] "PDF document, version 1.6"
@@ -150,6 +150,7 @@ nc_file <- zenodo_download_file(
   record_id = "6620748",
   file_name = "100Ma_Pohletal2022_DIB_PhaneroContinentalClimate.nc",
   read_func = terra::rast)
+#> Warning: [rast] guessed crs
 
 print(class(nc_file))
 #> [1] "SpatRaster"
@@ -157,15 +158,16 @@ print(class(nc_file))
 #> [1] "terra"
 
 print(nc_file)
-#> class       : SpatRaster 
-#> size        : 128, 128, 3  (nrow, ncol, nlyr)
-#> resolution  : 1.40625, 2.8125  (x, y)
-#> extent      : -90, 90, 0, 360  (xmin, xmax, ymin, ymax)
-#> coord. ref. :  
+#> class       : SpatRaster
+#> size        : 128, 128, 63  (nrow, ncol, nlyr)
+#> dimensions  : time, lat, lon (12, 128, 128}
+#> resolution  : 2.8125, 1.40625  (x, y)
+#> extent      : 0, 360, -90, 90  (xmin, xmax, ymin, ymax)
+#> coord. ref. : lon/lat WGS 84 (CRS84) (OGC:CRS84)
 #> source(s)   : memory
-#> varname     : topo (topography) 
-#> names       :              topo,                                              koppen, area 
-#> unit        : m above sea level, Koppen_Geiger classes (see associated data article),   m2 
+#> varname     : PmE (precipitation minus evaporation balance)
+#> names       :    PmE_1,    PmE_2,    PmE_3,    PmE_4,    PmE_5,    PmE_6, ...
+#> unit        : mm day-1, mm day-1, mm day-1, mm day-1, mm day-1, mm day-1, ...
 
 terra::inMemory(nc_file)
 #> [1] TRUE
@@ -177,6 +179,7 @@ nc_file2 <- zenodo_download_file(
   record_id = "6620748",
   file_name = "100Ma_Pohletal2022_DIB_PhaneroContinentalClimate.nc",
   read_func = function(x) { terra::rast(x) * 10 })
+#> Warning: [rast] guessed crs
 
 print(class(nc_file2))
 #> [1] "SpatRaster"
@@ -184,15 +187,15 @@ print(class(nc_file2))
 #> [1] "terra"
 
 print(nc_file2)
-#> class       : SpatRaster 
-#> size        : 128, 128, 3  (nrow, ncol, nlyr)
-#> resolution  : 1.40625, 2.8125  (x, y)
-#> extent      : -90, 90, 0, 360  (xmin, xmax, ymin, ymax)
-#> coord. ref. :  
+#> class       : SpatRaster
+#> size        : 128, 128, 63  (nrow, ncol, nlyr)
+#> resolution  : 2.8125, 1.40625  (x, y)
+#> extent      : 0, 360, -90, 90  (xmin, xmax, ymin, ymax)
+#> coord. ref. : lon/lat WGS 84 (CRS84) (OGC:CRS84)
 #> source(s)   : memory
-#> names       :     topo, koppen,         area 
-#> min values  :   200.00,     10,   5999121920 
-#> max values  : 31916.11,    130, 488827879424 
+#> names       :                                  PmE_1,                                  PmE_2,                                  PmE_3,                                  PmE_4,                                  PmE_5,                                  PmE_6, ...
+#> min values  :                              -26.04104,                             -20.056664,                             -17.386028,                             -27.430588,                             -25.757488,                             -20.652157, ...
+#> max values  : 99692099683868690467785529521025843200, 99692099683868690467785529521025843200, 99692099683868690467785529521025843200, 99692099683868690467785529521025843200, 99692099683868690467785529521025843200, 99692099683868690467785529521025843200, ...
 
 terra::inMemory(nc_file2)
 #> [1] TRUE
@@ -200,23 +203,23 @@ terra::inMemory(nc_file2)
 # --------------------------------------------
 
 terra::app(nc_file, "range")
-#> class       : SpatRaster 
+#> class       : SpatRaster
 #> size        : 128, 128, 2  (nrow, ncol, nlyr)
-#> resolution  : 1.40625, 2.8125  (x, y)
-#> extent      : -90, 90, 0, 360  (xmin, xmax, ymin, ymax)
-#> coord. ref. :  
-#> source      : spat_22de1e899699_8926_IpQM0ozIAA6UNCC.tif 
-#> names       : lyr.1,       lyr.2 
-#> min values  :     1,   599912192 
-#> max values  :    13, 48882786304 
+#> resolution  : 2.8125, 1.40625  (x, y)
+#> extent      : 0, 360, -90, 90  (xmin, xmax, ymin, ymax)
+#> coord. ref. : lon/lat WGS 84 (EPSG:4326)
+#> source      : spat_2200230c384a_8704_IpQM0ozIAA6UNCC.tif
+#> names       :                                 lyr.1,                                 lyr.2
+#> min values  :                            -42.894333,                             599912192
+#> max values  : 9969209968386899742160691604796473344, 9969209968386899742160691604796473344
 terra::app(nc_file2, "range")
-#> class       : SpatRaster 
+#> class       : SpatRaster
 #> size        : 128, 128, 2  (nrow, ncol, nlyr)
-#> resolution  : 1.40625, 2.8125  (x, y)
-#> extent      : -90, 90, 0, 360  (xmin, xmax, ymin, ymax)
-#> coord. ref. :  
-#> source      : spat_22de33e590cd_8926_rUCLcxsvO3wjAGy.tif 
-#> names       : lyr.1,        lyr.2 
-#> min values  :    10,   5999121920 
-#> max values  :   130, 488827879424 
+#> resolution  : 2.8125, 1.40625  (x, y)
+#> extent      : 0, 360, -90, 90  (xmin, xmax, ymin, ymax)
+#> coord. ref. : lon/lat WGS 84 (EPSG:4326)
+#> source      : spat_22005d2bd8b2_8704_rUCLcxsvO3wjAGy.tif
+#> names       :                                  lyr.1,                                  lyr.2
+#> min values  :                            -428.943329,                             5999121920
+#> max values  : 99692099683868992699240433178319519744, 99692099683868992699240433178319519744
 ```
