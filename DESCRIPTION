@@ -2,7 +2,7 @@ Type: Package
 Package: ecokit
 Title: Tools for Ecological and General Utilities
 Version: 0.1.0
-Date: 2026-05-11
+Date: 2026-05-23
 Authors@R: 
     person("Ahmed", "El-Gabbas", , "elgabbas@outlook.com", role = c("aut", "cre"))
 Description: A collection of utility functions designed for ecologists and
@@ -50,6 +50,7 @@ Suggests:
     parallelly (>= 1.43),
     patchwork (>= 1.3),
     png (>= 0.1),
+    RANN (>= 2.6),
     remotes (>= 2.5),
     rJava (>= 1.0),
     RNetCDF (>= 2.11),

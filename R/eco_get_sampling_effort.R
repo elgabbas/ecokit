@@ -3,9 +3,10 @@
 #' Downloads sampling effort raster files from the Open Science Framework (OSF)
 #' based on specified taxonomic groups, descendants, metrics, years, and spatial
 #' resolution. The function validates all inputs and retrieves corresponding
-#' raster data files. For more information, see [this
+#' raster data files. Valid descendants for each group can be retrieved with
+#' `get_group_descendants()`. For more information, see [this
 #' repo](https://github.com/elgabbas/global_sampling_efforts/) and *El-Gabbas
-#' (2026). Diversity and Distributions (accepted)*.
+#' (2026). Diversity and Distributions [DOI](https://doi.org/10.1111/ddi.70205).
 #'
 #' @param group Character. The taxonomic group to download sampling effort data
 #'   for. Must be one of: "all", "amphibia", "arachnida", "aves", "fungi",
@@ -13,8 +14,8 @@
 #'   refers to the overall sampling effort across all groups. Required.
 #' @param descendants A character vector of descendants for the chosen group.
 #'   Valid descendants vary by group. Defaults to "all" to download data for all
-#'   descendants combined of the chosen group. See details section below for the
-#'   list of valid descendants per group. Required.
+#'   descendants combined for the chosen group. Use `get_group_descendants()` to
+#'   retrieve valid descendants for a given group. Required.
 #' @param metric A character string specifying the metric to download. Must be
 #'   either "n_sp" (number of species) or "n_obs" (number of observations).
 #'   Required.
@@ -46,65 +47,38 @@
 #' @details
 #'
 #' This function downloads sampling effort raster files from the OSF project.
-#' This function complements the manuscript **"High-resolution, taxon-stratified
-#' global sampling effort grids: a reproducible workflow for bias-aware
-#' ecological modelling"** by providing a programmatic way to access the
-#' underlying data used in the study. Please cite the manuscript when using the
-#' data retrieved by this function.
+#' This function complements the manuscript **"A Global, Taxon-Stratified,
+#' High-Resolution Sampling-Effort Dataset From GBIF for Bias-Aware Ecological
+#' Modelling"** by providing a programmatic way to access the underlying data
+#' used in the study. Please cite the manuscript when using the data retrieved
+#' by this function.
 #'
 #' Files on the OSF project are organized hierarchically by group, resolution,
 #' metric, and descendant-year combinations.
 #'
 #' This function retrieves sampling effort rasters based on the specified group
 #' and its descendants. The `descendants` argument allows users to specify which
-#' descendant groups to download data for. The function checks that the
-#' specified descendants are valid for the chosen group and retrieves the
-#' corresponding raster files from OSF. Valid descendants for each group are as
-#' follows:
-#'   - `all`: "all"
-#'   - `amphibia`: "all", "anura", "caudata", "gymnophiona"
-#'   - `arachnida`: "all", "amblypygi", "araneae", "holothyrida", "ixodida",
-#' "mesostigmata", "opilioacarida", "opiliones", "palpigradi",
-#' "pseudoscorpiones", "ricinulei", "sarcoptiformes", "schizomida",
-#' "scorpiones", "solifugae", "trombidiformes", "uropygi"
-#'   - `aves`: "all", "accipitriformes", "anseriformes", "apodiformes",
-#' "apterygiformes", "bucerotiformes", "caprimulgiformes", "cariamiformes",
-#' "casuariiformes", "charadriiformes", "ciconiiformes", "coliiformes",
-#' "columbiformes", "coraciiformes", "cuculiformes", "eurypygiformes",
-#' "falconiformes", "galliformes", "gaviiformes", "gruiformes",
-#' "leptosomiformes", "mesitornithiformes", "musophagiformes", "nyctibiiformes",
-#' "opisthocomiformes", "otidiformes", "passeriformes", "pelecaniformes",
-#' "phaethontiformes", "phoenicopteriformes", "piciformes", "podicipediformes",
-#' "procellariiformes", "psittaciformes", "pteroclidiformes", "rheiformes",
-#' "sphenisciformes", "steatornithiformes", "strigiformes", "struthioniformes",
-#' "suliformes", "tinamiformes", "trogoniformes"
-#'   - `fungi`: "all", "ascomycota", "basidiomycota", "blastocladiomycota",
-#' "chytridiomycota", "entomophthoromycota", "glomeromycota", "mucoromycota",
-#' "neocallimastigomycota", "sanchytriomycota", "zoopagomycota", "zygomycota"
-#'   - `insecta`: "all", "archaeognatha", "blattodea", "cnemidolestodea",
-#' "coleoptera", "dermaptera", "diptera", "embioptera", "ephemeroptera",
-#' "grylloblattodea", "hemiptera", "hymenoptera", "lepidoptera", "mantodea",
-#' "mantophasmatodea", "mecoptera", "megaloptera", "neuroptera", "odonata",
-#' "orthoptera", "palaeodictyoptera", "phasmida", "plecoptera",
-#' "protorthoptera", "psocodea", "raphidioptera", "siphonaptera",
-#' "strepsiptera", "thysanoptera", "trichoptera", "zoraptera", "zygentoma"
-#' - `mammalia`: "all", "afrosoricida", "artiodactyla", "carnivora", "cetacea",
-#' "chiroptera", "cingulata", "dasyuromorphia", "dermoptera", "didelphimorphia",
-#' "diprotodontia", "erinaceomorpha", "hyracoidea", "lagomorpha",
-#' "macroscelidea", "microbiotheria", "monotremata", "notoryctemorphia",
-#' "paucituberculata", "peramelemorphia", "perissodactyla", "pholidota",
-#' "pilosa", "primates", "proboscidea", "rodentia", "scandentia", "sirenia",
-#' "soricomorpha", "tubulidentata"
-#' - `mollusca`: "all", "bivalvia", "caudofoveata", "cephalopoda",
-#' "cricoconarida", "gastropoda", "monoplacophora", "polyplacophora",
-#' "rostroconchia", "scaphopoda", "solenogastres"
-#' - `reptilia`: "all", "crocodylia", "sphenodontia", "squamata", "testudines"
-#' - `tracheophyta`: "all", "cycadopsida", "ginkgoopsida", "gnetopsida",
-#' "liliopsida", "lycopodiopsida", "magnoliopsida", "pinopsida",
-#' "polypodiopsida"
+#' descendant groups to download data for. The function validates descendants
+#' using `ecokit::get_group_descendants()` and retrieves the corresponding
+#' raster files from OSF.
+#'
+#' Use `ecokit::get_group_descendants()` to retrieve all valid descendants for a
+#' given taxonomic group.
+#'
+#' @references El-Gabbas, A. (2026). A Global, Taxon-Stratified, High-Resolution
+#'   Sampling-Effort Dataset From GBIF for Bias-Aware Ecological Modelling.
+#'   Diversity and Distributions. [DOI](https://doi.org/10.1111/ddi.70205).
 #'
 #' @examples
 #' require(terra)
+#'
+#' # Retrieve valid descendants for a group
+#' get_group_descendants("insecta")
+#'
+#' # Retrieve descendants for all groups
+#' get_group_descendants("all")
+#'
+#' # |||||||||||||||||||||||||||||||||||||||||||||||||||||||||||
 #'
 #' # Occurrence count for birds at 20 km resolution
 #' efforts_birds_all <- get_sampling_effort(
@@ -173,6 +147,12 @@
 #'   plot()
 #' @export
 
+#' @author Ahmed El-Gabbas
+#' @name sampling_effort
+#' @rdname sampling_effort
+#' @order 2
+#' @export
+
 get_sampling_effort <- function(
     group = NULL, descendants = "all", metric = NULL, years = "total",
     resolution = NULL, out_dir = getwd(), conflicts = "skip", verbose = FALSE) {
@@ -231,67 +211,7 @@ get_sampling_effort <- function(
   ## descendants ----
   ## ------------------------------------------------------
 
-  valid_descendants <- list(
-    all = "all",
-
-    amphibia = c("all", "anura", "caudata", "gymnophiona"),
-
-    arachnida = c(
-      "all", "amblypygi", "araneae", "holothyrida", "ixodida", "mesostigmata",
-      "opilioacarida", "opiliones", "palpigradi", "pseudoscorpiones",
-      "ricinulei", "sarcoptiformes", "schizomida", "scorpiones", "solifugae",
-      "trombidiformes", "uropygi"),
-
-    aves = c(
-      "all", "accipitriformes", "anseriformes", "apodiformes", "apterygiformes",
-      "bucerotiformes", "caprimulgiformes", "cariamiformes", "casuariiformes",
-      "charadriiformes", "ciconiiformes", "coliiformes", "columbiformes",
-      "coraciiformes", "cuculiformes", "eurypygiformes", "falconiformes",
-      "galliformes", "gaviiformes", "gruiformes", "leptosomiformes",
-      "mesitornithiformes", "musophagiformes", "nyctibiiformes",
-      "opisthocomiformes", "otidiformes", "passeriformes", "pelecaniformes",
-      "phaethontiformes", "phoenicopteriformes", "piciformes",
-      "podicipediformes", "procellariiformes", "psittaciformes",
-      "pteroclidiformes", "rheiformes", "sphenisciformes", "steatornithiformes",
-      "strigiformes", "struthioniformes", "suliformes", "tinamiformes",
-      "trogoniformes"),
-
-    fungi = c(
-      "all", "ascomycota", "basidiomycota", "blastocladiomycota",
-      "chytridiomycota", "entomophthoromycota", "glomeromycota", "mucoromycota",
-      "neocallimastigomycota", "sanchytriomycota", "zoopagomycota",
-      "zygomycota"),
-
-    insecta = c(
-      "all", "archaeognatha", "blattodea", "cnemidolestodea", "coleoptera",
-      "dermaptera", "diptera", "embioptera", "ephemeroptera", "grylloblattodea",
-      "hemiptera", "hymenoptera", "lepidoptera", "mantodea", "mantophasmatodea",
-      "mecoptera", "megaloptera", "neuroptera", "odonata", "orthoptera",
-      "palaeodictyoptera", "phasmida", "plecoptera", "protorthoptera",
-      "psocodea", "raphidioptera", "siphonaptera", "strepsiptera",
-      "thysanoptera", "trichoptera", "zoraptera", "zygentoma"),
-
-    mammalia = c(
-      "all", "afrosoricida", "artiodactyla", "carnivora", "cetacea",
-      "chiroptera", "cingulata", "dasyuromorphia", "dermoptera",
-      "didelphimorphia", "diprotodontia", "erinaceomorpha", "hyracoidea",
-      "lagomorpha", "macroscelidea", "microbiotheria", "monotremata",
-      "notoryctemorphia", "paucituberculata", "peramelemorphia",
-      "perissodactyla", "pholidota", "pilosa", "primates", "proboscidea",
-      "rodentia", "scandentia", "sirenia", "soricomorpha", "tubulidentata"),
-
-    mollusca = c(
-      "all", "bivalvia", "caudofoveata", "cephalopoda", "cricoconarida",
-      "gastropoda", "monoplacophora", "polyplacophora", "rostroconchia",
-      "scaphopoda", "solenogastres"),
-
-    reptilia = c("all", "crocodylia", "sphenodontia", "squamata", "testudines"),
-
-    tracheophyta = c(
-      "all", "cycadopsida", "ginkgoopsida", "gnetopsida", "liliopsida",
-      "lycopodiopsida", "magnoliopsida", "pinopsida", "polypodiopsida")
-  )
-
+  valid_descendants <- get_group_descendants(group = "all")
 
   if (is.null(descendants)) {
     ecokit::stop_ctx(
@@ -531,6 +451,88 @@ get_sampling_effort <- function(
 }
 
 
+#' @author Ahmed El-Gabbas
+#' @name sampling_effort
+#' @rdname sampling_effort
+#' @order 1
+#' @export
+
+get_group_descendants <- function(group = NULL) {
+
+  valid_descendants <- list(
+    all = "all",
+
+    amphibia = c("all", "anura", "caudata", "gymnophiona"),
+
+    arachnida = c(
+      "all", "amblypygi", "araneae", "holothyrida", "ixodida", "mesostigmata",
+      "opilioacarida", "opiliones", "palpigradi", "pseudoscorpiones",
+      "ricinulei", "sarcoptiformes", "schizomida", "scorpiones", "solifugae",
+      "trombidiformes", "uropygi"),
+
+    aves = c(
+      "all", "accipitriformes", "anseriformes", "apodiformes", "apterygiformes",
+      "bucerotiformes", "caprimulgiformes", "cariamiformes", "casuariiformes",
+      "charadriiformes", "ciconiiformes", "coliiformes", "columbiformes",
+      "coraciiformes", "cuculiformes", "eurypygiformes", "falconiformes",
+      "galliformes", "gaviiformes", "gruiformes", "leptosomiformes",
+      "mesitornithiformes", "musophagiformes", "nyctibiiformes",
+      "opisthocomiformes", "otidiformes", "passeriformes", "pelecaniformes",
+      "phaethontiformes", "phoenicopteriformes", "piciformes",
+      "podicipediformes", "procellariiformes", "psittaciformes",
+      "pteroclidiformes", "rheiformes", "sphenisciformes", "steatornithiformes",
+      "strigiformes", "struthioniformes", "suliformes", "tinamiformes",
+      "trogoniformes"),
+
+    fungi = c(
+      "all", "ascomycota", "basidiomycota", "blastocladiomycota",
+      "chytridiomycota", "entomophthoromycota", "glomeromycota", "mucoromycota",
+      "neocallimastigomycota", "sanchytriomycota", "zoopagomycota",
+      "zygomycota"),
+
+    insecta = c(
+      "all", "archaeognatha", "blattodea", "cnemidolestodea", "coleoptera",
+      "dermaptera", "diptera", "embioptera", "ephemeroptera", "grylloblattodea",
+      "hemiptera", "hymenoptera", "lepidoptera", "mantodea", "mantophasmatodea",
+      "mecoptera", "megaloptera", "neuroptera", "odonata", "orthoptera",
+      "palaeodictyoptera", "phasmida", "plecoptera", "protorthoptera",
+      "psocodea", "raphidioptera", "siphonaptera", "strepsiptera",
+      "thysanoptera", "trichoptera", "zoraptera", "zygentoma"),
+
+    mammalia = c(
+      "all", "afrosoricida", "artiodactyla", "carnivora", "cetacea",
+      "chiroptera", "cingulata", "dasyuromorphia", "dermoptera",
+      "didelphimorphia", "diprotodontia", "erinaceomorpha", "hyracoidea",
+      "lagomorpha", "macroscelidea", "microbiotheria", "monotremata",
+      "notoryctemorphia", "paucituberculata", "peramelemorphia",
+      "perissodactyla", "pholidota", "pilosa", "primates", "proboscidea",
+      "rodentia", "scandentia", "sirenia", "soricomorpha", "tubulidentata"),
+
+    mollusca = c(
+      "all", "bivalvia", "caudofoveata", "cephalopoda", "cricoconarida",
+      "gastropoda", "monoplacophora", "polyplacophora", "rostroconchia",
+      "scaphopoda", "solenogastres"),
+
+    reptilia = c("all", "crocodylia", "sphenodontia", "squamata", "testudines"),
+
+    tracheophyta = c(
+      "all", "cycadopsida", "ginkgoopsida", "gnetopsida", "liliopsida",
+      "lycopodiopsida", "magnoliopsida", "pinopsida", "polypodiopsida")
+  )
+
+  if (group == "all") {
+    return(valid_descendants)
+  }
+
+  group <- stringr::str_trim(stringr::str_to_lower(group))
+  if (!group %in% names(valid_descendants)) {
+    ecokit::stop_ctx(
+      "Invalid group.", group = group, valid_groups = names(valid_descendants))
+  }
+  return(valid_descendants[[group]])
+}
+
+
 
 # Top / lowest observation areas -------
 
@@ -544,7 +546,7 @@ get_sampling_effort <- function(
 #' based on the original raster (i.e., number of observations). The function
 #' also identifies cells with zero observations. For more information, see [this
 #' repo](https://github.com/elgabbas/global_sampling_efforts/) and *El-Gabbas
-#' (2026). Diversity and Distributions (accepted)*.
+#' (2026). Diversity and Distributions [DOI](https://doi.org/10.1111/ddi.70205)
 #'
 #' @param rast A SpatRaster object with numeric values (e.g., counts per cell)
 #' @param top_pct Numeric, percentage (0–100) for the top cumulative sum

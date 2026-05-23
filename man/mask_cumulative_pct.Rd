@@ -28,8 +28,8 @@ masked rasters that highlight areas contributing to the top and bottom
 percentages of the cumulative sum of the original raster values. This can be
 useful for identifying areas with the highest and lowest sampling efforts
 based on the original raster (i.e., number of observations). The function
-also identifies cells with zero observations. For more information, see \href{https://github.com/elgabbas/global_sampling_efforts/}{this repo} and \emph{El-Gabbas
-(2026). Diversity and Distributions (accepted)}.
+also identifies cells with zero observations. For more information, see \href{https://github.com/elgabbas/global_sampling_efforts/}{this repo} and *El-Gabbas
+(2026). Diversity and Distributions \href{https://doi.org/10.1111/ddi.70205}{DOI}
 }
 \examples{
 require(terra)

@@ -29,6 +29,8 @@ RasterBrick
 RasterLayer
 RasterStack
 Renviron
+SDM
+SDMs
 SHAs
 SLURM
 SpatRaster
@@ -61,6 +63,7 @@ carnivora
 casuariiformes
 caudata
 caudofoveata
+center
 cephalopoda
 cetacea
 ch
@@ -102,6 +105,7 @@ falconiformes
 galliformes
 gastropoda
 gaviiformes
+georeferencing
 ggplot
 ggplot2
 ginkgoopsida
@@ -116,6 +120,7 @@ holothyrida
 hyracoidea
 insecta
 ixodida
+kd
 kilometers
 lagomorpha
 lat
