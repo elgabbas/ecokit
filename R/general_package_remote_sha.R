@@ -13,7 +13,7 @@
 #'   `"tidyr"`). Must be valid package names (letters, numbers, dots, or
 #'   underscores) and installed in the library.
 #' @param lib_path Character. Path to the library where the packages are
-#'   installed. Defaults to the first library in `.libPaths()`. This parameter
+#'   installed. Defaults to the first library in [.libPaths()]. This parameter
 #'   is optional.
 #' @return A named character vector where names are package names and values are
 #'   the corresponding remote SHAs. Returns `NA` for packages not installed,

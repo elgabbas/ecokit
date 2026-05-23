@@ -27,7 +27,7 @@ refers to the overall sampling effort across all groups. Required.}
 
 \item{descendants}{A character vector of descendants for the chosen group.
 Valid descendants vary by group. Defaults to "all" to download data for all
-descendants combined for the chosen group. Use \code{get_group_descendants()} to
+descendants combined for the chosen group. Use \code{\link[=get_group_descendants]{get_group_descendants()}} to
 retrieve valid descendants for a given group. Required.}
 
 \item{metric}{A character string specifying the metric to download. Must be
@@ -71,16 +71,16 @@ Downloads sampling effort raster files from the Open Science Framework (OSF)
 based on specified taxonomic groups, descendants, metrics, years, and spatial
 resolution. The function validates all inputs and retrieves corresponding
 raster data files. Valid descendants for each group can be retrieved with
-\code{get_group_descendants()}. For more information, see \href{https://github.com/elgabbas/global_sampling_efforts/}{this repo} and *El-Gabbas
-(2026). Diversity and Distributions \href{https://doi.org/10.1111/ddi.70205}{DOI}.
+\code{\link[=get_group_descendants]{get_group_descendants()}}. For more information, see \href{https://github.com/elgabbas/global_sampling_efforts/}{this repo} and \emph{El-Gabbas
+(2026)}. \href{https://doi.org/10.1111/ddi.70205}{DOI}.
 }
 \details{
 This function downloads sampling effort raster files from the OSF project.
-This function complements the manuscript \strong{"A Global, Taxon-Stratified,
+This function complements the manuscript \emph{"A Global, Taxon-Stratified,
 High-Resolution Sampling-Effort Dataset From GBIF for Bias-Aware Ecological
-Modelling"} by providing a programmatic way to access the underlying data
-used in the study. Please cite the manuscript when using the data retrieved
-by this function.
+Modelling"} [\href{https://doi.org/10.1111/ddi.70205}{DOI}] by providing a
+programmatic way to access the underlying data used in the study. Please cite
+the manuscript when using the data retrieved by this function.
 
 Files on the OSF project are organized hierarchically by group, resolution,
 metric, and descendant-year combinations.
@@ -88,26 +88,32 @@ metric, and descendant-year combinations.
 This function retrieves sampling effort rasters based on the specified group
 and its descendants. The \code{descendants} argument allows users to specify which
 descendant groups to download data for. The function validates descendants
-using \code{ecokit::get_group_descendants()} and retrieves the corresponding
-raster files from OSF.
+using \code{\link[=get_group_descendants]{get_group_descendants()}} and retrieves the corresponding raster files
+from OSF.
 
-Use \code{ecokit::get_group_descendants()} to retrieve all valid descendants for a
-given taxonomic group.
+Use \verb{[get_group_descendants()]} to retrieve all valid descendants for a given
+taxonomic group.
 }
 \examples{
 require(terra)
+require(fs)
+
+# Retrieve descendants for all groups
+descendants_all <- get_group_descendants("all")
+str(descendants_all)
+descendants_all$aves
 
 # Retrieve valid descendants for a group
 get_group_descendants("insecta")
 
-# Retrieve descendants for all groups
-get_group_descendants("all")
-
 # |||||||||||||||||||||||||||||||||||||||||||||||||||||||||||
+
+temp_dir <- fs::path(fs::path_temp(), "sampling_efforts")
+fs::dir_create(temp_dir)
 
 # Occurrence count for birds at 20 km resolution
 efforts_birds_all <- get_sampling_effort(
-  group = "aves", metric = "n_obs", resolution = 20)
+  group = "aves", metric = "n_obs", resolution = 20, out_dir = temp_dir)
 
 dplyr::glimpse(efforts_birds_all)
 
@@ -124,7 +130,7 @@ terra::classify(efforts_birds_all_r, cbind(0, NA)) \%>\%
 # Occurrence count for insecta at 10 km resolution in 2020
 efforts_insecta_2020 <- get_sampling_effort(
   group = "insecta", descendants = "all",
-  metric = "n_obs", years = 2020, resolution = 10)
+  metric = "n_obs", years = 2020, resolution = 10, out_dir = temp_dir)
 
 efforts_insecta_2020_r <- terra::rast(efforts_insecta_2020$local_path)
 
@@ -139,7 +145,7 @@ terra::classify(efforts_insecta_2020_r, cbind(0, NA)) \%>\%
 # Species count for vascular plants at 10 km
 efforts_plants_2020 <- get_sampling_effort(
   group = "tracheophyta", descendants = "all",
-  metric = "n_sp", resolution = 10)
+  metric = "n_sp", resolution = 10, out_dir = temp_dir)
 
 efforts_plants_2020_r <- terra::rast(efforts_plants_2020$local_path)
 
@@ -155,7 +161,7 @@ terra::classify(efforts_plants_2020_r, cbind(0, NA)) \%>\%
 efforts_insects <- get_sampling_effort(
   group = "insecta",
   descendants = c("hemiptera", "hymenoptera", "lepidoptera"),
-  metric = "n_obs", resolution = 10)
+  metric = "n_obs", resolution = 10, out_dir = temp_dir)
 
 efforts_insects
 
@@ -170,6 +176,8 @@ terra::classify(efforts_insects_r, cbind(0, NA)) \%>\%
   stats::setNames(c("hemiptera", "hymenoptera", "lepidoptera")) \%>\%
   log10() \%>\%
   plot()
+
+fs::dir_delete(temp_dir)
 }
 \references{
 El-Gabbas, A. (2026). A Global, Taxon-Stratified, High-Resolution

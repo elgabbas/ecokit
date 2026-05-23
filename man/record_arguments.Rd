@@ -21,10 +21,9 @@ are presented as scalars (e.g., \code{8}) or list columns for complex objects
 the specified \code{.RData} file and \code{NULL} is returned invisibly.
 }
 \description{
-\code{record_arguments()} is a utility function that captures and records the
-evaluated forms of arguments passed to the parent function. It returns a
-tibble with columns named after the arguments, containing their evaluated
-values only.
+A utility function that captures and records the evaluated forms of arguments
+passed to the parent function. It returns a tibble with columns named after
+the arguments, containing their evaluated values only.
 }
 \details{
 This function evaluates all arguments in the grandparent environment
@@ -39,10 +38,10 @@ columns.
 \item Failed evaluations result in \code{NA}.
 \item Additional named arguments passed via \code{...} in the parent function are also
 recorded.
-}
 
 The function must be called from within another function, as it relies on
 \code{sys.call(-1)} to capture the parent call.
+}
 }
 \examples{
 a <- 5

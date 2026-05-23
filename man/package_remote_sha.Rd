@@ -12,7 +12,7 @@ package_remote_sha(..., lib_path = .libPaths()[1L])
 underscores) and installed in the library.}
 
 \item{lib_path}{Character. Path to the library where the packages are
-installed. Defaults to the first library in \code{.libPaths()}. This parameter
+installed. Defaults to the first library in \code{\link[=.libPaths]{.libPaths()}}. This parameter
 is optional.}
 }
 \value{

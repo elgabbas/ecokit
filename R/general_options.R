@@ -140,7 +140,7 @@ remove_options <- function(
 #' that are constants or quoted expressions.
 #'
 #' **Important:** This function only works for standard R functions whose
-#' default argument values are accessible via `formals()`. It does **not** work
+#' default argument values are accessible via [formals()]. It does **not** work
 #' for primitive functions (such as `max`, `mean`), functions implemented in
 #' C/C++, S4 methods, or functions whose defaults are not accessible
 #' programmatically.
@@ -160,7 +160,7 @@ remove_options <- function(
 #' # No option is called `.add_changed`
 #' getOption(".add_changed")
 #'
-#' # return the default value of the `.add` argument of `dplyr::group_by()`
+#' # return the default value of the `.add` argument of [dplyr::group_by()]
 #' get_option_with_default(".add_changed", "dplyr::group_by", ".add")
 #'
 #' # Setting and retrieving the option

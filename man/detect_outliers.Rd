@@ -35,7 +35,7 @@ is farther than a specified distance threshold.
 }
 \details{
 This function is designed for large spatial rasters and uses an efficient
-nearest-neighbour search based on a kd-tree implementation (\code{RANN::nn2()}),
+nearest-neighbour search based on a kd-tree implementation (\code{\link[RANN:nn2]{RANN::nn2()}}),
 making it suitable for datasets containing thousands of occupied cells.
 
 Spatial outlier detection is particularly useful in species distribution

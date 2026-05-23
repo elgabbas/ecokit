@@ -4,7 +4,7 @@
 #' is farther than a specified distance threshold.
 #'
 #' This function is designed for large spatial rasters and uses an efficient
-#' nearest-neighbour search based on a kd-tree implementation (`RANN::nn2()`),
+#' nearest-neighbour search based on a kd-tree implementation ([RANN::nn2()]),
 #' making it suitable for datasets containing thousands of occupied cells.
 #'
 #' Spatial outlier detection is particularly useful in species distribution
@@ -77,6 +77,8 @@
 
 detect_outliers <- function(r, threshold = 100L, plot_outliers = TRUE) {
 
+  dist_km <- NULL
+
   # ||||||||||||||||||||||||||||||||||||||||||||||||||||
   # Check required packages
   # ||||||||||||||||||||||||||||||||||||||||||||||||||||
@@ -145,8 +147,8 @@ detect_outliers <- function(r, threshold = 100L, plot_outliers = TRUE) {
   # ||||||||||||||||||||||||||||||||||||||||||||||||||||
 
   if (plot_outliers && nrow(out) > 0L) {
-    plot(r)
-    points(out$x, out$y, pch = 16L, cex = 1.5, col = "red")
+    terra::plot(r)
+    graphics::points(out$x, out$y, pch = 16L, cex = 1.5, col = "red")
   }
 
   out

@@ -45,8 +45,8 @@
 #'     \item \strong{Class}: The class of the object, with multiple classes
 #'       concatenated using ` + ` (e.g., `<tbl_df + tbl + data.frame>`).
 #'     \item \strong{Value}: The formatted output of the object, using methods
-#'       like `print()`, `summary()`, `glimpse()`, or `str()`, depending on the
-#'       object type.
+#'       like [print()], [summary()], [dplyr::glimpse()], or [str()], depending
+#'       on the object type.
 #'   }
 #'   For example:
 #'   \preformatted{

@@ -15,13 +15,13 @@
 #'   for each file.
 #' @return Logical: `TRUE` if all checks pass; `FALSE` otherwise.
 #' @author Ahmed El-Gabbas
-#' @details The `check_data()` function determines the file type based on its
+#' @details The [check_data()] function determines the file type based on its
 #'   extension (case-insensitive). If the extension is unrecognised, it returns
 #'   `FALSE`. Supported file types:
-#' - **RData**: Checked with `check_rdata()`, read using [load_as]
-#' - **qs2**: Checked with `check_qs()`, read using [qs2::qs_read]
-#' - **rds**: Checked with `check_rds()`, read using [readRDS]
-#' - **feather**: Checked with `check_feather()`, read using
+#' - **RData**: Checked with [check_rdata()], read using [load_as]
+#' - **qs2**: Checked with [check_qs()], read using [qs2::qs_read]
+#' - **rds**: Checked with [check_rds()], read using [readRDS]
+#' - **feather**: Checked with [check_feather()], read using
 #'   [arrow::read_feather]
 #' @examples
 #' require(ecokit)

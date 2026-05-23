@@ -25,9 +25,9 @@ graphical devices) that occur inside \code{future} parallel workers (e.g., with
 }
 }
 \details{
-When using \code{future.apply::future_lapply()} or similar parallel calls, certain
-functions— notably \code{ggplot2::ggplotGrob()}, \code{cowplot::as_grob()}, or
-\code{ggExtra::ggMarginal()}—may implicitly trigger graphics device changes (e.g.,
+When using \code{\link[future.apply:future_lapply]{future.apply::future_lapply()}} or similar parallel calls, certain
+functions— notably \code{\link[ggplot2:ggplotGrob]{ggplot2::ggplotGrob()}}, \code{\link[cowplot:as_grob]{cowplot::as_grob()}}, or
+\code{\link[ggExtra:ggMarginal]{ggExtra::ggMarginal()}}—may implicitly trigger graphics device changes (e.g.,
 opening a PDF device internally). This causes \code{future} to emit a
 \code{DeviceMisuseFutureWarning}, warning that devices were added, removed, or
 modified within a future. Additionally, in \code{multicore} plans, forked

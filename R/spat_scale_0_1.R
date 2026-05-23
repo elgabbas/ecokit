@@ -5,15 +5,15 @@
 #' Scale a raster object’s values to a range between 0 and 1
 #'
 #' Scales the values of a `SpatRaster` (from the `terra` package), `Raster*`
-#' (from the `raster` package), or a raster file loaded via `terra::rast()` to a
+#' (from the `raster` package), or a raster file loaded via [terra::rast()] to a
 #' range between 0 and 1.
 #'
 #' @param raster A `SpatRaster`, `RasterLayer`, `RasterStack`, `RasterBrick`
 #'   object, or a character string specifying the path to a raster file that can
-#'   be loaded with `terra::rast()` (e.g., GeoTIFF, NetCDF).
+#'   be loaded with [terra::rast()] (e.g., GeoTIFF, NetCDF).
 #' @return A `SpatRaster` object with all values scaled between 0 and 1.
 #' @note This function accepts a `SpatRaster`, `Raster*` object, or a file path.
-#'   `Raster*` objects are coerced to `SpatRaster` using `terra::rast()`, and
+#'   `Raster*` objects are coerced to `SpatRaster` using [terra::rast()], and
 #'   file paths are loaded as `SpatRaster`. It calculates the minimum and
 #'   maximum values and scales all values between 0 and 1.
 #' @author Ahmed El-Gabbas

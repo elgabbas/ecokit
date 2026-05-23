@@ -19,7 +19,7 @@
 #'   complex read functions.
 #' @param unwrap_r Logical. If `read_func` returns an `PackedSpatRaster` or
 #'   `PackedSpatVector` object, this argument controls whether to unwrap packed
-#'   objects using `terra::unwrap()`. Default is `TRUE`.
+#'   objects using [terra::unwrap()]. Default is `TRUE`.
 #' @param verbose Logical. Whether to print progress messages during download.
 #'   Default is `FALSE`.
 #' @param check_md5sum Logical. Whether to verify the MD5 checksum of the
@@ -32,9 +32,9 @@
 #' @param ... Additional arguments passed to `read_func`.
 #'
 #' @details
-#' - `zenodo_file_list()` lists all files and their metadata for a given
+#' - [zenodo_file_list()] lists all files and their metadata for a given
 #' Zenodo record.
-#' - `zenodo_download_file()` downloads a specified file from a
+#' - [zenodo_download_file()] downloads a specified file from a
 #' Zenodo record and can optionally read its contents into R using a
 #' user-supplied function.
 #' @return

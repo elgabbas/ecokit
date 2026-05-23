@@ -9,19 +9,19 @@ scale_0_1(raster)
 \arguments{
 \item{raster}{A \code{SpatRaster}, \code{RasterLayer}, \code{RasterStack}, \code{RasterBrick}
 object, or a character string specifying the path to a raster file that can
-be loaded with \code{terra::rast()} (e.g., GeoTIFF, NetCDF).}
+be loaded with \code{\link[terra:rast]{terra::rast()}} (e.g., GeoTIFF, NetCDF).}
 }
 \value{
 A \code{SpatRaster} object with all values scaled between 0 and 1.
 }
 \description{
 Scales the values of a \code{SpatRaster} (from the \code{terra} package), \verb{Raster*}
-(from the \code{raster} package), or a raster file loaded via \code{terra::rast()} to a
+(from the \code{raster} package), or a raster file loaded via \code{\link[terra:rast]{terra::rast()}} to a
 range between 0 and 1.
 }
 \note{
 This function accepts a \code{SpatRaster}, \verb{Raster*} object, or a file path.
-\verb{Raster*} objects are coerced to \code{SpatRaster} using \code{terra::rast()}, and
+\verb{Raster*} objects are coerced to \code{SpatRaster} using \code{\link[terra:rast]{terra::rast()}}, and
 file paths are loaded as \code{SpatRaster}. It calculates the minimum and
 maximum values and scales all values between 0 and 1.
 }

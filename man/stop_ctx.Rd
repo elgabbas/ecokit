@@ -68,8 +68,8 @@ class, and its value:
 \item \strong{Class}: The class of the object, with multiple classes
 concatenated using \code{+} (e.g., \verb{<tbl_df + tbl + data.frame>}).
 \item \strong{Value}: The formatted output of the object, using methods
-like \code{print()}, \code{summary()}, \code{glimpse()}, or \code{str()}, depending on the
-object type.
+like \code{\link[=print]{print()}}, \code{\link[=summary]{summary()}}, \code{\link[dplyr:glimpse]{dplyr::glimpse()}}, or \code{\link[=str]{str()}}, depending
+on the object type.
 }
 For example:
 \preformatted{

@@ -178,7 +178,7 @@ cat_time <- function(
 #'   The function first formats numbers using `format(..., big.mark =
 #'   big_mark)`, which returns a character vector. If the numeric input has
 #'   length greater than one, it collapses the formatted values into a single
-#'   string using `toString()`. Finally, the selected `crayon` styles are
+#'   string using [toString()]. Finally, the selected `crayon` styles are
 #'   applied in sequence (`blue`, `red`, `underline`, `bold`) to the resulting
 #'   character value.
 #'

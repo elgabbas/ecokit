@@ -42,14 +42,14 @@ supported extension, and loads successfully with a non-null object. Supports
 \code{RData}, \code{qs2}, \code{rds}, and \code{feather} file types.
 }
 \details{
-The \code{check_data()} function determines the file type based on its
+The \code{\link[=check_data]{check_data()}} function determines the file type based on its
 extension (case-insensitive). If the extension is unrecognised, it returns
 \code{FALSE}. Supported file types:
 \itemize{
-\item \strong{RData}: Checked with \code{check_rdata()}, read using \link{load_as}
-\item \strong{qs2}: Checked with \code{check_qs()}, read using \link[qs2:qs_read]{qs2::qs_read}
-\item \strong{rds}: Checked with \code{check_rds()}, read using \link{readRDS}
-\item \strong{feather}: Checked with \code{check_feather()}, read using
+\item \strong{RData}: Checked with \code{\link[=check_rdata]{check_rdata()}}, read using \link{load_as}
+\item \strong{qs2}: Checked with \code{\link[=check_qs]{check_qs()}}, read using \link[qs2:qs_read]{qs2::qs_read}
+\item \strong{rds}: Checked with \code{\link[=check_rds]{check_rds()}}, read using \link{readRDS}
+\item \strong{feather}: Checked with \code{\link[=check_feather]{check_feather()}}, read using
 \link[arrow:read_feather]{arrow::read_feather}
 }
 }

@@ -7,9 +7,9 @@
 #' - Package startup messages emitted during package loading in parallel workers
 #' (e.g., from `ggplot2` or `terra` in `multicore` plans).
 #'
-#' When using `future.apply::future_lapply()` or similar parallel calls, certain
-#' functions— notably `ggplot2::ggplotGrob()`, `cowplot::as_grob()`, or
-#' `ggExtra::ggMarginal()`—may implicitly trigger graphics device changes (e.g.,
+#' When using [future.apply::future_lapply()] or similar parallel calls, certain
+#' functions— notably [ggplot2::ggplotGrob()], [cowplot::as_grob()], or
+#' [ggExtra::ggMarginal()]—may implicitly trigger graphics device changes (e.g.,
 #' opening a PDF device internally). This causes `future` to emit a
 #' `DeviceMisuseFutureWarning`, warning that devices were added, removed, or
 #' modified within a future. Additionally, in `multicore` plans, forked

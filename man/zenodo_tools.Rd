@@ -43,7 +43,7 @@ complex read functions.}
 
 \item{unwrap_r}{Logical. If \code{read_func} returns an \code{PackedSpatRaster} or
 \code{PackedSpatVector} object, this argument controls whether to unwrap packed
-objects using \code{terra::unwrap()}. Default is \code{TRUE}.}
+objects using \code{\link[terra:unwrap]{terra::unwrap()}}. Default is \code{TRUE}.}
 
 \item{verbose}{Logical. Whether to print progress messages during download.
 Default is \code{FALSE}.}
@@ -75,9 +75,9 @@ and to download one of those files (optionally reading it into R).
 }
 \details{
 \itemize{
-\item \code{zenodo_file_list()} lists all files and their metadata for a given
+\item \code{\link[=zenodo_file_list]{zenodo_file_list()}} lists all files and their metadata for a given
 Zenodo record.
-\item \code{zenodo_download_file()} downloads a specified file from a
+\item \code{\link[=zenodo_download_file]{zenodo_download_file()}} downloads a specified file from a
 Zenodo record and can optionally read its contents into R using a
 user-supplied function.
 }

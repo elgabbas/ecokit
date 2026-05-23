@@ -52,7 +52,7 @@ and must be non-empty.
 
 The function first formats numbers using \code{format(..., big.mark = big_mark)}, which returns a character vector. If the numeric input has
 length greater than one, it collapses the formatted values into a single
-string using \code{toString()}. Finally, the selected \code{crayon} styles are
+string using \code{\link[=toString]{toString()}}. Finally, the selected \code{crayon} styles are
 applied in sequence (\code{blue}, \code{red}, \code{underline}, \code{bold}) to the resulting
 character value.
 }

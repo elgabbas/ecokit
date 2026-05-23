@@ -14,7 +14,7 @@
 #' @param arg Bare name of the argument to check and (potentially) assign.
 #'   Should be unquoted.
 #' @param option_name Character. The name of the global option (as in
-#'   `getOption()`) to use as a fallback value.
+#'   [getOption()]) to use as a fallback value.
 #' @param expected_class Character vector or `NULL`; if not `NULL`, the result
 #'   must inherit from one of these classes, otherwise an error is thrown.
 #' @param allow_null Logical; if `TRUE`, both the argument and the global option

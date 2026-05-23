@@ -16,7 +16,7 @@ assign_from_options(
 Should be unquoted.}
 
 \item{option_name}{Character. The name of the global option (as in
-\code{getOption()}) to use as a fallback value.}
+\code{\link[=getOption]{getOption()}}) to use as a fallback value.}
 
 \item{expected_class}{Character vector or \code{NULL}; if not \code{NULL}, the result
 must inherit from one of these classes, otherwise an error is thrown.}

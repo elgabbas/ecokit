@@ -144,6 +144,7 @@ reference:
   - write_nc
   - nearest_dist_sf
   - raster_dims_km
+  - detect_outliers
 
 - title: Plotting functions
   contents:

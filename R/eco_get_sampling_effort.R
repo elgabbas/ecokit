@@ -4,9 +4,9 @@
 #' based on specified taxonomic groups, descendants, metrics, years, and spatial
 #' resolution. The function validates all inputs and retrieves corresponding
 #' raster data files. Valid descendants for each group can be retrieved with
-#' `get_group_descendants()`. For more information, see [this
+#' [get_group_descendants()]. For more information, see [this
 #' repo](https://github.com/elgabbas/global_sampling_efforts/) and *El-Gabbas
-#' (2026). Diversity and Distributions [DOI](https://doi.org/10.1111/ddi.70205).
+#' (2026)*. [DOI](https://doi.org/10.1111/ddi.70205).
 #'
 #' @param group Character. The taxonomic group to download sampling effort data
 #'   for. Must be one of: "all", "amphibia", "arachnida", "aves", "fungi",
@@ -14,7 +14,7 @@
 #'   refers to the overall sampling effort across all groups. Required.
 #' @param descendants A character vector of descendants for the chosen group.
 #'   Valid descendants vary by group. Defaults to "all" to download data for all
-#'   descendants combined for the chosen group. Use `get_group_descendants()` to
+#'   descendants combined for the chosen group. Use [get_group_descendants()] to
 #'   retrieve valid descendants for a given group. Required.
 #' @param metric A character string specifying the metric to download. Must be
 #'   either "n_sp" (number of species) or "n_obs" (number of observations).
@@ -47,11 +47,11 @@
 #' @details
 #'
 #' This function downloads sampling effort raster files from the OSF project.
-#' This function complements the manuscript **"A Global, Taxon-Stratified,
+#' This function complements the manuscript *"A Global, Taxon-Stratified,
 #' High-Resolution Sampling-Effort Dataset From GBIF for Bias-Aware Ecological
-#' Modelling"** by providing a programmatic way to access the underlying data
-#' used in the study. Please cite the manuscript when using the data retrieved
-#' by this function.
+#' Modelling"* [[DOI](https://doi.org/10.1111/ddi.70205)] by providing a
+#' programmatic way to access the underlying data used in the study. Please cite
+#' the manuscript when using the data retrieved by this function.
 #'
 #' Files on the OSF project are organized hierarchically by group, resolution,
 #' metric, and descendant-year combinations.
@@ -59,11 +59,11 @@
 #' This function retrieves sampling effort rasters based on the specified group
 #' and its descendants. The `descendants` argument allows users to specify which
 #' descendant groups to download data for. The function validates descendants
-#' using `ecokit::get_group_descendants()` and retrieves the corresponding
-#' raster files from OSF.
+#' using [get_group_descendants()] and retrieves the corresponding raster files
+#' from OSF.
 #'
-#' Use `ecokit::get_group_descendants()` to retrieve all valid descendants for a
-#' given taxonomic group.
+#' Use `[get_group_descendants()]` to retrieve all valid descendants for a given
+#' taxonomic group.
 #'
 #' @references El-Gabbas, A. (2026). A Global, Taxon-Stratified, High-Resolution
 #'   Sampling-Effort Dataset From GBIF for Bias-Aware Ecological Modelling.
@@ -71,18 +71,24 @@
 #'
 #' @examples
 #' require(terra)
+#' require(fs)
+#'
+#' # Retrieve descendants for all groups
+#' descendants_all <- get_group_descendants("all")
+#' str(descendants_all)
+#' descendants_all$aves
 #'
 #' # Retrieve valid descendants for a group
 #' get_group_descendants("insecta")
 #'
-#' # Retrieve descendants for all groups
-#' get_group_descendants("all")
-#'
 #' # |||||||||||||||||||||||||||||||||||||||||||||||||||||||||||
+#'
+#' temp_dir <- fs::path(fs::path_temp(), "sampling_efforts")
+#' fs::dir_create(temp_dir)
 #'
 #' # Occurrence count for birds at 20 km resolution
 #' efforts_birds_all <- get_sampling_effort(
-#'   group = "aves", metric = "n_obs", resolution = 20)
+#'   group = "aves", metric = "n_obs", resolution = 20, out_dir = temp_dir)
 #'
 #' dplyr::glimpse(efforts_birds_all)
 #'
@@ -99,7 +105,7 @@
 #' # Occurrence count for insecta at 10 km resolution in 2020
 #' efforts_insecta_2020 <- get_sampling_effort(
 #'   group = "insecta", descendants = "all",
-#'   metric = "n_obs", years = 2020, resolution = 10)
+#'   metric = "n_obs", years = 2020, resolution = 10, out_dir = temp_dir)
 #'
 #' efforts_insecta_2020_r <- terra::rast(efforts_insecta_2020$local_path)
 #'
@@ -114,7 +120,7 @@
 #' # Species count for vascular plants at 10 km
 #' efforts_plants_2020 <- get_sampling_effort(
 #'   group = "tracheophyta", descendants = "all",
-#'   metric = "n_sp", resolution = 10)
+#'   metric = "n_sp", resolution = 10, out_dir = temp_dir)
 #'
 #' efforts_plants_2020_r <- terra::rast(efforts_plants_2020$local_path)
 #'
@@ -130,7 +136,7 @@
 #' efforts_insects <- get_sampling_effort(
 #'   group = "insecta",
 #'   descendants = c("hemiptera", "hymenoptera", "lepidoptera"),
-#'   metric = "n_obs", resolution = 10)
+#'   metric = "n_obs", resolution = 10, out_dir = temp_dir)
 #'
 #' efforts_insects
 #'
@@ -145,6 +151,8 @@
 #'   stats::setNames(c("hemiptera", "hymenoptera", "lepidoptera")) %>%
 #'   log10() %>%
 #'   plot()
+#'
+#' fs::dir_delete(temp_dir)
 #' @export
 
 #' @author Ahmed El-Gabbas
@@ -539,14 +547,14 @@ get_group_descendants <- function(group = NULL) {
 
 #' Mask raster to show top % and bottom % of cumulative sum
 #'
-#' This function complements the `get_sampling_effort()` function by creating
+#' This function complements the [get_sampling_effort()] function by creating
 #' masked rasters that highlight areas contributing to the top and bottom
 #' percentages of the cumulative sum of the original raster values. This can be
 #' useful for identifying areas with the highest and lowest sampling efforts
 #' based on the original raster (i.e., number of observations). The function
 #' also identifies cells with zero observations. For more information, see [this
 #' repo](https://github.com/elgabbas/global_sampling_efforts/) and *El-Gabbas
-#' (2026). Diversity and Distributions [DOI](https://doi.org/10.1111/ddi.70205)
+#' (2026)*. [DOI](https://doi.org/10.1111/ddi.70205).
 #'
 #' @param rast A SpatRaster object with numeric values (e.g., counts per cell)
 #' @param top_pct Numeric, percentage (0–100) for the top cumulative sum
@@ -560,10 +568,13 @@ get_group_descendants <- function(group = NULL) {
 #' @examples
 #' require(terra)
 #'
+#' temp_dir <- fs::path(fs::path_temp(), "sampling_efforts")
+#' fs::dir_create(temp_dir)
+#'
 #' # Sampling effort raster for birds (number of observations at 20 km
 #' # resolution)
 #' efforts_birds_all <- get_sampling_effort(
-#'   group = "aves", metric = "n_obs", resolution = 20)
+#'   group = "aves", metric = "n_obs", resolution = 20, out_dir = temp_dir)
 #' efforts_birds_all_r <- terra::rast(efforts_birds_all$local_path)
 #'
 #' result <- mask_cumulative_pct(rast = efforts_birds_all_r, top_pct = 90)
@@ -588,6 +599,8 @@ get_group_descendants <- function(group = NULL) {
 #' result$zero_observations %>%
 #'   terra::crop(terra::ext(-125, -66.5, 24.5, 49.5)) %>%
 #'   plot()
+#'
+#' fs::dir_delete(temp_dir)
 #'
 #' @export
 
@@ -618,7 +631,7 @@ mask_cumulative_pct <- function(rast, top_pct = 90L) {
   rast_0 <- (rast == 0L) %>%
     terra::classify(cbind(0L, NA)) %>%
     terra::as.factor() %>%
-    setNames("zero_observations")
+    stats::setNames("zero_observations")
 
   rast <- terra::classify(rast, cbind(0L, NA))
 

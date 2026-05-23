@@ -23,21 +23,24 @@ lowest \code{(100 - top_pct)}\%; where \code{xx} is the value of \code{top_pct}
 }
 }
 \description{
-This function complements the \code{get_sampling_effort()} function by creating
+This function complements the \code{\link[=get_sampling_effort]{get_sampling_effort()}} function by creating
 masked rasters that highlight areas contributing to the top and bottom
 percentages of the cumulative sum of the original raster values. This can be
 useful for identifying areas with the highest and lowest sampling efforts
 based on the original raster (i.e., number of observations). The function
-also identifies cells with zero observations. For more information, see \href{https://github.com/elgabbas/global_sampling_efforts/}{this repo} and *El-Gabbas
-(2026). Diversity and Distributions \href{https://doi.org/10.1111/ddi.70205}{DOI}
+also identifies cells with zero observations. For more information, see \href{https://github.com/elgabbas/global_sampling_efforts/}{this repo} and \emph{El-Gabbas
+(2026)}. \href{https://doi.org/10.1111/ddi.70205}{DOI}.
 }
 \examples{
 require(terra)
 
+temp_dir <- fs::path(fs::path_temp(), "sampling_efforts")
+fs::dir_create(temp_dir)
+
 # Sampling effort raster for birds (number of observations at 20 km
 # resolution)
 efforts_birds_all <- get_sampling_effort(
-  group = "aves", metric = "n_obs", resolution = 20)
+  group = "aves", metric = "n_obs", resolution = 20, out_dir = temp_dir)
 efforts_birds_all_r <- terra::rast(efforts_birds_all$local_path)
 
 result <- mask_cumulative_pct(rast = efforts_birds_all_r, top_pct = 90)
@@ -62,5 +65,7 @@ result$lowest_10_percent_cumulative \%>\%
 result$zero_observations \%>\%
   terra::crop(terra::ext(-125, -66.5, 24.5, 49.5)) \%>\%
   plot()
+
+fs::dir_delete(temp_dir)
 
 }
