@@ -50,13 +50,13 @@ Ahmed El-Gabbas
 ``` r
 # Calculate the size of the current working directory (recursive)
 dir_size(".", human_readable = TRUE)      # human-readable format
-#> [1] "1.66 MB"
+#> [1] "1.71 MB"
 
 dir_size(".", human_readable = FALSE)     # size in bytes
-#> [1] 1738690
+#> [1] 1795233
 
 dir_size(".", recursive = FALSE)          # non-recursive size calculation
-#> [1] "1.59 MB"
+#> [1] "1.64 MB"
 
 if (FALSE) { # \dontrun{
   # create temporary directory containing large files and subdirectories

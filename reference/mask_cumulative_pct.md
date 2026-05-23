@@ -1,7 +1,7 @@
 # Mask raster to show top % and bottom % of cumulative sum
 
 This function complements the
-[`get_sampling_effort()`](https://elgabbas.github.io/ecokit/reference/get_sampling_effort.md)
+[`get_sampling_effort()`](https://elgabbas.github.io/ecokit/reference/sampling_effort.md)
 function by creating masked rasters that highlight areas contributing to
 the top and bottom percentages of the cumulative sum of the original
 raster values. This can be useful for identifying areas with the highest
@@ -9,7 +9,7 @@ and lowest sampling efforts based on the original raster (i.e., number
 of observations). The function also identifies cells with zero
 observations. For more information, see [this
 repo](https://github.com/elgabbas/global_sampling_efforts/) and
-*El-Gabbas (2026). Diversity and Distributions (accepted)*.
+*El-Gabbas (2026)*. [DOI](https://doi.org/10.1111/ddi.70205).
 
 ## Usage
 
@@ -44,10 +44,13 @@ A SpatRaster with three layers:
 ``` r
 require(terra)
 
+temp_dir <- fs::path(fs::path_temp(), "sampling_efforts")
+fs::dir_create(temp_dir)
+
 # Sampling effort raster for birds (number of observations at 20 km
 # resolution)
 efforts_birds_all <- get_sampling_effort(
-  group = "aves", metric = "n_obs", resolution = 20)
+  group = "aves", metric = "n_obs", resolution = 20, out_dir = temp_dir)
 efforts_birds_all_r <- terra::rast(efforts_birds_all$local_path)
 
 result <- mask_cumulative_pct(rast = efforts_birds_all_r, top_pct = 90)
@@ -85,4 +88,6 @@ result$zero_observations %>%
   terra::crop(terra::ext(-125, -66.5, 24.5, 49.5)) %>%
   plot()
 
+
+fs::dir_delete(temp_dir)
 ```

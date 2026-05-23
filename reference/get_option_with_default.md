@@ -55,7 +55,7 @@ Ahmed El-Gabbas
 getOption(".add_changed")
 #> NULL
 
-# return the default value of the `.add` argument of `dplyr::group_by()`
+# return the default value of the `.add` argument of [dplyr::group_by()]
 get_option_with_default(".add_changed", "dplyr::group_by", ".add")
 #> [1] FALSE
 

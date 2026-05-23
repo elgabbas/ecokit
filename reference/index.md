@@ -18,7 +18,8 @@
   : Launch the Maxent Java Application from the dismo Package
 - [`maxent_variable_importance()`](https://elgabbas.github.io/ecokit/reference/maxent_variable_importance.md)
   : Extract Variable Importance from a Maxent Model Object
-- [`get_sampling_effort()`](https://elgabbas.github.io/ecokit/reference/get_sampling_effort.md)
+- [`get_group_descendants()`](https://elgabbas.github.io/ecokit/reference/sampling_effort.md)
+  [`get_sampling_effort()`](https://elgabbas.github.io/ecokit/reference/sampling_effort.md)
   : Get Sampling Effort Rasters
 - [`mask_cumulative_pct()`](https://elgabbas.github.io/ecokit/reference/mask_cumulative_pct.md)
   : Mask raster to show top % and bottom % of cumulative sum
@@ -304,6 +305,9 @@
 
 - [`raster_dims_km()`](https://elgabbas.github.io/ecokit/reference/raster_dims_km.md)
   : Raster dimensions in kilometres for lon/lat SpatRaster
+
+- [`detect_outliers()`](https://elgabbas.github.io/ecokit/reference/detect_outliers.md)
+  : Detect spatially isolated occupied raster cells
 
 ## Plotting functions
 

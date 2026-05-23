@@ -1,9 +1,9 @@
 # Capture and record evaluated function arguments
 
-`record_arguments()` is a utility function that captures and records the
-evaluated forms of arguments passed to the parent function. It returns a
-tibble with columns named after the arguments, containing their
-evaluated values only.
+A utility function that captures and records the evaluated forms of
+arguments passed to the parent function. It returns a tibble with
+columns named after the arguments, containing their evaluated values
+only.
 
 ## Usage
 
@@ -49,8 +49,8 @@ fails. This ensures correct evaluation in iterative contexts like
 - Additional named arguments passed via `...` in the parent function are
   also recorded.
 
-The function must be called from within another function, as it relies
-on `sys.call(-1)` to capture the parent call.
+  The function must be called from within another function, as it relies
+  on `sys.call(-1)` to capture the parent call.
 
 ## Author
 

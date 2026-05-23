@@ -40,6 +40,7 @@
 <url><loc>https://elgabbas.github.io/ecokit/reference/clear_console.html</loc></url>
 <url><loc>https://elgabbas.github.io/ecokit/reference/clip_raster_by_polygon.html</loc></url>
 <url><loc>https://elgabbas.github.io/ecokit/reference/detect_alias.html</loc></url>
+<url><loc>https://elgabbas.github.io/ecokit/reference/detect_outliers.html</loc></url>
 <url><loc>https://elgabbas.github.io/ecokit/reference/dir_size.html</loc></url>
 <url><loc>https://elgabbas.github.io/ecokit/reference/ecokit-package.html</loc></url>
 <url><loc>https://elgabbas.github.io/ecokit/reference/extract_options.html</loc></url>
@@ -50,7 +51,6 @@
 <url><loc>https://elgabbas.github.io/ecokit/reference/get_chelsa_links.html</loc></url>
 <url><loc>https://elgabbas.github.io/ecokit/reference/get_mode.html</loc></url>
 <url><loc>https://elgabbas.github.io/ecokit/reference/get_option_with_default.html</loc></url>
-<url><loc>https://elgabbas.github.io/ecokit/reference/get_sampling_effort.html</loc></url>
 <url><loc>https://elgabbas.github.io/ecokit/reference/git_log.html</loc></url>
 <url><loc>https://elgabbas.github.io/ecokit/reference/ht.html</loc></url>
 <url><loc>https://elgabbas.github.io/ecokit/reference/index.html</loc></url>
@@ -88,6 +88,7 @@
 <url><loc>https://elgabbas.github.io/ecokit/reference/remove_options.html</loc></url>
 <url><loc>https://elgabbas.github.io/ecokit/reference/rename_geometry.html</loc></url>
 <url><loc>https://elgabbas.github.io/ecokit/reference/replace_space.html</loc></url>
+<url><loc>https://elgabbas.github.io/ecokit/reference/sampling_effort.html</loc></url>
 <url><loc>https://elgabbas.github.io/ecokit/reference/save_as.html</loc></url>
 <url><loc>https://elgabbas.github.io/ecokit/reference/save_multiple.html</loc></url>
 <url><loc>https://elgabbas.github.io/ecokit/reference/save_session.html</loc></url>
