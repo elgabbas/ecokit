@@ -47,6 +47,9 @@ jobs:
         run: pkgdown::build_site_github_pages(new_process = FALSE, install = FALSE, lazy = TRUE)
         shell: Rscript {0}
 
+      - name: Copy Google verification file
+        run: cp google5e5720c2679ee898.html docs/
+      
       - name: Deploy to GitHub pages 🚀
         if: github.event_name != 'pull_request'
         uses: JamesIves/github-pages-deploy-action@v4.5.0
