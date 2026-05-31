@@ -24,6 +24,15 @@
 #'   [ecokit::cat_time()].
 #' @param ... Additional arguments to pass to [cat_time].
 #' @export
+#' @details When `n_cores > 1`, the function sets `future`-related options
+#'   (`future.globals.maxSize`, `future.gc`, `future.seed`) using one of two
+#'   approaches depending on the calling context:
+#'   - **Top-level (interactive) use**: options are set globally via
+#'   [base::options()]. No deferred restoration is registered.
+#'   - **Inside a function**: options are set locally via
+#'   [withr::local_options()] scoped to the caller's environment
+#'   (`parent.frame()`), so they are automatically restored when the calling
+#'   function exits.
 #' @name set_parallel
 #' @author Ahmed El-Gabbas
 #' @examples
@@ -105,22 +114,8 @@ set_parallel <- function(
     n_cores <- 1L
   }
 
-  if (!requireNamespace("future", quietly = TRUE)) {
-    ecokit::stop_ctx(
-      "The `future` package is required for parallel processing.")
-  }
-
-  if (!requireNamespace("withr", quietly = TRUE)) {
-    ecokit::stop_ctx(
-      paste0(
-        "The `withr` package is required for setting options in ",
-        "parallel processing."))
-  }
-
-  if (!requireNamespace("parallelly", quietly = TRUE)) {
-    ecokit::stop_ctx(
-      "The `parallelly` package is required for parallel processing.")
-  }
+  ecokit::check_packages(
+    packages = c("future", "withr", "parallelly"))
 
   if (stop_cluster) {
     if (show_log) {
@@ -180,10 +175,22 @@ set_parallel <- function(
           ...)
       }
 
-      withr::local_options(
-        future.globals.maxSize = future_max_size * 1024L^2L,
-        future.gc = TRUE, future.seed = TRUE,
-        .local_envir = parent.frame())
+      # Set future-related options, scoped to the calling context to avoid the
+      # withr "Setting global deferred event(s)..." message. That message occurs
+      # because withr::local_options() requires an enclosing function scope; at
+      # the top level no such scope exists, so it falls back to session-level
+      # deferral. Instead, use base options() at the top level (options persist
+      # for the session) and withr::local_options() inside a function (options
+      # are restored on caller exit).
+      if (is.null(sys.call(-1L))) {
+        options(
+          future.globals.maxSize = future_max_size * 1024L^2L,
+          future.gc = TRUE, future.seed = TRUE)
+      } else {
+        withr::local_options(
+          future.globals.maxSize = future_max_size * 1024L^2L,
+          future.gc = TRUE, future.seed = TRUE, .local_envir = parent.frame())
+      }
 
       future::plan(strategy = strategy, workers = n_cores, gc = TRUE)
 

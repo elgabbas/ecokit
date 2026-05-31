@@ -42,6 +42,19 @@ Default is \code{TRUE}. If \code{FALSE}, only the text is printed. See
 Configures parallel processing with \code{\link[future:plan]{future::plan()}} or stops an existing
 plan. When stopping, it resets to sequential mode.
 }
+\details{
+When \code{n_cores > 1}, the function sets \code{future}-related options
+(\code{future.globals.maxSize}, \code{future.gc}, \code{future.seed}) using one of two
+approaches depending on the calling context:
+\itemize{
+\item \strong{Top-level (interactive) use}: options are set globally via
+\code{\link[base:options]{base::options()}}. No deferred restoration is registered.
+\item \strong{Inside a function}: options are set locally via
+\code{\link[withr:local_options]{withr::local_options()}} scoped to the caller's environment
+(\code{parent.frame()}), so they are automatically restored when the calling
+function exits.
+}
+}
 \examples{
 load_packages(future)
 
