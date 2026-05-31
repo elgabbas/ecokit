@@ -179,20 +179,22 @@ set_parallel <- function(
       # withr "Setting global deferred event(s)..." message. That message occurs
       # because withr::local_options() requires an enclosing function scope; at
       # the top level no such scope exists, so it falls back to session-level
-      # deferral. Instead, use base options() at the top level (options persist
-      # for the session) and withr::local_options() inside a function (options
-      # are restored on caller exit).
-      if (is.null(sys.call(-1L))) {
-        options(
-          future.globals.maxSize = future_max_size * 1024L^2L,
-          future.gc = TRUE, future.seed = TRUE)
-      } else {
-        withr::local_options(
-          future.globals.maxSize = future_max_size * 1024L^2L,
-          future.gc = TRUE, future.seed = TRUE, .local_envir = parent.frame())
-      }
+      # deferral. withr::with_options() avoids this at the top level by wrapping
+      # the plan-setup call in a temporary scope without registering a deferred
+      # event. Inside a function, withr::local_options() is used instead so
+      # options are restored cleanly when the calling function exits.
+      future_opts <- list(
+        future.globals.maxSize = future_max_size * 1024L^2L,
+        future.gc = TRUE, future.seed = TRUE)
 
-      future::plan(strategy = strategy, workers = n_cores, gc = TRUE)
+      if (is.null(sys.call(-1L))) {
+        withr::with_options(future_opts, {
+          future::plan(strategy = strategy, workers = n_cores, gc = TRUE)
+        })
+      } else {
+        withr::local_options(future_opts, .local_envir = parent.frame())
+        future::plan(strategy = strategy, workers = n_cores, gc = TRUE)
+      }
 
     } else {
 
