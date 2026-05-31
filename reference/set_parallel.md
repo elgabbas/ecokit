@@ -61,6 +61,22 @@ set_parallel(
   Additional arguments to pass to
   [cat_time](https://elgabbas.github.io/ecokit/reference/cat_time.md).
 
+## Details
+
+When `n_cores > 1`, the function sets `future`-related options
+(`future.globals.maxSize`, `future.gc`, `future.seed`) using one of two
+approaches depending on the calling context:
+
+- **Top-level (interactive) use**: options are set globally via
+  [`base::options()`](https://rdrr.io/r/base/options.html). No deferred
+  restoration is registered.
+
+- **Inside a function**: options are set locally via
+  [`withr::local_options()`](https://withr.r-lib.org/reference/with_options.html)
+  scoped to the caller's environment
+  ([`parent.frame()`](https://rdrr.io/r/base/sys.parent.html)), so they
+  are automatically restored when the calling function exits.
+
 ## Author
 
 Ahmed El-Gabbas

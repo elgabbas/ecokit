@@ -99,6 +99,17 @@ Default is <code>TRUE</code>. If <code>FALSE</code>, only the text is printed. S
 
 </dl></div>
     <div class="section level2">
+    <h2 id="details">Details<a class="anchor" aria-label="anchor" href="#details"></a></h2>
+    <p>When <code>n_cores &gt; 1</code>, the function sets <code>future</code>-related options
+(<code>future.globals.maxSize</code>, <code>future.gc</code>, <code>future.seed</code>) using one of two
+approaches depending on the calling context:</p><ul><li><p><strong>Top-level (interactive) use</strong>: options are set globally via
+<code><a href="https://rdrr.io/r/base/options.html" class="external-link">base::options()</a></code>. No deferred restoration is registered.</p></li>
+<li><p><strong>Inside a function</strong>: options are set locally via
+<code><a href="https://withr.r-lib.org/reference/with_options.html" class="external-link">withr::local_options()</a></code> scoped to the caller's environment
+(<code><a href="https://rdrr.io/r/base/sys.parent.html" class="external-link">parent.frame()</a></code>), so they are automatically restored when the calling
+function exits.</p></li>
+</ul></div>
+    <div class="section level2">
     <h2 id="author">Author<a class="anchor" aria-label="anchor" href="#author"></a></h2>
     <p>Ahmed El-Gabbas</p>
     </div>
