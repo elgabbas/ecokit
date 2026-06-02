@@ -15,7 +15,8 @@ save_as(
 }
 \arguments{
 \item{object}{The input object to be saved. This can be an actual R object or
-a character string representing the name of an object.}
+a character string representing the name of an object. If input object is a
+\code{SpatRaster}, it will be converted to a \code{PackedSpatRaster} before saving.}
 
 \item{object_name}{Character. The new name for the saved \code{RData} object. This
 name is used when the object is loaded back into R. Default is \code{NULL}. This
@@ -25,8 +26,8 @@ is required when saving \code{RData} files.}
 \code{feather}, and \code{rds}) where the object be saved. This includes the
 directory and the file name.}
 
-\item{n_threads}{Numeric. Number of threads to use when compressing data.
-See \link[qs2:qs_save]{qs2::qs_save}.}
+\item{n_threads}{Numeric. Number of threads to use when compressing data. See
+\link[qs2:qs_save]{qs2::qs_save}.}
 
 \item{feather_compression}{Character. The compression algorithm to use when
 saving the object in the \code{feather} format. The default is "zstd". See

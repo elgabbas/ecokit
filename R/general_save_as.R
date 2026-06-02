@@ -10,15 +10,16 @@
 #' formats. The format is determined by the extension of the file path
 #' (case-insensitive).
 #' @param object The input object to be saved. This can be an actual R object or
-#'   a character string representing the name of an object.
+#'   a character string representing the name of an object. If input object is a
+#'   `SpatRaster`, it will be converted to a `PackedSpatRaster` before saving.
 #' @param object_name Character. The new name for the saved `RData` object. This
 #'   name is used when the object is loaded back into R. Default is `NULL`. This
 #'   is required when saving `RData` files.
 #' @param out_path Character. File path (ends with either `*.RData`, `*.qs2`,
 #'   `feather`, and `rds`) where the object be saved. This includes the
 #'   directory and the file name.
-#' @param n_threads Numeric. Number of threads to use when compressing data.
-#'   See [qs2::qs_save].
+#' @param n_threads Numeric. Number of threads to use when compressing data. See
+#'   [qs2::qs_save].
 #' @param feather_compression Character. The compression algorithm to use when
 #'   saving the object in the `feather` format. The default is "zstd". See
 #'   [arrow::write_feather].
@@ -79,6 +80,7 @@ save_as <- function(
       "`out_path` must be a single non-empty character string",
       out_path = out_path, include_backtrace = TRUE)
   }
+
   if (!is.numeric(n_threads) || length(n_threads) != 1L ||
       n_threads < 1L || n_threads != round(n_threads)) {
     ecokit::stop_ctx(
@@ -88,6 +90,10 @@ save_as <- function(
 
   if (inherits(object, "character")) {
     object <- get(object)
+  }
+
+  if (inherits(object, "SpatRaster")) {
+    object <- terra::wrap(object)
   }
 
   extension <- stringr::str_to_lower(tools::file_ext(out_path))
