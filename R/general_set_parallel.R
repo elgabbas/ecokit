@@ -164,15 +164,40 @@ set_parallel <- function(
           ...)
       }
 
-      ecokit::quietly({
-        future_opts <- list(
-          future.globals.maxSize = future_max_size * 1024L^2L,
-          future.gc = TRUE, future.seed = TRUE)
-        withr::local_options(future_opts, .local_envir = parent.frame())
-      },
-      "Setting global deferred")
+      # Set future options directly with `options()` rather than
+      # withr::local_options() because withr scopes changes to parent.frame(),
+      # which works correctly when called interactively (parent.frame() =
+      # .GlobalEnv, which never exits), but silently reverts the options when
+      # the file is sourced. `source()` creates a temporary evaluation frame
+      # that exits as soon as the file finishes parsing, triggering withr's
+      # cleanup before future_lapply() ever runs. Direct options() ensures the
+      # settings persist for the full session regardless of how the script is
+      # invoked (interactive, source(), nested function, Rscript, etc.). The
+      # nolint tags suppress lintr's no_options_lint rule, which flags bare
+      # options() calls in favour of withr::local_options() — here that advice
+      # is intentionally overridden for the reason above.
 
-      future::plan(strategy = strategy, workers = n_cores, gc = TRUE)
+      #nolint start: no_options_lint
+      options(
+        future.globals.maxSize = future_max_size * 1024L^2L,
+        future.gc = TRUE, future.seed = TRUE)
+      #nolint end
+
+      # `.cleanup = FALSE` prevents `future::plan()` from registering an
+      # `on.exit()` hook on `parent.frame()` that would silently reset the plan
+      # to sequential when the calling frame exits. By default `.cleanup =
+      # TRUE`, `plan()` is designed for use inside package functions so the plan
+      # auto-restores after the function returns — correct behaviour there, but
+      # fatal here: when the script is sourced, the `source()` evaluation frame
+      # exits immediately after the last line is parsed, firing the `on.exit()`
+      # and reverting to sequential before any `future_lapply()` call runs.
+      # Interactively, `parent.frame()` is `.GlobalEnv` (which never exits), so
+      # the bug is invisible. `set_parallel()` is an explicit set-and-forget
+      # utility paired with a matching `set_parallel(stop_cluster = TRUE)` call,
+      # so managing the plan lifetime via `on.exit()` is neither needed nor
+      # wanted.
+      future::plan(
+        strategy = strategy, workers = n_cores, gc = TRUE, .cleanup = FALSE)
 
     } else {
 
