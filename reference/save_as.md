@@ -24,7 +24,9 @@ save_as(
 - object:
 
   The input object to be saved. This can be an actual R object or a
-  character string representing the name of an object.
+  character string representing the name of an object. If input object
+  is a `SpatRaster`, it will be converted to a `PackedSpatRaster` before
+  saving.
 
 - object_name:
 

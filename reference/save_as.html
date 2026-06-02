@@ -71,7 +71,8 @@ formats. The format is determined by the extension of the file path
 
 <dl><dt id="arg-object">object<a class="anchor" aria-label="anchor" href="#arg-object"></a></dt>
 <dd><p>The input object to be saved. This can be an actual R object or
-a character string representing the name of an object.</p></dd>
+a character string representing the name of an object. If input object is a
+<code>SpatRaster</code>, it will be converted to a <code>PackedSpatRaster</code> before saving.</p></dd>
 
 
 <dt id="arg-object-name">object_name<a class="anchor" aria-label="anchor" href="#arg-object-name"></a></dt>
@@ -87,8 +88,8 @@ directory and the file name.</p></dd>
 
 
 <dt id="arg-n-threads">n_threads<a class="anchor" aria-label="anchor" href="#arg-n-threads"></a></dt>
-<dd><p>Numeric. Number of threads to use when compressing data.
-See <a href="https://rdrr.io/pkg/qs2/man/qs_save.html" class="external-link">qs2::qs_save</a>.</p></dd>
+<dd><p>Numeric. Number of threads to use when compressing data. See
+<a href="https://rdrr.io/pkg/qs2/man/qs_save.html" class="external-link">qs2::qs_save</a>.</p></dd>
 
 
 <dt id="arg-feather-compression">feather_compression<a class="anchor" aria-label="anchor" href="#arg-feather-compression"></a></dt>
