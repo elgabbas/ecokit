@@ -24,15 +24,6 @@
 #'   [ecokit::cat_time()].
 #' @param ... Additional arguments to pass to [cat_time].
 #' @export
-#' @details When `n_cores > 1`, the function sets `future`-related options
-#'   (`future.globals.maxSize`, `future.gc`, `future.seed`) using one of two
-#'   approaches depending on the calling context:
-#'   - **Top-level (interactive) use**: options are set globally via
-#'   [base::options()]. No deferred restoration is registered.
-#'   - **Inside a function**: options are set locally via
-#'   [withr::local_options()] scoped to the caller's environment
-#'   (`parent.frame()`), so they are automatically restored when the calling
-#'   function exits.
 #' @name set_parallel
 #' @author Ahmed El-Gabbas
 #' @examples
@@ -114,8 +105,7 @@ set_parallel <- function(
     n_cores <- 1L
   }
 
-  ecokit::check_packages(
-    packages = c("future", "withr", "parallelly"))
+  ecokit::check_packages(packages = c("future", "parallelly"))
 
   if (stop_cluster) {
     if (show_log) {
@@ -129,7 +119,6 @@ set_parallel <- function(
   } else {
 
     # strategy can not be NULL
-
     if (is.null(strategy)) {
       message(
         "`strategy` cannot be NULL. It was reset to `multisession`",
@@ -175,26 +164,15 @@ set_parallel <- function(
           ...)
       }
 
-      # Set future-related options, scoped to the calling context to avoid the
-      # withr "Setting global deferred event(s)..." message. That message occurs
-      # because withr::local_options() requires an enclosing function scope; at
-      # the top level no such scope exists, so it falls back to session-level
-      # deferral. withr::with_options() avoids this at the top level by wrapping
-      # the plan-setup call in a temporary scope without registering a deferred
-      # event. Inside a function, withr::local_options() is used instead so
-      # options are restored cleanly when the calling function exits.
-      future_opts <- list(
-        future.globals.maxSize = future_max_size * 1024L^2L,
-        future.gc = TRUE, future.seed = TRUE)
-
-      if (is.null(sys.call(-1L))) {
-        withr::with_options(future_opts, {
-          future::plan(strategy = strategy, workers = n_cores, gc = TRUE)
-        })
-      } else {
+      ecokit::quietly({
+        future_opts <- list(
+          future.globals.maxSize = future_max_size * 1024L^2L,
+          future.gc = TRUE, future.seed = TRUE)
         withr::local_options(future_opts, .local_envir = parent.frame())
-        future::plan(strategy = strategy, workers = n_cores, gc = TRUE)
-      }
+      },
+      "Setting global deferred")
+
+      future::plan(strategy = strategy, workers = n_cores, gc = TRUE)
 
     } else {
 
