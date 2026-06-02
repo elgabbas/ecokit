@@ -123,7 +123,7 @@ Default is <code>TRUE</code>. If <code>FALSE</code>, only the text is printed. S
 <span class="r-out co"><span class="r-pr">#&gt;</span> 1. multisession:</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>    - args: function (..., workers = 2L, gc = TRUE)</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>    - tweaked: TRUE</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>    - call: future::plan(strategy = strategy, workers = n_cores, gc = TRUE)</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>    - call: future::plan(strategy = strategy, workers = n_cores, gc = TRUE, .cleanup = FALSE)</span>
 <span class="r-in"><span><span class="fu">future</span><span class="fu">::</span><span class="fu"><a href="https://future.futureverse.org/reference/nbrOfWorkers.html" class="external-link">nbrOfWorkers</a></span><span class="op">(</span><span class="op">)</span></span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> [1] 2</span>
 <span class="r-in"><span></span></span>
@@ -151,7 +151,7 @@ Default is <code>TRUE</code>. If <code>FALSE</code>, only the text is printed. S
 <span class="r-out co"><span class="r-pr">#&gt;</span> 1. cluster:</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>    - args: function (..., workers = 2L, gc = TRUE)</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>    - tweaked: TRUE</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>    - call: future::plan(strategy = strategy, workers = n_cores, gc = TRUE)</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>    - call: future::plan(strategy = strategy, workers = n_cores, gc = TRUE, .cleanup = FALSE)</span>
 <span class="r-in"><span><span class="fu">future</span><span class="fu">::</span><span class="fu"><a href="https://future.futureverse.org/reference/nbrOfWorkers.html" class="external-link">nbrOfWorkers</a></span><span class="op">(</span><span class="op">)</span></span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> [1] 2</span>
 <span class="r-in"><span></span></span>
@@ -179,7 +179,7 @@ Default is <code>TRUE</code>. If <code>FALSE</code>, only the text is printed. S
 <span class="r-out co"><span class="r-pr">#&gt;</span> 1. multicore:</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>    - args: function (..., workers = 2L, gc = TRUE)</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>    - tweaked: TRUE</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>    - call: future::plan(strategy = strategy, workers = n_cores, gc = TRUE)</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>    - call: future::plan(strategy = strategy, workers = n_cores, gc = TRUE, .cleanup = FALSE)</span>
 <span class="r-in"><span><span class="fu">future</span><span class="fu">::</span><span class="fu"><a href="https://future.futureverse.org/reference/nbrOfWorkers.html" class="external-link">nbrOfWorkers</a></span><span class="op">(</span><span class="op">)</span></span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> [1] 2</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> attr(,"class")</span>

@@ -86,7 +86,7 @@ future::plan("list")
 #> 1. multisession:
 #>    - args: function (..., workers = 2L, gc = TRUE)
 #>    - tweaked: TRUE
-#>    - call: future::plan(strategy = strategy, workers = n_cores, gc = TRUE)
+#>    - call: future::plan(strategy = strategy, workers = n_cores, gc = TRUE, .cleanup = FALSE)
 future::nbrOfWorkers()
 #> [1] 2
 
@@ -114,7 +114,7 @@ future::plan("list")
 #> 1. cluster:
 #>    - args: function (..., workers = 2L, gc = TRUE)
 #>    - tweaked: TRUE
-#>    - call: future::plan(strategy = strategy, workers = n_cores, gc = TRUE)
+#>    - call: future::plan(strategy = strategy, workers = n_cores, gc = TRUE, .cleanup = FALSE)
 future::nbrOfWorkers()
 #> [1] 2
 
@@ -142,7 +142,7 @@ future::plan("list")
 #> 1. multicore:
 #>    - args: function (..., workers = 2L, gc = TRUE)
 #>    - tweaked: TRUE
-#>    - call: future::plan(strategy = strategy, workers = n_cores, gc = TRUE)
+#>    - call: future::plan(strategy = strategy, workers = n_cores, gc = TRUE, .cleanup = FALSE)
 future::nbrOfWorkers()
 #> [1] 2
 #> attr(,"class")
