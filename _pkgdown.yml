@@ -145,6 +145,7 @@ reference:
   - nearest_dist_sf
   - raster_dims_km
   - detect_outliers
+  - sort_raster_layers
 
 - title: Plotting functions
   contents:
