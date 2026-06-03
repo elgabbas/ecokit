@@ -85,25 +85,25 @@ Ahmed El-Gabbas
 
 ``` r
 cat_time()
-#> 02:03:43
+#> 07:27:48
 
 cat_time(cat_date = TRUE)
-#> 03/06/2026 02:03:43
+#> 03/06/2026 07:27:48
 
 cat_time("time now")
-#> time now - 02:03:43
+#> time now - 07:27:48
 
 cat_time("\n\nTime now", msg_n_lines = 2L, level = 1L)
 #> 
 #> 
-#>   >>>  Time now - 02:03:43
+#>   >>>  Time now - 07:27:48
 #>  
 
 cat_time(
   "\ntime now", cat_date = TRUE, cat_bold = TRUE, cat_red = TRUE,
   msg_n_lines = 2L, level = 1L)
 #> 
-#>   >>>  time now - 03/06/2026 02:03:43
+#>   >>>  time now - 03/06/2026 07:27:48
 #>  
 
 # The use of levels
@@ -113,10 +113,10 @@ cat_time(
   cat_time("subtask L2", level = 2L)
   cat_time("subtask L3", level = 3L)
 }
-#> Task 1 - 02:03:43
-#>   >>>  subtask L1 - 02:03:43
-#>   >>>  >>>  subtask L2 - 02:03:43
-#>   >>>  >>>  >>>  subtask L3 - 02:03:43
+#> Task 1 - 07:27:48
+#>   >>>  subtask L1 - 07:27:48
+#>   >>>  >>>  subtask L2 - 07:27:48
+#>   >>>  >>>  >>>  subtask L3 - 07:27:48
 
 # disabling the function output
 cat_time(verbose = FALSE)

@@ -201,7 +201,7 @@ dplyr::glimpse(efforts_birds_all)
 #> $ resolution <dbl> 20
 #> $ name       <chr> "n_obs_Aves_res_20.tif"
 #> $ id         <chr> "69144be425b8c888ea3ee2b8"
-#> $ local_path <chr> "/tmp/RtmpmMumn2/sampling_efforts/n_obs_Aves_res_20.tif"
+#> $ local_path <chr> "/tmp/RtmpOCEThP/sampling_efforts/n_obs_Aves_res_20.tif"
 #> $ meta       <list> [[<NULL>, <NULL>, "n_obs_Aves_res_20.tif", "file", "/69144be425b8c888ea3ee2b8", 822667, "osfstorage", "/res_20_n_obs/n_obs_Aves_res_20.tif", <NULL>, 2025-11-12 08:57:09, 2025-11-12 08:57:09, [["ba82a8bd3ef8fe226f5a91e366ff2755", "def3eac67285494859167be1838dd3fee1edc0a069f4465ed97a8a2f8262a226"], 55], [], FALSE, 1, FALSE], ["https://api.osf.io/v2/files/69144be425b8c888ea3ee2b8…
 
 efforts_birds_all_r <- terra::rast(efforts_birds_all$local_path)
@@ -267,9 +267,9 @@ efforts_insects
 #> 3 69162b43bdc702dce1e2fd62
 #>   local_path                                                         
 #>   <chr>                                                              
-#> 1 /tmp/RtmpmMumn2/sampling_efforts/n_obs_Hemiptera_total_res_10.tif  
-#> 2 /tmp/RtmpmMumn2/sampling_efforts/n_obs_Hymenoptera_total_res_10.tif
-#> 3 /tmp/RtmpmMumn2/sampling_efforts/n_obs_Lepidoptera_total_res_10.tif
+#> 1 /tmp/RtmpOCEThP/sampling_efforts/n_obs_Hemiptera_total_res_10.tif  
+#> 2 /tmp/RtmpOCEThP/sampling_efforts/n_obs_Hymenoptera_total_res_10.tif
+#> 3 /tmp/RtmpOCEThP/sampling_efforts/n_obs_Lepidoptera_total_res_10.tif
 #>   meta            
 #>   <list>          
 #> 1 <named list [3]>
@@ -286,7 +286,7 @@ dplyr::glimpse(efforts_insects)
 #> $ resolution <dbl> 10, 10, 10
 #> $ name       <chr> "n_obs_Hemiptera_total_res_10.tif", "n_obs_Hymenoptera_total_res_10.tif", "n_obs_Lepidoptera_total_res_10.tif"
 #> $ id         <chr> "691627285d3006de940c2892", "6916281e843c090b4dfdc3f1", "69162b43bdc702dce1e2fd62"
-#> $ local_path <chr> "/tmp/RtmpmMumn2/sampling_efforts/n_obs_Hemiptera_total_res_10.tif", "/tmp/RtmpmMumn2/sampling_efforts/n_obs_Hymenoptera_total_res_10.tif", "/tmp/RtmpmMumn2/sampling_efforts/n_obs_Lepidoptera_total_res_10.tif"
+#> $ local_path <chr> "/tmp/RtmpOCEThP/sampling_efforts/n_obs_Hemiptera_total_res_10.tif", "/tmp/RtmpOCEThP/sampling_efforts/n_obs_Hymenoptera_total_res_10.tif", "/tmp/RtmpOCEThP/sampling_efforts/n_obs_Lepidoptera_total_res_10.tif"
 #> $ meta       <list> [[<NULL>, <NULL>, "n_obs_Hemiptera_total_res_10.tif", "file", "/691627285d3006de940c2892", 291337, "osfstorage", "/res_10_n_obs/n_obs_Hemiptera_total_res_10.tif", <NULL>, 2025-11-13 18:44:56, 2025-11-13 18:44:56, [["8bfce8c7dc631d23e2b9f64645612606", "ea6bde11aca3b7135487e3f1b3fc0708e4923f65c8bb116ce7d3848f886f53d5"], 35], [], FALSE, 1, FALSE], ["https://api.osf.io/v2/files/69…
 
 efforts_insects_r <- terra::rast(efforts_insects$local_path)
