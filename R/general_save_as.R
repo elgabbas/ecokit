@@ -67,6 +67,12 @@ save_as <- function(
       include_backtrace = TRUE)
   }
 
+  if (rlang::is_empty(object)) {
+    ecokit::stop_ctx(
+      "`object` cannot be empty", class_object = class(object),
+      include_backtrace = TRUE)
+  }
+
   if (!is.null(object_name) &&
       (!is.character(object_name) || length(object_name) != 1L ||
        !nzchar(object_name))) {

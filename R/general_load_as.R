@@ -86,6 +86,12 @@ load_as <- function(
 
   if (is.null(file)) ecokit::stop_ctx("file or URL cannot be NULL")
 
+  if (rlang::is_empty(file)) {
+    ecokit::stop_ctx(
+      "`file` cannot be empty", class_file = class(file),
+      include_backtrace = TRUE)
+  }
+
   if (!is.numeric(n_threads) || n_threads < 1L) {
     ecokit::stop_ctx(
       "`n_threads` must be a positive integer", n_threads = n_threads)
