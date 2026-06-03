@@ -309,6 +309,9 @@
 - [`detect_outliers()`](https://elgabbas.github.io/ecokit/reference/detect_outliers.md)
   : Detect spatially isolated occupied raster cells
 
+- [`sort_raster_layers()`](https://elgabbas.github.io/ecokit/reference/sort_raster_layers.md)
+  : Sort raster layers by name using natural ordering
+
 ## Plotting functions
 
 - [`add_image_to_plot()`](https://elgabbas.github.io/ecokit/reference/add_image_to_plot.md)

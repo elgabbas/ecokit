@@ -53,7 +53,7 @@ dir_size(".", human_readable = TRUE)      # human-readable format
 #> [1] "1.71 MB"
 
 dir_size(".", human_readable = FALSE)     # size in bytes
-#> [1] 1795227
+#> [1] 1795412
 
 dir_size(".", recursive = FALSE)          # non-recursive size calculation
 #> [1] "1.64 MB"

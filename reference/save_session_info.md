@@ -45,13 +45,13 @@ fs::dir_create(temp_dir)
 
 save_session_info(out_directory = temp_dir)
 #> Saving session info to:
-#> /tmp/RtmpLQ5SnK/save_session_info/S_20260602_1851.txt
+#> /tmp/RtmpmMumn2/save_session_info/S_20260603_0205.txt
 
 saved_file <- list.files(
   temp_dir, pattern = "S_.+txt$", full.names = TRUE) %>%
   ecokit::normalize_path()
 (saved_file <- saved_file[length(saved_file)])
-#> /tmp/RtmpLQ5SnK/save_session_info/S_20260602_1851.txt
+#> /tmp/RtmpmMumn2/save_session_info/S_20260603_0205.txt
 
 cat(readLines(saved_file), sep = "\n")
 #> 
@@ -69,7 +69,7 @@ cat(readLines(saved_file), sep = "\n")
 #>  collate  C
 #>  ctype    C.UTF-8
 #>  tz       UTC
-#>  date     2026-06-02
+#>  date     2026-06-03
 #>  pandoc   3.8.3 @ /opt/hostedtoolcache/pandoc/3.8.3/x64/ (via rmarkdown)
 #>  quarto   NA
 #> 
@@ -103,7 +103,7 @@ cat(readLines(saved_file), sep = "\n")
 #>  downlit        0.4.5     2025-11-14 [1] RSPM
 #>  dplyr        * 1.2.1     2026-04-03 [1] RSPM
 #>  e1071          1.7-17    2025-12-18 [1] RSPM
-#>  ecokit       * 0.1.0     2026-06-02 [1] local
+#>  ecokit       * 0.1.0     2026-06-03 [1] local
 #>  evaluate       1.0.5     2025-08-27 [1] RSPM
 #>  fansi          1.0.7     2025-11-19 [1] RSPM
 #>  farver         2.1.2     2024-05-13 [1] RSPM
@@ -223,13 +223,13 @@ vec <- rnorm(1000)
 session_data <- tibble::tibble(object = c("df", "vec"), size = c(0.1, 0.1))
 save_session_info(out_directory = temp_dir, session_info = session_data)
 #> Saving session info to:
-#> /tmp/RtmpLQ5SnK/save_session_info/S_20260602_1851.txt
+#> /tmp/RtmpmMumn2/save_session_info/S_20260603_0205.txt
 
 saved_file <- list.files(
   temp_dir, pattern = "S_.+txt$", full.names = TRUE) %>%
   ecokit::normalize_path()
 (saved_file <- saved_file[length(saved_file)])
-#> /tmp/RtmpLQ5SnK/save_session_info/S_20260602_1851.txt
+#> /tmp/RtmpmMumn2/save_session_info/S_20260603_0205.txt
 
 cat(readLines(saved_file), sep = "\n")
 #> 
@@ -247,7 +247,7 @@ cat(readLines(saved_file), sep = "\n")
 #>  collate  C
 #>  ctype    C.UTF-8
 #>  tz       UTC
-#>  date     2026-06-02
+#>  date     2026-06-03
 #>  pandoc   3.8.3 @ /opt/hostedtoolcache/pandoc/3.8.3/x64/ (via rmarkdown)
 #>  quarto   NA
 #> 
@@ -281,7 +281,7 @@ cat(readLines(saved_file), sep = "\n")
 #>  downlit        0.4.5     2025-11-14 [1] RSPM
 #>  dplyr        * 1.2.1     2026-04-03 [1] RSPM
 #>  e1071          1.7-17    2025-12-18 [1] RSPM
-#>  ecokit       * 0.1.0     2026-06-02 [1] local
+#>  ecokit       * 0.1.0     2026-06-03 [1] local
 #>  evaluate       1.0.5     2025-08-27 [1] RSPM
 #>  fansi          1.0.7     2025-11-19 [1] RSPM
 #>  farver         2.1.2     2024-05-13 [1] RSPM

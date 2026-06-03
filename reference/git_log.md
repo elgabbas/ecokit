@@ -51,15 +51,15 @@ Ahmed El-Gabbas
 ``` r
 # Show the most recent commit
 git_log(n_commits = 1)
-#> * cb332aa - (grafted, HEAD -> main, origin/main) refactor set_parallel to use options() for future settings and prevent cleanup on exit (4 minutes ago) <Ahmed El-Gabbas>
+#> * 8a83928 - (grafted, HEAD -> main, origin/main) Add sort_raster_layers function for natural ordering of SpatRaster layers (3 minutes ago) <Ahmed El-Gabbas>
 
 # Show the most recent 5 commits
 git_log(n_commits = 5)
-#> * cb332aa - (grafted, HEAD -> main, origin/main) refactor set_parallel to use options() for future settings and prevent cleanup on exit (4 minutes ago) <Ahmed El-Gabbas>
+#> * 8a83928 - (grafted, HEAD -> main, origin/main) Add sort_raster_layers function for natural ordering of SpatRaster layers (3 minutes ago) <Ahmed El-Gabbas>
 
 # by default, the log is only printed, not returned
 log_example <- git_log(n_commits = 1)
-#> * cb332aa - (grafted, HEAD -> main, origin/main) refactor set_parallel to use options() for future settings and prevent cleanup on exit (4 minutes ago) <Ahmed El-Gabbas>
+#> * 8a83928 - (grafted, HEAD -> main, origin/main) Add sort_raster_layers function for natural ordering of SpatRaster layers (3 minutes ago) <Ahmed El-Gabbas>
 print(log_example)
 #> NULL
 
@@ -68,7 +68,7 @@ log_example <- git_log(return_log = TRUE)
 length(log_example)
 #> [1] 1
 head(log_example, 8)
-#> [1] "* cb332aa - (grafted, HEAD -> main, origin/main) refactor set_parallel to use options() for future settings and prevent cleanup on exit (4 minutes ago) <Ahmed El-Gabbas>"
+#> [1] "* 8a83928 - (grafted, HEAD -> main, origin/main) Add sort_raster_layers function for natural ordering of SpatRaster layers (3 minutes ago) <Ahmed El-Gabbas>"
 
 # not a git repo
 non_git_dir <- fs::path_temp("test_dir")
