@@ -47,7 +47,7 @@ cat_diff(
 
   integer; the level at which the message will be printed. If e.g.
   `level = 1L`, the following string will be printed at the beginning of
-  the message: " \>\>\> ". Default is `0`.
+  the message: " \>\> ". Default is `0`.
 
 - cat_timestamp:
 
@@ -89,21 +89,21 @@ cat_diff(reference_time, prefix = "Finished in ")
 
 # level = 1
 cat_diff(reference_time, prefix = "Finished in ", level = 1L)
-#>   >>>  Finished in 00:00:45
+#>   >>  Finished in 00:00:45
 
 # print date
 cat_diff(reference_time, prefix = "Finished in ", cat_timestamp = TRUE)
-#> Finished in 00:00:45 - 07:27:47
+#> Finished in 00:00:45 - 20:50:11
 
 # print date and time
 cat_diff(reference_time, prefix = "Finished in ", cat_date = TRUE)
-#> Finished in 00:00:45 - 03/06/2026
+#> Finished in 00:00:45 - 05/06/2026
 
 # show chunk info
 cat_diff(reference_time, cat_info = TRUE, prefix = "Finished in ")
 #> 
 #> --------------------------------------------------
-#> Session summary - 03/06/2026
+#> Session summary - 05/06/2026
 #> --------------------------------------------------
 #> 
 #> 
@@ -115,7 +115,7 @@ cat_diff(
   prefix = "Finished in ")
 #> 
 #> --------------------------------------------------
-#> Summary of task - 03/06/2026
+#> Summary of task - 05/06/2026
 #> --------------------------------------------------
 #> 
 #> 

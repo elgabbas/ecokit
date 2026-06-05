@@ -45,13 +45,13 @@ fs::dir_create(temp_dir)
 
 save_session_info(out_directory = temp_dir)
 #> Saving session info to:
-#> /tmp/RtmpOCEThP/save_session_info/S_20260603_0729.txt
+#> /tmp/Rtmp6A96YS/save_session_info/S_20260605_2051.txt
 
 saved_file <- list.files(
   temp_dir, pattern = "S_.+txt$", full.names = TRUE) %>%
   ecokit::normalize_path()
 (saved_file <- saved_file[length(saved_file)])
-#> /tmp/RtmpOCEThP/save_session_info/S_20260603_0729.txt
+#> /tmp/Rtmp6A96YS/save_session_info/S_20260605_2051.txt
 
 cat(readLines(saved_file), sep = "\n")
 #> 
@@ -69,7 +69,7 @@ cat(readLines(saved_file), sep = "\n")
 #>  collate  C
 #>  ctype    C.UTF-8
 #>  tz       UTC
-#>  date     2026-06-03
+#>  date     2026-06-05
 #>  pandoc   3.8.3 @ /opt/hostedtoolcache/pandoc/3.8.3/x64/ (via rmarkdown)
 #>  quarto   NA
 #> 
@@ -83,7 +83,7 @@ cat(readLines(saved_file), sep = "\n")
 #>  bit64          4.8.2     2026-05-19 [1] RSPM
 #>  bslib          0.11.0    2026-05-16 [1] RSPM
 #>  cachem         1.1.0     2024-05-16 [1] RSPM
-#>  callr          3.7.6     2024-03-25 [1] RSPM
+#>  callr          3.8.0     2026-06-05 [1] RSPM
 #>  car          * 3.1-5     2026-02-03 [1] RSPM
 #>  carData      * 3.0-6     2026-01-30 [1] RSPM
 #>  class          7.3-23    2025-01-01 [3] CRAN (R 4.6.0)
@@ -103,7 +103,7 @@ cat(readLines(saved_file), sep = "\n")
 #>  downlit        0.4.5     2025-11-14 [1] RSPM
 #>  dplyr        * 1.2.1     2026-04-03 [1] RSPM
 #>  e1071          1.7-17    2025-12-18 [1] RSPM
-#>  ecokit       * 0.1.0     2026-06-03 [1] local
+#>  ecokit       * 0.1.0     2026-06-05 [1] local
 #>  evaluate       1.0.5     2025-08-27 [1] RSPM
 #>  fansi          1.0.7     2025-11-19 [1] RSPM
 #>  farver         2.1.2     2024-05-13 [1] RSPM
@@ -155,7 +155,7 @@ cat(readLines(saved_file), sep = "\n")
 #>  proxy          0.4-29    2025-12-29 [1] RSPM
 #>  ps             1.9.3     2026-04-20 [1] RSPM
 #>  purrr        * 1.2.2     2026-04-10 [1] RSPM
-#>  qs2          * 0.2.1     2026-05-04 [1] RSPM
+#>  qs2          * 0.2.2     2026-06-03 [1] RSPM
 #>  R6             2.6.1     2025-02-15 [1] RSPM
 #>  ragg           1.5.2     2026-03-23 [1] RSPM
 #>  RANN           2.6.2     2024-08-25 [1] RSPM
@@ -177,7 +177,7 @@ cat(readLines(saved_file), sep = "\n")
 #>  sass           0.4.10    2025-04-11 [1] RSPM
 #>  scales       * 1.4.0     2025-04-24 [1] RSPM
 #>  selectr        0.5-1     2025-12-17 [1] RSPM
-#>  sessioninfo    1.2.3     2025-02-05 [1] RSPM
+#>  sessioninfo    1.2.4     2026-06-04 [1] RSPM
 #>  sf           * 1.1-1     2026-05-06 [1] RSPM
 #>  sp           * 2.2-1     2026-02-13 [1] RSPM
 #>  spam           2.11-4    2026-05-29 [1] RSPM
@@ -223,13 +223,13 @@ vec <- rnorm(1000)
 session_data <- tibble::tibble(object = c("df", "vec"), size = c(0.1, 0.1))
 save_session_info(out_directory = temp_dir, session_info = session_data)
 #> Saving session info to:
-#> /tmp/RtmpOCEThP/save_session_info/S_20260603_0729.txt
+#> /tmp/Rtmp6A96YS/save_session_info/S_20260605_2051.txt
 
 saved_file <- list.files(
   temp_dir, pattern = "S_.+txt$", full.names = TRUE) %>%
   ecokit::normalize_path()
 (saved_file <- saved_file[length(saved_file)])
-#> /tmp/RtmpOCEThP/save_session_info/S_20260603_0729.txt
+#> /tmp/Rtmp6A96YS/save_session_info/S_20260605_2051.txt
 
 cat(readLines(saved_file), sep = "\n")
 #> 
@@ -247,7 +247,7 @@ cat(readLines(saved_file), sep = "\n")
 #>  collate  C
 #>  ctype    C.UTF-8
 #>  tz       UTC
-#>  date     2026-06-03
+#>  date     2026-06-05
 #>  pandoc   3.8.3 @ /opt/hostedtoolcache/pandoc/3.8.3/x64/ (via rmarkdown)
 #>  quarto   NA
 #> 
@@ -261,7 +261,7 @@ cat(readLines(saved_file), sep = "\n")
 #>  bit64          4.8.2     2026-05-19 [1] RSPM
 #>  bslib          0.11.0    2026-05-16 [1] RSPM
 #>  cachem         1.1.0     2024-05-16 [1] RSPM
-#>  callr          3.7.6     2024-03-25 [1] RSPM
+#>  callr          3.8.0     2026-06-05 [1] RSPM
 #>  car          * 3.1-5     2026-02-03 [1] RSPM
 #>  carData      * 3.0-6     2026-01-30 [1] RSPM
 #>  class          7.3-23    2025-01-01 [3] CRAN (R 4.6.0)
@@ -281,7 +281,7 @@ cat(readLines(saved_file), sep = "\n")
 #>  downlit        0.4.5     2025-11-14 [1] RSPM
 #>  dplyr        * 1.2.1     2026-04-03 [1] RSPM
 #>  e1071          1.7-17    2025-12-18 [1] RSPM
-#>  ecokit       * 0.1.0     2026-06-03 [1] local
+#>  ecokit       * 0.1.0     2026-06-05 [1] local
 #>  evaluate       1.0.5     2025-08-27 [1] RSPM
 #>  fansi          1.0.7     2025-11-19 [1] RSPM
 #>  farver         2.1.2     2024-05-13 [1] RSPM
@@ -333,7 +333,7 @@ cat(readLines(saved_file), sep = "\n")
 #>  proxy          0.4-29    2025-12-29 [1] RSPM
 #>  ps             1.9.3     2026-04-20 [1] RSPM
 #>  purrr        * 1.2.2     2026-04-10 [1] RSPM
-#>  qs2          * 0.2.1     2026-05-04 [1] RSPM
+#>  qs2          * 0.2.2     2026-06-03 [1] RSPM
 #>  R6             2.6.1     2025-02-15 [1] RSPM
 #>  ragg           1.5.2     2026-03-23 [1] RSPM
 #>  RANN           2.6.2     2024-08-25 [1] RSPM
@@ -355,7 +355,7 @@ cat(readLines(saved_file), sep = "\n")
 #>  sass           0.4.10    2025-04-11 [1] RSPM
 #>  scales       * 1.4.0     2025-04-24 [1] RSPM
 #>  selectr        0.5-1     2025-12-17 [1] RSPM
-#>  sessioninfo    1.2.3     2025-02-05 [1] RSPM
+#>  sessioninfo    1.2.4     2026-06-04 [1] RSPM
 #>  sf           * 1.1-1     2026-05-06 [1] RSPM
 #>  sp           * 2.2-1     2026-02-13 [1] RSPM
 #>  spam           2.11-4    2026-05-29 [1] RSPM

@@ -51,15 +51,15 @@ Ahmed El-Gabbas
 ``` r
 # Show the most recent commit
 git_log(n_commits = 1)
-#> * 3ffc6fe - (grafted, HEAD -> main, origin/main) Add validation to check for empty file and object parameters in load_as and save_as functions (3 minutes ago) <Ahmed El-Gabbas>
+#> * f726207 - (grafted, HEAD -> main, origin/main) Small fix to save_as when input object is character vector of length 1. (6 minutes ago) <Ahmed El-Gabbas>
 
 # Show the most recent 5 commits
 git_log(n_commits = 5)
-#> * 3ffc6fe - (grafted, HEAD -> main, origin/main) Add validation to check for empty file and object parameters in load_as and save_as functions (3 minutes ago) <Ahmed El-Gabbas>
+#> * f726207 - (grafted, HEAD -> main, origin/main) Small fix to save_as when input object is character vector of length 1. (6 minutes ago) <Ahmed El-Gabbas>
 
 # by default, the log is only printed, not returned
 log_example <- git_log(n_commits = 1)
-#> * 3ffc6fe - (grafted, HEAD -> main, origin/main) Add validation to check for empty file and object parameters in load_as and save_as functions (3 minutes ago) <Ahmed El-Gabbas>
+#> * f726207 - (grafted, HEAD -> main, origin/main) Small fix to save_as when input object is character vector of length 1. (6 minutes ago) <Ahmed El-Gabbas>
 print(log_example)
 #> NULL
 
@@ -68,7 +68,7 @@ log_example <- git_log(return_log = TRUE)
 length(log_example)
 #> [1] 1
 head(log_example, 8)
-#> [1] "* 3ffc6fe - (grafted, HEAD -> main, origin/main) Add validation to check for empty file and object parameters in load_as and save_as functions (3 minutes ago) <Ahmed El-Gabbas>"
+#> [1] "* f726207 - (grafted, HEAD -> main, origin/main) Small fix to save_as when input object is character vector of length 1. (6 minutes ago) <Ahmed El-Gabbas>"
 
 # not a git repo
 non_git_dir <- fs::path_temp("test_dir")

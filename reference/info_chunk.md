@@ -59,7 +59,7 @@ info_chunk(
 
   integer; the level at which the message will be printed. If e.g.
   `level = 1L`, the following string will be printed at the beginning of
-  the message: " \>\>\> ". Default is `0`.
+  the message: " \>\> ". Default is `0`.
 
 - msg_n_lines:
 
@@ -98,21 +98,21 @@ Ahmed El-Gabbas
 info_chunk(message = "Started")
 #> 
 #> --------------------------------------------------
-#> Started - 03/06/2026
+#> Started - 05/06/2026
 #> --------------------------------------------------
 #> 
 
 info_chunk(message = "finished", line_char = "*", line_char_rep = 60)
 #> 
 #> ************************************************************
-#> finished - 03/06/2026
+#> finished - 05/06/2026
 #> ************************************************************
 #> 
 
 info_chunk(message = "Started", cat_bold =  TRUE, cat_red = TRUE)
 #> 
 #> --------------------------------------------------
-#> Started - 03/06/2026
+#> Started - 05/06/2026
 #> --------------------------------------------------
 #> 
 ```

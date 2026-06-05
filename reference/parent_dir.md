@@ -83,8 +83,8 @@ example_path <- "/home/user/projects/data"
 # input as file
 example_file <- "/home/user/projects/data/file.txt"
 parent_dir(example_file, levels = 2)
-#>   >>>  Input `path` appears to be a file (exists as file or has extension), using its parent directory.
-#>   >>>  /home/user/projects/data/file.txt
+#>   >>  Input `path` appears to be a file (exists as file or has extension), using its parent directory.
+#>   >>  /home/user/projects/data/file.txt
 #> 
 #> /home/user
 # suppress warning

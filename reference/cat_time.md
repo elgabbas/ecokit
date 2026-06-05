@@ -61,7 +61,7 @@ cat_time(
 
   integer; the level at which the message will be printed. If e.g.
   `level = 1L`, the following string will be printed at the beginning of
-  the message: " \>\>\> ". Default is `0`.
+  the message: " \>\> ". Default is `0`.
 
 - verbose:
 
@@ -85,25 +85,25 @@ Ahmed El-Gabbas
 
 ``` r
 cat_time()
-#> 07:27:48
+#> 20:50:11
 
 cat_time(cat_date = TRUE)
-#> 03/06/2026 07:27:48
+#> 05/06/2026 20:50:11
 
 cat_time("time now")
-#> time now - 07:27:48
+#> time now - 20:50:11
 
 cat_time("\n\nTime now", msg_n_lines = 2L, level = 1L)
 #> 
 #> 
-#>   >>>  Time now - 07:27:48
+#>   >>  Time now - 20:50:11
 #>  
 
 cat_time(
   "\ntime now", cat_date = TRUE, cat_bold = TRUE, cat_red = TRUE,
   msg_n_lines = 2L, level = 1L)
 #> 
-#>   >>>  time now - 03/06/2026 07:27:48
+#>   >>  time now - 05/06/2026 20:50:11
 #>  
 
 # The use of levels
@@ -113,10 +113,10 @@ cat_time(
   cat_time("subtask L2", level = 2L)
   cat_time("subtask L3", level = 3L)
 }
-#> Task 1 - 07:27:48
-#>   >>>  subtask L1 - 07:27:48
-#>   >>>  >>>  subtask L2 - 07:27:48
-#>   >>>  >>>  >>>  subtask L3 - 07:27:48
+#> Task 1 - 20:50:11
+#>   >>  subtask L1 - 20:50:11
+#>   >>  >>  subtask L2 - 20:50:11
+#>   >>  >>  >>  subtask L3 - 20:50:11
 
 # disabling the function output
 cat_time(verbose = FALSE)
