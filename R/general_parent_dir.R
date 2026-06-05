@@ -64,8 +64,8 @@ parent_dir <- function(
       cat(
         crayon::blue(
           paste0(
-            "  >>>  Input `path` appears to be a file (exists as file or has ",
-            "extension), using its parent directory.\n  >>>  ", path, "\n")))
+            "  >>  Input `path` appears to be a file (exists as file or has ",
+            "extension), using its parent directory.\n  >>  ", path, "\n")))
     }
     path <- fs::path_dir(path)
   }

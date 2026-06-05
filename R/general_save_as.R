@@ -95,6 +95,11 @@ save_as <- function(
   }
 
   if (inherits(object, "character")) {
+    if (length(object) != 1L || !nzchar(object)) {
+      ecokit::stop_ctx(
+        "`object` as a character must be a single non-empty string",
+        object = object, include_backtrace = TRUE)
+    }
     object <- get(object)
   }
 

@@ -41,7 +41,7 @@ is \code{CET}.}
 
 \item{level}{integer; the level at which the message will be printed. If e.g.
 \code{level = 1L}, the following string will be printed at the beginning of the
-message: "   >>>   ". Default is \code{0}.}
+message: "  >>  ". Default is \code{0}.}
 
 \item{verbose}{logical; whether to print output to console. Default is
 \code{TRUE}. If \code{FALSE}, the function does nothing. This is useful to suppress

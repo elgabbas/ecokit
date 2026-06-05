@@ -41,7 +41,7 @@ Default is \code{FALSE}.}
 
 \item{level}{integer; the level at which the message will be printed. If e.g.
 \code{level = 1L}, the following string will be printed at the beginning of the
-message: "   >>>   ". Default is \code{0}.}
+message: "  >>  ". Default is \code{0}.}
 
 \item{msg_n_lines}{integer; the number of newline characters to print after
 the message. Default is 1.}

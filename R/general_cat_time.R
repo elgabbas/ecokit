@@ -21,7 +21,7 @@
 #'   is `CET`.
 #' @param level integer; the level at which the message will be printed. If e.g.
 #'   `level = 1L`, the following string will be printed at the beginning of the
-#'   message: "   >>>   ". Default is `0`.
+#'   message: "  >>  ". Default is `0`.
 #' @param cat_bold logical; whether to print the text in bold. Default is
 #'   `FALSE`.
 #' @param cat_red logical; whether to print the text in red. Default is `FALSE`.
@@ -116,7 +116,7 @@ cat_time <- function(
     text <- paste0(text, time_now)
   } else {
     if (level > 0L) {
-      prefix <- rep("  >>>", each = level) %>%
+      prefix <- rep("  >>", each = level) %>%
         paste(collapse = "") %>%
         paste0("  ")
       text <- paste0(prefix, text)

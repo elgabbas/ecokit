@@ -78,7 +78,7 @@ load_packages <- function(
   packages <- setdiff(packages, base_pkgs)
   if (length(packages) == 0L) return(invisible(NULL))
 
-  prefix <- "  >>>>  "
+  prefix <- " >> "
 
   # List of installed packages
   installed_packages <- rownames(utils::installed.packages())
