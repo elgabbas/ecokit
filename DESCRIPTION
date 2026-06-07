@@ -2,7 +2,7 @@ Type: Package
 Package: ecokit
 Title: Tools for Ecological and General Utilities
 Version: 0.1.0
-Date: 2026-06-05
+Date: 2026-06-08
 Authors@R: 
     person("Ahmed", "El-Gabbas", , "elgabbas@outlook.com", role = c("aut", "cre"))
 Description: A collection of utility functions designed for ecologists and
@@ -30,6 +30,7 @@ Imports:
     tibble (>= 3.2),
     tidyselect (>= 1.2)
 Suggests:
+    archive (>= 1.1.10),
     arrow (>= 19.0),
     car (>= 3.1),
     data.table (>= 1.17),

@@ -87,6 +87,7 @@ reference:
   - source_silent
   - n_unique
   - add_missing_columns
+  - create_tar
   - load_tar_file
 
 - title: Printing/logging functions
