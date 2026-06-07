@@ -170,6 +170,9 @@
 - [`add_missing_columns()`](https://elgabbas.github.io/ecokit/reference/add_missing_columns.md)
   : Add missing columns to a data frame with specified fill values
 
+- [`create_tar()`](https://elgabbas.github.io/ecokit/reference/create_tar.md)
+  : Create a tar archive from files in a directory
+
 - [`load_tar_file()`](https://elgabbas.github.io/ecokit/reference/load_tar_file.md)
   : Load a File from a Tar Archive
 
