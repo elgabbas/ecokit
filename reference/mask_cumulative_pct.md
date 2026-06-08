@@ -90,7 +90,7 @@ result
 #>     }
 #>     UseMethod("result")
 #> }
-#> <bytecode: 0x55909b604f78>
+#> <bytecode: 0x55a8481dac40>
 #> <environment: namespace:future>
 
 # Areas contributing to the top 90% of cumulative sum (log10 scale; computed

@@ -234,26 +234,18 @@ Diversity and Distributions. <a href="https://doi.org/10.1111/ddi.70205" class="
 <span class="r-in"><span><span class="co"># Occurrence count for birds at 20 km resolution</span></span></span>
 <span class="r-in"><span><span class="va">efforts_birds_all</span> <span class="op">&lt;-</span> <span class="fu">get_sampling_effort</span><span class="op">(</span></span></span>
 <span class="r-in"><span>  group <span class="op">=</span> <span class="st">"aves"</span>, metric <span class="op">=</span> <span class="st">"n_obs"</span>, resolution <span class="op">=</span> <span class="fl">20</span>, out_dir <span class="op">=</span> <span class="va">temp_dir</span><span class="op">)</span></span></span>
-<span class="r-wrn co"><span class="r-pr">#&gt;</span> <span class="warning">Warning: </span>There was 1 warning in `dplyr::mutate()`.</span>
-<span class="r-wrn co"><span class="r-pr">#&gt;</span> <span style="color: #00BBBB;">ℹ</span> In argument: `effort_down = purrr::pmap(...)`.</span>
-<span class="r-wrn co"><span class="r-pr">#&gt;</span> Caused by warning:</span>
-<span class="r-wrn co"><span class="r-pr">#&gt;</span> <span style="color: #BBBB00;">!</span> Failed to download file using osfr. Attempting fallback download.</span>
-<span class="r-wrn co"><span class="r-pr">#&gt;</span>    group: aves</span>
-<span class="r-wrn co"><span class="r-pr">#&gt;</span>    descendant: all</span>
-<span class="r-wrn co"><span class="r-pr">#&gt;</span>    year: total</span>
-<span class="r-wrn co"><span class="r-pr">#&gt;</span>    metric: n_obs</span>
-<span class="r-wrn co"><span class="r-pr">#&gt;</span>    resolution: 20</span>
-<span class="r-wrn co"><span class="r-pr">#&gt;</span>    URL: https://osf.io/download/69144be425b8c888ea3ee2b8/</span>
 <span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="fu">dplyr</span><span class="fu">::</span><span class="fu"><a href="https://pillar.r-lib.org/reference/glimpse.html" class="external-link">glimpse</a></span><span class="op">(</span><span class="va">efforts_birds_all</span><span class="op">)</span></span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> Rows: 0</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> Columns: 6</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> $ group       <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> $ descendant  <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> $ year        <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> $ metric      <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> $ resolution  <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> $ effort_down <span style="color: #949494; font-style: italic;">&lt;???&gt;</span> </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> Rows: 1</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> Columns: 8</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> $ group      <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> "aves"</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> $ descendant <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> "all"</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> $ year       <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> "total"</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> $ metric     <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> "n_obs"</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> $ resolution <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> 20</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> $ name       <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> "n_obs_Aves_res_20.tif"</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> $ id         <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> "69144be425b8c888ea3ee2b8"</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> $ meta       <span style="color: #949494; font-style: italic;">&lt;list&gt;</span> [[&lt;NULL&gt;, &lt;NULL&gt;, "n_obs_Aves_res_20.tif", "file", "/69144be425b8c888ea3ee2b8", 822667, "osfstorage", "/res_20_n_obs/n_obs_Aves_res_20.tif", &lt;NULL&gt;, 2025-11-12 08:57:09, 2025-11-12 08:57:09, [["ba82a8bd3ef8fe226f5a91e366ff2755", "def3eac67285494859167be1838dd3fee1edc0a069f4465ed97a8a2f8262a226"], 143], [], FALSE, 1, FALSE], ["https://api.osf.io/v2/files/69144be425b8c888ea3ee2b…</span>
 <span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="va">efforts_birds_all_r</span> <span class="op">&lt;-</span> <span class="fu">terra</span><span class="fu">::</span><span class="fu"><a href="https://rspatial.github.io/terra/reference/rast.html" class="external-link">rast</a></span><span class="op">(</span><span class="va">efforts_birds_all</span><span class="op">$</span><span class="va">local_path</span><span class="op">)</span></span></span>
 <span class="r-wrn co"><span class="r-pr">#&gt;</span> <span class="warning">Warning: </span>Unknown or uninitialised column: `local_path`.</span>
@@ -300,16 +292,6 @@ Diversity and Distributions. <a href="https://doi.org/10.1111/ddi.70205" class="
 <span class="r-in"><span><span class="va">efforts_plants_2020</span> <span class="op">&lt;-</span> <span class="fu">get_sampling_effort</span><span class="op">(</span></span></span>
 <span class="r-in"><span>  group <span class="op">=</span> <span class="st">"tracheophyta"</span>, descendants <span class="op">=</span> <span class="st">"all"</span>,</span></span>
 <span class="r-in"><span>  metric <span class="op">=</span> <span class="st">"n_sp"</span>, resolution <span class="op">=</span> <span class="fl">10</span>, out_dir <span class="op">=</span> <span class="va">temp_dir</span><span class="op">)</span></span></span>
-<span class="r-wrn co"><span class="r-pr">#&gt;</span> <span class="warning">Warning: </span>There was 1 warning in `dplyr::mutate()`.</span>
-<span class="r-wrn co"><span class="r-pr">#&gt;</span> <span style="color: #00BBBB;">ℹ</span> In argument: `effort_down = purrr::pmap(...)`.</span>
-<span class="r-wrn co"><span class="r-pr">#&gt;</span> Caused by warning:</span>
-<span class="r-wrn co"><span class="r-pr">#&gt;</span> <span style="color: #BBBB00;">!</span> Failed to download file using osfr. Attempting fallback download.</span>
-<span class="r-wrn co"><span class="r-pr">#&gt;</span>    group: tracheophyta</span>
-<span class="r-wrn co"><span class="r-pr">#&gt;</span>    descendant: all</span>
-<span class="r-wrn co"><span class="r-pr">#&gt;</span>    year: total</span>
-<span class="r-wrn co"><span class="r-pr">#&gt;</span>    metric: n_sp</span>
-<span class="r-wrn co"><span class="r-pr">#&gt;</span>    resolution: 10</span>
-<span class="r-wrn co"><span class="r-pr">#&gt;</span>    URL: https://osf.io/download/690b6907e442d3491b9c3f51/</span>
 <span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="va">efforts_plants_2020_r</span> <span class="op">&lt;-</span> <span class="fu">terra</span><span class="fu">::</span><span class="fu"><a href="https://rspatial.github.io/terra/reference/rast.html" class="external-link">rast</a></span><span class="op">(</span><span class="va">efforts_plants_2020</span><span class="op">$</span><span class="va">local_path</span><span class="op">)</span></span></span>
 <span class="r-wrn co"><span class="r-pr">#&gt;</span> <span class="warning">Warning: </span>Unknown or uninitialised column: `local_path`.</span>
@@ -329,32 +311,43 @@ Diversity and Distributions. <a href="https://doi.org/10.1111/ddi.70205" class="
 <span class="r-in"><span>  group <span class="op">=</span> <span class="st">"insecta"</span>,</span></span>
 <span class="r-in"><span>  descendants <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"hemiptera"</span>, <span class="st">"hymenoptera"</span>, <span class="st">"lepidoptera"</span><span class="op">)</span>,</span></span>
 <span class="r-in"><span>  metric <span class="op">=</span> <span class="st">"n_obs"</span>, resolution <span class="op">=</span> <span class="fl">10</span>, out_dir <span class="op">=</span> <span class="va">temp_dir</span><span class="op">)</span></span></span>
-<span class="r-wrn co"><span class="r-pr">#&gt;</span> <span class="warning">Warning: </span>There were 3 warnings in `dplyr::mutate()`.</span>
+<span class="r-wrn co"><span class="r-pr">#&gt;</span> <span class="warning">Warning: </span>There were 2 warnings in `dplyr::mutate()`.</span>
 <span class="r-wrn co"><span class="r-pr">#&gt;</span> The first warning was:</span>
 <span class="r-wrn co"><span class="r-pr">#&gt;</span> <span style="color: #00BBBB;">ℹ</span> In argument: `effort_down = purrr::pmap(...)`.</span>
 <span class="r-wrn co"><span class="r-pr">#&gt;</span> Caused by warning:</span>
 <span class="r-wrn co"><span class="r-pr">#&gt;</span> <span style="color: #BBBB00;">!</span> Failed to download file using osfr. Attempting fallback download.</span>
 <span class="r-wrn co"><span class="r-pr">#&gt;</span>    group: insecta</span>
-<span class="r-wrn co"><span class="r-pr">#&gt;</span>    descendant: hemiptera</span>
+<span class="r-wrn co"><span class="r-pr">#&gt;</span>    descendant: hymenoptera</span>
 <span class="r-wrn co"><span class="r-pr">#&gt;</span>    year: total</span>
 <span class="r-wrn co"><span class="r-pr">#&gt;</span>    metric: n_obs</span>
 <span class="r-wrn co"><span class="r-pr">#&gt;</span>    resolution: 10</span>
-<span class="r-wrn co"><span class="r-pr">#&gt;</span>    URL: https://osf.io/download/691627285d3006de940c2892/</span>
-<span class="r-wrn co"><span class="r-pr">#&gt;</span> <span style="color: #00BBBB;">ℹ</span> Run `dplyr::last_dplyr_warnings()` to see the 2 remaining warnings.</span>
+<span class="r-wrn co"><span class="r-pr">#&gt;</span>    URL: https://osf.io/download/6916281e843c090b4dfdc3f1/</span>
+<span class="r-wrn co"><span class="r-pr">#&gt;</span> <span style="color: #00BBBB;">ℹ</span> Run `dplyr::last_dplyr_warnings()` to see the 1 remaining warning.</span>
 <span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="va">efforts_insects</span></span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># A tibble: 0 × 6</span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># ℹ 6 variables: group &lt;chr&gt;, descendant &lt;chr&gt;, year &lt;chr&gt;, metric &lt;chr&gt;, resolution &lt;dbl&gt;, effort_down &lt;???&gt;</span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># A tibble: 3 × 8</span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   group   descendant  year  metric resolution name                              </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>   <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>       <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>       <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>                             </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">1</span> insecta hemiptera   total n_obs          10 n_obs_Hemiptera_total_res_10.tif  </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">2</span> insecta hymenoptera total n_obs          10 n_obs_Hymenoptera_total_res_10.tif</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">3</span> insecta lepidoptera total n_obs          10 n_obs_Lepidoptera_total_res_10.tif</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   id                       meta            </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>                    <span style="color: #949494; font-style: italic;">&lt;list&gt;</span>          </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">1</span> 691627285d3006de940c2892 <span style="color: #949494;">&lt;named list [3]&gt;</span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">2</span> 6916281e843c090b4dfdc3f1 <span style="color: #949494;">&lt;named list [3]&gt;</span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">3</span> 69162b43bdc702dce1e2fd62 <span style="color: #949494;">&lt;named list [3]&gt;</span></span>
 <span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="fu">dplyr</span><span class="fu">::</span><span class="fu"><a href="https://pillar.r-lib.org/reference/glimpse.html" class="external-link">glimpse</a></span><span class="op">(</span><span class="va">efforts_insects</span><span class="op">)</span></span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> Rows: 0</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> Columns: 6</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> $ group       <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> $ descendant  <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> $ year        <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> $ metric      <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> $ resolution  <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> $ effort_down <span style="color: #949494; font-style: italic;">&lt;???&gt;</span> </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> Rows: 3</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> Columns: 8</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> $ group      <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> "insecta"<span style="color: #949494;">, </span>"insecta"<span style="color: #949494;">, </span>"insecta"</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> $ descendant <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> "hemiptera"<span style="color: #949494;">, </span>"hymenoptera"<span style="color: #949494;">, </span>"lepidoptera"</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> $ year       <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> "total"<span style="color: #949494;">, </span>"total"<span style="color: #949494;">, </span>"total"</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> $ metric     <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> "n_obs"<span style="color: #949494;">, </span>"n_obs"<span style="color: #949494;">, </span>"n_obs"</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> $ resolution <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> 10<span style="color: #949494;">, </span>10<span style="color: #949494;">, </span>10</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> $ name       <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> "n_obs_Hemiptera_total_res_10.tif"<span style="color: #949494;">, </span>"n_obs_Hymenoptera_total_res_10.tif"<span style="color: #949494;">, </span>"n_obs_Lepidoptera_total_res_10.tif"</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> $ id         <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> "691627285d3006de940c2892"<span style="color: #949494;">, </span>"6916281e843c090b4dfdc3f1"<span style="color: #949494;">, </span>"69162b43bdc702dce1e2fd62"</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> $ meta       <span style="color: #949494; font-style: italic;">&lt;list&gt;</span> [[&lt;NULL&gt;, &lt;NULL&gt;, "n_obs_Hemiptera_total_res_10.tif", "file", "/691627285d3006de940c2892", 291337, "osfstorage", "/res_10_n_obs/n_obs_Hemiptera_total_res_10.tif", &lt;NULL&gt;, 2025-11-13 18:44:56, 2025-11-13 18:44:56, [["8bfce8c7dc631d23e2b9f64645612606", "ea6bde11aca3b7135487e3f1b3fc0708e4923f65c8bb116ce7d3848f886f53d5"], 79], [], FALSE, 1, FALSE], ["https://api.osf.io/v2/files/69…</span>
 <span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="va">efforts_insects_r</span> <span class="op">&lt;-</span> <span class="fu">terra</span><span class="fu">::</span><span class="fu"><a href="https://rspatial.github.io/terra/reference/rast.html" class="external-link">rast</a></span><span class="op">(</span><span class="va">efforts_insects</span><span class="op">$</span><span class="va">local_path</span><span class="op">)</span></span></span>
 <span class="r-wrn co"><span class="r-pr">#&gt;</span> <span class="warning">Warning: </span>Unknown or uninitialised column: `local_path`.</span>
