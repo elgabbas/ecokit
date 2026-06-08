@@ -96,7 +96,7 @@ load_packages <- function(
   # wall time because R must stat() every DESCRIPTION file across potentially
   # thousands of packages in multiple library trees. Requesting only the
   # Version field reduces the per-file parse work and keeps the matrix small.
-  
+
   installed_mat <- utils::installed.packages(fields = "Version")
   installed_pkgs <- rownames(installed_mat)
 
@@ -114,7 +114,7 @@ load_packages <- function(
           dependencies = TRUE, quiet = TRUE, verbose = FALSE, Ncpus = n_cpus),
         file = nullfile())
 
-      
+
       # Refresh the cache only after installation changes the library state
       installed_mat <- utils::installed.packages(fields = "Version")
       installed_pkgs <- rownames(installed_mat)
