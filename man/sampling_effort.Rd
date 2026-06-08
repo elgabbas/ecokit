@@ -16,7 +16,8 @@ get_sampling_effort(
   resolution = NULL,
   out_dir = getwd(),
   conflicts = "skip",
-  verbose = FALSE
+  verbose = FALSE,
+  osf_token = NULL
 )
 }
 \arguments{
@@ -51,6 +52,10 @@ Must be either "skip" (default) or "overwrite".}
 
 \item{verbose}{Logical. If \code{TRUE}, prints progress messages during the
 download process. Defaults to \code{FALSE}.}
+
+\item{osf_token}{Character string. An \emph{optional} OSF token for
+authentication. If provided, it will be used to authenticate with OSF.
+Defaults to \code{NULL}, which access public files without authentication.}
 }
 \value{
 A tibble containing downloaded sampling effort data with columns:
@@ -93,6 +98,11 @@ from OSF.
 
 Use \verb{[get_group_descendants()]} to retrieve all valid descendants for a given
 taxonomic group.
+
+The function tries to download files using the \code{osfr} package. If the
+download fails or results in an invalid file, it attempts a fallback download
+using the direct URL with \code{\link[utils:download.file]{utils::download.file()}}. If both attempts fail, an
+error is raised.
 }
 \examples{
 require(terra)

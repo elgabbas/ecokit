@@ -32,6 +32,9 @@
 #'   Must be either "skip" (default) or "overwrite".
 #' @param verbose Logical. If `TRUE`, prints progress messages during the
 #'   download process. Defaults to `FALSE`.
+#' @param osf_token Character string. An *optional* OSF token for
+#'   authentication. If provided, it will be used to authenticate with OSF.
+#'   Defaults to `NULL`, which access public files without authentication.
 #'
 #' @return A tibble containing downloaded sampling effort data with columns:
 #'   - `group`: The taxonomic group
@@ -64,6 +67,11 @@
 #'
 #' Use `[get_group_descendants()]` to retrieve all valid descendants for a given
 #' taxonomic group.
+#'
+#' The function tries to download files using the `osfr` package. If the
+#' download fails or results in an invalid file, it attempts a fallback download
+#' using the direct URL with [utils::download.file()]. If both attempts fail, an
+#' error is raised.
 #'
 #' @references El-Gabbas, A. (2026). A Global, Taxon-Stratified, High-Resolution
 #'   Sampling-Effort Dataset From GBIF for Bias-Aware Ecological Modelling.
@@ -163,7 +171,8 @@
 
 get_sampling_effort <- function(
     group = NULL, descendants = "all", metric = NULL, years = "total",
-    resolution = NULL, out_dir = getwd(), conflicts = "skip", verbose = FALSE) {
+    resolution = NULL, out_dir = getwd(), conflicts = "skip", verbose = FALSE,
+    osf_token = NULL) {
 
   year <- descendant <- name2 <- name <- NULL
 
@@ -181,9 +190,9 @@ get_sampling_effort <- function(
   # Validate inputs ----
   # ++++++++++++++++++++++++++++++++++++++++++++++++++++++ #
 
-  ## ------------------------------------------------------
+  ## ------------------------------------------------------ #
   ## group ----
-  ## ------------------------------------------------------
+  ## ------------------------------------------------------ #
 
   valid_groups <- c(
     "all", "amphibia", "arachnida", "aves", "fungi", "insecta", "mammalia",
@@ -215,9 +224,9 @@ get_sampling_effort <- function(
       "Invalid group.", group = group, valid_groups = valid_groups)
   }
 
-  ## ------------------------------------------------------
+  ## ------------------------------------------------------ #
   ## descendants ----
-  ## ------------------------------------------------------
+  ## ------------------------------------------------------ #
 
   valid_descendants <- get_group_descendants(group = "all")
 
@@ -244,9 +253,9 @@ get_sampling_effort <- function(
         toString(valid_descendants[[group]]), "."))
   }
 
-  ## ------------------------------------------------------
+  ## ------------------------------------------------------ #
   ## metric ----
-  ## ------------------------------------------------------
+  ## ------------------------------------------------------ #
 
   if (is.null(metric)) {
     ecokit::stop_ctx(
@@ -268,9 +277,9 @@ get_sampling_effort <- function(
         "'n_obs' for number of observations."))
   }
 
-  ## ------------------------------------------------------
+  ## ------------------------------------------------------ #
   ## years ----
-  ## ------------------------------------------------------
+  ## ------------------------------------------------------ #
 
 
   if (group == "all") {
@@ -295,9 +304,9 @@ get_sampling_effort <- function(
     }
   }
 
-  ## ------------------------------------------------------
+  ## ------------------------------------------------------ #
   ## resolution ----
-  ## ------------------------------------------------------
+  ## ------------------------------------------------------ #
 
   valid_resolutions <- c(1L, 5L, 10L, 20L)
 
@@ -327,9 +336,9 @@ get_sampling_effort <- function(
       resolution = resolution)
   }
 
-  ## ------------------------------------------------------
+  ## ------------------------------------------------------ #
   ## out_dir ----
-  ## ------------------------------------------------------
+  ## ------------------------------------------------------ #
 
   if (is.null(out_dir)) {
     ecokit::stop_ctx(
@@ -354,10 +363,9 @@ get_sampling_effort <- function(
     fs::dir_create(out_dir)
   }
 
-  ## ------------------------------------------------------
+  ## ------------------------------------------------------ #
   ## conflicts ----
-  ## ------------------------------------------------------
-
+  ## ------------------------------------------------------ #
 
   if (is.null(conflicts)) {
     ecokit::stop_ctx(
@@ -373,11 +381,19 @@ get_sampling_effort <- function(
         "'skip' or 'overwrite'"))
   }
 
+  ## ------------------------------------------------------ #
+  ## osf_token ----
+  ## ------------------------------------------------------ #
+
+  if (!is.null(osf_token) && is.character(osf_token) && nzchar(osf_token)) {
+    suppressMessages(osfr::osf_auth(token = osf_token))
+  }
+
   # |||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||| #
   # |||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||| #
 
   # ++++++++++++++++++++++++++++++++++++++++++++++++++++++ #
-  # Retrieve sampling effort raster from OSF based on validated inputs
+  # Retrieve sampling effort raster from OSF based on validated inputs -----
   # ++++++++++++++++++++++++++++++++++++++++++++++++++++++ #
 
   node_lists <- osfr::osf_retrieve_node("hz4sy") %>%
@@ -450,7 +466,55 @@ get_sampling_effort <- function(
           }
 
           Sys.sleep(2L)
-          osfr::osf_download(x = r_file, path = out_dir, conflicts = conflicts)
+
+          down_osf <- tryCatch({
+            osfr::osf_download(
+              x = r_file, path = out_dir, conflicts = conflicts)
+            TRUE
+          },
+          warning = function(w) {
+            FALSE
+          },
+          error = function(e) {
+            FALSE
+          })
+
+          # Check if file was downloaded successfully and is a valid TIFF
+          file_tiff <- fs::path(out_dir, r_file$name)
+          file_not_ok <- any(
+            isFALSE(down_osf),
+            !fs::file_exists(file_tiff),
+            fs::file_info(file_tiff)$size == 0L,
+            !ecokit::check_tiff(file_tiff, warning = FALSE))
+
+          down_url <- r_file$meta[[1L]]$links$download
+          if (file_not_ok) {
+            warning(
+              "Failed to download file using osfr. ",
+              "Attempting fallback download.\n   group: ",
+              group, "\n   descendant: ", descendant, "\n   year: ",
+              year, "\n   metric: ", metric, "\n   resolution: ", resolution,
+              "\n   URL: ", down_url, "\n",
+              call. = FALSE, immediate. = TRUE)
+            utils::download.file(
+              url = down_url, destfile = file_tiff, mode = "wb", quiet = TRUE)
+          }
+
+          file_not_ok <- any(
+            !fs::file_exists(file_tiff),
+            fs::file_info(file_tiff)$size == 0L,
+            !ecokit::check_tiff(file_tiff, warning = FALSE))
+
+          if (file_not_ok) {
+            if (fs::file_exists(file_tiff)) {
+              fs::file_delete(file_tiff)
+            }
+            ecokit::stop_ctx(
+              "Failed to download file from OSF and fallback URL.",
+              file_tiff = file_tiff, down_url = down_url, group = group,
+              descendant = descendant, year = year, metric = metric,
+              resolution = resolution)
+          }
 
         })) %>%
     tidyr::unnest("effort_down")
