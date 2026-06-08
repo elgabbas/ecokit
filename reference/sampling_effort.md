@@ -21,7 +21,8 @@ get_sampling_effort(
   resolution = NULL,
   out_dir = getwd(),
   conflicts = "skip",
-  verbose = FALSE
+  verbose = FALSE,
+  osf_token = NULL
 )
 ```
 
@@ -77,6 +78,12 @@ get_sampling_effort(
   Logical. If `TRUE`, prints progress messages during the download
   process. Defaults to `FALSE`.
 
+- osf_token:
+
+  Character string. An *optional* OSF token for authentication. If
+  provided, it will be used to authenticate with OSF. Defaults to
+  `NULL`, which access public files without authentication.
+
 ## Value
 
 A tibble containing downloaded sampling effort data with columns:
@@ -120,6 +127,12 @@ corresponding raster files from OSF.
 
 Use `[get_group_descendants()]` to retrieve all valid descendants for a
 given taxonomic group.
+
+The function tries to download files using the `osfr` package. If the
+download fails or results in an invalid file, it attempts a fallback
+download using the direct URL with
+[`utils::download.file()`](https://rdrr.io/r/utils/download.file.html).
+If both attempts fail, an error is raised.
 
 ## References
 
@@ -190,17 +203,30 @@ fs::dir_create(temp_dir)
 # Occurrence count for birds at 20 km resolution
 efforts_birds_all <- get_sampling_effort(
   group = "aves", metric = "n_obs", resolution = 20, out_dir = temp_dir)
-#> Error in dplyr::mutate(., effort_down = purrr::pmap(list(group, descendant,     year, metric, resolution), function(group, descendant, year,     metric, resolution) {    ecokit::cat_time(paste0(group, ": ", descendant, "; year: ",         year), verbose = verbose)    if (group == "all") {        descendant_year <- paste0(metric, "_", resolution, ".tif")        r_file <- osfr::osf_retrieve_node(node_lists$id) %>%             osfr::osf_ls_files(type = "file", pattern = descendant_year)    }    else {        res_metric <- paste0("res_", resolution, "_", metric)        if (year == "total") {            if (descendant == "all") {                descendant_year <- paste0(group, "_res")            }            else {                descendant_year <- paste0("_", descendant, "_total_res")            }        }        else if (descendant == "all") {            descendant_year <- paste0(group, "_", year)        }        else {            descendant_year <- paste0("_", descendant, "_", year)        }        r_file <- osfr::osf_retrieve_node(node_lists$id) %>%             osfr::osf_ls_files(n_max = 15L, type = "folder",                 pattern = res_metric) %>% osfr::osf_ls_files(type = "file",             pattern = descendant_year)    }    if (nrow(r_file) != 1L) {        ecokit::stop_ctx(paste0("Expected exactly one file for metric '",             metric, "' and descendant-year '", descendant, " - ",             year, "'. Found ", nrow(r_file), " files."))    }    Sys.sleep(2L)    osfr::osf_download(x = r_file, path = out_dir, conflicts = conflicts)})): ℹ In argument: `effort_down = purrr::pmap(...)`.
-#> Caused by error in `purrr::pmap()`:
-#> ℹ In index: 1.
-#> Caused by error:
-#> ! Too Many Requests (HTTP 429)
+#> Warning: There was 1 warning in `dplyr::mutate()`.
+#> ℹ In argument: `effort_down = purrr::pmap(...)`.
+#> Caused by warning:
+#> ! Failed to download file using osfr. Attempting fallback download.
+#>    group: aves
+#>    descendant: all
+#>    year: total
+#>    metric: n_obs
+#>    resolution: 20
+#>    URL: https://osf.io/download/69144be425b8c888ea3ee2b8/
 
 dplyr::glimpse(efforts_birds_all)
-#> Error: object 'efforts_birds_all' not found
+#> Rows: 0
+#> Columns: 6
+#> $ group       <chr> 
+#> $ descendant  <chr> 
+#> $ year        <chr> 
+#> $ metric      <chr> 
+#> $ resolution  <dbl> 
+#> $ effort_down <???> 
 
 efforts_birds_all_r <- terra::rast(efforts_birds_all$local_path)
-#> Error in h(simpleError(msg, call)): error in evaluating the argument 'x' in selecting a method for function 'rast': object 'efforts_birds_all' not found
+#> Warning: Unknown or uninitialised column: `local_path`.
+#> Error in methods::as(x, "SpatRaster"): no method or default for coercing “NULL” to “SpatRaster”
 
 # Plot at log10 scale
 terra::classify(efforts_birds_all_r, cbind(0, NA)) %>%
@@ -215,15 +241,27 @@ terra::classify(efforts_birds_all_r, cbind(0, NA)) %>%
 efforts_insecta_2020 <- get_sampling_effort(
   group = "insecta", descendants = "all",
   metric = "n_obs", years = 2020, resolution = 10, out_dir = temp_dir)
+#> Warning: There was 1 warning in `dplyr::mutate()`.
+#> ℹ In argument: `effort_down = purrr::pmap(...)`.
+#> Caused by warning:
+#> ! Failed to download file using osfr. Attempting fallback download.
+#>    group: insecta
+#>    descendant: all
+#>    year: 2020
+#>    metric: n_obs
+#>    resolution: 10
+#>    URL: https://osf.io/download/69162951e79337dd25e2f525/
 
 efforts_insecta_2020_r <- terra::rast(efforts_insecta_2020$local_path)
+#> Warning: Unknown or uninitialised column: `local_path`.
+#> Error in methods::as(x, "SpatRaster"): no method or default for coercing “NULL” to “SpatRaster”
 
 # Plot at log10 scale
 terra::classify(efforts_insecta_2020_r, cbind(0, NA)) %>%
   terra::crop(terra::ext(-125, -66.5, 24.5, 49.5)) %>%
   log10() %>%
   plot()
-
+#> Error in h(simpleError(msg, call)): error in evaluating the argument 'x' in selecting a method for function 'plot': error in evaluating the argument 'x' in selecting a method for function 'crop': error in evaluating the argument 'x' in selecting a method for function 'classify': object 'efforts_insecta_2020_r' not found
 
 # |||||||||||||||||||||||||||||||||||||||||||||||||||||||||||
 
@@ -231,15 +269,27 @@ terra::classify(efforts_insecta_2020_r, cbind(0, NA)) %>%
 efforts_plants_2020 <- get_sampling_effort(
   group = "tracheophyta", descendants = "all",
   metric = "n_sp", resolution = 10, out_dir = temp_dir)
+#> Warning: There was 1 warning in `dplyr::mutate()`.
+#> ℹ In argument: `effort_down = purrr::pmap(...)`.
+#> Caused by warning:
+#> ! Failed to download file using osfr. Attempting fallback download.
+#>    group: tracheophyta
+#>    descendant: all
+#>    year: total
+#>    metric: n_sp
+#>    resolution: 10
+#>    URL: https://osf.io/download/690b6907e442d3491b9c3f51/
 
 efforts_plants_2020_r <- terra::rast(efforts_plants_2020$local_path)
+#> Warning: Unknown or uninitialised column: `local_path`.
+#> Error in methods::as(x, "SpatRaster"): no method or default for coercing “NULL” to “SpatRaster”
 
 # Plot at log10 scale
 terra::classify(efforts_plants_2020_r, cbind(0, NA)) %>%
   terra::crop(terra::ext(-125, -66.5, 24.5, 49.5)) %>%
   log10() %>%
   plot()
-
+#> Error in h(simpleError(msg, call)): error in evaluating the argument 'x' in selecting a method for function 'plot': error in evaluating the argument 'x' in selecting a method for function 'crop': error in evaluating the argument 'x' in selecting a method for function 'classify': object 'efforts_plants_2020_r' not found
 
 # |||||||||||||||||||||||||||||||||||||||||||||||||||||||||||
 
@@ -248,56 +298,38 @@ efforts_insects <- get_sampling_effort(
   group = "insecta",
   descendants = c("hemiptera", "hymenoptera", "lepidoptera"),
   metric = "n_obs", resolution = 10, out_dir = temp_dir)
+#> Warning: There were 3 warnings in `dplyr::mutate()`.
+#> The first warning was:
+#> ℹ In argument: `effort_down = purrr::pmap(...)`.
+#> Caused by warning:
+#> ! Failed to download file using osfr. Attempting fallback download.
+#>    group: insecta
+#>    descendant: hemiptera
+#>    year: total
+#>    metric: n_obs
+#>    resolution: 10
+#>    URL: https://osf.io/download/691627285d3006de940c2892/
+#> ℹ Run `dplyr::last_dplyr_warnings()` to see the 2 remaining warnings.
 
 efforts_insects
-#> # A tibble: 3 × 9
-#>   group   descendant  year  metric resolution name                              
-#>   <chr>   <chr>       <chr> <chr>       <dbl> <chr>                             
-#> 1 insecta hemiptera   total n_obs          10 n_obs_Hemiptera_total_res_10.tif  
-#> 2 insecta hymenoptera total n_obs          10 n_obs_Hymenoptera_total_res_10.tif
-#> 3 insecta lepidoptera total n_obs          10 n_obs_Lepidoptera_total_res_10.tif
-#>   id                      
-#>   <chr>                   
-#> 1 691627285d3006de940c2892
-#> 2 6916281e843c090b4dfdc3f1
-#> 3 69162b43bdc702dce1e2fd62
-#>   local_path                                                         
-#>   <chr>                                                              
-#> 1 /tmp/Rtmp8Ya4JB/sampling_efforts/n_obs_Hemiptera_total_res_10.tif  
-#> 2 /tmp/Rtmp8Ya4JB/sampling_efforts/n_obs_Hymenoptera_total_res_10.tif
-#> 3 /tmp/Rtmp8Ya4JB/sampling_efforts/n_obs_Lepidoptera_total_res_10.tif
-#>   meta            
-#>   <list>          
-#> 1 <named list [3]>
-#> 2 <named list [3]>
-#> 3 <named list [3]>
+#> # A tibble: 0 × 6
+#> # ℹ 6 variables: group <chr>, descendant <chr>, year <chr>, metric <chr>, resolution <dbl>, effort_down <???>
 
 dplyr::glimpse(efforts_insects)
-#> Rows: 3
-#> Columns: 9
-#> $ group      <chr> "insecta", "insecta", "insecta"
-#> $ descendant <chr> "hemiptera", "hymenoptera", "lepidoptera"
-#> $ year       <chr> "total", "total", "total"
-#> $ metric     <chr> "n_obs", "n_obs", "n_obs"
-#> $ resolution <dbl> 10, 10, 10
-#> $ name       <chr> "n_obs_Hemiptera_total_res_10.tif", "n_obs_Hymenoptera_total_res_10.tif", "n_obs_Lepidoptera_total_res_10.tif"
-#> $ id         <chr> "691627285d3006de940c2892", "6916281e843c090b4dfdc3f1", "69162b43bdc702dce1e2fd62"
-#> $ local_path <chr> "/tmp/Rtmp8Ya4JB/sampling_efforts/n_obs_Hemiptera_total_res_10.tif", "/tmp/Rtmp8Ya4JB/sampling_efforts/n_obs_Hymenoptera_total_res_10.tif", "/tmp/Rtmp8Ya4JB/sampling_efforts/n_obs_Lepidoptera_total_res_10.tif"
-#> $ meta       <list> [[<NULL>, <NULL>, "n_obs_Hemiptera_total_res_10.tif", "file", "/691627285d3006de940c2892", 291337, "osfstorage", "/res_10_n_obs/n_obs_Hemiptera_total_res_10.tif", <NULL>, 2025-11-13 18:44:56, 2025-11-13 18:44:56, [["8bfce8c7dc631d23e2b9f64645612606", "ea6bde11aca3b7135487e3f1b3fc0708e4923f65c8bb116ce7d3848f886f53d5"], 75], [], FALSE, 1, FALSE], ["https://api.osf.io/v2/files/69…
+#> Rows: 0
+#> Columns: 6
+#> $ group       <chr> 
+#> $ descendant  <chr> 
+#> $ year        <chr> 
+#> $ metric      <chr> 
+#> $ resolution  <dbl> 
+#> $ effort_down <???> 
 
 efforts_insects_r <- terra::rast(efforts_insects$local_path)
+#> Warning: Unknown or uninitialised column: `local_path`.
+#> Error in methods::as(x, "SpatRaster"): no method or default for coercing “NULL” to “SpatRaster”
 efforts_insects_r
-#> class       : SpatRaster
-#> size        : 2160, 4320, 3  (nrow, ncol, nlyr)
-#> resolution  : 0.08333333, 0.08333333  (x, y)
-#> extent      : -180, 180, -90, 90  (xmin, xmax, ymin, ymax)
-#> coord. ref. : lon/lat WGS 84 (EPSG:4326)
-#> sources     : n_obs_Hemiptera_total_res_10.tif
-#>               n_obs_Hymenoptera_total_res_10.tif
-#>               n_obs_Lepidoptera_total_res_10.tif
-#> names       : n_obs_Hemi~tal_res_10, n_obs_Hyme~tal_res_10, n_obs_Lepi~tal_res_10
-#> min values  :                     0,                     0,                     0
-#> max values  :                 92257,                270776,                324427
+#> Error: object 'efforts_insects_r' not found
 
 # Plot at log10 scale
 terra::classify(efforts_insects_r, cbind(0, NA)) %>%
@@ -305,7 +337,7 @@ terra::classify(efforts_insects_r, cbind(0, NA)) %>%
   stats::setNames(c("hemiptera", "hymenoptera", "lepidoptera")) %>%
   log10() %>%
   plot()
-
+#> Error in h(simpleError(msg, call)): error in evaluating the argument 'x' in selecting a method for function 'plot': error in evaluating the argument 'x' in selecting a method for function 'crop': error in evaluating the argument 'x' in selecting a method for function 'classify': object 'efforts_insects_r' not found
 
 fs::dir_delete(temp_dir)
 ```

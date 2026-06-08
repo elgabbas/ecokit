@@ -86,7 +86,7 @@ r
 #> resolution  : 36, 18  (x, y)
 #> extent      : -180, 180, -90, 90  (xmin, xmax, ymin, ymax)
 #> coord. ref. : lon/lat WGS 84 (CRS84) (OGC:CRS84)
-#> source      : spat_2303a3441ac_8963_yLRg6hGAP8aRG2b.tif
+#> source      : spat_22e36043ab7_8931_LM26AmsODEGPU5D.tif
 #> names       : layer10, layer2, layer10, layer1
 #> min values  :       1,      1,       1,      1
 #> max values  :       1,      1,       1,      1
@@ -98,7 +98,7 @@ sort_raster_layers(r)
 #> resolution  : 36, 18  (x, y)
 #> extent      : -180, 180, -90, 90  (xmin, xmax, ymin, ymax)
 #> coord. ref. : lon/lat WGS 84 (CRS84) (OGC:CRS84)
-#> source      : spat_2303a3441ac_8963_yLRg6hGAP8aRG2b.tif
+#> source      : spat_22e36043ab7_8931_LM26AmsODEGPU5D.tif
 #> names       : layer1, layer2, layer10, layer10
 #> min values  :      1,      1,       1,       1
 #> max values  :      1,      1,       1,       1

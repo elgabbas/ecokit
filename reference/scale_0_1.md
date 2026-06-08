@@ -57,7 +57,7 @@ c(r, r_scaled)
 #> extent      : -180, 180, -90, 90  (xmin, xmax, ymin, ymax)
 #> coord. ref. : lon/lat WGS 84 (CRS84) (OGC:CRS84)
 #> sources     : memory
-#>               spat_23036d219910_8963_I6VOVroMnudXN8o.tif
+#>               spat_22e367b822e8_8931_rG2neQku8ByG59H.tif
 #> names       :     lyr.1, lyr.1
 #> min values  : -2.957118,     0
 #> max values  :  2.761415,     1
@@ -84,7 +84,7 @@ c(r_raster, r_raster_scaled)
 #> resolution  : 36, 18  (x, y)
 #> extent      : -180, 180, -90, 90  (xmin, xmax, ymin, ymax)
 #> coord. ref. : lon/lat WGS 84 (EPSG:4326)
-#> source      : spat_23037ae40bc6_8963_CXwLzwEs1YOcmaT.tif
+#> source      : spat_22e334a0c3fc_8931_8nr4ZcY08gqXcRL.tif
 #> name        : lyr.1
 #> min value   :     0
 #> max value   :     1
@@ -101,7 +101,7 @@ c(terra::rast(r_file), r_file_scaled)
 #> extent      : -180, 180, -90, 90  (xmin, xmax, ymin, ymax)
 #> coord. ref. : lon/lat WGS 84 (EPSG:4326)
 #> sources     : raster.tif
-#>               spat_2303e440007_8963_CXI1TtECqsCRE9A.tif
+#>               spat_22e35e41dc2e_8931_CV8ON4lE27FBVEp.tif
 #> names       :     lyr.1, lyr.1
 #> min values  : -2.957118,     0
 #> max values  :  2.761415,     1

@@ -67,7 +67,7 @@ tar_flag <- ifelse(i == 1, "c", "r")
 
 # List contents of the tar file
 print(system2("tar", c("-tf", tmp_tar), stdout = TRUE))
-#> [1] "elev.tif"             "file23037a15ef02.csv" "file23036791cca.rds" 
+#> [1] "elev.tif"             "file22e35ed8250f.csv" "file22e35a04a883.rds"
 
 # example SpatRaster
 load_tar_file(

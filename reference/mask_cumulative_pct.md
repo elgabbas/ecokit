@@ -51,13 +51,19 @@ fs::dir_create(temp_dir)
 # resolution)
 efforts_birds_all <- get_sampling_effort(
   group = "aves", metric = "n_obs", resolution = 20, out_dir = temp_dir)
-#> Error in dplyr::mutate(., effort_down = purrr::pmap(list(group, descendant,     year, metric, resolution), function(group, descendant, year,     metric, resolution) {    ecokit::cat_time(paste0(group, ": ", descendant, "; year: ",         year), verbose = verbose)    if (group == "all") {        descendant_year <- paste0(metric, "_", resolution, ".tif")        r_file <- osfr::osf_retrieve_node(node_lists$id) %>%             osfr::osf_ls_files(type = "file", pattern = descendant_year)    }    else {        res_metric <- paste0("res_", resolution, "_", metric)        if (year == "total") {            if (descendant == "all") {                descendant_year <- paste0(group, "_res")            }            else {                descendant_year <- paste0("_", descendant, "_total_res")            }        }        else if (descendant == "all") {            descendant_year <- paste0(group, "_", year)        }        else {            descendant_year <- paste0("_", descendant, "_", year)        }        r_file <- osfr::osf_retrieve_node(node_lists$id) %>%             osfr::osf_ls_files(n_max = 15L, type = "folder",                 pattern = res_metric) %>% osfr::osf_ls_files(type = "file",             pattern = descendant_year)    }    if (nrow(r_file) != 1L) {        ecokit::stop_ctx(paste0("Expected exactly one file for metric '",             metric, "' and descendant-year '", descendant, " - ",             year, "'. Found ", nrow(r_file), " files."))    }    Sys.sleep(2L)    osfr::osf_download(x = r_file, path = out_dir, conflicts = conflicts)})): ℹ In argument: `effort_down = purrr::pmap(...)`.
-#> Caused by error in `purrr::pmap()`:
-#> ℹ In index: 1.
-#> Caused by error:
-#> ! Too Many Requests (HTTP 429)
+#> Warning: There was 1 warning in `dplyr::mutate()`.
+#> ℹ In argument: `effort_down = purrr::pmap(...)`.
+#> Caused by warning:
+#> ! Failed to download file using osfr. Attempting fallback download.
+#>    group: aves
+#>    descendant: all
+#>    year: total
+#>    metric: n_obs
+#>    resolution: 20
+#>    URL: https://osf.io/download/69144be425b8c888ea3ee2b8/
 efforts_birds_all_r <- terra::rast(efforts_birds_all$local_path)
-#> Error in h(simpleError(msg, call)): error in evaluating the argument 'x' in selecting a method for function 'rast': object 'efforts_birds_all' not found
+#> Warning: Unknown or uninitialised column: `local_path`.
+#> Error in methods::as(x, "SpatRaster"): no method or default for coercing “NULL” to “SpatRaster”
 
 result <- mask_cumulative_pct(rast = efforts_birds_all_r, top_pct = 90)
 #> Error: object 'efforts_birds_all_r' not found
@@ -84,7 +90,7 @@ result
 #>     }
 #>     UseMethod("result")
 #> }
-#> <bytecode: 0x559801613bc8>
+#> <bytecode: 0x55909b604f78>
 #> <environment: namespace:future>
 
 # Areas contributing to the top 90% of cumulative sum (log10 scale; computed

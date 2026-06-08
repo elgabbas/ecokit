@@ -97,13 +97,19 @@ lowest <code>(100 - top_pct)</code>%; where <code>xx</code> is the value of <cod
 <span class="r-in"><span><span class="co"># resolution)</span></span></span>
 <span class="r-in"><span><span class="va">efforts_birds_all</span> <span class="op">&lt;-</span> <span class="fu"><a href="sampling_effort.html">get_sampling_effort</a></span><span class="op">(</span></span></span>
 <span class="r-in"><span>  group <span class="op">=</span> <span class="st">"aves"</span>, metric <span class="op">=</span> <span class="st">"n_obs"</span>, resolution <span class="op">=</span> <span class="fl">20</span>, out_dir <span class="op">=</span> <span class="va">temp_dir</span><span class="op">)</span></span></span>
-<span class="r-err co"><span class="r-pr">#&gt;</span> <span class="error">Error in dplyr::mutate(., effort_down = purrr::pmap(list(group, descendant,     year, metric, resolution), function(group, descendant, year,     metric, resolution) {    ecokit::cat_time(paste0(group, ": ", descendant, "; year: ",         year), verbose = verbose)    if (group == "all") {        descendant_year &lt;- paste0(metric, "_", resolution, ".tif")        r_file &lt;- osfr::osf_retrieve_node(node_lists$id) %&gt;%             osfr::osf_ls_files(type = "file", pattern = descendant_year)    }    else {        res_metric &lt;- paste0("res_", resolution, "_", metric)        if (year == "total") {            if (descendant == "all") {                descendant_year &lt;- paste0(group, "_res")            }            else {                descendant_year &lt;- paste0("_", descendant, "_total_res")            }        }        else if (descendant == "all") {            descendant_year &lt;- paste0(group, "_", year)        }        else {            descendant_year &lt;- paste0("_", descendant, "_", year)        }        r_file &lt;- osfr::osf_retrieve_node(node_lists$id) %&gt;%             osfr::osf_ls_files(n_max = 15L, type = "folder",                 pattern = res_metric) %&gt;% osfr::osf_ls_files(type = "file",             pattern = descendant_year)    }    if (nrow(r_file) != 1L) {        ecokit::stop_ctx(paste0("Expected exactly one file for metric '",             metric, "' and descendant-year '", descendant, " - ",             year, "'. Found ", nrow(r_file), " files."))    }    Sys.sleep(2L)    osfr::osf_download(x = r_file, path = out_dir, conflicts = conflicts)})):</span> <span style="color: #00BBBB;">ℹ</span> In argument: `effort_down = purrr::pmap(...)`.</span>
-<span class="r-err co"><span class="r-pr">#&gt;</span> <span style="font-weight: bold;">Caused by error in `purrr::pmap()`:</span></span>
-<span class="r-err co"><span class="r-pr">#&gt;</span> <span style="color: #00BBBB;">ℹ</span> In index: 1.</span>
-<span class="r-err co"><span class="r-pr">#&gt;</span> <span style="font-weight: bold;">Caused by error:</span></span>
-<span class="r-err co"><span class="r-pr">#&gt;</span> <span style="color: #BBBB00;">!</span> Too Many Requests (HTTP 429)</span>
+<span class="r-wrn co"><span class="r-pr">#&gt;</span> <span class="warning">Warning: </span>There was 1 warning in `dplyr::mutate()`.</span>
+<span class="r-wrn co"><span class="r-pr">#&gt;</span> <span style="color: #00BBBB;">ℹ</span> In argument: `effort_down = purrr::pmap(...)`.</span>
+<span class="r-wrn co"><span class="r-pr">#&gt;</span> Caused by warning:</span>
+<span class="r-wrn co"><span class="r-pr">#&gt;</span> <span style="color: #BBBB00;">!</span> Failed to download file using osfr. Attempting fallback download.</span>
+<span class="r-wrn co"><span class="r-pr">#&gt;</span>    group: aves</span>
+<span class="r-wrn co"><span class="r-pr">#&gt;</span>    descendant: all</span>
+<span class="r-wrn co"><span class="r-pr">#&gt;</span>    year: total</span>
+<span class="r-wrn co"><span class="r-pr">#&gt;</span>    metric: n_obs</span>
+<span class="r-wrn co"><span class="r-pr">#&gt;</span>    resolution: 20</span>
+<span class="r-wrn co"><span class="r-pr">#&gt;</span>    URL: https://osf.io/download/69144be425b8c888ea3ee2b8/</span>
 <span class="r-in"><span><span class="va">efforts_birds_all_r</span> <span class="op">&lt;-</span> <span class="fu">terra</span><span class="fu">::</span><span class="fu"><a href="https://rspatial.github.io/terra/reference/rast.html" class="external-link">rast</a></span><span class="op">(</span><span class="va">efforts_birds_all</span><span class="op">$</span><span class="va">local_path</span><span class="op">)</span></span></span>
-<span class="r-err co"><span class="r-pr">#&gt;</span> <span class="error">Error in h(simpleError(msg, call)):</span> error in evaluating the argument 'x' in selecting a method for function 'rast': object 'efforts_birds_all' not found</span>
+<span class="r-wrn co"><span class="r-pr">#&gt;</span> <span class="warning">Warning: </span>Unknown or uninitialised column: `local_path`.</span>
+<span class="r-err co"><span class="r-pr">#&gt;</span> <span class="error">Error in methods::as(x, "SpatRaster"):</span> no method or default for coercing “NULL” to “SpatRaster”</span>
 <span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="va">result</span> <span class="op">&lt;-</span> <span class="fu">mask_cumulative_pct</span><span class="op">(</span>rast <span class="op">=</span> <span class="va">efforts_birds_all_r</span>, top_pct <span class="op">=</span> <span class="fl">90</span><span class="op">)</span></span></span>
 <span class="r-err co"><span class="r-pr">#&gt;</span> <span class="error">Error:</span> object 'efforts_birds_all_r' not found</span>
@@ -130,7 +136,7 @@ lowest <code>(100 - top_pct)</code>%; where <code>xx</code> is the value of <cod
 <span class="r-out co"><span class="r-pr">#&gt;</span>     }</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>     UseMethod("result")</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> }</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> &lt;bytecode: 0x559801613bc8&gt;</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> &lt;bytecode: 0x55909b604f78&gt;</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> &lt;environment: namespace:future&gt;</span>
 <span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="co"># Areas contributing to the top 90% of cumulative sum (log10 scale; computed</span></span></span>
