@@ -468,7 +468,7 @@ get_sampling_effort <- function(
           Sys.sleep(2L)
 
           down_osf <- tryCatch({
-            osfr::osf_download(
+            r_file2 <- osfr::osf_download(
               x = r_file, path = out_dir, conflicts = conflicts)
             TRUE
           },
@@ -479,10 +479,13 @@ get_sampling_effort <- function(
             FALSE
           })
 
+          if (down_osf) {
+            return(r_file2)
+          }
+
           # Check if file was downloaded successfully and is a valid TIFF
           file_tiff <- fs::path(out_dir, r_file$name)
           file_not_ok <- any(
-            isFALSE(down_osf),
             !fs::file_exists(file_tiff),
             fs::file_info(file_tiff)$size == 0L,
             !ecokit::check_tiff(file_tiff, warning = FALSE))
@@ -515,8 +518,7 @@ get_sampling_effort <- function(
               descendant = descendant, year = year, metric = metric,
               resolution = resolution)
           }
-
-          return(r_file)
+          dplyr::mutate(r_file, local_path = file_tiff, .before = meta)
         })) %>%
     tidyr::unnest("effort_down")
 
