@@ -291,6 +291,9 @@
 - [`set_raster_crs()`](https://elgabbas.github.io/ecokit/reference/set_raster_CRS.md)
   : Set CRS for a SpatRaster in a Pipeline
 
+- [`set_raster_varnames()`](https://elgabbas.github.io/ecokit/reference/set_raster_varnames.md)
+  : Set the variable name of a SpatRaster within a pipe
+
 - [`add_cross_to_grid()`](https://elgabbas.github.io/ecokit/reference/add_geometric_features.md)
   [`add_diagonals_to_grid()`](https://elgabbas.github.io/ecokit/reference/add_geometric_features.md)
   : Add Geometric Features to Spatial Grid Cells

@@ -45,13 +45,13 @@ fs::dir_create(temp_dir)
 
 save_session_info(out_directory = temp_dir)
 #> Saving session info to:
-#> /tmp/RtmpxXMNZN/save_session_info/S_20260608_0035.txt
+#> /tmp/Rtmp8Ya4JB/save_session_info/S_20260608_1600.txt
 
 saved_file <- list.files(
   temp_dir, pattern = "S_.+txt$", full.names = TRUE) %>%
   ecokit::normalize_path()
 (saved_file <- saved_file[length(saved_file)])
-#> /tmp/RtmpxXMNZN/save_session_info/S_20260608_0035.txt
+#> /tmp/Rtmp8Ya4JB/save_session_info/S_20260608_1600.txt
 
 cat(readLines(saved_file), sep = "\n")
 #> 
@@ -69,7 +69,7 @@ cat(readLines(saved_file), sep = "\n")
 #>  collate  C
 #>  ctype    C.UTF-8
 #>  tz       UTC
-#>  date     2026-06-07
+#>  date     2026-06-08
 #>  pandoc   3.8.3 @ /opt/hostedtoolcache/pandoc/3.8.3/x64/ (via rmarkdown)
 #>  quarto   NA
 #> 
@@ -104,7 +104,7 @@ cat(readLines(saved_file), sep = "\n")
 #>  downlit        0.4.5     2025-11-14 [1] RSPM
 #>  dplyr        * 1.2.1     2026-04-03 [1] RSPM
 #>  e1071          1.7-17    2025-12-18 [1] RSPM
-#>  ecokit       * 0.1.0     2026-06-07 [1] local
+#>  ecokit       * 0.1.0     2026-06-08 [1] local
 #>  evaluate       1.0.5     2025-08-27 [1] RSPM
 #>  fansi          1.0.7     2025-11-19 [1] RSPM
 #>  farver         2.1.2     2024-05-13 [1] RSPM
@@ -145,7 +145,7 @@ cat(readLines(saved_file), sep = "\n")
 #>  openssl        2.4.1     2026-05-14 [1] RSPM
 #>  osfr           0.2.9     2022-09-25 [1] RSPM
 #>  otel           0.2.0     2025-08-29 [1] RSPM
-#>  pak            0.9.5     2026-04-27 [1] RSPM
+#>  pak            0.10.0    2026-06-07 [1] RSPM
 #>  parallelly     1.47.0    2026-04-17 [1] RSPM
 #>  pillar         1.11.1    2025-09-17 [1] RSPM
 #>  pkgbuild       1.4.8     2025-05-26 [1] RSPM
@@ -224,13 +224,13 @@ vec <- rnorm(1000)
 session_data <- tibble::tibble(object = c("df", "vec"), size = c(0.1, 0.1))
 save_session_info(out_directory = temp_dir, session_info = session_data)
 #> Saving session info to:
-#> /tmp/RtmpxXMNZN/save_session_info/S_20260608_0035.txt
+#> /tmp/Rtmp8Ya4JB/save_session_info/S_20260608_1600.txt
 
 saved_file <- list.files(
   temp_dir, pattern = "S_.+txt$", full.names = TRUE) %>%
   ecokit::normalize_path()
 (saved_file <- saved_file[length(saved_file)])
-#> /tmp/RtmpxXMNZN/save_session_info/S_20260608_0035.txt
+#> /tmp/Rtmp8Ya4JB/save_session_info/S_20260608_1600.txt
 
 cat(readLines(saved_file), sep = "\n")
 #> 
@@ -248,7 +248,7 @@ cat(readLines(saved_file), sep = "\n")
 #>  collate  C
 #>  ctype    C.UTF-8
 #>  tz       UTC
-#>  date     2026-06-07
+#>  date     2026-06-08
 #>  pandoc   3.8.3 @ /opt/hostedtoolcache/pandoc/3.8.3/x64/ (via rmarkdown)
 #>  quarto   NA
 #> 
@@ -283,7 +283,7 @@ cat(readLines(saved_file), sep = "\n")
 #>  downlit        0.4.5     2025-11-14 [1] RSPM
 #>  dplyr        * 1.2.1     2026-04-03 [1] RSPM
 #>  e1071          1.7-17    2025-12-18 [1] RSPM
-#>  ecokit       * 0.1.0     2026-06-07 [1] local
+#>  ecokit       * 0.1.0     2026-06-08 [1] local
 #>  evaluate       1.0.5     2025-08-27 [1] RSPM
 #>  fansi          1.0.7     2025-11-19 [1] RSPM
 #>  farver         2.1.2     2024-05-13 [1] RSPM
@@ -324,7 +324,7 @@ cat(readLines(saved_file), sep = "\n")
 #>  openssl        2.4.1     2026-05-14 [1] RSPM
 #>  osfr           0.2.9     2022-09-25 [1] RSPM
 #>  otel           0.2.0     2025-08-29 [1] RSPM
-#>  pak            0.9.5     2026-04-27 [1] RSPM
+#>  pak            0.10.0    2026-06-07 [1] RSPM
 #>  parallelly     1.47.0    2026-04-17 [1] RSPM
 #>  pillar         1.11.1    2025-09-17 [1] RSPM
 #>  pkgbuild       1.4.8     2025-05-26 [1] RSPM

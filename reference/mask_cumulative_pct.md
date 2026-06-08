@@ -51,20 +51,41 @@ fs::dir_create(temp_dir)
 # resolution)
 efforts_birds_all <- get_sampling_effort(
   group = "aves", metric = "n_obs", resolution = 20, out_dir = temp_dir)
+#> Error in dplyr::mutate(., effort_down = purrr::pmap(list(group, descendant,     year, metric, resolution), function(group, descendant, year,     metric, resolution) {    ecokit::cat_time(paste0(group, ": ", descendant, "; year: ",         year), verbose = verbose)    if (group == "all") {        descendant_year <- paste0(metric, "_", resolution, ".tif")        r_file <- osfr::osf_retrieve_node(node_lists$id) %>%             osfr::osf_ls_files(type = "file", pattern = descendant_year)    }    else {        res_metric <- paste0("res_", resolution, "_", metric)        if (year == "total") {            if (descendant == "all") {                descendant_year <- paste0(group, "_res")            }            else {                descendant_year <- paste0("_", descendant, "_total_res")            }        }        else if (descendant == "all") {            descendant_year <- paste0(group, "_", year)        }        else {            descendant_year <- paste0("_", descendant, "_", year)        }        r_file <- osfr::osf_retrieve_node(node_lists$id) %>%             osfr::osf_ls_files(n_max = 15L, type = "folder",                 pattern = res_metric) %>% osfr::osf_ls_files(type = "file",             pattern = descendant_year)    }    if (nrow(r_file) != 1L) {        ecokit::stop_ctx(paste0("Expected exactly one file for metric '",             metric, "' and descendant-year '", descendant, " - ",             year, "'. Found ", nrow(r_file), " files."))    }    Sys.sleep(2L)    osfr::osf_download(x = r_file, path = out_dir, conflicts = conflicts)})): ℹ In argument: `effort_down = purrr::pmap(...)`.
+#> Caused by error in `purrr::pmap()`:
+#> ℹ In index: 1.
+#> Caused by error:
+#> ! Too Many Requests (HTTP 429)
 efforts_birds_all_r <- terra::rast(efforts_birds_all$local_path)
+#> Error in h(simpleError(msg, call)): error in evaluating the argument 'x' in selecting a method for function 'rast': object 'efforts_birds_all' not found
 
 result <- mask_cumulative_pct(rast = efforts_birds_all_r, top_pct = 90)
+#> Error: object 'efforts_birds_all_r' not found
 result
-#> class       : SpatRaster
-#> size        : 1080, 2160, 3  (nrow, ncol, nlyr)
-#> resolution  : 0.1666667, 0.1666667  (x, y)
-#> extent      : -180, 180, -90, 90  (xmin, xmax, ymin, ymax)
-#> coord. ref. : lon/lat WGS 84 (EPSG:4326)
-#> source(s)   : memory
-#> varname     : n_obs_Aves_res_20
-#> names       : top_90_per~cumulative, lowest_10_~cumulative, zero_observations
-#> min values  :                 11303,                     1,                 1
-#> max values  :               6193941,                 11303,                 1
+#> function (future, ...) 
+#> {
+#>     if (inherits(future, "Future") && inherits(future[[".journal"]], 
+#>         "FutureJournal")) {
+#>         start <- Sys.time()
+#>         on.exit({
+#>             appendToFutureJournal(future, event = "gather", category = "overhead", 
+#>                 start = start, stop = Sys.time())
+#>             if (!isTRUE(future[[".journal_signalled"]])) {
+#>                 journal <- journal(future)
+#>                 label <- sQuoteLabel(future)
+#>                 msg <- sprintf("A future (%s) of class %s was resolved", 
+#>                   label, class(future)[1])
+#>                 cond <- FutureJournalCondition(message = msg, 
+#>                   journal = journal)
+#>                 signalCondition(cond)
+#>                 future[[".journal_signalled"]] <- TRUE
+#>             }
+#>         })
+#>     }
+#>     UseMethod("result")
+#> }
+#> <bytecode: 0x559801613bc8>
+#> <environment: namespace:future>
 
 # Areas contributing to the top 90% of cumulative sum (log10 scale; computed
 # on the global scale and cropped to USA)
@@ -72,7 +93,7 @@ result$top_90_percent_cumulative %>%
   terra::crop(terra::ext(-125, -66.5, 24.5, 49.5)) %>%
   log10() %>%
   plot()
-
+#> Error in h(simpleError(msg, call)): error in evaluating the argument 'x' in selecting a method for function 'plot': error in evaluating the argument 'x' in selecting a method for function 'crop': object of type 'closure' is not subsettable
 
 # Areas contributing to the lowest 10% of cumulative sum (log10 scale;
 # computed on the global scale and cropped to USA)
@@ -80,14 +101,14 @@ result$lowest_10_percent_cumulative %>%
   terra::crop(terra::ext(-125, -66.5, 24.5, 49.5)) %>%
   log10() %>%
   plot()
-
+#> Error in h(simpleError(msg, call)): error in evaluating the argument 'x' in selecting a method for function 'plot': error in evaluating the argument 'x' in selecting a method for function 'crop': object of type 'closure' is not subsettable
 
 # Areas with zero observations (computed on the global scale and cropped to
 # USA)
 result$zero_observations %>%
   terra::crop(terra::ext(-125, -66.5, 24.5, 49.5)) %>%
   plot()
-
+#> Error in h(simpleError(msg, call)): error in evaluating the argument 'x' in selecting a method for function 'plot': error in evaluating the argument 'x' in selecting a method for function 'crop': object of type 'closure' is not subsettable
 
 fs::dir_delete(temp_dir)
 ```

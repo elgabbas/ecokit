@@ -51,15 +51,15 @@ Ahmed El-Gabbas
 ``` r
 # Show the most recent commit
 git_log(n_commits = 1)
-#> * a751be6 - (grafted, HEAD -> main, origin/main) Adding create_tar (4 minutes ago) <Ahmed El-Gabbas>
+#> * ec01fd3 - (grafted, HEAD -> main, origin/main) Add set_raster_varnames function to assign variable names to SpatRaster objects (3 minutes ago) <Ahmed El-Gabbas>
 
 # Show the most recent 5 commits
 git_log(n_commits = 5)
-#> * a751be6 - (grafted, HEAD -> main, origin/main) Adding create_tar (4 minutes ago) <Ahmed El-Gabbas>
+#> * ec01fd3 - (grafted, HEAD -> main, origin/main) Add set_raster_varnames function to assign variable names to SpatRaster objects (3 minutes ago) <Ahmed El-Gabbas>
 
 # by default, the log is only printed, not returned
 log_example <- git_log(n_commits = 1)
-#> * a751be6 - (grafted, HEAD -> main, origin/main) Adding create_tar (4 minutes ago) <Ahmed El-Gabbas>
+#> * ec01fd3 - (grafted, HEAD -> main, origin/main) Add set_raster_varnames function to assign variable names to SpatRaster objects (3 minutes ago) <Ahmed El-Gabbas>
 print(log_example)
 #> NULL
 
@@ -68,7 +68,7 @@ log_example <- git_log(return_log = TRUE)
 length(log_example)
 #> [1] 1
 head(log_example, 8)
-#> [1] "* a751be6 - (grafted, HEAD -> main, origin/main) Adding create_tar (4 minutes ago) <Ahmed El-Gabbas>"
+#> [1] "* ec01fd3 - (grafted, HEAD -> main, origin/main) Add set_raster_varnames function to assign variable names to SpatRaster objects (3 minutes ago) <Ahmed El-Gabbas>"
 
 # not a git repo
 non_git_dir <- fs::path_temp("test_dir")

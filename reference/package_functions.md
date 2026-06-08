@@ -86,14 +86,14 @@ package_functions(package = "ecokit")
 #>  [97] "save_session_info"          "scale_0_1"                 
 #>  [99] "scrape_link"                "script_location"           
 #> [101] "set_geometry"               "set_parallel"              
-#> [103] "set_raster_crs"             "sf_add_coords"             
-#> [105] "sort_raster_layers"         "source_silent"             
-#> [107] "split_df_to_chunks"         "split_raster"              
-#> [109] "split_vector"               "stop_ctx"                  
-#> [111] "system_command"             "text_to_coordinates"       
-#> [113] "tibble_column_size"         "used_packages"             
-#> [115] "write_nc"                   "zenodo_download_file"      
-#> [117] "zenodo_file_list"          
+#> [103] "set_raster_crs"             "set_raster_varnames"       
+#> [105] "sf_add_coords"              "sort_raster_layers"        
+#> [107] "source_silent"              "split_df_to_chunks"        
+#> [109] "split_raster"               "split_vector"              
+#> [111] "stop_ctx"                   "system_command"            
+#> [113] "text_to_coordinates"        "tibble_column_size"        
+#> [115] "used_packages"              "write_nc"                  
+#> [117] "zenodo_download_file"       "zenodo_file_list"          
 
 # Error: package not found
  try(package_functions(package = "non_exist"))
