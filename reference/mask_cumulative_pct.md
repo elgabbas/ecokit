@@ -62,36 +62,19 @@ efforts_birds_all <- get_sampling_effort(
 #>    resolution: 20
 #>    URL: https://osf.io/download/69144be425b8c888ea3ee2b8/
 efforts_birds_all_r <- terra::rast(efforts_birds_all$local_path)
-#> Warning: Unknown or uninitialised column: `local_path`.
-#> Error in methods::as(x, "SpatRaster"): no method or default for coercing “NULL” to “SpatRaster”
 
 result <- mask_cumulative_pct(rast = efforts_birds_all_r, top_pct = 90)
-#> Error: object 'efforts_birds_all_r' not found
 result
-#> function (future, ...) 
-#> {
-#>     if (inherits(future, "Future") && inherits(future[[".journal"]], 
-#>         "FutureJournal")) {
-#>         start <- Sys.time()
-#>         on.exit({
-#>             appendToFutureJournal(future, event = "gather", category = "overhead", 
-#>                 start = start, stop = Sys.time())
-#>             if (!isTRUE(future[[".journal_signalled"]])) {
-#>                 journal <- journal(future)
-#>                 label <- sQuoteLabel(future)
-#>                 msg <- sprintf("A future (%s) of class %s was resolved", 
-#>                   label, class(future)[1])
-#>                 cond <- FutureJournalCondition(message = msg, 
-#>                   journal = journal)
-#>                 signalCondition(cond)
-#>                 future[[".journal_signalled"]] <- TRUE
-#>             }
-#>         })
-#>     }
-#>     UseMethod("result")
-#> }
-#> <bytecode: 0x55a8481dac40>
-#> <environment: namespace:future>
+#> class       : SpatRaster
+#> size        : 1080, 2160, 3  (nrow, ncol, nlyr)
+#> resolution  : 0.1666667, 0.1666667  (x, y)
+#> extent      : -180, 180, -90, 90  (xmin, xmax, ymin, ymax)
+#> coord. ref. : lon/lat WGS 84 (EPSG:4326)
+#> source(s)   : memory
+#> varname     : n_obs_Aves_res_20
+#> names       : top_90_per~cumulative, lowest_10_~cumulative, zero_observations
+#> min values  :                 11303,                     1,                 1
+#> max values  :               6193941,                 11303,                 1
 
 # Areas contributing to the top 90% of cumulative sum (log10 scale; computed
 # on the global scale and cropped to USA)
@@ -99,7 +82,7 @@ result$top_90_percent_cumulative %>%
   terra::crop(terra::ext(-125, -66.5, 24.5, 49.5)) %>%
   log10() %>%
   plot()
-#> Error in h(simpleError(msg, call)): error in evaluating the argument 'x' in selecting a method for function 'plot': error in evaluating the argument 'x' in selecting a method for function 'crop': object of type 'closure' is not subsettable
+
 
 # Areas contributing to the lowest 10% of cumulative sum (log10 scale;
 # computed on the global scale and cropped to USA)
@@ -107,14 +90,14 @@ result$lowest_10_percent_cumulative %>%
   terra::crop(terra::ext(-125, -66.5, 24.5, 49.5)) %>%
   log10() %>%
   plot()
-#> Error in h(simpleError(msg, call)): error in evaluating the argument 'x' in selecting a method for function 'plot': error in evaluating the argument 'x' in selecting a method for function 'crop': object of type 'closure' is not subsettable
+
 
 # Areas with zero observations (computed on the global scale and cropped to
 # USA)
 result$zero_observations %>%
   terra::crop(terra::ext(-125, -66.5, 24.5, 49.5)) %>%
   plot()
-#> Error in h(simpleError(msg, call)): error in evaluating the argument 'x' in selecting a method for function 'plot': error in evaluating the argument 'x' in selecting a method for function 'crop': object of type 'closure' is not subsettable
+
 
 fs::dir_delete(temp_dir)
 ```

@@ -228,8 +228,8 @@ R_terra3 <- range_to_new_value(
 #> extent      : 178400, 181600, 329400, 334000  (xmin, xmax, ymin, ymax)
 #> coord. ref. : +proj=sterea +lat_0=52.1561605555556 +lon_0=5.38763888888889 +k=0.9999079 +x_0=155000 +y_0=463000 +datum=WGS84 +units=m +no_defs
 #> sources     : test.grd
-#>               spat_228be224f50_8843_4P3LWamMvx89ZOT.tif
-#>               spat_228b21fa212b_8843_bTGLeWgikzRi5uE.tif
+#>               spat_22a52987f9cc_8869_J0P2uAoeGj8eURN.tif
+#>               spat_22a5649d6ea3_8869_omf5NvSmIUuRURk.tif
 #> varnames    : test
 #>               test
 #>               test
