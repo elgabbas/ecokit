@@ -485,13 +485,9 @@ get_sampling_effort <- function(
 
           # Check if file was downloaded successfully and is a valid TIFF
           file_tiff <- fs::path(out_dir, r_file$name)
-          file_not_ok <- any(
-            !fs::file_exists(file_tiff),
-            fs::file_info(file_tiff)$size == 0L,
-            !ecokit::check_tiff(file_tiff, warning = FALSE))
-
           down_url <- r_file$meta[[1L]]$links$download
-          if (file_not_ok) {
+
+          if (!ecokit::check_tiff(file_tiff, warning = FALSE) && verbose) {
             warning(
               "Failed to download file using osfr. ",
               "Attempting fallback download.\n   group: ",
@@ -503,14 +499,9 @@ get_sampling_effort <- function(
               url = down_url, destfile = file_tiff, mode = "wb", quiet = TRUE)
           }
 
-          file_not_ok <- any(
-            !fs::file_exists(file_tiff),
-            fs::file_info(file_tiff)$size == 0L,
-            !ecokit::check_tiff(file_tiff, warning = FALSE))
-
-          if (file_not_ok) {
+          if (!ecokit::check_tiff(file_tiff, warning = FALSE)) {
             if (fs::file_exists(file_tiff)) {
-              fs::file_delete(file_tiff)
+              try(fs::file_delete(file_tiff), silent = TRUE)
             }
             ecokit::stop_ctx(
               "Failed to download file from OSF and fallback URL.",

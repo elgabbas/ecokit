@@ -54,7 +54,7 @@ set_raster_varnames <- function(rast, var_name) {
 
   if (is.null(var_name)) {
     terra::varnames(rast) <- ""
-    return(invisible(rast))
+    return(rast)
   }
 
   if (!is.character(var_name) || length(var_name) != 1L || !nzchar(var_name)) {
