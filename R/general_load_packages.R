@@ -20,6 +20,13 @@
 #'   if `install_missing` is `TRUE`.
 #' @return This function is used for its side effects (loading/installing
 #'   packages) and does not return any value.
+#' @details On HPC systems using network filesystems (e.g. Lustre) with `renv`,
+#'   [utils::installed.packages()] can be slow due to high metadata I/O latency
+#'   across large library trees. This function mitigates that by calling
+#'   [ecokit::installed.packages()] once with `fields = "Version"` only, caching
+#'   the result, and reading package versions from the cached matrix rather than
+#'   re-reading individual `DESCRIPTION` files via `packageDescription()`.
+#'
 #' @author Ahmed El-Gabbas
 #' @export
 #' @name load_packages
@@ -49,17 +56,20 @@ load_packages <- function(
     ..., package_list = NULL, verbose = FALSE, install_missing = FALSE,
     n_cpus = getOption("Ncpus", 1L)) {
 
+  ecokit::check_packages(c("crayon", "purrr", "rlang"))
 
   # Check inputs
   if (!is.logical(verbose) || length(verbose) != 1L) {
     ecokit::stop_ctx(
       "`verbose` must be a logical of length 1", verbose = verbose)
   }
+
   if (!is.logical(install_missing) || length(install_missing) != 1L) {
     ecokit::stop_ctx(
       "`install_missing` must be a logical of length 1",
       install_missing = install_missing)
   }
+
   if (!is.numeric(n_cpus) || length(n_cpus) != 1L || n_cpus < 1L) {
     ecokit::stop_ctx(
       "`n_cpus` must be a positive integer of length 1", n_cpus = n_cpus)
@@ -76,29 +86,38 @@ load_packages <- function(
     "base", "utils", "graphics", "grDevices", "stats",
     "methods", "datasets", "tools", "compiler")
   packages <- setdiff(packages, base_pkgs)
+
   if (length(packages) == 0L) return(invisible(NULL))
 
   prefix <- " >> "
 
-  # List of installed packages
-  installed_packages <- rownames(utils::installed.packages())
+  # Call installed.packages() once with only the Version field. On HPC
+  # network filesystems (Lustre/GPFS) with renv, this single call dominates
+  # wall time because R must stat() every DESCRIPTION file across potentially
+  # thousands of packages in multiple library trees. Requesting only the
+  # Version field reduces the per-file parse work and keeps the matrix small.
+  
+  installed_mat <- utils::installed.packages(fields = "Version")
+  installed_pkgs <- rownames(installed_mat)
 
-  # packages to install
-  packages_to_install <- setdiff(packages, installed_packages)
+  # Packages to install
+  packages_to_install <- setdiff(packages, installed_pkgs)
 
   if (length(packages_to_install) > 0L) {
     if (install_missing) {
       message(
         "The following packages will be installed:\n",
         paste(prefix, packages_to_install, collapse = "\n"))
-
-      # Installing missing packages
       utils::capture.output(
         utils::install.packages(
           pkgs = packages_to_install, repos = "http://cran.us.r-project.org",
           dependencies = TRUE, quiet = TRUE, verbose = FALSE, Ncpus = n_cpus),
         file = nullfile())
 
+      
+      # Refresh the cache only after installation changes the library state
+      installed_mat <- utils::installed.packages(fields = "Version")
+      installed_pkgs <- rownames(installed_mat)
     } else {
       message(
         "The following packages are neither available nor installed ",
@@ -108,20 +127,35 @@ load_packages <- function(
     }
   }
 
-  # already loaded packages; they will not be reloaded
-  already_loaded <- intersect(packages, ecokit::loaded_packages())
-  # Packages to load
-  packages_to_load <- setdiff(packages, ecokit::loaded_packages())
+  # Call loaded_packages() once and reuse the result for both set operations
+  currently_loaded <- ecokit::loaded_packages()
+
+  already_loaded <- intersect(packages, currently_loaded)
+  packages_to_load <- setdiff(packages, currently_loaded)
+
+  # Read version from the cached installed_mat to avoid per-package
+  # packageDescription() disk reads (one stat()+open() per call on Lustre)
+  .get_version <- function(pkg) {
+    v <- installed_mat[pkg, "Version"]
+    if (is.na(v)) {
+      tryCatch(
+        as.character(utils::packageVersion(pkg)),
+        error = function(e) "unknown"
+      )
+    } else {
+      as.character(v)
+    }
+  }
 
   if (verbose && length(already_loaded) > 0L) {
-
     message("The following packages were already loaded:")
     purrr::walk(
       .x = already_loaded,
       .f = ~{
-        utils::packageDescription(.x)$Version %>%
-          as.character() %>%
-          paste0(prefix, crayon::bold(crayon::blue(.x)), " (", ., ")") %>%
+        paste0(
+          prefix, crayon::bold(crayon::blue(.x)),
+          " (", .get_version(.x), ")"
+        ) %>%
           message()
       }) %>%
       invisible()
@@ -131,25 +165,23 @@ load_packages <- function(
     if (verbose) {
       message("Loading packages:")
     }
-
     purrr::walk(
       .x = packages_to_load,
       .f = ~{
         suppressMessages(
           suppressWarnings(
             suppressPackageStartupMessages(
-              library(    #nolint
+              library( #nolint
                 package = .x, character.only = TRUE,
                 quietly = TRUE, warn.conflicts = FALSE)
             )))
-
         if (verbose) {
-          utils::packageDescription(.x)$Version %>%
-            as.character() %>%
-            paste0(prefix, crayon::bold(crayon::blue(.x)), " (", ., ")") %>%
+          paste0(
+            prefix, crayon::bold(crayon::blue(.x)),
+            " (", .get_version(.x), ")"
+          ) %>%
             message()
         }
-
       }) %>%
       invisible()
   }

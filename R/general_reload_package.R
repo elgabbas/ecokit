@@ -22,74 +22,57 @@
 
 reload_package <- function(...) {
 
-  # capture the package name
-  package <- rlang::ensyms(...) %>%
-    purrr::map_chr(rlang::as_string)
+  ecokit::check_packages(c("crayon", "purrr", "rlang"))
 
-  # capture and validate package names
-  packages <- tryCatch(
-    expr = {
-      rlang::ensyms(...) %>%
-        purrr::map_chr(rlang::as_string)
-    },
-    error = function(e) {
-      ecokit::stop_ctx(
-        "All arguments must be unquoted package names", input = list(...))
-    })
+  # Capture and validate package names from unquoted arguments.
+  packages <- purrr::map_chr(rlang::ensyms(...), rlang::as_string)
 
   if (length(packages) == 0L) {
     ecokit::stop_ctx(
       "At least one package name must be provided", packages = packages)
   }
+
   if (!all(nzchar(packages))) {
     ecokit::stop_ctx("Package names must be non-empty", packages = packages)
   }
 
   purrr::walk(
-    .x = package,
+    .x = packages,
     .f = function(pkg) {
 
-      # check if package is installed
+      # Skip packages that are not installed — warn rather than error so that
+      # the remaining packages in the list are still processed.
       if (!requireNamespace(pkg, quietly = TRUE)) {
         message("Not installed: ", crayon::bold(pkg))
-        return(NULL)
+        return(invisible(NULL))
       }
 
-      # check if package is loaded
-      if (pkg %in% ecokit::loaded_packages()) {
-        # Detach and reload
-        message("Reloading '", crayon::bold(pkg), "'")
+      is_loaded <- pkg %in% ecokit::loaded_packages()
+
+      message(
+        if (is_loaded) "Reloading '" else "Loading '",
+        crayon::bold(pkg), "'")
+
+      # If already loaded, detach first (with unload = TRUE to also unload
+      # the namespace). force = TRUE silently handles cases where other
+      # packages depend on this one. Errors are caught and reported as
+      # warnings so the subsequent library() call can still proceed.
+
+      if (is_loaded) {
         tryCatch(
-          expr = {
-            detach(   #nolint
+          suppressWarnings(
+            detach(                                                  # nolint
               name = paste0("package:", pkg), character.only = TRUE,
-              unload = TRUE, force = TRUE)
-          },
+              unload = TRUE, force = TRUE)),
           error = function(e) {
             message("Warning: Could not detach '", pkg, "': ", e$message)
           })
-        return(NULL)
       }
 
-      message("Loading '", crayon::bold(pkg), "'")
+      # Re-attach (or freshly attach) the package.
+      suppressPackageStartupMessages(library(pkg, character.only = TRUE)) # nolint
 
-      # find package path
-      pkg_path <- tryCatch(
-        find.package(pkg),
-        error = function(e) {
-          message(
-            "Cannot locate package '", crayon::bold(pkg),
-            "' in library paths")
-        })
-
-      if (!requireNamespace("devtools", quietly = TRUE)) {
-        ecokit::stop_ctx(
-          "The `devtools` package is required to reload packages.")
-      }
-
-      # Reload using devtools::reload
-      devtools::reload(pkg = pkg_path, quiet = TRUE)
-      suppressPackageStartupMessages(library(pkg, character.only = TRUE))  #nolint
+      invisible(NULL)
     })
 
   invisible(NULL)
