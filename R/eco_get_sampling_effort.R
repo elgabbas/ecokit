@@ -516,6 +516,7 @@ get_sampling_effort <- function(
               resolution = resolution)
           }
 
+          return(r_file)
         })) %>%
     tidyr::unnest("effort_down")
 
