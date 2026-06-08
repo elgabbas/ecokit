@@ -45,13 +45,13 @@ fs::dir_create(temp_dir)
 
 save_session_info(out_directory = temp_dir)
 #> Saving session info to:
-#> /tmp/RtmpvafRTD/save_session_info/S_20260608_1739.txt
+#> /tmp/RtmpzoBzO4/save_session_info/S_20260608_2312.txt
 
 saved_file <- list.files(
   temp_dir, pattern = "S_.+txt$", full.names = TRUE) %>%
   ecokit::normalize_path()
 (saved_file <- saved_file[length(saved_file)])
-#> /tmp/RtmpvafRTD/save_session_info/S_20260608_1739.txt
+#> /tmp/RtmpzoBzO4/save_session_info/S_20260608_2312.txt
 
 cat(readLines(saved_file), sep = "\n")
 #> 
@@ -142,6 +142,7 @@ cat(readLines(saved_file), sep = "\n")
 #>  MASS           7.3-65    2025-02-28 [3] CRAN (R 4.6.0)
 #>  memoise        2.0.1     2021-11-26 [1] RSPM
 #>  nnet         * 7.3-20    2025-01-01 [3] CRAN (R 4.6.0)
+#>  nngeo        * 0.4.8     2024-04-17 [1] RSPM
 #>  openssl        2.4.1     2026-05-14 [1] RSPM
 #>  osfr           0.2.9     2022-09-25 [1] RSPM
 #>  otel           0.2.0     2025-08-29 [1] RSPM
@@ -224,13 +225,13 @@ vec <- rnorm(1000)
 session_data <- tibble::tibble(object = c("df", "vec"), size = c(0.1, 0.1))
 save_session_info(out_directory = temp_dir, session_info = session_data)
 #> Saving session info to:
-#> /tmp/RtmpvafRTD/save_session_info/S_20260608_1739.txt
+#> /tmp/RtmpzoBzO4/save_session_info/S_20260608_2312.txt
 
 saved_file <- list.files(
   temp_dir, pattern = "S_.+txt$", full.names = TRUE) %>%
   ecokit::normalize_path()
 (saved_file <- saved_file[length(saved_file)])
-#> /tmp/RtmpvafRTD/save_session_info/S_20260608_1739.txt
+#> /tmp/RtmpzoBzO4/save_session_info/S_20260608_2312.txt
 
 cat(readLines(saved_file), sep = "\n")
 #> 
@@ -321,6 +322,7 @@ cat(readLines(saved_file), sep = "\n")
 #>  MASS           7.3-65    2025-02-28 [3] CRAN (R 4.6.0)
 #>  memoise        2.0.1     2021-11-26 [1] RSPM
 #>  nnet         * 7.3-20    2025-01-01 [3] CRAN (R 4.6.0)
+#>  nngeo        * 0.4.8     2024-04-17 [1] RSPM
 #>  openssl        2.4.1     2026-05-14 [1] RSPM
 #>  osfr           0.2.9     2022-09-25 [1] RSPM
 #>  otel           0.2.0     2025-08-29 [1] RSPM

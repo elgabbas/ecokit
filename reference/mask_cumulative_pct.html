@@ -97,64 +97,20 @@ lowest <code>(100 - top_pct)</code>%; where <code>xx</code> is the value of <cod
 <span class="r-in"><span><span class="co"># resolution)</span></span></span>
 <span class="r-in"><span><span class="va">efforts_birds_all</span> <span class="op">&lt;-</span> <span class="fu"><a href="sampling_effort.html">get_sampling_effort</a></span><span class="op">(</span></span></span>
 <span class="r-in"><span>  group <span class="op">=</span> <span class="st">"aves"</span>, metric <span class="op">=</span> <span class="st">"n_obs"</span>, resolution <span class="op">=</span> <span class="fl">20</span>, out_dir <span class="op">=</span> <span class="va">temp_dir</span><span class="op">)</span></span></span>
-<span class="r-err co"><span class="r-pr">#&gt;</span> <span class="error">Error in dplyr::mutate(., effort_down = purrr::pmap(list(group, descendant,     year, metric, resolution), function(group, descendant, year,     metric, resolution) {    ecokit::cat_time(paste0(group, ": ", descendant, "; year: ",         year), verbose = verbose)    if (group == "all") {        descendant_year &lt;- paste0(metric, "_", resolution, ".tif")        r_file &lt;- osfr::osf_retrieve_node(node_lists$id) %&gt;%             osfr::osf_ls_files(type = "file", pattern = descendant_year)    }    else {        res_metric &lt;- paste0("res_", resolution, "_", metric)        if (year == "total") {            if (descendant == "all") {                descendant_year &lt;- paste0(group, "_res")            }            else {                descendant_year &lt;- paste0("_", descendant, "_total_res")            }        }        else if (descendant == "all") {            descendant_year &lt;- paste0(group, "_", year)        }        else {            descendant_year &lt;- paste0("_", descendant, "_", year)        }        r_file &lt;- osfr::osf_retrieve_node(node_lists$id) %&gt;%             osfr::osf_ls_files(n_max = 15L, type = "folder",                 pattern = res_metric) %&gt;% osfr::osf_ls_files(type = "file",             pattern = descendant_year)    }    if (nrow(r_file) != 1L) {        ecokit::stop_ctx(paste0("Expected exactly one file for metric '",             metric, "' and descendant-year '", descendant, " - ",             year, "'. Found ", nrow(r_file), " files."))    }    Sys.sleep(2L)    down_osf &lt;- tryCatch({        r_file2 &lt;- osfr::osf_download(x = r_file, path = out_dir,             conflicts = conflicts)        TRUE    }, warning = function(w) {        FALSE    }, error = function(e) {        FALSE    })    if (down_osf) {        return(r_file2)    }    file_tiff &lt;- fs::path(out_dir, r_file$name)    down_url &lt;- r_file$meta[[1L]]$links$download    if (!ecokit::check_tiff(file_tiff, warning = FALSE) &amp;&amp; verbose) {        warning("Failed to download file using osfr. ", "Attempting fallback download.\n   group: ",             group, "\n   descendant: ", descendant, "\n   year: ",             year, "\n   metric: ", metric, "\n   resolution: ",             resolution, "\n   URL: ", down_url, "\n", call. = FALSE,             immediate. = TRUE)        utils::download.file(url = down_url, destfile = file_tiff,             mode = "wb", quiet = TRUE)    }    if (!ecokit::check_tiff(file_tiff, warning = FALSE)) {        if (fs::file_exists(file_tiff)) {            try(fs::file_delete(file_tiff), silent = TRUE)        }        ecokit::stop_ctx("Failed to download file from OSF and fallback URL.",             file_tiff = file_tiff, down_url = down_url, group = group,             descendant = descendant, year = year, metric = metric,             resolution = resolution)    }    dplyr::mutate(r_file, local_path = file_tiff, .before = meta)})):</span> <span style="color: #00BBBB;">ℹ</span> In argument: `effort_down = purrr::pmap(...)`.</span>
-<span class="r-err co"><span class="r-pr">#&gt;</span> <span style="font-weight: bold;">Caused by error in `purrr::pmap()`:</span></span>
-<span class="r-err co"><span class="r-pr">#&gt;</span> <span style="color: #00BBBB;">ℹ</span> In index: 1.</span>
-<span class="r-err co"><span class="r-pr">#&gt;</span> <span style="font-weight: bold;">Caused by error in `.f()`:</span></span>
-<span class="r-err co"><span class="r-pr">#&gt;</span> <span style="color: #BBBB00;">!</span> <span style="color: #BB0000; font-weight: bold;">Failed to download file from OSF and fallback URL.</span></span>
-<span class="r-err co"><span class="r-pr">#&gt;</span> </span>
-<span class="r-err co"><span class="r-pr">#&gt;</span> ----- Metadata -----</span>
-<span class="r-err co"><span class="r-pr">#&gt;</span> </span>
-<span class="r-err co"><span class="r-pr">#&gt;</span> <span style="color: #0000BB; font-weight: bold;">file_tiff</span> [<span style="text-decoration: underline;">file_tiff</span>]: &lt;fs_path + character&gt;</span>
-<span class="r-err co"><span class="r-pr">#&gt;</span> /tmp/RtmpvafRTD/sampling_efforts/n_obs_Aves_res_20.tif</span>
-<span class="r-err co"><span class="r-pr">#&gt;</span> </span>
-<span class="r-err co"><span class="r-pr">#&gt;</span> <span style="color: #0000BB; font-weight: bold;">down_url</span> [<span style="text-decoration: underline;">down_url</span>]: &lt;character&gt;</span>
-<span class="r-err co"><span class="r-pr">#&gt;</span> https://osf.io/download/69144be425b8c888ea3ee2b8/</span>
-<span class="r-err co"><span class="r-pr">#&gt;</span> </span>
-<span class="r-err co"><span class="r-pr">#&gt;</span> <span style="color: #0000BB; font-weight: bold;">group</span> [<span style="text-decoration: underline;">group</span>]: &lt;character&gt;</span>
-<span class="r-err co"><span class="r-pr">#&gt;</span> aves</span>
-<span class="r-err co"><span class="r-pr">#&gt;</span> </span>
-<span class="r-err co"><span class="r-pr">#&gt;</span> <span style="color: #0000BB; font-weight: bold;">descendant</span> [<span style="text-decoration: underline;">descendant</span>]: &lt;character&gt;</span>
-<span class="r-err co"><span class="r-pr">#&gt;</span> all</span>
-<span class="r-err co"><span class="r-pr">#&gt;</span> </span>
-<span class="r-err co"><span class="r-pr">#&gt;</span> <span style="color: #0000BB; font-weight: bold;">year</span> [<span style="text-decoration: underline;">year</span>]: &lt;character&gt;</span>
-<span class="r-err co"><span class="r-pr">#&gt;</span> total</span>
-<span class="r-err co"><span class="r-pr">#&gt;</span> </span>
-<span class="r-err co"><span class="r-pr">#&gt;</span> <span style="color: #0000BB; font-weight: bold;">metric</span> [<span style="text-decoration: underline;">metric</span>]: &lt;character&gt;</span>
-<span class="r-err co"><span class="r-pr">#&gt;</span> n_obs</span>
-<span class="r-err co"><span class="r-pr">#&gt;</span> </span>
-<span class="r-err co"><span class="r-pr">#&gt;</span> <span style="color: #0000BB; font-weight: bold;">resolution</span> [<span style="text-decoration: underline;">resolution</span>]: &lt;numeric&gt;</span>
-<span class="r-err co"><span class="r-pr">#&gt;</span> 20</span>
 <span class="r-in"><span><span class="va">efforts_birds_all_r</span> <span class="op">&lt;-</span> <span class="fu">terra</span><span class="fu">::</span><span class="fu"><a href="https://rspatial.github.io/terra/reference/rast.html" class="external-link">rast</a></span><span class="op">(</span><span class="va">efforts_birds_all</span><span class="op">$</span><span class="va">local_path</span><span class="op">)</span></span></span>
-<span class="r-err co"><span class="r-pr">#&gt;</span> <span class="error">Error in h(simpleError(msg, call)):</span> error in evaluating the argument 'x' in selecting a method for function 'rast': object 'efforts_birds_all' not found</span>
 <span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="va">result</span> <span class="op">&lt;-</span> <span class="fu">mask_cumulative_pct</span><span class="op">(</span>rast <span class="op">=</span> <span class="va">efforts_birds_all_r</span>, top_pct <span class="op">=</span> <span class="fl">90</span><span class="op">)</span></span></span>
-<span class="r-err co"><span class="r-pr">#&gt;</span> <span class="error">Error:</span> object 'efforts_birds_all_r' not found</span>
 <span class="r-in"><span><span class="va">result</span></span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> function (future, ...) </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> {</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>     if (inherits(future, "Future") &amp;&amp; inherits(future[[".journal"]], </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>         "FutureJournal")) {</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>         start &lt;- Sys.time()</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>         on.exit({</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>             appendToFutureJournal(future, event = "gather", category = "overhead", </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>                 start = start, stop = Sys.time())</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>             if (!isTRUE(future[[".journal_signalled"]])) {</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>                 journal &lt;- journal(future)</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>                 label &lt;- sQuoteLabel(future)</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>                 msg &lt;- sprintf("A future (%s) of class %s was resolved", </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>                   label, class(future)[1])</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>                 cond &lt;- FutureJournalCondition(message = msg, </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>                   journal = journal)</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>                 signalCondition(cond)</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>                 future[[".journal_signalled"]] &lt;- TRUE</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>             }</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>         })</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>     }</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>     UseMethod("result")</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> }</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> &lt;bytecode: 0x55b887b0a578&gt;</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> &lt;environment: namespace:future&gt;</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> class       : SpatRaster</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> size        : 1080, 2160, 3  (nrow, ncol, nlyr)</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> resolution  : 0.1666667, 0.1666667  (x, y)</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> extent      : -180, 180, -90, 90  (xmin, xmax, ymin, ymax)</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> coord. ref. : lon/lat WGS 84 (EPSG:4326)</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> source(s)   : memory</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> varname     : n_obs_Aves_res_20</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> names       : top_90_per~cumulative, lowest_10_~cumulative, zero_observations</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> min values  :                 11303,                     1,                 1</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> max values  :               6193941,                 11303,                 1</span>
 <span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="co"># Areas contributing to the top 90% of cumulative sum (log10 scale; computed</span></span></span>
 <span class="r-in"><span><span class="co"># on the global scale and cropped to USA)</span></span></span>
@@ -162,7 +118,7 @@ lowest <code>(100 - top_pct)</code>%; where <code>xx</code> is the value of <cod
 <span class="r-in"><span>  <span class="fu">terra</span><span class="fu">::</span><span class="fu"><a href="https://rspatial.github.io/terra/reference/crop.html" class="external-link">crop</a></span><span class="op">(</span><span class="fu">terra</span><span class="fu">::</span><span class="fu"><a href="https://rspatial.github.io/terra/reference/ext.html" class="external-link">ext</a></span><span class="op">(</span><span class="op">-</span><span class="fl">125</span>, <span class="op">-</span><span class="fl">66.5</span>, <span class="fl">24.5</span>, <span class="fl">49.5</span><span class="op">)</span><span class="op">)</span> <span class="op"><a href="pipe.html">%&gt;%</a></span></span></span>
 <span class="r-in"><span>  <span class="fu"><a href="https://rdrr.io/r/base/Log.html" class="external-link">log10</a></span><span class="op">(</span><span class="op">)</span> <span class="op"><a href="pipe.html">%&gt;%</a></span></span></span>
 <span class="r-in"><span>  <span class="fu"><a href="https://rspatial.github.io/terra/reference/plot.html" class="external-link">plot</a></span><span class="op">(</span><span class="op">)</span></span></span>
-<span class="r-err co"><span class="r-pr">#&gt;</span> <span class="error">Error in h(simpleError(msg, call)):</span> error in evaluating the argument 'x' in selecting a method for function 'plot': error in evaluating the argument 'x' in selecting a method for function 'crop': object of type 'closure' is not subsettable</span>
+<span class="r-plt img"><img src="mask_cumulative_pct-1.png" alt="" width="700" height="433"></span>
 <span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="co"># Areas contributing to the lowest 10% of cumulative sum (log10 scale;</span></span></span>
 <span class="r-in"><span><span class="co"># computed on the global scale and cropped to USA)</span></span></span>
@@ -170,14 +126,14 @@ lowest <code>(100 - top_pct)</code>%; where <code>xx</code> is the value of <cod
 <span class="r-in"><span>  <span class="fu">terra</span><span class="fu">::</span><span class="fu"><a href="https://rspatial.github.io/terra/reference/crop.html" class="external-link">crop</a></span><span class="op">(</span><span class="fu">terra</span><span class="fu">::</span><span class="fu"><a href="https://rspatial.github.io/terra/reference/ext.html" class="external-link">ext</a></span><span class="op">(</span><span class="op">-</span><span class="fl">125</span>, <span class="op">-</span><span class="fl">66.5</span>, <span class="fl">24.5</span>, <span class="fl">49.5</span><span class="op">)</span><span class="op">)</span> <span class="op"><a href="pipe.html">%&gt;%</a></span></span></span>
 <span class="r-in"><span>  <span class="fu"><a href="https://rdrr.io/r/base/Log.html" class="external-link">log10</a></span><span class="op">(</span><span class="op">)</span> <span class="op"><a href="pipe.html">%&gt;%</a></span></span></span>
 <span class="r-in"><span>  <span class="fu"><a href="https://rspatial.github.io/terra/reference/plot.html" class="external-link">plot</a></span><span class="op">(</span><span class="op">)</span></span></span>
-<span class="r-err co"><span class="r-pr">#&gt;</span> <span class="error">Error in h(simpleError(msg, call)):</span> error in evaluating the argument 'x' in selecting a method for function 'plot': error in evaluating the argument 'x' in selecting a method for function 'crop': object of type 'closure' is not subsettable</span>
+<span class="r-plt img"><img src="mask_cumulative_pct-2.png" alt="" width="700" height="433"></span>
 <span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="co"># Areas with zero observations (computed on the global scale and cropped to</span></span></span>
 <span class="r-in"><span><span class="co"># USA)</span></span></span>
 <span class="r-in"><span><span class="va">result</span><span class="op">$</span><span class="va">zero_observations</span> <span class="op"><a href="pipe.html">%&gt;%</a></span></span></span>
 <span class="r-in"><span>  <span class="fu">terra</span><span class="fu">::</span><span class="fu"><a href="https://rspatial.github.io/terra/reference/crop.html" class="external-link">crop</a></span><span class="op">(</span><span class="fu">terra</span><span class="fu">::</span><span class="fu"><a href="https://rspatial.github.io/terra/reference/ext.html" class="external-link">ext</a></span><span class="op">(</span><span class="op">-</span><span class="fl">125</span>, <span class="op">-</span><span class="fl">66.5</span>, <span class="fl">24.5</span>, <span class="fl">49.5</span><span class="op">)</span><span class="op">)</span> <span class="op"><a href="pipe.html">%&gt;%</a></span></span></span>
 <span class="r-in"><span>  <span class="fu"><a href="https://rspatial.github.io/terra/reference/plot.html" class="external-link">plot</a></span><span class="op">(</span><span class="op">)</span></span></span>
-<span class="r-err co"><span class="r-pr">#&gt;</span> <span class="error">Error in h(simpleError(msg, call)):</span> error in evaluating the argument 'x' in selecting a method for function 'plot': error in evaluating the argument 'x' in selecting a method for function 'crop': object of type 'closure' is not subsettable</span>
+<span class="r-plt img"><img src="mask_cumulative_pct-3.png" alt="" width="700" height="433"></span>
 <span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="fu">fs</span><span class="fu">::</span><span class="fu"><a href="https://fs.r-lib.org/reference/delete.html" class="external-link">dir_delete</a></span><span class="op">(</span><span class="va">temp_dir</span><span class="op">)</span></span></span>
 <span class="r-in"><span></span></span>

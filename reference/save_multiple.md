@@ -70,7 +70,7 @@ x2 = 20
 
 save_multiple(
   variables = c("x1", "x2"), out_directory = temp_dir, verbose = TRUE)
-#> Saved 2 object(s) to /tmp/RtmpvafRTD/save_multiple.
+#> Saved 2 object(s) to /tmp/RtmpzoBzO4/save_multiple.
 #> Saved files are: x1.RData, x2.RData.
 
 list.files(path = temp_dir, pattern = "^.+.RData")
