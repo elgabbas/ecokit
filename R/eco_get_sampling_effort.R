@@ -174,7 +174,7 @@ get_sampling_effort <- function(
     resolution = NULL, out_dir = getwd(), conflicts = "skip", verbose = FALSE,
     osf_token = NULL) {
 
-  year <- descendant <- name2 <- name <- NULL
+  year <- descendant <- name2 <- name <- meta <- NULL
 
   # ++++++++++++++++++++++++++++++++++++++++++++++++++++++ #
   # Validate packages ----

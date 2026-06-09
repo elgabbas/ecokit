@@ -65,6 +65,7 @@ reference:
   - load_multiple
   - check_data
   - check_zip
+  - check_pdf
   - check_image
   - check_env_file
   - save_as

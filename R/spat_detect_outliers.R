@@ -83,7 +83,7 @@ detect_outliers <- function(r, threshold = 100L, plot_outliers = TRUE) {
   # Check required packages
   # ||||||||||||||||||||||||||||||||||||||||||||||||||||
 
-  ecokit::check_packages("RANN", "terra", "tibble", "dplyr")
+  ecokit::check_packages(c("RANN", "terra", "tibble", "dplyr"))
 
   # ||||||||||||||||||||||||||||||||||||||||||||||||||||
   # Unwrap PackedSpatRaster if needed

@@ -38,6 +38,14 @@ a package is not installed, the function can optionally install it before
 loading. It also provides an option to print the names and versions of the
 loaded packages.
 }
+\details{
+On HPC systems using network filesystems (e.g. Lustre) with \code{renv},
+\code{\link[utils:installed.packages]{utils::installed.packages()}} can be slow due to high metadata I/O latency
+across large library trees. This function mitigates that by calling
+\code{\link[=installed.packages]{installed.packages()}} once with \code{fields = "Version"} only, caching
+the result, and reading package versions from the cached matrix rather than
+re-reading individual \code{DESCRIPTION} files via \code{packageDescription()}.
+}
 \examples{
 # Currently loaded packages
 (P1 <- ecokit::loaded_packages())
