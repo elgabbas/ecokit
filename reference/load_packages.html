@@ -96,6 +96,15 @@ if <code>install_missing</code> is <code>TRUE</code>.</p></dd>
 packages) and does not return any value.</p>
     </div>
     <div class="section level2">
+    <h2 id="details">Details<a class="anchor" aria-label="anchor" href="#details"></a></h2>
+    <p>On HPC systems using network filesystems (e.g. Lustre) with <code>renv</code>,
+<code><a href="https://rdrr.io/r/utils/installed.packages.html" class="external-link">utils::installed.packages()</a></code> can be slow due to high metadata I/O latency
+across large library trees. This function mitigates that by calling
+<code><a href="https://rdrr.io/r/utils/installed.packages.html" class="external-link">installed.packages()</a></code> once with <code>fields = "Version"</code> only, caching
+the result, and reading package versions from the cached matrix rather than
+re-reading individual <code>DESCRIPTION</code> files via <code><a href="https://rdrr.io/r/utils/packageDescription.html" class="external-link">packageDescription()</a></code>.</p>
+    </div>
+    <div class="section level2">
     <h2 id="author">Author<a class="anchor" aria-label="anchor" href="#author"></a></h2>
     <p>Ahmed El-Gabbas</p>
     </div>
@@ -105,10 +114,11 @@ packages) and does not return any value.</p>
     <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span><span class="co"># Currently loaded packages</span></span></span>
 <span class="r-in"><span><span class="op">(</span><span class="va">P1</span> <span class="op">&lt;-</span> <span class="fu">ecokit</span><span class="fu">::</span><span class="fu"><a href="loaded_packages.html">loaded_packages</a></span><span class="op">(</span><span class="op">)</span><span class="op">)</span></span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>  [1] "qs2"       "stringr"   "tools"     "future"    "car"       "carData"  </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  [7] "purrr"     "archive"   "rworldmap" "arrow"     "dismo"     "raster"   </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [13] "sp"        "terra"     "fs"        "tidyr"     "tibble"    "png"      </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [19] "sf"        "ggplot2"   "dplyr"     "ecokit"    "magrittr"  "stats"    </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [25] "graphics"  "grDevices" "utils"     "datasets"  "methods"   "base"     </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  [7] "purrr"     "archive"   "rworldmap" "pdftools"  "arrow"     "dismo"    </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [13] "raster"    "sp"        "terra"     "fs"        "tidyr"     "tibble"   </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [19] "png"       "sf"        "ggplot2"   "dplyr"     "ecokit"    "magrittr" </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [25] "stats"     "graphics"  "grDevices" "utils"     "datasets"  "methods"  </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [31] "base"     </span>
 <span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="co"># Load tidyr</span></span></span>
 <span class="r-in"><span><span class="fu">load_packages</span><span class="op">(</span><span class="va">tidyr</span>, <span class="va">raster</span>, <span class="va">ggplot2</span>, <span class="va">nnet</span>, verbose <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></span></span>
@@ -122,11 +132,11 @@ packages) and does not return any value.</p>
 <span class="r-in"><span><span class="co"># Loaded packages after implementing the function</span></span></span>
 <span class="r-in"><span><span class="op">(</span><span class="va">P2</span> <span class="op">&lt;-</span> <span class="fu">ecokit</span><span class="fu">::</span><span class="fu"><a href="loaded_packages.html">loaded_packages</a></span><span class="op">(</span><span class="op">)</span><span class="op">)</span></span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>  [1] "nnet"      "qs2"       "stringr"   "tools"     "future"    "car"      </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  [7] "carData"   "purrr"     "archive"   "rworldmap" "arrow"     "dismo"    </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [13] "raster"    "sp"        "terra"     "fs"        "tidyr"     "tibble"   </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [19] "png"       "sf"        "ggplot2"   "dplyr"     "ecokit"    "magrittr" </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [25] "stats"     "graphics"  "grDevices" "utils"     "datasets"  "methods"  </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [31] "base"     </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  [7] "carData"   "purrr"     "archive"   "rworldmap" "pdftools"  "arrow"    </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [13] "dismo"     "raster"    "sp"        "terra"     "fs"        "tidyr"    </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [19] "tibble"    "png"       "sf"        "ggplot2"   "dplyr"     "ecokit"   </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [25] "magrittr"  "stats"     "graphics"  "grDevices" "utils"     "datasets" </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [31] "methods"   "base"     </span>
 <span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="co"># Which packages were loaded?</span></span></span>
 <span class="r-in"><span><span class="fu"><a href="https://generics.r-lib.org/reference/setops.html" class="external-link">setdiff</a></span><span class="op">(</span><span class="va">P2</span>, <span class="va">P1</span><span class="op">)</span></span></span>

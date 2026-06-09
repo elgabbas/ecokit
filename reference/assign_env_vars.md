@@ -62,8 +62,8 @@ rm(tmp_dir, tmp_file, envir = environment())
 
 # contents of the .env file
 readLines(tmp_env_file)
-#> [1] "MY_FILE=/tmp/RtmpE4KZ0T/file228452e8ffd7.txt"
-#> [2] "MY_DIR=/tmp/RtmpE4KZ0T/assign_env_vars"      
+#> [1] "MY_FILE=/tmp/Rtmp4rODlN/file22757b12484c.txt"
+#> [2] "MY_DIR=/tmp/Rtmp4rODlN/assign_env_vars"      
 
 # Define simple environment variables data
 (env_vars <- tibble::tibble(
@@ -87,9 +87,9 @@ ls()
 
 # Verify
 my_file
-#> [1] "/tmp/RtmpE4KZ0T/file228452e8ffd7.txt"
+#> [1] "/tmp/Rtmp4rODlN/file22757b12484c.txt"
 my_dir
-#> [1] "/tmp/RtmpE4KZ0T/assign_env_vars"
+#> [1] "/tmp/Rtmp4rODlN/assign_env_vars"
 
 # clean up
 fs::dir_delete(fs::path_temp("assign_env_vars"))

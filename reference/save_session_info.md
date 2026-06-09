@@ -45,13 +45,13 @@ fs::dir_create(temp_dir)
 
 save_session_info(out_directory = temp_dir)
 #> Saving session info to:
-#> /tmp/RtmpE4KZ0T/save_session_info/S_20260608_2329.txt
+#> /tmp/Rtmp4rODlN/save_session_info/S_20260609_1734.txt
 
 saved_file <- list.files(
   temp_dir, pattern = "S_.+txt$", full.names = TRUE) %>%
   ecokit::normalize_path()
 (saved_file <- saved_file[length(saved_file)])
-#> /tmp/RtmpE4KZ0T/save_session_info/S_20260608_2329.txt
+#> /tmp/Rtmp4rODlN/save_session_info/S_20260609_1734.txt
 
 cat(readLines(saved_file), sep = "\n")
 #> 
@@ -69,7 +69,7 @@ cat(readLines(saved_file), sep = "\n")
 #>  collate  C
 #>  ctype    C.UTF-8
 #>  tz       UTC
-#>  date     2026-06-08
+#>  date     2026-06-09
 #>  pandoc   3.8.3 @ /opt/hostedtoolcache/pandoc/3.8.3/x64/ (via rmarkdown)
 #>  quarto   NA
 #> 
@@ -104,7 +104,7 @@ cat(readLines(saved_file), sep = "\n")
 #>  downlit        0.4.5     2025-11-14 [1] RSPM
 #>  dplyr        * 1.2.1     2026-04-03 [1] RSPM
 #>  e1071          1.7-17    2025-12-18 [1] RSPM
-#>  ecokit       * 0.1.0     2026-06-08 [1] local
+#>  ecokit       * 0.1.0     2026-06-09 [1] local
 #>  evaluate       1.0.5     2025-08-27 [1] RSPM
 #>  fansi          1.0.7     2025-11-19 [1] RSPM
 #>  farver         2.1.2     2024-05-13 [1] RSPM
@@ -148,6 +148,7 @@ cat(readLines(saved_file), sep = "\n")
 #>  otel           0.2.0     2025-08-29 [1] RSPM
 #>  pak            0.10.0    2026-06-07 [1] RSPM
 #>  parallelly     1.47.0    2026-04-17 [1] RSPM
+#>  pdftools     * 3.9.0     2026-05-14 [1] RSPM
 #>  pillar         1.11.1    2025-09-17 [1] RSPM
 #>  pkgbuild       1.4.8     2025-05-26 [1] RSPM
 #>  pkgconfig      2.0.3     2019-09-22 [1] RSPM
@@ -157,6 +158,7 @@ cat(readLines(saved_file), sep = "\n")
 #>  proxy          0.4-29    2025-12-29 [1] RSPM
 #>  ps             1.9.3     2026-04-20 [1] RSPM
 #>  purrr        * 1.2.2     2026-04-10 [1] RSPM
+#>  qpdf           1.4.1     2025-07-02 [1] RSPM
 #>  qs2          * 0.2.2     2026-06-03 [1] RSPM
 #>  R6             2.6.1     2025-02-15 [1] RSPM
 #>  ragg           1.5.2     2026-03-23 [1] RSPM
@@ -225,13 +227,13 @@ vec <- rnorm(1000)
 session_data <- tibble::tibble(object = c("df", "vec"), size = c(0.1, 0.1))
 save_session_info(out_directory = temp_dir, session_info = session_data)
 #> Saving session info to:
-#> /tmp/RtmpE4KZ0T/save_session_info/S_20260608_2329.txt
+#> /tmp/Rtmp4rODlN/save_session_info/S_20260609_1734.txt
 
 saved_file <- list.files(
   temp_dir, pattern = "S_.+txt$", full.names = TRUE) %>%
   ecokit::normalize_path()
 (saved_file <- saved_file[length(saved_file)])
-#> /tmp/RtmpE4KZ0T/save_session_info/S_20260608_2329.txt
+#> /tmp/Rtmp4rODlN/save_session_info/S_20260609_1734.txt
 
 cat(readLines(saved_file), sep = "\n")
 #> 
@@ -249,7 +251,7 @@ cat(readLines(saved_file), sep = "\n")
 #>  collate  C
 #>  ctype    C.UTF-8
 #>  tz       UTC
-#>  date     2026-06-08
+#>  date     2026-06-09
 #>  pandoc   3.8.3 @ /opt/hostedtoolcache/pandoc/3.8.3/x64/ (via rmarkdown)
 #>  quarto   NA
 #> 
@@ -284,7 +286,7 @@ cat(readLines(saved_file), sep = "\n")
 #>  downlit        0.4.5     2025-11-14 [1] RSPM
 #>  dplyr        * 1.2.1     2026-04-03 [1] RSPM
 #>  e1071          1.7-17    2025-12-18 [1] RSPM
-#>  ecokit       * 0.1.0     2026-06-08 [1] local
+#>  ecokit       * 0.1.0     2026-06-09 [1] local
 #>  evaluate       1.0.5     2025-08-27 [1] RSPM
 #>  fansi          1.0.7     2025-11-19 [1] RSPM
 #>  farver         2.1.2     2024-05-13 [1] RSPM
@@ -328,6 +330,7 @@ cat(readLines(saved_file), sep = "\n")
 #>  otel           0.2.0     2025-08-29 [1] RSPM
 #>  pak            0.10.0    2026-06-07 [1] RSPM
 #>  parallelly     1.47.0    2026-04-17 [1] RSPM
+#>  pdftools     * 3.9.0     2026-05-14 [1] RSPM
 #>  pillar         1.11.1    2025-09-17 [1] RSPM
 #>  pkgbuild       1.4.8     2025-05-26 [1] RSPM
 #>  pkgconfig      2.0.3     2019-09-22 [1] RSPM
@@ -337,6 +340,7 @@ cat(readLines(saved_file), sep = "\n")
 #>  proxy          0.4-29    2025-12-29 [1] RSPM
 #>  ps             1.9.3     2026-04-20 [1] RSPM
 #>  purrr        * 1.2.2     2026-04-10 [1] RSPM
+#>  qpdf           1.4.1     2025-07-02 [1] RSPM
 #>  qs2          * 0.2.2     2026-06-03 [1] RSPM
 #>  R6             2.6.1     2025-02-15 [1] RSPM
 #>  ragg           1.5.2     2026-03-23 [1] RSPM

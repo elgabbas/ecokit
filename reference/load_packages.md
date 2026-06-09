@@ -49,6 +49,18 @@ load_packages(
 This function is used for its side effects (loading/installing packages)
 and does not return any value.
 
+## Details
+
+On HPC systems using network filesystems (e.g. Lustre) with `renv`,
+[`utils::installed.packages()`](https://rdrr.io/r/utils/installed.packages.html)
+can be slow due to high metadata I/O latency across large library trees.
+This function mitigates that by calling
+[`installed.packages()`](https://rdrr.io/r/utils/installed.packages.html)
+once with `fields = "Version"` only, caching the result, and reading
+package versions from the cached matrix rather than re-reading
+individual `DESCRIPTION` files via
+[`packageDescription()`](https://rdrr.io/r/utils/packageDescription.html).
+
 ## Author
 
 Ahmed El-Gabbas
@@ -59,10 +71,11 @@ Ahmed El-Gabbas
 # Currently loaded packages
 (P1 <- ecokit::loaded_packages())
 #>  [1] "qs2"       "stringr"   "tools"     "future"    "car"       "carData"  
-#>  [7] "purrr"     "archive"   "rworldmap" "arrow"     "dismo"     "raster"   
-#> [13] "sp"        "terra"     "fs"        "tidyr"     "tibble"    "png"      
-#> [19] "sf"        "ggplot2"   "dplyr"     "ecokit"    "magrittr"  "stats"    
-#> [25] "graphics"  "grDevices" "utils"     "datasets"  "methods"   "base"     
+#>  [7] "purrr"     "archive"   "rworldmap" "pdftools"  "arrow"     "dismo"    
+#> [13] "raster"    "sp"        "terra"     "fs"        "tidyr"     "tibble"   
+#> [19] "png"       "sf"        "ggplot2"   "dplyr"     "ecokit"    "magrittr" 
+#> [25] "stats"     "graphics"  "grDevices" "utils"     "datasets"  "methods"  
+#> [31] "base"     
 
 # Load tidyr
 load_packages(tidyr, raster, ggplot2, nnet, verbose = TRUE)
@@ -76,11 +89,11 @@ load_packages(tidyr, raster, ggplot2, nnet, verbose = TRUE)
 # Loaded packages after implementing the function
 (P2 <- ecokit::loaded_packages())
 #>  [1] "nnet"      "qs2"       "stringr"   "tools"     "future"    "car"      
-#>  [7] "carData"   "purrr"     "archive"   "rworldmap" "arrow"     "dismo"    
-#> [13] "raster"    "sp"        "terra"     "fs"        "tidyr"     "tibble"   
-#> [19] "png"       "sf"        "ggplot2"   "dplyr"     "ecokit"    "magrittr" 
-#> [25] "stats"     "graphics"  "grDevices" "utils"     "datasets"  "methods"  
-#> [31] "base"     
+#>  [7] "carData"   "purrr"     "archive"   "rworldmap" "pdftools"  "arrow"    
+#> [13] "dismo"     "raster"    "sp"        "terra"     "fs"        "tidyr"    
+#> [19] "tibble"    "png"       "sf"        "ggplot2"   "dplyr"     "ecokit"   
+#> [25] "magrittr"  "stats"     "graphics"  "grDevices" "utils"     "datasets" 
+#> [31] "methods"   "base"     
 
 # Which packages were loaded?
 setdiff(P2, P1)

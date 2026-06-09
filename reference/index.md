@@ -93,6 +93,9 @@
 - [`check_zip()`](https://elgabbas.github.io/ecokit/reference/check_zip.md)
   : Check the Integrity of ZIP Files
 
+- [`check_pdf()`](https://elgabbas.github.io/ecokit/reference/check_pdf.md)
+  : Check the integrity of a PDF file
+
 - [`check_image()`](https://elgabbas.github.io/ecokit/reference/check_image.md)
   : Verify Image File Integrity
 

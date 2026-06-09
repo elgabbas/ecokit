@@ -93,9 +93,9 @@ archive::archive(tar_file)
 #> # A tibble: 3 × 3
 #>   path   size date               
 #>   <chr> <int> <dttm>             
-#> 1 a.qs2    13 2026-06-08 21:27:46
-#> 2 b.qs2    13 2026-06-08 21:27:46
-#> 3 c.qs2    13 2026-06-08 21:27:46
+#> 1 a.qs2    13 2026-06-09 15:29:19
+#> 2 b.qs2    13 2026-06-09 15:29:19
+#> 3 c.qs2    13 2026-06-09 15:29:19
 
 ecokit::file_type(tar_file)
 #> [1] "POSIX tar archive (GNU)"
@@ -112,6 +112,6 @@ fs::file_info(c(tar_file, tar_gz_file)) %>%
 #> # A tibble: 2 × 3
 #>   path                                                size type 
 #>   <fs::path>                                   <fs::bytes> <fct>
-#> 1 /tmp/RtmpE4KZ0T/example_files/archive.tar            10K file 
-#> 2 /tmp/RtmpE4KZ0T/example_files/archive.tar.gz         149 file 
+#> 1 /tmp/Rtmp4rODlN/example_files/archive.tar            10K file 
+#> 2 /tmp/Rtmp4rODlN/example_files/archive.tar.gz         149 file 
 ```
