@@ -53,10 +53,10 @@ dir_size(".", human_readable = TRUE)      # human-readable format
 #> [1] "1.74 MB"
 
 dir_size(".", human_readable = FALSE)     # size in bytes
-#> [1] 1826343
+#> [1] 1828200
 
 dir_size(".", recursive = FALSE)          # non-recursive size calculation
-#> [1] "1.67 MB"
+#> [1] "1.68 MB"
 
 if (FALSE) { # \dontrun{
   # create temporary directory containing large files and subdirectories

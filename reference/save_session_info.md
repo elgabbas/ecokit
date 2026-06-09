@@ -45,13 +45,13 @@ fs::dir_create(temp_dir)
 
 save_session_info(out_directory = temp_dir)
 #> Saving session info to:
-#> /tmp/Rtmp4rODlN/save_session_info/S_20260609_1734.txt
+#> /tmp/RtmpHqavzE/save_session_info/S_20260609_1928.txt
 
 saved_file <- list.files(
   temp_dir, pattern = "S_.+txt$", full.names = TRUE) %>%
   ecokit::normalize_path()
 (saved_file <- saved_file[length(saved_file)])
-#> /tmp/Rtmp4rODlN/save_session_info/S_20260609_1734.txt
+#> /tmp/RtmpHqavzE/save_session_info/S_20260609_1928.txt
 
 cat(readLines(saved_file), sep = "\n")
 #> 
@@ -148,7 +148,7 @@ cat(readLines(saved_file), sep = "\n")
 #>  otel           0.2.0     2025-08-29 [1] RSPM
 #>  pak            0.10.0    2026-06-07 [1] RSPM
 #>  parallelly     1.47.0    2026-04-17 [1] RSPM
-#>  pdftools     * 3.9.0     2026-05-14 [1] RSPM
+#>  pdftools       3.9.0     2026-05-14 [1] RSPM
 #>  pillar         1.11.1    2025-09-17 [1] RSPM
 #>  pkgbuild       1.4.8     2025-05-26 [1] RSPM
 #>  pkgconfig      2.0.3     2019-09-22 [1] RSPM
@@ -227,13 +227,13 @@ vec <- rnorm(1000)
 session_data <- tibble::tibble(object = c("df", "vec"), size = c(0.1, 0.1))
 save_session_info(out_directory = temp_dir, session_info = session_data)
 #> Saving session info to:
-#> /tmp/Rtmp4rODlN/save_session_info/S_20260609_1734.txt
+#> /tmp/RtmpHqavzE/save_session_info/S_20260609_1928.txt
 
 saved_file <- list.files(
   temp_dir, pattern = "S_.+txt$", full.names = TRUE) %>%
   ecokit::normalize_path()
 (saved_file <- saved_file[length(saved_file)])
-#> /tmp/Rtmp4rODlN/save_session_info/S_20260609_1734.txt
+#> /tmp/RtmpHqavzE/save_session_info/S_20260609_1928.txt
 
 cat(readLines(saved_file), sep = "\n")
 #> 
@@ -330,7 +330,7 @@ cat(readLines(saved_file), sep = "\n")
 #>  otel           0.2.0     2025-08-29 [1] RSPM
 #>  pak            0.10.0    2026-06-07 [1] RSPM
 #>  parallelly     1.47.0    2026-04-17 [1] RSPM
-#>  pdftools     * 3.9.0     2026-05-14 [1] RSPM
+#>  pdftools       3.9.0     2026-05-14 [1] RSPM
 #>  pillar         1.11.1    2025-09-17 [1] RSPM
 #>  pkgbuild       1.4.8     2025-05-26 [1] RSPM
 #>  pkgconfig      2.0.3     2019-09-22 [1] RSPM

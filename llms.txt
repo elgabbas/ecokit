@@ -85,6 +85,8 @@ Last update: 2026-06-09
   : Reload an R package
 - [`loaded_packages()`](https://elgabbas.github.io/ecokit/reference/loaded_packages.md)
   : List of loaded packages
+- [`package_installed()`](https://elgabbas.github.io/ecokit/reference/package_installed.md)
+  : Check whether an R package is installed
 - [`package_remote_sha()`](https://elgabbas.github.io/ecokit/reference/package_remote_sha.md)
   : Retrieve Remote SHAs for R Packages
 - [`assign_env_vars()`](https://elgabbas.github.io/ecokit/reference/assign_env_vars.md)
