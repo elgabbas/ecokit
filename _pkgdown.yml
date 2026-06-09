@@ -46,6 +46,7 @@ reference:
   - quiet_device
   - reload_package
   - loaded_packages
+  - package_installed
   - package_remote_sha
   - assign_env_vars
   - check_args

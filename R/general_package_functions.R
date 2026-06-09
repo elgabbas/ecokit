@@ -40,6 +40,41 @@ package_functions <- function(package) {
 }
 
 
+#' Check whether an R package is installed
+#'
+#' A small wrapper function to determine whether a package namespace can be
+#' loaded via [base::requireNamespace()] without attaching the package.
+#'
+#' @param package Character scalar. Package name.
+#'
+#' @return A logical scalar:
+#' - `TRUE`: The package is installed and its namespace can be loaded.
+#' - `FALSE`: The package is not installed or its namespace cannot be loaded.
+#'
+#' @details The supplied package name is first validated to be a non-missing,
+#'   non-empty character scalar, then [base::requireNamespace()] is called with
+#'   `quietly = TRUE`.
+#'
+#' @examples
+#' package_installed("stats")
+#' package_installed("this_package_does_not_exist")
+#'
+#' @export
+#' @author Ahmed El-Gabbas
+
+package_installed <- function(package) {
+
+  ecokit::check_args(args_to_check = "package", args_type = "character")
+
+  if (length(package) != 1L || is.na(package) || !nzchar(package)) {
+    ecokit::stop_ctx(
+      "`package` must be a non-empty character scalar", package = package)
+  }
+
+  out <- requireNamespace(package, quietly = TRUE)
+  return(out)
+}
+
 
 #' Check Package Availability
 #'

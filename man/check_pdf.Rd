@@ -4,43 +4,57 @@
 \alias{check_pdf}
 \title{Check the integrity of a PDF file}
 \usage{
-check_pdf(file, render = FALSE)
+check_pdf(file, use_pdftools = FALSE, warning = TRUE, render = FALSE)
 }
 \arguments{
 \item{file}{Character scalar. Path to a PDF file.}
 
+\item{use_pdftools}{Logical scalar. If \code{FALSE} (default), perform a basic
+check using file info and the PDF header signature ("\verb{\%PDF-}"). If \code{TRUE},
+use \code{pdftools} for validation; if \code{pdftools} is not installed, the function
+falls back to the basic header check and issues a warning if "\code{warning = TRUE}".}
+
+\item{warning}{Logical scalar. If \code{TRUE}, issue a warning when "\code{use_pdftools = TRUE}" but \code{pdftools} is not installed. Has no effect when "\code{use_pdftools = FALSE}" or when \code{pdftools} is installed.}
+
 \item{render}{Logical scalar. If \code{TRUE}, additionally attempt to render the
 first page using \code{\link[pdftools:pdf_render_page]{pdftools::pdf_render_page()}}. Rendering provides a
-stronger integrity check but is slower than metadata validation alone.}
+stronger integrity check but is slower than metadata validation alone. Only
+has an effect when "\code{use_pdftools = TRUE}".}
 }
 \value{
 A logical scalar:
 \itemize{
-\item \code{TRUE}: The file exists, is non-empty, appears to be a PDF
-document, and can be successfully parsed by \code{pdftools}.
-\item \code{FALSE}: The file is missing, empty, not recognized as a PDF,
-cannot be parsed, or an error occurs during validation.
+\item \code{TRUE}: The file exists, is non-empty, and either (a) its first five bytes
+match the \verb{\%PDF-} header signature (\code{use_pdftools = FALSE}), or (b) it can
+be successfully parsed by \code{pdftools} ("\code{use_pdftools = TRUE}").
+\item \code{FALSE}: The file is missing, empty, not recognised as a PDF, fails the
+header check, cannot be parsed, or an error occurs during validation.
 }
 }
 \description{
 Verify that a file exists, is non-empty, is identified as a PDF document, and
-can be successfully parsed by \code{pdftools}. Optionally, the first page can also
-be rendered to perform a stronger integrity check.
+can be successfully validated by \code{pdftools} when available. Optionally, the
+first page can also be rendered to perform a stronger integrity check.
 }
 \details{
 The function is intended to detect missing, empty, truncated, or corrupted
-PDF files. Validation is performed by attempting to read the document
-metadata using \code{\link[pdftools:pdf_info]{pdftools::pdf_info()}}
+PDF files. When "\code{use_pdftools = TRUE}", validation is performed by
+attempting to read document metadata using \code{\link[pdftools:pdf_info]{pdftools::pdf_info()}}.
 
 Validation is performed in the following order:
 \itemize{
 \item Verify that the file exists and is non-empty.
 \item Verify that the file type contains the string \code{pdf} according to
 \code{\link[=file_type]{file_type()}}.
-\item Attempt to read PDF metadata using \code{\link[pdftools:pdf_info]{pdftools::pdf_info()}}.
-\item Optionally render the first page using \code{\link[pdftools:pdf_render_page]{pdftools::pdf_render_page()}}.
-Note that Poppler may emit font diagnostic messages directly to stderr
-during rendering; these are harmless and are suppressed automatically.
+\item If "\code{use_pdftools = FALSE}" or \code{pdftools} is not installed: check that the
+first five bytes of the file match the \verb{\%PDF-} header signature.
+\item If "\code{use_pdftools = TRUE}" and \code{pdftools} is installed: attempt to read PDF
+metadata using \code{\link[pdftools:pdf_info]{pdftools::pdf_info()}}.
+\item If \code{render = TRUE} (and "\code{use_pdftools = TRUE}"): additionally attempt to
+render the first page using \code{\link[pdftools:pdf_render_page]{pdftools::pdf_render_page()}}. Any R-level
+messages emitted during rendering are suppressed. Note that \code{Poppler} may
+also emit font diagnostic messages directly to C-level stderr; these bypass
+R's message system, are harmless, and cannot be suppressed from R.
 
 Successful validation indicates that the PDF structure is readable by the
 Poppler library used by \code{pdftools}. It does not guarantee that every page
@@ -49,7 +63,7 @@ not corrupted.
 }
 }
 \examples{
-ecokit::load_packages(fs, pdftools)
+ecokit::load_packages(fs)
 
 # Create a temporary invalid pdf file
 invalid_file <- fs::file_temp(ext = "pdf")
