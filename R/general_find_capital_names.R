@@ -60,6 +60,8 @@ find_capital_names <- function(
     path = ".", extension = NULL, exclude_extension = NULL,
     exclude_dirs = c(".git", ".Rproj.user"), full_paths = FALSE) {
 
+  relative_path <- is_dir <- name <- NULL
+
   if (is.null(path)) {
     ecokit::stop_ctx("`path` must be a non-missing character scalar.")
   }
@@ -104,7 +106,8 @@ find_capital_names <- function(
   paths_tbl <- tibble::tibble(path = as.character(all_paths)) %>%
     dplyr::mutate(
       relative_path = fs::path_rel(path, start = root_path),
-      name = fs::path_file(path), is_dir = fs::is_dir(path))
+      name = fs::path_file(path),
+      is_dir = fs::is_dir(path))
 
   if (!is.null(exclude_dirs) && length(exclude_dirs) > 0L) {
 
