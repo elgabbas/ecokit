@@ -77,6 +77,9 @@
 - [`find_duplicates()`](https://elgabbas.github.io/ecokit/reference/find_duplicates.md)
   : Find duplicated files and directories within a given path
 
+- [`find_capital_names()`](https://elgabbas.github.io/ecokit/reference/find_capital_names.md)
+  : Find files and directories with uppercase letters in their names
+
 - [`load_as()`](https://elgabbas.github.io/ecokit/reference/load_as.md)
   :
 
@@ -245,6 +248,8 @@
 - [`zenodo_file_list()`](https://elgabbas.github.io/ecokit/reference/zenodo_tools.md)
   [`zenodo_download_file()`](https://elgabbas.github.io/ecokit/reference/zenodo_tools.md)
   : List and Download Files from a Zenodo Record
+- [`render_html()`](https://elgabbas.github.io/ecokit/reference/render_html.md)
+  : Render HTML text in the RStudio Viewer
 
 ## Spatial functions
 
