@@ -1,7 +1,7 @@
 ## |------------------------------------------------------------------------| #
 # package_functions ----
 ## |------------------------------------------------------------------------| #
-#
+
 #' List of functions in a package
 #'
 #' This function returns a character vector listing all the functions available
@@ -39,6 +39,9 @@ package_functions <- function(package) {
   ls(paste0("package:", package))
 }
 
+## |------------------------------------------------------------------------| #
+# package_installed ----
+## |------------------------------------------------------------------------| #
 
 #' Check whether an R package is installed
 #'
@@ -75,6 +78,10 @@ package_installed <- function(package) {
   return(out)
 }
 
+
+## |------------------------------------------------------------------------| #
+# check_packages ----
+## |------------------------------------------------------------------------| #
 
 #' Check Package Availability
 #'

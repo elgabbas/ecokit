@@ -62,6 +62,7 @@ reference:
   - parent_dir
   - normalize_path
   - find_duplicates
+  - find_capital_names
   - load_as
   - load_multiple
   - check_data
@@ -125,6 +126,7 @@ reference:
   - assign_from_options
   - get_option_with_default
   - zenodo_tools
+  - render_html
 
 - title: Spatial functions
   contents:
