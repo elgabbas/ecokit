@@ -93,7 +93,7 @@ cat_diff(reference_time, prefix = "Finished in ", level = 1L)
 
 # print date
 cat_diff(reference_time, prefix = "Finished in ", cat_timestamp = TRUE)
-#> Finished in 00:00:45 - 05:32:11
+#> Finished in 00:00:45 - 06:38:58
 
 # print date and time
 cat_diff(reference_time, prefix = "Finished in ", cat_date = TRUE)
