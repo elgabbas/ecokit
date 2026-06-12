@@ -16,7 +16,6 @@ Depends:
     magrittr (>= 2.0),
     R (>= 4.0.4)
 Imports:
-    callr (>= 3.7),
     crayon (>= 1.5),
     dplyr (>= 1.1),
     fs (>= 1.6),

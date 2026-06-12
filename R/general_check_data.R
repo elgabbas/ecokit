@@ -28,18 +28,6 @@
 #' - **feather**: Checked with [check_feather()], read using
 #'   [arrow::read_feather]
 #'
-#'   For all file types, the actual loading attempt is performed in a disposable
-#'   background R process via [callr::r]. This is important because reading a
-#'   corrupted `feather`/Arrow IPC file (and, less commonly, a corrupted `qs2`
-#'   or `RData` file) with the native readers can crash the R process with a
-#'   segmentation fault rather than throwing a catchable error. Such a crash
-#'   cannot be intercepted with `try()`/`tryCatch()` and would terminate the
-#'   calling session — or, under parallel processing (e.g. `future`/`furrr`),
-#'   silently kill a worker. Running the load in a subprocess confines any crash
-#'   to that subprocess; [callr::r] converts it into a normal, catchable R error
-#'   in the calling process, which [check_data()] reports as `FALSE` (with an
-#'   optional warning).
-#'
 #'   For `feather` files specifically, a lightweight, pure-R check of the Arrow
 #'   IPC file-format magic bytes (`"ARROW1"` at the start and end of the file)
 #'   is performed first. This is fast, allocates no native memory, and filters
@@ -158,6 +146,13 @@ check_data <- function(
   ecokit::check_args(
     args_to_check = c("n_threads", "timeout"), args_type = "numeric")
 
+  if (is.null(file)) {
+    ecokit::stop_ctx("`file` cannot be NULL or empty string")
+  }
+  if (!is.character(file)) {
+    ecokit::stop_ctx("`file` must be a character vector", file = file)
+  }
+
   # Clamp n_threads to available cores if necessary
   n_threads <- ecokit::validate_n_cores(n_threads)
 
@@ -175,6 +170,34 @@ check_data <- function(
       }
     })
 
+  # files_check <- purrr::map_lgl(
+  #   .x = file,
+  #   .f = ~{
+  #
+  #     if (isFALSE(check_file_basic(.x, warning = warning))) {
+  #       return(FALSE)
+  #     }
+  #
+  #     # Get file extension
+  #     extension <- get_file_extension(.x)
+  #
+  #     switch(
+  #       extension,
+  #       qs2 = ecokit::check_qs(
+  #         .x, n_threads = n_threads, warning = warning, timeout = timeout),
+  #       rdata = ecokit::check_rdata(.x, warning = warning, timeout = timeout),
+  #       rds = ecokit::check_rds(.x, warning = warning, timeout = timeout),
+  #       feather = ecokit::check_feather(
+  #         .x, warning = warning, timeout = timeout),
+  #       {
+  #         if (warning) {
+  #           warning("Unsupported file extension: ", extension, call. = FALSE)
+  #         }
+  #         FALSE
+  #       })
+  #   })
+
+
   files_check <- purrr::map_lgl(
     .x = file,
     .f = ~{
@@ -186,21 +209,54 @@ check_data <- function(
       # Get file extension
       extension <- get_file_extension(.x)
 
-      switch(
-        extension,
-        qs2 = ecokit::check_qs(
-          .x, n_threads = n_threads, warning = warning, timeout = timeout),
-        rdata = ecokit::check_rdata(.x, warning = warning, timeout = timeout),
-        rds = ecokit::check_rds(.x, warning = warning, timeout = timeout),
-        feather = ecokit::check_feather(
-          .x, warning = warning, timeout = timeout),
-        {
-          if (warning) {
-            warning("Unsupported file extension: ", extension, call. = FALSE)
-          }
-          FALSE
-        })
+      attempt <- 1L
+
+      repeat {
+
+        result <- tryCatch(
+          switch(
+            extension,
+            qs2 = ecokit::check_qs(
+              .x,
+              n_threads = n_threads,
+              warning = warning,
+              timeout = timeout),
+            rdata = ecokit::check_rdata(
+              .x,
+              warning = warning,
+              timeout = timeout),
+            rds = ecokit::check_rds(
+              .x,
+              warning = warning,
+              timeout = timeout),
+            feather = ecokit::check_feather(
+              .x,
+              warning = warning,
+              timeout = timeout),
+            {
+              if (warning) {
+                warning(
+                  "Unsupported file extension: ",
+                  extension,
+                  call. = FALSE)
+              }
+              FALSE
+            }),
+          error = function(e) FALSE,
+          warning = function(w) FALSE)
+
+        if (isTRUE(result)) {
+          return(TRUE)
+        }
+
+        if (attempt >= 5L) {
+          return(FALSE)
+        }
+
+        attempt <- attempt + 1L
+      }
     })
+
 
   if (all_okay) {
     files_check <- all(files_check)
@@ -243,16 +299,22 @@ check_rdata <- function(file, warning = TRUE, timeout = 120L) {
     return(FALSE)
   }
 
-  safe_load_object(
-    load_func = function(file) {
-      loaded <- ecokit::load_as(file)
-      if (is.null(loaded)) {
-        stop("Loaded object is NULL", call. = FALSE)
+  loaded_obj <- tryCatch(
+    ecokit::load_as(file),
+    error = function(e) {
+      if (warning) {
+        warning(
+          "Failed to load RData file: \n", ecokit::normalize_path(file),
+          "\n  Reason: ", conditionMessage(e), call. = FALSE, immediate. = TRUE)
       }
-      invisible(TRUE)
-    },
-    load_args = list(file = file), warning = warning, file = file,
-    file_type = "RData", timeout = timeout)
+      NULL
+    })
+
+  if (is.null(loaded_obj)) {
+    return(FALSE)
+  }
+
+  TRUE
 }
 
 ## |------------------------------------------------------------------------| #
@@ -294,16 +356,23 @@ check_qs <- function(file, warning = TRUE, n_threads = 1L, timeout = 120L) {
 
   ecokit::check_packages("qs2")
 
-  safe_load_object(
-    load_func = function(file, n_threads) {
-      loaded <- qs2::qs_read(file = file, nthreads = n_threads)
-      if (is.null(loaded)) {
-        stop("Loaded object is NULL", call. = FALSE)
+
+  loaded_obj <- tryCatch(
+    qs2::qs_read(file),
+    error = function(e) {
+      if (warning) {
+        warning(
+          "Failed to load qs2 file: \n", ecokit::normalize_path(file),
+          "\n  Reason: ", conditionMessage(e), call. = FALSE, immediate. = TRUE)
       }
-      invisible(TRUE)
-    },
-    load_args = list(file = file, n_threads = as.integer(n_threads)),
-    warning = warning, file = file, file_type = "qs2", timeout = timeout)
+      NULL
+    })
+
+  if (is.null(loaded_obj)) {
+    return(FALSE)
+  }
+
+  TRUE
 }
 
 ## |------------------------------------------------------------------------| #
@@ -340,16 +409,22 @@ check_rds <- function(file, warning = TRUE, timeout = 120L) {
     return(FALSE)
   }
 
-  safe_load_object(
-    load_func = function(file) {
-      loaded <- readRDS(file)
-      if (is.null(loaded)) {
-        stop("Loaded object is NULL", call. = FALSE)
+  loaded_obj <- tryCatch(
+    ecokit::load_as(file),
+    error = function(e) {
+      if (warning) {
+        warning(
+          "Failed to load rds file: \n", ecokit::normalize_path(file),
+          "\n  Reason: ", conditionMessage(e), call. = FALSE, immediate. = TRUE)
       }
-      invisible(TRUE)
-    },
-    load_args = list(file = file), warning = warning, file = file,
-    file_type = "rds", timeout = timeout)
+      NULL
+    })
+
+  if (is.null(loaded_obj)) {
+    return(FALSE)
+  }
+
+  TRUE
 }
 
 ## |------------------------------------------------------------------------| #
@@ -403,16 +478,24 @@ check_feather <- function(file, warning = TRUE, timeout = 120L) {
     return(FALSE)
   }
 
-  safe_load_object(
-    load_func = function(file) {
-      loaded <- arrow::read_feather(file)
-      if (is.null(loaded)) {
-        stop("Loaded object is NULL", call. = FALSE)
+  loaded_obj <- tryCatch(
+    # default `mmap = TRUE` can cause crashes on corrupted files; safer to
+    # disable memory-mapping
+    arrow::read_feather(file = file, mmap = FALSE),
+    error = function(e) {
+      if (warning) {
+        warning(
+          "Failed to load feather file: \n", ecokit::normalize_path(file),
+          "\n  Reason: ", conditionMessage(e), call. = FALSE, immediate. = TRUE)
       }
-      invisible(TRUE)
-    },
-    load_args = list(file = file), warning = warning, file = file,
-    file_type = "feather", timeout = timeout)
+      NULL
+    })
+
+  if (is.null(loaded_obj)) {
+    return(FALSE)
+  }
+
+  TRUE
 }
 
 ## |------------------------------------------------------------------------| #
@@ -567,55 +650,4 @@ check_feather_magic <- function(file) {
   tail_bytes <- readBin(con, what = "raw", n = 6L)
 
   identical(head_bytes, magic) && identical(tail_bytes, magic)
-}
-
-## |------------------------------------------------------------------------| #
-# safe_load_object ----
-## |------------------------------------------------------------------------| #
-
-#' Safely attempt to load a file in a disposable background R process
-#'
-#' Runs `load_func(load_args)` inside a fresh background R process via
-#' [callr::r()]. If the load succeeds (returns without error within `timeout`
-#' seconds), returns `TRUE`. If the subprocess errors, times out, or crashes
-#' (e.g. segmentation fault from a corrupted `feather`/`qs2`/`RData` file),
-#' [callr::r()] surfaces this as a catchable R error in the calling process,
-#' which is reported as `FALSE` (with an optional warning) rather than crashing
-#' the caller.
-#'
-#' @param load_func Function. Takes the elements of `load_args` as arguments,
-#'   loads the file, and `stop()`s if the loaded object is `NULL` or invalid.
-#'   Must not rely on any state outside of `load_args` (it runs in a fresh R
-#'   process).
-#' @param load_args Named list. Arguments passed to `load_func`.
-#' @param warning Logical. If `TRUE`, issue a warning on failure.
-#' @param file Character. Path to the file, used in warning messages.
-#' @param file_type Character. Human-readable file type, used in warning
-#'   messages (e.g. `"feather"`, `"qs2"`).
-#' @param timeout Integer. Maximum time in seconds allowed for the load.
-#' @return Logical: `TRUE` if the load succeeded; `FALSE` otherwise.
-#' @keywords internal
-#' @noRd
-
-safe_load_object <- function(
-    load_func, load_args, warning, file, file_type, timeout) {
-
-  ecokit::check_packages("callr")
-
-  result <- try(
-    callr::r(
-      func = load_func, args = load_args, libpath = .libPaths(), # nolint
-      error = "error", timeout = timeout),
-    silent = TRUE)
-
-  if (inherits(result, "try-error")) {
-    if (warning) {
-      warning(
-        "Failed to load ", file_type, " file: ",
-        ecokit::normalize_path(file), call. = FALSE)
-    }
-    return(FALSE)
-  }
-
-  TRUE
 }

@@ -63,18 +63,6 @@ extension (case-insensitive). If the extension is unrecognised, it returns
 \item \strong{feather}: Checked with \code{\link[=check_feather]{check_feather()}}, read using
 \link[arrow:read_feather]{arrow::read_feather}
 
-For all file types, the actual loading attempt is performed in a disposable
-background R process via \link[callr:r]{callr::r}. This is important because reading a
-corrupted \code{feather}/Arrow IPC file (and, less commonly, a corrupted \code{qs2}
-or \code{RData} file) with the native readers can crash the R process with a
-segmentation fault rather than throwing a catchable error. Such a crash
-cannot be intercepted with \code{try()}/\code{tryCatch()} and would terminate the
-calling session — or, under parallel processing (e.g. \code{future}/\code{furrr}),
-silently kill a worker. Running the load in a subprocess confines any crash
-to that subprocess; \link[callr:r]{callr::r} converts it into a normal, catchable R error
-in the calling process, which \code{\link[=check_data]{check_data()}} reports as \code{FALSE} (with an
-optional warning).
-
 For \code{feather} files specifically, a lightweight, pure-R check of the Arrow
 IPC file-format magic bytes (\code{"ARROW1"} at the start and end of the file)
 is performed first. This is fast, allocates no native memory, and filters
