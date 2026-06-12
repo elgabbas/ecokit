@@ -74,6 +74,7 @@ reference:
   - save_as
   - save_multiple
   - list_to_rdata
+  - validate_named_list
   - assign_if_not_exist
   - cc
   - ht
