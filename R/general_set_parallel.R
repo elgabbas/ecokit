@@ -85,6 +85,13 @@ set_parallel <- function(
     n_cores = 1L, strategy = "multisession", stop_cluster = FALSE,
     show_log = TRUE, future_max_size = 500L, cat_timestamp = FALSE, ...) {
 
+  ecokit::check_args(
+    args_to_check = c("n_cores", "future_max_size"), args_type = "numeric")
+  ecokit::check_args(args_to_check = "strategy", args_type = "character")
+  ecokit::check_args(
+    args_to_check = c("stop_cluster", "cat_timestamp", "show_log"),
+    args_type = "logical")
+
   # Validate n_cores input
   n_cores <- ifelse((is.null(n_cores) || n_cores < 1L), 1L, as.integer(n_cores))
 
@@ -117,21 +124,6 @@ set_parallel <- function(
     future::plan(strategy = "sequential", gc = TRUE)
 
   } else {
-
-    # strategy can not be NULL
-    if (is.null(strategy)) {
-      message(
-        "`strategy` cannot be NULL. It was reset to `multisession`",
-        call. = FALSE)
-      strategy <- "multisession"
-    }
-
-    # strategy should be a character vector of length 1
-    if (length(strategy) != 1L) {
-      ecokit::stop_ctx(
-        "`strategy` must be a character vector of length 1",
-        strategy = strategy, length_strategy = length(strategy))
-    }
 
     # strategy can be only one of the following: "sequential",
     # "multisession", "multicore", "cluster".

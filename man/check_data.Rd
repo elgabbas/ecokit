@@ -8,15 +8,21 @@
 \alias{check_feather}
 \title{Check Integrity of Data Files}
 \usage{
-check_data(file = NULL, warning = TRUE, all_okay = TRUE, n_threads = 1L)
+check_data(
+  file = NULL,
+  warning = TRUE,
+  all_okay = TRUE,
+  n_threads = 1L,
+  timeout = 120L
+)
 
-check_rdata(file, warning = TRUE)
+check_rdata(file, warning = TRUE, timeout = 120L)
 
-check_qs(file, warning = TRUE, n_threads = 1L)
+check_qs(file, warning = TRUE, n_threads = 1L, timeout = 120L)
 
-check_rds(file, warning = TRUE)
+check_rds(file, warning = TRUE, timeout = 120L)
 
-check_feather(file, warning = TRUE)
+check_feather(file, warning = TRUE, timeout = 120L)
 }
 \arguments{
 \item{file}{Character vector. Path to a data file (e.g., \code{.rdata}, \code{.qs2},
@@ -30,7 +36,12 @@ indicating the integrity of all files; if \code{FALSE}, returns logical vectors
 for each file.}
 
 \item{n_threads}{Integer. Number of threads for reading \code{qs2} files. Must be
-a positive integer. See \link[qs2:qs_read]{qs2::qs_read} for more details.}
+a positive integer. See \link[qs2:qs_read]{qs2::qs_read} for more details. If it exceeds
+\code{\link[parallelly:availableCores]{parallelly::availableCores()}}, it is silently clamped to the number of
+available cores (with a warning); see \code{\link[=validate_n_cores]{validate_n_cores()}}.}
+
+\item{timeout}{Integer. Maximum time in seconds allowed for the file-loading
+attempt (per file) before it is treated as a failure. Default \code{120L}.}
 }
 \value{
 Logical: \code{TRUE} if all checks pass; \code{FALSE} otherwise.
@@ -51,6 +62,23 @@ extension (case-insensitive). If the extension is unrecognised, it returns
 \item \strong{rds}: Checked with \code{\link[=check_rds]{check_rds()}}, read using \link{readRDS}
 \item \strong{feather}: Checked with \code{\link[=check_feather]{check_feather()}}, read using
 \link[arrow:read_feather]{arrow::read_feather}
+
+For all file types, the actual loading attempt is performed in a disposable
+background R process via \link[callr:r]{callr::r}. This is important because reading a
+corrupted \code{feather}/Arrow IPC file (and, less commonly, a corrupted \code{qs2}
+or \code{RData} file) with the native readers can crash the R process with a
+segmentation fault rather than throwing a catchable error. Such a crash
+cannot be intercepted with \code{try()}/\code{tryCatch()} and would terminate the
+calling session — or, under parallel processing (e.g. \code{future}/\code{furrr}),
+silently kill a worker. Running the load in a subprocess confines any crash
+to that subprocess; \link[callr:r]{callr::r} converts it into a normal, catchable R error
+in the calling process, which \code{\link[=check_data]{check_data()}} reports as \code{FALSE} (with an
+optional warning).
+
+For \code{feather} files specifically, a lightweight, pure-R check of the Arrow
+IPC file-format magic bytes (\code{"ARROW1"} at the start and end of the file)
+is performed first. This is fast, allocates no native memory, and filters
+out most corrupted files before \code{arrow::read_feather} is ever called.
 }
 }
 \examples{

@@ -70,6 +70,7 @@ reference:
   - check_pdf
   - check_image
   - check_env_file
+  - check_java
   - save_as
   - save_multiple
   - list_to_rdata
@@ -103,6 +104,7 @@ reference:
 
 - title: Utility functions
   contents:
+  - validators
   - set_parallel
   - os
   - system_command
