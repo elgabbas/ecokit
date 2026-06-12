@@ -51,15 +51,15 @@ Ahmed El-Gabbas
 ``` r
 # Show the most recent commit
 git_log(n_commits = 1)
-#> * 682c398 - (grafted, HEAD -> main, origin/main) small fix (3 minutes ago) <Ahmed El-Gabbas>
+#> * a042f57 - (grafted, HEAD -> main, origin/main) Enhance argument validation in set_parallel function and add new validators (4 minutes ago) <Ahmed El-Gabbas>
 
 # Show the most recent 5 commits
 git_log(n_commits = 5)
-#> * 682c398 - (grafted, HEAD -> main, origin/main) small fix (3 minutes ago) <Ahmed El-Gabbas>
+#> * a042f57 - (grafted, HEAD -> main, origin/main) Enhance argument validation in set_parallel function and add new validators (4 minutes ago) <Ahmed El-Gabbas>
 
 # by default, the log is only printed, not returned
 log_example <- git_log(n_commits = 1)
-#> * 682c398 - (grafted, HEAD -> main, origin/main) small fix (3 minutes ago) <Ahmed El-Gabbas>
+#> * a042f57 - (grafted, HEAD -> main, origin/main) Enhance argument validation in set_parallel function and add new validators (4 minutes ago) <Ahmed El-Gabbas>
 print(log_example)
 #> NULL
 
@@ -68,7 +68,7 @@ log_example <- git_log(return_log = TRUE)
 length(log_example)
 #> [1] 1
 head(log_example, 8)
-#> [1] "* 682c398 - (grafted, HEAD -> main, origin/main) small fix (3 minutes ago) <Ahmed El-Gabbas>"
+#> [1] "* a042f57 - (grafted, HEAD -> main, origin/main) Enhance argument validation in set_parallel function and add new validators (4 minutes ago) <Ahmed El-Gabbas>"
 
 # not a git repo
 non_git_dir <- fs::path_temp("test_dir")

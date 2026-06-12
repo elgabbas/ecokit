@@ -110,6 +110,9 @@
   Check the integrity of a `.env` file before loading environment
   variables
 
+- [`check_java()`](https://elgabbas.github.io/ecokit/reference/check_java.md)
+  : Check that Java is available on the system PATH
+
 - [`save_as()`](https://elgabbas.github.io/ecokit/reference/save_as.md)
   : Save an object to a file with a new name
 
@@ -199,6 +202,12 @@
 
 ## Utility functions
 
+- [`is_integer()`](https://elgabbas.github.io/ecokit/reference/validators.md)
+  [`validate_n_cores()`](https://elgabbas.github.io/ecokit/reference/validators.md)
+  [`validate_strategy()`](https://elgabbas.github.io/ecokit/reference/validators.md)
+  [`validate_slurm_runtime()`](https://elgabbas.github.io/ecokit/reference/validators.md)
+  [`validate_slurm_ram()`](https://elgabbas.github.io/ecokit/reference/validators.md)
+  : Argument validation helpers for ecokit
 - [`set_parallel()`](https://elgabbas.github.io/ecokit/reference/set_parallel.md)
   : Set up or stop parallel processing plan
 - [`os()`](https://elgabbas.github.io/ecokit/reference/OS.md) : Current

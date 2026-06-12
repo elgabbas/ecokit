@@ -52,15 +52,21 @@ supported extension, and loads successfully with a non-null object. Supports
 
     <div class="section level2">
     <h2 id="ref-usage">Usage<a class="anchor" aria-label="anchor" href="#ref-usage"></a></h2>
-    <div class="sourceCode"><pre class="sourceCode r"><code><span><span class="fu">check_data</span><span class="op">(</span>file <span class="op">=</span> <span class="cn">NULL</span>, warning <span class="op">=</span> <span class="cn">TRUE</span>, all_okay <span class="op">=</span> <span class="cn">TRUE</span>, n_threads <span class="op">=</span> <span class="fl">1L</span><span class="op">)</span></span>
+    <div class="sourceCode"><pre class="sourceCode r"><code><span><span class="fu">check_data</span><span class="op">(</span></span>
+<span>  file <span class="op">=</span> <span class="cn">NULL</span>,</span>
+<span>  warning <span class="op">=</span> <span class="cn">TRUE</span>,</span>
+<span>  all_okay <span class="op">=</span> <span class="cn">TRUE</span>,</span>
+<span>  n_threads <span class="op">=</span> <span class="fl">1L</span>,</span>
+<span>  timeout <span class="op">=</span> <span class="fl">120L</span></span>
+<span><span class="op">)</span></span>
 <span></span>
-<span><span class="fu">check_rdata</span><span class="op">(</span><span class="va">file</span>, warning <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></span>
+<span><span class="fu">check_rdata</span><span class="op">(</span><span class="va">file</span>, warning <span class="op">=</span> <span class="cn">TRUE</span>, timeout <span class="op">=</span> <span class="fl">120L</span><span class="op">)</span></span>
 <span></span>
-<span><span class="fu">check_qs</span><span class="op">(</span><span class="va">file</span>, warning <span class="op">=</span> <span class="cn">TRUE</span>, n_threads <span class="op">=</span> <span class="fl">1L</span><span class="op">)</span></span>
+<span><span class="fu">check_qs</span><span class="op">(</span><span class="va">file</span>, warning <span class="op">=</span> <span class="cn">TRUE</span>, n_threads <span class="op">=</span> <span class="fl">1L</span>, timeout <span class="op">=</span> <span class="fl">120L</span><span class="op">)</span></span>
 <span></span>
-<span><span class="fu">check_rds</span><span class="op">(</span><span class="va">file</span>, warning <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></span>
+<span><span class="fu">check_rds</span><span class="op">(</span><span class="va">file</span>, warning <span class="op">=</span> <span class="cn">TRUE</span>, timeout <span class="op">=</span> <span class="fl">120L</span><span class="op">)</span></span>
 <span></span>
-<span><span class="fu">check_feather</span><span class="op">(</span><span class="va">file</span>, warning <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></span></code></pre></div>
+<span><span class="fu">check_feather</span><span class="op">(</span><span class="va">file</span>, warning <span class="op">=</span> <span class="cn">TRUE</span>, timeout <span class="op">=</span> <span class="fl">120L</span><span class="op">)</span></span></code></pre></div>
     </div>
 
     <div class="section level2">
@@ -85,7 +91,14 @@ for each file.</p></dd>
 
 <dt id="arg-n-threads">n_threads<a class="anchor" aria-label="anchor" href="#arg-n-threads"></a></dt>
 <dd><p>Integer. Number of threads for reading <code>qs2</code> files. Must be
-a positive integer. See <a href="https://rdrr.io/pkg/qs2/man/qs_read.html" class="external-link">qs2::qs_read</a> for more details.</p></dd>
+a positive integer. See <a href="https://rdrr.io/pkg/qs2/man/qs_read.html" class="external-link">qs2::qs_read</a> for more details. If it exceeds
+<code><a href="https://parallelly.futureverse.org/reference/availableCores.html" class="external-link">parallelly::availableCores()</a></code>, it is silently clamped to the number of
+available cores (with a warning); see <code><a href="validators.html">validate_n_cores()</a></code>.</p></dd>
+
+
+<dt id="arg-timeout">timeout<a class="anchor" aria-label="anchor" href="#arg-timeout"></a></dt>
+<dd><p>Integer. Maximum time in seconds allowed for the file-loading
+attempt (per file) before it is treated as a failure. Default <code>120L</code>.</p></dd>
 
 </dl></div>
     <div class="section level2">
@@ -100,7 +113,22 @@ extension (case-insensitive). If the extension is unrecognised, it returns
 <li><p><strong>qs2</strong>: Checked with <code>check_qs()</code>, read using <a href="https://rdrr.io/pkg/qs2/man/qs_read.html" class="external-link">qs2::qs_read</a></p></li>
 <li><p><strong>rds</strong>: Checked with <code>check_rds()</code>, read using <a href="https://rdrr.io/r/base/readRDS.html" class="external-link">readRDS</a></p></li>
 <li><p><strong>feather</strong>: Checked with <code>check_feather()</code>, read using
-<a href="https://arrow.apache.org/docs/r/reference/read_feather.html" class="external-link">arrow::read_feather</a></p></li>
+<a href="https://arrow.apache.org/docs/r/reference/read_feather.html" class="external-link">arrow::read_feather</a></p>
+<p>For all file types, the actual loading attempt is performed in a disposable
+background R process via <a href="https://callr.r-lib.org/reference/r.html" class="external-link">callr::r</a>. This is important because reading a
+corrupted <code>feather</code>/Arrow IPC file (and, less commonly, a corrupted <code>qs2</code>
+or <code>RData</code> file) with the native readers can crash the R process with a
+segmentation fault rather than throwing a catchable error. Such a crash
+cannot be intercepted with <code><a href="https://rdrr.io/r/base/try.html" class="external-link">try()</a></code>/<code><a href="https://rdrr.io/r/base/conditions.html" class="external-link">tryCatch()</a></code> and would terminate the
+calling session — or, under parallel processing (e.g. <code>future</code>/<code>furrr</code>),
+silently kill a worker. Running the load in a subprocess confines any crash
+to that subprocess; <a href="https://callr.r-lib.org/reference/r.html" class="external-link">callr::r</a> converts it into a normal, catchable R error
+in the calling process, which <code>check_data()</code> reports as <code>FALSE</code> (with an
+optional warning).</p>
+<p>For <code>feather</code> files specifically, a lightweight, pure-R check of the Arrow
+IPC file-format magic bytes (<code>"ARROW1"</code> at the start and end of the file)
+is performed first. This is fast, allocates no native memory, and filters
+out most corrupted files before <code><a href="https://arrow.apache.org/docs/r/reference/read_feather.html" class="external-link">arrow::read_feather</a></code> is ever called.</p></li>
 </ul></div>
     <div class="section level2">
     <h2 id="author">Author<a class="anchor" aria-label="anchor" href="#author"></a></h2>
@@ -131,7 +159,7 @@ extension (case-insensitive). If the extension is unrecognised, it returns
 <span class="r-in"><span><span class="va">bad_rdata</span> <span class="op">&lt;-</span> <span class="fu">fs</span><span class="fu">::</span><span class="fu"><a href="https://fs.r-lib.org/reference/path.html" class="external-link">path</a></span><span class="op">(</span><span class="va">temp_dir</span>, <span class="st">"invalid.Rdata"</span><span class="op">)</span></span></span>
 <span class="r-in"><span><span class="fu"><a href="https://rdrr.io/r/base/writeLines.html" class="external-link">writeLines</a></span><span class="op">(</span><span class="st">"not an RData file"</span>, <span class="va">bad_rdata</span><span class="op">)</span></span></span>
 <span class="r-in"><span><span class="fu">check_rdata</span><span class="op">(</span><span class="va">bad_rdata</span><span class="op">)</span></span></span>
-<span class="r-wrn co"><span class="r-pr">#&gt;</span> <span class="warning">Warning: </span>Failed to load RData file: /tmp/RtmpENqXaS/load_multiple/invalid.Rdata</span>
+<span class="r-wrn co"><span class="r-pr">#&gt;</span> <span class="warning">Warning: </span>Failed to load RData file: /tmp/RtmpKKokny/load_multiple/invalid.Rdata</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> [1] FALSE</span>
 <span class="r-in"><span><span class="fu">check_rdata</span><span class="op">(</span><span class="va">bad_rdata</span>, warning <span class="op">=</span> <span class="cn">FALSE</span><span class="op">)</span></span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> [1] FALSE</span>
@@ -150,7 +178,7 @@ extension (case-insensitive). If the extension is unrecognised, it returns
 <span class="r-in"><span><span class="va">bad_qs</span> <span class="op">&lt;-</span> <span class="fu">fs</span><span class="fu">::</span><span class="fu"><a href="https://fs.r-lib.org/reference/path.html" class="external-link">path</a></span><span class="op">(</span><span class="va">temp_dir</span>, <span class="st">"invalid.qs2"</span><span class="op">)</span></span></span>
 <span class="r-in"><span><span class="fu"><a href="https://rdrr.io/r/base/writeLines.html" class="external-link">writeLines</a></span><span class="op">(</span><span class="st">"not a qs2 file"</span>, <span class="va">bad_qs</span><span class="op">)</span></span></span>
 <span class="r-in"><span><span class="fu">check_qs</span><span class="op">(</span><span class="va">bad_qs</span>, n_threads <span class="op">=</span> <span class="fl">1L</span><span class="op">)</span></span></span>
-<span class="r-wrn co"><span class="r-pr">#&gt;</span> <span class="warning">Warning: </span>Failed to load qs2 file: /tmp/RtmpENqXaS/load_multiple/invalid.qs2</span>
+<span class="r-wrn co"><span class="r-pr">#&gt;</span> <span class="warning">Warning: </span>Failed to load qs2 file: /tmp/RtmpKKokny/load_multiple/invalid.qs2</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> [1] FALSE</span>
 <span class="r-in"><span><span class="fu">check_qs</span><span class="op">(</span><span class="va">bad_qs</span>, n_threads <span class="op">=</span> <span class="fl">1L</span>, warning <span class="op">=</span> <span class="cn">FALSE</span><span class="op">)</span></span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> [1] FALSE</span>
@@ -169,7 +197,7 @@ extension (case-insensitive). If the extension is unrecognised, it returns
 <span class="r-in"><span><span class="va">bad_rds</span> <span class="op">&lt;-</span> <span class="fu">fs</span><span class="fu">::</span><span class="fu"><a href="https://fs.r-lib.org/reference/path.html" class="external-link">path</a></span><span class="op">(</span><span class="va">temp_dir</span>, <span class="st">"invalid.rds"</span><span class="op">)</span></span></span>
 <span class="r-in"><span><span class="fu"><a href="https://rdrr.io/r/base/writeLines.html" class="external-link">writeLines</a></span><span class="op">(</span><span class="st">"not an rds file"</span>, <span class="va">bad_rds</span><span class="op">)</span></span></span>
 <span class="r-in"><span><span class="fu">check_rds</span><span class="op">(</span><span class="va">bad_rds</span><span class="op">)</span></span></span>
-<span class="r-wrn co"><span class="r-pr">#&gt;</span> <span class="warning">Warning: </span>Failed to load rds file: /tmp/RtmpENqXaS/load_multiple/invalid.rds</span>
+<span class="r-wrn co"><span class="r-pr">#&gt;</span> <span class="warning">Warning: </span>Failed to load rds file: /tmp/RtmpKKokny/load_multiple/invalid.rds</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> [1] FALSE</span>
 <span class="r-in"><span><span class="fu">check_rds</span><span class="op">(</span><span class="va">bad_rds</span>, warning <span class="op">=</span> <span class="cn">FALSE</span><span class="op">)</span></span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> [1] FALSE</span>
@@ -188,7 +216,7 @@ extension (case-insensitive). If the extension is unrecognised, it returns
 <span class="r-in"><span><span class="va">bad_feather</span> <span class="op">&lt;-</span> <span class="fu">fs</span><span class="fu">::</span><span class="fu"><a href="https://fs.r-lib.org/reference/path.html" class="external-link">path</a></span><span class="op">(</span><span class="va">temp_dir</span>, <span class="st">"invalid.feather"</span><span class="op">)</span></span></span>
 <span class="r-in"><span><span class="fu"><a href="https://rdrr.io/r/base/writeLines.html" class="external-link">writeLines</a></span><span class="op">(</span><span class="st">"not a feather file"</span>, <span class="va">bad_feather</span><span class="op">)</span></span></span>
 <span class="r-in"><span><span class="fu">check_feather</span><span class="op">(</span><span class="va">bad_feather</span><span class="op">)</span></span></span>
-<span class="r-wrn co"><span class="r-pr">#&gt;</span> <span class="warning">Warning: </span>Failed to load feather file: /tmp/RtmpENqXaS/load_multiple/invalid.feather</span>
+<span class="r-wrn co"><span class="r-pr">#&gt;</span> <span class="warning">Warning: </span>Failed to load feather file: /tmp/RtmpKKokny/load_multiple/invalid.feather</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> [1] FALSE</span>
 <span class="r-in"><span><span class="fu">check_feather</span><span class="op">(</span><span class="va">bad_feather</span>, warning <span class="op">=</span> <span class="cn">FALSE</span><span class="op">)</span></span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> [1] FALSE</span>
@@ -210,20 +238,20 @@ extension (case-insensitive). If the extension is unrecognised, it returns
 <span class="r-in"><span>  <span class="va">feather_file</span>, <span class="va">bad_feather</span><span class="op">)</span></span></span>
 <span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="fu">check_data</span><span class="op">(</span><span class="va">all_files</span><span class="op">)</span></span></span>
-<span class="r-wrn co"><span class="r-pr">#&gt;</span> <span class="warning">Warning: </span>Failed to load RData file: /tmp/RtmpENqXaS/load_multiple/invalid.Rdata</span>
-<span class="r-wrn co"><span class="r-pr">#&gt;</span> <span class="warning">Warning: </span>Failed to load qs2 file: /tmp/RtmpENqXaS/load_multiple/invalid.qs2</span>
-<span class="r-wrn co"><span class="r-pr">#&gt;</span> <span class="warning">Warning: </span>Failed to load rds file: /tmp/RtmpENqXaS/load_multiple/invalid.rds</span>
-<span class="r-wrn co"><span class="r-pr">#&gt;</span> <span class="warning">Warning: </span>Failed to load feather file: /tmp/RtmpENqXaS/load_multiple/invalid.feather</span>
+<span class="r-wrn co"><span class="r-pr">#&gt;</span> <span class="warning">Warning: </span>Failed to load RData file: /tmp/RtmpKKokny/load_multiple/invalid.Rdata</span>
+<span class="r-wrn co"><span class="r-pr">#&gt;</span> <span class="warning">Warning: </span>Failed to load qs2 file: /tmp/RtmpKKokny/load_multiple/invalid.qs2</span>
+<span class="r-wrn co"><span class="r-pr">#&gt;</span> <span class="warning">Warning: </span>Failed to load rds file: /tmp/RtmpKKokny/load_multiple/invalid.rds</span>
+<span class="r-wrn co"><span class="r-pr">#&gt;</span> <span class="warning">Warning: </span>Failed to load feather file: /tmp/RtmpKKokny/load_multiple/invalid.feather</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> [1] FALSE</span>
 <span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="fu">check_data</span><span class="op">(</span><span class="va">all_files</span>, warning <span class="op">=</span> <span class="cn">FALSE</span><span class="op">)</span></span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> [1] FALSE</span>
 <span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="fu">check_data</span><span class="op">(</span><span class="va">all_files</span>, all_okay <span class="op">=</span> <span class="cn">FALSE</span><span class="op">)</span></span></span>
-<span class="r-wrn co"><span class="r-pr">#&gt;</span> <span class="warning">Warning: </span>Failed to load RData file: /tmp/RtmpENqXaS/load_multiple/invalid.Rdata</span>
-<span class="r-wrn co"><span class="r-pr">#&gt;</span> <span class="warning">Warning: </span>Failed to load qs2 file: /tmp/RtmpENqXaS/load_multiple/invalid.qs2</span>
-<span class="r-wrn co"><span class="r-pr">#&gt;</span> <span class="warning">Warning: </span>Failed to load rds file: /tmp/RtmpENqXaS/load_multiple/invalid.rds</span>
-<span class="r-wrn co"><span class="r-pr">#&gt;</span> <span class="warning">Warning: </span>Failed to load feather file: /tmp/RtmpENqXaS/load_multiple/invalid.feather</span>
+<span class="r-wrn co"><span class="r-pr">#&gt;</span> <span class="warning">Warning: </span>Failed to load RData file: /tmp/RtmpKKokny/load_multiple/invalid.Rdata</span>
+<span class="r-wrn co"><span class="r-pr">#&gt;</span> <span class="warning">Warning: </span>Failed to load qs2 file: /tmp/RtmpKKokny/load_multiple/invalid.qs2</span>
+<span class="r-wrn co"><span class="r-pr">#&gt;</span> <span class="warning">Warning: </span>Failed to load rds file: /tmp/RtmpKKokny/load_multiple/invalid.rds</span>
+<span class="r-wrn co"><span class="r-pr">#&gt;</span> <span class="warning">Warning: </span>Failed to load feather file: /tmp/RtmpKKokny/load_multiple/invalid.feather</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> [1]  TRUE FALSE  TRUE FALSE  TRUE FALSE  TRUE FALSE</span>
 <span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="fu">check_data</span><span class="op">(</span><span class="va">all_files</span>, all_okay <span class="op">=</span> <span class="cn">FALSE</span>, warning <span class="op">=</span> <span class="cn">FALSE</span><span class="op">)</span></span></span>
