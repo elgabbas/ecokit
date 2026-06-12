@@ -119,7 +119,7 @@ check_rdata(bad_rdata)
 #> Warning: file ‘invalid.Rdata’ has magic number 'not a'
 #>   Use of save versions prior to 2 is deprecated
 #> Warning: Failed to load RData file: 
-#> /tmp/RtmpKZyNv4/load_multiple/invalid.Rdata
+#> /tmp/RtmpEPuLrw/load_multiple/invalid.Rdata
 #>   Reason: bad restore file magic number (file may be corrupted) -- no data loaded
 #> [1] FALSE
 check_rdata(bad_rdata, warning = FALSE)
@@ -142,7 +142,7 @@ bad_qs <- fs::path(temp_dir, "invalid.qs2")
 writeLines("not a qs2 file", bad_qs)
 check_qs(bad_qs, n_threads = 1L)
 #> Warning: Failed to load qs2 file: 
-#> /tmp/RtmpKZyNv4/load_multiple/invalid.qs2
+#> /tmp/RtmpEPuLrw/load_multiple/invalid.qs2
 #>   Reason: Unknown file format detected
 #> [1] FALSE
 check_qs(bad_qs, n_threads = 1L, warning = FALSE)
@@ -163,7 +163,7 @@ bad_rds <- fs::path(temp_dir, "invalid.rds")
 writeLines("not an rds file", bad_rds)
 check_rds(bad_rds)
 #> Warning: Failed to load rds file: 
-#> /tmp/RtmpKZyNv4/load_multiple/invalid.rds
+#> /tmp/RtmpEPuLrw/load_multiple/invalid.rds
 #>   Reason: unknown input format
 #> [1] FALSE
 check_rds(bad_rds, warning = FALSE)
@@ -183,7 +183,7 @@ check_feather(feather_file)
 bad_feather <- fs::path(temp_dir, "invalid.feather")
 writeLines("not a feather file", bad_feather)
 check_feather(bad_feather)
-#> Warning: Failed to load feather file: /tmp/RtmpKZyNv4/load_multiple/invalid.feather
+#> Warning: Failed to load feather file: /tmp/RtmpEPuLrw/load_multiple/invalid.feather
 #> [1] FALSE
 check_feather(bad_feather, warning = FALSE)
 #> [1] FALSE

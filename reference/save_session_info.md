@@ -45,13 +45,13 @@ fs::dir_create(temp_dir)
 
 save_session_info(out_directory = temp_dir)
 #> Saving session info to:
-#> /tmp/RtmpKZyNv4/save_session_info/S_20260612_0640.txt
+#> /tmp/RtmpEPuLrw/save_session_info/S_20260613_0059.txt
 
 saved_file <- list.files(
   temp_dir, pattern = "S_.+txt$", full.names = TRUE) %>%
   ecokit::normalize_path()
 (saved_file <- saved_file[length(saved_file)])
-#> /tmp/RtmpKZyNv4/save_session_info/S_20260612_0640.txt
+#> /tmp/RtmpEPuLrw/save_session_info/S_20260613_0059.txt
 
 cat(readLines(saved_file), sep = "\n")
 #> 
@@ -173,7 +173,7 @@ cat(readLines(saved_file), sep = "\n")
 #>  rlang          1.2.0     2026-04-06 [1] RSPM
 #>  rmarkdown      2.31      2026-03-26 [1] RSPM
 #>  RNetCDF        2.11-1    2025-04-30 [1] RSPM
-#>  rstudioapi     0.18.0    2026-01-16 [1] RSPM
+#>  rstudioapi     0.19.0    2026-06-11 [1] RSPM
 #>  rvest          1.0.5     2025-08-29 [1] RSPM
 #>  rworldmap    * 1.3-8     2023-10-16 [1] RSPM
 #>  s2             1.1.11    2026-06-01 [1] RSPM
@@ -227,13 +227,13 @@ vec <- rnorm(1000)
 session_data <- tibble::tibble(object = c("df", "vec"), size = c(0.1, 0.1))
 save_session_info(out_directory = temp_dir, session_info = session_data)
 #> Saving session info to:
-#> /tmp/RtmpKZyNv4/save_session_info/S_20260612_0640.txt
+#> /tmp/RtmpEPuLrw/save_session_info/S_20260613_0059.txt
 
 saved_file <- list.files(
   temp_dir, pattern = "S_.+txt$", full.names = TRUE) %>%
   ecokit::normalize_path()
 (saved_file <- saved_file[length(saved_file)])
-#> /tmp/RtmpKZyNv4/save_session_info/S_20260612_0640.txt
+#> /tmp/RtmpEPuLrw/save_session_info/S_20260613_0059.txt
 
 cat(readLines(saved_file), sep = "\n")
 #> 
@@ -355,7 +355,7 @@ cat(readLines(saved_file), sep = "\n")
 #>  rlang          1.2.0     2026-04-06 [1] RSPM
 #>  rmarkdown      2.31      2026-03-26 [1] RSPM
 #>  RNetCDF        2.11-1    2025-04-30 [1] RSPM
-#>  rstudioapi     0.18.0    2026-01-16 [1] RSPM
+#>  rstudioapi     0.19.0    2026-06-11 [1] RSPM
 #>  rvest          1.0.5     2025-08-29 [1] RSPM
 #>  rworldmap    * 1.3-8     2023-10-16 [1] RSPM
 #>  s2             1.1.11    2026-06-01 [1] RSPM

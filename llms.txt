@@ -41,7 +41,7 @@ features, please:
 - **Contact me** directly at *elgabbas\[at\]outlook\[dot\]com* for
   collaboration ideas or questions.
 
-Last update: 2026-06-12
+Last update: 2026-06-13
 
 # Package index
 
@@ -170,6 +170,9 @@ Last update: 2026-06-12
   :
 
   Split list items into separate `.RData` files
+
+- [`validate_named_list()`](https://elgabbas.github.io/ecokit/reference/validate_named_list.md)
+  : Validate a Named List Against Required Elements
 
 - [`assign_if_not_exist()`](https://elgabbas.github.io/ecokit/reference/assign_if_not_exist.md)
   : Assign a value to a variable if it does not already exist in the

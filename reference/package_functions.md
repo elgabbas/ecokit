@@ -96,9 +96,10 @@ package_functions(package = "ecokit")
 #> [117] "stop_ctx"                   "system_command"            
 #> [119] "text_to_coordinates"        "tibble_column_size"        
 #> [121] "used_packages"              "validate_n_cores"          
-#> [123] "validate_slurm_ram"         "validate_slurm_runtime"    
-#> [125] "validate_strategy"          "write_nc"                  
-#> [127] "zenodo_download_file"       "zenodo_file_list"          
+#> [123] "validate_named_list"        "validate_slurm_ram"        
+#> [125] "validate_slurm_runtime"     "validate_strategy"         
+#> [127] "write_nc"                   "zenodo_download_file"      
+#> [129] "zenodo_file_list"          
 
 # Error: package not found
  try(package_functions(package = "non_exist"))

@@ -126,6 +126,9 @@
 
   Split list items into separate `.RData` files
 
+- [`validate_named_list()`](https://elgabbas.github.io/ecokit/reference/validate_named_list.md)
+  : Validate a Named List Against Required Elements
+
 - [`assign_if_not_exist()`](https://elgabbas.github.io/ecokit/reference/assign_if_not_exist.md)
   : Assign a value to a variable if it does not already exist in the
   specified environment
