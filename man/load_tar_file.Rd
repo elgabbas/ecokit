@@ -4,34 +4,68 @@
 \alias{load_tar_file}
 \title{Load a File from a Tar Archive}
 \usage{
-load_tar_file(tar_file, file_to_extract, load_fun = "ecokit::load_as", ...)
+load_tar_file(
+  tar_file,
+  file_to_extract,
+  load_fun = "ecokit::load_as",
+  wrap_r = TRUE,
+  ...
+)
 }
 \arguments{
-\item{tar_file}{Character. Path to the tar archive file.}
+\item{tar_file}{Character. Path to the tar archive file. Supported
+extensions: \code{.tar}, \code{.tar.gz}, \code{.tgz}, \code{.tar.bz2}, \code{.tbz2}.}
 
-\item{file_to_extract}{Character. Path of the file to extract from the tar
-archive (can include directories within the archive).}
+\item{file_to_extract}{Character. Path of the file to extract from the
+archive, exactly as it appears in the archive listing (may include
+subdirectory components).}
 
 \item{load_fun}{Either a function or a character string naming a function
-(possibly with package namespace like "package::function") to load the
-extracted file. Defaults to \link{load_as}.}
+(optionally namespace-qualified, e.g. \code{"readr::read_csv"}) used to load the
+extracted file for non-TIFF, non-\code{ecokit::load_as}-handled types. Defaults
+to \link{load_as}. Ignored for TIFF files and for files whose extension
+is handled natively by \code{\link[=load_as]{load_as()}}.}
 
-\item{...}{Additional arguments passed to the loading function.}
+\item{wrap_r}{Logical. Only relevant when the extracted file is a TIFF. If
+\code{TRUE} (default), the in-memory \code{SpatRaster} is wrapped with
+\code{\link[terra:wrap]{terra::wrap()}} before being returned, making it safe for serialisation
+(e.g. passing across parallel workers). Set to \code{FALSE} to return a plain
+\code{SpatRaster}.}
+
+\item{...}{Additional arguments passed to \code{load_fun} (ignored for TIFF
+files).}
 }
 \value{
-The object returned by the loading function applied to the extracted
-file.
+For TIFF files: a \code{PackedSpatRaster} (when \code{wrap_r = TRUE}) or a
+\code{SpatRaster} fully loaded into memory (when \code{wrap_r = FALSE}). For all
+other types: the object returned by \code{load_fun} or \code{\link[=load_as]{load_as()}}, as
+appropriate.
 }
 \description{
-This function extracts a specified file from a tar archive to a temporary
-directory, loads it using a provided loading function, and returns the loaded
-object.
+Extracts a single file from a tar archive into a temporary directory, loads
+it, and returns the in-memory object. The temporary directory is always
+deleted on exit, so file-backed objects such as \code{SpatRaster} are read fully
+into memory before the directory is removed.
+}
+\details{
+For TIFF files (extensions \code{.tif} or \code{.tiff}), the function always uses
+\code{\link[terra:rast]{terra::rast()}} followed by \code{\link[terra:toMemory]{terra::toMemory()}} to ensure the raster is fully
+in memory before the temporary extraction directory is deleted. The
+\code{load_fun} argument is therefore \strong{ignored} for TIFF files. If \code{wrap_r = TRUE} (the default), the in-memory \code{SpatRaster} is additionally wrapped with
+\code{\link[terra:wrap]{terra::wrap()}} to make it serialisable for parallel or inter-process
+transfer.
+
+For files with extensions recognised by \code{\link[=load_as]{load_as()}} (\code{.rdata},
+\code{.qs2}, \code{.rds}, \code{.feather}), that function is called directly and \code{load_fun}
+is ignored.
+
+For all other file types, the function calls \code{load_fun} on the extracted file
+path.
 }
 \examples{
 ecokit::load_packages(terra, stringr, fs)
 
-# example tar file containing 3 files
-
+# Build an example tar file containing 3 files
 tif_file <- system.file("ex/elev.tif", package = "terra")
 rds_file <- fs::file_temp(ext = ".rds")
 ecokit::save_as(mtcars, out_path = rds_file)
@@ -42,32 +76,45 @@ file_list <- c(tif_file, csv_file, rds_file)
 base_names <- basename(file_list)
 dirs <- dirname(file_list)
 for (i in seq_along(file_list)) {
-tar_flag <- ifelse(i == 1, "c", "r")
-  tar_args <- str_glue(
-    'tar -{tar_flag}f {shQuote(tmp_tar)} -C {shQuote(dirs[i])} \\\\
-    {shQuote(base_names[i])}')
+  tar_flag <- ifelse(i == 1L, "c", "r")
+  tar_args <- stringr::str_glue(
+    "tar -{tar_flag}f {shQuote(tmp_tar)} -C {shQuote(dirs[i])} \\\\
+    {shQuote(base_names[i])}")
   invisible(system(tar_args))
 }
 
 # List contents of the tar file
 print(system2("tar", c("-tf", tmp_tar), stdout = TRUE))
 
-# example SpatRaster
-load_tar_file(
-  tar_file = tmp_tar, file_to_extract = "elev.tif",
-  load_fun = "terra::rast")
+# TIFF: returned fully in memory (wrapped by default)
+r <- load_tar_file(
+  tar_file = tmp_tar, file_to_extract = "elev.tif")
 
-# example CSV file using readr
+# TIFF: unwrapped SpatRaster
+r2 <- load_tar_file(
+  tar_file = tmp_tar, file_to_extract = "elev.tif", wrap_r = FALSE)
+terra::sources(r2)  # should be "" (in memory)
+
+# CSV via base read.csv
 load_tar_file(
   tar_file = tmp_tar, file_to_extract = basename(csv_file),
   load_fun = "read.csv") \%>\%
   head()
 
-# example rds file
+# RDS (handled automatically by ecokit::load_as)
 load_tar_file(
-  tar_file = tmp_tar, file_to_extract = basename(rds_file),
-  load_fun = readRDS) \%>\%
+  tar_file = tmp_tar, file_to_extract = basename(rds_file)) \%>\%
   head()
+
+\dontrun{
+# Invalid load_fun: errors with a clear message
+load_tar_file(
+  tar_file = tmp_tar, file_to_extract = basename(csv_file),
+  load_fun = "function_name")
+}
+
+# clean up
+fs::file_delete(tmp_tar)
 }
 \author{
 Ahmed El-Gabbas
