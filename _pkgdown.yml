@@ -36,6 +36,7 @@ reference:
   - maxent_variable_importance
   - sampling_effort
   - mask_cumulative_pct
+  - coda_to_tibble
 
 - title: Package management
   contents:
