@@ -63,7 +63,7 @@ For all other file types, the function calls \code{load_fun} on the extracted fi
 path.
 }
 \examples{
-ecokit::load_packages(terra, stringr, fs)
+ecokit::load_packages(terra, stringr, fs, magrittr)
 
 # Build an example tar file containing 3 files
 tif_file <- system.file("ex/elev.tif", package = "terra")
@@ -87,8 +87,7 @@ for (i in seq_along(file_list)) {
 print(system2("tar", c("-tf", tmp_tar), stdout = TRUE))
 
 # TIFF: returned fully in memory (wrapped by default)
-r <- load_tar_file(
-  tar_file = tmp_tar, file_to_extract = "elev.tif")
+r <- load_tar_file(tar_file = tmp_tar, file_to_extract = "elev.tif")
 
 # TIFF: unwrapped SpatRaster
 r2 <- load_tar_file(
@@ -98,12 +97,11 @@ terra::sources(r2)  # should be "" (in memory)
 # CSV via base read.csv
 load_tar_file(
   tar_file = tmp_tar, file_to_extract = basename(csv_file),
-  load_fun = "read.csv") \%>\%
+  load_fun = "readr::read_csv", col_types = "c") \%>\%
   head()
 
 # RDS (handled automatically by ecokit::load_as)
-load_tar_file(
-  tar_file = tmp_tar, file_to_extract = basename(rds_file)) \%>\%
+load_tar_file(tar_file = tmp_tar, file_to_extract = basename(rds_file)) \%>\%
   head()
 
 \dontrun{
