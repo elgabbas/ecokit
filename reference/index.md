@@ -23,6 +23,8 @@
   : Get Sampling Effort Rasters
 - [`mask_cumulative_pct()`](https://elgabbas.github.io/ecokit/reference/mask_cumulative_pct.md)
   : Mask raster to show top % and bottom % of cumulative sum
+- [`coda_to_tibble()`](https://elgabbas.github.io/ecokit/reference/coda_to_tibble.md)
+  : Convert an MCMC coda object to a tidy tibble
 
 ## Package management
 

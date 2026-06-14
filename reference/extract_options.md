@@ -37,7 +37,7 @@ Ahmed El-Gabbas
 # all options
 all_options <- extract_options()
 length(all_options)
-#> [1] 130
+#> [1] 131
 
 # all options with "warn" in the name (case-insensitive)
 extract_options(pattern = "warn")
@@ -87,7 +87,7 @@ extract_options(pattern = "^r", case_sensitive = TRUE)
 #> [1] FALSE
 #> 
 #> $rlang_trace_top_env
-#> <environment: 0x55d624a08830>
+#> <environment: 0x55a29ac38928>
 #> 
 
 # non-existing pattern

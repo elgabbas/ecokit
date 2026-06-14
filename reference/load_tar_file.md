@@ -90,7 +90,7 @@ Ahmed El-Gabbas
 ## Examples
 
 ``` r
-ecokit::load_packages(terra, stringr, fs)
+ecokit::load_packages(terra, stringr, fs, magrittr)
 
 # Build an example tar file containing 3 files
 tif_file <- system.file("ex/elev.tif", package = "terra")
@@ -112,11 +112,10 @@ for (i in seq_along(file_list)) {
 
 # List contents of the tar file
 print(system2("tar", c("-tf", tmp_tar), stdout = TRUE))
-#> [1] "elev.tif"             "file217837a65535.csv" "file2178225b1998.rds"
+#> [1] "elev.tif"             "file22529d0915d.csv"  "file225261ab92d6.rds"
 
 # TIFF: returned fully in memory (wrapped by default)
-r <- load_tar_file(
-  tar_file = tmp_tar, file_to_extract = "elev.tif")
+r <- load_tar_file(tar_file = tmp_tar, file_to_extract = "elev.tif")
 
 # TIFF: unwrapped SpatRaster
 r2 <- load_tar_file(
@@ -127,19 +126,12 @@ terra::sources(r2)  # should be "" (in memory)
 # CSV via base read.csv
 load_tar_file(
   tar_file = tmp_tar, file_to_extract = basename(csv_file),
-  load_fun = "read.csv") %>%
+  load_fun = "readr::read_csv", col_types = "c") %>%
   head()
-#>   Sepal.Length Sepal.Width Petal.Length Petal.Width Species
-#> 1          5.1         3.5          1.4         0.2  setosa
-#> 2          4.9         3.0          1.4         0.2  setosa
-#> 3          4.7         3.2          1.3         0.2  setosa
-#> 4          4.6         3.1          1.5         0.2  setosa
-#> 5          5.0         3.6          1.4         0.2  setosa
-#> 6          5.4         3.9          1.7         0.4  setosa
+#> Error in (function (cond) .Internal(C_tryCatchHelper(addr, 1L, cond)))(structure(list(message = "\033[1m\033[31mThe following required packages are missing: readr. Please install them to proceed.\033[39m\033[22m",     trace = structure(list(call = list(pkgdown::build_site_github_pages(new_process = FALSE,         install = FALSE, lazy = TRUE), build_site(pkg, preview = FALSE,         install = install, new_process = new_process, ...), build_site_local(pkg = pkg,         examples = examples, run_dont_run = run_dont_run, seed = seed,         lazy = lazy, override = override, preview = preview,         devel = devel, quiet = quiet), build_reference(pkg, lazy = lazy,         examples = examples, run_dont_run = run_dont_run, seed = seed,         override = override, preview = FALSE, devel = devel),         unwrap_purrr_error(purrr::map(topics, build_reference_topic,             pkg = pkg, lazy = lazy, examples_env = examples_env,             run_dont_run = run_dont_run)), withCallingHandlers(code,             purrr_error_indexed = function(err) {                cnd_signal(err$parent)            }), purrr::map(topics, build_reference_topic, pkg = pkg,             lazy = lazy, examples_env = examples_env, run_dont_run = run_dont_run),         map_("list", .x, .f, ..., .progress = .progress), with_indexed_errors(i = i,             names = names, error_call = .purrr_error_call, call_with_cleanup(map_impl,                 environment(), .type, .progress, n, names, i)),         withCallingHandlers(expr, error = function(cnd) {            if (i == 0L) {            }            else {                message <- c(i = "In index: {i}.")                if (!is.null(names) && !is.na(names[[i]]) &&                   names[[i]] != "") {                  name <- names[[i]]                  message <- c(message, i = "With name: {name}.")                }                else {                  name <- NULL                }                cli::cli_abort(message, location = i, name = name,                   parent = cnd, call = error_call, class = "purrr_error_indexed")            }        }), call_with_cleanup(map_impl, environment(), .type,             .progress, n, names, i), .f(.x[[i]], ...), withCallingHandlers(data_reference_topic(topic,             pkg, examples_env = examples_env, run_dont_run = run_dont_run),             error = function(err) {                cli::cli_abort("Failed to parse Rd in {.file {topic$file_in}}",                   parent = err, call = quote(build_reference()))            }), data_reference_topic(topic, pkg, examples_env = examples_env,             run_dont_run = run_dont_run), run_examples(tags$tag_examples[[1]],             env = if (is.null(examples_env)) NULL else new.env(parent = examples_env),             topic = tools::file_path_sans_ext(topic$file_in),             run_dont_run = run_dont_run), highlight_examples(code,             topic, env = env), downlit::evaluate_and_highlight(code,             fig_save = fig_save_topic, env = eval_env, output_handler = handler),         evaluate::evaluate(code, child_env(env), new_device = TRUE,             output_handler = output_handler), withRestarts(with_handlers({            for (expr in tle$exprs) {                ev <- withVisible(eval(expr, envir))                watcher$capture_plot_and_output()                watcher$print_value(ev$value, ev$visible, envir)            }            TRUE        }, handlers), eval_continue = function() TRUE, eval_stop = function() FALSE),         withRestartList(expr, restarts), withOneRestart(withRestartList(expr,             restarts[-nr]), restarts[[nr]]), doWithOneRestart(return(expr),             restart), withRestartList(expr, restarts[-nr]), withOneRestart(expr,             restarts[[1L]]), doWithOneRestart(return(expr), restart),         with_handlers({            for (expr in tle$exprs) {                ev <- withVisible(eval(expr, envir))                watcher$capture_plot_and_output()                watcher$print_value(ev$value, ev$visible, envir)            }            TRUE        }, handlers), eval(call), eval(call), withCallingHandlers(code,             message = `<fn>`, warning = `<fn>`, error = `<fn>`),         withVisible(eval(expr, envir)), eval(expr, envir), eval(expr,             envir), load_tar_file(tar_file = tmp_tar, file_to_extract = basename(csv_file),             load_fun = "readr::read_csv", col_types = "c") %>%             head(), head(.), load_tar_file(tar_file = tmp_tar,             file_to_extract = basename(csv_file), load_fun = "readr::read_csv",             col_types = "c"), ecokit::check_packages(pkg_fun[1L]),         ecokit::stop_ctx(paste0("The following required packages are missing: ",             toString(packages[!packages_available]), ". Please install them to proceed."),             ...), rlang::abort(message = full_msg, ..., class = class,             call = call, parent = parent)), parent = c(0L, 1L,     2L, 3L, 4L, 5L, 4L, 7L, 8L, 9L, 8L, 8L, 12L, 12L, 14L, 15L,     16L, 17L, 18L, 19L, 20L, 21L, 20L, 23L, 24L, 18L, 26L, 27L,     26L, 18L, 18L, 31L, 32L, 0L, 32L, 35L, 36L, 37L), visible = c(TRUE,     TRUE, TRUE, TRUE, TRUE, TRUE, TRUE, TRUE, TRUE, TRUE, TRUE,     TRUE, TRUE, TRUE, TRUE, TRUE, TRUE, TRUE, TRUE, TRUE, TRUE,     TRUE, TRUE, TRUE, TRUE, TRUE, TRUE, TRUE, TRUE, TRUE, TRUE,     TRUE, TRUE, TRUE, TRUE, TRUE, TRUE, FALSE), namespace = c("pkgdown",     "pkgdown", "pkgdown", "pkgdown", "pkgdown", "base", "purrr",     "purrr", "purrr", "base", "purrr", "pkgdown", "base", "pkgdown",     "pkgdown", "pkgdown", "downlit", "evaluate", "base", "base",     "base", "base", "base", "base", "base", "evaluate", "base",     "base", "base", "base", "base", "base", NA, "utils", "ecokit",     "ecokit", "ecokit", "rlang"), scope = c("::", "::", ":::",     "::", ":::", "::", "::", ":::", ":::", "::", ":::", "local",     "::", ":::", ":::", ":::", "::", "::", "::", "local", "local",     "local", "local", "local", "local", ":::", "::", "::", "::",     "::", "::", "::", NA, "::", "::", "::", "::", "::")), row.names = c(NA,     -38L), version = 2L, class = c("rlang_trace", "rlib_trace",     "tbl", "data.frame")), parent = NULL, rlang = list(inherit = TRUE),     call = ecokit::check_packages(pkg_fun[1L])), class = c("rlang_error", "error", "condition"))): error in evaluating the argument 'x' in selecting a method for function 'head': The following required packages are missing: readr. Please install them to proceed.
 
 # RDS (handled automatically by ecokit::load_as)
-load_tar_file(
-  tar_file = tmp_tar, file_to_extract = basename(rds_file)) %>%
+load_tar_file(tar_file = tmp_tar, file_to_extract = basename(rds_file)) %>%
   head()
 #>                    mpg cyl disp  hp drat    wt  qsec vs am gear carb
 #> Mazda RX4         21.0   6  160 110 3.90 2.620 16.46  0  1    4    4

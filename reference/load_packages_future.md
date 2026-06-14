@@ -63,11 +63,11 @@ Ahmed El-Gabbas
 ``` r
 (pkg_init <- loaded_packages())
 #>  [1] "tidyterra" "nnet"      "qs2"       "stringr"   "tools"     "future"   
-#>  [7] "car"       "carData"   "purrr"     "archive"   "rworldmap" "arrow"    
-#> [13] "dismo"     "raster"    "sp"        "terra"     "fs"        "tidyr"    
-#> [19] "tibble"    "png"       "sf"        "ggplot2"   "dplyr"     "ecokit"   
-#> [25] "magrittr"  "stats"     "graphics"  "grDevices" "utils"     "datasets" 
-#> [31] "methods"   "base"     
+#>  [7] "car"       "carData"   "purrr"     "archive"   "Hmsc"      "coda"     
+#> [13] "rworldmap" "arrow"     "dismo"     "raster"    "sp"        "terra"    
+#> [19] "fs"        "tidyr"     "tibble"    "png"       "sf"        "ggplot2"  
+#> [25] "dplyr"     "ecokit"    "magrittr"  "stats"     "graphics"  "grDevices"
+#> [31] "utils"     "datasets"  "methods"   "base"     
 pkg_to_load <- c("tidyterra", "lubridate", "tidyr", "sf", "scales")
 
 # sequential

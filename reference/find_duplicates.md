@@ -115,16 +115,16 @@ dups <- find_duplicates(temp_dir1, size_threshold = 0)
 #> # A tibble: 1 × 7
 #>   path             dup_group files    file_ext n_files file_size_mb content_hash
 #>   <fs::path>           <int> <list>   <chr>      <int>        <dbl> <chr>       
-#> 1 …CgFISY/example1         1 <tibble> txt            3            0 d3608428aac…
+#> 1 …poueNB/example1         1 <tibble> txt            3            0 d3608428aac…
 
 dups$duplicated_files$files
 #> [[1]]
 #> # A tibble: 3 × 3
 #>   file_abs                                  file_rel         modified           
 #>   <chr>                                     <fs::path>       <dttm>             
-#> 1 /tmp/RtmpCgFISY/example1/file1.txt        file1.txt        2026-06-13 20:26:43
-#> 2 /tmp/RtmpCgFISY/example1/file2.txt        file2.txt        2026-06-13 20:26:43
-#> 3 /tmp/RtmpCgFISY/example1/subdir/file3.txt subdir/file3.txt 2026-06-13 20:26:43
+#> 1 /tmp/RtmppoueNB/example1/file1.txt        file1.txt        2026-06-14 05:31:39
+#> 2 /tmp/RtmppoueNB/example1/file2.txt        file2.txt        2026-06-14 05:31:39
+#> 3 /tmp/RtmppoueNB/example1/subdir/file3.txt subdir/file3.txt 2026-06-14 05:31:39
 #> 
 
 # Clean up
@@ -166,9 +166,9 @@ dups <- find_duplicates(temp_dir2, size_threshold = 0)
 #> # A tibble: 3 × 5
 #>   dir        dir_abs                        n_files n_dup_dirs dup_group
 #>   <fs::path> <fs::path>                       <int>      <int>     <int>
-#> 1 dir_a      /tmp/RtmpCgFISY/example2/dir_a       1          3         1
-#> 2 dir_b      /tmp/RtmpCgFISY/example2/dir_b       1          3         1
-#> 3 dir_c      /tmp/RtmpCgFISY/example2/dir_c       1          3         1
+#> 1 dir_a      /tmp/RtmppoueNB/example2/dir_a       1          3         1
+#> 2 dir_b      /tmp/RtmppoueNB/example2/dir_b       1          3         1
+#> 3 dir_c      /tmp/RtmppoueNB/example2/dir_c       1          3         1
 #> 
 #> --------------------------------
 #>   >>  Duplicated files
@@ -177,31 +177,31 @@ dups <- find_duplicates(temp_dir2, size_threshold = 0)
 #> # A tibble: 2 × 7
 #>   path             dup_group files    file_ext n_files file_size_mb content_hash
 #>   <fs::path>           <int> <list>   <chr>      <int>        <dbl> <chr>       
-#> 1 …CgFISY/example2         1 <tibble> txt            2            0 39a16930dd4…
-#> 2 …CgFISY/example2         2 <tibble> txt            2            0 3294155fa14…
+#> 1 …poueNB/example2         1 <tibble> txt            2            0 39a16930dd4…
+#> 2 …poueNB/example2         2 <tibble> txt            2            0 3294155fa14…
 
 dups$duplicated_dirs
 #> # A tibble: 3 × 5
 #>   dir        dir_abs                        n_files n_dup_dirs dup_group
 #>   <fs::path> <fs::path>                       <int>      <int>     <int>
-#> 1 dir_a      /tmp/RtmpCgFISY/example2/dir_a       1          3         1
-#> 2 dir_b      /tmp/RtmpCgFISY/example2/dir_b       1          3         1
-#> 3 dir_c      /tmp/RtmpCgFISY/example2/dir_c       1          3         1
+#> 1 dir_a      /tmp/RtmppoueNB/example2/dir_a       1          3         1
+#> 2 dir_b      /tmp/RtmppoueNB/example2/dir_b       1          3         1
+#> 3 dir_c      /tmp/RtmppoueNB/example2/dir_c       1          3         1
 
 dups$duplicated_files$files
 #> [[1]]
 #> # A tibble: 2 × 3
 #>   file_abs                                 file_rel        modified           
 #>   <chr>                                    <fs::path>      <dttm>             
-#> 1 /tmp/RtmpCgFISY/example2/dir_a/file1.txt dir_a/file1.txt 2026-06-13 20:26:43
-#> 2 /tmp/RtmpCgFISY/example2/dir_b/file1.txt dir_b/file1.txt 2026-06-13 20:26:43
+#> 1 /tmp/RtmppoueNB/example2/dir_a/file1.txt dir_a/file1.txt 2026-06-14 05:31:40
+#> 2 /tmp/RtmppoueNB/example2/dir_b/file1.txt dir_b/file1.txt 2026-06-14 05:31:40
 #> 
 #> [[2]]
 #> # A tibble: 2 × 3
 #>   file_abs                                 file_rel        modified           
 #>   <chr>                                    <fs::path>      <dttm>             
-#> 1 /tmp/RtmpCgFISY/example2/dir_a/file2.txt dir_a/file2.txt 2026-06-13 20:26:43
-#> 2 /tmp/RtmpCgFISY/example2/dir_b/file2.txt dir_b/file2.txt 2026-06-13 20:26:43
+#> 1 /tmp/RtmppoueNB/example2/dir_a/file2.txt dir_a/file2.txt 2026-06-14 05:31:40
+#> 2 /tmp/RtmppoueNB/example2/dir_b/file2.txt dir_b/file2.txt 2026-06-14 05:31:40
 #> 
 
 # Clean up
@@ -267,11 +267,11 @@ find_duplicates(temp_dir4, n_cores = 2, size_threshold = 0)
 #> # A tibble: 5 × 5
 #>   dir        dir_abs                         n_files n_dup_dirs dup_group
 #>   <fs::path> <fs::path>                        <int>      <int>     <int>
-#> 1 group1     /tmp/RtmpCgFISY/example4/group1       1          5         1
-#> 2 group2     /tmp/RtmpCgFISY/example4/group2       1          5         1
-#> 3 group3     /tmp/RtmpCgFISY/example4/group3       1          5         1
-#> 4 group4     /tmp/RtmpCgFISY/example4/group4       1          5         1
-#> 5 group5     /tmp/RtmpCgFISY/example4/group5       1          5         1
+#> 1 group1     /tmp/RtmppoueNB/example4/group1       1          5         1
+#> 2 group2     /tmp/RtmppoueNB/example4/group2       1          5         1
+#> 3 group3     /tmp/RtmppoueNB/example4/group3       1          5         1
+#> 4 group4     /tmp/RtmppoueNB/example4/group4       1          5         1
+#> 5 group5     /tmp/RtmppoueNB/example4/group5       1          5         1
 #> 
 #> --------------------------------
 #>   >>  Duplicated files
@@ -280,11 +280,11 @@ find_duplicates(temp_dir4, n_cores = 2, size_threshold = 0)
 #> # A tibble: 5 × 7
 #>   path             dup_group files    file_ext n_files file_size_mb content_hash
 #>   <fs::path>           <int> <list>   <chr>      <int>        <dbl> <chr>       
-#> 1 …CgFISY/example4         1 <tibble> txt            3            0 289d4cf190e…
-#> 2 …CgFISY/example4         2 <tibble> txt            3            0 d5735c1086d…
-#> 3 …CgFISY/example4         3 <tibble> txt            3            0 31575137fb5…
-#> 4 …CgFISY/example4         4 <tibble> txt            3            0 e4f4464959f…
-#> 5 …CgFISY/example4         5 <tibble> txt            3            0 8506efe5d5b…
+#> 1 …poueNB/example4         1 <tibble> txt            3            0 289d4cf190e…
+#> 2 …poueNB/example4         2 <tibble> txt            3            0 d5735c1086d…
+#> 3 …poueNB/example4         3 <tibble> txt            3            0 31575137fb5…
+#> 4 …poueNB/example4         4 <tibble> txt            3            0 e4f4464959f…
+#> 5 …poueNB/example4         5 <tibble> txt            3            0 8506efe5d5b…
 
 # Clean up
 dir_delete(temp_dir4)

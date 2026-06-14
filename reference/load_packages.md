@@ -71,10 +71,11 @@ Ahmed El-Gabbas
 # Currently loaded packages
 (P1 <- ecokit::loaded_packages())
 #>  [1] "qs2"       "stringr"   "tools"     "future"    "car"       "carData"  
-#>  [7] "purrr"     "archive"   "rworldmap" "arrow"     "dismo"     "raster"   
-#> [13] "sp"        "terra"     "fs"        "tidyr"     "tibble"    "png"      
-#> [19] "sf"        "ggplot2"   "dplyr"     "ecokit"    "magrittr"  "stats"    
-#> [25] "graphics"  "grDevices" "utils"     "datasets"  "methods"   "base"     
+#>  [7] "purrr"     "archive"   "Hmsc"      "coda"      "rworldmap" "arrow"    
+#> [13] "dismo"     "raster"    "sp"        "terra"     "fs"        "tidyr"    
+#> [19] "tibble"    "png"       "sf"        "ggplot2"   "dplyr"     "ecokit"   
+#> [25] "magrittr"  "stats"     "graphics"  "grDevices" "utils"     "datasets" 
+#> [31] "methods"   "base"     
 
 # Load tidyr
 load_packages(tidyr, raster, ggplot2, nnet, verbose = TRUE)
@@ -88,11 +89,11 @@ load_packages(tidyr, raster, ggplot2, nnet, verbose = TRUE)
 # Loaded packages after implementing the function
 (P2 <- ecokit::loaded_packages())
 #>  [1] "nnet"      "qs2"       "stringr"   "tools"     "future"    "car"      
-#>  [7] "carData"   "purrr"     "archive"   "rworldmap" "arrow"     "dismo"    
-#> [13] "raster"    "sp"        "terra"     "fs"        "tidyr"     "tibble"   
-#> [19] "png"       "sf"        "ggplot2"   "dplyr"     "ecokit"    "magrittr" 
-#> [25] "stats"     "graphics"  "grDevices" "utils"     "datasets"  "methods"  
-#> [31] "base"     
+#>  [7] "carData"   "purrr"     "archive"   "Hmsc"      "coda"      "rworldmap"
+#> [13] "arrow"     "dismo"     "raster"    "sp"        "terra"     "fs"       
+#> [19] "tidyr"     "tibble"    "png"       "sf"        "ggplot2"   "dplyr"    
+#> [25] "ecokit"    "magrittr"  "stats"     "graphics"  "grDevices" "utils"    
+#> [31] "datasets"  "methods"   "base"     
 
 # Which packages were loaded?
 setdiff(P2, P1)
