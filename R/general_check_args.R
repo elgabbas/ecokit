@@ -115,7 +115,7 @@ check_args <- function(
         ecokit::stop_ctx(
           "The following argument(s) must be character",
           invalid_arguments = invalid_arguments,
-          length_MissingArgs = length(invalid_arguments), ...)
+          length_missing_args = length(invalid_arguments), ...)
       }
     },
     logical = {
@@ -126,7 +126,7 @@ check_args <- function(
         ecokit::stop_ctx(
           "The following argument(s) must be logical",
           invalid_arguments = invalid_arguments,
-          length_MissingArgs = length(invalid_arguments), ...)
+          length_missing_args = length(invalid_arguments), ...)
       }
 
     },
@@ -139,7 +139,7 @@ check_args <- function(
         ecokit::stop_ctx(
           "The following argument(s) must be numeric",
           invalid_arguments = invalid_arguments,
-          length_MissingArgs = length(invalid_arguments), ...)
+          length_missing_args = length(invalid_arguments), ...)
       }
     })
 

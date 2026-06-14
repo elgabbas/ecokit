@@ -2,47 +2,82 @@
 % Please edit documentation in R/general_normalize_path.R
 \name{normalize_path}
 \alias{normalize_path}
-\title{Normalise and quote file paths}
+\title{Normalise file paths to a consistent absolute form}
 \usage{
-normalize_path(path, must_work = FALSE)
+normalize_path(path = ".", must_work = FALSE, check_size = FALSE)
 }
 \arguments{
-\item{path}{Character vector. file path(s).}
+\item{path}{Character vector. One or more file or directory paths to
+normalise. Empty strings and \code{NULL} trigger an error. Default: \code{"."}
+(current working directory).}
 
-\item{must_work}{Logical; if \code{TRUE}, the function errors for non-existing
-paths.}
+\item{must_work}{Logical. If \code{TRUE}, the function errors for any path in
+\code{path} that does not exist on disk (checked after normalisation). Default:
+\code{FALSE}.}
+
+\item{check_size}{Logical. If \code{TRUE} and \code{must_work = TRUE}, the function
+additionally errors if any of the (existing) paths points to a file of
+zero bytes. Ignored when \code{must_work = FALSE} or when any path refers to a
+directory rather than a file. Default: \code{FALSE}.}
 }
 \value{
-A character vector of absolute, tidied, and shell-quoted paths.
+A character vector of the same length as \code{path}, containing absolute,
+tidied paths. Redundant separators, \code{.} and \code{..} components, and
+mixed-style slashes are all resolved.
 }
 \description{
-This function ensures that file paths are expressed in a consistent and
-canonical form. It first converts paths to absolute form using
-\code{\link[fs:path_abs]{fs::path_abs()}}, then tidies them with \code{\link[fs:path_tidy]{fs::path_tidy()}}, and finally quotes
-them correctly based on the operating system. By default,
-\code{\link[base:normalizePath]{base::normalizePath()}} behaves differently on Windows and Linux when a file
-does not exist. On Windows, it tries to construct an absolute path, while on
-Linux, it returns the input path as-is (relative). To maintain consistency
-across platforms, this function uses \code{\link[fs:path_abs]{fs::path_abs()}} instead of
-\code{\link[base:normalizePath]{base::normalizePath()}}.
+Converts one or more file paths to their absolute, tidied canonical form
+using \code{\link[fs:path_abs]{fs::path_abs()}} and \code{\link[fs:path_tidy]{fs::path_tidy()}}. Optionally errors if any path
+does not exist on disk or has a size of zero bytes.
+}
+\details{
+\code{\link[base:normalizePath]{base::normalizePath()}} behaves inconsistently across platforms when a path
+does not exist: on Windows it attempts to construct an absolute path, while
+on Linux/macOS it returns the input unchanged (i.e. relative paths stay
+relative). This function uses \code{\link[fs:path_abs]{fs::path_abs()}} instead, which always
+returns an absolute path regardless of whether the path exists or which
+platform is used.
+
+Path tidying via \code{\link[fs:path_tidy]{fs::path_tidy()}} normalises directory separators to
+forward slashes and removes redundant separators and trailing slashes,
+making the output safe to use in both R and shell contexts across
+platforms.
+
+When \code{must_work = TRUE}, existence is checked \strong{after} normalisation so
+that relative inputs such as \code{"."} or \code{"../"} resolve correctly before the
+check is applied. The \code{check_size} check is subordinate to \code{must_work}:
+it only runs once all paths are confirmed to exist.
 }
 \examples{
-# current working directory
+# Current working directory
 normalize_path(".")
 
-# up one directory
+# Parent directory
 normalize_path("../")
 
-list.files()[1]
-normalize_path(list.files()[1])
+# First file in the working directory (if any)
+if (length(list.files()) > 0L) {
+  normalize_path(list.files()[[1L]])
+}
 
-# absolute path with windows-style slashes
+# Vectorised: multiple paths at once
+normalize_path(c(".", "../"))
+
+# Windows-style separators are normalised on all platforms
 normalize_path("D://Folder1//Folder2//file.txt")
 
 \dontrun{
-  # this will give an error if the path does not exist
+  # Errors when must_work = TRUE and the path does not exist
   normalize_path("D://Folder1//Folder2//file.txt", must_work = TRUE)
+
+  # Errors when must_work = TRUE, check_size = TRUE, and the file is empty
+  empty_file <- fs::file_temp(pattern = "empty_")
+  fs::file_create(empty_file)
+  normalize_path(empty_file, must_work = TRUE, check_size = TRUE)
 }
+}
+\seealso{
+\code{\link[fs:path_abs]{fs::path_abs()}}, \code{\link[fs:path_tidy]{fs::path_tidy()}}, \code{\link[base:normalizePath]{base::normalizePath()}}
 }
 \author{
 Ahmed El-Gabbas
