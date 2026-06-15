@@ -39,7 +39,7 @@
 #' @export
 #' @examples
 #' #' # Example usage with a coda object from Hmsc::convertToCodaObject()
-#' ecokit::load_packages(Hmsc, coda, dplyr)
+#' ecokit::load_packages(Hmsc, coda, dplyr, tibble)
 #'
 #' coda_object <- Hmsc::convertToCodaObject(Hmsc::TD$m)
 #'
@@ -47,16 +47,18 @@
 #' # Alpha posterior samples
 #' # ||||||||||||||||||||||||||||||||||||
 #'
+#' alpha_name <- coda_match_param(obj = coda_object, param = "alpha")
 #' dt_alpha <- coda_to_tibble(
-#'    coda_object = coda_object$alpha[[1]], posterior_type = "Alpha")
+#'    coda_object = coda_object[[alpha_name]][[1]], posterior_type = "alpha")
 #' dplyr::glimpse(dt_alpha)
 #'
 #' # ||||||||||||||||||||||||||||||||||||
 #' # Omega posterior samples
 #' # ||||||||||||||||||||||||||||||||||||
 #'
+#' omega_name <- coda_match_param(obj = coda_object, param = "omega")
 #' dt_omega <- coda_to_tibble(
-#'    coda_object = coda_object$Omega[[1]], posterior_type = "omega",
+#'    coda_object = coda_object[[omega_name]][[1]], posterior_type = "omega",
 #'    n_omega = 10L)
 #'
 #' dplyr::glimpse(dt_omega)
@@ -67,8 +69,9 @@
 #' # Rho posterior samples
 #' # ||||||||||||||||||||||||||||||||||||
 #'
+#' rho_name <- coda_match_param(obj = coda_object, param = "rho")
 #' dt_rho <- coda_to_tibble(
-#'     coda_object = coda_object$rho, posterior_type = "rho")
+#'     coda_object = coda_object[[rho_name]], posterior_type = "rho")
 #' dplyr::glimpse(dt_rho)
 #'
 #' @author Ahmed El-Gabbas
@@ -89,7 +92,7 @@ coda_to_tibble <- function(
 
   # Validate coda_object
   if (is.null(coda_object)) {
-    ecokit::stop_ctx("`coda_object` must both be provided.")
+    ecokit::stop_ctx("`coda_object` cannot be NULL.")
   }
 
   # Accept both mcmc and mcmc.list; coda functions generally handle both,
@@ -103,7 +106,7 @@ coda_to_tibble <- function(
 
   # Validate posterior_type
   if (is.null(posterior_type)) {
-    ecokit::stop_ctx("`posterior_type` must both be provided.")
+    ecokit::stop_ctx("`posterior_type` cannot be NULL.")
   }
 
   # Normalise to lower-case so the caller can write "Beta", "beta", "BETA".
@@ -295,4 +298,71 @@ coda_to_tibble <- function(
   }
 
   return(coda_data)
+}
+
+
+# ''''''''''''''''''''''''''''''''''''''''''' ------
+
+# # ========================================================================= #
+
+# # ------------------------------------------------------------------------- #
+# coda_match_param ----
+# # ------------------------------------------------------------------------- #
+
+#' Retrieve a canonical parameter name from a HMSC coda object
+#'
+#' Performs a case-insensitive lookup of a requested HMSC posterior parameter
+#' name against the names in `obj`. Returns the exact name as stored in the coda
+#' object (e.g. `"AlphaInd"` when HMSC >= 3.4-0 is used, or `"Alpha"` for older
+#' versions) so callers do not need to hard-code version-specific names.
+#'
+#' @param obj A named list (typically a HMSC coda object produced by
+#'   [Hmsc::convertToCodaObject()]). Cannot be `NULL` or empty.
+#' @param param Character. Parameter name to look up. Must be one of `"beta"`,
+#'   `"alpha"`, `"omega"`, `"rho"`, or `"gamma"` (case-insensitive).
+#' @param warning Logical. If `TRUE` (default), emit a warning when `param` is
+#'   not found in `obj`.
+#'
+#' @return The matched name as a character string, exactly as it appears in
+#'   `names(obj)`. Returns `NA_character_` when no match is found.
+#'
+#' @export
+#' @author Ahmed El-Gabbas
+
+coda_match_param <- function(obj = NULL, param = NULL, warning = TRUE) {
+
+  ecokit::check_args(args_to_check = "param", args_type = "character")
+
+  if (missing(obj) || is.null(obj) || length(obj) == 0L) {
+    ecokit::stop_ctx("`obj` cannot be empty.", obj = obj)
+  }
+
+  param <- stringr::str_to_lower(param)
+  valid_params <- c("beta", "alpha", "omega", "rho", "gamma")
+
+  if (!param %in% valid_params) {
+    ecokit::stop_ctx(
+      "Invalid parameter. Must be one of: beta, alpha, omega, rho, gamma.",
+      param = param,
+      valid_params = toString(valid_params))
+  }
+
+  names_coda <- names(obj)
+  names_coda_lower <- stringr::str_to_lower(names_coda)
+
+  # which() may return a zero-length integer vector when there is no match.
+  # Subscripting with [[1]] would then error; use [1] which returns NA safely.
+  matched_idx <- which(names_coda_lower == param)[1L]
+
+  if (length(matched_idx) == 0L) {
+    if (warning) {
+      warning(
+        "Parameter '", param,
+        "' not found in coda object. Returning NA_character_.",
+        call. = FALSE, immediate. = TRUE)
+    }
+    return(NA_character_)
+  }
+
+  names_coda[matched_idx]
 }

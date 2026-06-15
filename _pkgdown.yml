@@ -37,6 +37,7 @@ reference:
   - sampling_effort
   - mask_cumulative_pct
   - coda_to_tibble
+  - coda_match_param
 
 - title: Package management
   contents:

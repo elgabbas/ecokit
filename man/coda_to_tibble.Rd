@@ -47,7 +47,7 @@ must follow the Hmsc convention \verb{Omega1[<sp_id1>, <sp_id2>]}.
 }
 \examples{
 #' # Example usage with a coda object from Hmsc::convertToCodaObject()
-ecokit::load_packages(Hmsc, coda, dplyr)
+ecokit::load_packages(Hmsc, coda, dplyr, tibble)
 
 coda_object <- Hmsc::convertToCodaObject(Hmsc::TD$m)
 
@@ -55,16 +55,18 @@ coda_object <- Hmsc::convertToCodaObject(Hmsc::TD$m)
 # Alpha posterior samples
 # ||||||||||||||||||||||||||||||||||||
 
+alpha_name <- coda_match_param(obj = coda_object, param = "alpha")
 dt_alpha <- coda_to_tibble(
-   coda_object = coda_object$alpha[[1]], posterior_type = "Alpha")
+   coda_object = coda_object[[alpha_name]][[1]], posterior_type = "alpha")
 dplyr::glimpse(dt_alpha)
 
 # ||||||||||||||||||||||||||||||||||||
 # Omega posterior samples
 # ||||||||||||||||||||||||||||||||||||
 
+omega_name <- coda_match_param(obj = coda_object, param = "omega")
 dt_omega <- coda_to_tibble(
-   coda_object = coda_object$Omega[[1]], posterior_type = "omega",
+   coda_object = coda_object[[omega_name]][[1]], posterior_type = "omega",
    n_omega = 10L)
 
 dplyr::glimpse(dt_omega)
@@ -75,8 +77,9 @@ dplyr::glimpse(dt_omega$data[[1]])
 # Rho posterior samples
 # ||||||||||||||||||||||||||||||||||||
 
+rho_name <- coda_match_param(obj = coda_object, param = "rho")
 dt_rho <- coda_to_tibble(
-    coda_object = coda_object$rho, posterior_type = "rho")
+    coda_object = coda_object[[rho_name]], posterior_type = "rho")
 dplyr::glimpse(dt_rho)
 
 }
