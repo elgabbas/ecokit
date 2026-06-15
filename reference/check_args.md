@@ -61,7 +61,7 @@ try(f1(x = 1))
 #> invalid_arguments [invalid_arguments]: <character>
 #> x
 #> 
-#> length_MissingArgs [length(invalid_arguments)]: <integer>
+#> length_missing_args [length(invalid_arguments)]: <integer>
 #> 1
 
 try(f1(x = c("X1", "x2", "x3"), y = c(20, 30)))

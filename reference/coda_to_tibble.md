@@ -70,7 +70,7 @@ Ahmed El-Gabbas
 
 ``` r
 #' # Example usage with a coda object from Hmsc::convertToCodaObject()
-ecokit::load_packages(Hmsc, coda, dplyr)
+ecokit::load_packages(Hmsc, coda, dplyr, tibble)
 
 coda_object <- Hmsc::convertToCodaObject(Hmsc::TD$m)
 
@@ -78,18 +78,26 @@ coda_object <- Hmsc::convertToCodaObject(Hmsc::TD$m)
 # Alpha posterior samples
 # ||||||||||||||||||||||||||||||||||||
 
+alpha_name <- coda_match_param(obj = coda_object, param = "alpha")
 dt_alpha <- coda_to_tibble(
-   coda_object = coda_object$alpha[[1]], posterior_type = "Alpha")
-#> Error in coda_to_tibble(coda_object = coda_object$alpha[[1]], posterior_type = "Alpha"): `coda_object` must both be provided.
+   coda_object = coda_object[[alpha_name]][[1]], posterior_type = "alpha")
 dplyr::glimpse(dt_alpha)
-#> Error: object 'dt_alpha' not found
+#> Rows: 400
+#> Columns: 6
+#> $ Alpha     <fct> Alpha1[factor1], Alpha1[factor1], Alpha1[factor1], Alpha1[fa…
+#> $ alpha_num <fct> Alpha1, Alpha1, Alpha1, Alpha1, Alpha1, Alpha1, Alpha1, Alph…
+#> $ factor    <fct> factor1, factor1, factor1, factor1, factor1, factor1, factor…
+#> $ chain     <fct> 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, …
+#> $ iter      <int> 51, 52, 53, 54, 55, 56, 57, 58, 59, 60, 61, 62, 63, 64, 65, …
+#> $ value     <dbl> 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, …
 
 # ||||||||||||||||||||||||||||||||||||
 # Omega posterior samples
 # ||||||||||||||||||||||||||||||||||||
 
+omega_name <- coda_match_param(obj = coda_object, param = "omega")
 dt_omega <- coda_to_tibble(
-   coda_object = coda_object$Omega[[1]], posterior_type = "omega",
+   coda_object = coda_object[[omega_name]][[1]], posterior_type = "omega",
    n_omega = 10L)
 
 dplyr::glimpse(dt_omega)
@@ -111,9 +119,13 @@ dplyr::glimpse(dt_omega$data[[1]])
 # Rho posterior samples
 # ||||||||||||||||||||||||||||||||||||
 
+rho_name <- coda_match_param(obj = coda_object, param = "rho")
 dt_rho <- coda_to_tibble(
-    coda_object = coda_object$rho, posterior_type = "rho")
-#> Error in coda_to_tibble(coda_object = coda_object$rho, posterior_type = "rho"): `coda_object` must both be provided.
+    coda_object = coda_object[[rho_name]], posterior_type = "rho")
 dplyr::glimpse(dt_rho)
-#> Error: object 'dt_rho' not found
+#> Rows: 200
+#> Columns: 3
+#> $ chain <fct> 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1…
+#> $ iter  <int> 51, 52, 53, 54, 55, 56, 57, 58, 59, 60, 61, 62, 63, 64, 65, 66, …
+#> $ value <dbl> 0.22, 0.83, 0.94, 0.96, 0.94, 0.77, 0.65, 0.95, 0.97, 0.79, 0.69…
 ```

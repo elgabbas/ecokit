@@ -87,7 +87,7 @@ extract_options(pattern = "^r", case_sensitive = TRUE)
 #> [1] FALSE
 #> 
 #> $rlang_trace_top_env
-#> <environment: 0x55a29ac38928>
+#> <environment: 0x55698ef5e328>
 #> 
 
 # non-existing pattern

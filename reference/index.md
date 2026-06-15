@@ -10,21 +10,36 @@
 
 - [`chelsa_var_info`](https://elgabbas.github.io/ecokit/reference/chelsa_var_info.md)
   : CHELSA Variable Information
+
 - [`get_chelsa_links()`](https://elgabbas.github.io/ecokit/reference/get_chelsa_links.md)
   : Retrieve CHELSA Data Links
+
 - [`check_gbif()`](https://elgabbas.github.io/ecokit/reference/check_gbif.md)
   : Check and Load GBIF Credentials from .Renviron
+
 - [`maxent_open()`](https://elgabbas.github.io/ecokit/reference/maxent_open.md)
   : Launch the Maxent Java Application from the dismo Package
+
 - [`maxent_variable_importance()`](https://elgabbas.github.io/ecokit/reference/maxent_variable_importance.md)
   : Extract Variable Importance from a Maxent Model Object
+
 - [`get_group_descendants()`](https://elgabbas.github.io/ecokit/reference/sampling_effort.md)
   [`get_sampling_effort()`](https://elgabbas.github.io/ecokit/reference/sampling_effort.md)
   : Get Sampling Effort Rasters
+
 - [`mask_cumulative_pct()`](https://elgabbas.github.io/ecokit/reference/mask_cumulative_pct.md)
   : Mask raster to show top % and bottom % of cumulative sum
+
+- [`trim_hmsc()`](https://elgabbas.github.io/ecokit/reference/trim_hmsc.md)
+  :
+
+  Trim an `Hmsc` model object by removing specified components
+
 - [`coda_to_tibble()`](https://elgabbas.github.io/ecokit/reference/coda_to_tibble.md)
   : Convert an MCMC coda object to a tidy tibble
+
+- [`coda_match_param()`](https://elgabbas.github.io/ecokit/reference/coda_match_param.md)
+  : Retrieve a canonical parameter name from a HMSC coda object
 
 ## Package management
 
@@ -74,7 +89,7 @@
   : Jump Up Parent Directories
 
 - [`normalize_path()`](https://elgabbas.github.io/ecokit/reference/normalize_path.md)
-  : Normalise and quote file paths
+  : Normalise file paths to a consistent absolute form
 
 - [`find_duplicates()`](https://elgabbas.github.io/ecokit/reference/find_duplicates.md)
   : Find duplicated files and directories within a given path

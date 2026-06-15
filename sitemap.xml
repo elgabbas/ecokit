@@ -41,6 +41,7 @@
 <url><loc>https://elgabbas.github.io/ecokit/reference/chelsa_var_info.html</loc></url>
 <url><loc>https://elgabbas.github.io/ecokit/reference/clear_console.html</loc></url>
 <url><loc>https://elgabbas.github.io/ecokit/reference/clip_raster_by_polygon.html</loc></url>
+<url><loc>https://elgabbas.github.io/ecokit/reference/coda_match_param.html</loc></url>
 <url><loc>https://elgabbas.github.io/ecokit/reference/coda_to_tibble.html</loc></url>
 <url><loc>https://elgabbas.github.io/ecokit/reference/create_tar.html</loc></url>
 <url><loc>https://elgabbas.github.io/ecokit/reference/detect_alias.html</loc></url>
@@ -117,6 +118,7 @@
 <url><loc>https://elgabbas.github.io/ecokit/reference/system_command.html</loc></url>
 <url><loc>https://elgabbas.github.io/ecokit/reference/text_to_coordinates.html</loc></url>
 <url><loc>https://elgabbas.github.io/ecokit/reference/tibble_column_size.html</loc></url>
+<url><loc>https://elgabbas.github.io/ecokit/reference/trim_hmsc.html</loc></url>
 <url><loc>https://elgabbas.github.io/ecokit/reference/used_packages.html</loc></url>
 <url><loc>https://elgabbas.github.io/ecokit/reference/validate_named_list.html</loc></url>
 <url><loc>https://elgabbas.github.io/ecokit/reference/validators.html</loc></url>
