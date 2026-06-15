@@ -36,6 +36,7 @@ reference:
   - maxent_variable_importance
   - sampling_effort
   - mask_cumulative_pct
+  - trim_hmsc
   - coda_to_tibble
   - coda_match_param
 

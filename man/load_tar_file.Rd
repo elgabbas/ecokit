@@ -97,7 +97,7 @@ terra::sources(r2)  # should be "" (in memory)
 # CSV via base read.csv
 load_tar_file(
   tar_file = tmp_tar, file_to_extract = basename(csv_file),
-  load_fun = "readr::read_csv", col_types = "c") \%>\%
+  load_fun = "read.csv") \%>\%
   head()
 
 # RDS (handled automatically by ecokit::load_as)
