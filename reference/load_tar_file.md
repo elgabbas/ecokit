@@ -112,7 +112,7 @@ for (i in seq_along(file_list)) {
 
 # List contents of the tar file
 print(system2("tar", c("-tf", tmp_tar), stdout = TRUE))
-#> [1] "elev.tif"             "file224548498e95.csv" "file224573b15520.rds"
+#> [1] "elev.tif"             "file21f0186b53bf.csv" "file21f06adecd72.rds"
 
 # TIFF: returned fully in memory (wrapped by default)
 r <- load_tar_file(tar_file = tmp_tar, file_to_extract = "elev.tif")

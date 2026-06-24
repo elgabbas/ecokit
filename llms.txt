@@ -41,7 +41,7 @@ features, please:
 - **Contact me** directly at *elgabbas\[at\]outlook\[dot\]com* for
   collaboration ideas or questions.
 
-Last update: 2026-06-15
+Last update: 2026-06-24
 
 # Package index
 
@@ -58,6 +58,9 @@ Last update: 2026-06-15
 
 - [`get_chelsa_links()`](https://elgabbas.github.io/ecokit/reference/get_chelsa_links.md)
   : Retrieve CHELSA Data Links
+
+- [`get_inat_obs()`](https://elgabbas.github.io/ecokit/reference/get_inat_obs.md)
+  : Retrieve iNaturalist research-grade observations
 
 - [`check_gbif()`](https://elgabbas.github.io/ecokit/reference/check_gbif.md)
   : Check and Load GBIF Credentials from .Renviron

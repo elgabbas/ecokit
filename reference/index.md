@@ -14,6 +14,9 @@
 - [`get_chelsa_links()`](https://elgabbas.github.io/ecokit/reference/get_chelsa_links.md)
   : Retrieve CHELSA Data Links
 
+- [`get_inat_obs()`](https://elgabbas.github.io/ecokit/reference/get_inat_obs.md)
+  : Retrieve iNaturalist research-grade observations
+
 - [`check_gbif()`](https://elgabbas.github.io/ecokit/reference/check_gbif.md)
   : Check and Load GBIF Credentials from .Renviron
 

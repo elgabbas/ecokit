@@ -106,7 +106,7 @@ load_packages(tidyterra, verbose = FALSE)
 load_packages(tidyr, tidyterra, verbose = TRUE)
 #> The following packages were already loaded:
 #>  >> tidyr (1.3.2)
-#>  >> tidyterra (1.1.0)
+#>  >> tidyterra (1.2.0)
 
 # non-existent package
 load_packages("non_existent")

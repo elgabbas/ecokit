@@ -45,13 +45,13 @@ fs::dir_create(temp_dir)
 
 save_session_info(out_directory = temp_dir)
 #> Saving session info to:
-#> /tmp/RtmpacoNio/save_session_info/S_20260615_0245.txt
+#> /tmp/Rtmp6r1DBi/save_session_info/S_20260624_0347.txt
 
 saved_file <- list.files(
   temp_dir, pattern = "S_.+txt$", full.names = TRUE) %>%
   ecokit::normalize_path()
 (saved_file <- saved_file[length(saved_file)])
-#> /tmp/RtmpacoNio/save_session_info/S_20260615_0245.txt
+#> /tmp/Rtmp6r1DBi/save_session_info/S_20260624_0347.txt
 
 cat(readLines(saved_file), sep = "\n")
 #> 
@@ -69,7 +69,7 @@ cat(readLines(saved_file), sep = "\n")
 #>  collate  C
 #>  ctype    C.UTF-8
 #>  tz       UTC
-#>  date     2026-06-15
+#>  date     2026-06-24
 #>  pandoc   3.8.3 @ /opt/hostedtoolcache/pandoc/3.8.3/x64/ (via rmarkdown)
 #>  quarto   NA
 #> 
@@ -107,7 +107,7 @@ cat(readLines(saved_file), sep = "\n")
 #>  downlit        0.4.5     2025-11-14 [1] RSPM
 #>  dplyr        * 1.2.1     2026-04-03 [1] RSPM
 #>  e1071          1.7-17    2025-12-18 [1] RSPM
-#>  ecokit       * 0.1.0     2026-06-15 [1] local
+#>  ecokit       * 0.1.0     2026-06-24 [1] local
 #>  evaluate       1.0.5     2025-08-27 [1] RSPM
 #>  fansi          1.0.7     2025-11-19 [1] RSPM
 #>  farver         2.1.2     2024-05-13 [1] RSPM
@@ -139,7 +139,7 @@ cat(readLines(saved_file), sep = "\n")
 #>  labeling       0.4.3     2023-08-29 [1] RSPM
 #>  lattice        0.22-9    2026-02-09 [3] CRAN (R 4.6.0)
 #>  lifecycle      1.0.5     2026-01-08 [1] RSPM
-#>  listenv        0.10.1    2026-03-10 [1] RSPM
+#>  listenv        1.0.0     2026-06-22 [1] RSPM
 #>  lobstr         1.2.1     2026-04-04 [1] RSPM
 #>  lubridate    * 1.9.5     2026-02-04 [1] RSPM
 #>  magrittr     * 2.0.5     2026-04-04 [1] RSPM
@@ -206,12 +206,12 @@ cat(readLines(saved_file), sep = "\n")
 #>  stringr      * 1.6.0     2025-11-04 [1] RSPM
 #>  survival       3.8-6     2026-01-16 [3] CRAN (R 4.6.0)
 #>  systemfonts    1.3.2     2026-03-05 [1] RSPM
-#>  terra        * 1.9-27    2026-05-10 [1] RSPM
+#>  terra        * 1.9-34    2026-06-19 [1] RSPM
 #>  textshaping    1.0.5     2026-03-06 [1] RSPM
 #>  tibble       * 3.3.1     2026-01-11 [1] RSPM
 #>  tidyr        * 1.3.2     2025-12-19 [1] RSPM
 #>  tidyselect     1.2.1     2024-03-11 [1] RSPM
-#>  tidyterra    * 1.1.0     2026-03-11 [1] RSPM
+#>  tidyterra    * 1.2.0     2026-06-17 [1] RSPM
 #>  timechange     0.4.0     2026-01-29 [1] RSPM
 #>  triebeard      0.4.1     2023-03-04 [1] RSPM
 #>  truncnorm      1.0-9     2023-03-20 [1] RSPM
@@ -221,10 +221,10 @@ cat(readLines(saved_file), sep = "\n")
 #>  vctrs          0.7.3     2026-04-11 [1] RSPM
 #>  viridisLite    0.4.3     2026-02-04 [1] RSPM
 #>  whisker        0.4.1     2022-12-05 [1] RSPM
-#>  withr          3.0.2     2024-10-28 [1] RSPM
+#>  withr          3.0.3     2026-06-19 [1] RSPM
 #>  wk             0.9.5     2025-12-18 [1] RSPM
-#>  xfun           0.58      2026-06-01 [1] RSPM
-#>  xml2           1.5.2     2026-01-17 [1] RSPM
+#>  xfun           0.59      2026-06-19 [1] RSPM
+#>  xml2           1.6.0     2026-06-22 [1] RSPM
 #>  yaml           2.3.12    2025-12-10 [1] RSPM
 #> 
 #>  [1] /home/runner/work/_temp/Library
@@ -245,13 +245,13 @@ vec <- rnorm(1000)
 session_data <- tibble::tibble(object = c("df", "vec"), size = c(0.1, 0.1))
 save_session_info(out_directory = temp_dir, session_info = session_data)
 #> Saving session info to:
-#> /tmp/RtmpacoNio/save_session_info/S_20260615_0245.txt
+#> /tmp/Rtmp6r1DBi/save_session_info/S_20260624_0347.txt
 
 saved_file <- list.files(
   temp_dir, pattern = "S_.+txt$", full.names = TRUE) %>%
   ecokit::normalize_path()
 (saved_file <- saved_file[length(saved_file)])
-#> /tmp/RtmpacoNio/save_session_info/S_20260615_0245.txt
+#> /tmp/Rtmp6r1DBi/save_session_info/S_20260624_0347.txt
 
 cat(readLines(saved_file), sep = "\n")
 #> 
@@ -269,7 +269,7 @@ cat(readLines(saved_file), sep = "\n")
 #>  collate  C
 #>  ctype    C.UTF-8
 #>  tz       UTC
-#>  date     2026-06-15
+#>  date     2026-06-24
 #>  pandoc   3.8.3 @ /opt/hostedtoolcache/pandoc/3.8.3/x64/ (via rmarkdown)
 #>  quarto   NA
 #> 
@@ -307,7 +307,7 @@ cat(readLines(saved_file), sep = "\n")
 #>  downlit        0.4.5     2025-11-14 [1] RSPM
 #>  dplyr        * 1.2.1     2026-04-03 [1] RSPM
 #>  e1071          1.7-17    2025-12-18 [1] RSPM
-#>  ecokit       * 0.1.0     2026-06-15 [1] local
+#>  ecokit       * 0.1.0     2026-06-24 [1] local
 #>  evaluate       1.0.5     2025-08-27 [1] RSPM
 #>  fansi          1.0.7     2025-11-19 [1] RSPM
 #>  farver         2.1.2     2024-05-13 [1] RSPM
@@ -339,7 +339,7 @@ cat(readLines(saved_file), sep = "\n")
 #>  labeling       0.4.3     2023-08-29 [1] RSPM
 #>  lattice        0.22-9    2026-02-09 [3] CRAN (R 4.6.0)
 #>  lifecycle      1.0.5     2026-01-08 [1] RSPM
-#>  listenv        0.10.1    2026-03-10 [1] RSPM
+#>  listenv        1.0.0     2026-06-22 [1] RSPM
 #>  lobstr         1.2.1     2026-04-04 [1] RSPM
 #>  lubridate    * 1.9.5     2026-02-04 [1] RSPM
 #>  magrittr     * 2.0.5     2026-04-04 [1] RSPM
@@ -406,12 +406,12 @@ cat(readLines(saved_file), sep = "\n")
 #>  stringr      * 1.6.0     2025-11-04 [1] RSPM
 #>  survival       3.8-6     2026-01-16 [3] CRAN (R 4.6.0)
 #>  systemfonts    1.3.2     2026-03-05 [1] RSPM
-#>  terra        * 1.9-27    2026-05-10 [1] RSPM
+#>  terra        * 1.9-34    2026-06-19 [1] RSPM
 #>  textshaping    1.0.5     2026-03-06 [1] RSPM
 #>  tibble       * 3.3.1     2026-01-11 [1] RSPM
 #>  tidyr        * 1.3.2     2025-12-19 [1] RSPM
 #>  tidyselect     1.2.1     2024-03-11 [1] RSPM
-#>  tidyterra    * 1.1.0     2026-03-11 [1] RSPM
+#>  tidyterra    * 1.2.0     2026-06-17 [1] RSPM
 #>  timechange     0.4.0     2026-01-29 [1] RSPM
 #>  triebeard      0.4.1     2023-03-04 [1] RSPM
 #>  truncnorm      1.0-9     2023-03-20 [1] RSPM
@@ -421,10 +421,10 @@ cat(readLines(saved_file), sep = "\n")
 #>  vctrs          0.7.3     2026-04-11 [1] RSPM
 #>  viridisLite    0.4.3     2026-02-04 [1] RSPM
 #>  whisker        0.4.1     2022-12-05 [1] RSPM
-#>  withr          3.0.2     2024-10-28 [1] RSPM
+#>  withr          3.0.3     2026-06-19 [1] RSPM
 #>  wk             0.9.5     2025-12-18 [1] RSPM
-#>  xfun           0.58      2026-06-01 [1] RSPM
-#>  xml2           1.5.2     2026-01-17 [1] RSPM
+#>  xfun           0.59      2026-06-19 [1] RSPM
+#>  xml2           1.6.0     2026-06-22 [1] RSPM
 #>  yaml           2.3.12    2025-12-10 [1] RSPM
 #> 
 #>  [1] /home/runner/work/_temp/Library
