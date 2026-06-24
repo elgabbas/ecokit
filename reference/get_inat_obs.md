@@ -146,7 +146,7 @@ obs_jan <- get_inat_obs(
 #> Year: 2024, month: 1 --- 34 records
 #> Done. 34 unique records retrieved.
 obs_jan
-#> # A tibble: 34 × 20
+#> # A tibble: 34 × 22
 #>         id observed_on   day month  year quality_grade taxon_id rank  taxon_name
 #>      <int> <date>      <int> <int> <int> <chr>            <int> <chr> <chr>     
 #>  1  1.95e8 2024-01-01      1     1  2024 research         67835 spec… Danaus ch…
@@ -183,10 +183,11 @@ obs_jan
 #> 32  2.39e8 2024-01-03      3     1  2024 research         67835 spec… Danaus ch…
 #> 33  2.39e8 2024-01-03      3     1  2024 research         67835 spec… Danaus ch…
 #> 34  2.55e8 2024-01-14     14     1  2024 research         67835 spec… Danaus ch…
-#> # ℹ 11 more variables: num_identification_agreements <int>, latitude <dbl>,
+#> # ℹ 13 more variables: num_identification_agreements <int>, latitude <dbl>,
 #> #   longitude <dbl>, latitude_n_decimals <int>, longitude_n_decimals <int>,
-#> #   geoprivacy <chr>, place_guess <chr>, user_login <chr>, uri <chr>,
-#> #   in_gbif <lgl>, outlinks <list>
+#> #   positional_accuracy <int>, coordinates_obscured <lgl>, geoprivacy <chr>,
+#> #   place_guess <chr>, user_login <chr>, uri <chr>, in_gbif <lgl>,
+#> #   outlinks <list>
 
 # All months for one year (monthly / weekly / daily fallback automatic)
 obs_2023 <- get_inat_obs(taxon_id = 67835, bounds = europe, year = 2023L)
@@ -199,7 +200,7 @@ obs_2023 <- get_inat_obs(taxon_id = 67835, bounds = europe, year = 2023L)
 #> Year: 2023 --- 622 records total
 #> Done. 622 unique records retrieved.
 obs_2023
-#> # A tibble: 622 × 20
+#> # A tibble: 622 × 22
 #>         id observed_on   day month  year quality_grade taxon_id rank  taxon_name
 #>      <int> <date>      <int> <int> <int> <chr>            <int> <chr> <chr>     
 #>  1  1.46e8 2023-01-03      3     1  2023 research         67835 spec… Danaus ch…
@@ -213,10 +214,11 @@ obs_2023
 #>  9  1.46e8 2023-01-07      7     1  2023 research         67835 spec… Danaus ch…
 #> 10  1.46e8 2023-01-07      7     1  2023 research         67835 spec… Danaus ch…
 #> # ℹ 612 more rows
-#> # ℹ 11 more variables: num_identification_agreements <int>, latitude <dbl>,
+#> # ℹ 13 more variables: num_identification_agreements <int>, latitude <dbl>,
 #> #   longitude <dbl>, latitude_n_decimals <int>, longitude_n_decimals <int>,
-#> #   geoprivacy <chr>, place_guess <chr>, user_login <chr>, uri <chr>,
-#> #   in_gbif <lgl>, outlinks <list>
+#> #   positional_accuracy <int>, coordinates_obscured <lgl>, geoprivacy <chr>,
+#> #   place_guess <chr>, user_login <chr>, uri <chr>, in_gbif <lgl>,
+#> #   outlinks <list>
 
 # Multi-year loop with deduplication
 obs_multi <- purrr::map_dfr(
@@ -255,4 +257,24 @@ obs_multi <- purrr::map_dfr(
 #> 
 #> Year: 2023 --- 622 records total
 #> Done. 622 unique records retrieved.
+obs_multi
+#> # A tibble: 1,180 × 22
+#>         id observed_on   day month  year quality_grade taxon_id rank  taxon_name
+#>      <int> <date>      <int> <int> <int> <chr>            <int> <chr> <chr>     
+#>  1  3.75e7 2020-01-11     11     1  2020 research         67835 spec… Danaus ch…
+#>  2  3.78e7 2020-01-16     16     1  2020 research         67835 spec… Danaus ch…
+#>  3  3.83e7 2020-02-02      2     2  2020 research         67835 spec… Danaus ch…
+#>  4  3.83e7 2020-01-30     30     1  2020 research         67835 spec… Danaus ch…
+#>  5  3.91e7 2020-02-15     15     2  2020 research         67835 spec… Danaus ch…
+#>  6  4.02e7 2020-03-11     11     3  2020 research         67835 spec… Danaus ch…
+#>  7  4.27e7 2020-04-19     19     4  2020 research         67835 spec… Danaus ch…
+#>  8  4.59e7 2020-05-12     12     5  2020 research         67835 spec… Danaus ch…
+#>  9  4.59e7 2020-05-14     14     5  2020 research         67835 spec… Danaus ch…
+#> 10  4.78e7 2020-05-30     30     5  2020 research         67835 spec… Danaus ch…
+#> # ℹ 1,170 more rows
+#> # ℹ 13 more variables: num_identification_agreements <int>, latitude <dbl>,
+#> #   longitude <dbl>, latitude_n_decimals <int>, longitude_n_decimals <int>,
+#> #   positional_accuracy <int>, coordinates_obscured <lgl>, geoprivacy <chr>,
+#> #   place_guess <chr>, user_login <chr>, uri <chr>, in_gbif <lgl>,
+#> #   outlinks <list>
 ```
