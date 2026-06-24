@@ -132,6 +132,9 @@
 #'   latitude value
 #'  - `longitude_n_decimals`: `integer` --- number of decimal places in the
 #'   longitude value
+#'  - `positional_accuracy`: `integer` --- positional accuracy in meters
+#'  - `coordinates_obscured`: `logical` --- `TRUE` if the coordinates have been
+#'   obscured, otherwise `FALSE`
 #'  - `geoprivacy`: `character` --- geoprivacy setting (`"open"`, `"obscured"`,
 #'   or `"private"`)
 #'  - `place_guess`: `character` --- human-readable locality string
@@ -179,6 +182,8 @@
         longitude = as.numeric(coords[[2L]]) %||% NA_real_,
         latitude_n_decimals = coords_n_decimals[[1L]] %||% NA_integer_,
         longitude_n_decimals = coords_n_decimals[[2L]] %||% NA_integer_,
+        positional_accuracy = .x$positional_accuracy %||% NA_integer_,
+        coordinates_obscured = .x$obscured %||% NA,
         geoprivacy = .x$geoprivacy %||% NA_character_,
         place_guess = .x$place_guess %||% NA_character_,
         user_login = .x$user$login %||% NA_character_,
@@ -188,7 +193,6 @@
     }
   )
 }
-
 
 # =========================================================================== #
 # INTERNAL HELPER: fetch all pages for one date window
@@ -610,6 +614,7 @@
 #'   .x = 2020:2023,
 #'   .f = ~ get_inat_obs(taxon_id = 67835, bounds = europe, year = .x))  %>%
 #'   dplyr::distinct(id, .keep_all = TRUE)
+#' obs_multi
 #'
 #' @author Ahmed El-Gabbas
 

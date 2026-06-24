@@ -116,6 +116,7 @@ obs_multi <- purrr::map_dfr(
   .x = 2020:2023,
   .f = ~ get_inat_obs(taxon_id = 67835, bounds = europe, year = .x))  \%>\%
   dplyr::distinct(id, .keep_all = TRUE)
+obs_multi
 
 }
 \author{
