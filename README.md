@@ -47,4 +47,4 @@ features, please:
   collaboration ideas or questions.
 
 <span style="     color: grey !important;">Last update:
-2026-06-15</span>
+2026-06-24</span>

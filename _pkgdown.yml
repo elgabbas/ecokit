@@ -31,6 +31,7 @@ reference:
   contents:
   - chelsa_var_info
   - get_chelsa_links
+  - get_inat_obs
   - check_gbif
   - maxent_open
   - maxent_variable_importance

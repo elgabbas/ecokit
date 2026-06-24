@@ -2,7 +2,7 @@ Type: Package
 Package: ecokit
 Title: Tools for Ecological and General Utilities
 Version: 0.1.0
-Date: 2026-06-15
+Date: 2026-06-24
 Authors@R: 
     person("Ahmed", "El-Gabbas", , "elgabbas@outlook.com", role = c("aut", "cre"))
 Description: A collection of utility functions designed for ecologists and
@@ -41,9 +41,11 @@ Suggests:
     future.apply (>= 1.11),
     gdata (>= 3.0),
     ggplot2 (>= 3.5),
+    glue (>= 1.8.0),
     gtools (>= 3.9),
     Hmsc (>= 3.3),
     httr (>= 1.4),
+    httr2 (>= 1.2.0),
     jsonlite (>= 2.0),
     lobstr (>= 1.1),
     ncdf4 (>= 1.24),
