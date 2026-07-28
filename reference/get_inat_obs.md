@@ -197,10 +197,10 @@ obs_2023 <- get_inat_obs(taxon_id = 67835, bounds = europe, year = 2023L)
 #> taxon_id: 67835 | year: 2023
 #> --------------------------------------------------
 #> 
-#> Year: 2023 --- 622 records total
-#> Done. 622 unique records retrieved.
+#> Year: 2023 --- 625 records total
+#> Done. 625 unique records retrieved.
 obs_2023
-#> # A tibble: 622 × 22
+#> # A tibble: 625 × 22
 #>         id observed_on   day month  year quality_grade taxon_id rank  taxon_name
 #>      <int> <date>      <int> <int> <int> <chr>            <int> <chr> <chr>     
 #>  1  1.46e8 2023-01-03      3     1  2023 research         67835 spec… Danaus ch…
@@ -213,7 +213,7 @@ obs_2023
 #>  8  1.46e8 2023-01-07      7     1  2023 research         67835 spec… Danaus ch…
 #>  9  1.46e8 2023-01-07      7     1  2023 research         67835 spec… Danaus ch…
 #> 10  1.46e8 2023-01-07      7     1  2023 research         67835 spec… Danaus ch…
-#> # ℹ 612 more rows
+#> # ℹ 615 more rows
 #> # ℹ 13 more variables: num_identification_agreements <int>, latitude <dbl>,
 #> #   longitude <dbl>, latitude_n_decimals <int>, longitude_n_decimals <int>,
 #> #   positional_accuracy <int>, coordinates_obscured <lgl>, geoprivacy <chr>,
@@ -231,8 +231,8 @@ obs_multi <- purrr::map_dfr(
 #> taxon_id: 67835 | year: 2020
 #> --------------------------------------------------
 #> 
-#> Year: 2020 --- 167 records total
-#> Done. 167 unique records retrieved.
+#> Year: 2020 --- 168 records total
+#> Done. 168 unique records retrieved.
 #> 
 #> --------------------------------------------------
 #> Querying iNaturalist
@@ -255,10 +255,10 @@ obs_multi <- purrr::map_dfr(
 #> taxon_id: 67835 | year: 2023
 #> --------------------------------------------------
 #> 
-#> Year: 2023 --- 622 records total
-#> Done. 622 unique records retrieved.
+#> Year: 2023 --- 625 records total
+#> Done. 625 unique records retrieved.
 obs_multi
-#> # A tibble: 1,180 × 22
+#> # A tibble: 1,184 × 22
 #>         id observed_on   day month  year quality_grade taxon_id rank  taxon_name
 #>      <int> <date>      <int> <int> <int> <chr>            <int> <chr> <chr>     
 #>  1  3.75e7 2020-01-11     11     1  2020 research         67835 spec… Danaus ch…
@@ -271,7 +271,7 @@ obs_multi
 #>  8  4.59e7 2020-05-12     12     5  2020 research         67835 spec… Danaus ch…
 #>  9  4.59e7 2020-05-14     14     5  2020 research         67835 spec… Danaus ch…
 #> 10  4.78e7 2020-05-30     30     5  2020 research         67835 spec… Danaus ch…
-#> # ℹ 1,170 more rows
+#> # ℹ 1,174 more rows
 #> # ℹ 13 more variables: num_identification_agreements <int>, latitude <dbl>,
 #> #   longitude <dbl>, latitude_n_decimals <int>, longitude_n_decimals <int>,
 #> #   positional_accuracy <int>, coordinates_obscured <lgl>, geoprivacy <chr>,

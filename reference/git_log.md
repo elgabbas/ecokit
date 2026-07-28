@@ -51,15 +51,15 @@ Ahmed El-Gabbas
 ``` r
 # Show the most recent commit
 git_log(n_commits = 1)
-#> * b81613c - (grafted, HEAD -> main, origin/main) Add positional_accuracy and coordinates_obscured to `get_inat_obs` function (4 minutes ago) <Ahmed El-Gabbas>
+#> * 58bf46b - (grafted, HEAD -> main, origin/main) Fix check_rstudio and check_quarto (6 minutes ago) <Ahmed El-Gabbas>
 
 # Show the most recent 5 commits
 git_log(n_commits = 5)
-#> * b81613c - (grafted, HEAD -> main, origin/main) Add positional_accuracy and coordinates_obscured to `get_inat_obs` function (4 minutes ago) <Ahmed El-Gabbas>
+#> * 58bf46b - (grafted, HEAD -> main, origin/main) Fix check_rstudio and check_quarto (6 minutes ago) <Ahmed El-Gabbas>
 
 # by default, the log is only printed, not returned
 log_example <- git_log(n_commits = 1)
-#> * b81613c - (grafted, HEAD -> main, origin/main) Add positional_accuracy and coordinates_obscured to `get_inat_obs` function (4 minutes ago) <Ahmed El-Gabbas>
+#> * 58bf46b - (grafted, HEAD -> main, origin/main) Fix check_rstudio and check_quarto (6 minutes ago) <Ahmed El-Gabbas>
 print(log_example)
 #> NULL
 
@@ -68,7 +68,7 @@ log_example <- git_log(return_log = TRUE)
 length(log_example)
 #> [1] 1
 head(log_example, 8)
-#> [1] "* b81613c - (grafted, HEAD -> main, origin/main) Add positional_accuracy and coordinates_obscured to `get_inat_obs` function (4 minutes ago) <Ahmed El-Gabbas>"
+#> [1] "* 58bf46b - (grafted, HEAD -> main, origin/main) Fix check_rstudio and check_quarto (6 minutes ago) <Ahmed El-Gabbas>"
 
 # not a git repo
 non_git_dir <- fs::path_temp("test_dir")

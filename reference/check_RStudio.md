@@ -19,7 +19,10 @@ status of RStudio version.
 
 This function requires internet access to check the latest version of
 RStudio online. If called outside of RStudio, it will only fetch and
-display the latest version without comparing.
+display the latest version without comparing. If posit has changed the
+structure of their webpage and the online version can not be parsed, the
+function reports this clearly and, when possible, still shows the
+installed version.
 
 ## Author
 
@@ -29,5 +32,5 @@ Ahmed El-Gabbas
 
 ``` r
 check_rstudio()
-#> Not called from RStudio. The most recent version of RStudio is NA.
+#> Not called from RStudio. The most recent version of RStudio is 2026.07.1.147.
 ```

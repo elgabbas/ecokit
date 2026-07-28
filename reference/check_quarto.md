@@ -24,6 +24,12 @@ check_quarto(pre_release = FALSE)
 A message indicating whether the installed Quarto version is up to date
 or suggesting an update if it is not.
 
+## Note
+
+If GitHub has changed the structure of the releases page and the online
+version can not be parsed, the function reports this clearly and, when
+possible, still shows the installed version.
+
 ## Author
 
 Ahmed El-Gabbas
@@ -33,11 +39,11 @@ Ahmed El-Gabbas
 ``` r
 check_quarto()
 #> Quarto is not available in the system.
-#> Latest quarto version is v1.9.38 [installed: NA]
+#> Latest quarto version is v1.10.18 [installed: NA]
 #> 
 
 check_quarto(pre_release = TRUE)
 #> Quarto is not available in the system.
-#> Available pre-release version is: v1.9.38 [installed: NA]
+#> Available pre-release version is: v1.11.1 [installed: NA]
 #> 
 ```

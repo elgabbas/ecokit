@@ -137,7 +137,7 @@ dplyr::glimpse(files)
 pdf_file <- zenodo_download_file(
   record_id = "1234567", file_name = "article.pdf")
 print(pdf_file)
-#> /tmp/RtmpCSqJ96/article20fe28dde90a.pdf
+#> /tmp/RtmpyqWmvT/article224466268cd3.pdf
 
 ecokit::file_type(pdf_file)
 #> [1] "PDF document, version 1.6"
@@ -208,7 +208,7 @@ terra::app(nc_file, "range")
 #> resolution  : 2.8125, 1.40625  (x, y)
 #> extent      : 0, 360, -90, 90  (xmin, xmax, ymin, ymax)
 #> coord. ref. : lon/lat WGS 84 (EPSG:4326)
-#> source      : spat_20fed87d896_8446_jXFhpfBBJ7szfAj.tif
+#> source      : spat_22444a778c21_8772_jXFhpfBBJ7szfAj.tif
 #> names       :                                 lyr.1,                                 lyr.2
 #> min values  :                            -42.894333,                             599912192
 #> max values  : 9969209968386899742160691604796473344, 9969209968386899742160691604796473344
@@ -218,7 +218,7 @@ terra::app(nc_file2, "range")
 #> resolution  : 2.8125, 1.40625  (x, y)
 #> extent      : 0, 360, -90, 90  (xmin, xmax, ymin, ymax)
 #> coord. ref. : lon/lat WGS 84 (EPSG:4326)
-#> source      : spat_20fed6496a9_8446_23Y8s5f0BSMdSWy.tif
+#> source      : spat_224418b82624_8772_23Y8s5f0BSMdSWy.tif
 #> names       :                                  lyr.1,                                  lyr.2
 #> min values  :                            -428.943329,                             5999121920
 #> max values  : 99692099683868992699240433178319519744, 99692099683868992699240433178319519744

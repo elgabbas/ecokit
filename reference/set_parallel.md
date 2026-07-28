@@ -145,8 +145,6 @@ future::plan("list")
 #>    - call: future::plan(strategy = strategy, workers = n_cores, gc = TRUE, .cleanup = FALSE)
 future::nbrOfWorkers()
 #> [1] 2
-#> attr(,"class")
-#> [1] "integer"
 
 # Stopping parallel processing
 set_parallel(stop_cluster = TRUE)

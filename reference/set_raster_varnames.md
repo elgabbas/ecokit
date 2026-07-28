@@ -61,7 +61,7 @@ r
 #> resolution  : 36, 18  (x, y)
 #> extent      : -180, 180, -90, 90  (xmin, xmax, ymin, ymax)
 #> coord. ref. : lon/lat WGS 84 (CRS84) (OGC:CRS84)
-#> source      : spat_20fe8f55571_8446_BnO3HOrWuPceBcV.tif
+#> source      : spat_224464b4b6d2_8772_BnO3HOrWuPceBcV.tif
 #> varname     : v1
 #> names       : l1, l2, l3
 #> min values  :  1,  1,  1
@@ -74,7 +74,7 @@ r
 #> resolution  : 36, 18  (x, y)
 #> extent      : -180, 180, -90, 90  (xmin, xmax, ymin, ymax)
 #> coord. ref. : lon/lat WGS 84 (CRS84) (OGC:CRS84)
-#> source      : spat_20fe8f55571_8446_BnO3HOrWuPceBcV.tif
+#> source      : spat_224464b4b6d2_8772_BnO3HOrWuPceBcV.tif
 #> varname     : temperature
 #> names       : l1, l2, l3
 #> min values  :  1,  1,  1
@@ -87,7 +87,7 @@ r
 #> resolution  : 36, 18  (x, y)
 #> extent      : -180, 180, -90, 90  (xmin, xmax, ymin, ymax)
 #> coord. ref. : lon/lat WGS 84 (CRS84) (OGC:CRS84)
-#> source      : spat_20fe8f55571_8446_BnO3HOrWuPceBcV.tif
+#> source      : spat_224464b4b6d2_8772_BnO3HOrWuPceBcV.tif
 #> names       : l1, l2, l3
 #> min values  :  1,  1,  1
 #> max values  :  1,  1,  1

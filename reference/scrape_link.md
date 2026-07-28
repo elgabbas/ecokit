@@ -48,12 +48,12 @@ head(
 #> # A tibble: 6 × 2
 #>   link_text     link                                                      
 #>   <chr>         <chr>                                                     
-#> 1 + 44 releases https://github.com/tidyverse/dplyr/releases               
-#> 2 .Rbuildignore https://github.com/tidyverse/dplyr/blob/main/.Rbuildignore
-#> 3 .claude       https://github.com/tidyverse/dplyr/tree/main/.claude      
-#> 4 .github       https://github.com/tidyverse/dplyr/tree/main/.github      
-#> 5 .gitignore    https://github.com/tidyverse/dplyr/blob/main/.gitignore   
-#> 6 .vscode       https://github.com/tidyverse/dplyr/tree/main/.vscode      
+#> 1 .Rbuildignore https://github.com/tidyverse/dplyr/blob/main/.Rbuildignore
+#> 2 .claude       https://github.com/tidyverse/dplyr/tree/main/.claude      
+#> 3 .github       https://github.com/tidyverse/dplyr/tree/main/.github      
+#> 4 .gitignore    https://github.com/tidyverse/dplyr/blob/main/.gitignore   
+#> 5 .vscode       https://github.com/tidyverse/dplyr/tree/main/.vscode      
+#> 6 2.1k forks    https://github.com/tidyverse/dplyr/forks                  
 
 # This will give an "Invalid url" error
 try(scrape_link(url = "https://github50.com"))
