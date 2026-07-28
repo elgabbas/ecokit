@@ -349,7 +349,7 @@
 
   ecokit::cat_time(
     glue::glue("Week {week_index}/{n_weeks}: days {day_min}-{day_max}"),
-    verbose = verbose, cat_timestamp = FALSE)
+    verbose = verbose, cat_timestamp = FALSE, level = 2L)
 
   # Ping the whole week first
   ping <- .inat_fetch_page(
@@ -378,10 +378,9 @@
   # Slow path: week > limit, split into individual days
   total_week0 <- ecokit::format_number(total_week, underline = TRUE)
   max_results0 <- ecokit::format_number(max_results, underline = TRUE)
-
   ecokit::cat_time(
     glue::glue(
-      "{total_week0} records exceed {max_results0}"),
+      "{total_week0} records exceed the `max_results` of {max_results0}"),
     verbose = verbose, cat_timestamp = FALSE, level = 1L)
   ecokit::cat_time(
     "Splitting week {week_index}/{n_weeks} into daily chunks",    # nolint
@@ -475,11 +474,14 @@
   }
 
   # Slow path: split into weekly windows
+  total_month0 <- ecokit::format_number(total_month, underline = TRUE)
+  max_results0 <- ecokit::format_number(max_results, underline = TRUE)
   ecokit::cat_time(
-    glue::glue("{total_month} records exceed {max_results}"),
+    glue::glue(
+      "{total_month0} records exceed the `max_results` of {max_results0}"),
     verbose = verbose, cat_timestamp = FALSE, level = 1L)
   ecokit::cat_time(
-    "splitting month {month} into weekly chunks",
+    glue::glue("Splitting month {month} into weekly chunks"),
     verbose = verbose, cat_timestamp = FALSE, level = 1L)
 
   # Last day of this month: advance to the 1st of next month then subtract 1
@@ -813,8 +815,11 @@ get_inat_obs <- function(
   }
 
   # Slow path: year > limit --> iterate over 12 months
+  total_annual0 <- ecokit::format_number(total_annual, underline = TRUE)
+  max_results0 <- ecokit::format_number(max_results, underline = TRUE)
   ecokit::cat_time(
-    glue::glue("{total_annual} records exceed {max_results}"),
+    glue::glue(
+      "{total_annual0} records exceed the `max_results` of {max_results0}"),
     verbose = verbose, cat_timestamp = FALSE, level = 1L)
   ecokit::cat_time(
     "Iterating over 12 months",

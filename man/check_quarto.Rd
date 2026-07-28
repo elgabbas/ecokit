@@ -21,6 +21,11 @@ user to update Quarto. It uses web scraping to find the latest version
 available on the Quarto GitHub releases page and the system command to find
 the installed version.
 }
+\note{
+If GitHub has changed the structure of the releases page and the online
+version can not be parsed, the function reports this clearly and, when
+possible, still shows the installed version.
+}
 \examples{
 check_quarto()
 

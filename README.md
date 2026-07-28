@@ -46,5 +46,5 @@ features, please:
 - **Contact me** directly at *elgabbas\[at\]outlook\[dot\]com* for
   collaboration ideas or questions.
 
-<span style="     color: grey !important;">Last update:
-2026-06-24</span>
+<span class="TRUE" style="color: grey !important;">Last update:
+2026-07-28</span>

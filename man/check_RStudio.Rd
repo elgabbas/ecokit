@@ -18,7 +18,10 @@ updating RStudio.
 \note{
 This function requires internet access to check the latest version of
 RStudio online. If called outside of RStudio, it will only fetch and
-display the latest version without comparing.
+display the latest version without comparing. If posit has changed the
+structure of their webpage and the online version can not be parsed, the
+function reports this clearly and, when possible, still shows the installed
+version.
 }
 \examples{
 check_rstudio()

@@ -15,6 +15,9 @@
 #'   Default is `FALSE`.
 #' @return A message indicating whether the installed Quarto version is up to
 #'   date or suggesting an update if it is not.
+#' @note If GitHub has changed the structure of the releases page and the online
+#'   version can not be parsed, the function reports this clearly and, when
+#'   possible, still shows the installed version.
 #' @export
 #' @examples
 #' check_quarto()
@@ -25,52 +28,74 @@ check_quarto <- function(pre_release = FALSE) {
 
   quarto_version <- labels <- NULL
 
-  if (!requireNamespace("rvest", quietly = TRUE)) {
-    ecokit::stop_ctx("The `rvest` package is required to scrape web content.")
-  }
+  ecokit::check_packages(c("rvest", "stringr", "crayon"))
 
   # URL of the Quarto releases page
-  release_blocks <- "https://github.com/quarto-dev/quarto-cli/releases/" %>%
-    # Read the HTML content of the page
-    rvest::read_html() %>%
-    # Extract all release blocks (adjust selector based on current structure)
-    rvest::html_nodes("div.Box")
+  release_url <- "https://github.com/quarto-dev/quarto-cli/releases/"
 
-  # Extract version and label for each release
-  releases <- release_blocks %>%
-    lapply(function(block) {
-      # Get the version number from the <h2><a> or <a> tag
-      quarto_version <- block %>%
-        # Targets release tag links or titles
-        rvest::html_node("h2 a, a[href*='/tag/v']") %>%
-        rvest::html_text(trim = TRUE)
+  # --- Try to retrieve and parse the latest online version ---
+  # Wrapped in tryCatch because a change in the GitHub page structure (e.g.
+  # no "Box" blocks, renamed selectors, no "Latest" label) would otherwise
+  # throw an error or silently return an empty/invalid result
+  version_latest <- tryCatch(
+    {
+      # Extract all release blocks (adjust selector based on current structure)
+      release_blocks <- release_url %>%
+        # Read the HTML content of the page
+        rvest::read_html() %>%
+        rvest::html_nodes("div.Box")
 
-      # Get all labels (<span> tags with class "Label" or similar)
-      labels <- block %>%
-        rvest::html_nodes(
-          "span.Label, span.Label--success, span.Label--orange") %>%
-        rvest::html_text(trim = TRUE) %>%
-        unique() %>%
-        # Combine multiple labels if present
-        paste(collapse = ", ")
+      # Extract version and label for each release
+      releases <- release_blocks %>%
+        lapply(function(block) {
+          # Get the version number from the <h2><a> or <a> tag
+          quarto_version <- block %>%
+            # Targets release tag links or titles
+            rvest::html_node("h2 a, a[href*='/tag/v']") %>%
+            rvest::html_text(trim = TRUE)
 
-      # Return a data frame row
-      if (is.na(quarto_version)) {
-        # Skip if no version found
-        NULL
-      } else {
-        tibble::tibble(
-          quarto_version = quarto_version,
-          labels = dplyr::if_else(nzchar(labels), labels, "None"))
-      }
-    }) %>%
-    # Combine into a single data frame
-    dplyr::bind_rows() %>%
-    dplyr::filter(startsWith(quarto_version, "v"))
+          # Get all labels (<span> tags with class "Label" or similar)
+          labels <- block %>%
+            rvest::html_nodes(
+              "span.Label, span.Label--success, span.Label--orange") %>%
+            rvest::html_text(trim = TRUE) %>%
+            unique() %>%
+            # Combine multiple labels if present
+            paste(collapse = ", ")
 
-  version_latest <- releases %>%
-    dplyr::filter(stringr::str_detect(labels, "Latest")) %>%
-    dplyr::pull("quarto_version")
+          # Return a data frame row
+          if (is.na(quarto_version)) {
+            # Skip if no version found
+            NULL
+          } else {
+            tibble::tibble(
+              quarto_version = quarto_version,
+              labels = dplyr::if_else(nzchar(labels), labels, "None"))
+          }
+        }) %>%
+        # Combine into a single data frame
+        dplyr::bind_rows() %>%
+        dplyr::filter(startsWith(quarto_version, "v"))
+
+      releases %>%
+        dplyr::filter(stringr::str_detect(labels, "Latest")) %>%
+        dplyr::pull("quarto_version")
+    },
+    error = function(e) character(0L))
+
+  # --- Flag whether the online lookup actually succeeded ---
+  # `version_latest` is `character(0)` both on a caught error and when the
+  # page was read but no row was tagged "Latest" any more - either way this
+  # signals that the GitHub page structure has likely changed
+  online_ok <- length(version_latest) > 0L
+
+  if (!online_ok) {
+    cat(
+      crayon::red(
+        "Could not retrieve the latest Quarto version online.\n",
+        "The GitHub releases page structure may have changed; please ",
+        "check manually:\n", release_url, "\n", sep = ""))
+  }
 
   # # ..................................................................... ###
 
@@ -82,7 +107,16 @@ check_quarto <- function(pre_release = FALSE) {
     installed_version <- NA_character_
   }
 
-  if (isFALSE(identical(version_latest, installed_version))) {
+  if (!online_ok) {
+
+    # Online version unknown, but we can still report what is installed
+    cat(
+      crayon::blue(
+        "Installed Quarto version: ",
+        crayon::red(crayon::bold(installed_version)), ".",
+        sep = ""))
+
+  } else if (isFALSE(identical(version_latest, installed_version))) {
 
     if (pre_release) {
 

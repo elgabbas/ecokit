@@ -2,7 +2,7 @@ Type: Package
 Package: ecokit
 Title: Tools for Ecological and General Utilities
 Version: 0.1.0
-Date: 2026-06-24
+Date: 2026-07-28
 Authors@R: 
     person("Ahmed", "El-Gabbas", , "elgabbas@outlook.com", role = c("aut", "cre"))
 Description: A collection of utility functions designed for ecologists and
@@ -21,7 +21,7 @@ Imports:
     fs (>= 1.6),
     lubridate (>= 1.9),
     purrr (>= 1.0),
-    qs2 (>= 0.1.5),
+    qs2 (>= 0.2),
     raster (>= 3.6),
     rlang (>= 1.1),
     sf (>= 1.1),
